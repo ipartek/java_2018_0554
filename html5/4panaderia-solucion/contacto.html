@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	
+	<meta name="description" content="">  
+	<meta name="author" content=""> 
+	<meta name="generator" content="Notepad++">
+	
+	<title>Panadería Pepe | Contacto</title>	
+	
+	
+</head>
+	
+<body>
+
+<!-- Aquí empieza la cabecera de página -->
+<header>
+	<p>
+		<a href="index.html">
+			<img src="media/logo.png" alt="Panadería Pepe">
+		</a>
+	</p>
+
+	<nav>
+		<ul>
+			<li><a href="quienes.html">quienes somos</a></li>
+			<li><a href="servicios.html">servicios</a></li>
+			<li><a href="productos.html">productos</a></li>
+			<li><a href="noticias.html">noticias</a></li>
+			<li><a href="contacto.html">contacto</a></li>
+		</ul>	
+	</nav>
+	
+
+	<fieldset>
+		<legend>Busca en la página:</legend>
+		<form name="formbuscar" id="formbuscar" action="index.html" method="post" enctype="text/plain">
+			<p>
+				<label for="campobusqueda">
+					Texto a buscar:
+					<input type="text" name="campobusqueda" id="campobusqueda">
+				</label>
+				<input type="image" src="media/buscar.png" alt="Buscar">
+			</p>
+		</form>
+	</fieldset>
+</header>
+<!-- Aquí finaliza la cabecera de página -->
+
+
+<main>
+	<article>
+			
+		<h1>Contacto</h1>
+
+		<dl>
+			<dt>Dirección:</dt>
+			<dd>
+				C/ Principal, nº1, dpto 1A<br>
+				48000 Bilbao
+			</dd>
+			
+			<dt>Teléfono:</dt>
+			<dd>555 555 555</dd>
+			
+			<dt>E-mail:</dt>
+			<dd>info@web.com</dd>
+		</dl>
+
+		<fieldset>
+			<legend>Contacta con nosotros</legend>
+			<form name="formcontacto" id="formcontacto" method="post" action="contacto.html" enctype="text/plain">
+				<p>
+					<label for="nombre">
+						Nombre
+						<input type="text" name="nombre" id="nombre">
+					</label>
+				</p>
+				
+				<p>
+					<label for="email">
+						Email
+						<input type="text" name="email" id="email">
+					</label>
+				</p>
+				
+				<p>
+					<label for="telefono">
+						Teléfono
+						<input type="text" name="telefono" id="telefono">
+					</label>
+				</p>
+				
+				<p>
+					<label for="departamento">
+						Dpto al que se dirige
+						<select name="departamento" id="departamento">
+							<option value="1">Atención al cliente</option>
+							<option value="2">Recursos Humanos</option>
+							<option value="3">Marketing</option>
+							<option value="0">Otro</option>
+						</select>
+					</label>
+				</p>
+				
+				<p>
+					<label for="mensaje">
+						Mensaje
+						<textarea name="mensaje" id="mensaje" cols="50" rows="5"></textarea>
+					</label>
+				</p>
+				
+				<p>
+					<label for="aceptar">
+						<input type="checkbox" name="aceptar" id="aceptar" value="si"> 
+						Aceptar la política de privacidad
+					</label>
+				</p>
+				
+				<p>
+					<input type="submit" name="botonenviar" value="Enviar mensaje">
+				</p>
+
+			</form>
+		</fieldset>
+
+	</article>
+</main>
+
+<!-- Aquí empieza el pie de página -->
+<footer>
+
+	<dl>
+		<dt>Dirección:</dt>
+		<dd>
+			C/ Principal, nº1, dpto 1A<br>
+			48000 Bilbao
+		</dd>
+		
+		<dt>Teléfono:</dt>
+		<dd>555 555 555</dd>
+		
+		<dt>E-mail:</dt>
+		<dd>info@web.com</dd>
+	</dl>
+
+	<ul>
+		<li><a href="https://www.facebook.com" title="enlace externo"><img src="media/facebook.png" alt="facebook"></a></li>
+		<li><a href="https://www.twitter.com" title="enlace externo"><img src="media/twitter.png" alt="twitter"></a></li>
+		<li><a href="https://www.instagram.com" title="enlace externo"><img src="media/instagram.png" alt="instagram"></a></li>
+	</ul>
+
+	<ul>
+		<li><a href="legal.html">Aviso Legal</a></li>
+		<li><a href="privacidad.html">Política de Privacidad</a></li>
+		<li><a href="cookies.html">Información sobre Cookies</a></li>
+	</ul>
+
+</footer>
+<!-- Aquí finaliza el pie de página -->
+
+	
+
+	
+</body>
+</html>
