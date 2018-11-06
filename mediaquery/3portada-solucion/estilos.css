@@ -1,0 +1,90 @@
+/* Mi hoja de estilos */
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+body{
+	background:#FFF;
+	color:#000;
+	font-family:Arial, sans-serif;
+}
+
+h1{
+	display:none;
+}
+
+.menu-ppal{
+	border:5px solid #F00;
+	padding-left:0;
+	text-align:right;
+}
+
+.menu-ppal li{
+	border:5px solid #0FF;
+	list-style-type:none;
+	display:inline-block;
+	/*width:20%;*/
+	margin:0 0 0 -4px;
+
+}
+
+.menu-ppal a{
+	border:5px solid #00F;
+	padding:5px 10px;
+}
+
+
+
+.menu-ppal2{
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:space-between;
+	
+	/*
+	flex-direction: row ***| row-reverse | column | column-reverse;
+	flex-wrap: nowrap | wrap | wrap-reverse;
+	justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
+	align-items: flex-start | flex-end | center | baseline | stretch***;
+	*/
+	
+	padding-left:0;
+}
+
+.menu-ppal2 li{
+	list-style-type:none;
+	border:2px dotted #000;
+}
+
+
+.li-quienes{order:5;}
+.li-servicios{order:4;}
+.li-proyectos{order:1;}
+	
+.li-blog{order:3;
+	align-self: flex-end;
+}
+.li-contacto{order:6;}
+.li-otro{order:2;}
+	
+
+
+.menu-ppal2 a{}
+
+
+
+.menu-ppal3{}
+.menu-ppal3 li{display:inline-block;}
+.menu-ppal3 li:after{content:" | "; color:#F00;}
+
+.menu-ppal3 li:last-child:after{ content:"";}
+
+
+
+
+
+
