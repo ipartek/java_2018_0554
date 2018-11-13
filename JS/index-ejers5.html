@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Javascript básico, DOM</title>	
+	
+	<link rel="stylesheet" href="estilos-ejers5.css">		
+	
+</head>
+	
+<body id="inicio">
+	
+	<h1 id="titulo">Eventos y objetos</h1>
+	
+	<header>
+		<nav>
+			<p><a href="#" id="gestionaMenu">Menú</a></p>
+
+			<ul id="menu">
+				<li><a href="index.html">Inicio</a></li>
+				<li><a href="eventos.html">Eventos</a></li>
+				<li><a href="productos.html">Productos</a></li>
+				<li><a href="galeria.html">Galería</a></li>
+				<li><a href="patrocinadores.html">Patrocinadores</a></li>
+				<li><a href="contacto.html">Contacto</a></li>
+			</ul>
+		</nav>
+	</header>
+	
+	<span id="coordenadas"></span>
+	
+	
+	
+	
+	
+	<section id="sec-contenido">
+		<h2>Enlaces eventos-en-linea</h2>
+		<ul class="listaeventos eventos-en-linea">
+			<li><a onblur="alert('has perdido el foco del enlace')" href="#">Enlace onblur</a></li>
+			<li><a onmouseover="alert('has hecho hover en el enlace')" href="#">Enlace onmouseover</a></li>		
+			<li><a onclick="alert('has hecho click en el enlace')" href="#">Enlace onclick</a></li>
+			<li><a onfocus="alert('has ganado el foco del enlace')" href="#">Enlace onfocus</a></li>
+		</ul>
+		
+		<h2>Enlaces eventos-en-archivo-js</h2>
+		<ul class="listaeventos eventos-en-archivo-js">
+			<li><a href="#" id="enlaceBlur">Enlace onblur</a></li>
+			<li><a href="#" id="enlaceHover">Enlace onmouseover</a></li>		
+			<li><a href="#" id="enlaceClick">Enlace onclick</a></li>
+			<li><a href="#" id="enlaceFocus">Enlace onfocus</a></li>
+		</ul>
+		
+	</section>
+	
+	
+	
+	
+	<section id="sec-noticias">
+		<h2>Noticias</h2>
+		<div class="wrap-noticias">
+			<article class="noticia" id="noticia1">
+				<h3><a href="https://en.wikipedia.org/wiki/HTML">Título noticia 1</a></h3>
+				<p><img src="https://picsum.photos/300/200?image=30" alt="Título noticia 1"></p>
+				<p>You wanna know how I got them? So I had a wife. She was beautiful, like you, who tells me I worry too much, who tells me I ought to smile more, who gambles and gets in deep with the sharks. Hey. One day they carve her face.</p>
+			</article>
+			
+			<article class="noticia" id="noticia2">
+				<h3><a href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets">Título noticia 1</a></h3>
+				<p><img src="https://picsum.photos/300/200?image=32" alt="Título noticia 1"></p>
+				<p> And we have no money for surgeries. She can't take it. I just wanna see her smile again. I just want her to know that I don't care about the scars. So, I do this to myself. And you know what? She can't stand the sight of me. She leaves. Now I see the funny side. Now I'm always smiling.</p>
+			</article>
+		</div>
+	</section>
+	
+	
+	
+	
+	
+	<section id="sec-buscadores">
+		<h2>Buscadores</h2>
+		<ul class="lista-buscadores">
+			<li><a href="https://www.google.es" class="enlace-externo">google</a></li>
+			<li><a href="https://www.yahoo.es" class="enlace-externo">yahoo</a></li>
+			<li><a href="https://www.bing.es" class="enlace-externo">bing</a></li>
+			<li><a href="index.html">mi buscador</a></li>
+		</ul>
+	</section>
+	
+	
+	
+	
+	<!-- Probablemente tengas que poner un id a cada li de cada color, para hacerlo más fácil, aunque no es necesario -->
+	<section id="sec-colores">
+		<ul class="lista-colores">
+			<li>Rojo</li>
+			<li>Verde</li>
+			<li>Azul</li>
+			<li>Morado</li>
+			<li>Amarillo</li>	
+		</ul>
+	</section>
+	
+	
+	
+	
+	<section id="sec-imagenes">
+		<h2 id="subtitulo-imagenes">Imágenes</h2>
+		
+		<ul class="galeria">
+			<li><img src="https://picsum.photos/300/200?image=10" alt="Mallorca"></li>
+			<li><img src="https://picsum.photos/300/200?image=12" alt="Menorca"></li>
+			<li><img src="https://picsum.photos/300/200?image=13" alt="Formentera"></li>
+			<li><img src="https://picsum.photos/300/200?image=14" alt="Cabrera"></li>
+			<li><img src="https://picsum.photos/300/200?image=15" alt="Ibiza"></li>
+		</ul>
+	</section>
+	
+	
+	
+	
+	<footer>
+		<p><a href="http://www.google.es">Enlace a google</a></p>
+	</footer>
+	
+	<!-- JS enlazado -->
+	<script src="scripts-ejers5.js"></script>	
+</body>
+</html><!--
+
+/*
+RESUMEN NAVEGADOR, VENTANA
+---------------------------
+
+* Objetos:
+
+Navigator		información sobre el navegador.
+Screen			información sobre la pantalla.
+History			información sobre el historial de navegación.
+Location		información sobre la URL actual.
+Window			control sobre la ventana
+
+
+* Navigator
+https://developer.mozilla.org/es/docs/Web/API/Navigator
+*/
+document.write( "<br><br>" );
+document.write( "appCodeName: "   + navigator.appCodeName   + "<br>" );
+document.write( "appName: "       + navigator.appName       + "<br>" );
+document.write( "appVersion: "    + navigator.appVersion    + "<br>" );
+document.write( "cookieEnabled: " + navigator.cookieEnabled + "<br>" );
+document.write( "platform: "      + navigator.platform      + "<br>" );
+document.write( "userAgent: "     + navigator.userAgent     + "<br>" );
+document.write( "product: "    	  + navigator.product    	+ "<br>" );
+document.write( "geolocation: "   + navigator.geolocation   + "<br>" ); //Lo veremos con el JS de HTML 5
+document.write( "language: "   	  + navigator.language      + "<br>" );
+
+document.write( "javaEnabled(): " + navigator.javaEnabled() + "<br>" ); //Si hay soporte para Java -no confundir con javascript-
+document.write( "<br><br>" );
+
+
+/*
+
+Screen
+https://developer.mozilla.org/en-US/docs/Web/API/Screen
+*/
+document.write( "height: " 		+ screen.height 		+ "<br>" );
+document.write( "availHeight: " + screen.availHeight 	+ "<br>" ); //Se excluyen las barras
+document.write( "width: "		+ screen.width 			+ "<br>" );
+document.write( "availWidth: " 	+ screen.availWidth 	+ "<br>" ); //Se excluyen las barras
+document.write( "orientation: " + screen.orientation 	+ "<br>" ); 
+
+document.write( "screen.onorientationchange()			   <br>" ); //Al cambiar la orientación del dispositivo
+document.write( "<br><br>" );
+
+
+/*
+
+History
+https://developer.mozilla.org/en-US/docs/Web/API/History
+*/
+document.write( "length: " 		+ history.length 		+ "<br>" ); //número de URL's visitadas en el navegador.
+
+document.write( "history.back()		<br>" ); //vuelve a cargar la URL anterior
+document.write( "history.forward()	<br>" ); //carga la siguiente URL
+document.write( "history.go(-2)		<br>" ); //dos páginas anteriores en el historial
+document.write( "history.go(2)		<br>" ); //dos páginas siguientes, en el historial
+document.write( "<br><br>" );
+
+
+/*
+
+Location
+https://developer.mozilla.org/es/docs/Web/API/Location
+*/
+//Podemos obtener la información y también establecerla
+document.write( "hash: " 		+ location.hash 		+ "<br>" ); //la parte # de una url
+document.write( "host: " 		+ location.host 		+ "<br>" ); //el servidor y el puerto usados
+document.write( "hostname: "	+ location.hostname 	+ "<br>" );
+document.write( "href: "    	+ location.href 		+ "<br>" ); //la URL completa
+document.write( "pathname: " 	+ location.pathname 	+ "<br>" ); //la ruta
+document.write( "port: "    	+ location.port 		+ "<br>" );
+document.write( "protocol: " 	+ location.protocol 	+ "<br>" );
+document.write( "search: "  	+ location.search 		+ "<br>" ); //Los parámetros de la url
+
+// Carga la URL en el navegador:
+//location.href = "http://www.google.es";
+
+document.write( "location.assign() <br>" ); //carga la URL que indiquemos como parámetro
+document.write( "location.reload() <br>" ); //recarga la URL actual
+document.write( "location.replace() <br>" ); //carga la URL que indiquemos como parámetro, sin reemplazar en el historial de navegación a la que había sido cargada previamente
+document.write( "<br><br>" );
+
+
+/*
+
+Window
+https://developer.mozilla.org/es/docs/Web/API/Window
+*/
+window.name = "";
+document.write( "El nombre de la ventana es: " + window.name + "<br />" );
+window.name = "ddd";
+document.write( "Ahora el nombre de la ventana es: " + window.name + "<br />" );
+
+
+/* 
+* Abrir, cerrar, mover, redimensionar y scroll en una ventana 
+	- open()
+
+		URL (opcional): dirección URL o nombre del archivo de página web que se debe cargarse en la nueva ventana.
+		Si no la indicamos (poniendo dos comillas seguidas) se abrirá una ventana en blanco.
+		
+		nombre (opcional): nombre de la ventana.
+		
+		opciones (opcional): cadena en la que indicaremos opciones de configuración de la ventana.
+
+			height: alto de la ventana (en píxels).
+			left: margen con respecto a la parte izquierda de la pantalla (en píxels).
+			location: mostrar la barra de direcciones (yes/no o 1-0).
+			menubar: mostrar la barra de menú (yes/no o 1-0).
+			resizable: indica si se permite redimensionar la ventana (yes/no o 1-0).
+			scrollbars: mostrar las barras de scroll (yes/no o 1-0).
+			status: mostrar la barra de estado (yes/no o 1-0).
+			titlebar: mostrar la barra de título (yes/no o 1-0).
+			toolbar: mostrar la barra de herramientas (yes/no o 1-0).
+			top: margen con respecto a la parte superior de la pantalla (en píxels).
+			width: ancho de la ventana (en píxels).
+		
+		replace (opcional): si el valor es 'true' se reemplazará la URL actual en el historial de navegación por la cargada en la ventana, y si es 'false' se añadirá a la lista existente.
+
+
+	- close()
+		Para cerrar las ventanas que hayamos creado con open()
+
+	- moveBy()
+		mueve una ventana (no maximizada) un determinado número de píxels, partiendo desde la esquina superior izquierda. Se pueden usar valores - - - - 
+	
+	- moveTo()
+		mueve la ventana (si no está maximizada) hacia las coordenadas de pantalla que indiquemos en píxels (ancho y alto).
+
+	- resizeBy()
+		estira la ventana al ancho y alto especificado en píxels, a partir de la esquina inferior derecha de la misma.
+    
+	- resizeTo()
+		redimensiona la ventana al ancho y alto indicado en píxels.
+	
+	- scrollBy()
+		hace scroll en la página web tanto vertical como horizontalmente, según el número de píxels que indiquemos. Es necesario que las barras de desplazamiento estén visibles.
+	
+    - scrollTo()
+		hace scroll hacia unas determinadas coordenadas dentro de la página web, indicadas en píxels (ancho y alto).
+	
+	- pageXOffset
+		devuelve el número de píxels que se ha hecho scroll horizontal, desde la esquina superior izquierda del área de visualización de la página web.
+	
+	- pageYOffset
+		devuelve el número de píxels que se ha hecho scroll vertical, desde la esquina superior izquierda del área de visualización de la página web.
+
+
+* Imprimir pantalla:
+	window.print();
+	
+*/
+
+/*
+var nuevaVentana = window.open( "", "ventana1", "height=200,width=700,left=300,location=yes,menubar=no,resizable=no,scrollbars=yes,status=no,titlebar=yes,top=300" );
+nuevaVentana.close();
+
+window.moveTo(300, 200);
+window.moveBy(-50, 50);
+
+window.resizeTo(300, 500);
+window.resizeBy(200, 100);
+
+window.scrollBy(0,200);
+window.scrollTo(0,400);
+
+alert( "pageXOffset: " + window.pageXOffset + " / pageYOffset: " + window.pageYOffset );
+
+
+
+*/
+	
+	
+	
+	
+/*
+
+RESUMEN EVENTOS
+---------------
+
+https://developer.mozilla.org/en-US/docs/Web/Events
+Los eventos se producen cuando sucede algo determinado (se pulsa una tecla, se hace click, se carga la página...)
+Los más utilizados son:
+
+* Eventos de Ratón:
+
+	onclick			al hacer clic en un elemento.
+	ondblclick		al hacer doble click.
+	onmouseover		el cursor del ratón entra en el área ocupada por un elemento o sus hijos.
+	onmouseout		el cursor del ratón sale del área ocupada por un elemento o sus hijos.
+
+	
+* Eventos de Teclado:
+
+	onkeydown		al pulsar cualquier tecla.
+	onkeypress		al pulsar una tecla correspondiente a un carácter.
+	onkeyup			al leventar cualquier una tecla.
+
+
+* Eventos de Formulario:
+
+	onfocus			cuando un elemento obtiene el foco. (normalmente, un enlace o un campo de formulario)
+	onblur			cuando un elemento pierde el foco.
+
+	onchange		al modificar el valor de un elemento (p.e. select)
+	onselect		cuando se selecciona un texto.
+
+	onreset 		cuando se resetea un formulario
+	onsubmit		cuando se ejecuta un submit en el formulario
+
+
+* Ventana / Objeto:
+	
+	onresize		al redimensionar una ventana.
+	onscroll 		al hacer scroll
+
+	onload			se produce al terminar de cargarse la página web o un objeto.
+	onunload		al salir de la página web.
+
+	onerror			si se produce un error al cargar la página web o un objeto.
+
+
+
+*/
+
+/*
+EJEMPLOS:
+---------
+
+
+window.onload = function(){
+    alert('La página se ha cargado completamente.');
+}
+
+window.onresize = function(){
+	window.alert('estás redimensionando la ventana!');	
+};
+
+
+
+document.getElementById('enlaceBlur').onblur = function() {
+    alert('has perdido el foco del enlace');
+}
+
+document.getElementById('enlaceHover').onmouseover = function() {
+    alert('has hecho hover en el enlace');
+}
+
+document.getElementById('enlaceClick').onclick = function() {
+    alert('has hecho click en el enlace');
+}
+
+document.getElementById('enlaceFocus').onfocus = function() {
+    alert('has ganado el foco del enlace');
+}
+
+
+
+
+var titulo = document.getElementById('titulo');
+var tituloTexto =  titulo.innerHTML;
+
+titulo.onmouseover = function(){
+    titulo.innerHTML = 'Estoy cambiando el título';
+}
+
+titulo.onmouseout  = function(){
+    titulo.innerHTML = tituloTexto;
+}
+
+
+
+// Capturar evento de manera más eficaz y limpia:
+https://developer.mozilla.org/es/docs/Web/API/EventTarget/addEventListener
+elemento.addEventListener( evento, funcion, true/false );
+
+	- true: el evento se propagará descendentemente en la rama del árbol DOM en la que se encuentra el elemento (se producirá primero en sus nodos padre).
+    - false: el evento se propagará ascendentemente partiendo desde el elemento para el que lo hemos definido, y propagándose hacia arriba en la rama del árbol DOM dentro de la que se halla.
+
+//En los eventos, se prescinde del prefijo "on";
+	
+
+var subtitulo = document.getElementById('subtitulo-imagenes');
+subtitulo.addEventListener( 'click', function(){ alert('Has hecho click'); }, false );
+
+// Se puede escribir de varias maneras:
+
+// sin variable intermedia:
+document.getElementById('subtitulo-imagenes').addEventListener( 'click', function(){ alert('Has hecho click'); }, false );
+
+// Separándolo visualmente en varias líneas para mejorar la comprensión:
+var subtitulo = document.getElementById('subtitulo-imagenes');
+subtitulo.addEventListener(
+	'click',
+		function(){ 
+			alert('Has hecho click'); 
+		}, 
+	false 
+);
+
+// Podemos tener que usar una función que ya esté creada, en vez de crearla en la llamada:
+// En este caso, a la función se la llama sin los paréntesis ni parámetros.
+
+function saludar(){
+	alert('Buenos días');
+}
+
+var subtitulo = document.getElementById('subtitulo-imagenes');
+subtitulo.addEventListener( 'click', saludar, false ); 
+*/
+
+
+/*
+* Coordenadas en pantalla:
+
+function coordenadas(){
+	x = event.clientX + document.body.scrollLeft;
+	y = event.clientY + document.body.scrollTop;
+
+	document.getElementById('coordenadas').innerHTML = "x: [" + x + "] - y: [" + y + "]<br/>";
+}
+
+document.body.addEventListener( 'mousemove', coordenadas, true ); 
+
+
+
+
+
+* Mostrar mensaje al entrar y al salir de la página:
+
+function saludar(){
+	alert('Bienvenido a nuestra página web'); 
+}
+
+function despedir(){
+	alert('Gracias por su visita, vuelve pronto'); 
+}
+
+window.addEventListener('load', saludar, true ); 
+window.addEventListener('unload', despedir, true ); 
+*/
+
+ -->

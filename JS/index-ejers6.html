@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Javascript básico, Formularios</title>	
+	
+	<link rel="stylesheet" href="estilos-ejers6.css">		
+	
+</head>
+	
+<body id="inicio">
+	
+	<h1>Formularios</h1>
+	
+	
+<fieldset>
+	<legend>Contacta con nosotros</legend>
+	<form name="formcontacto" id="formcontacto" method="post" action="index.html" enctype="text/plain">
+		<p>
+			<label for="nombre">
+				Nombre
+				<input type="text" name="nombre" id="nombre">
+			</label>
+		</p>
+		
+		<p>
+			<label for="email">
+				Email
+				<input type="text" name="email" id="email">
+			</label>
+		</p>
+		
+		<p>
+			<label for="telefono">
+				Teléfono
+				<input type="text" name="telefono" id="telefono">
+			</label>
+		</p>
+		
+		<p>
+			<label for="volumen">
+				Volúmen general de los videos
+				<input type="range" name="volumen" id="volumen" min="0" max="100" onchange="ActualizarValue(this.value);">
+			</label>
+			<input type="text" name="volumenMostrar" id="volumenMostrar" value="">
+		</p>
+		
+		<p>
+			<label for="departamento">
+				Dpto al que se dirige
+				<select name="departamento" id="departamento">
+					<option value="1">Atención al cliente</option>
+					<option value="2">Recursos Humanos</option>
+					<option value="3" selected>Marketing</option>
+					<option value="0">Otro</option>
+				</select>
+			</label>
+		</p>
+		
+		<p>
+			¿Quiere que le llamemos por teléfono para atender su solicitud mejor?
+			<label for="pregunta_si">
+				<input type="radio" value="si" name="pregunta" id="pregunta_si"
+			<label for="pregunta_no">
+				<input type="radio" value="no" name="pregunta" id="pregunta_no" checked> NO
+			</label>	
+			<label for="pregunta_nsnc">
+				<input type="radio" value="nsnc" name="pregunta" id="pregunta_nsnc"> NS/NC
+			</label>	
+		</p>
+		
+		<p>
+			<label for="mensaje">
+				Mensaje
+				<textarea name="mensaje" id="mensaje" cols="50" rows="5"></textarea>
+			</label>
+		</p>
+		
+		<p>
+			<label for="aceptar">
+				<input type="checkbox" name="aceptar" id="aceptar" value="si"> 
+				Aceptar la política de privacidad
+			</label>
+		</p>
+		
+		<p class="acciones">
+			<input type="reset" name="botonreset" id="botonreset" value="Borrar">
+			<input type="button" name="boton" id="boton" value="¿Hago algo?">
+			<input type="submit" name="botonenviar" id="botonEnviar" value="Enviar mensaje">
+		</p>
+
+	</form>
+</fieldset>
+
+	
+	
+	<!-- JS enlazado -->
+	<script src="scripts-ejers6.js"></script>	
+</body>
+</html><!--
+/*
+RESUMEN FORMULARIOS
+---------------------------
+http://librosweb.es/libro/javascript/capitulo_7.html
+
+* Forma de acceder a un formulario y sus elementos (la recomendada):
+
+	- Forma clásica, por id, tags, clases, selectores...
+		var formulario = document.getElementById('formcontacto');
+		var campoNombre = document.getElementById('nombre');
+		
+		var elementos = document.getElementsByName('pregunta');
+		
+	- Forma clásica nueva: por name	
+
+	- Forma particular, mediante name:
+		var formulario = document.formcontacto;
+		var campoNombre = document.formcontacto.nombre;
+		
+	- Forma genérica, según nº de elemento:
+		var formulario = document.forms[0];
+		var campoNombre = document.forms[0].elements[0];
+
+		
+		
+* Propiedades generales:	
+
+    - type: indica el tipo de elemento que se trata. 
+		para <input> y <textarea> será igual que el atributo type
+		para <select> será select-one
+		
+    - form: indica el form padre de un campo: document.getElementById('id_del_elemento').form
+    
+	- name: obtiene el valor de name de un campo/form
+	
+    - value: obtiene y modifica el valor del atributo value
+	
+	- checked: true/false para checkbox y radiobutton
+	
+	- options: array para los valores de un select
+	
+	
+	
+* Funciones y eventos particulares:
+
+	submit(): enviar el formulario.
+	onsubmit(): evento al enviar el formulario
+	
+    reset(): resetea el formulario
+    onreset(): evento al resetear el formulario
+	
+	
+	
+*/
+
+
+/*
+Ver si un radiobutton está seleccionado o no
+var elementos = document.getElementsByName('pregunta');
+for(var i=0; i<elementos.length; i++) {
+  alert(' Elemento: ' + elementos[i].value + '\n Seleccionado: ' + elementos[i].checked);
+}
+*/
+
+
+
+/*
+Ver los valores de un select, forma larga
+
+var lista = document.getElementById('departamento'); //array de options
+var indiceSeleccionado = lista.selectedIndex; //índice de la opción seleccionada
+var opcionSeleccionada = lista.options[indiceSeleccionado]; //obtener la opción seleccionada
+var valorSeleccionado = opcionSeleccionada.text; // Obtener el valor de la opción seleccionada
+var textoSeleccionado = opcionSeleccionada.value; // Obtener el texto de la opción seleccionada
+ 
+alert("Opción seleccionada: " + textoSeleccionado + "\n Valor de la opción: " + valorSeleccionado);
+*/
+
+
+
+
+/*
+Ver los valores de un select, forma abreviada
+
+
+var lista = document.getElementById('departamento');//array de options
+var valorSeleccionado = lista.options[lista.selectedIndex].value; // Obtener el valor de la opción seleccionada
+var textoSeleccionado = lista.options[lista.selectedIndex].text; // Obtener el texto que muestra la opción seleccionada
+
+alert("Opción seleccionada: " + textoSeleccionado + "\n Valor de la opción: " + valorSeleccionado);
+
+*/
+
+
+
+
+/* Mostrar el valor de un value por pantalla: 
+
+function ActualizarValue(val) {
+    document.getElementById('volumenMostrar').value=val; 
+}	
+
+Más ejemplos: https://css-tricks.com/value-bubbles-for-range-inputs/
+	
+*/
+
+
+ -->

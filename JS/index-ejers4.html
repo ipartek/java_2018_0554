@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Javascript básico, DOM</title>	
+	
+	<link rel="stylesheet" href="estilos-ejers4.css">		
+	
+</head>
+	
+<body id="inicio">
+	
+	<h1 id="titulo">JS básico, Document Object Model (DOM)</h1>
+	
+	<section id="sec-menu">
+		<h2>Menú de navegación</h2>
+		<nav class="page-nav">
+			<ul class="menu">
+				<li><a href="">quienes somos</a></li>
+				<li><a href="">servicios</a></li>
+				<li><a href="">noticias</a></li>
+				<li><a href="">contacto</a></li>
+			</ul>
+			
+			<ul id="menu-idiomas" class="idiomas">
+				<li><a href="">english</a></li>
+				<li><a href="">español</a></li>
+			</ul>
+		</nav>
+	</section>
+
+	
+	<section id="sec-contenido">
+		<h2>Contenido textual</h2>
+		<p>
+		Mi <abbr title="teléfono">tf.</abbr> es: 555 555 555 y puedes encontrarme en el <abbr title="departamento">dpto.</abbr> de <abbr title="Recursos Humanos">RRHH</abbr> de la <abbr title="Organización de las Naciones Unidas">ONU</abbr>. <strong id="aviso">Aviso importante:</strong>
+		</p>
+		
+		<p>
+		You can't, uh, that is, uh, nobody's home. I'll get it back to you, alright? That's George McFly? Damn. I'm late for school. George, there's nothing to be scared of. All it takes is a little self confidence. You know, if you put your mind to it, you could accomplish anything.
+		</p>
+	</section>
+	
+	
+	<section id="sec-imagenes">
+		<h2>Imágenes</h2>
+		
+		<ul class="galeria galeria-con-pie">
+			<li><img src="https://picsum.photos/300/200?image=10" alt="Mallorca"></li>
+			<li><img src="https://picsum.photos/300/200?image=12" alt="Menorca"></li>
+			<li><img src="https://picsum.photos/300/200?image=13" alt="Formentera"></li>
+			<li><img src="https://picsum.photos/300/200?image=14" alt="Cabrera"></li>
+			<li><img src="https://picsum.photos/300/200?image=15" alt="Ibiza"></li>
+			<li><img src="https://picsum.photos/300/200?image=16" alt="Dragonera"></li>	
+		</ul>
+	</section>
+	
+	<section id="sec-biografía">
+		<h2>Biografía</h2>
+		<p>Hola, me llamo <span id="bio-nombre">Pepe</span> y estoy estudiando un curso de <span id="curso">Repostería</span> hasta <span class="id">julio</span>.</p>
+	</section>
+	
+	
+	
+	<footer id="page-pie">
+		<p class="copyright">2018 &copy;</p>
+	</footer>
+	
+	
+	
+	<!-- JS enlazado -->
+	<script src="scripts-ejers4.js"></script>	
+</body>
+</html><!--
+
+
+RESUMEN DOM (2ª parte)
+----------------------
+
+* Seleccionar elementos según su parentesto:
+
+.parentNode		Elemento padre de un elemento
+https://developer.mozilla.org/es/docs/Web/API/Node/parentNode
+
+
+
+
+* Hijos y hermanos:
+
+- Selecciona el primer o último hijo, sea un elemento html o un espacio en blanco o un tabulador...
+.firstChild		
+.lastChild		
+
+- Selecciona el elemento hermano siguiente o anterior, sea un elemento html o un espacio en blanco o un tabulador...
+.nextSibling
+.previousSibling
+
+- En las cuatro funciones anteriores, si lo queremos es elegir elementos (ignorando espacios en blanco, tabuladores, etc.), entonces debemos usar:
+.firstElementChild
+.lastElementChild
+.nextElementSibling
+.previousElementSibling
+
+pero esto no funciona en IE8 e inferiores
+https://developer.mozilla.org/en-US/docs/Web/API/Node/firstChild
+
+
+
+
+* Otra forma de crear html
+
+- forma clásica:
+var parrafo = document.createElement('p');
+var texto = document.createTextNode('texto del parrafo');
+elemento.appendChild(texto);
+document.body.appendChild(parrafo);
+
+appendChild añade el contenido al final de elemento donde lo estamos incluyendo (p.e. body)
+
+-  innerHTML, para establecer contenido
+var parrafo = document.createElement('p');
+parrafo.innerHTML = 'texto del parrafo';
+
+- innerHTML para obtener contenido
+var contenido = document.getElementById('id_del_elemento').innerHTML;
+
+https://developer.mozilla.org/es/docs/Web/API/Element/innerHTML
+
+
+
+
+* Otra forma de acceder a los elementos
+
+.querySelector('selector');  		//Los selectores tienen que ser igual que si los llamáramos por css
+.querySelectorAll('selectores');
+
+https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll
+
+
+
+
+* Insertar elementos antes o después de otro elemento
+
+.insertBefore	Inserta el elemento antes de otro elemento
+.insertAfter	No existe en javascript, pero podemos crearnos una función
+
+https://developer.mozilla.org/es/docs/Web/API/Node/insertarAntes
+
+
+
+
+* Reemplazar o eliminar elementos
+
+.replaceChild	Reemplaza
+.removeChild	Elimina
+.cloneNode		Clona
+
+https://developer.mozilla.org/es/docs/Web/API/Node/removeChild
+
+
+
+
+* Eliminar atributos
+.removeAttribute
+
+https://developer.mozilla.org/es/docs/Web/API/Element/removeAttribute
+
+
+ -->

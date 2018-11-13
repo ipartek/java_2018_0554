@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Javascript básico, DOM</title>	
+	
+	<link rel="stylesheet" href="estilos-ejers3.css">		
+	
+</head>
+	
+<body id="inicio">
+	
+	<h1 id="titulo">JS básico, Document Object Model (DOM)</h1>
+	
+	<p>
+	You can't, uh, that is, uh, nobody's home. I'll get it back to you, alright? That's George McFly? Damn. I'm late for school. George, there's nothing to be scared of. All it takes is a little self confidence. You know, if you put your mind to it, you could accomplish anything.
+	</p>
+	
+	<p>
+	You can't, uh, that is, uh, nobody's home. I'll get it back to you, alright? That's George McFly? Damn. I'm late for school. George, there's nothing to be scared of. All it takes is a little self confidence. You know, if you put your mind to it, you could accomplish anything.
+	</p>
+	
+	<p>
+	Alright kid, you stick to your father like glue and make sure that he takes her to the dance. <strong>George McFly</strong>? Oh, he's kinda cute and all, but, well, I think a man should be strong, so he could stand up for himself, and protect the woman he loves. Don't you? Jesus. You broke it. <span class="destacado">Wow, look at him go.</span> The way I see it, if you're gonna build a <strong>time machine</strong> into a car why not do it with some style. Besides, the stainless, steel construction made the <strong>flux dispersal</strong>- look out.
+	</p>
+	
+	
+	
+	<ul id="lista-enlaces">
+		<li><a href="index.html">Portada</a></li>
+		<li><a href="https://www.google.es" id="google" class="enlace-externo">Google</a></li>
+		<li><a href="https://www.facebook.com" id="efacebook" class="enlace-externo">Facebook</a></li>
+		<li><a href="https://www.youtube.com" id="youtube" class="enlace-externo">Youtube</a></li>
+		<li><a href="#inicio" id="enlace-inicio">Ir al inicio</a></li>
+	</ul>
+	
+	
+	
+	
+	
+	<!-- JS enlazado -->
+	<script src="scripts-ejers3.js"></script>	
+</body>
+</html><!--
+
+RESUMEN FUNCIONES
+------------------
+- Función sencilla 1
+
+function saludar(){
+	document.write('Hola');
+}
+
+saludar();
+saludar();
+saludar();
+
+
+
+- Función sencilla 2
+
+function pedirNumero(){
+	var n = prompt('Introduce un número:');
+	n = parseInt(n);	
+	return(n);
+}
+
+var num1 = pedirNumero();
+var num2 = pedirNumero();
+document.write (num1 + num2);
+
+
+- Función con parámetros 1:
+
+function calculaVenta(p,c){ // p: precio unitario   c: cantidad
+	var t = p*c;  // t: total
+	return t;
+}
+
+var total = calculaVenta(50,3);
+document.write (total);
+
+
+
+
+- Función con parámetros 2:
+
+function pedirNumero(){
+	var n = prompt('Introduce un número:');
+	n = parseInt(n);	
+	return(n);
+}
+
+function calculaVenta(p,c){ // p: precio unitario   c: cantidad
+	var t = p*c;  // t: total
+	return t;
+}
+
+var precio = pedirNumero();
+var cantidad = pedirNumero();
+
+var total = calculaVenta(precio,cantidad);
+document.write (total);
+
+
+
+
+- Función con parámetros 3:
+
+function pedirDato(txt,nt){	//txt: texto a preguntar   nt: numérico o texto 	nt=1 numérico; nt=2 texto
+	var n = prompt(txt);
+	if (nt == 1){ 
+		n = parseInt(n);
+	}
+	return(n);
+}
+
+function calculaVenta(p,c){ // p: precio unitario   c: cantidad
+	var t = p*c;  // t: total
+	return t;
+}
+
+var precio = pedirDato('Introduce el precio unitario',1);
+var cantidad = pedirDato('Introduce la cantidad',1);
+
+var total = calculaVenta(precio,cantidad);
+document.write (total);
+
+
+
+
+
+
+RESUMEN DOM (1ª parte)
+----------------------
+
+Document:	nodo raíz						
+Element:	cada elemento HTML				
+Attr:		atributo de un elemento HTML	
+Text:		texto de un elemento HTML		
+Comment: 	comentario HTML
+
+
+Ejemplo:	<a href="">enlace a página principal</a>
+
+Element:	a
+Attr:		href
+Text:		enlace a página principal
+
+
+- Llamar a los elementos:
+
+document.getElementsByTagName('elemento');				llamo a todos los elementos con la misma etiqueta
+document.getElementById('id_del_elemento');				llamo a un elemento con el id concreto
+document.getElementsByClassName('clase_del_elemento');	llamo a todos los elementos con la misma clase
+
+var enlaces = document.getElementsByTagName('a');
+en la variable enlaces se crea un array con todos los enlaces que existen en la página
+
+var parrafo = document.getElementById('parrafo1');
+en la variable párrafo meto el elemento html con el id parrafo1
+
+var enlaces = document.getElementById('enlace-externo');
+en la variable enlaces se crea un array con todos los enlaces que existen en la página que tengan la clase enlace-externo
+
+
+- Crear elementos:
+var elemento = document.createElement('elemento');	Creo elemento
+var texto = document.createTextNode('texto');		Creo el texto de un elemento
+elemento.appendChild(texto);						Añado el texto al elemento
+document.body.appendChild(elemento);				Añado el elemento a la página
+
+
+- Eliminar elementos:
+var elemento = document.getElementById('id_del_elemento');  Llamo al elemento html
+elemento.parentNode.removeChild(elemento);					Lo borro
+
+- Acceder a los atributos:
+var elemento = document.getElementById('a');
+console.log(elemento.href); 
+
+elemento.href = 'http://...'; 				cambiar la información de un atributo
+
+
+- Acceder a los estilos en línea
+var elemento = document.getElementById('id_del_elemento');
+console.log(elemento.style.fontWeight); 
+
+- Acceder a la clase(s) de un elemento:
+var elemento = document.getElementById('id_del_elemento');
+console.log(elemento.className); 
+
+
+-->
