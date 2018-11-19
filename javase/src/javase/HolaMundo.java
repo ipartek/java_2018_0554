@@ -149,8 +149,9 @@ public class HolaMundo {
 		System.out.println(nombre != null && nombre.equals("Javier"));
 		
 		System.out.println("      ñlajsd ñlkah  ñlkaj dsñl hasd      ".trim());
+		
+		
 	}
-
 }
 
 // javase.HolaMundo.main()
