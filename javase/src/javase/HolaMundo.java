@@ -116,7 +116,7 @@ public class HolaMundo {
 			System.out.println("Falso");
 		}
 
-		// if, switch, while, do while, for
+		// if, switch, while, do while, for, break, continue
 		bucleprincipal: for (int veces = 1; veces <= 2; veces++) {
 			for (int indice = 1; indice <= 10; indice++) {
 				if (indice % 3 == 0) {
@@ -126,8 +126,29 @@ public class HolaMundo {
 			}
 		}
 		
-
-		// break, continue
+		// Tipos de datos básicos
+		String nombreCompleto = "Javier Lete";
+		String nombre = "Javier";
+		String apellido = "Lete";
+		
+		System.out.println("Mi nombre es " + nombreCompleto);
+		
+		String nombreCompuesto = nombre + " " + apellido;
+		
+		if(nombreCompleto.equals(nombreCompuesto)) { //NUNCA CON ==
+			System.out.println("Bienvenido profesor");
+		} else {
+			System.out.println("Bienvenido desconocido");
+		}
+		
+		System.out.println("hola".toUpperCase());
+		
+		nombre = null;
+		
+		System.out.println("Javier".equals(nombre));
+		System.out.println(nombre != null && nombre.equals("Javier"));
+		
+		System.out.println("      ñlajsd ñlkah  ñlkaj dsñl hasd      ".trim());
 	}
 
 }
