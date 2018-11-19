@@ -150,7 +150,31 @@ public class HolaMundo {
 		
 		System.out.println("      ñlajsd ñlkah  ñlkaj dsñl hasd      ".trim());
 		
+		// ARRAYS
+		String[] arr = new String[2];
 		
+		arr[0] = "Texto1"; arr[1] = "Texto2"; //arr[2] = "Texto3";
+		
+		for(i = 0; i < arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+		
+		for(String texto: arr) { //Java5
+			System.out.println(texto);
+		}
+		
+		String[] meses = { "Enero", "Febrero" };
+		
+		char[][] tablero = new char[8][8];
+		
+		tablero[0][0] = 'T';
+		
+		for(x = 0; x < tablero.length; x++) {
+			System.out.println();
+			for(y = 0; y < tablero[x].length; y++) {
+				System.out.print(tablero[x][y]);
+			}
+		}
 	}
 }
 
