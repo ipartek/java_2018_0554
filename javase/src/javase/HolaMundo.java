@@ -67,6 +67,43 @@ public class HolaMundo {
 		
 		// Clases equivalentes a los tipos primitivos
 		// Byte, Short, Integer, Long, Float, Double, Boolean, Character
+		
+		// OPERADORES
+		// Matemáticos: + - * / %
+		
+		int resto = 5 % 3; // El resto de dividir 5 / 3 es 2
+		
+		System.out.println(resto);
+		
+		// Comparaciones: ==, !=, <, >, <=, >=
+		
+		int x = 5;
+		System.out.println(x == 3);
+		
+		System.out.println(x);
+		
+		// Operadores lógicos: &&, ||, !
+		
+		System.out.println(!(1 <= x && x <= 10));
+		
+		System.out.println(1 > x || x > 10);
+		
+		// Operadores a nivel de bits: &, |, ~, ^
+		x = 5 | 2; // XOR
+		
+		System.out.println(x);
+		
+		// Operadores de asignación: =, +=, -=, *=, /= ...
+		
+		int y = x = 2;
+		
+		y += 5; // y = y + 5
+		
+		// Incremento decremento (--, ++)
+		y = 1;
+		
+		System.out.println(++y); //PREincremento
+		System.out.println(y++); //POSTincremento
 	}
 
 }
