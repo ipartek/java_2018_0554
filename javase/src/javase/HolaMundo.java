@@ -253,7 +253,8 @@ public class HolaMundo {
 		}
 		
 		//Soporte de caracteres unicode
-		System.out.println("😀");
+		String eЯЯe = "\uD83D\uDE40";
+		System.out.println(eЯЯe);
 	}
 }
 
