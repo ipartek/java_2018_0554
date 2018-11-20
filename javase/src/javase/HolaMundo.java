@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class HolaMundo {
 	/**
-	 * Método que se ejecutará cuando se inicie la aplicación
+	 * MÃ©todo que se ejecutarÃ¡ cuando se inicie la aplicaciÃ³n
 	 * 
 	 * @param args Argumentos de consola recibidos en un array
 	 */
@@ -23,12 +23,12 @@ public class HolaMundo {
 		// Comentario
 		// de
 		// varias
-		// líneas
+		// lÃ­neas
 
-		// CTRL-MAY-7 ó CTRL-7
+		// CTRL-MAY-7 Ã³ CTRL-7
 
 		/*
-		 * Comentario multilínea mucho más cómodo
+		 * Comentario multilÃ­nea mucho mÃ¡s cÃ³modo
 		 */
 
 		// TIPOS PRIMITIVOS
@@ -51,11 +51,11 @@ public class HolaMundo {
 		float f; // 32 bits
 		double d; // 64 bits
 
-		d = 5.3E7; // 5000E-3 != 5 NUNCA COMPARAR IGUALDAD ENTRE NÚMEROS DE COMA FLOTANTE
+		d = 5.3E7; // 5000E-3 != 5 NUNCA COMPARAR IGUALDAD ENTRE NÃšMEROS DE COMA FLOTANTE
 
 		System.out.println(d);
 
-		// BOOLEANO SÓLO PUEDEN VALER true O false
+		// BOOLEANO SÃ“LO PUEDEN VALER true O false
 		@SuppressWarnings("unused")
 		boolean bool;
 
@@ -73,7 +73,7 @@ public class HolaMundo {
 		// Byte, Short, Integer, Long, Float, Double, Boolean, Character
 
 		// OPERADORES
-		// Matemáticos: + - * / %
+		// MatemÃ¡ticos: + - * / %
 
 		int resto = 5 % 3; // El resto de dividir 5 / 3 es 2
 
@@ -86,7 +86,7 @@ public class HolaMundo {
 
 		System.out.println(x);
 
-		// Operadores lógicos: &&, ||, !
+		// Operadores lÃ³gicos: &&, ||, !
 
 		System.out.println(!(1 <= x && x <= 10));
 
@@ -97,7 +97,7 @@ public class HolaMundo {
 
 		System.out.println(x);
 
-		// Operadores de asignación: =, +=, -=, *=, /= ...
+		// Operadores de asignaciÃ³n: =, +=, -=, *=, /= ...
 
 		int y = x = 2;
 
@@ -150,7 +150,7 @@ public class HolaMundo {
 			}
 		}
 		
-		// Tipos de datos básicos
+		// Tipos de datos bÃ¡sicos
 		String nombreCompleto = "Javier Lete";
 		String nombre = "Javier";
 		String apellido = "Lete";
@@ -172,7 +172,7 @@ public class HolaMundo {
 		System.out.println("Javier".equals(nombre));
 		System.out.println(nombre != null && nombre.equals("Javier"));
 		
-		System.out.println("      ñlajsd ñlkah  ñlkaj dsñl hasd      ".trim());
+		System.out.println("      Ã±lajsd Ã±lkah  Ã±lkaj dsÃ±l hasd      ".trim());
 		
 		// ARRAYS
 		String[] arr = new String[2];
@@ -225,7 +225,7 @@ public class HolaMundo {
 		
 		entero = (int) fVariable;
 		
-		//Funciones matemáticas
+		//Funciones matemÃ¡ticas
 		double seno = Math.sin(5.5);
 		
 		//Vuelta de marcador
@@ -251,6 +251,9 @@ public class HolaMundo {
 		for(String texto : textos) {
 			System.out.println(texto);
 		}
+		
+		//Soporte de caracteres unicode
+		System.out.println("ðŸ˜€");
 	}
 }
 
