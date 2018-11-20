@@ -1,5 +1,6 @@
 package javase;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 // import java.lang.*;
@@ -232,6 +233,24 @@ public class HolaMundo {
 		System.out.println(grande);
 		
 		System.out.println(++grande);
+		
+		//Colecciones (en el ejemplo ArrayList) Java 5
+		//ArrayList<String> textos = new ArrayList<String>();
+		ArrayList<String> textos = new ArrayList<>(); //Java 8
+		
+		textos.add("UNO");
+		textos.add("DOS");
+		textos.add("TRES");
+		
+		System.out.println(textos.get(0));
+		
+		textos.set(2, "MODIFICADO");
+		
+		textos.remove(1);
+		
+		for(String texto : textos) {
+			System.out.println(texto);
+		}
 	}
 }
 
