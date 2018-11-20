@@ -1,5 +1,7 @@
 package javase;
 
+import java.util.Scanner;
+
 // import java.lang.*;
 
 /**
@@ -35,7 +37,7 @@ public class HolaMundo {
 		byte b; // 8 bits -128 a 127
 		@SuppressWarnings("unused")
 		short s;// 16 bits -32768 a 32767
-		int i; // 32 bits ~-4000M a ~4000M
+		int i; // 32 bits ~-2127M a ~2127M
 		@SuppressWarnings("unused")
 		long l; // 64 bits (trillones)
 
@@ -106,6 +108,27 @@ public class HolaMundo {
 		System.out.println(++y); // PREincremento
 		System.out.println(y++); // POSTincremento
 
+		//Operador condicional ? :
+		boolean datoBooleano = false;
+		System.out.println(datoBooleano ? "VERDADERO" : "FALSO");
+
+		if(datoBooleano) {
+			System.out.println("VERDADERO");
+		} else {
+			System.out.println("FALSO");
+		}
+		
+		int num1 = 5, num2 = 10;
+		int max = num1 > num2 ? num1: num2;
+		
+		if(num1 > num2) {
+			max = num1;
+		} else {
+			max = num2;
+		}
+		
+		System.out.println(max);
+		
 		// Sentencias de control
 
 		boolean estaArrancado = false;
@@ -175,6 +198,40 @@ public class HolaMundo {
 				System.out.print(tablero[x][y]);
 			}
 		}
+		
+		//Leer de teclado Java 5
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("Introduce tu email: ");
+		String email = sc.nextLine();
+		
+		System.out.println(email);
+		
+		sc.close();
+		
+		//Conversiones
+		String sEntero = "5";
+		int entero = Integer.parseInt(sEntero);
+		
+		String sDoblePrecision = "5.3";
+		double doblePrecision = Double.parseDouble(sDoblePrecision);
+		
+		long largo = 5L;
+		String sLargo = String.valueOf(largo);
+		
+		float fVariable = 5.3F;
+		String sVariable = String.valueOf(fVariable);
+		
+		entero = (int) fVariable;
+		
+		//Funciones matemáticas
+		double seno = Math.sin(5.5);
+		
+		//Vuelta de marcador
+		int grande = Integer.MAX_VALUE;
+		System.out.println(grande);
+		
+		System.out.println(++grande);
 	}
 }
 
