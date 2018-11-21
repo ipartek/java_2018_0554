@@ -255,6 +255,21 @@ public class HolaMundo {
 		//Soporte de caracteres unicode
 		String eЯЯe = "\uD83D\uDE40";
 		System.out.println(eЯЯe);
+		
+		//Ejemplo switch
+		
+		int mes = 4, diasmes;
+		
+		switch(mes) {
+		case 2: diasmes = 28; break;
+		case 4:
+		case 6:
+		case 9:
+		case 11: diasmes = 30; break;
+		default: diasmes = 31;
+		}
+		
+		System.out.println(diasmes);
 	}
 }
 
