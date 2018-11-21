@@ -252,6 +252,12 @@ public class HolaMundo {
 			System.out.println(texto);
 		}
 		
+		for(int indice = 0; indice < textos.size(); indice++) {
+			String texto = textos.get(indice);
+			
+			System.out.println(texto);
+		}
+		
 		//Soporte de caracteres unicode
 		String eЯЯe = "\uD83D\uDE40";
 		System.out.println(eЯЯe);
