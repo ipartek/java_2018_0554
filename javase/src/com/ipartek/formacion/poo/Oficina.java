@@ -19,6 +19,14 @@ public class Oficina {
 		usuarios.add(usuario);
 	}
 	
+	public void eliminarUsuario(Usuario usuario) {
+		if(usuario == null) {
+			throw new RuntimeException("No se admite el valor null para añadir un nuevo usuario");
+		}
+		
+		usuarios.remove(usuario);
+	}
+	
 	public ArrayList<Usuario> getUsuarios() {
 		return usuarios;
 	}
