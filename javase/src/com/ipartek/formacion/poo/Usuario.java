@@ -37,7 +37,7 @@ public class Usuario {
 	//Métodos de acceso (getters y setters)
 	public void setEmail(String email) {
 		if(email.indexOf('@') == -1 ) {
-			throw new RuntimeException("No se admiten emails sin @");
+			throw new UsuarioException("No se admiten emails sin @");
 		}
 		this.email = email;
 	}
