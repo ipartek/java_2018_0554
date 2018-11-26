@@ -17,6 +17,7 @@ public class HolaMundo {
 	 * 
 	 * @param args Argumentos de consola recibidos en un array
 	 */
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		System.out.println("Hola Mundo"); // Muestra "Hola Mundo" por pantalla
 

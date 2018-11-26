@@ -2,6 +2,7 @@ package javase;
 
 public class Excepciones {
 
+	@SuppressWarnings("null")
 	public static void main(String[] args) {
 		int a = 5, b = 0;
 		int div;
