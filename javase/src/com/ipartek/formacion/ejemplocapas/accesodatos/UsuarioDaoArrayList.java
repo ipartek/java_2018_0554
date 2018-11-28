@@ -14,8 +14,8 @@ public class UsuarioDaoArrayList implements CrudAble<Usuario> {
 	private ArrayList<Usuario> usuarios = new ArrayList<>();
 
 	public UsuarioDaoArrayList() {
-		usuarios.add(new Usuario(1L, "javier@lete.com", "contra"));
-		usuarios.add(new Usuario(2L, "pepe@perez.com", "yepa"));
+		usuarios.add(new Usuario(1L, "javier@lete.com", "Pa$$w0rd"));
+		usuarios.add(new Usuario(2L, "pepe@perez.com", "Pa$$w0rd"));
 	}
 	@Override
 	public List<Usuario> getAll() {
