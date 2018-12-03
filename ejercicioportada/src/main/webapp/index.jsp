@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.ipartek.formacion.pojos.Proyecto" %>
+<%
+	ArrayList<Proyecto> proyectos = (ArrayList<Proyecto>)request.getAttribute("proyectos");
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,7 +17,6 @@
     
 <header>
     <h1>
-    	<%= request.getAttribute("proyectos") %>
         <a href="index.html">
             <img src="media/logo.jpg" alt="Logo">
         </a>
@@ -58,47 +60,21 @@
     
     <h2>Últimos Proyectos</h2>
     
+    <% for(Proyecto proyecto: proyectos) { %>
     <article>
        
-        <p><img src="media/proyecto-1.jpg" alt=""></p>
+        <p><img src="media/proyecto-<%=proyecto.getId() %>.jpg" alt=""></p>
         
         <header>
-            <h3>Proyecto 1</h3>
+            <h3><%=proyecto.getTitulo() %></h3>
         </header>
         
-        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.</p>
+        <p><%=proyecto.getDescripcion() %></p>
         
         <p><a href="#">leer más</a></p>
         
     </article>
-    
-   <article>
-       
-        <p><img src="media/proyecto-2.jpg" alt=""></p>
-        
-        <header>
-            <h3>Proyecto 2</h3>
-        </header>
-        
-        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.</p>
-        
-        <p><a href="#">leer más</a></p>
-        
-    </article>
-    
-    <article>
-       
-        <p><img src="media/proyecto-3.jpg" alt=""></p>
-        
-        <header>
-            <h3>Proyecto 3</h3>
-        </header>
-        
-        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.</p>
-        
-        <p><a href="#">leer más</a></p>
-        
-    </article>
+    <% } %>
     
 </section>   
     
