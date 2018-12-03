@@ -14,6 +14,7 @@
     
 <header>
     <h1>
+    	<%= request.getAttribute("proyectos") %>
         <a href="index.html">
             <img src="media/logo.jpg" alt="Logo">
         </a>
