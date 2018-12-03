@@ -4,4 +4,15 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>Principal</servlet-name>
+  	<servlet-class>com.ipartek.formacion.PrincipalServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Principal</servlet-name>
+  	<url-pattern>/principal</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+  	<welcome-file>principal</welcome-file>
+  </welcome-file-list>
 </web-app>
