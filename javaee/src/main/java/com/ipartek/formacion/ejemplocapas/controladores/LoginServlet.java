@@ -24,8 +24,12 @@ public class LoginServlet extends HttpServlet {
 			usuario = new Usuario(null, email, password);
 		} catch(PojoException e) {
 			//response.sendRedirect("login.jsp");
-			request.setAttribute("error", "Error en el formato de email o contraseña");
+			if(email != null && password != null) {
+				request.setAttribute("error", "Error en el formato de email o contraseña");
+			}
+			
 			request.getRequestDispatcher("login.jsp").forward(request, response);
+			
 			return;
 		}
 		
