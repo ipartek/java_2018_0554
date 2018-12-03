@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, com.ipartek.formacion.pojos.Proyecto" %>
-<%
-	ArrayList<Proyecto> proyectos = (ArrayList<Proyecto>)request.getAttribute("proyectos");
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -60,21 +58,21 @@
     
     <h2>Últimos Proyectos</h2>
     
-    <% for(Proyecto proyecto: proyectos) { %>
+    <c:forEach items="${proyectos}" var="proyecto">
     <article>
        
-        <p><img src="media/proyecto-<%=proyecto.getId() %>.jpg" alt=""></p>
+        <p><img src="media/proyecto-${proyecto.id}.jpg" alt=""></p>
         
         <header>
-            <h3><%=proyecto.getTitulo() %></h3>
+            <h3>${proyecto.titulo}</h3>
         </header>
         
-        <p><%=proyecto.getDescripcion() %></p>
+        <p>${proyecto.descripcion}</p>
         
         <p><a href="#">leer más</a></p>
         
     </article>
-    <% } %>
+    </c:forEach>
     
 </section>   
     
