@@ -6,7 +6,7 @@
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
   	<servlet-name>Principal</servlet-name>
-  	<servlet-class>com.ipartek.formacion.PrincipalServlet</servlet-class>
+  	<servlet-class>com.ipartek.formacion.controladores.PrincipalServlet</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>Principal</servlet-name>
