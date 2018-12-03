@@ -20,7 +20,7 @@
 
 	<h1>
 		Bienvenido a esta web
-		<%=usuario.getEmail()%></h1>
+		<%= usuario.getEmail() %></h1>
 
 	<table>
 		<thead>
