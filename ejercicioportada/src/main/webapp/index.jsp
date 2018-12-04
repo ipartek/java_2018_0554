@@ -64,7 +64,7 @@
         <p><img src="media/proyecto-${proyecto.id}.jpg" alt=""></p>
         
         <header>
-            <h3>${proyecto.titulo}</h3>
+            <h3>${proyecto.titulo} <a href="editarproyecto?id=${proyecto.id}">Editar</a></h3>
         </header>
         
         <p>${proyecto.descripcion}</p>

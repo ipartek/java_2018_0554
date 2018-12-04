@@ -14,15 +14,15 @@
 		<legend>Nuevo proyecto</legend>
 		<p>
 			<label for="id">Id</label>
-			<input type="number" name="id" id="id" />
+			<input type="number" name="id" id="id" value="${proyecto.id}" />
 		</p>
 		<p>
 			<label for="titulo">Título</label>
-			<input name="titulo" id="titulo" />
+			<input name="titulo" id="titulo" value="${proyecto.titulo}" />
 		</p>
 		<p>
 			<label for="descripcion">Descripción</label>
-			<textarea name="descripcion" id="descripcion" cols="80" rows="10"></textarea>
+			<textarea name="descripcion" id="descripcion" cols="80" rows="10">${proyecto.descripcion}</textarea>
 		</p>
 		<p>
 			<button>Guardar cambios</button>
