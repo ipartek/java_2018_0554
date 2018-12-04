@@ -65,7 +65,7 @@
         
         <header>
             <h3>${proyecto.titulo} <a href="editarproyecto?id=${proyecto.id}">Editar</a>
-            <a href="borrarproyecto?id=${proyecto.id}">Borrar</a></h3>
+            <a href="borrarproyecto?id=${proyecto.id}" onclick="return confirm('¿Estás seguro de borrar ${proyecto.titulo}?')">Borrar</a></h3>
         </header>
         
         <p>${proyecto.descripcion}</p>
