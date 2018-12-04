@@ -74,6 +74,9 @@
     </article>
     </c:forEach>
     
+    <p>
+    	<a href="nuevoproyecto">Nuevo proyecto</a>
+   	</p>
 </section>   
     
     
