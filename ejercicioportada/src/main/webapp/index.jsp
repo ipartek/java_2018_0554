@@ -58,7 +58,7 @@
     
     <h2>Últimos Proyectos</h2>
     
-    <c:forEach items="${proyectos}" var="proyecto">
+    <c:forEach items="${proyectos.values()}" var="proyecto">
     <article>
        
         <p><img src="media/proyecto-${proyecto.id}.jpg" alt=""></p>

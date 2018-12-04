@@ -1,7 +1,7 @@
 package com.ipartek.formacion.controladores;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,15 +22,16 @@ public class GuardarProyectoServlet extends HttpServlet {
 		String descripcion = request.getParameter("descripcion");
 		
 		@SuppressWarnings("unchecked")
-		ArrayList<Proyecto> proyectos = 
-				(ArrayList<Proyecto>) request.getServletContext().getAttribute("proyectos");
+		HashMap<Long, Proyecto> proyectos = 
+				(HashMap<Long, Proyecto>) request.getServletContext().getAttribute("proyectos");
 		
 		//Empaquetarla en un objeto
 		Proyecto proyecto = new Proyecto(Long.parseLong(id), titulo, descripcion);
 		
 		//Realizar la operación
-		proyectos.add(proyecto);
+		proyectos.put(Long.parseLong(id), proyecto);
 		
+		//Redireccionar a la página correspondiente
 		request.getRequestDispatcher("/").forward(request, response);
 	}
 

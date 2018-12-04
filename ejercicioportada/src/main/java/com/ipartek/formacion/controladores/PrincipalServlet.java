@@ -1,7 +1,7 @@
 package com.ipartek.formacion.controladores;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,14 +19,14 @@ public class PrincipalServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		@SuppressWarnings("unchecked")
-		ArrayList<Proyecto> proyectos = (ArrayList<Proyecto>) request.getServletContext().getAttribute("proyectos");
+		HashMap<Long, Proyecto> proyectos = (HashMap<Long, Proyecto>) request.getServletContext().getAttribute("proyectos");
 
 		if (proyectos == null) {
-			proyectos = new ArrayList<Proyecto>();
+			proyectos = new HashMap<Long,Proyecto>();
 
-			proyectos.add(new Proyecto(1L, "Primer proyecto",
+			proyectos.put(1L, new Proyecto(1L, "Primer proyecto",
 					"Este proyecto mola mogollón porque bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla"));
-			proyectos.add(new Proyecto(2L, "Segundo proyecto",
+			proyectos.put(2L, new Proyecto(2L, "Segundo proyecto",
 					"Este proyecto es una birria porque bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla"));
 
 			request.getServletContext().setAttribute("proyectos", proyectos);
