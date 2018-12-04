@@ -15,18 +15,28 @@ import com.ipartek.formacion.pojos.Proyecto;
 public class PrincipalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Proyecto> proyectos = new ArrayList<Proyecto>();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		
-		proyectos.add(new Proyecto(1L, "Primer proyecto", "Este proyecto mola mogollón porque bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla"));
-		proyectos.add(new Proyecto(2L, "Segundo proyecto", "Este proyecto es una birria porque bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla"));
-		
-		request.setAttribute("proyectos", proyectos);
+		@SuppressWarnings("unchecked")
+		ArrayList<Proyecto> proyectos = (ArrayList<Proyecto>) request.getServletContext().getAttribute("proyectos");
+
+		if (proyectos == null) {
+			proyectos = new ArrayList<Proyecto>();
+
+			proyectos.add(new Proyecto(1L, "Primer proyecto",
+					"Este proyecto mola mogollón porque bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla"));
+			proyectos.add(new Proyecto(2L, "Segundo proyecto",
+					"Este proyecto es una birria porque bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla"));
+
+			request.getServletContext().setAttribute("proyectos", proyectos);
+		}
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
