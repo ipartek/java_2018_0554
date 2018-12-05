@@ -3,7 +3,8 @@ package com.ipartek.formacion.repaso;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class EmpleadoIndefinido extends Empleado {
+class EmpleadoIndefinido extends Empleado {
+	public static final BigDecimal SUELDO_ANUAL_POR_DEFECTO = new BigDecimal("20000.00");
 	private BigDecimal sueldoAnual;
 	private int numeroDePagas;
 	

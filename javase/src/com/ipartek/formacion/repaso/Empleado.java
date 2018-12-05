@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 //La clase se ve obligada a ser abstracta al tener un método abstracto
 //Por ello no se puede instanciar (new Empleado no funciona)
-public abstract class Empleado extends Persona {
+abstract class Empleado extends Persona {
 	private String numeroSeguridadSocial;
 	private String dni;
 	

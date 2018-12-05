@@ -1,6 +1,6 @@
 package com.ipartek.formacion.repaso;
 
-public class Persona {//extends Object { //implícito
+class Persona {//extends Object { //implícito
 	//Variables de instancia: SIEMPRE PRIVADAS
 	private Long id; //private solo da acceso a la propia clase en la que está definido el elemento
 	private String nombre;

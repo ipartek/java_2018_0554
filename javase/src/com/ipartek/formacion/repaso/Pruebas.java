@@ -1,24 +1,31 @@
 package com.ipartek.formacion.repaso;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pruebas {
+class Pruebas {
 	public static void main(String[] args) {
 		List<Empleado> empleados = new ArrayList<Empleado>();
 
 		//Un empleado indefinido se puede agregar a una colección de Empleado a secas
 		//porque EmpleadoIndefinido define todo lo necesario para poder dar respuesta
 		//a todas las necesidades de un Empleado
-		empleados.add(new EmpleadoIndefinido(
-						1L, "Javier", "Lete", //Persona
-						"123456789", "12345678Z", //Empleado
-						new BigDecimal(20000), 14)); //EmpleadoIndefinido
+		EmpleadoIndefinido ef = new EmpleadoIndefinido(
+				1L, "Javier", "Lete", //Persona
+				"123456789", "12345678Z", //Empleado
+				EmpleadoIndefinido.SUELDO_ANUAL_POR_DEFECTO, 14);
+		
+		System.out.println(Math.E);
+		
+		//System.out.println(ef.SUELDO_ANUAL_POR_DEFECTO); // Se puede, pero no se debe
+		
+		empleados.add(ef); //EmpleadoIndefinido
 		
 		//Iterable<Empleado> conjuntoARecorrer = empleados;
 		
 		for (Empleado empleado : empleados) {//conjuntoARecorrer) {
+			System.out.println(empleado.getClass());
+			  
 			System.out.println(empleado);
 			System.out.println(empleado.getSueldoMensual());
 			
