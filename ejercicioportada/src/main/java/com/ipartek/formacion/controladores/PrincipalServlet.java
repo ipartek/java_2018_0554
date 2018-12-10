@@ -3,6 +3,7 @@ package com.ipartek.formacion.controladores;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +19,12 @@ public class PrincipalServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		//Las variables de tipo application se comparten para todos los usuarios
+		//de este contexto (aplicación)
+		ServletContext application = request.getServletContext();
+		
 		@SuppressWarnings("unchecked")
-		HashMap<Long, Proyecto> proyectos = (HashMap<Long, Proyecto>) request.getServletContext().getAttribute("proyectos");
+		HashMap<Long, Proyecto> proyectos = (HashMap<Long, Proyecto>) application.getAttribute("proyectos");
 
 		if (proyectos == null) {
 			proyectos = new HashMap<Long,Proyecto>();
@@ -29,7 +34,7 @@ public class PrincipalServlet extends HttpServlet {
 			proyectos.put(2L, new Proyecto(2L, "Segundo proyecto",
 					"Este proyecto es una birria porque bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla, bla"));
 
-			request.getServletContext().setAttribute("proyectos", proyectos);
+			application.setAttribute("proyectos", proyectos);
 		}
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
