@@ -15,7 +15,11 @@
         </header>
        
         <footer>
-             Publicado el <time datetime="${noticia.fecha}">${noticia.fecha}</time> por ${noticia.autor} 
+             Publicado el
+             <time datetime="${noticia.fecha}">
+             	<fmt:formatDate pattern = "dd.MM.yy HH:mm:ss" value = "${noticia.fecha}" />
+             </time>
+             por ${noticia.autor} 
         </footer>
     
        <p><img src="media/noticia-${noticia.id}.jpg" alt=""></p>
