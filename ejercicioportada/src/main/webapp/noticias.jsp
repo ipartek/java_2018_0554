@@ -22,14 +22,22 @@
              por ${noticia.autor} 
         </footer>
     
-       <p><img src="media/noticia-${noticia.id}.jpg" alt=""></p>
+        <p><img src="media/noticia-${noticia.id}.jpg" alt=""></p>
         
         <p>${noticia.texto}</p>
         
-        <p><a href="#">leer más</a></p>
+        <p>
+        	<a href="#">leer más</a>
+        	<a href="formularionoticia?accion=editar&id=${noticia.id}">Editar</a>
+        	<a href="formularionoticia?accion=borrar&id=${noticia.id}">Borrar</a>
+        </p>
         
     </article>
     </c:forEach>
+    
+    <p>
+    	<a href="formularionoticia?accion=anadir">Añadir</a>
+    </p>
 </section>
 
 <%@ include file="includes/pie.jsp" %>
