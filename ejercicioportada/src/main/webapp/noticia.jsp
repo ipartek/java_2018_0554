@@ -5,16 +5,19 @@
 
 <form action="formularionoticia" method="post">
 	<fieldset>
-		<legend>Noticia</legend>
+		<legend>Noticia (${accion})</legend>
+		
+		<input type="hidden" name="accion" value="${accion}" />
+		
 		<input type="hidden" name="id" id="id" value="${noticia.id}" />
 
 		<p>
 			<label for="titulo">Título</label>
-			<input type="text" name="titulo" id="titulo" value="${noticia.titulo}" />
+			<input type="text" name="titular" id="titular" value="${noticia.titular}" />
 		</p>
 		<p>
 			<label for="fecha">Fecha</label>
-			<input type="date" name="fecha" id="fecha" value="${noticia.fecha}" />
+			<input type="datetime-local" name="fecha" id="fecha" value="<fmt:formatDate pattern = "yyyy-MM-dd'T'HH:mm" value = "${noticia.fecha}" />" />
 		</p>
 		<p>
 			<label for="autor">Autor</label>
