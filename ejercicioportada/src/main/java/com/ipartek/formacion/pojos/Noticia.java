@@ -11,11 +11,11 @@ public class Noticia {
 	
 	public Noticia(Long id, String titular, Date fecha, String autor, String texto) {
 		super();
-		this.id = id;
-		this.titular = titular;
-		this.fecha = fecha;
-		this.autor = autor;
-		this.texto = texto;
+		setId(id);
+		setTitular(titular);
+		setFecha(fecha);
+		setAutor(autor);
+		setTexto(texto);
 	}
 
 	public Long getId() {
