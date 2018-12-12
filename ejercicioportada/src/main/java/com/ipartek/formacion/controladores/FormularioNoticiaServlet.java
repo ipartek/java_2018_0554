@@ -1,9 +1,6 @@
 package com.ipartek.formacion.controladores;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.TreeMap;
 
 import javax.servlet.ServletException;
@@ -16,6 +13,7 @@ import com.ipartek.formacion.pojos.Noticia;
 
 @WebServlet("/formularionoticia")
 public class FormularioNoticiaServlet extends HttpServlet {
+	private static final String NOTICIA_JSP = "noticia.jsp";
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,10 +37,12 @@ public class FormularioNoticiaServlet extends HttpServlet {
 		
 		request.setAttribute("accion", accion);
 		
-		request.getRequestDispatcher("noticia.jsp").forward(request, response);
+		request.getRequestDispatcher(NOTICIA_JSP).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		
 		String accion = request.getParameter("accion");
 		String id = request.getParameter("id");
 		
@@ -50,15 +50,6 @@ public class FormularioNoticiaServlet extends HttpServlet {
 		String fecha = request.getParameter("fecha");
 		String autor = request.getParameter("autor");
 		String texto = request.getParameter("texto");
-
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
-		Date fechaDate;
-		
-		try {
-			fechaDate = format.parse(fecha);
-		} catch (ParseException e) {
-			throw new ServletException("Error en la fecha", e);
-		}
 		
 		@SuppressWarnings("unchecked")
 		TreeMap<Long, Noticia> noticias = 
@@ -79,8 +70,17 @@ public class FormularioNoticiaServlet extends HttpServlet {
 		switch(accion) {
 		case "insertar": 
 		case "editar": 
-			Noticia noticia = new Noticia(idLong, titular, fechaDate, autor, texto);
+			Noticia noticia = new Noticia(idLong, titular, fecha, autor, texto);
+			
+			if(!noticia.isCorrecto()) {
+				request.setAttribute("accion", accion);
+				request.setAttribute("noticia", noticia);
+				request.getRequestDispatcher(NOTICIA_JSP).forward(request, response);
+				return;
+			}
+			
 			noticias.put(noticia.getId(), noticia);
+
 			break;
 		case "borrar": noticias.remove(Long.parseLong(id)); break;
 		default: throw new ServletException("Opción no definida");
