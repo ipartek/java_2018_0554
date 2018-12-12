@@ -12,8 +12,7 @@
 
 
 <body>
-
-
+<%-- 
 	<header>
 		<h1>
 			<a href="index.html"> <img src="media/logo.jpg" alt="Logo">
@@ -49,3 +48,4 @@
 		</p>
 
 	</aside>
+ --%>
