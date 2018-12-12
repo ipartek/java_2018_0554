@@ -8,6 +8,10 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Notepad++">
 <title>Práctica Estructura y CSS</title>
+
+<style>
+.error {color: red}
+</style>
 </head>
 
 

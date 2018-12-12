@@ -1,5 +1,7 @@
 package com.ipartek.formacion.pojos;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Noticia {
@@ -8,7 +10,15 @@ public class Noticia {
 	private Date fecha;
 	private String autor;
 	private String texto;
-	
+
+	private String errorId;
+	private String errorTitular;
+	private String errorFecha;
+	private String errorAutor;
+	private String errorTexto;
+
+	private boolean hayErrores = false;
+
 	public Noticia(Long id, String titular, Date fecha, String autor, String texto) {
 		super();
 		setId(id);
@@ -17,12 +27,40 @@ public class Noticia {
 		setAutor(autor);
 		setTexto(texto);
 	}
+	
+	public Noticia(Long id, String titular, String fecha, String autor, String texto) {
+		Date fechaResultado = fechaTexto2fechaDate(fecha);
+		setId(id);
+		setTitular(titular);
+		setFecha(fechaResultado);
+		setAutor(autor);
+		setTexto(texto);
+	}
+	
+	public Noticia() {
+		
+	}
 
+	private Date fechaTexto2fechaDate(String texto) {
+		try {
+			return new SimpleDateFormat("yyyy-MM-dd'T'hh:mm").parse(texto);
+		} catch (ParseException e) {
+			setErrorFecha("La fecha no tiene el formato adecuado");
+		}
+		
+		return null;
+	}
+	
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
+		if (id == null || id <= 0) {
+			// throw new PojoException("No se admiten valores de id <= 0");
+			setErrorId("El id debe valer más que 0");
+		}
+
 		this.id = id;
 	}
 
@@ -31,6 +69,10 @@ public class Noticia {
 	}
 
 	public void setTitular(String titular) {
+		if (titular == null || titular.trim().length() == 0) {
+			setErrorTitular("No se admiten titulares vacíos");
+		}
+
 		this.titular = titular;
 	}
 
@@ -39,6 +81,12 @@ public class Noticia {
 	}
 
 	public void setFecha(Date fecha) {
+		if (fecha == null) {
+			this.fecha = new Date();
+		} else if (fecha.after(new Date())) {
+			setErrorFecha("No se admiten fechas futuras");
+		}
+
 		this.fecha = fecha;
 	}
 
@@ -47,6 +95,10 @@ public class Noticia {
 	}
 
 	public void setAutor(String autor) {
+		if (autor == null || autor.trim().length() == 0) {
+			this.autor = "Anónimo";
+		}
+		
 		this.autor = autor;
 	}
 
@@ -55,9 +107,62 @@ public class Noticia {
 	}
 
 	public void setTexto(String texto) {
+		// Expresión regular original .+\.\s.+\.\s.+\.\s
+		if(!texto.matches(".+\\.\\s.+\\.\\s.+\\.\\s")) {
+			setErrorTexto("No cumple nuestras reglas de estilo de texto");
+		}
+		
 		this.texto = texto;
 	}
 
+	public String getErrorId() {
+		return errorId;
+	}
+
+	public void setErrorId(String errorId) {
+		hayErrores = true;
+		this.errorId = errorId;
+	}
+
+	public String getErrorTitular() {
+		return errorTitular;
+	}
+
+	public void setErrorTitular(String errorTitular) {
+		hayErrores = true;
+		this.errorTitular = errorTitular;
+	}
+
+	public String getErrorFecha() {
+		return errorFecha;
+	}
+
+	public void setErrorFecha(String errorFecha) {
+		hayErrores = true;
+		this.errorFecha = errorFecha;
+	}
+
+	public String getErrorAutor() {
+		return errorAutor;
+	}
+
+	public void setErrorAutor(String errorAutor) {
+		hayErrores = true;
+		this.errorAutor = errorAutor;
+	}
+
+	public String getErrorTexto() {
+		return errorTexto;
+	}
+
+	public void setErrorTexto(String errorTexto) {
+		this.errorTexto = errorTexto;
+	}
+
+	public boolean isCorrecto() {
+		return !hayErrores;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
