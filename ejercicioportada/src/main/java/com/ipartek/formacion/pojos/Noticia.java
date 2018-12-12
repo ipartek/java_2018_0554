@@ -97,6 +97,7 @@ public class Noticia {
 	public void setAutor(String autor) {
 		if (autor == null || autor.trim().length() == 0) {
 			this.autor = "Anónimo";
+			return;
 		}
 		
 		this.autor = autor;
@@ -107,8 +108,7 @@ public class Noticia {
 	}
 
 	public void setTexto(String texto) {
-		// Expresión regular original .+\.\s.+\.\s.+\.\s
-		if(!texto.matches(".+\\.\\s.+\\.\\s.+\\.\\s")) {
+		if(!texto.matches("[A-Za-zÑñÁáÉéÍíÓóÚúÜü,\\.\\n\\s]{50,}")) {
 			setErrorTexto("No cumple nuestras reglas de estilo de texto");
 		}
 		
@@ -156,6 +156,7 @@ public class Noticia {
 	}
 
 	public void setErrorTexto(String errorTexto) {
+		hayErrores = true;
 		this.errorTexto = errorTexto;
 	}
 
