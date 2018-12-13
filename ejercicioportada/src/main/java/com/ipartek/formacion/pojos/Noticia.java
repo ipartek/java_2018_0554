@@ -108,7 +108,7 @@ public class Noticia {
 	}
 
 	public void setTexto(String texto) {
-		if(!texto.matches("[A-Za-zÑñÁáÉéÍíÓóÚúÜü,\\.\\n\\s]{50,}")) {
+		if(!texto.matches("[0-9A-Za-zÑñÁáÉéÍíÓóÚúÜü,\\.\\n\\s]{50,}")) {
 			setErrorTexto("No cumple nuestras reglas de estilo de texto");
 		}
 		
