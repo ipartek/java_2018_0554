@@ -8,12 +8,16 @@ import static org.junit.Assert.fail;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import org.junit.Test;
 
 import com.ipartek.formacion.ejemplocapas.pojos.Usuario;
 
 public class TestConexionBaseDatos {
+	
+	
 	
 	
 	@Test
@@ -34,6 +38,32 @@ public class TestConexionBaseDatos {
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.0.44/youtube?useSSL=false", "viernes","juernes");
 			assertNotNull(conn);
+			
+					
+			String sql = "select id, nombre, password from usuario order by id desc limit 500;";
+			
+			
+			// select id, nombre, password from usuario 
+			// videonombre='xabier@ipartek.com' AND password = 'Pa$$w0rd';
+			
+			PreparedStatement pst = conn.prepareStatement(sql);
+			
+			ResultSet rs = pst.executeQuery();
+			
+			
+			while( rs.next() ) {
+				
+				int id = rs.getInt("id");
+				String nombre = rs.getString("nombre");
+				String password = rs.getString("password");
+				
+				System.out.println( id + " " + nombre + " " + password );
+			}
+			
+			rs.close();
+			pst.close();
+			conn.close();
+			
 			
 		}catch (Exception e) {
 			fail("no se pudo establecer conexion " + e.getMessage());
