@@ -19,6 +19,9 @@
 	<h1>
 		Bienvenido a esta web
 		<%= usuario.getEmail() %></h1>
+		
+		
+	<a href="videos">Ver Videos</a>	
 
 	<table>
 		<thead>
