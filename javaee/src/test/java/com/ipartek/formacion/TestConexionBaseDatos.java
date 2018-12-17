@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 
 import org.junit.Test;
 
-import com.ipartek.formacion.ejemplocapas.pojos.Usuario;
+import com.ipartek.formacion.modelo.pojos.Usuario;
 
 public class TestConexionBaseDatos {
 	

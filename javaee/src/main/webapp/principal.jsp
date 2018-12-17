@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="com.ipartek.formacion.ejemplocapas.pojos.Usuario, java.util.ArrayList"%>
+	import="com.ipartek.formacion.modelo.pojos.Usuario, java.util.ArrayList"%>
 
 <%
 	Object objeto = session.getAttribute("usuario");

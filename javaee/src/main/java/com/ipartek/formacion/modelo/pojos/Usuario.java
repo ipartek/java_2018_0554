@@ -1,10 +1,12 @@
-package com.ipartek.formacion.ejemplocapas.pojos;
+package com.ipartek.formacion.modelo.pojos;
 
 import com.ipartek.formacion.biblioteca.Constantes;
 
 public class Usuario {
+	
 	private Long id;
-	private String email, password;
+	private String email;
+	private String password;
 	
 	public Usuario(Long id, String email, String password) {
 		setId(id);

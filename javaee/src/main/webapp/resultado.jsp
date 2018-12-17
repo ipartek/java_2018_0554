@@ -1,4 +1,10 @@
 <h1>Resultado</h1>
 
 
-<p>Suma = <%=request.getAttribute("suma")%></p>
+<%
+	
+	int suma = (Integer)request.getAttribute("suma");
+
+%>
+
+<p>Suma = <%=suma%></p>

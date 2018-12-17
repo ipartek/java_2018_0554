@@ -1,4 +1,4 @@
-package com.ipartek.formacion.ejemplocapas.pojos;
+package com.ipartek.formacion.modelo.pojos;
 
 public class PojoException extends RuntimeException {
 
