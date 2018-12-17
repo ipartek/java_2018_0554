@@ -8,6 +8,9 @@
 </head>
 <body>
 
+<a href="calculadora.jsp">Ejemplo Calculadora</a>
+<a href="calcular">Ejemplo Calculadora</a>
+
 <form action="login" method="post">
 	<fieldset>
 		<legend>Login</legend>
