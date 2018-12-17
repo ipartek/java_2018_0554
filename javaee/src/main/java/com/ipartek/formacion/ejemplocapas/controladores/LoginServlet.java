@@ -38,6 +38,16 @@ public class LoginServlet extends HttpServlet {
 			
 			if ( usuario != null ) {
 				vista = VISTA_PRINCIPAL;
+				
+				ArrayList<Usuario> usuariosValidos = dao.getAll();
+				
+				request.setAttribute("usuario", usuario);
+				request.setAttribute("listado", usuariosValidos);
+				
+				
+				//ArrayList<String> usuariosNoValidos = dao.getAllNoValid();
+				
+				
 			}else {				
 				request.setAttribute("error", "Usuario No valido");				
 			}			

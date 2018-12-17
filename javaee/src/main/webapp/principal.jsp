@@ -3,11 +3,9 @@
 	import="com.ipartek.formacion.modelo.pojos.Usuario, java.util.ArrayList"%>
 
 <%
-	Object objeto = session.getAttribute("usuario");
-	Usuario usuario = (Usuario) objeto;
+	Usuario usuario = (Usuario)request.getAttribute("usuario");
+	ArrayList<Usuario> listado = (ArrayList<Usuario>)request.getAttribute("listado");
 
-	Object oUsuarios = request.getAttribute("usuarios");
-	ArrayList<Usuario> usuarios = (ArrayList<Usuario>) oUsuarios;
 %>
 
 <!DOCTYPE html>
@@ -31,7 +29,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% for(Usuario u: usuarios) { %>
+			<% for(Usuario u: listado) { %>
 			<tr>
 				<th><%=u.getId() %></th>
 				<td><%=u.getEmail() %></td>
