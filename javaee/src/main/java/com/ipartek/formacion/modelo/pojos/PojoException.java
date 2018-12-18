@@ -1,8 +1,13 @@
-package com.ipartek.formacion.ejemplocapas.pojos;
+package com.ipartek.formacion.modelo.pojos;
 
 public class PojoException extends RuntimeException {
 
 	private static final long serialVersionUID = 6476469723528702472L;
+	
+	public static final String EXCEPTION_EMAIL_VACIO = "No se admiten emails vacíos";
+	public static final String EXCEPTION_EMAIL_NO_VALIDO = "El formato del email no es correcto";
+	public static final String EXCEPTION_PASSWORD_VACIO = "No se admiten contraseñas vacías";
+	public static final String EXCEPTION_PASSWORD_NO_VALIDO = "Minimo 6 caracteres con al menos una mayuscula";
 
 	public PojoException() {
 		
