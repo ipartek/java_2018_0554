@@ -24,7 +24,7 @@
 			<tr>
 				<th>ID</th>
 				<th>titulo</th>
-				<th>URL</th>
+				<th>Prev</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,12 +34,13 @@
 			<tr>
 				<th><%=v.getId()%></th>
 				<td><%=v.getTitulo()%></td>
-				<td><a href="<%=v.getUrl()%>">Ir a video</a></td>
+				<td><iframe width="280" height="157" src="<%=v.getUrl() %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
 			</tr>
 			<%
 				}
 			%>
 		</tbody>
 	</table>
+	 
 </body>
 </html>

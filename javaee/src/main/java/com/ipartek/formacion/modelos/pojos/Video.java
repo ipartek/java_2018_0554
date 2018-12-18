@@ -15,6 +15,9 @@ public class Video {
 		return titulo;
 	}
 	public void setTitulo(String titulo) {
+		if(titulo==null || titulo.trim().length()==0) {
+			titulo="¡LA NUEVA DRIFTBOARD DE FORTNITE! - TheGrefg";
+		}
 		this.titulo = titulo;
 	}
 	@Override
@@ -60,6 +63,9 @@ public class Video {
 		return url;
 	}
 	public void setUrl(String url) {
+		if(url==null || url.trim().length()==0) {
+			url="https://www.youtube.com/watch?v=NMkDvINuxyY";
+		}
 		this.url = url;
 	}
 	public Video(Long id, String titulo, String url) {
