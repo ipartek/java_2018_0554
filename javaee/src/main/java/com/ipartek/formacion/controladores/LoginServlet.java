@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.modelos.daos.UsuarioDAO;
 import com.ipartek.formacion.modelos.pojos.Usuario;
@@ -38,6 +39,9 @@ public class LoginServlet extends HttpServlet {
 				request.setAttribute("usuariosok", usuariosok);
 				request.setAttribute("usuariosnook", usuariosnook);
 				request.setAttribute("usuario", usuario);
+				HttpSession session=request.getSession();
+				session.setMaxInactiveInterval(60*5);
+				session.setAttribute("usuario_logueado", usuario);
 				vista=VISTA_PRINCIPAL;
 			}else {
 				request.setAttribute("error", "Usuario No valido");

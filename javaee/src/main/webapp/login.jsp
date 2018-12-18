@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+ <%@ include file="cabecera.jsp" %>
+ <a href="privado/index.jsp">Zona privada</a>
 <form action="login" method="post">
 	<fieldset>
 		<legend>Login</legend>

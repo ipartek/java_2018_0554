@@ -7,6 +7,7 @@
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
 	String busqueda = (String) request.getAttribute("busqueda");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+ <%@ include file="cabecera.jsp" %>
 <h1>MIS VIDEOS</h1>
 <%if(busqueda!=null && busqueda.trim().length()!=0){ %>
 <p>Resultado de busqueda: <%=busqueda%></p>

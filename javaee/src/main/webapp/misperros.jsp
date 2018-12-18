@@ -11,6 +11,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="cabecera.jsp" %>
+ 
 <h1>MIS PERROS</h1>
 
 <table>
