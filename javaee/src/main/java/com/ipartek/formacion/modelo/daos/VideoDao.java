@@ -12,7 +12,7 @@ public class VideoDao {
 	public ArrayList<Video> listarVideos() {
 		ArrayList<Video> listadoVideos = new ArrayList<Video>();
 		Video video = null;
-		String sql = "SELECT nombre, url FROM imanol ORDER BY id DESC LIMIT 500";
+		String sql = "SELECT id, nombre, url FROM imanol ORDER BY id DESC LIMIT 500";
 		try (
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);
@@ -20,11 +20,12 @@ public class VideoDao {
 				try ( ResultSet rs = pst.executeQuery() ){											
 					while(rs.next()) { // hemos encontrado usuario								
 						video = new Video();
+						video.setId( rs.getLong("id"));
 						video.setNombre( rs.getString("nombre"));
 						video.setUrl(rs.getString("url"));	
 						listadoVideos.add(video);
-					}						
-			}
+					}				
+			}	
 			
 		}catch(Exception e) {
 			e.printStackTrace();

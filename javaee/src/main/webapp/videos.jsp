@@ -10,7 +10,6 @@ String placeholder="";
 if(texto!=null){
 	 placeholder=texto;
 }
-
 %>
 <!DOCTYPE html>
 <html>
@@ -32,7 +31,7 @@ if(texto!=null){
 
 
 <%if(listadoVideosbuscados!=null){ %>
-
+<%if(listadoVideosbuscados.size()!=0){ %>
 <h2>Filtrado por <%=texto %> </h2>
 <table>
 	<thead>
@@ -52,7 +51,7 @@ if(texto!=null){
 	String[] idVideo = v.getUrl().split("=");
 	String id = idVideo[1];
 	String enlace="https://www.youtube.com/embed/"+id;%>
-	<td><iframe width="280" height="155" src="<%=enlace %>" 
+	<td><iframe width="140" height="80" src="<%=enlace %>" 
 	frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</td>
 	</tr>
@@ -60,7 +59,9 @@ if(texto!=null){
 	</tbody>
 	
 </table>
-
+<%}else {%>
+	<h3>No hay resultado que coincidad con: <%=texto %> </h3>
+<%}%>
 	
 <%} %>
 
@@ -86,7 +87,7 @@ if(texto!=null){
 	String[] idVideo = v.getUrl().split("=");
 	String id = idVideo[1];
 	String enlace="https://www.youtube.com/embed/"+id;%>
-	<td><iframe width="280" height="155" src="<%=enlace %>" 
+	<td><iframe width="140" height="80" src="<%=enlace %>" 
 	frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</td>
 	</tr>
