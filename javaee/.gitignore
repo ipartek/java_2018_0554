@@ -1,2 +1,7 @@
-/target/
-/ws_JAVA_2018_0554/
+#estas carpetas no se sincronizan con el repositorio
+
+**/target/
+**/bin/
+**/.classpath
+**/.project
+**/.settings/
