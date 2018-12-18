@@ -15,11 +15,19 @@
 </head>
 <body>
 
-<a href="videos">Ver Videos</a>
+	<%@ include file="cabecera.jsp"  %>
+
+
+	
 
 	<h1>
 		Bienvenido a esta web
 		<%= usuario.getEmail() %></h1>
+		
+		
+	<a href="videos">Ver Videos</a>	
+	<br>
+	<a href="discos">Ver Discos</a>	
 
 	<table>
 		<thead>
@@ -37,14 +45,6 @@
 				<td><%=u.getPassword() %></td>
 			</tr>
 			<% } %>
-			
-			<%-- <% for(Usuario unv: listadonovalido) { %>
-			<tr>
-				<th><%=unv.getId() %></th>
-				<td><%=unv.getEmail() %></td>
-				<td><%=unv.getPassword() %></td>
-			</tr>
-			<% } %> --%>
 		</tbody>
 	</table>
 

@@ -8,6 +8,8 @@
 </head>
 <body>
 
+<%@ include file="cabecera.jsp"  %>
+
 <form>
 	<fieldset>
 		<legend>Dime quien eres</legend>

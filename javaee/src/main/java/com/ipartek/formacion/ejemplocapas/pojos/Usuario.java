@@ -1,7 +1,5 @@
 package com.ipartek.formacion.ejemplocapas.pojos;
 
-import com.ipartek.formacion.biblioteca.Constantes;
-
 public class Usuario {
 	private Long id;
 	private String email, password;

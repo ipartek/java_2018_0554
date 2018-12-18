@@ -5,6 +5,9 @@
 <title>Ejemplo JSP</title>
 </head>
 <body>
+
+<%@ include file="cabecera.jsp"  %>
+
 ¡Hola a todos!
 
 <%-- Scriptlets --%>
