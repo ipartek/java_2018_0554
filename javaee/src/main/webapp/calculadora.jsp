@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="cabecera.jsp" %>
 <form action="operacion" method="post">
 	<input type="number" name="num1" />
 	<input type="number" name="num2" />

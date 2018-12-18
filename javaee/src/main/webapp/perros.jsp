@@ -1,9 +1,10 @@
+<%@page import="com.ipartek.formacion.modelo.pojos.Perro"%>
 <%@page import="java.util.ArrayList"%>
-<%@ include file="cabecera.jsp" %>
-<h1>Listado Videos</h1>
+
+<h1>Listado Perros</h1>
 
 <%
-	ArrayList<String> videos = (ArrayList<String>)request.getAttribute("videos");
+	ArrayList<Perro> perros = (ArrayList<Perro>)request.getAttribute("perros");
 	String busqueda = (String)request.getAttribute("busqueda");
 %>
 
@@ -17,16 +18,16 @@
 	}
 %>
 
-<form action="videos" method="post">
+<form action="perros" method="post">
 	<input type="text" name="busqueda" value="<%=busqueda%>" required>
 	<input type="submit" value="filtrar">
 </form>
 
 <ol>
 	<%
-		for( String video: videos){
+		for( Perro perro: perros){
 			%>
-					<li><%=video%></li>
+					<li><%=perro%></li>
 			<%	
 		}	
 	%>
