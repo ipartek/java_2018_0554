@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ipartek.formacion.modelo.daos.VideoDAO;
+import com.ipartek.formacion.modelo.pojos.Video;
+
 /**
  * Servlet implementation class VideoController
  */
@@ -20,13 +23,11 @@ public class VideoController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<String> videos = new ArrayList<String>();
+		ArrayList<Video> videos = new ArrayList<Video>();
 		
-		videos.add("video1");
-		videos.add("Fary");
-		videos.add("Que nos se te olcide el WHERE XD");
+		VideoDAO dao = new VideoDAO();
 		
-		request.setAttribute("videos", videos);
+		request.setAttribute("videos", dao.getAll() );
 		
 		request.getRequestDispatcher("videos.jsp").forward(request, response);
 		
@@ -39,10 +40,11 @@ public class VideoController extends HttpServlet {
 		
 		String busqueda = request.getParameter("busqueda");
 		
-		ArrayList<String> videos = new ArrayList<String>();
-		videos.add("video1");		
+		ArrayList<Video> videos = new ArrayList<Video>();
 		
-		request.setAttribute("videos", videos);
+		VideoDAO dao = new VideoDAO();
+		
+		request.setAttribute("videos", dao.getAllByNombre(busqueda) );		
 		request.setAttribute("busqueda", busqueda);
 		request.getRequestDispatcher("videos.jsp").forward(request, response);
 	}
