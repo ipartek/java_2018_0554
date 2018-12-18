@@ -2,6 +2,9 @@
 <%@page import="com.ipartek.formacion.modelo.pojos.Video"%>
 <%@page import="java.util.ArrayList"%>
 
+<%@ include file="cabecera.jsp"  %>
+
+
 <h1>Listado Videos</h1>
 
 <%

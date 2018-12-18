@@ -8,8 +8,12 @@
 </head>
 <body>
 
-<a href="calculadora.jsp">Ejemplo Calculadora</a>
-<a href="calcular">Ejemplo Calculadora</a>
+<%@ include file="cabecera.jsp"  %>
+
+
+<a href="privado/index.jsp">Zona Privada</a><br>
+<a href="calculadora.jsp">Ejemplo Calculadora</a><br>
+<a href="calcular">Ejemplo Calculadora</a><br>
 
 <form action="login" method="post">
 	<fieldset>
