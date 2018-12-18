@@ -24,6 +24,7 @@
 			<p>
 				<button>Login</button>
 				<%=request.getAttribute("error") != null ? request.getAttribute("error") : ""%>
+				<%=session.getAttribute("sesionNoIniciada") != null ? session.getAttribute("sesionNoIniciada") : ""%>
 			</p>
 		</fieldset>
 	</form>

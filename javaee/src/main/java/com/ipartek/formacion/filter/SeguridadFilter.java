@@ -45,6 +45,10 @@ public class SeguridadFilter implements Filter {
 		}else {
 			// redigir al login, poruqe el usuario se ha saltado el login o caduca la sesion
 			//req.getContextPath() --> te devuelve la ruta principal
+			
+			
+			session.setAttribute("sesionNoIniciada", "Para acceder a la zona privada tienes que logearte.");
+		
 			resp.sendRedirect(req.getContextPath() + "/login");
 		}
 		

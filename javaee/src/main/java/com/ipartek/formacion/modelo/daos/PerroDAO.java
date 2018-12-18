@@ -8,10 +8,6 @@ public class PerroDAO {
 
 	public ArrayList<Perro> getAll(){
 		ArrayList<Perro> perros = new ArrayList<>();
-		
-		
-		
-		
 		return perros;
 	}
 }
