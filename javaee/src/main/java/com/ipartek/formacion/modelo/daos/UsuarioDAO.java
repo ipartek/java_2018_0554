@@ -1,11 +1,12 @@
 package com.ipartek.formacion.modelo.daos;
 
 import java.sql.Connection;
-
-import com.ipartek.formacion.modelo.pojos.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import com.ipartek.formacion.modelo.pojos.Usuario;
+import com.ipartek.formacion.modelo.pojos.UsuarioNoValido;
 
 public class UsuarioDAO {
 	
@@ -40,33 +41,61 @@ public class UsuarioDAO {
 	}
 
 	public ArrayList<Usuario> getAll() {
-		
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-		String sql = "SELECT id, nombre, password FROM usuario ORDER BY id DESC LIMIT 500";		
-		
-		try ( Connection conn = ConnectionManager.getConnection();
-			  PreparedStatement pst = conn.prepareStatement(sql);
-			  ResultSet rs = pst.executeQuery() 
-			){
+		String sql = "SELECT id, nombre, password, github FROM usuario ORDER BY id DESC LIMIT 500";
+		try(Connection conn = ConnectionManager.getConnection();
+			PreparedStatement pst = conn.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery()
+		) {
 			
-			while(rs.next()) { 			
+			while(rs.next()) {
 				try {
-					Usuario usuario = new Usuario();
-					usuario.setId( rs.getLong("id"));
-					usuario.setEmail( rs.getString("nombre"));
-					usuario.setPassword(rs.getString("password"));
-					// añadir en array
-					usuarios.add(usuario);
+					
+				Usuario usuario = new Usuario();
+				usuario.setId(rs.getLong("id"));
+				usuario.setEmail(rs.getString("nombre"));
+				usuario.setPassword(rs.getString("password"));
+				usuario.setGitHub(rs.getString("github"));
+				usuarios.add(usuario);
 				}catch (Exception e) {
-					System.out.println("usuario no valido");
+					
+					//System.out.println("Usuario no válido");
 					e.printStackTrace();
-				}		
-			} // while	
+				}
+			}
 			
 		}catch (Exception e) {
 			e.printStackTrace();
-		}		
+		}
+		
 		return usuarios;
+	}
+
+	public ArrayList<UsuarioNoValido> getAllNoValid() {
+		ArrayList<UsuarioNoValido> usuariosNoValidos = new ArrayList<UsuarioNoValido>();
+		String sql ="SELECT id, nombre, password, github FROM usuario ORDER BY id DESC LIMIT 500";
+		try (Connection conn = ConnectionManager.getConnection();
+			 PreparedStatement pst = conn.prepareStatement(sql);
+			 ResultSet rs = pst.executeQuery()
+		){
+			
+			while(rs.next()) {
+				try {
+					Usuario usuario = new Usuario();
+					usuario.setId(rs.getLong("id"));
+					usuario.setEmail(rs.getString("nombre"));
+					usuario.setPassword(rs.getString("password"));
+					usuario.setGitHub(rs.getString("github"));
+				}catch (Exception e) {
+					UsuarioNoValido usuarioNoValido = new UsuarioNoValido(rs.getLong("id"), rs.getString("nombre"), rs.getString("password"), rs.getString("github"));
+					usuariosNoValidos.add(usuarioNoValido);
+				}
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return usuariosNoValidos;
 	}
 
 }

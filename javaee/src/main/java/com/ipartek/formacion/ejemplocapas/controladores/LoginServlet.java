@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.formacion.modelo.daos.UsuarioDAO;
 import com.ipartek.formacion.modelo.pojos.Usuario;
+import com.ipartek.formacion.modelo.pojos.UsuarioNoValido;
 
 public class LoginServlet extends HttpServlet {
-	
 	private static final long serialVersionUID = 1L;
 	private static final String VISTA_LOGIN = "login.jsp";
 	private static final String VISTA_PRINCIPAL = "principal.jsp";
@@ -20,9 +20,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher(VISTA_LOGIN).forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+ 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
 		
 		Usuario usuario = null;
 		String vista = VISTA_LOGIN;
@@ -39,14 +37,11 @@ public class LoginServlet extends HttpServlet {
 				vista = VISTA_PRINCIPAL;
 				
 				ArrayList<Usuario> usuariosValidos = dao.getAll();
+				ArrayList<UsuarioNoValido> usuariosNoValidos = dao.getAllNoValid();
 				
 				request.setAttribute("usuario", usuario);
 				request.setAttribute("listado", usuariosValidos);
-				
-				
-				//ArrayList<String> usuariosNoValidos = dao.getAllNoValid();
-				
-				
+				request.setAttribute("listadoNoValido", usuariosNoValidos);
 			}else {				
 				request.setAttribute("error", "Usuario No valido");				
 			}			
@@ -60,7 +55,5 @@ public class LoginServlet extends HttpServlet {
 		
 		
 	}
-
-	
 
 }

@@ -8,43 +8,39 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ipartek.formacion.modelo.daos.VideoDAO;
+import com.ipartek.formacion.modelo.pojos.Video;
+
 /**
- * Servlet implementation class VideoController
+ * Servlet implementation class VideoServlet
  */
-public class VideoController extends HttpServlet {
+public class VideoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ArrayList<String> videos = new ArrayList<String>();
-		
-		videos.add("video1");
-		videos.add("Fary");
-		videos.add("Que nos se te olcide el WHERE XD");
-		
+		VideoDAO dao = new VideoDAO();
+		ArrayList<Video> videos = dao.getAll();
 		request.setAttribute("videos", videos);
 		
-		request.getRequestDispatcher("videos.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("miTabla.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String busqueda = request.getParameter("busqueda");
 		
-		ArrayList<String> videos = new ArrayList<String>();
-		videos.add("video1");		
+		VideoDAO dao = new VideoDAO();
+		ArrayList<Video> videosBuscados = dao.buscarVideo(busqueda);
 		
-		request.setAttribute("videos", videos);
-		request.setAttribute("busqueda", busqueda);
-		request.getRequestDispatcher("videos.jsp").forward(request, response);
+		request.setAttribute("videosBuscados", videosBuscados);
+		
+		request.getRequestDispatcher("miTabla.jsp").forward(request, response);
 	}
 
 }
+
