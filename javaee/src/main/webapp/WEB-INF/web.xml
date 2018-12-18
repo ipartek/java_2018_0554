@@ -16,6 +16,12 @@
   	<description></description>
   	<servlet-class>com.ipartek.formacion.controladores.VideoSrvLt</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>PerroSrvLt</servlet-name>
+  	<display-name>PerroSrvLt</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.controladores.PerroSrvLt</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
   	<url-pattern>/login</url-pattern>
@@ -23,6 +29,10 @@
   <servlet-mapping>
   	<servlet-name>VideoSrvLt</servlet-name>
   	<url-pattern>/video</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>PerroSrvLt</servlet-name>
+  	<url-pattern>/perro</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
   	<welcome-file>login</welcome-file>

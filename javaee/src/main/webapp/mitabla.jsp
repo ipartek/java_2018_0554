@@ -20,7 +20,7 @@
 <%} %>
 <form action="video" method="post">
 	<label for="busca">Buscar</label>
-	<input type="text" name="busca" id="busca" required>
+	<input type="text" name="busca" id="busca">
 	<button>Buscar</button>
 </form>
 <table>

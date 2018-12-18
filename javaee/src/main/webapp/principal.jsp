@@ -15,7 +15,8 @@
 <title>Principal</title>
 </head>
 <body>
-<a href="video">Mi tabla</a>
+<a href="video">Videos</a>
+<a href="perro">Perros</a>
 <h1>BIENVENIDO <%=usuario.getEmail() %></h1>
 	<table>
 		<thead>
