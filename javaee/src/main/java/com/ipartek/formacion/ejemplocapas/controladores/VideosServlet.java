@@ -16,44 +16,46 @@ import com.ipartek.formacion.modelo.pojos.Video;
  */
 public class VideosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String VISTA_VIDEOS= "videos.jsp";
-
-
+	private static final String VISTA_VIDEOS = "videos.jsp";
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		VideosDAO dao = new VideosDAO();
 		ArrayList<Video> videos = dao.getAll();
-		
+
 		request.setAttribute("misVideos", videos);
 		request.getRequestDispatcher(VISTA_VIDEOS).forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Video video= null;
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Video video = null;
 		String nombreVideo = request.getParameter("nombreVideo");
-		
+		ArrayList<Video> videos = new ArrayList<>();
 		try {
+			// Creo el dao para hacer la llamar el metodo getByNombre
 			VideosDAO dao = new VideosDAO();
-			video = dao.getByNombre(nombreVideo);
-			if (video != null) {
-				request.setAttribute("video", video);
-			} else {
-				request.setAttribute("error", "Ese video no existe");
-			} 
+			videos = dao.getByNombre(nombreVideo);
+
+				request.setAttribute("busqueda", nombreVideo);
+				request.setAttribute("misVideos", videos);
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			request.getRequestDispatcher(VISTA_VIDEOS).forward(request, response);
 		}
-		
-		
+
 	}
 
 }

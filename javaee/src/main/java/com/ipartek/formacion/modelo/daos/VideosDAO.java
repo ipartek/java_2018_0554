@@ -21,10 +21,12 @@ public class VideosDAO {
 		String sql = "Select id, nombre, url from daniel order by id desc limit 100";
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(sql);
-				ResultSet rs = pst.executeQuery();) {
+				ResultSet rs = pst.executeQuery()
+			){
+			Video video = null;
 			while (rs.next()) {
 				try {
-					Video video = new Video();
+					video = new Video();
 					video.setId(rs.getLong("id"));
 					video.setNombre(rs.getString("nombre"));
 					video.setUrl(rs.getString("url"));
@@ -41,7 +43,8 @@ public class VideosDAO {
 		return videos;
 	}
 
-	public Video getByNombre(String nombreVideo) {
+	public ArrayList<Video> getByNombre(String nombreVideo) {
+		ArrayList<Video> videos = new ArrayList<>();
 		Video video = new Video();
 
 		String sql = "Select id,nombre, url from daniel where nombre like ? order by id desc limit 100";
@@ -54,11 +57,12 @@ public class VideosDAO {
 					video.setId(rs.getLong("id"));
 					video.setNombre(rs.getString("nombre"));
 					video.setUrl(rs.getString("url"));
+					videos.add(video);
 				}
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
-		return video;
+		return videos;
 	}
 }
