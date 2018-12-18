@@ -13,58 +13,55 @@ import com.ipartek.formacion.modelo.daos.UsuarioDAO;
 import com.ipartek.formacion.modelo.pojos.Usuario;
 
 public class LoginServlet extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
 	private static final String VISTA_LOGIN = "login.jsp";
 	private static final String VISTA_PRINCIPAL = "principal.jsp";
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.getRequestDispatcher(VISTA_LOGIN).forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		Usuario usuario = null;
 		String vista = VISTA_LOGIN;
-		
+
 		String email = request.getParameter("email");
-		String password = request.getParameter("password");		
-		
+		String password = request.getParameter("password");
+
 		try {
-			
-			UsuarioDAO dao = new UsuarioDAO();			
+
+			UsuarioDAO dao = new UsuarioDAO();
 			usuario = dao.login(email, password);
-			
-			if ( usuario != null ) {
+
+			if (usuario != null) {
 				vista = VISTA_PRINCIPAL;
-				
+
 				ArrayList<Usuario> usuariosValidos = dao.getAll();
-				
+
 				request.setAttribute("usuario", usuario);
 				request.setAttribute("listado", usuariosValidos);
-				
-				
-				//guardar usuario en sesión
-				
+
+				// guardar usuario en sesión
+
 				HttpSession sesion = request.getSession();
-				sesion.setMaxInactiveInterval(60 * 5); // 5 minutos, tambien se puede configurar el cierre de la sesión en el WEB.xml
+				sesion.setMaxInactiveInterval(60 * 5); // 5 minutos, tambien se puede configurar el cierre de la sesión
+														// en el WEB.xml
 				sesion.setAttribute("usuario_logueado", usuario);
-				
-			}else {				
-				request.setAttribute("error", "Usuario No valido");				
-			}			
-		}catch (Exception e) {
+
+			} else {
+				request.setAttribute("error", "Usuario No valido");
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
-			
-		}finally {
+
+		} finally {
 			request.getRequestDispatcher(vista).forward(request, response);
 		}
-		
-		
-		
-	}
 
-	
+	}
 
 }

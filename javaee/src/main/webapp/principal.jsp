@@ -1,4 +1,5 @@
-<%@page import="com.ipartek.formacion.modelo.pojos.Usuario, java.util.ArrayList"%>
+<%@page
+	import="com.ipartek.formacion.modelo.pojos.Usuario, java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -17,11 +18,12 @@
 <title>Principal</title>
 </head>
 <body>
-<%@ include file="cabecera.jsp" %>
+	<%@ include file="cabecera.jsp"%>
 	<h1>
 		Bienvenido a esta web
-		<%= usuario.getEmail() %></h1>
-<a href="videos">Ver Videos</a>	
+		<%=usuario.getEmail()%>
+	</h1>
+	<a href="videos">Ver Videos</a>
 	<table>
 		<thead>
 			<tr>
@@ -31,13 +33,17 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% for(Usuario u: usuarios) { %>
+			<%
+				for (Usuario u : usuarios) {
+			%>
 			<tr>
-				<th><%=u.getId() %></th>
-				<td><%=u.getEmail() %></td>
-				<td><%=u.getPassword() %></td>
+				<th><%=u.getId()%></th>
+				<td><%=u.getEmail()%></td>
+				<td><%=u.getPassword()%></td>
 			</tr>
-			<% } %>
+			<%
+				}
+			%>
 		</tbody>
 	</table>
 
