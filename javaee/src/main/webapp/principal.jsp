@@ -15,13 +15,17 @@
 <title>Principal</title>
 </head>
 <body>
+<%@ include file="cabecera.jsp" %>
+<a href="privado/index.jsp"> Zona privada </a>
 
 	<h1>
 		Bienvenido a esta web
 		<%= usuario.getEmail() %></h1>
 		
 		
-	<a href="videos">Ver Videos</a>	
+	<a href="videos">Ver Videos</a>
+	<a href="videojuegos">Ver Videojuegos</a>
+
 
 	<table>
 		<thead>

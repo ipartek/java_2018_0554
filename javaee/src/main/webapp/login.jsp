@@ -8,6 +8,8 @@
 </head>
 <body>
 
+<%@ include file="cabecera.jsp" %>
+<a href="privado/index.jsp"> Zona privada </a>
 
 <a href="calculadora.jsp"> Ejemplo Calculadora</a>
 <a href="calcular"> Ejemplo Calculadora</a>

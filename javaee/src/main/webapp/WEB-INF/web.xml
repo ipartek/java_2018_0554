@@ -4,6 +4,16 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <filter>
+  	<filter-name>SeguridadFilter</filter-name>
+  	<display-name>SeguridadFilter</display-name>
+  	<description></description>
+  	<filter-class>com.ipartek.formacion.filter.SeguridadFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>SeguridadFilter</filter-name>
+  	<url-pattern>/privado/*</url-pattern>
+  </filter-mapping>
   <servlet>
   	<servlet-name>LoginServlet</servlet-name>
   	<display-name>LoginServlet</display-name>
@@ -22,6 +32,24 @@
   	<description></description>
   	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.VideosServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>VideoJuegosServlet</servlet-name>
+  	<display-name>VideoJuegosServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.VideoJuegosServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<display-name>LogoutServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>CarritoServlet</servlet-name>
+  	<display-name>CarritoServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.CarritoServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
   	<url-pattern>/login</url-pattern>
@@ -33,6 +61,18 @@
   <servlet-mapping>
   	<servlet-name>VideosServlet</servlet-name>
   	<url-pattern>/videos</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>VideoJuegosServlet</servlet-name>
+  	<url-pattern>/videojuegos</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>CarritoServlet</servlet-name>
+  	<url-pattern>/carrito</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
   	<welcome-file>login</welcome-file>

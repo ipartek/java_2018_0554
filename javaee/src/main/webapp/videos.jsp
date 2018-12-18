@@ -1,9 +1,11 @@
+<%@page import="com.ipartek.formacion.modelo.pojos.Video"%>
 <%@page import="java.util.ArrayList"%>
+<%@ include file="cabecera.jsp" %>
 
 <h1>Listado Videos</h1>
 
 <%
-	ArrayList<String> videos = (ArrayList<String>)request.getAttribute("videos");
+	ArrayList<Video> videos = (ArrayList<Video>)request.getAttribute("videos");
 	String busqueda = (String)request.getAttribute("busqueda");
 %>
 
@@ -22,11 +24,29 @@
 	<input type="submit" value="filtrar">
 </form>
 
+
+<%
+	if ( videos.isEmpty() ) {
+%>
+	<p style="color:red;"> No existen Videos todavia!!!</p>
+<%
+	} // if
+%>
+
 <ol>
 	<%
-		for( String video: videos){
+		for( Video video: videos){
 			%>
-					<li><%=video%></li>
+					<li>
+							<%=video.getNombre()%>
+							<iframe width="150" 
+							        height="150" 
+							        src="https://www.youtube.com/embed/<%=video.getUrl()%>" 
+							        frameborder="0" 
+							        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+							        allowfullscreen></iframe>
+					
+					</li>
 			<%	
 		}	
 	%>

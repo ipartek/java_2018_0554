@@ -1,3 +1,4 @@
+<%@ include file="cabecera.jsp" %>
 <h1>Calculadora</h1>
 <%
 String mensaje = (String)request.getAttribute("mensaje");
