@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="com.ipartek.formacion.ejemplocapas.pojos.Usuario, java.util.ArrayList"%>
+	import="com.ipartek.formacion.modelos.pojos.Usuario, java.util.ArrayList"%>
 
 <%
-	Object objeto = session.getAttribute("usuario");
-	Usuario usuario = (Usuario) objeto;
-
-	Object oUsuarios = request.getAttribute("usuarios");
-	ArrayList<Usuario> usuarios = (ArrayList<Usuario>) oUsuarios;
+	ArrayList<Usuario> usuariosok = (ArrayList<Usuario>) request.getAttribute("usuariosok");
+	ArrayList<String> usuariosnook = (ArrayList<String>) request.getAttribute("usuariosnook");
+	Usuario usuario = (Usuario) request.getAttribute("usuario");
 %>
 
 <!DOCTYPE html>
@@ -17,11 +15,8 @@
 <title>Principal</title>
 </head>
 <body>
-
-	<h1>
-		Bienvenido a esta web
-		<%= usuario.getEmail() %></h1>
-
+<a href="video">Mi tabla</a>
+<h1>BIENVENIDO <%=usuario.getEmail() %></h1>
 	<table>
 		<thead>
 			<tr>
@@ -31,13 +26,28 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% for(Usuario u: usuarios) { %>
+			<%
+				for (Usuario u : usuariosok) {
+			%>
 			<tr>
-				<th><%=u.getId() %></th>
-				<td><%=u.getEmail() %></td>
-				<td><%=u.getPassword() %></td>
+				<th><%=u.getId()%></th>
+				<td><%=u.getEmail()%></td>
+				<td><%=u.getPassword()%></td>
 			</tr>
-			<% } %>
+			<%
+				}
+			%>
+		</tbody>
+		<tbody>
+			<%
+				for (String um : usuariosnook) {
+			%>
+			<tr>
+				<th><%=um%></th>
+			</tr>
+			<%
+				}
+			%>
 		</tbody>
 	</table>
 

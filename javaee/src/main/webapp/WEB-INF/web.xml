@@ -8,11 +8,21 @@
   	<servlet-name>LoginServlet</servlet-name>
   	<display-name>LoginServlet</display-name>
   	<description></description>
-  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.LoginServlet</servlet-class>
+  	<servlet-class>com.ipartek.formacion.controladores.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>VideoSrvLt</servlet-name>
+  	<display-name>VideoSrvLt</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.controladores.VideoSrvLt</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
   	<url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>VideoSrvLt</servlet-name>
+  	<url-pattern>/video</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
   	<welcome-file>login</welcome-file>
