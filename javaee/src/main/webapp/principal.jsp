@@ -21,7 +21,8 @@
 		<%= usuario.getEmail() %></h1>
 		
 		
-	<a href="videos">Ver Videos</a>	
+	<a href="videos">Ver Videos</a>
+	<a href="Coche">Ver Coches</a>
 
 	<table>
 		<thead>

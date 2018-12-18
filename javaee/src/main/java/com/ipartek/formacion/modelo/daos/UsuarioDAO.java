@@ -1,11 +1,11 @@
 package com.ipartek.formacion.modelo.daos;
 
 import java.sql.Connection;
+
+import com.ipartek.formacion.modelo.pojos.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
-import com.ipartek.formacion.modelo.pojos.Usuario;
 
 public class UsuarioDAO {
 	

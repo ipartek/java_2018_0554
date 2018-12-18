@@ -1,12 +1,13 @@
 
-<%@page import="com.ipartek.formacion.modelo.pojos.Video"%>
+<%@page import="com.ipartek.formacion.modelo.pojos.Coche"%>
+
 <%@page import="java.util.ArrayList"%>
 
-<h1>Listado Videos</h1>
+<h1>Listado Coches</h1>
 
 <%
 
-	ArrayList<Video> videos = (ArrayList<Video>)request.getAttribute("videos");
+	ArrayList<Coche> coches = (ArrayList<Coche>)request.getAttribute("coches");
 	String busqueda = (String)request.getAttribute("busqueda");
 
 %>
@@ -21,12 +22,12 @@
 	}
 %>
 
-<form action="videos" method="post">
+<form action="Coche" method="post">
 	<input type="text" name="busqueda" value="<%=busqueda%>" required>
 	<input type="submit" value="filtrar">
 </form>
 <%
-	if(videos.isEmpty())
+	if(coches.isEmpty())
 	//if (videos.size()==0)
 	{
 		
@@ -35,12 +36,10 @@
 <% } //endif %>
 <ol>
 	<%
-		for( Video video: videos){
+		for( Coche coche: coches){
 			%>
-					<li><%=video.getNombre()%></li>
-					<iframe width="560" height="315" src="https://www.youtube.com/embed/<%=video.getUrl() %>/embed" frameborder="0" 
-					allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-					allowfullscreen></iframe>
+					<li><%=coche%></li>
+
 			<%	
 		}	
 	%>

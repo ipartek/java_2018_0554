@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.formacion.modelo.daos.UsuarioDAO;
-import com.ipartek.formacion.modelo.pojos.PojoException;
 import com.ipartek.formacion.modelo.pojos.Usuario;
 
 public class LoginServlet extends HttpServlet {
