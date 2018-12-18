@@ -3,10 +3,10 @@ package com.ipartek.formacion.ejemplocapas.pojos;
 import com.ipartek.formacion.biblioteca.Constantes;
 
 public class Usuario {
-	private Long id;
+	private int id;
 	private String email, password;
 	
-	public Usuario(Long id, String email, String password) {
+	public Usuario(int id, String email, String password) {
 		setId(id);
 		setEmail(email);
 		setPassword(password);
@@ -16,11 +16,11 @@ public class Usuario {
 		
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -33,7 +33,6 @@ public class Usuario {
 			throw new PojoException("No se admiten emails vacíos");
 		}
 		
-		//if(!email.matches("\\w[a-zA-Z0-9\\._]*@\\w[a-zA-Z0-9\\.]*\\.\\w+")) {
 		if(!email.matches(Constantes.REGEX_EMAIL)) {
 			throw new PojoException("El formato del email no es correcto");
 		}

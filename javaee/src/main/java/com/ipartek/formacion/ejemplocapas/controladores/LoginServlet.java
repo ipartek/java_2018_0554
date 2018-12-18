@@ -1,6 +1,11 @@
 package com.ipartek.formacion.ejemplocapas.controladores;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -13,46 +18,71 @@ import com.ipartek.formacion.ejemplocapas.pojos.Usuario;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	boolean usuarioCorrecto = false;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		
+
 		Usuario usuario;
-		
+
 		try {
-			usuario = new Usuario(null, email, password);
-		} catch(PojoException e) {
-			//response.sendRedirect("login.jsp");
-			if(email != null && password != null) {
-				request.setAttribute("error", "Error en el formato de email o contraseÃ±a");
+			usuario = new Usuario(0, email, password);
+		} catch (PojoException e) {
+			if (email != null && password != null) {
+				request.setAttribute("error", "Error en el formato de email o contraseña");
 			}
-			
+
 			request.getRequestDispatcher("login.jsp").forward(request, response);
-			
+
 			return;
 		}
-		
-		if("javier@lete.com".equals(usuario.getEmail()) && "Pa$$w0rd".equals(usuario.getPassword())) {
-			ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-			
-			usuarios.add(new Usuario(1L, "javier@lete.com", "Pa$$w0rd"));
-			usuarios.add(new Usuario(2L, "pepe@perez.com", "Pa$$w0rd"));
-			
-			request.setAttribute("usuarios", usuarios);
-			
-			request.getSession().setAttribute("usuario", usuario);
-			
-			request.getRequestDispatcher("principal.jsp").forward(request, response);
-		} else {
-			//response.sendRedirect("login.jsp");
-			request.setAttribute("error", "No tienes permiso para login");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		//response.getWriter().println("Hola " + usuario.getEmail());
+
+		Connection conn;
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://192.168.0.44/youtube?useSSL=false", "viernes", "juernes");
+
+			Statement stmt = conn.createStatement();
+
+			ResultSet rs = stmt.executeQuery("SELECT id, nombre, password FROM usuario WHERE nombre='" + email
+					+ "' AND password='" + password + "'");
+			while (rs.next()) {
+				if (email.equals(rs.getString("nombre")) && password.equals(rs.getString("password"))) {
+					usuarioCorrecto = true;
+					break;
+				}
+			}
+			rs.close();
+			if (usuarioCorrecto) {
+				ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+				ResultSet rsCompleto = stmt.executeQuery("SELECT id, nombre, password FROM usuario");
+				while (rsCompleto.next()) {
+					usuarios.add(new Usuario(rsCompleto.getInt("id"), rsCompleto.getString("nombre"),
+							rsCompleto.getString("password")));
+				}
+				request.setAttribute("usuarios", usuarios);
+				request.getSession().setAttribute("usuario", usuario);
+				request.getRequestDispatcher("principal.jsp").forward(request, response);
+				rsCompleto.close();
+			} else {
+				request.setAttribute("error", "No tienes permiso para login");
+				request.getRequestDispatcher("login.jsp").forward(request, response);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
