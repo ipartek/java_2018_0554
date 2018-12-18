@@ -15,6 +15,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="cabecera.jsp" %>
 	<p>
 	<h2>Busca tu video</h2>
 	</p>

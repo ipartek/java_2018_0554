@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.modelo.daos.UsuarioDAO;
 import com.ipartek.formacion.modelo.pojos.Usuario;
@@ -51,6 +52,15 @@ public class LoginServlet extends HttpServlet {
 				request.setAttribute("usuario", usuarioLogin);
 				request.setAttribute("listado", usuariosValidos);
 				request.setAttribute("usuariosNoValidos", usuariosNoValidos);
+				
+				//guardar usuario logeado en sesion
+				// Como recuperar la session
+				HttpSession session = request.getSession();
+				//Dar tiempo limite a la sesion
+				session.setMaxInactiveInterval(60 * 5); 
+				//5 min Los tiempos nunca se pone el resultado en segundos directamente
+				// También se puede configurar el cierre de la sesion en el web.xml
+				session.setAttribute("usuario_logeado", usuarioLogin);
 				
 			}else {
 				request.setAttribute("error", "Usuario NO VALIDO");

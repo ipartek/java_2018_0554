@@ -13,7 +13,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<%@ include file="cabecera.jsp" %>
 	<table>
 		<thead>
 			<tr>

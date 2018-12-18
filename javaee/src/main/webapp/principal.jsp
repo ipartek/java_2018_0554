@@ -16,7 +16,7 @@
 <title>Principal</title>
 </head>
 <body>
-
+<%@ include file="cabecera.jsp" %>
 	<h1>
 		Bienvenido a esta web
 		<%=usuario.getEmail()%></h1>
