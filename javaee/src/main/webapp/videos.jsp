@@ -1,7 +1,8 @@
 
 <%@page import="com.ipartek.formacion.modelo.pojos.Video"%>
 <%@page import="java.util.ArrayList"%>
-
+<%@page import="com.ipartek.formacion.modelo.pojos.Usuario"%>
+<%@include file="cabecera.jsp" %>
 <h1>Listado Videos</h1>
 
 <%

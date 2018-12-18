@@ -1,5 +1,7 @@
+<%@include file="cabecera.jsp" %>
 <h1>Resultado</h1>
 
+<%@page import="com.ipartek.formacion.modelo.pojos.Usuario"%>
 
 <%
 	

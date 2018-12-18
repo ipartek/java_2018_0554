@@ -2,7 +2,8 @@
 <%@page import="com.ipartek.formacion.modelo.pojos.Coche"%>
 
 <%@page import="java.util.ArrayList"%>
-
+<%@page import="com.ipartek.formacion.modelo.pojos.Usuario"%>
+<%@include file="cabecera.jsp" %>
 <h1>Listado Coches</h1>
 
 <%

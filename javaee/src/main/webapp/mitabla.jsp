@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@include file="cabecera.jsp" %>
+
 <h1>Videos</h1>
 <%
 ArrayList<String> videos = (ArrayList<String>)request.getAttribute("videos");
