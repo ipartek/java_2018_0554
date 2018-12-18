@@ -32,6 +32,8 @@ public class SeguridadFilter implements Filter {
 		if (uLogueado!=null) {
 			chain.doFilter(request, response);
 		}else {
+			session.setAttribute("error", "Acceso restringido a area privada sin logueo");
+			session.setAttribute("navegador",req.getHeader("USER-AGENT"));
 			res.sendRedirect(req.getContextPath()+"/login");
 		}
 		

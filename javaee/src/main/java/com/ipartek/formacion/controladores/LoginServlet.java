@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.modelos.daos.UsuarioDAO;
+import com.ipartek.formacion.modelos.pojos.Perro;
 import com.ipartek.formacion.modelos.pojos.Usuario;
 
 public class LoginServlet extends HttpServlet {
@@ -36,10 +37,11 @@ public class LoginServlet extends HttpServlet {
 			if(usuario  != null) {
 				usuariosok= dao.getAllValidos();	
 				usuariosnook= dao.getAllNoValidos();
+				ArrayList<Perro> carrito = new ArrayList<Perro>();
 				request.setAttribute("usuariosok", usuariosok);
 				request.setAttribute("usuariosnook", usuariosnook);
-				request.setAttribute("usuario", usuario);
 				HttpSession session=request.getSession();
+				session.setAttribute("carrito", carrito);
 				session.setMaxInactiveInterval(60*5);
 				session.setAttribute("usuario_logueado", usuario);
 				vista=VISTA_PRINCIPAL;

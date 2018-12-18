@@ -9,13 +9,13 @@
 <nav>
 <%
 	Usuario usuariolog=(Usuario)session.getAttribute("usuario_logueado");
-
 %>
 
 
 <%
 	if(usuariolog!=null){%>
-		<%=usuariolog.getEmail() %>
+		<p><%=usuariolog.getEmail() %></p>
+		<p><a href="carrito">Ver carrito de la compra</a></p>
 		<a href="logout">Cerrar sesion</a>	
 <%	}else{ %>
 		<a href="login">Iniciar sesion</a>

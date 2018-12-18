@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%
-	ArrayList<Perro> perros = (ArrayList<Perro>) request.getAttribute("listado");
+	ArrayList<Perro> carrito = (ArrayList<Perro>) request.getSession().getAttribute("carrito");
 %>
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,7 @@
 <body>
 <%@ include file="cabecera.jsp" %>
  
-<h1>MIS PERROS</h1>
+<h1>MIS PERROS EN CARRITO</h1>
 
 <table>
 	<thead>
@@ -21,19 +21,17 @@
 				<th>ID</th>
 				<th>raza</th>
 				<th>Imagen</th>
-				<th>&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
-		<% if (perros.size()!=0) {%>
+		<% if (carrito.size()!=0) {%>
 			<%
-				for (Perro p : perros) {
+				for (Perro p : carrito) {
 			%>
 			<tr>
 				<th><%=p.getId()%></th>
 				<td><%=p.getRaza()%></td>
 				<td><img width=150 height=150 src="<%=p.getImagen()%>" alt="Imagen <%=p.getRaza()%>"></td>
-				<td><a href="carrito">Comprar</a></td>
 			</tr>
 			<%
 				}
@@ -41,12 +39,10 @@
 			<tr>
 				<td>NO</td>
 				<td>EXISTEN</td>
-				<td>PERROS</td>
+				<td>COMPRAS</td>
 			</tr>
 			<%}%>
 		</tbody>
 	</table>
-	 
-
 </body>
 </html>

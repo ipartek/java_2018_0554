@@ -21,10 +21,7 @@ public class PerroSrvLt extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/*ArrayList<Perro> perros = new ArrayList<Perro>();
-			perros.add(new Perro(1,"Beagle","https://t1.ea.ltmcdn.com/es/razas/0/4/3/img_340_beagle_0_600.jpg"));	
-			perros.add(new Perro(2,"Akita","https://t1.ea.ltmcdn.com/es/razas/7/0/1/img_107_akita-inu-o-akita-japones_0_600.jpg"));	
-			perros.add(new Perro(3,"Boxer","https://www.petdarling.com/articulos/wp-content/uploads/2014/08/boxer.jpg"));*/	
+	
 			PerroDAO dao = new PerroDAO();
 			request.setAttribute("listado", dao.getAll());
 			request.getRequestDispatcher("misperros.jsp").forward(request, response);

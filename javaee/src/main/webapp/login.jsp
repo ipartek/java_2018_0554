@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    <%	 %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +24,9 @@
 		</p>
 		<p>
 			<button>Login</button>
-			<%= request.getAttribute("error") != null ? request.getAttribute("error") : "" %>
+			<p><%= request.getSession().getAttribute("navegador") != null ? request.getSession().getAttribute("navegador") : "" %></p>
+			<p><%= request.getSession().getAttribute("error") != null ? request.getSession().getAttribute("error") : "" %></p>
+			<p><%= request.getAttribute("error") != null ? request.getAttribute("error") : "" %></p>
 		</p>
 	</fieldset>
 </form>
