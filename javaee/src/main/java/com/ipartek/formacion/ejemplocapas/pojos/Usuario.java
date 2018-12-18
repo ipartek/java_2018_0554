@@ -29,7 +29,7 @@ public class Usuario {
 	}
 
 	public void setEmail(String email) {
-		if(email == null || email.trim().length() == 0) {
+		/*if(email == null || email.trim().length() == 0) {
 			throw new PojoException("No se admiten emails vacíos");
 		}
 		
@@ -39,14 +39,16 @@ public class Usuario {
 		}
 		
 		this.email = email;
+		*/
 	}
 
 	public String getPassword() {
 		return password;
+		
 	}
 
 	public void setPassword(String password) {
-		if(password == null || password.trim().length() == 0) {
+		/*if(password == null || password.trim().length() == 0) {
 			throw new PojoException("No se admiten contraseñas vacías");
 		}
 		
@@ -54,6 +56,7 @@ public class Usuario {
 			throw new PojoException("This regular expression match can be used for validating strong password. It expects at least 1 small-case letter, 1 Capital letter, 1 digit, 1 special character and the length should be at least 6 characters. The sequence of the characters is not important. This expression follows the above 4 norms specified by microsoft for a strong password.");
 		}
 		this.password = password;
+		*/
 	}
 
 	@Override

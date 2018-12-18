@@ -10,9 +10,39 @@
   	<description></description>
   	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.LoginServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>CalcularController</servlet-name>
+  	<display-name>CalcularController</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.CalcularController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>MitablaController</servlet-name>
+  	<display-name>MitablaController</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.MitablaController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>VideoController</servlet-name>
+  	<display-name>VideoController</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.VideoController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
   	<url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>CalcularController</servlet-name>
+  	<url-pattern>/calcular</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>MitablaController</servlet-name>
+  	<url-pattern>/mitabla</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>VideoController</servlet-name>
+  	<url-pattern>/videos</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
   	<welcome-file>login</welcome-file>
