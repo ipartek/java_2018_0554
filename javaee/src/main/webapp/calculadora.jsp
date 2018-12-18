@@ -1,3 +1,6 @@
+<%@ include file="cabecera.jsp" %>
+
+
 <h1>Calculadora</h1>
 
 

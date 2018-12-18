@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="com.ipartek.formacion.modelo.pojos.Video, java.util.ArrayList"%>
-	
+<%@ include file="cabecera.jsp" %>	
 <% ArrayList<Video> listadoVideos = (ArrayList<Video>)request.getAttribute("listadoVideos"); %>
 <% ArrayList<Video> listadoVideosbuscados = (ArrayList<Video>)request.getAttribute("listadoVideosbuscados"); %>
 <%

@@ -7,9 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.modelo.daos.UsuarioDAO;
-import com.ipartek.formacion.modelo.pojos.PojoException;
 import com.ipartek.formacion.modelo.pojos.Usuario;
 
 public class LoginServlet extends HttpServlet {
@@ -45,8 +45,14 @@ public class LoginServlet extends HttpServlet {
 				request.setAttribute("listado", usuariosValidos);
 				
 				
-			ArrayList<String> usuariosNoValidos = dao.getAllNoValid();
-			request.setAttribute("listadomal", usuariosNoValidos);
+				ArrayList<String> usuariosNoValidos = dao.getAllNoValid();
+				request.setAttribute("listadomal", usuariosNoValidos);
+				
+				//recuperamos la sesion
+				HttpSession session= request.getSession();
+				//tambine se puede configurar en el web.xml 
+				session.setMaxInactiveInterval(60*5);//5min
+				session.setAttribute("usuario_logeado", usuario);
 				
 				
 			}else {				
