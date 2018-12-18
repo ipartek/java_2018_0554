@@ -26,7 +26,7 @@ ArrayList<Video> videosBuscados = (ArrayList<Video>) request.getAttribute("video
 	</fieldset>
 </form>
 </div>
-<% if (videos != null){ %>
+<% if (videos != null && videos.size() != 0){ %>
 <table class="table">
 		<thead class="thead-dark">
 			<tr>
@@ -53,7 +53,7 @@ ArrayList<Video> videosBuscados = (ArrayList<Video>) request.getAttribute("video
 			%>
 		</tbody>
 	</table>
-	<% if(videosBuscados != null && videosBuscados.size() != 0) { %>
+	<% if(videosBuscados != null && videosBuscados.size()>0) { %>
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
@@ -78,9 +78,9 @@ ArrayList<Video> videosBuscados = (ArrayList<Video>) request.getAttribute("video
 				}%>
 		</tbody>
 	</table>
-	<% }else{ %>
-	<h1>No se han encontrado videos con esos parámetros</h1>
-	<% } %>
+	<% }else if(videos == null && videosBuscados.size() == 0){%>
+	<h1>No se han encontrado resultados para esa búsqueda</h1>
+	<%} %>
 </div>
 </body>
 </html>
