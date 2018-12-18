@@ -18,8 +18,7 @@ public class VideoSrvLt extends HttpServlet {
 		VideoDAO dao= new VideoDAO();
 		if(dao.creatabla()) {
 			ArrayList<Video> videos = new ArrayList<Video>();
-			videos=dao.getAll();
-			request.setAttribute("videos", videos);
+			request.setAttribute("videos",dao.getAll());
 			request.getRequestDispatcher("mitabla.jsp").forward(request, response);
 			
 		}else {
@@ -36,6 +35,7 @@ public class VideoSrvLt extends HttpServlet {
 		ArrayList<Video> videos = new ArrayList<Video>();
 			videos=dao.buscarvideo(quebusco);
 			request.setAttribute("videos", videos);
+			request.setAttribute("busqueda", quebusco);
 			request.getRequestDispatcher("mitabla.jsp").forward(request, response);
 		
 		

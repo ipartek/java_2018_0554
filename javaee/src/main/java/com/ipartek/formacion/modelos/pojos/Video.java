@@ -64,7 +64,7 @@ public class Video {
 	}
 	public void setUrl(String url) {
 		if(url==null || url.trim().length()==0) {
-			url="https://www.youtube.com/watch?v=NMkDvINuxyY";
+			url="https://www.youtube.com/embed/NMkDvINuxyY";
 		}
 		this.url = url;
 	}
@@ -75,6 +75,9 @@ public class Video {
 		setUrl(url);
 	}
 	public Video() {
-		
+		super();
+		this.id=(long) -1;
+		this.titulo="¡LA NUEVA DRIFTBOARD DE FORTNITE! - TheGrefg";
+		this.url="https://www.youtube.com/embed/NMkDvINuxyY";
 	}
 }

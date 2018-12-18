@@ -5,6 +5,7 @@
 <%
 	ArrayList<Video> videos = (ArrayList<Video>) request.getAttribute("videos");
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
+	String busqueda = (String) request.getAttribute("busqueda");
 %>
 <!DOCTYPE html>
 <html>
@@ -14,6 +15,9 @@
 </head>
 <body>
 <h1>MIS VIDEOS</h1>
+<%if(busqueda!=null && busqueda.trim().length()!=0){ %>
+<p>Resultado de busqueda: <%=busqueda%></p>
+<%} %>
 <form action="video" method="post">
 	<label for="busca">Buscar</label>
 	<input type="text" name="busca" id="busca" required>
@@ -28,6 +32,7 @@
 			</tr>
 		</thead>
 		<tbody>
+		<% if (videos.size()!=0) {%>
 			<%
 				for (Video v : videos) {
 			%>
@@ -38,7 +43,13 @@
 			</tr>
 			<%
 				}
-			%>
+			}else{%>
+			<tr>
+				<td>NO</td>
+				<td>EXISTEN</td>
+				<td>VIDEOS</td>
+			</tr>
+			<%}%>
 		</tbody>
 	</table>
 	 
