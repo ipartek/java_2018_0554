@@ -2,7 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <h1>Listado Videos</h1>
 
-
+  
 <%
 ArrayList<String> videos=(ArrayList<String>)request.getAttribute("videos");
 String busqueda = (String)request.getAttribute("busqueda");
