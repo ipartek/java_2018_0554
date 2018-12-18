@@ -32,6 +32,7 @@ public class GestorVideos extends HttpServlet {
 		
 		
 		request.setAttribute("videos", videos);
+		
 		request.getRequestDispatcher("videos.jsp").forward(request,response);
 		
 		}
@@ -41,11 +42,14 @@ public class GestorVideos extends HttpServlet {
 		String busqueda= request.getParameter("busqueda");
 		
 		ArrayList<String> videos= new ArrayList<String>();
-		videos.add("video1");
+		
+videos.add("video1");		
 		
 		request.setAttribute("videos", videos);
-		request.setAttribute(name, o);
-	
+		
+		request.setAttribute("busqueda", busqueda);
+		
+		request.getRequestDispatcher("videos.jsp").forward(request, response);
 	}
 
 }

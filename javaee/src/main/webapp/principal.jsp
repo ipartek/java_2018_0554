@@ -5,9 +5,7 @@
 <%
 	 Usuario usuario = (Usuario)request.getAttribute("usuario");
 	ArrayList<Usuario> listado = (ArrayList<Usuario>)request.getAttribute("listado");
-	 
-	Video video= (Video)request.getAtribute("video");
-	ArrayList<Video> listadoV = (ArrayList<Video>)request.getAttribute("listadoV");
+	
 %>
 
 <!DOCTYPE html>
@@ -18,9 +16,9 @@
 </head>
 <body>
 
-	<h1>
 	
-		Bienvenido a esta web
+	
+		<h1>Bienvenido a esta web
 		<%= usuario.getEmail() %></h1>
 <<a href="videos">Videos online</a>
 
@@ -38,11 +36,11 @@
 		</thead>
 		<tbody>
 		
-			 for(Video v: listadoV) {
+			<%  for(Video v: listadoV) {%>
 			 
-			 <th>v.getTitulo</th>
-			  <th>v.getURL</th>
-			 }
+			 <th><% v.getTitulo()%></th>
+			  <th><% v.getURL()%></th>
+			 <%}%>
 			<%-- <% for(Usuario u: listado) { %> --%>
 			<tr>
 				<<%-- th><%=u.getId() %></th>
