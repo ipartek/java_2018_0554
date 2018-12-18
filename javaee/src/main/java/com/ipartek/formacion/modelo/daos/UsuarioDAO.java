@@ -16,7 +16,7 @@ public class UsuarioDAO {
 	 * @param email
 	 *            String
 	 * @param pass
-	 *            String contraseña
+	 *            String contraseï¿½a
 	 * @return usuario con datos si existe, null si no existe
 	 */
 	public Usuario login(String email, String pass) {
@@ -56,7 +56,7 @@ public class UsuarioDAO {
 					usuario.setId(rs.getLong("id"));
 					usuario.setEmail(rs.getString("nombre"));
 					usuario.setPassword(rs.getString("password"));
-					// añadir en array
+					// insertar en array
 					usuarios.add(usuario);
 				} catch (Exception e) {
 					System.out.println("usuario no valido");
