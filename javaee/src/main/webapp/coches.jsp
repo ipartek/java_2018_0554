@@ -35,14 +35,27 @@
 %>
 	<p style="color:red">No existen videos</p>
 <% } //endif %>
-<ol>
+<table border=1>
+	<tr>
+		<th>ID</th>
+		<th>Marca</th>
+		<th>Modelo</th>
+		<th>Imagen</th>
+		<th>Comprar</th>
+	</tr>
 	<%
 		for( Coche coche: coches){
 			%>
-					<li><%=coche%></li>
+					<tr>
+						<td><%=coche.getId()%></td>
+						<td><%=coche.getMarca()%></td>
+						<td><%=coche.getModelo()%></td>
+						<td><img width="200px" height="140px" src="<%=coche.getImagen()%>" alt="texto alt"></td>
+						<td><a href="comprar?idCoche=<%=coche.getId()%>&marcaCoche=<%=coche.getMarca()%>&modeloCoche=<%=coche.getModelo()%>&imagenCoche<%=coche.getImagen()%>">Añadir al carrito</a></td>
+					</tr>
 
 			<%	
 		}	
 	%>
-</ol>
+</table>
 
