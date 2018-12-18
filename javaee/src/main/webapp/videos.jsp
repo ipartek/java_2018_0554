@@ -16,7 +16,7 @@
 		busqueda = "";
 	}
 %>
-
+<%@ include file="cabecera.jsp" %>
 <form action="videos" method="post">
 	<input type="text" name="busqueda" value="<%=busqueda%>" required>
 	<input type="submit" value="filtrar">

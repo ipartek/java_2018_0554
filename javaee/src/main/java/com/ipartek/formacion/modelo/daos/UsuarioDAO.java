@@ -1,11 +1,11 @@
 package com.ipartek.formacion.modelo.daos;
 
 import java.sql.Connection;
+
+import com.ipartek.formacion.modelo.pojos.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
-import ENDESHUSOcom.ipartek.formacion.ejemplocapas.pojos.Usuario;
 
 public class UsuarioDAO {
 	
@@ -58,7 +58,7 @@ public class UsuarioDAO {
 					// añadir en array
 					usuarios.add(usuario);
 				}catch (Exception e) {
-					
+					System.out.println("usuario no valido");
 					e.printStackTrace();
 				}		
 			} // while	
@@ -68,33 +68,4 @@ public class UsuarioDAO {
 		}		
 		return usuarios;
 	}
-	public ArrayList<String> getAllNoValid(){
-		
-		ArrayList<String> usuariosNoValidos = new ArrayList<String>();
-		String sql = "SELECT id, nombre, password FROM usuario ORDER BY id DESC LIMIT 500";		
-		
-		try ( Connection conn = ConnectionManager.getConnection();
-			  PreparedStatement pst = conn.prepareStatement(sql);
-			  ResultSet rs = pst.executeQuery() 
-			){
-			
-			while(rs.next()) { 			
-				try {
-					Usuario usuario = new Usuario();
-					usuario.setId( rs.getLong("id"));
-					usuario.setEmail( rs.getString("nombre"));
-					usuario.setPassword(rs.getString("password"));
-					// añadir en array
-					
-				}catch (Exception e) {
-					
-					usuariosNoValidos.add(rs.getString("nombre"));
-				}		
-			} // while	
-			
-		}catch (Exception e) {
-			e.printStackTrace();
-		}		
-		return usuariosNoValidos;
-	}
-	}
+}

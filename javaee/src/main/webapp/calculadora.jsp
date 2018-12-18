@@ -16,7 +16,7 @@
 	<%
 		}
 	%>
-
+<%@ include file="cabecera.jsp" %>
 	<form action="Calculator" method=GET>
 
 		<!--   <form action="Calculator" method=POST> -->

@@ -7,10 +7,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.modelo.daos.UsuarioDAO;
 
-import ENDESHUSOcom.ipartek.formacion.ejemplocapas.pojos.Usuario;
+import com.ipartek.formacion.modelo.pojos.Usuario;
+
 public class LoginServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -44,9 +46,11 @@ public class LoginServlet extends HttpServlet {
 				request.setAttribute("listado", usuariosValidos);
 				
 				
-				ArrayList<String> usuariosNoValidos = dao.getAllNoValid();
-				request.setAttribute("usuario", usuario);
-				request.setAttribute("listadoNoValidos", usuariosNoValidos);
+				//Guardar usuario en sesion
+				HttpSession session = request.getSession();
+				session.setMaxInactiveInterval(60 * 5); //5 min, tambien se puede configurar en web.xml
+				session.setAttribute("usuario_logueado", usuario);
+				
 				
 			}else {				
 				request.setAttribute("error", "Usuario No valido");				

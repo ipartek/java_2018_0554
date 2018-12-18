@@ -4,6 +4,17 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <filter>
+  	<filter-name>SeguridadFilter</filter-name>
+  	<display-name>SeguridadFilter</display-name>
+  	<description></description>
+  	<filter-class>com.ipartek.formacion.filter.SeguridadFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>SeguridadFilter</filter-name>
+  	<url-pattern>/SeguridadFilter</url-pattern>
+  </filter-mapping>
+
   <servlet>
   	<servlet-name>LoginServlet</servlet-name>
   	<display-name>LoginServlet</display-name>
@@ -34,6 +45,12 @@
   	<description></description>
   	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.GestorRetro</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>logoutController</servlet-name>
+  	<display-name>logoutController</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.logoutController</servlet-class>
+  </servlet>
   
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
@@ -56,6 +73,10 @@
   <servlet-mapping>
   	<servlet-name>GestorRetro</servlet-name>
   	<url-pattern>/GestorRetro</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>logoutController</servlet-name>
+  	<url-pattern>/logoutController</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

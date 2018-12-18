@@ -8,7 +8,7 @@
 ¡Hola a todos!
 
 <%-- Scriptlets --%>
-
+<%@ include file="cabecera.jsp" %>
 <%= new java.util.Date() %>
 
 <% for(int i = 1; i <= 6; i++) { %>
