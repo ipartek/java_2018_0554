@@ -1,3 +1,4 @@
+<%@page import="com.ipartek.formacion.modelo.pojos.Coche"%>
 <%@page import="com.ipartek.formacion.modelo.pojos.Usuario"%>
 <style>
 nav{
@@ -12,16 +13,23 @@ nav{
 
 <nav>
 <%
+
 	Usuario usuario_logeado = (Usuario)session.getAttribute("usuario_logeado");
 	if(usuario_logeado!=null){
 %>
 
 <%=usuario_logeado.getEmail() %>
-<a href="logout">Cerrar Sesion</a></nav>
+<a href="logout">Cerrar Sesion</a>
+
 
 
 <%}else{%>	
-<a href="login">Iniciar sesion</a></nav>
+<a href="login">Iniciar sesion</a>
 	<%}%>
+	
+	
 	<a href="privado/index.jsp">Zona Privada</a>
+	<a href="coches">Coches</a>
+	<a href="calcular">Ejemplo Calculadora</a>
+	
 </nav>	

@@ -9,10 +9,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
+
+
 <%@ include file="cabecera.jsp" %>
 
-
-<a href="calcular">Ejemplo Calculadora</a>
 
 <form action="login" method="post">
 	<fieldset>

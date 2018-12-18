@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.modelo.daos.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojos.Coche;
 import com.ipartek.formacion.modelo.pojos.Usuario;
 
 public class LoginServlet extends HttpServlet {
@@ -53,6 +54,11 @@ public class LoginServlet extends HttpServlet {
 				//tambine se puede configurar en el web.xml 
 				session.setMaxInactiveInterval(60*5);//5min
 				session.setAttribute("usuario_logeado", usuario);
+				
+				
+				
+				
+				
 				
 				
 			}else {				
