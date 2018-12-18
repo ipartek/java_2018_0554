@@ -23,6 +23,9 @@
 	<p>
 		<a href="misVideos">Mis videos</a>
 	</p>
+		<p>
+		<a href="perros">Perros</a>
+	</p>
 	<h2>Usuarios validos</h2>
 	<table>
 		<thead>
