@@ -41,7 +41,7 @@ public class SeguridadFilter implements Filter {
 			chain.doFilter(req, res);
 		}
 		else {
-			res.sendRedirect(request.getContextPath() + "/login");
+			response.sendRedirect(request.getContextPath() + "/login");
 		}
 	}
 
