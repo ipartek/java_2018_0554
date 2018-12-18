@@ -8,43 +8,45 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class VideoController
- */
+import com.ipartek.formacion.modelo.daos.VideoDao;
+import com.ipartek.formacion.modelo.pojos.Video;
+
+
 public class VideoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-   
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ArrayList<String> videos = new ArrayList<String>();
-		
-		videos.add("video1");
-		videos.add("Fary");
-		videos.add("Que nos se te olcide el WHERE XD");
-		
-		request.setAttribute("videos", videos);
-		
+	try {
+		VideoDao dao = new VideoDao();
+		ArrayList<Video> listadoVideos = dao.listarVideos();
+		request.setAttribute("listadoVideos", listadoVideos);
+	}catch(Exception e) {e.printStackTrace();
+	}finally {
 		request.getRequestDispatcher("videos.jsp").forward(request, response);
+	}
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String texto = request.getParameter("textoBuscar").trim();
 		
-		String busqueda = request.getParameter("busqueda");
+		try {
+			VideoDao dao = new VideoDao();
+			ArrayList<Video> listadoVideosbuscados = dao.listarVideosBuscados(texto);
+			request.setAttribute("listadoVideosbuscados", listadoVideosbuscados);
+			request.setAttribute("texto", texto);
+			
+			/*VideoDao dao2 = new VideoDao();
+			ArrayList<Video> listadoVideos = dao2.listarVideos();
+			request.setAttribute("listadoVideos", listadoVideos);*/
+		}catch(Exception e) {
+			e.printStackTrace();
 		
-		ArrayList<String> videos = new ArrayList<String>();
-		videos.add("video1");		
-		
-		request.setAttribute("videos", videos);
-		request.setAttribute("busqueda", busqueda);
-		request.getRequestDispatcher("videos.jsp").forward(request, response);
+		}finally {
+			request.getRequestDispatcher("videos.jsp").forward(request, response);
+		}
 	}
 
 }

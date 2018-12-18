@@ -1,2 +1,7 @@
 /target/
 /ws_JAVA_2018_0554/
+
+**/bin/
+**/.classpath
+**/.project
+**/.settings/

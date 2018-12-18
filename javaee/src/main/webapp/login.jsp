@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<a href="calculadora.jsp">Ejemplo Calculadora</a>
+
 <a href="calcular">Ejemplo Calculadora</a>
 
 <form action="login" method="post">
@@ -17,7 +17,7 @@
 		
 		<p>
 			<label for="email">Email</label>
-			<input type="email" name="email" id="email" value="xabier@ipartek.com" />
+			<input type="email" name="email" id="email" value="ima@gmail.com" />
 		</p>
 		<p>
 			<label for="password">Password</label>

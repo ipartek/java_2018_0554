@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.formacion.modelo.daos.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojos.PojoException;
 import com.ipartek.formacion.modelo.pojos.Usuario;
 
 public class LoginServlet extends HttpServlet {
@@ -44,7 +45,8 @@ public class LoginServlet extends HttpServlet {
 				request.setAttribute("listado", usuariosValidos);
 				
 				
-				//ArrayList<String> usuariosNoValidos = dao.getAllNoValid();
+			ArrayList<String> usuariosNoValidos = dao.getAllNoValid();
+			request.setAttribute("listadomal", usuariosNoValidos);
 				
 				
 			}else {				

@@ -26,7 +26,7 @@ public class UsuarioDAO {
 					pst.setString(1, email);
 					pst.setString(2, pass);			
 					try ( ResultSet rs = pst.executeQuery() ){											
-							while(rs.next()) { // hemos encontrado usuario								
+							while(rs.next()) { 						
 								usuario = new Usuario();
 								usuario.setId( rs.getLong("id"));
 								usuario.setEmail( rs.getString("nombre"));
@@ -68,5 +68,35 @@ public class UsuarioDAO {
 		}		
 		return usuarios;
 	}
+
+	public ArrayList<String> getAllNoValid() {
+		
+		ArrayList<String> usuariosmal= new ArrayList<String>();
+		String sql = "SELECT id, nombre, password FROM usuario ORDER BY id DESC LIMIT 500";		
+		
+		try ( Connection conn = ConnectionManager.getConnection();
+				  PreparedStatement pst = conn.prepareStatement(sql);
+				  ResultSet rs = pst.executeQuery() 
+				){
+				
+				while(rs.next()) { 			
+					try {
+						Usuario usuario = new Usuario();
+						//usuario.setId( rs.getLong("id"));
+						usuario.setEmail( rs.getString("nombre"));
+						usuario.setPassword(rs.getString("password"));
+						
+					}catch (Exception e) {
+						String nombre = rs.getString("nombre");
+						usuariosmal.add(nombre);
+					}	
+				} // while	
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		return usuariosmal;
+	}
+	
 
 }

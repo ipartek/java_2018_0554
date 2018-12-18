@@ -4,7 +4,12 @@
 
 <%
 	Usuario usuario = (Usuario)request.getAttribute("usuario");
+if(usuario!=null){
+	
+
 	ArrayList<Usuario> listado = (ArrayList<Usuario>)request.getAttribute("listado");
+	
+	ArrayList<String> listadomal = (ArrayList<String>)request.getAttribute("listadomal");
 
 %>
 
@@ -18,13 +23,13 @@
 
 	<h1>
 		Bienvenido a esta web
-		<%= usuario.getEmail() %></h1>
-		
-		
-	<a href="videos">Ver Videos</a>	
+		<%= usuario.getEmail() %>
+	</h1>
+	<a href="videos">MI TABLA</a>
 
 	<table>
 		<thead>
+		<tr><th>LISTADO NO VALIDO</th></tr>
 			<tr>
 				<th>ID</th>
 				<th>Email</th>
@@ -41,6 +46,30 @@
 			<% } %>
 		</tbody>
 	</table>
+	
+	
+		<table>
+		<thead>
+		<tr><th>LISTADO NO VALIDO</th></tr>
+			<tr>
+				
+				<th>Email</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<% for(String u: listadomal) { %>
+			<tr>
+				
+				<td><%=u.toString() %></td>
+				
+			</tr>
+			<% } %>
+		</tbody>
+	</table>
 
 </body>
 </html>
+
+<%}else{
+response.sendRedirect("login");} %>

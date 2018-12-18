@@ -7,6 +7,7 @@ public class ConnectionManager {
 
 	private static Connection conn;
 	private static final String URL = "jdbc:mysql://192.168.0.44/youtube?useSSL=false";
+			//"jdbc:mysql://localhost:3306/youtube?useSSL=false";
 	private static final String USER = "viernes";
 	private static final String PASS = "juernes";
 
