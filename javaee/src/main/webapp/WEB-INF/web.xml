@@ -16,6 +16,12 @@
   	<description></description>
   	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.VideoServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>VideoUnicoServlet</servlet-name>
+  	<display-name>VideoUnicoServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.VideoUnicoServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
   	<url-pattern>/login</url-pattern>
@@ -23,6 +29,10 @@
   <servlet-mapping>
   	<servlet-name>VideoServlet</servlet-name>
   	<url-pattern>/videos</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>VideoUnicoServlet</servlet-name>
+  	<url-pattern>/video</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
   	<welcome-file>login</welcome-file>

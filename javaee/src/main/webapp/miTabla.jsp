@@ -45,7 +45,7 @@ ArrayList<Video> videosBuscados = (ArrayList<Video>) request.getAttribute("video
 			<tr>
 				<td><%=v.getId()%></td>
 				<td><%=v.getNombre()%></td>
-				<td><%=v.getUrl()%></td>
+				<td><a href="video?direccion=<%=v.getUrl()%>">Ir al video</a></td>
 			</tr>
 			<%
 				}
