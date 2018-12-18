@@ -7,19 +7,23 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="privado/index.jsp">Zona privada</a>
-<%@ include file="cabecera.jsp" %> <br>
+
+<%@ include file="cabecera.jsp"  %>
+
+
+<a href="privado/index.jsp">Zona Privada</a><br>
+
 <form action="login" method="post">
 	<fieldset>
 		<legend>Login</legend>
 		
 		<p>
 			<label for="email">Email</label>
-			<input type="email" name="email" id="email" />
+			<input type="email" name="email" id="email" value="" />
 		</p>
 		<p>
 			<label for="password">Password</label>
-			<input type="password" name="password" id="password" />
+			<input type="password" name="password" id="password" value="" />
 		</p>
 		<p>
 			<button>Login</button>
@@ -30,7 +34,6 @@
 
 </body>
 </html>
-
 <!-- Tareas
 cuando no entre en el filtro el navegador la ip y el idioma 
 -->

@@ -1,6 +1,9 @@
 <%@page import="com.ipartek.formacion.modelo.pojos.Video"%>
 <%@page import="java.util.ArrayList"%>
 
+<%@ include file="cabecera.jsp"%>
+
+
 <h1>Listado Videos</h1>
 
 <%
@@ -20,7 +23,7 @@
 	}
 %>
 
-<form action="video" method="post">
+<form action="videos" method="post">
 	<input type="text" name="busqueda" value="<%=busqueda%>" required>
 	<input type="submit" value="filtrar">
 </form>
@@ -47,3 +50,4 @@
 		}
 	%>
 </ol>
+

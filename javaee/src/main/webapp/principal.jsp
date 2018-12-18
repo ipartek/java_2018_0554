@@ -1,14 +1,10 @@
-<%@page
-	import="com.ipartek.formacion.modelo.pojos.Usuario, java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+	import="com.ipartek.formacion.modelo.pojos.Usuario, java.util.ArrayList"%>
 
 <%
-	Object objeto = session.getAttribute("usuario");
-	Usuario usuario = (Usuario) objeto;
-
-	Object oUsuarios = request.getAttribute("usuarios");
-	ArrayList<Usuario> usuarios = (ArrayList<Usuario>) oUsuarios;
+	Usuario usuario = (Usuario) request.getAttribute("usuario");
+	ArrayList<Usuario> listado = (ArrayList<Usuario>) request.getAttribute("listado");
 %>
 
 <!DOCTYPE html>
@@ -18,12 +14,19 @@
 <title>Principal</title>
 </head>
 <body>
+
 	<%@ include file="cabecera.jsp"%>
+
+
+
+
 	<h1>
 		Bienvenido a esta web
-		<%=usuario.getEmail()%>
-	</h1>
+		<%=usuario.getEmail()%></h1>
+
+
 	<a href="videos">Ver Videos</a>
+
 	<table>
 		<thead>
 			<tr>
@@ -34,7 +37,7 @@
 		</thead>
 		<tbody>
 			<%
-				for (Usuario u : usuarios) {
+				for (Usuario u : listado) {
 			%>
 			<tr>
 				<th><%=u.getId()%></th>

@@ -27,10 +27,10 @@
 		<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.VideoController</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>Logout</servlet-name>
-		<display-name>Logout</display-name>
+		<servlet-name>LogoutController</servlet-name>
+		<display-name>LogoutController</display-name>
 		<description></description>
-		<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.Logout</servlet-class>
+		<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.LogoutController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
@@ -41,7 +41,7 @@
 		<url-pattern>/videos</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>Logout</servlet-name>
+		<servlet-name>LogoutController</servlet-name>
 		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>

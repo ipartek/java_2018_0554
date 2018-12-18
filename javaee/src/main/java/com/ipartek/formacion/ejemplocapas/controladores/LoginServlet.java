@@ -48,8 +48,7 @@ public class LoginServlet extends HttpServlet {
 				// guardar usuario en sesi�n
 
 				HttpSession sesion = request.getSession();
-				sesion.setMaxInactiveInterval(60 * 5); // 5 minutos, tambien se puede configurar el cierre de la sesión
-														// en el WEB.xml
+				sesion.setMaxInactiveInterval(60 * 5); // 5 minutos, tambien se puede configurar el cierre de la sesión en el WEB.xml
 				sesion.setAttribute("usuario_logueado", usuario);
 
 			} else {

@@ -1,31 +1,30 @@
 package com.ipartek.formacion.modelo.pojos;
 
-import com.ipartek.formacion.modelo.pojos.Video;
-
 public class Video {
-	//Atributos
-	private int id;
+
+	// Atributos
+	private long id;
 	private String nombre;
 	private String url;
 
-	public Video(int id, String nombre, String url) {
-		setId(id);
-		setNombre(nombre);
-		setUrl(url);
-	}
+	// Constructores
 
 	public Video() {
 		super();
 		this.id = -1;
-		this.nombre = "";
-		this.url = "";
+		this.nombre = "Surf Search Spot 2 0 video promo";
+		this.url = "LPDhuthFD98";
 	}
+	
+	
 
-	public int getId() {
+	// Getters y Setters
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -45,8 +44,11 @@ public class Video {
 		this.url = url;
 	}
 
+	// Otros metodos => toString
+
 	@Override
 	public String toString() {
 		return "Video [id=" + id + ", nombre=" + nombre + ", url=" + url + "]";
 	}
+
 }
