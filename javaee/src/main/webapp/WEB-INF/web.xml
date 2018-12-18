@@ -28,6 +28,12 @@
   	<description></description>
   	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.GestorVideos</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>GestorRetro</servlet-name>
+  	<display-name>GestorRetro</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.GestorRetro</servlet-class>
+  </servlet>
   
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
@@ -46,6 +52,10 @@
   <servlet-mapping>
   	<servlet-name>GestorVideos</servlet-name>
   	<url-pattern>/GestorVideos</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>GestorRetro</servlet-name>
+  	<url-pattern>/GestorRetro</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ipartek.formacion.modelo.daos.VideoDAO;
+import com.ipartek.formacion.modelo.pojos.Videos;
+
 import ENDESHUSOcom.ipartek.formacion.ejemplocapas.pojos.Usuario;
 
 /**
@@ -24,14 +27,17 @@ public class GestorVideos extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		ArrayList<String> videos = new ArrayList<String>();
+		ArrayList<Videos> videos = new ArrayList<Videos>();
 		
-		videos.add("video1");
-		videos.add("Fary");
-		videos.add("Que no...");
+		VideoDAO dao= new VideoDAO();
 		
 		
-		request.setAttribute("videos", videos);
+//		videos.add("video1");
+//		videos.add("Fary");
+//		videos.add("Que no...");
+//		
+		
+		request.setAttribute("videos", dao.getAll());
 		
 		request.getRequestDispatcher("videos.jsp").forward(request,response);
 		
@@ -41,12 +47,14 @@ public class GestorVideos extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String busqueda= request.getParameter("busqueda");
 		
-		ArrayList<String> videos= new ArrayList<String>();
+		ArrayList<Videos> videos= new ArrayList<Videos>();
 		
-videos.add("video1");		
+//videos.add("video1");		
 		
-		request.setAttribute("videos", videos);
+		VideoDAO dao = new VideoDAO();
 		
+		request.setAttribute("videos", dao.getAllByNombre(busqueda));
+	
 		request.setAttribute("busqueda", busqueda);
 		
 		request.getRequestDispatcher("videos.jsp").forward(request, response);
