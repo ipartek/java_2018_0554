@@ -22,8 +22,7 @@
 	
 		Bienvenido a esta web
 		<%= usuario.getEmail() %></h1>
-
-<a href="videos"></a>
+<<a href="videos">Videos online</a>
 
 	<table>
 		<thead>
