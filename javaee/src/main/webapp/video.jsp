@@ -1,74 +1,49 @@
-<%@page import="com.ipartek.formacion.modelo.pojos.UsuarioNoValido"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-	import="com.ipartek.formacion.modelo.pojos.Video, java.util.ArrayList"%>
+<%@page import="com.ipartek.formacion.modelo.pojos.Video"%>
+<%@page import="java.util.ArrayList"%>
+
+<h1>Listado Videos</h1>
 
 <%
-	ArrayList<Video> videos = (ArrayList<Video>) request.getAttribute("misVideos");
-	Video videoBuscar= (Video)request.getAttribute("video");
+	ArrayList<Video> videos = (ArrayList<Video>) request.getAttribute("videos");
+	String busqueda = (String) request.getAttribute("busqueda");
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Busca tu vídeo</title>
-</head>
-<body>
-	<p>
-		<h2>Busca tu video</h2>
-	</p>
-	<p>
-	<form action="misVideos" method="post">
-		<label for="nombreVideo"> Introduce el nombre del video:<input type="text" id="nombreVideo"
-			name="nombreVideo" value="noriyaro">
-		</label>
-		<button>Buscar</button>
-		<%= request.getAttribute("error") != null ? request.getAttribute("error") : "" %>
-		
-	</p>
-	<% if(videoBuscar !=null){ %>
-	<table>
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Nombre</th>
-				<th>Url</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<th><%=videoBuscar.getId()%></th>
-				<td><%=videoBuscar.getNombre()%></td>
-				<td><%=videoBuscar.getUrl()%></td>
-			</tr>
 
-		</tbody>
-	</table>
-	<% } %>
-	<p>
-	<h2>Mis Videos</h2>
-	</p>
-	<table>
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Nombre</th>
-				<th>Url</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-				for (Video v : videos) {
-			%>
-			<tr>
-				<th><%=v.getId()%></th>
-				<td><%=v.getNombre()%></td>
-				<td><%=v.getUrl()%></td>
-			</tr>
-			<%
-				}
-			%>
-		</tbody>
-	</table>
-</body>
-</html>
+<%
+	if (busqueda != null) {
+%>
+<p>
+	Resultado para la busqueda: <b><%=busqueda%></b>
+</p>
+<%
+	} else {
+		busqueda = "";
+	}
+%>
+
+<form action="video" method="post">
+	<input type="text" name="busqueda" value="<%=busqueda%>" required>
+	<input type="submit" value="filtrar">
+</form>
+
+
+<%
+	if (videos.isEmpty()) {
+%>
+<p style="color: red;">No existen Videos todavia!!!</p>
+<%
+	} // if
+%>
+
+<ol>
+	<%
+		for (Video video : videos) {
+	%>
+	<li><%=video.getNombre()%> <iframe width="150" height="150"
+			src="https://www.youtube.com/embed/<%=video.getUrl()%>"
+			frameborder="0"
+			allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+			allowfullscreen></iframe></li>
+	<%
+		}
+	%>
+</ol>

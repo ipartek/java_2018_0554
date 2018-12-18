@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<a href="privado/index.jsp">Zona privada</a>
+<%@ include file="cabecera.jsp" %> <br>
 <form action="login" method="post">
 	<fieldset>
 		<legend>Login</legend>
@@ -29,3 +30,7 @@
 
 </body>
 </html>
+
+<!-- Tareas
+cuando no entre en el filtro el navegador la ip y el idioma 
+-->

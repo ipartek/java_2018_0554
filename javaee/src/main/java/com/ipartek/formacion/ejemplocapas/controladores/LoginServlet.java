@@ -1,89 +1,70 @@
 package com.ipartek.formacion.ejemplocapas.controladores;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.ipartek.formacion.ejemplocapas.pojos.PojoException;
-import com.ipartek.formacion.ejemplocapas.pojos.Usuario;
+import com.ipartek.formacion.modelo.daos.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojos.Usuario;
 
 public class LoginServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
-	boolean usuarioCorrecto = false;
+	private static final String VISTA_LOGIN = "login.jsp";
+	private static final String VISTA_PRINCIPAL = "principal.jsp";
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher(VISTA_LOGIN).forward(request, response);
+	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		Usuario usuario = null;
+		String vista = VISTA_LOGIN;
+		
 		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-
-		Usuario usuario;
-
+		String password = request.getParameter("password");		
+		
 		try {
-			usuario = new Usuario(0, email, password);
-		} catch (PojoException e) {
-			if (email != null && password != null) {
-				request.setAttribute("error", "Error en el formato de email o contraseña");
-			}
-
-			request.getRequestDispatcher("login.jsp").forward(request, response);
-
-			return;
-		}
-
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-
-		} catch (Exception e) {
+			
+			UsuarioDAO dao = new UsuarioDAO();			
+			usuario = dao.login(email, password);
+			
+			if ( usuario != null ) {
+				vista = VISTA_PRINCIPAL;
+				
+				ArrayList<Usuario> usuariosValidos = dao.getAll();
+				
+				request.setAttribute("usuario", usuario);
+				request.setAttribute("listado", usuariosValidos);
+				
+				
+				//guardar usuario en sesión
+				
+				HttpSession sesion = request.getSession();
+				sesion.setMaxInactiveInterval(60 * 5); // 5 minutos, tambien se puede configurar el cierre de la sesión en el WEB.xml
+				sesion.setAttribute("usuario_logueado", usuario);
+				
+			}else {				
+				request.setAttribute("error", "Usuario No valido");				
+			}			
+		}catch (Exception e) {
 			e.printStackTrace();
+			
+		}finally {
+			request.getRequestDispatcher(vista).forward(request, response);
 		}
-
-		Connection conn;
-		try {
-			conn = DriverManager.getConnection("jdbc:mysql://192.168.0.44/youtube?useSSL=false", "viernes", "juernes");
-
-			Statement stmt = conn.createStatement();
-
-			ResultSet rs = stmt.executeQuery("SELECT id, nombre, password FROM usuario WHERE nombre='" + email
-					+ "' AND password='" + password + "'");
-			while (rs.next()) {
-				if (email.equals(rs.getString("nombre")) && password.equals(rs.getString("password"))) {
-					usuarioCorrecto = true;
-					break;
-				}
-			}
-			rs.close();
-			if (usuarioCorrecto) {
-				ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-				ResultSet rsCompleto = stmt.executeQuery("SELECT id, nombre, password FROM usuario");
-				while (rsCompleto.next()) {
-					usuarios.add(new Usuario(rsCompleto.getInt("id"), rsCompleto.getString("nombre"),
-							rsCompleto.getString("password")));
-				}
-				request.setAttribute("usuarios", usuarios);
-				request.getSession().setAttribute("usuario", usuario);
-				request.getRequestDispatcher("principal.jsp").forward(request, response);
-				rsCompleto.close();
-			} else {
-				request.setAttribute("error", "No tienes permiso para login");
-				request.getRequestDispatcher("login.jsp").forward(request, response);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
+		
+		
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
-	}
+	
 
 }
