@@ -12,6 +12,7 @@ ArrayList<Video> videosBuscados = (ArrayList<Video>) request.getAttribute("video
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body>
+<%@include file="cabecera.jsp" %>
 <div class="container">
 <div class="jumbotron">
 <form action="videos" method="post">

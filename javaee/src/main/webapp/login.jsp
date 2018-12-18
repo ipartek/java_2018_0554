@@ -11,7 +11,9 @@
 </style>
 </head>
 <body>
+<%@include file="cabecera.jsp" %>
 <div class="container">
+<a href="privado/index.jsp">Zona Privada</a><br/><br/>
 <div class="jumbotron">
 <form action="login" method="post">
 	
@@ -20,15 +22,16 @@
 		
 		<div class="form-group">
 			<label for="email">Email</label>
-			<input type="email" name="email" id="email" />
+			<input type="email" name="email" id="email" value="ander@solana.com" />
 		</div>
 		<div class="form-group">
 			<label for="password">Password</label>
-			<input type="password" name="password" id="password" />
+			<input type="password" name="password" id="password" value="Pa$$w0rd" />
 		</div>
 		<div class="form-group">
 			<button>Login</button>
 		<%= request.getAttribute("error") != null ? request.getAttribute("error") : "" %>
+		<%= session.getAttribute("sesionNoIniciada") != null ? session.getAttribute("sesionNoIniciada") : "" %>
 		</div>
 	</fieldset>
 	

@@ -26,9 +26,10 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body>
+<%@include file="cabecera.jsp" %>
 <div class="container">
-<h1>Bienvenido <%= usuario.getEmail() %></h1>
 <h2><a href="videos">Mi Tabla</a></h2>
+<h2><a href="gatos">Gatos</a></h2>
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
