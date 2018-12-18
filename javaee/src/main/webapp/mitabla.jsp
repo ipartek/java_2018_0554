@@ -34,7 +34,7 @@
 			<tr>
 				<th><%=v.getId()%></th>
 				<td><%=v.getTitulo()%></td>
-				<td><%=v.getUrl()%></td>
+				<td><a href="<%=v.getUrl()%>">Ir a video</a></td>
 			</tr>
 			<%
 				}
