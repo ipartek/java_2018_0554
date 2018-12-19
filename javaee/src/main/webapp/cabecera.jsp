@@ -4,7 +4,7 @@
 <nav class="navbar navbar-default">
 <%
 	Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario_logueado");
-	ArrayList<Gato> gatosComprados = (ArrayList<Gato>) session.getAttribute("gatosComprados");	
+	ArrayList<String> gatosComprados = (ArrayList<String>) session.getAttribute("gatosComprados");	
 
 	if (usuarioLogueado != null) {
 %>
@@ -16,14 +16,14 @@
 	<table class="table">
 	<thead class="thead-dark">
 	<tr>
-		<th>Carrito de la compra de la puta madre de dani</th>
+		<th>Carrito</th>
 	</tr>
 	</thead>
 	<tbody>
 	<% if(gatosComprados != null){ %>
-	<% for(Gato g : gatosComprados){ %>
+	<% for(String g : gatosComprados){ %>
 	<tr>
-	<td><%=g.getRaza() + " - " + g.getNombre() %></td>
+	<td><%=g %></td>
 	</tr>
 	<%} }%>
 	</tbody>

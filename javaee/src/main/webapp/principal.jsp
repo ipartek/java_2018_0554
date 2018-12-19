@@ -30,6 +30,7 @@
 <div class="container">
 <h2><a href="videos">Mi Tabla</a></h2>
 <h2><a href="gatos">Gatos</a></h2>
+<a href="usuarios">Ver Usuarios</a>
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>
