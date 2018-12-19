@@ -4,8 +4,7 @@
 
 <%
 	Usuario usuario = (Usuario)request.getAttribute("usuario");
-	ArrayList<Usuario> listado = (ArrayList<Usuario>)request.getAttribute("listado");
-	ArrayList<String> listadoNo = (ArrayList<String>)request.getAttribute("listadoNo");
+	
 %>
 
 <!DOCTYPE html>
@@ -15,45 +14,20 @@
 <title>Principal</title>
 </head>
 <body>
-<%@ include file="cabecera.jsp" %>
-<a href="video">Videos</a>
-	<h1>
-		Bienvenido a esta web
-		<%= usuario.getEmail() %></h1>
 
-	<table>
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Email</th>
-				<th>Password</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% for(Usuario u: listado) { %>
-			<tr>
-				<th><%=u.getId() %></th>
-				<td><%=u.getEmail() %></td>
-				<td><%=u.getPassword() %></td>
-			</tr>
-			<% } %>
-		</tbody>
-	</table>
+	<%@ include file="cabecera.jsp"  %>
+
+
 	
-	<table>
-		<thead>
-			<tr>
-				<th>Email</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% for(String u: listadoNo) { %>
-			<tr>
-				<td><%=u %></td>
-			</tr>
-			<% } %>
-		</tbody>
-	</table>
+
+
+	<a href="privado/index.jsp">Zona Privada</a><br>
+	<a href="calculadora.jsp">Ejemplo Calculadora</a><br>
+	<a href="calcular">Ejemplo Calculadora</a><br>
+	<a href="videos">Ver Videos</a><br>
+	<a href="usuarios">Ver Usuarios</a>	
+
+
 
 </body>
 </html>

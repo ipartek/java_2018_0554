@@ -7,13 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@ include file="cabecera.jsp" %>
 
-<a href="calculadora.jsp">Ejemplo Calculadora</a>
-<a href="calcular">Ejemplo Calculadora</a>
-<a href="perro">Perros</a>
 
-<a href="video">Videos</a>
 
 <form action="login" method="post">
 	<fieldset>
