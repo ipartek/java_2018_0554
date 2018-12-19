@@ -27,7 +27,9 @@ public class DiscoController extends HttpServlet {
 		discos.add(new Disco());
 		discos.add(new Disco(1L, "Trapped!","Rage", "PortadaRage", "1992"));
 		discos.add(new Disco(2L, "Firepower","Judas Priest", "PortadaJudas", "2018"));
-		
+		discos.add(new Disco(3L, "01011001","Ayreon", "Portada01011001", "2008"));
+		discos.add(new Disco(4L, "The Bottom Deep","Communic", "PortadaThe Bottom Deep", "2011"));
+		discos.add(new Disco(5L, "In Your Multitude","Conception", "PortadaIn Your Multitude", "1995"));
 
 		request.setAttribute("lista", discos);
 		

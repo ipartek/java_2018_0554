@@ -20,7 +20,7 @@ public class Disco {
 		this.id = -1;
 		this.titulo = "Dystopia";
 		this.artista = "Megadeth";
-		this.portada = "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjnvc7Ci6nfAhXPGewKHWzDBLUQjRx6BAgBEAU&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FDystopia_(Megadeth_album)&psig=AOvVaw1TsDy6qhGagnfJbFjrD9P0&ust=1545212566099277";
+		this.portada = "PortadaDystopia";
 		this.year = "2016";
 		
 		
