@@ -1,4 +1,4 @@
-<%@page import="com.ipartek.formacion.modelos.pojos.Carrito, java.util.ArrayList"%>
+<%@page import="com.ipartek.formacion.modelos.pojos.Carrito,com.ipartek.formacion.modelos.pojos.Perro, java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%
@@ -30,14 +30,16 @@
 		<% if (carritocomp.size()!=0) {%>
 			<%
 				for (Carrito c: carritocomp) {
+					Perro p= new Perro();
+					p=c.getPerro();
 			%>
 			<tr>
 				<th><%=c.getId()%></th>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><%=p.getRaza()%></td>
+				<td><img src="<%=p.getImagen() %>" alt="imagen <%= p.getRaza() %>"/></td>
+				<td><%=p.getPrecio() %></td>
 				<td><%=c.getCantidad()%></td>
-				<td></td>
+				<td><%=p.getPrecio()*c.getCantidad() %></td>
 			</tr>
 			<%
 				}

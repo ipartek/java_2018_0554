@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.formacion.modelos.daos.CarritoDAO;
+import com.ipartek.formacion.modelos.daos.PerroDAO;
+import com.ipartek.formacion.modelos.pojos.Perro;
 
 
 public class CarritoSrvLt extends HttpServlet {
@@ -26,20 +28,16 @@ public void init(ServletConfig config) throws ServletException {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String idperro=request.getParameter("id");
+		int idperroi=Integer.parseInt(idperro);
 		if(idperro!=null) {
-			int idperroi=Integer.parseInt(idperro);
 			try {
-				if (dao.agregaralcarro(idperroi)) {
-					request.getSession().setAttribute("carrito", dao.getAll());
-					request.getRequestDispatcher("miscomprasperros.jsp").forward(request, response);
-				}
+				dao.agregaralcarro(idperroi);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}else {
-			request.getSession().setAttribute("carrito", dao.getAll());
-			request.getRequestDispatcher("miscomprasperros.jsp").forward(request, response);
 		}
+		request.getSession().setAttribute("carrito", dao.getAll());
+		request.getRequestDispatcher("miscomprasperros.jsp").forward(request, response);
 	}
 
 	

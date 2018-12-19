@@ -2,16 +2,16 @@ package com.ipartek.formacion.modelos.pojos;
 
 public class Carrito {
 	private int id;
-	private int perro;
+	private Perro perro;
 	private int cantidad;
 	
 	
 	
 	
-	public Carrito(int id, int perro, int cantidad) {
+	public Carrito(int id, Perro perro, int cantidad) {
 		super();
 		setId(id);
-		setPerro(perro);
+		setPerro(null);
 		setCantidad(cantidad);
 	}
 
@@ -19,7 +19,7 @@ public class Carrito {
 	public Carrito() {
 		super();
 		this.id=-1;
-		this.perro=-1;
+		this.perro=null;
 		this.cantidad=-1;
 	}
 
@@ -37,15 +37,14 @@ public class Carrito {
 	}
 
 
-	public int getPerro() {
+	public Perro getPerro() {
 		return perro;
 	}
 
 
-	public void setPerro(Integer perro) {
-		if(perro == null || perro.toString().trim().length()==0) {
-			perro=-1;
-		}
+	public void setPerro(Perro perro) {
+			this.perro=null;
+
 	}
 
 
