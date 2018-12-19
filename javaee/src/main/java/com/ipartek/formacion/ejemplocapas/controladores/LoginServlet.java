@@ -49,10 +49,12 @@ public class LoginServlet extends HttpServlet {
 //				request.setAttribute("listadomal", usuariosNoValidos);
 				
 				//recuperamos la sesion
+				//la guardamos en una variable k la llamamso session pero puede tner cualkier nombre
 				HttpSession session= request.getSession();
 				//tambine se puede configurar en el web.xml 
 				session.setMaxInactiveInterval(60*5);//5min
 				session.setAttribute("usuario_logeado", usuario);
+				
 				
 				
 				

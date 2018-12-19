@@ -13,6 +13,12 @@ public class Video {
 		this.nombre = "Video Promocional";
 		this.url = "https://www.youtube.com/watch?v=yUPeEbgDNK0";
 	}
+	public Video(String nombre){
+		super();
+		this.nombre=nombre;
+		
+		
+	}
 	
 	public Video(Long id,String nombre, String url) {
 		super();

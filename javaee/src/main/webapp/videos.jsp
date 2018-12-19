@@ -90,6 +90,7 @@ if(texto!=null){
 	<td><iframe width="140" height="80" src="<%=enlace %>" 
 	frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 	</td>
+	<td><a href="carrito?id=<%=v.getId()%>">Al carrito</a></td>
 	</tr>
 	<% } %>
 	</tbody>
