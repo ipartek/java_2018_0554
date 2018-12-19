@@ -24,8 +24,10 @@ public class DiscoController extends HttpServlet {
 		
 		ArrayList<Disco> discos = new ArrayList<Disco>();
 		
-		discos.add(new Disco(1L,"Rage", "Trapped!", "PortadaRage", "1992"));
-		discos.add(new Disco(2L,"Judas Priest", "Firepower", "PortadaJudas", "2018"));
+		discos.add(new Disco());
+		discos.add(new Disco(1L, "Trapped!","Rage", "PortadaRage", "1992"));
+		discos.add(new Disco(2L, "Firepower","Judas Priest", "PortadaJudas", "2018"));
+		
 
 		request.setAttribute("lista", discos);
 		
