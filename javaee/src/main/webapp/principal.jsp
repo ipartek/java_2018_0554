@@ -18,6 +18,10 @@
 <%@ include file="cabecera.jsp" %>
 <a href="privado/index.jsp"> Zona privada </a>
 
+<a href="calculadora.jsp"> Ejemplo Calculadora</a>
+<a href="calcular"> Ejemplo Calculadora</a>
+<a href="privado/index.jsp"> Zona privada </a>
+
 	<h1>
 		Bienvenido a esta web
 		<%= usuario.getEmail() %></h1>
@@ -25,26 +29,7 @@
 		
 	<a href="videos">Ver Videos</a>
 	<a href="videojuegos">Ver Videojuegos</a>
-
-
-	<table>
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Email</th>
-				<th>Password</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% for(Usuario u: listado) { %>
-			<tr>
-				<th><%=u.getId() %></th>
-				<td><%=u.getEmail() %></td>
-				<td><%=u.getPassword() %></td>
-			</tr>
-			<% } %>
-		</tbody>
-	</table>
+	<a href="usuarios">Ver usuarios</a>
 
 </body>
 </html>
