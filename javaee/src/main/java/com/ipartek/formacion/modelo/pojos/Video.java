@@ -16,6 +16,10 @@ public class Video {
 		this.url = "https://www.youtube.com/watch?v=LPDhuthFD98";
 	}
 	
+	public Video(String nombre) {
+		this();
+		this.nombre = nombre;
+	}
 	
 
 	// Getters y Setters

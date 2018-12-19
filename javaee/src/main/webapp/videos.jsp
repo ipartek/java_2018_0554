@@ -50,7 +50,7 @@
 							        frameborder="0" 
 							        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
 							        allowfullscreen></iframe>
-					
+						<a href="carrito?id=<%=video.getId()%>">Añadir al Carrito</a>
 					</li>
 			<%	
 		}	
