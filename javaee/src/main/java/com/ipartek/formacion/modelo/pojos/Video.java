@@ -14,6 +14,14 @@ public class Video {
 		this.nombre ="";
 		this.url ="";
 	}
+	
+
+	public Video(String nombre) {
+		this();
+		this.nombre = nombre;
+	
+	}
+
 
 	public long getId() {
 		return id;
