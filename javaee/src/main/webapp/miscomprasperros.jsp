@@ -34,7 +34,7 @@
 			<tr>
 				<th><%=c.getId()%></th>
 				<td></td>
-				<td><!-- <img width=150 height=150 src="<%=//c.getImagen()%>" alt="Imagen <%=//c.getRaza()%>"> --></td>
+				<td></td>
 				<td></td>
 				<td><%=c.getCantidad()%></td>
 				<td></td>
@@ -53,5 +53,6 @@
 			<%}%>
 		</tbody>
 	</table>
+	<a href="perro">Volver</a>
 </body>
 </html>
