@@ -1,5 +1,6 @@
 package com.ipartek.formacion.modelo.daos;
 
+//añadiendo comentario...
 import java.sql.Connection;
 import java.sql.DriverManager;
 
