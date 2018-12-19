@@ -5,8 +5,7 @@
 
 <%
 	Usuario usuario = (Usuario) request.getAttribute("usuario");
-	ArrayList<Usuario> listado = (ArrayList<Usuario>) request.getAttribute("listado");
-	ArrayList<UsuarioNoValido> listadoNO = (ArrayList<UsuarioNoValido>) request.getAttribute("usuariosNoValidos");
+	
 %>
 
 <!DOCTYPE html>
@@ -16,64 +15,19 @@
 <title>Principal</title>
 </head>
 <body>
-<%@ include file="cabecera.jsp" %>
+	<%@ include file="cabecera.jsp"%>
 	<h1>
 		Bienvenido a esta web
 		<%=usuario.getEmail()%></h1>
 	<p>
 		<a href="misVideos">Mis videos</a>
 	</p>
-		<p>
+	<p>
 		<a href="perros">Perros</a>
 	</p>
-	<h2>Usuarios validos</h2>
-	<table>
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Email</th>
-				<th>Password</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-				for (Usuario u : listado) {
-			%>
-			<tr>
-				<th><%=u.getId()%></th>
-				<td><%=u.getEmail()%></td>
-				<td><%=u.getPassword()%></td>
-			</tr>
-			<%
-				}
-			%>
-		</tbody>
-	</table>
-
-	<h2>
-		Usuarios NO validos
-		</h1>
-		<table>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Email</th>
-					<th>Password</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-					for (UsuarioNoValido u : listadoNO) {
-				%>
-				<tr>
-					<th><%=u.getId()%></th>
-					<td><%=u.getEmail()%></td>
-					<td><%=u.getPassword()%></td>
-				</tr>
-				<%
-					}
-				%>
-			</tbody>
-		</table>
+	<p>
+		<a href="usuarios">Usuarios</a>
+	</p>
+		
 </body>
 </html>

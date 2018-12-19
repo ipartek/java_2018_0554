@@ -10,7 +10,7 @@ public class Usuario {
 
 	public Usuario() throws PojoException {
 		super();
-		this.id = (long)-1;
+		this.id = (long) -1;
 		this.email = "";
 		this.password = "";
 	}

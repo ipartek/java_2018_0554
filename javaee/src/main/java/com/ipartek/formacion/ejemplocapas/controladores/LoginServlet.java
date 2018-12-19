@@ -47,12 +47,9 @@ public class LoginServlet extends HttpServlet {
 			usuarioLogin = dao.login(email, password);
 			if(usuarioLogin != null) {
 				vista=VISTA_PRINCIPAL;
-				ArrayList<Usuario>usuariosValidos= dao.getAll();
-				ArrayList<UsuarioNoValido> usuariosNoValidos=dao.getAllNoValid();
 				
 				request.setAttribute("usuario", usuarioLogin);
-				request.setAttribute("listado", usuariosValidos);
-				request.setAttribute("usuariosNoValidos", usuariosNoValidos);
+
 				
 				//guardar usuario logeado en sesion
 				// Como recuperar la session
