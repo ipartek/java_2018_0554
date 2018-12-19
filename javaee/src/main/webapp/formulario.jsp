@@ -7,6 +7,7 @@
 <title>Formulario</title>
 </head>
 <body>
+<%@ include file="cabecera.jsp"  %>
 
 <form>
 	<fieldset>

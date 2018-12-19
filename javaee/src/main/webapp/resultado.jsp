@@ -1,3 +1,5 @@
+<%@ include file="cabecera.jsp"  %>
+
 <h1>Resultado</h1>
 
 

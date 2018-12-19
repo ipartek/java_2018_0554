@@ -4,6 +4,16 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <filter>
+  	<filter-name>SeguridadFilter</filter-name>
+  	<display-name>SeguridadFilter</display-name>
+  	<description></description>
+  	<filter-class>com.ipartek.formacion.filter.SeguridadFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>SeguridadFilter</filter-name>
+  	<url-pattern>/privado/*</url-pattern>
+  </filter-mapping>
   <servlet>
   	<servlet-name>LoginServlet</servlet-name>
   	<display-name>LoginServlet</display-name>
@@ -22,6 +32,30 @@
   	<description></description>
   	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.VideoController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>LibroController</servlet-name>
+  	<display-name>LibroController</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.LibroController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>LogoutController</servlet-name>
+  	<display-name>LogoutController</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.LogoutController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>UsuarioController</servlet-name>
+  	<display-name>UsuarioController</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.UsuarioController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>CestaController</servlet-name>
+  	<display-name>CestaController</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.CestaController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
   	<url-pattern>/login</url-pattern>
@@ -33,6 +67,22 @@
   <servlet-mapping>
   	<servlet-name>VideoController</servlet-name>
   	<url-pattern>/videos</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LibroController</servlet-name>
+  	<url-pattern>/libros</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LogoutController</servlet-name>
+  	<url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>UsuarioController</servlet-name>
+  	<url-pattern>/usuarios</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>CestaController</servlet-name>
+  	<url-pattern>/cesta</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
   	<welcome-file>login</welcome-file>
