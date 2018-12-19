@@ -45,29 +45,29 @@ public class UsuarioController extends HttpServlet {
 
 		try {
 			// recoger parametros del formulario
-			
+
 			String id = request.getParameter("id");
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 
-			Usuario uNuevo = new Usuario();	
+			Usuario uNuevo = new Usuario();
 			try {
-				//crear usuario nuevo   TODO hacer insert en base datos
+				// crear usuario nuevo TODO hacer insert en base datos
 				uNuevo = new Usuario();
-				uNuevo.setId( Long.parseLong(id));
+				uNuevo.setId(Long.parseLong(id));
 				uNuevo.setEmail(email);
 				uNuevo.setPassword(password);
-			}catch (NumberFormatException e) {
-				uNuevo = null;		
+			} catch (NumberFormatException e) {
+				uNuevo = null;
 				request.setAttribute("mensajeId", "El id debe ser numerico");
-			}catch (PojoException e) {
-				uNuevo = null;		
-				request.setAttribute("mensajePojo", e.getMessage() );
-			
-			}catch (Exception e) {
-				uNuevo = null;				
+			} catch (PojoException e) {
+				uNuevo = null;
+				request.setAttribute("mensajePojo", e.getMessage());
+
+			} catch (Exception e) {
+				uNuevo = null;
 				request.setAttribute("mensajeGeneral", "Los datos del usuario no son validos");
-			}finally {
+			} finally {
 				request.setAttribute("email", email);
 				request.setAttribute("id", id);
 				request.setAttribute("password", password);

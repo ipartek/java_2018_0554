@@ -15,8 +15,11 @@ public class Video {
 		this.nombre = "Surf Search Spot 2 0 video promo";
 		this.url = "LPDhuthFD98";
 	}
-	
-	
+
+	public Video(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
 
 	// Getters y Setters
 

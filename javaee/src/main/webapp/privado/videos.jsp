@@ -41,11 +41,12 @@
 	<%
 		for (Video video : videos) {
 	%>
-	<li><%=video.getNombre()%> <iframe width="150" height="150"
+	<li><%=video.getNombre()%> <iframe width="250" height="250"
 			src="https://www.youtube.com/embed/<%=video.getUrl()%>"
 			frameborder="0"
 			allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 			allowfullscreen></iframe></li>
+			<a href="carrito?id=<%=video.getId()%>">Sumar al carrito</a>
 	<%
 		}
 	%>

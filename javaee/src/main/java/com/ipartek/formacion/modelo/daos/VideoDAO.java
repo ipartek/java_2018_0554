@@ -41,10 +41,7 @@ public class VideoDAO {
 		ArrayList<Video> listado = new ArrayList<Video>();
 		String sql = "SELECT id, nombre, url FROM hector_videos WHERE NOMBRE LIKE ? ORDER BY id DESC LIMIT 100;";
 
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);
-
-		) {
-
+		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 			pst.setString(1, "%" + nombre + "%");
 
 			try (ResultSet rs = pst.executeQuery()) {
@@ -69,4 +66,28 @@ public class VideoDAO {
 		return listado;
 	}
 
+	public Video getById(long id) {
+
+		Video registro = null;
+		String sql = "SELECT id, nombre, url FROM hector_videos WHERE id= ?;";
+		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+
+			pst.setLong(1, id);
+
+			try (ResultSet rs = pst.executeQuery()) {
+
+				while (rs.next()) {
+					registro = new Video();
+					registro.setId(rs.getLong("id"));
+					registro.setNombre(rs.getString("nombre"));
+					registro.setUrl(rs.getString("url"));
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return registro;
+	}
 }
