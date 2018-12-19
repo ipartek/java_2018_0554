@@ -4,7 +4,7 @@
 
 <%
 	Usuario usuario = (Usuario)request.getAttribute("usuario");
-	ArrayList<Usuario> listado = (ArrayList<Usuario>)request.getAttribute("listado");
+
 
 %>
 
@@ -20,28 +20,13 @@
 		Bienvenido a esta web
 		<%= usuario.getEmail() %></h1>
 		
-		
-	<a href="videos">Ver Videos</a>
+	<a href="privado/index.jsp">Zona privada</a><br>
+<a href="calcular">Ejemplo Calculadora</a>	<br>
+	<a href="videos">Ver Videos</a><br>
+	<a href="usuarios">Ver Usuarios</a><br>
 	<a href="Coche">Ver Coches</a>
 
-	<table>
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Email</th>
-				<th>Password</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% for(Usuario u: listado) { %>
-			<tr>
-				<th><%=u.getId() %></th>
-				<td><%=u.getEmail() %></td>
-				<td><%=u.getPassword() %></td>
-			</tr>
-			<% } %>
-		</tbody>
-	</table>
+	
 
 </body>
 </html>

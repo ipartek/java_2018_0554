@@ -7,9 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@include file="cabecera.jsp" %>
-<a href="privado/index.jsp">Zona privada</a>
-<a href="calcular">Ejemplo Calculadora</a>
+
+
 
 <form action="login" method="post">
 	<fieldset>
