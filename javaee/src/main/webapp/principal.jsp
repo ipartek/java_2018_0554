@@ -25,48 +25,14 @@ if(usuario!=null){
 		Bienvenido a esta web
 		<%= usuario.getEmail() %>
 	</h1>
-	<a href="videos">MI TABLA</a>
+	<ul>
+	<li><a href="videos">VIDEOS</a></li>
+	<li><a href="coches">COCHES</a></li>
+	<li><a href="calcular">CALCULADORA</a></li>
+	<li><a href="usuarios">USUARIOS</a></li>
+	</ul>
 
-	<table>
-		<thead>
-		<tr><th>LISTADO NO VALIDO</th></tr>
-			<tr>
-				<th>ID</th>
-				<th>Email</th>
-				<th>Password</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% for(Usuario u: listado) { %>
-			<tr>
-				<th><%=u.getId() %></th>
-				<td><%=u.getEmail() %></td>
-				<td><%=u.getPassword() %></td>
-			</tr>
-			<% } %>
-		</tbody>
-	</table>
 	
-	
-		<table>
-		<thead>
-		<tr><th>LISTADO NO VALIDO</th></tr>
-			<tr>
-				
-				<th>Email</th>
-
-			</tr>
-		</thead>
-		<tbody>
-			<% for(String u: listadomal) { %>
-			<tr>
-				
-				<td><%=u.toString() %></td>
-				
-			</tr>
-			<% } %>
-		</tbody>
-	</table>
 
 </body>
 </html>

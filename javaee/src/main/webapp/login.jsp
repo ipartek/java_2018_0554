@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>LOGIN</title>
 </head>
 <body>
 
@@ -31,6 +31,9 @@
 		<p>
 			<button>Login</button>
 			<%= request.getAttribute("error") != null ? request.getAttribute("error") : "" %>
+			<%= request.getSession().getAttribute("log") != null ? request.getSession().getAttribute("log") : "" %>
+			
+			
 		</p>
 	</fieldset>
 </form>

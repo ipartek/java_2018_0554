@@ -40,14 +40,13 @@ public class LoginServlet extends HttpServlet {
 			if ( usuario != null ) {
 				vista = VISTA_PRINCIPAL;
 				
-				ArrayList<Usuario> usuariosValidos = dao.getAll();
+				//ArrayList<Usuario> usuariosValidos = dao.getAll();
 				
 				request.setAttribute("usuario", usuario);
-				request.setAttribute("listado", usuariosValidos);
 				
-				
-				ArrayList<String> usuariosNoValidos = dao.getAllNoValid();
-				request.setAttribute("listadomal", usuariosNoValidos);
+//				request.setAttribute("listado", usuariosValidos);
+//				ArrayList<String> usuariosNoValidos = dao.getAllNoValid();
+//				request.setAttribute("listadomal", usuariosNoValidos);
 				
 				//recuperamos la sesion
 				HttpSession session= request.getSession();

@@ -29,7 +29,6 @@ nav{
 	
 	
 	<a href="privado/index.jsp">Zona Privada</a>
-	<a href="coches">Coches</a>
-	<a href="calcular">Ejemplo Calculadora</a>
+
 	
 </nav>	
