@@ -56,6 +56,24 @@
   	<description></description>
   	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.CestaController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>CarritoControllerLibro</servlet-name>
+  	<display-name>CarritoControllerLibro</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.CarritoControllerLibro</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>CarritoController</servlet-name>
+  	<display-name>CarritoController</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.CarritoController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>CalcController</servlet-name>
+  	<display-name>CalcController</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.CalcController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
   	<url-pattern>/login</url-pattern>
@@ -83,6 +101,18 @@
   <servlet-mapping>
   	<servlet-name>CestaController</servlet-name>
   	<url-pattern>/cesta</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>CarritoControllerLibro</servlet-name>
+  	<url-pattern>/carritoLibro</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>CarritoController</servlet-name>
+  	<url-pattern>/carrito</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>CalcController</servlet-name>
+  	<url-pattern>/calculadora</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
   	<welcome-file>login</welcome-file>

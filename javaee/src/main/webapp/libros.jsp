@@ -30,6 +30,7 @@
 	<input type="submit" value="filtrar">
 </form>
 
+<form action="carritoLibros" method="post">
 <ol>
 	<%
 		for( Libro libro: libros){
@@ -40,9 +41,10 @@
 			<li><%=libro.getAutor()%></li>
 			<li><img alt="<%=libro.getNombre()%>"
 				src="<%=libro.getImagen()%>" width="150" height="200"></li>
-			<li><input type="checkbox" name="<%=libro.getId()%>" /> <label
+			<li><input type="checkbox" name="carrito?id=<%=libro.getId()%>" /> <label
 				for="compra+<%=libro.getId()%>">Comprar</label></li>
 		</ul>
 	</li>
 	<%}%>
 </ol>
+</form>

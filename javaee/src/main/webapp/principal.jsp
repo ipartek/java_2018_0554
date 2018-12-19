@@ -15,22 +15,16 @@
 <title>Principal</title>
 </head>
 <body>
-	<%@ include file="cabecera.jsp"%>
+	<%@ include file="cabecera.jsp" %>
 	<h1>
 		Bienvenido a esta web
 		<%=usuario.getEmail()%></h1>
 
-
-
-
 	<a href="privado/index.jsp">Area Privada</a>
 	<a href="calculadora.jsp">Ejemplo Calculadora</a>
-	<a href="calcular">Ejemplo Calculadora</a>
 	<a href="libros">Ver Libros</a>
 	<a href="videos">Ver Videos</a>
 	<a href="usuarios">Ver Usuarios</a>
-
-
 
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 
 <%
-	String mensaje = (String)request.getAttribute("mensaje");
+	String mensaje = (String)request.getAttribute("message");
 	if ( mensaje  != null ){
 %>	
 		<p style="color:red"><%=mensaje%></p>
@@ -10,11 +10,11 @@
 	} // if
  %>
 
-<form action="calcular" method="post">
+<form action="calculadora" method="post">
 
-	<input type="text" name="p1">
+	<input type="text" name="op1">
 	<br>
-	<input type="text" name="p2">
+	<input type="text" name="op2">
 
 	<input type="submit" value="SUMAR">
 
