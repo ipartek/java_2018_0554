@@ -34,14 +34,13 @@ public class LoginServlet extends HttpServlet {
 		try {
 			UsuarioDAO dao = new UsuarioDAO();
 			usuario=dao.login(email,password);
-			if(usuario  != null) {
+			if(usuario != null) {
 				usuariosok= dao.getAllValidos();	
 				usuariosnook= dao.getAllNoValidos();
-				ArrayList<Perro> carrito = new ArrayList<Perro>();
 				request.setAttribute("usuariosok", usuariosok);
 				request.setAttribute("usuariosnook", usuariosnook);
+				request.setAttribute("usuario", usuario);
 				HttpSession session=request.getSession();
-				session.setAttribute("carrito", carrito);
 				session.setMaxInactiveInterval(60*5);
 				session.setAttribute("usuario_logueado", usuario);
 				vista=VISTA_PRINCIPAL;

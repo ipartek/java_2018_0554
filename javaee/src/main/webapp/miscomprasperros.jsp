@@ -1,8 +1,8 @@
-<%@page import="com.ipartek.formacion.modelos.pojos.Perro, java.util.ArrayList"%>
+<%@page import="com.ipartek.formacion.modelos.pojos.Carrito, java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%
-	ArrayList<Perro> carrito = (ArrayList<Perro>) request.getSession().getAttribute("carrito");
+	ArrayList<Carrito> carritocomp = (ArrayList<Carrito>) request.getSession().getAttribute("carrito");
 %>
 <!DOCTYPE html>
 <html>
@@ -27,17 +27,17 @@
 			</tr>
 		</thead>
 		<tbody>
-		<% if (carrito.size()!=0) {%>
+		<% if (carritocomp.size()!=0) {%>
 			<%
-				for (Perro p : carrito) {
+				for (Carrito c: carritocomp) {
 			%>
 			<tr>
-				<th><%=p.getId()%></th>
-				<td><%=p.getRaza()%></td>
-				<td><img width=150 height=150 src="<%=p.getImagen()%>" alt="Imagen <%=p.getRaza()%>"></td>
-				<td><%=p.getPrecio()%></td>
-				<td><%=p.getRaza()%></td>
-				<td><%=p.getRaza()%></td>
+				<th><%=c.getId()%></th>
+				<td></td>
+				<td><!-- <img width=150 height=150 src="<%=//c.getImagen()%>" alt="Imagen <%=//c.getRaza()%>"> --></td>
+				<td></td>
+				<td><%=c.getCantidad()%></td>
+				<td></td>
 			</tr>
 			<%
 				}
@@ -46,6 +46,9 @@
 				<td>NO</td>
 				<td>EXISTEN</td>
 				<td>COMPRAS</td>
+				<td></td>
+				<td></td>
+				<td></td>
 			</tr>
 			<%}%>
 		</tbody>

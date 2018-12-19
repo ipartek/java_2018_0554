@@ -25,16 +25,17 @@ public void init(ServletConfig config) throws ServletException {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int idperro=Integer.parseInt(request.getParameter("id"));
+		String idperro=request.getParameter("id");
+		int idperroi=Integer.parseInt(idperro);
 		try {
-			if (dao.agregaralcarro(idperro)) {
-				
+			if (dao.agregaralcarro(idperroi)) {
+				request.getSession().setAttribute("carrito", dao.getAll());
+				request.getRequestDispatcher("miscomprasperros.jsp").forward(request, response);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		request.getSession().setAttribute("carrito", dao.getAll());
-		request.getRequestDispatcher("miscomprasperros.jsp").forward(request, response);
+		
 		
 		
 

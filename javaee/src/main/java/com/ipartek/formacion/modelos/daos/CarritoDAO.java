@@ -11,7 +11,28 @@ import com.ipartek.formacion.modelos.pojos.Carrito;
 public class CarritoDAO {
 
 	public ArrayList<Carrito> getAll() {
-		return null;
+		ArrayList<Carrito> carritocomp = new ArrayList<Carrito>();
+		String sql = "SELECT id,perro,cantidad FROM carrito_perros_borja ORDER BY id LIMIT 500";
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery();) {
+			Carrito carrito;
+			while (rs.next()) {
+				try {
+					carrito = new Carrito();
+					carrito.setId(rs.getInt("id"));
+					carrito.setPerro(rs.getInt("perro"));
+					carrito.setCantidad(rs.getInt("cantidad"));
+					carritocomp.add(carrito);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return carritocomp;
 	}
 
 	/**
@@ -25,7 +46,7 @@ public class CarritoDAO {
 
 	public boolean agregaralcarro(int id) throws SQLException {
 		boolean encontrado = false;
-		String sql = "SELECT id,perro,cantidad FROM carrito_perros_Borja WHERE perro='" + id
+		String sql = "SELECT id,perro,cantidad FROM carrito_perros_borja WHERE perro='" + id
 				+ "' ORDER BY id LIMIT 500";
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(sql);
@@ -44,7 +65,7 @@ public class CarritoDAO {
 				}
 			}
 			if(!encontrado) {
-				String sql3 = "INSERT INTO carrito_perros_borja VALUES perro='"+id+"', cantidad=1";
+				String sql3 = "INSERT INTO carrito_perros_borja (perro,cantidad) VALUES ('"+id+"',1)";
 				try (Connection conn3 = ConnectionManager.getConnection();
 						PreparedStatement pst3 = conn3.prepareStatement(sql3);) {
 					pst3.executeUpdate();

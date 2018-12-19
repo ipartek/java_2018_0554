@@ -16,11 +16,11 @@
 		
 		<p>
 			<label for="email">Email</label>
-			<input type="email" name="email" id="email" />
+			<input type="email" name="email" id="email" value="ander@solana.com" />
 		</p>
 		<p>
 			<label for="password">Password</label>
-			<input type="password" name="password" id="password" />
+			<input type="password" name="password" id="password" value="Pa$$w0rd" />
 		</p>
 		<p>
 			<button>Login</button>
