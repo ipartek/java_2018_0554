@@ -57,6 +57,12 @@
   	<description></description>
   	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.UsuarioController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>CarritoController</servlet-name>
+  	<display-name>CarritoController</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.CarritoController</servlet-class>
+  </servlet>
   
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
@@ -74,7 +80,7 @@
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>GestorVideos</servlet-name>
-  	<url-pattern>/GestorVideos</url-pattern>
+  	<url-pattern>/videos</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>GestorRetro</servlet-name>
@@ -87,6 +93,10 @@
   <servlet-mapping>
   	<servlet-name>UsuarioController</servlet-name>
   	<url-pattern>/usuarios</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>CarritoController</servlet-name>
+  	<url-pattern>/carrito</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

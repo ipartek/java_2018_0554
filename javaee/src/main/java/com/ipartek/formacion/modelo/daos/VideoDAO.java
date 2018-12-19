@@ -17,6 +17,36 @@ public class VideoDAO {
 	 * @param pass String contraseña
 	 * @return usuario con datos si existe, null si no existe
 	 */
+	
+public Videos getById( long id ) {
+		
+		Videos registro = null;
+		String sql = "SELECT id, nombre, url FROM oscar WHERE id= ?;";		
+		try ( Connection conn = ConnectionManager.getConnection();
+			  PreparedStatement pst = conn.prepareStatement(sql);
+			){
+			
+			pst.setLong(1, id);
+			
+			try( ResultSet rs = pst.executeQuery() ){
+				
+				while(rs.next()) { 		
+					registro = new Videos();
+					registro.setId( rs.getLong("id"));
+					registro.setTitulo( rs.getString("nombre"));
+					registro.setUrl(rs.getString("url"));		
+				}
+			}
+			
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		
+		
+		return registro;
+	}
+	
 	public ArrayList <Videos>getAll(){
 		ArrayList<Videos> listado = new ArrayList<Videos>();
 		String sql = "SELECT id, nombre, url FROM oscar ORDER BY id DESC LIMIT 500;";		

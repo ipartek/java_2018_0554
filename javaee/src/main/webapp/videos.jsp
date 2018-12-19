@@ -43,8 +43,10 @@ if ( videos.isEmpty() ) {
 							        frameborder="0" 
 							        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
 							        allowfullscreen></iframe>
+									<a href="carrito?id=<%=video.getId()%>">Añadir al carrito</a>
+
 					</li>
-			<%	
+			<%
 		}	
 	%>
 </ol>

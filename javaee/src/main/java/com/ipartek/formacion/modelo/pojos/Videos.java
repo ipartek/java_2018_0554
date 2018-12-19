@@ -16,6 +16,12 @@ public class Videos {
 		this.url = "https://www.youtube.com/watch?v=LPDhuthFD98";
 	}
 	
+	public Videos(String Titulo) {
+		
+	
+		this.titulo = "Surf Search Spot 2 0 video promo";
+	
+	}
 	
 
 	// Getters y Setters
