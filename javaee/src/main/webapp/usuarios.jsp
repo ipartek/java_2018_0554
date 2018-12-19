@@ -30,9 +30,10 @@
 	<p style="color:red"><%=request.getAttribute("mensaje")%></p>
 	<h2>Crear Nuevo USuario</h2>
 	<form action="usuarios" method="post">
-	
-		<input type="text" name="email" placeholder="tu@email.com">
-	
+		
+		<input type="text" name="id" value="<%=(request.getAttribute("id")==null)?"":request.getAttribute("id")%>" placeholder="identificodor"><br>
+		<input type="text" name="email" value="<%=(request.getAttribute("email")==null)?"":request.getAttribute("email")%>" placeholder="tu@email.com"><br>
+		<input type="text" name="password" value="<%=(request.getAttribute("password")==null)?"":request.getAttribute("password")%>" placeholder="contraseña"><br>
 		<input type="submit" value="CREAR">
 	</form>
 	

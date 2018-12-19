@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.formacion.modelo.daos.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojos.PojoException;
 import com.ipartek.formacion.modelo.pojos.Usuario;
 
 /**
@@ -40,21 +41,36 @@ public class UsuarioController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//recoger parametros del formulario
+		String id = request.getParameter("id");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		
 		
 		try {
-			//recoger parametros del formulario
 			
-			String email = request.getParameter("email");
 			
 			Usuario uNuevo = new Usuario();	
 			try {
 				//crear usuario nuevo   TODO hacer insert en base datos
-				uNuevo = new Usuario();		
+				uNuevo = new Usuario();
+				uNuevo.setId( Long.parseLong(id));
 				uNuevo.setEmail(email);
-				
+				uNuevo.setPassword(password);
+			}catch (NumberFormatException e) {
+				uNuevo = null;		
+				request.setAttribute("mensaje", "El id debe ser numerico");
+			}catch (PojoException e) {
+				uNuevo = null;		
+				request.setAttribute("mensaje", e.getMessage() );
+			
 			}catch (Exception e) {
-				uNuevo = null;
+				uNuevo = null;				
 				request.setAttribute("mensaje", "Los datos del usuario no son validos");
+			}finally {
+				request.setAttribute("email", email);
+				request.setAttribute("id", id);
+				request.setAttribute("password", password);
 			}
 			
 			// añadir en listado
