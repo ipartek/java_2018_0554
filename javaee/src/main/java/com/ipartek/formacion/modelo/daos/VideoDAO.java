@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpSession;
+
 import com.ipartek.formacion.modelo.pojos.Video;
 
 public class VideoDAO {
@@ -59,16 +62,16 @@ public class VideoDAO {
 					}
 				} // while
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return listado;
 	}
 
-	public Video getById(long id) {
+	public ArrayList<Video> getById(long id) {
 
 		Video registro = null;
+		ArrayList<Video> listado = new ArrayList<Video>();
 		String sql = "SELECT id, nombre, url FROM hector_videos WHERE id= ?;";
 		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 
@@ -81,6 +84,7 @@ public class VideoDAO {
 					registro.setId(rs.getLong("id"));
 					registro.setNombre(rs.getString("nombre"));
 					registro.setUrl(rs.getString("url"));
+					listado.add(registro);
 				}
 			}
 
@@ -88,6 +92,6 @@ public class VideoDAO {
 			e.printStackTrace();
 		}
 
-		return registro;
+		return listado;
 	}
 }

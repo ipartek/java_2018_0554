@@ -37,13 +37,8 @@ public class VideoController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		// Antes de doGet o doPost
-		System.out.println("Antes de doGet o doPost");
-
 		super.service(req, resp);
 
-		// Despues de doGet o doPost
-		System.out.println("Despues de doGet o doPost");
 	}
 
 	/**
