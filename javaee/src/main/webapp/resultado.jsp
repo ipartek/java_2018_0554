@@ -10,4 +10,4 @@
 
 %>
 
-<p><%=request.getParameter("p1")%> ? <%=request.getParameter("p2")%> = <%=resultado%></p>
+<p><%= %> = <%=resultado%></p>
