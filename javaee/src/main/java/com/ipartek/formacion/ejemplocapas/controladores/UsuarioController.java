@@ -69,6 +69,9 @@ public class UsuarioController extends HttpServlet {
 			}	
 			}catch (Exception e) {
 				uNuevo = null;
+				request.setAttribute("id", id);
+				request.setAttribute("email", email);
+				request.setAttribute("pass", pass);
 				request.setAttribute("mensaje", "Los datos del usuario no son validos");
 			}
 			

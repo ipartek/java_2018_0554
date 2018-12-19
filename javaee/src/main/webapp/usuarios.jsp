@@ -19,9 +19,9 @@
 <% } %>	
 	<h2>Crear Nuevo Usuario</h2>
 	<form action="usuarios" method="post">
-		<input type="text" name="id" placeholder="15">
-		<input type="text" name="email" placeholder="tu@email.com">
-		<input type="text" name="pass" placeholder="Pa$$w0rd">
+		<input type="text" name="id" placeholder="15" value=<%=(request.getAttribute("id")==null)?"":request.getAttribute("email") %>>
+		<input type="text" name="email" placeholder="tu@email.com" value=<%=(request.getAttribute("email")==null)?"":request.getAttribute("email") %>>
+		<input type="text" name="pass" placeholder="Pa$$w0rd" value=<%=(request.getAttribute("pass")==null)?"":request.getAttribute("pass") %>>
 	
 		<input type="submit" value="CREAR">
 	</form>
