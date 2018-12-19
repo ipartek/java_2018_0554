@@ -8,11 +8,6 @@
 </head>
 <body>
 
-<%@ include file="cabecera.jsp"  %>
-
-
-<a href="privado/index.jsp">Zona Privada</a><br>
-
 <form action="login" method="post">
 	<fieldset>
 		<legend>Login</legend>

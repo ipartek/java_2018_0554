@@ -15,40 +15,15 @@
 </head>
 <body>
 
-	<%@ include file="cabecera.jsp"%>
-
-
-
-
+	<%@ include file="../cabecera.jsp"%>
+	<a href="index.jsp">Zona Privada</a>
+	<br>
+	<a href="privado/videos">Videos</a>
+	<br>
+	<a href="privado/usuarios">Usuarios</a>
+	<br>
 	<h1>
 		Bienvenido a esta web
 		<%=usuario.getEmail()%></h1>
-
-
-	<a href="videos">Ver Videos</a>
-
-	<table>
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Email</th>
-				<th>Password</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-				for (Usuario u : listado) {
-			%>
-			<tr>
-				<th><%=u.getId()%></th>
-				<td><%=u.getEmail()%></td>
-				<td><%=u.getPassword()%></td>
-			</tr>
-			<%
-				}
-			%>
-		</tbody>
-	</table>
-
 </body>
 </html>

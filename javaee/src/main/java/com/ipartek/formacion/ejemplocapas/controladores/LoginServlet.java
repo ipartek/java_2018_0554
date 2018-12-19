@@ -16,7 +16,7 @@ public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static final String VISTA_LOGIN = "login.jsp";
-	private static final String VISTA_PRINCIPAL = "principal.jsp";
+	private static final String VISTA_PRINCIPAL = "privado/principal.jsp";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
