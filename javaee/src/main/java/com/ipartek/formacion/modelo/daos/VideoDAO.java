@@ -3,12 +3,42 @@ package com.ipartek.formacion.modelo.daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ipartek.formacion.modelo.pojos.Video;
 
 public class VideoDAO {
 	
+	
+	public Video getById( long id ) {
+		
+		Video registro = null;
+		String sql = "SELECT id, nombre, url FROM oscar WHERE id= ?;";		
+		try ( Connection conn = ConnectionManager.getConnection();
+			  PreparedStatement pst = conn.prepareStatement(sql);
+			){
+			
+			pst.setLong(1, id);
+			
+			try( ResultSet rs = pst.executeQuery() ){
+				
+				while(rs.next()) { 		
+					registro = new Video();
+					registro.setId( rs.getLong("id"));
+					registro.setNombre( rs.getString("nombre"));
+					registro.setUrl(rs.getString("url"));		
+				}
+			}
+			
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		
+		
+		return registro;
+	}
 	
 
 	public ArrayList<Video> getAll() {

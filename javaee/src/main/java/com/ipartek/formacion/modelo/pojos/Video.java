@@ -18,7 +18,10 @@ public class Video {
 	}
 
 
-	
+	public Video(String nombre) {
+		this();
+		this.nombre = nombre;
+	}
 	
 	
 	//getters and setters

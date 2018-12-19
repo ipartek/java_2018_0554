@@ -11,10 +11,22 @@
 	}
 	
 	#carrito{
-	positio:fixed;
-	top:0;
-	right:0;
+		position: fixed;
+		top:0;
+		right: 0;
+		background-color: teal;
+		color: #FFF;
+		width: 200px;
+		height: 500px;
+		padding: 5px 10px;
 	}
+	
+	#carrito .titulo{
+		text-align: center;
+		font-weight: 600;
+		text-transform: uppercase;
+	}
+	
 </style>
 
 <nav>
@@ -35,30 +47,37 @@
 
 <% } %>
 
-<!-- carrito de la compra -->
+
+
+<!-- carrito compra -->
 
 <%
-ArrayList<Video>carrito = (ArrayList<Video>)session.getAttribute("carrito");
-if(carrito == null){
-	carrito = new ArrayList<Video>();
-}
-
-//harcodear dos productos
-
-carrito.add(new Video());
-// mod constructor
-
-
+ 
+	ArrayList<Video> carrito = (ArrayList<Video>)session.getAttribute("carrito");
+	if ( carrito == null ){
+		carrito = new ArrayList<Video>();
+	}
+	
 %>
+
 <div id="carrito">
-<span class = "titulo">Carrito Compra</span>
-
-<%if(carrito.isEmpty()){ %>
-	<p>Todavia no hay productos</p>
-<% }else{%>	
-
-
-<%} %>
+	<span class="titulo">Carrito Compra</span>
+	
+	<% if ( carrito.isEmpty() ){
+		out.print("<p>Todavia no hay productos</p>");
+	   }else{ 
+			out.print("<ol>");
+			for( Video v : carrito ){
+				%>
+					<li><%=v.getNombre()%></li>
+				<%
+			} // for
+			out.print("</ol>");
+	 } // else
+	%>
 </div>
+
+
+
 
 </nav>
