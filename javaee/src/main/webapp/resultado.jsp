@@ -5,7 +5,9 @@
 
 <%
 	
-	int suma = (Integer)request.getAttribute("suma");
+	double resultado = (Double)request.getAttribute("resultado");
+
+
 %>
 
-<p>Suma = <%=suma%></p>
+<p><%=request.getParameter("p1")%> ? <%=request.getParameter("p2")%> = <%=resultado%></p>

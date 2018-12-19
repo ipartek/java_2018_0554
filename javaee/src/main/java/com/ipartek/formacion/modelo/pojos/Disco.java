@@ -22,6 +22,18 @@ public class Disco {
 		this.artista = "Megadeth";
 		this.portada = "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjnvc7Ci6nfAhXPGewKHWzDBLUQjRx6BAgBEAU&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FDystopia_(Megadeth_album)&psig=AOvVaw1TsDy6qhGagnfJbFjrD9P0&ust=1545212566099277";
 		this.year = "2016";
+		
+		
+			
+	}
+	
+	public Disco(long id, String titulo, String artista, String portada, String year) {
+		this();
+		this.id = id;
+		this.titulo = titulo;
+		this.artista = artista;
+		this.portada = portada;
+		this.year = year;
 	}
 	//Getters y setters
 	public long getId() {

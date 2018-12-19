@@ -6,47 +6,75 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.omg.PortableInterceptor.ForwardRequest;
-
+/**
+ * Servlet implementation class CalculadoraController
+ */
 public class CalcularController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
    
 
-	
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("calculadora.jsp").forward(request, response);
-
 		
-		
-		
-		
-	}
-	
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String op1 = request.getParameter("op1");
-		String op2 = request.getParameter("op2");
-		
+		/*
+		String p1 = request.getParameter("p1");
+		String p2 = request.getParameter("p2");
 		
 		try {
-		int sum1;
-		int sum2;
-		
-			sum1 = Integer.parseInt(op1);
-			sum2 = Integer.parseInt(op2);
 			
-			request.setAttribute("suma", sum1 + sum2);
-		request.getRequestDispatcher("resultado.jsp").forward(request, response);
-		} catch (NumberFormatException e) {
-			request.setAttribute("mensaje", "Por favor rellena los campos con numeros");
-			request.getRequestDispatcher("calculadora.jsp").forward(request, response);;
-		}
+			String operacion = request.getParameter("operacion");
+			
+			
+			
+			if(p1 != "" && p2 != "") {
+				double i1 = Double.parseDouble(p1);
+				double i2 = Double.parseDouble(p2);
+				//TODO switch(+ - * /)
+				if(sumar != null && restar == null && multiplicar == null && dividir == null) {
+			request.setAttribute("resultado", i1 + i2 );
+			
+			
+			}else if(sumar == null && restar != null && multiplicar == null && dividir == null) {
+				request.setAttribute("resultado", i1 - i2 );
+			}else if(sumar == null && restar == null && multiplicar != null && dividir == null) {
+				request.setAttribute("resultado", i1 * i2 );
+			}else if(sumar == null && restar == null && multiplicar == null && dividir != null) {
+				request.setAttribute("resultado", i1 / i2 );
+			}
+				}
+			request.getRequestDispatcher("resultado.jsp").forward(request, response);
+		}catch (Exception e) {
+			if (p1 == "" && p2 != "") {	 													// utilizo "" en vez de null para indicar el campo vacio (en el que no se han introducido datos) porque Op1 ES UN STRING. NO ES ENTERO
+				request.setAttribute("error", "No has rellenado el primer numero" );  			// envio parametro error con valor string menssaje
+		
+				request.getRequestDispatcher("calculadora.jsp").forward(request, response);			// ENVIO LA RESPUESTA A ERRORES.JSP
+			}
+			else if (p1 !="" && p2 == "") {
+				request.setAttribute("error", "No has rellenado el segundo numero");  			
+			
+				request.getRequestDispatcher("calculadora.jsp").forward(request, response);
+			}
+			else if (p1 == "" && p2 == "") {
+				request.setAttribute("error", "No has rellenado ningun numero" );  				
+			
+				request.getRequestDispatcher("calculadora.jsp").forward(request, response);
+			}
+		
+		}	*/
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
 		
+		
+		doGet(request, response);
 	}
 
 }

@@ -1,5 +1,3 @@
-
-
 <%@page import="com.ipartek.formacion.modelo.pojos.Disco"%>
 <%@page import="java.util.ArrayList"%>
 
@@ -8,48 +6,44 @@
 
 <h1>Listado de Discos</h1>
 
+<!-- <form action="discos" method="get"> -->
 
 <%
-	ArrayList<Disco> discos = (ArrayList<Disco>) request.getAttribute("discos");
-	String busqueda = (String) request.getAttribute("busqueda");
-%>
 
-<%
-	if (busqueda != null) {
+	ArrayList<Disco> discos = (ArrayList<Disco>)request.getAttribute("lista");
+	
 %>
-<p>
-	Resultado para la busqueda: <b><%=busqueda%></b>
-</p>
-<%
-	} else {
-		busqueda = "";
-	}
-%>
-
-<form action="discos" method="post">
-	<input type="text" name="busqueda" value="<%=busqueda%>" required>
-	<input type="submit" value="filtrar">
+	
 </form>
 
-<%
-	if (discos.isEmpty()) {
-%>
-<p style="color: red;">No existen Discos todavia!!!</p>
-<%
-	} // if
-%>
-
-
-<ol>
-	<%
-		for (Disco disco : discos) {
-	%>
-	<li><%=disco.getTitulo()%></li>
-	
 
 
 
-	<%
-		}
-	%>
-</ol>
+<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Título</th>
+				<th>Artista</th>
+				<th>Portada</th>
+				<th>Año</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+		
+			<% for(Disco dis : discos) { 
+			
+			%>
+			
+			<tr>
+				<th><%=dis.getId() %></th>
+				<td><%=dis.getTitulo()%></td>
+				<td><%=dis.getArtista()%></td>
+				<td><%=dis.getPortada()%></td>
+				<td><%=dis.getYear()%></td>
+			</tr>
+			
+			<% } %>
+		</tbody>
+	</table>
