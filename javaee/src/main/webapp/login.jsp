@@ -28,8 +28,9 @@
 			<label for="password">Password</label>
 			<input type="password" name="password" id="password" value="Pa$$w0rd" />
 		</p>
-		<p>
-			<button>Login</button>
+		<button>Login</button>
+		<p style="color:red">
+			
 			<%= request.getAttribute("error") != null ? request.getAttribute("error") : "" %>
 			<%= request.getSession().getAttribute("log") != null ? request.getSession().getAttribute("log") : "" %>
 			

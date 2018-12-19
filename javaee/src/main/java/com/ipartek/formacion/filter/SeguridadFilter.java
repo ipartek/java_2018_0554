@@ -47,7 +47,7 @@ public class SeguridadFilter implements Filter {
 			//vuleta al login pork se ha saltado o se ha acabado la  sesion
 			//res.sendRedirect("../login");
 		
-			session.setAttribute("error", "Acceso restringido a area privada sin logueo");
+			session.setAttribute("log", "Inicia sesion para acceder a la zona privada");
 			res.sendRedirect(req.getContextPath()+"/login");
 			
 		}
