@@ -73,7 +73,7 @@ public Video getById( long id ) {
 		String texto = texto1;
 		ArrayList<Video> listadoVideosBuscados = new ArrayList<Video>();
 		Video video = null;
-		String sql = "SELECT  nombre, url FROM imanol WHERE nombre LIKE ? ORDER BY nombre ASC LIMIT 500";
+		String sql = "SELECT id, nombre, url FROM imanol WHERE nombre LIKE ? ORDER BY nombre ASC LIMIT 500";
 		try (
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);
@@ -82,6 +82,7 @@ public Video getById( long id ) {
 				try ( ResultSet rs = pst.executeQuery() ){											
 					while(rs.next()) { 							
 						video = new Video();
+						video.setId( Long.parseLong(rs.getString("id")));
 						video.setNombre( rs.getString("nombre"));
 						video.setUrl(rs.getString("url"));	
 						listadoVideosBuscados.add(video);

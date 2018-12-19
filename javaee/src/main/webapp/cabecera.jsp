@@ -21,9 +21,11 @@ width:200px;
 height:500px;
 padding: 5px 10px;
 }
-#carrito .titulo{
-	font-weight: bold;
-	text-transform:uppercase;
+#carrito table{
+	color:white;
+}
+#carrito table a{
+	color: coral;
 }
 </style>
 
@@ -48,10 +50,13 @@ padding: 5px 10px;
 
 <!-- CARRITO DE LA COMPRA -->
 <% 
-//aki utiliza la variable implicita de session k es el mismo objeto k la session de login servlet
+//se crea la coleccion de videos con la variable implicita de session que recoge lo que contiene sesion y se getAttribute carrito
 ArrayList<Video> carrito = (ArrayList<Video>)session.getAttribute("carrito") ;
+//Si es igual a nulo, no existe
 if(carrito == null){
+	//se instacia carrito
 	carrito = new ArrayList<>();
+	// se simulaba unos productos añadidos al carrito
 	//harcodear los productos simular que ya hay algo en el carrito
 	//carrito.add(new Video());
 	//carrito.add(new Video("otro"));
@@ -60,19 +65,40 @@ if(carrito == null){
 
 <div id="carrito">
 	<span class="titulo">Carrito Compra</span>
+	
+<%--si carrito esta vacio --%>
+
 <%if(carrito.isEmpty()){%>
+
 <p>Carrito Vacío</p>
 	
 <%} else{
-	out.print("<ol>");
+	out.print("<table>");
 	for(Video v: carrito){
 		%>
-		<li><%=v.getNombre() %>
+		<tr><td><%=v.getNombre() %></td><td><a href="#">Borrar</a></td>
 		<%
 	}	
-	out.print("</ol>");
+	out.print("</table>");
 }%>
+
+
+
+<%if(carrito.isEmpty()){%>
+
+<%} else{%>
+		<form action="carrito" method="post">
+			<%for(Video v: carrito){%>
+			<p><label for="id"><%=v.getNombre() %> </label>
+			<input type="hidden" name="id" value="<%=v.getId() %>" />
+			<button>Quitar</button>
+			</p>
+			<%}%>
+		</form>
+<%}%>
 </div>
+
+
 	
 	
 	

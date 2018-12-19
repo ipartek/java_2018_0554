@@ -22,14 +22,7 @@ public class CarritoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		//RECIBIR PARAMETROS EN ESTE CASO EL id
 		String id = request.getParameter("id");
 		
@@ -54,6 +47,30 @@ public class CarritoController extends HttpServlet {
 		
 		//REDIRECT A VIDEOCONTROLLER
 		response.sendRedirect("videos");
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//RECIBIR PARAMETROS EN ESTE CASO EL id
+				String id = request.getParameter("id");
+		//RECUPERAMOS CARRITO DE SESION DEL USUARIO
+				HttpSession session= request.getSession();
+				ArrayList<Video> carrito = (ArrayList<Video>)session.getAttribute("carrito") ;
+				
+				for(Video v: carrito){
+					if(v.getId()==Long.parseLong(id)) {
+						carrito.remove(v);
+						break;
+					}
+				}
+				//GUARDAMOS EL CARRITO EN SESION DE NUEVO
+				session.setAttribute("carrito", carrito);
+				
+				//REDIRECT A VIDEOCONTROLLER
+				response.sendRedirect("videos");		
+				
 	}
 
 }
