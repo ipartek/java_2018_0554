@@ -32,7 +32,7 @@
 				<td><%=p.getRaza() %></td>
 				<td><%=p.getOrigen()%></td>
 				<td><img src="<%=p.getImg()%>" alt=""></td>
-				<td><a href="comprar?id=<%=p.getId()%>">Comprar</a></td>
+				<td><a href="carrito?id=<%=p.getId()%>">Añadir al carrito</a></td>
 			</tr>
 			<%
 				}

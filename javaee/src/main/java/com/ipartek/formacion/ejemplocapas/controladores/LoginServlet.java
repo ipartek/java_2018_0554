@@ -60,10 +60,7 @@ public class LoginServlet extends HttpServlet {
 				// También se puede configurar el cierre de la sesion en el web.xml
 				session.setAttribute("usuario_logeado", usuarioLogin);
 				
-				//Declaramos el carro de Perro y lo añadimos a la sesion para poder acceder al listado desde cualquier lado
-				ArrayList<Perro> perrosCarro = new ArrayList<>();
-				perrosCarro.add(new Perro(1L, "Shih Tzu", "República Popular China, Tíbet", "https://petyzoo.com/wp-content/uploads/2017/10/shih-tzu-razas-perros-cuidados-alimentacion.jpg"));
-				session.setAttribute("carro", perrosCarro);
+
 				
 			}else {
 				request.setAttribute("error", "Usuario NO VALIDO");
