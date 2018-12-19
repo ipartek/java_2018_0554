@@ -13,6 +13,7 @@
 	<input type="number" name="num2" />
 	<input type="submit" value="sumar" />
 </form>
+	<a href="operacion?num1=3&num2=7">Operación 3+7</a>
 
 </body>
 </html>

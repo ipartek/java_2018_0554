@@ -7,18 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ContCalculadora
+ * Servlet implementation class CarritoController
  */
-public class ContCalculadora extends HttpServlet {
+public class CarritoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ContCalculadora() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -31,20 +25,20 @@ public class ContCalculadora extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		try {
-		int num1 = Integer.parseInt(request.getParameter("num1"));
-		int num2 = Integer.parseInt(request.getParameter("num2"));
 		
-		int res = num1 + num2;
+		//recibir parametros => id
 		
-		request.setAttribute("res", res);
-		request.getRequestDispatcher("resultado.jsp").forward(request, response);
-		}catch(Exception e) {
-			request.setAttribute("mensaje", "pon un numero");
-			request.getRequestDispatcher("calculadora.jsp").forward(request, response);
-			
-		}
+		// buscar en base datos el Video por Id
+		
+		//recuperar carrito de session del usuario
+		
+		// añadimos el nuevo video
+		
+		// guardamos el carrito en session
+		
+		// redirect a => http://localhost:8080/javaee/videos
+		
+		
 	}
 
 }
