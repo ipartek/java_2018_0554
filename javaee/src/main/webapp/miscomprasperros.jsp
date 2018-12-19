@@ -21,6 +21,9 @@
 				<th>ID</th>
 				<th>raza</th>
 				<th>Imagen</th>
+				<th>Precio /u</th>
+				<th>Cantidad</th>
+				<th>Total</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -32,6 +35,9 @@
 				<th><%=p.getId()%></th>
 				<td><%=p.getRaza()%></td>
 				<td><img width=150 height=150 src="<%=p.getImagen()%>" alt="Imagen <%=p.getRaza()%>"></td>
+				<td><%=p.getPrecio()%></td>
+				<td><%=p.getRaza()%></td>
+				<td><%=p.getRaza()%></td>
 			</tr>
 			<%
 				}

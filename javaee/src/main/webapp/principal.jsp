@@ -15,7 +15,7 @@
 <title>Principal</title>
 </head>
 <body>
- <%@ include file="cabecera.jsp" %>
+ <%@ include file="cabecera.jsp"%>
 <a href="video">Videos</a>
 <a href="perro">Perros</a>
 <h1>BIENVENIDO <%=usuario.getEmail() %></h1>

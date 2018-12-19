@@ -33,7 +33,7 @@
 				<th><%=p.getId()%></th>
 				<td><%=p.getRaza()%></td>
 				<td><img width=150 height=150 src="<%=p.getImagen()%>" alt="Imagen <%=p.getRaza()%>"></td>
-				<td><a href="carrito">Comprar</a></td>
+				<td><a href="carrito?id=<%=p.getId()%>">Comprar</a></td>
 			</tr>
 			<%
 				}

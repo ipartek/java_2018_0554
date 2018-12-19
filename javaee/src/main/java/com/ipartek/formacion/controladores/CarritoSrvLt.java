@@ -1,6 +1,7 @@
 package com.ipartek.formacion.controladores;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -24,7 +25,14 @@ public void init(ServletConfig config) throws ServletException {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
+		int idperro=Integer.parseInt(request.getParameter("id"));
+		try {
+			if (dao.agregaralcarro(idperro)) {
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		request.getSession().setAttribute("carrito", dao.getAll());
 		request.getRequestDispatcher("miscomprasperros.jsp").forward(request, response);
 		
