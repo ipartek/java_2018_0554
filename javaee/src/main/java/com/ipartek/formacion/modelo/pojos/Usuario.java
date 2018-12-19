@@ -11,20 +11,17 @@ public class Usuario {
 
 	public Usuario() throws PojoException {
 		super();
-		this.id = (long)-1;
+		this.id = (long) -1;
 		this.email = "";
 		this.password = "";
 	}
-	
-	
+
 	public Usuario(Long id, String email, String password) throws PojoException {
 		this();
 		setId(id);
 		setEmail(email);
 		setPassword(password);
 	}
-
-	
 
 	public Long getId() {
 		return id;
@@ -58,7 +55,7 @@ public class Usuario {
 	public void setPassword(String password) throws PojoException {
 
 		if (password == null || password.trim().length() == 0) {
-			throw new PojoException( PojoException.EXCEPTION_PASSWORD_VACIO );
+			throw new PojoException(PojoException.EXCEPTION_PASSWORD_VACIO);
 		}
 
 		if (!password.matches(REGEX_PASSWORD)) {
