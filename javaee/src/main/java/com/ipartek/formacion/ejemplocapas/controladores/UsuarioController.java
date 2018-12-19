@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.formacion.modelo.daos.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojos.PojoException;
 import com.ipartek.formacion.modelo.pojos.Usuario;
 
 /**
@@ -17,16 +18,21 @@ import com.ipartek.formacion.modelo.pojos.Usuario;
 public class UsuarioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+   
 
-
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		
-		UsuarioDAO dao = new UsuarioDAO();
+		UsuarioDAO dao = new UsuarioDAO();		
 		usuarios = dao.getAll();
 		
 		request.setAttribute("listado", usuarios);
+		
 		request.getRequestDispatcher("usuarios.jsp").forward(request, response);
 	}
 
@@ -34,52 +40,61 @@ public class UsuarioController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
+		
+		//recoger parametros del formulario
+		String id = request.getParameter("id");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		
+		
 		try {
-		//		recoger parametros del formulario
-				
-				String email = request.getParameter("email");
-				String password = request.getParameter("password");
-				Long id = Long.parseLong(request.getParameter("id"));
-
-//				Guardar los parametros
-
-				
-				Usuario uNuevo = new Usuario();
-				try {
-	//				Crear nuevo usuario
-					uNuevo = new Usuario();
-					uNuevo.setId(id);
-					uNuevo.setEmail(email);
-					uNuevo.setPassword(password);
-				}catch(Exception e) {
-					request.setAttribute("emailValue", email);
-					request.setAttribute("passwordValue", password);
-					request.setAttribute("idValue", id);
-					uNuevo = null;
-					request.setAttribute("mensaje", "Datos no validos");
-				}
-				
-		//		Añadir en listado
-				ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-				UsuarioDAO dao = new UsuarioDAO();
-				usuarios = dao.getAll();
-				if(uNuevo != null) {
-					usuarios.add(uNuevo);
-				}
-				
-				
-		//		enviar atributo para jsp
-				request.setAttribute("listado", usuarios);
-		}catch(Exception e) {
 			
-				request.setAttribute("mensaje", "Hay un problema sin controlar");
 			
+			Usuario uNuevo = new Usuario();	
+			try {
+				//crear usuario nuevo   TODO hacer insert en base datos
+				uNuevo = new Usuario();
+				uNuevo.setId( Long.parseLong(id));
+				uNuevo.setEmail(email);
+				uNuevo.setPassword(password);
+			}catch (NumberFormatException e) {
+				uNuevo = null;		
+				request.setAttribute("mensaje", "El id debe ser numerico");
+			}catch (PojoException e) {
+				uNuevo = null;		
+				request.setAttribute("mensaje", e.getMessage() );
+			
+			}catch (Exception e) {
+				uNuevo = null;				
+				request.setAttribute("mensaje", "Los datos del usuario no son validos");
+			}finally {
+				request.setAttribute("email", email);
+				request.setAttribute("id", id);
+				request.setAttribute("password", password);
+			}
+			
+			// añadir en listado
+			ArrayList<Usuario> usuarios = new ArrayList<Usuario>();		
+			UsuarioDAO dao = new UsuarioDAO();		
+			usuarios = dao.getAll();
+			
+			if( uNuevo != null ) {
+				usuarios.add(uNuevo);
+			}	
+			
+			//enviar atributo para pintar JSP
+			request.setAttribute("listado", usuarios);
+			
+		}catch (Exception e) {
+			
+			request.setAttribute("mensaje", "TENEMOS UN PROBLEMA SIN CONTROLAR");
 		}finally {
-		//		ir a jsp
-				request.getRequestDispatcher("usuarios.jsp").forward(request, response);
-		}
+			
+			// Ir a JSP o VISTA
+			request.getRequestDispatcher("usuarios.jsp").forward(request, response);
+		}	
+			
+			
 	}
 
 }
