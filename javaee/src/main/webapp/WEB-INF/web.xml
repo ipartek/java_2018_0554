@@ -51,6 +51,12 @@
   	<description></description>
   	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.logoutController</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>UsuarioController</servlet-name>
+  	<display-name>UsuarioController</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.UsuarioController</servlet-class>
+  </servlet>
   
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
@@ -77,6 +83,10 @@
   <servlet-mapping>
   	<servlet-name>logoutController</servlet-name>
   	<url-pattern>/logoutController</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>UsuarioController</servlet-name>
+  	<url-pattern>/usuarios</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

@@ -1,55 +1,89 @@
 package com.ipartek.formacion.modelo.pojos;
 
 public class Retro {
-
-	private long id;
-	public String nombre;
-	public String plataforma;
-	public String url;
-
-	public Retro(long id, String nombre, String plataforma, String url) {
+	int id;
+	String titulo;
+	String plataforma;
+	int decada;
+	String desarollador;
+	String imagen;
+	
+	
+	public Retro(int id, String titulo, String plataforma, int decada, String desarollador, String imagen) {
 		super();
 		this.id = id;
-		this.nombre = nombre;
+		this.titulo = titulo;
 		this.plataforma = plataforma;
-		this.url = url;
+		this.decada = decada;
+		this.desarollador = desarollador;
+		this.imagen = imagen;
 	}
 
-	public long getId() {
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getNombre() {
-		return nombre;
+
+	public String getTitulo() {
+		return titulo;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
+
 
 	public String getPlataforma() {
 		return plataforma;
 	}
 
+
 	public void setPlataforma(String plataforma) {
 		this.plataforma = plataforma;
 	}
 
-	public String getUrl() {
-		return url;
+
+	public int getDecada() {
+		return decada;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+
+	public void setDecada(int decada) {
+		this.decada = decada;
 	}
+
+
+	public String getDesarollador() {
+		return desarollador;
+	}
+
+
+	public void setDesarollador(String desarollador) {
+		this.desarollador = desarollador;
+	}
+
+
+	public String getImagen() {
+		return imagen;
+	}
+
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Retro [id=" + id + ", nombre=" + nombre + ", plataforma=" + plataforma + ", url=" + url + "]";
+		return "Retro [id=" + id + ", titulo=" + titulo + ", plataforma=" + plataforma + ", decada=" + decada
+				+ ", desarollador=" + desarollador + ", imagen=" + imagen + "]";
 	}
 
 }

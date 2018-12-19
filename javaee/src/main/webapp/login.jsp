@@ -8,14 +8,8 @@
 </head>
 <body>
 
+	<a href="usuarios">Ver Usuarios</a>
 
-<%@ include file="cabecera.jsp" %>
-
-<a href="calculadora.jsp">Ejemplo Calculadora</a>
-<a href="calcular">Ejemplo Calculadora</a>
-<%-- <%@ include file="cabecera.jsp" %>
- --%>
-<a href="privado/index.jsp"></a>
 <form action="login" method="post">
 	<fieldset>
 		<legend>Login</legend>

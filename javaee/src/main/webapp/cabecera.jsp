@@ -19,6 +19,7 @@
 	<p><%=usuarioLogeado.getEmail() %></p>
 	<a href="privado/index.jsp">Zona Privada</a><br>
 	<a href="logout">Cerrar Session</a>
+
 	
 
 <% } else { %>
@@ -27,4 +28,7 @@
 
 <% } %>
 
+<a href="calculadora.jsp">Ejemplo Calculadora</a>
+<a href="calcular">Ejemplo Calculadora</a>
+<a href="privado/index.jsp"></a>
 </nav>
