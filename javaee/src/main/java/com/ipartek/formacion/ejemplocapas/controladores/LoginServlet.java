@@ -15,9 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.modelo.daos.UsuarioDAO;
-import com.ipartek.formacion.modelo.pojos.Perro;
 import com.ipartek.formacion.modelo.pojos.Usuario;
-import com.ipartek.formacion.modelo.pojos.UsuarioNoValido;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
