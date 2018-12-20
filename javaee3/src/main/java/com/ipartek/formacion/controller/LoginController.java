@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.modelo.dao.UsuarioDAO;
 import com.ipartek.formacion.modelo.pojo.Usuario;
@@ -34,23 +35,27 @@ public class LoginController extends HttpServlet {
 		Usuario usuario = null;
 		String vista = VISTA_LOGIN;
 		
-		String nombre = request.getParameter("nombre");
+		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
 		
 		try {
 			
 			UsuarioDAO dao = new UsuarioDAO();
 			
-			usuario = dao.login(nombre, pass);
+			usuario = dao.login(email, pass);
 			
 			if (usuario != null) {
 				vista = VISTA_PRINCIPAL;
 			}else {
-				request.setAttribute("mensaje", "Usuario erróneo " + usuario);
+				request.setAttribute("mensaje", "Usuario erróneo '" + email + "'");
 			}
 			
+			HttpSession session = request.getSession();
+			session.setMaxInactiveInterval(60 * 5); // 5 min, también se puede configurar en WEB.XML [Para configurarlo para toda aplicación]
+			session.setAttribute("usuario_logueado", usuario);
+			
 		}catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}finally {
 			request.getRequestDispatcher(vista).forward(request, response);
 		}
