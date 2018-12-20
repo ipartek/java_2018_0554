@@ -25,7 +25,7 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String ENLACE_LOGIN="index.jsp";
-	private static final String ENLACE_PRINCIPAL="/privado/videos";
+	private static final String ENLACE_PRINCIPAL="privado/videos";
 	private UsuarioDAO dao;
 	private ValidatorFactory factory;
 	private Validator validator;
@@ -43,7 +43,7 @@ public class LoginController extends HttpServlet {
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//drequest.getRequestDispatcher(ENLACE_LOGIN).forward(request, response);
+		doPost(request, response);
 	}
 
 
@@ -55,6 +55,7 @@ public class LoginController extends HttpServlet {
 		String email = request.getParameter("mail");
 		String password = request.getParameter("pass");		
 		
+		boolean redirect = false;
 		
 		try {
 			Usuario usuario = new Usuario();
@@ -85,7 +86,7 @@ public class LoginController extends HttpServlet {
 						vista = ENLACE_PRINCIPAL;				
 						request.setAttribute("usuario", usuario);
 						HttpSession session= request.getSession(); 
-						session.setMaxInactiveInterval(60*5);//5min
+						//session.setMaxInactiveInterval(60*5);//5min
 						session.setAttribute("usuario_logeado", usuario);
 							
 					}else {				
@@ -96,8 +97,9 @@ public class LoginController extends HttpServlet {
 						e.printStackTrace();
 						
 					}finally {
-						response.sendRedirect("privado/videos");
-						//request.getRequestDispatcher(vista).forward(request, response);
+							request.getRequestDispatcher(vista).forward(request, response);
+						
+						
 					}
 		
 		

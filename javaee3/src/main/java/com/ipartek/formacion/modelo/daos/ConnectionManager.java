@@ -7,14 +7,14 @@ public class ConnectionManager {
 
 	private static Connection conn;
 	// CONEXION IPARTEK
-	private static final String URL = "jdbc:mysql://192.168.0.44/youtube?useSSL=false";
-	private static final String USER = "viernes";
-	private static final String PASS = "juernes";
+//	private static final String URL = "jdbc:mysql://192.168.0.44/youtube?useSSL=false";
+//	private static final String USER = "viernes";
+//	private static final String PASS = "juernes";
 	
 	// CONEXION CASA
-//	private static final String URL = "jdbc:mysql://localhost:3306/youtube?useSSL=false";	
-//	private static final String USER = "root";
-//	private static final String PASS = "";
+	private static final String URL = "jdbc:mysql://localhost:3306/youtube?useSSL=false";	
+	private static final String USER = "root";
+	private static final String PASS = "";
 
 	public static Connection getConnection() {
 

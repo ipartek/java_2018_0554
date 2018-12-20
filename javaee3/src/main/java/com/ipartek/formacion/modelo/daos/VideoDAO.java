@@ -8,6 +8,20 @@ import java.util.ArrayList;
 import com.ipartek.formacion.modelo.pojo.Video;
 
 public class VideoDAO {
+	private static VideoDAO INSTANCE = null;
+
+	// constructor privado, solo acceso por getInstance()
+	private VideoDAO() {
+		super();
+	}
+
+	public synchronized static VideoDAO getInstance() {
+
+		if (INSTANCE == null) {
+			INSTANCE = new VideoDAO();
+		}
+		return INSTANCE;
+	}
 	
 public Video getById( long id ) {
 		

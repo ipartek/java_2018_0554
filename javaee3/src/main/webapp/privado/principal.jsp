@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,7 +12,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Página principal ${usuario_logeado.email}</title>
+    <title>Principal ${usuario_logeado.email.split("@")[0].toUpperCase()}</title>
 
    <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,45 +22,46 @@
   </head>
 
   <body>
-
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">${usuario_logeado.email}</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Cerrar Sesion</a>
-          </li>
-      </div>
-    </nav>
-
+	<header>
+	    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+	      <a class="navbar-brand" href="#">${usuario_logeado.email}</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="navbar-toggler-icon"></span>
+	      </button>
+	
+	      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	        <ul class="navbar-nav mr-auto">
+	          <li class="nav-item">
+	            <a class="nav-link" href="#">Cerrar Sesion</a>
+	          </li>
+	      </div>
+	    </nav>
+	</header>
+	
+	
     <main role="main">
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
         <div class="container">
-          <h1 class="display-3">Tus videos ${usuario_logeado.email}</h1>
+          <h1 class="display-3">Principal</h1>
           <table>
           
           <tr>
           <th>ID</th>
           <th>Nombre</th>
-          <th>Enlace</th>
+          <th>URL</th>
           </tr>
           
-      	 <c:forEach items="${listadoVideos}" var="video">
+      	 <c:forEach items="${videos}" var="video">
       	 <tr>
           <td>${video.id}</td>
-          <td>${video}</td>
-          <td>${video}</td>
+          <td>${video.nombre}</td>
+          <td><img src="https://i.ytimg.com/vi/'tthCwSHOqzA'/hqdefault.jpg?sqp=-oaymwEjCPYBEIoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLC-0TQpZmGU71vmEVPvBis7neeyqg"></td>
+          <td>${video.url.split("=")[1]}</td>
           </tr>
    			 
-		</c:forEach>
-          
-          
+		</c:forEach>       
           
           </table>
         </div>
