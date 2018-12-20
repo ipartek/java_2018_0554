@@ -63,6 +63,10 @@ public class LoginController extends HttpServlet {
 			
 			Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario);
 			
+			HttpSession session = request.getSession();
+			
+			if (!session.isNew()) {
+			
 			if (violations.size() > 0) {
 				
 				String errores = "<ul>";
@@ -79,11 +83,12 @@ public class LoginController extends HttpServlet {
 					request.setAttribute("mensaje", "Usuario erróneo '" + email + "'");
 				}else {
 					vista = CONTROLLER_VIDEOS;
-					HttpSession session = request.getSession();
+					session = request.getSession();
 					session.setMaxInactiveInterval(60 * 5); // 5 min, también se puede configurar en WEB.XML [Para configurarlo para toda aplicación]
 					session.setAttribute("usuario_logueado", usuario);
 				}
 
+			}
 			}
 			
 		}catch (Exception e) {
