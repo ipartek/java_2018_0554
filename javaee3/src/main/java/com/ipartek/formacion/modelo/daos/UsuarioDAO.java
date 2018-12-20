@@ -9,6 +9,20 @@ import java.util.ArrayList;
 
 public class UsuarioDAO {
 	
+	private static UsuarioDAO INSTANCE = null;
+	
+	//constructor privado, solo acceso por get instance
+	private UsuarioDAO() {
+		super();
+	}
+	
+	
+	 public synchronized static UsuarioDAO getInstance() {
+        if (INSTANCE == null) { 
+            INSTANCE = new UsuarioDAO();
+        }
+        return INSTANCE;
+    }
 	/**
 	 * comprobar si existe el usuario en la bbdd
 	 * @param email String 
@@ -68,29 +82,6 @@ public class UsuarioDAO {
 		return usuarios;
 	}
 
-	public ArrayList<String> getAllNoValid() {
-		ArrayList<String> usuariosNoValidos = new ArrayList<String>();
-		String sql = "SELECT id, nombre, password FROM usuario ORDER BY id DESC LIMIT 500";
-		
-		try ( Connection conn = ConnectionManager.getConnection();
-				  PreparedStatement pst = conn.prepareStatement(sql);
-				  ResultSet rs = pst.executeQuery() 
-				){
-				
-				while(rs.next()) { 			
-					try {
-						Usuario usuario = new Usuario();
-						usuario.setEmail( rs.getString("nombre"));
-						usuario.setPassword(rs.getString("password"));
-					}catch (Exception e) {
-						usuariosNoValidos.add(rs.getString("nombre"));
-					}		
-				} // while	
-				
-			}catch (Exception e) {
-				e.printStackTrace();
-			}		
-		return usuariosNoValidos;
-	}
+	
 
 }
