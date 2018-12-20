@@ -35,27 +35,35 @@ public class CarritoController extends HttpServlet {
 		//TODO recibir parametros => id
 		String id = request.getParameter("id");
 		
-		//buscar en BD el Video por id
-		VideoDAO vdao = new VideoDAO();
-		Video videocarrito = vdao.getById(Long.parseLong(id));
+		try {
+			//buscar en BD el Video por id
+		VideoDAO dao = new VideoDAO();
+		Video videocarrito = dao.getById(Long.parseLong(id));
 		
-		//recuperar carrito de la session
-		
+		//recuperar carrito de la session		
 		HttpSession session = request.getSession();
-		//añadimos el nuevo video
-		
 		ArrayList<Video> carrito = (ArrayList<Video>)session.getAttribute("carrito");
-		
-		if(carrito == null) {
-			carrito = new ArrayList<>();
+		if(carrito ==null) {
+			carrito = new ArrayList<Video>();
+			//añadimos el nuevo video
+			carrito.add(videocarrito);
 			
-		}
-		carrito.add(videocarrito);
-		//guardamos el carrito en session
+			//guardamos el carrito en session
 		
 		session.setAttribute("carrito", carrito);
-		//redirect a => ..../javaee/Videos
+		}
+		
+		}catch(Exception e){
+			
+			
+		}finally {
+			
+			//redirect a => ..../javaee/Videos
 		response.sendRedirect("videos");
+		}		
+		
+		
+		
 	}
 
 }
