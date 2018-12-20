@@ -11,11 +11,11 @@
     
     <div class="col-md-4">
       <section class="login-form">
-        <form method="post" action="login" role="login">
+        <form novalidate method="post" action="login" role="login">
           <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="logo perrillos.com" />
-          <input type="email" name="usuario" placeholder="Usuario" required class="form-control input-lg" />
+          <input type="email" name="usuario" placeholder="tu@email.com" required class="form-control input-lg" />
           
-          <input type="password" class="form-control input-lg" name="pass" id="password" placeholder="Contraseña" required="" />
+          <input type="password" class="form-control input-lg" name="pass" id="password" placeholder="Pa$$w0rd" required />
           
           
           <div class="pwstrength_viewport_progress"></div>

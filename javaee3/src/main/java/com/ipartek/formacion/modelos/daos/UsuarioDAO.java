@@ -8,9 +8,20 @@ import java.util.ArrayList;
 import com.ipartek.formacion.modelos.pojos.Usuario;
 
 public class UsuarioDAO {
+	private static UsuarioDAO INSTANCE = null;
+
+	private UsuarioDAO() {
+		super();
+	}
+	
+	public synchronized static UsuarioDAO getInstance() {
+        if (INSTANCE == null) { 
+            INSTANCE = new UsuarioDAO();
+        }
+        return INSTANCE;
+    }
 
 	public Usuario loginCorrecto(String email, String password) {
-
 		Usuario usuario = null;
 		String sql = "SELECT id, nombre, password FROM usuario WHERE nombre=? AND Password=?";
 		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
@@ -19,7 +30,7 @@ public class UsuarioDAO {
 			pst.setString(2, password);
 			try (ResultSet rs = pst.executeQuery();) {
 				while (rs.next()) {
-					usuario = new Usuario(rs.getString("nombre"), rs.getString("password"));
+					usuario = new Usuario(rs.getInt("id"),rs.getString("nombre"), rs.getString("password"));
 					break;
 				}
 			} catch (Exception e2) {
