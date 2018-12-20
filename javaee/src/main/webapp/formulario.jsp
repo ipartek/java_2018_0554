@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@page import="com.ipartek.formacion.modelo.pojos.Usuario"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +10,7 @@
 <title>Formulario</title>
 </head>
 <body>
-
+<%@  include file="cabecera.jsp" %>
 <form>
 	<fieldset>
 		<legend>Dime quien eres</legend>

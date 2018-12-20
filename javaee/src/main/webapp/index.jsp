@@ -1,3 +1,24 @@
+<%@page import="com.ipartek.formacion.modelo.pojos.Usuario"%>
+<%@  include file="cabecera.jsp" %>
+<%
+
+	Usuario usuario = (Usuario)session.getAttribute("usuario_logueado");
+
+	if(usuario != null){
+		
+%>
+
+	<nav>
+		<p><%=usuario.getEmail() %></p>
+		<a href="logout">Cerrar Sesion</a>
+	</nav>
+
+<% }else { %>
+	<a href="login.jsp">Iniciar sesion</a>
+<%} %>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>

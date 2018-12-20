@@ -4,15 +4,65 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <filter>
+  	<filter-name>SeguridadFilter</filter-name>
+  	<display-name>SeguridadFilter</display-name>
+  	<description></description>
+  	<filter-class>com.ipartek.formacion.filter.SeguridadFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>SeguridadFilter</filter-name>
+  	<url-pattern>/privado/*</url-pattern>
+  </filter-mapping>
   <servlet>
   	<servlet-name>LoginServlet</servlet-name>
   	<display-name>LoginServlet</display-name>
   	<description></description>
   	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.LoginServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>CalculadoraController</servlet-name>
+  	<display-name>CalculadoraController</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.CalculadoraController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>VideoController</servlet-name>
+  	<display-name>VideoController</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.VideoController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>LogoutController</servlet-name>
+  	<display-name>LogoutController</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.LogoutController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>PerroControler</servlet-name>
+  	<display-name>PerroControler</display-name>
+  	<description></description>
+  	<servlet-class>com.ipartek.formacion.ejemplocapas.controladores.PerroControler</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>LoginServlet</servlet-name>
   	<url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>CalculadoraController</servlet-name>
+  	<url-pattern>/calcular</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>VideoController</servlet-name>
+  	<url-pattern>/videos</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LogoutController</servlet-name>
+  	<url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>PerroControler</servlet-name>
+  	<url-pattern>/perros</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
   	<welcome-file>login</welcome-file>
