@@ -1,12 +1,24 @@
 package com.ipartek.formacion.modelo.pojo;
 
-import com.ipartek.formacion.biblioteca.Constantes;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
 
 public class Usuario {
 	
 	private Long id;
+	
+	// TODO mirar por que no funciona @Email
+	
+	@NotNull
+	@Email
 	private String email;
+	
+	@NotNull
+	@Size(min=6, max=50)
 	private String password;
+	
 	private String gitHub;
 	
 	public Usuario() throws PojoException{
@@ -37,15 +49,15 @@ public class Usuario {
 	}
 
 	public void setEmail(String email) throws PojoException{
-		if(email == null || email.trim().length() == 0) {
-			throw new PojoException(PojoException.EXCEPTION_EMAIL_VACIO);
-		}
-		
-		//if(!email.matches("\\w[a-zA-Z0-9\\._]*@\\w[a-zA-Z0-9\\.]*\\.\\w+")) {
-		if(!email.matches(Constantes.REGEX_EMAIL)) {
-			throw new PojoException(PojoException.EXCEPTION_EMAIL_NO_VALIDO);
-		}
-		
+//		if(email == null || email.trim().length() == 0) {
+//			throw new PojoException(PojoException.EXCEPTION_EMAIL_VACIO);
+//		}
+//		
+//		//if(!email.matches("\\w[a-zA-Z0-9\\._]*@\\w[a-zA-Z0-9\\.]*\\.\\w+")) {
+//		if(!email.matches(Constantes.REGEX_EMAIL)) {
+//			throw new PojoException(PojoException.EXCEPTION_EMAIL_NO_VALIDO);
+//		}
+//		
 		this.email = email;
 	}
 
@@ -54,13 +66,13 @@ public class Usuario {
 	}
 
 	public void setPassword(String password) throws PojoException{
-		if(password == null || password.trim().length() == 0) {
-			throw new PojoException(PojoException.EXCEPTION_PASSWORD_VACIO);
-		}
-		
-		if(!password.matches(Constantes.REGEX_PASSWORD)) {
-			throw new PojoException(PojoException.EXCEPTION_PASSWORD_NO_VALIDO);
-		}
+//		if(password == null || password.trim().length() == 0) {
+//			throw new PojoException(PojoException.EXCEPTION_PASSWORD_VACIO);
+//		}
+//		
+//		if(!password.matches(Constantes.REGEX_PASSWORD)) {
+//			throw new PojoException(PojoException.EXCEPTION_PASSWORD_NO_VALIDO);
+//		}
 		this.password = password;
 	}
 	

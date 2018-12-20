@@ -9,6 +9,20 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
 
 public class UsuarioDAO {
 	
+	private static UsuarioDAO INSTANCE = null;
+	
+	//Constructor privado, solo acceso por getInstance()
+	private UsuarioDAO() {
+		super();
+	}
+	
+	public synchronized static UsuarioDAO getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new UsuarioDAO();
+		}
+		return INSTANCE;
+	}
+	
 	/**
 	 * comprobar si existe el usuario en la bbdd
 	 * @param email String 
