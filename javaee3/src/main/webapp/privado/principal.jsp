@@ -12,6 +12,7 @@
     <!-- Bootstrap core CSS -->
     <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
      <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.css" rel="stylesheet">
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   </head>
 
   <body>
@@ -49,6 +50,33 @@
         </ul>
       </div>
     </nav>
+
+
+ 
+      <div class="container">
+        <h1>Listado Videos</h1>
+        <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Video</th>
+      </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${videos}" var="v">
+      <tr>
+        <td>${v.id}</td>
+        <td>${v.nombre}</td>
+        <td>${v.url}</td>
+      </tr>
+      
+    </tbody>
+  </table>
+  </div>
+
+ 
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

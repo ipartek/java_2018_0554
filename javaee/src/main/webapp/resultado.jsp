@@ -10,4 +10,8 @@
 
 %>
 
-<p><%= %> = <%=resultado%></p>
+<%
+	int num1 = (Integer)request.getAttribute("p1");
+%>
+
+<p><%=num1 %> = <%=resultado%></p>

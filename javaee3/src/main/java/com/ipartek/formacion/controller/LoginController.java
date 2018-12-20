@@ -48,6 +48,19 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+			
+		doPost(request, response);
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
 		String view = VIEW_LOGIN;
@@ -97,17 +110,6 @@ public class LoginController extends HttpServlet {
 		}finally {
 			request.getRequestDispatcher(view).forward(request, response);	
 		}
-			
-		
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		doGet(request, response);
 	}
 
 }
