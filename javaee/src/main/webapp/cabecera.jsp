@@ -46,7 +46,6 @@ nav {
 		if (carrito == null) {
 			carrito = new ArrayList<Video>();
 		}
-		carrito.add(new Video("Video de prueba"));
 	%>
 	<div id="carrito">
 		<span class="titulo">Carrito compra</span>
@@ -56,7 +55,7 @@ nav {
 			} else {
 				for (Video v : carrito) {
 					out.print("<li>");
-					v.getNombre();
+					out.print(v.getNombre());
 					out.print("</li>");
 				}
 			}

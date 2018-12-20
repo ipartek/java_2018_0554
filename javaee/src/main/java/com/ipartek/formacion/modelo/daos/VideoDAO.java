@@ -68,10 +68,9 @@ public class VideoDAO {
 		return listado;
 	}
 
-	public ArrayList<Video> getById(long id) {
+	public Video getById(long id) {
 
 		Video registro = null;
-		ArrayList<Video> listado = new ArrayList<Video>();
 		String sql = "SELECT id, nombre, url FROM hector_videos WHERE id= ?;";
 		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 
@@ -84,7 +83,6 @@ public class VideoDAO {
 					registro.setId(rs.getLong("id"));
 					registro.setNombre(rs.getString("nombre"));
 					registro.setUrl(rs.getString("url"));
-					listado.add(registro);
 				}
 			}
 
@@ -92,6 +90,6 @@ public class VideoDAO {
 			e.printStackTrace();
 		}
 
-		return listado;
+		return registro;
 	}
 }

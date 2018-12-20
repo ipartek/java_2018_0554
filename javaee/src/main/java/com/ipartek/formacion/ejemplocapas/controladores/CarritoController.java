@@ -17,11 +17,25 @@ public class CarritoController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		String id = request.getParameter("id");
-		VideoDAO dao = new VideoDAO();
-		session.setAttribute("carrito", dao.getById(Long.parseLong(id)));
-		request.getRequestDispatcher("videos").forward(request, response);
+		try {
+			VideoDAO dao = new VideoDAO();
+			Video v = dao.getById(Long.parseLong(id));
+			HttpSession session = request.getSession();
+			ArrayList<Video> carrito = (ArrayList<Video>) session.getAttribute("carrito");
+			if (carrito == null) {
+				carrito = new ArrayList<Video>();
+			}
+			carrito.add(v);
+			session.setAttribute("carrito", carrito);
+		}
+		catch (Exception e) {
+			
+		}
+		finally {
+			String url = request.getContextPath() + "/privado/videos";
+			response.sendRedirect(url);
+		}
 
 	}
 
