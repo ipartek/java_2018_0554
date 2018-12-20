@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.formacion.modelo.daos.VideoDAO;
+import com.ipartek.formacion.modelo.pojos.Perro;
+import com.ipartek.formacion.modelo.pojos.Video;
 
 /**
  * Servlet implementation class VideoController
@@ -44,11 +46,11 @@ protected void service(HttpServletRequest req, HttpServletResponse resp) throws 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<String> videos = new ArrayList<String>();
+		ArrayList<Video> videos = new ArrayList<Video>();
 		
-		videos.add("video1");
-		videos.add("Fary");
-		videos.add("Que nos se te olcide el WHERE XD");
+		Video v1 = new Video(1L, "video1", "https://http2.mlstatic.com/pastor-aleman-cachorros-super-calidad-vip-D_NQ_NP_949437-MLM27059324737_032018-F.jpg");
+		Video v2 = new Video(2L, "Fary", "https://t2.ea.ltmcdn.com/es/razas/0/0/1/img_100_labrador-retriever_0_600.jpg");
+		Video v3 = new Video(3L, "Que nos se te olcide el WHERE XD", "https://t1.ea.ltmcdn.com/es/razas/0/4/3/img_340_beagle_0_600.jpg");
 		
 		request.setAttribute("videos", videos);
 		
