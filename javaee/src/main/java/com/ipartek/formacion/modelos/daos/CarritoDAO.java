@@ -25,6 +25,7 @@ public class CarritoDAO {
 					carrito = new Carrito();
 					carrito.setId(rs.getInt("id"));
 					Perro perro=new Perro();
+					perro.setId(rs.getInt("perro"));
 					perro.setRaza(rs.getString("raza"));
 					perro.setPrecio(rs.getDouble("precio"));
 					perro.setImagen(rs.getString("imagen"));

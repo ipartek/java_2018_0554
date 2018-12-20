@@ -43,7 +43,7 @@ public class Carrito {
 
 
 	public void setPerro(Perro perro) {
-			this.perro=null;
+			this.perro=perro;
 
 	}
 

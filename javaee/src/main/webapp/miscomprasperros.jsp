@@ -36,7 +36,7 @@
 			<tr>
 				<th><%=c.getId()%></th>
 				<td><%=p.getRaza()%></td>
-				<td><img src="<%=p.getImagen() %>" alt="imagen <%= p.getRaza() %>"/></td>
+				<td><img width=150 height=150  src="<%=p.getImagen() %>" alt="imagen <%= p.getRaza() %>"/></td>
 				<td><%=p.getPrecio() %></td>
 				<td><%=c.getCantidad()%></td>
 				<td><%=p.getPrecio()*c.getCantidad() %></td>
