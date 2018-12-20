@@ -32,7 +32,7 @@
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-     <p style="color:red">${mensaje }</p>
+     <div class="alert alert-danger">${mensaje }</div>
     <%-- <a href="login?usuario=manolo&pass=lolailo">Link al Login</a>
     <h2>Video</h2>
     ${requestScope.video.nombre}  
