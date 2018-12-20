@@ -20,49 +20,65 @@ public class CarritoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private PerroDAO dao = null;
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		//se ejecuta con la 1º petición y solo una vez, el resto de peticiones iran al "service"
+		// se ejecuta con la 1º petición y solo una vez, el resto de peticiones iran al
+		// "service"
 		dao = new PerroDAO();
 	}
-	
+
 	@Override
 	public void destroy() {
 		super.destroy();
-		//Se ejecuta al parar el servidor
-		
-		dao= null;
+		// Se ejecuta al parar el servidor
+
+		dao = null;
 	}
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//recibir parametros
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// recibir parametros
 		String id = request.getParameter("id");
-		//buscar en base datos el Perro por id
-		Perro perroResultado = dao.getById(Long.parseLong(id));
-		//recuperar carrito de sesion del usuario
-		HttpSession session = request.getSession();
-		ArrayList<Perro> carrito = (ArrayList<Perro>)session.getAttribute("carrito");
-		
-		if( carrito== null){
-			carrito = new ArrayList<Perro>();
-			
+		// recuperar carrito de sesion del usuario
+		HttpSession session;
+		ArrayList<Perro> carrito;
+
+		try {
+			// buscar en base datos el Perro por id
+			Perro perroResultado = dao.getById(Long.parseLong(id));
+			session = request.getSession();
+			carrito = (ArrayList<Perro>) session.getAttribute("carrito");
+			if (carrito == null) {
+				carrito = new ArrayList<Perro>();
+
+			}
+			// añadir perro al carrito
+			carrito.add(perroResultado);
+			// guardamos el carrito en session
+			session.setAttribute("carrito", carrito);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// redirect a perro controller
+			response.sendRedirect("perros");
 		}
-		//añadir perro al carrito
-		carrito.add(perroResultado);
-		//guardamos el carrito en session
-		session.setAttribute("carrito", carrito);
-		//redirect a perro controller
-		response.sendRedirect("perros");
+
 	}
 
 }
