@@ -49,8 +49,7 @@ public class LoginServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setMaxInactiveInterval( 60 * 5 ); // 5 min, tambien se puede configurar en WEB.XML
 				session.setAttribute("usuario_logeado", usuario);
-				
-				
+								
 			}else {				
 				request.setAttribute("error", "Usuario No valido");				
 			}			
