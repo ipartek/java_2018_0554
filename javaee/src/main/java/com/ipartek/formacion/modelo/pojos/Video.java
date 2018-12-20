@@ -11,8 +11,12 @@ public class Video {
 	public Video() {
 		super();
 		this.id = -1L;
-		this.nombre = "https://www.youtube.com/watch?v=aavV58NxIf8";
-		this.url = "Best Songs Of Linkin Park";
+		this.nombre = "Best Songs Of Linkin Park";
+		this.url = "https://www.youtube.com/watch?v=aavV58NxIf8";
+	}
+	public Video(String nombre) {
+		super();
+		this.nombre = nombre;
 	}
 
 //  Getters y setters

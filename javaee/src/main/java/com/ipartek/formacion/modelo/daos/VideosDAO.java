@@ -3,54 +3,48 @@ package com.ipartek.formacion.modelo.daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ipartek.formacion.modelo.pojos.Video;
 
 public class VideosDAO {
 	
-public ArrayList<Video> getAllByNombre(String nombre) {
+	
+	public Video getById( long id ) {
 		
-		ArrayList<Video> listado = new ArrayList<Video>();
-		String sql = "SELECT id, nombre, url FROM mikel_videos WHERE nombre like ? order by id desc limit 500";		
-		
+		Video registro = null;
+		String sql = "SELECT id, nombre, url FROM mikel_videos WHERE id= ?;";		
 		try ( Connection conn = ConnectionManager.getConnection();
 			  PreparedStatement pst = conn.prepareStatement(sql);
-			  
 			){
-			pst.setString(1, "%" + nombre + "%");
 			
-			try(ResultSet rs = pst.executeQuery() ){
-				
+			pst.setLong(1, id);
 			
-			Video v = null;
-			while(rs.next()) { 			
-				try {
-					v = new Video();
-					v.setId( rs.getLong("id"));
-					v.setNombre( rs.getString("nombre"));
-					v.setUrl(rs.getString("url"));
-					// añadir en array
-					listado.add(v);
-				}catch (Exception e) {
-					System.out.println("usuario no valido");
-					e.printStackTrace();
-				}		
-			} // while	
-			}catch(Exception e) {
+			try( ResultSet rs = pst.executeQuery() ){
 				
+				while(rs.next()) { 		
+					registro = new Video();
+					registro.setId( rs.getLong("id"));
+					registro.setNombre( rs.getString("nombre"));
+					registro.setUrl(rs.getString("url"));		
+				}
 			}
 			
-		}catch (Exception e) {
+				
+		} catch (Exception e) {
 			e.printStackTrace();
-		}		
-		return listado;
+		}	
+		
+		
+		return registro;
 	}
 	
-public ArrayList<Video> getAll() {
+
+	public ArrayList<Video> getAll() {
 		
 		ArrayList<Video> listado = new ArrayList<Video>();
-		String sql = "SELECT id, nombre, url FROM mikel_videos ORDER BY id DESC LIMIT 500";		
+		String sql = "SELECT id, nombre, url FROM mikel_videos ORDER BY id DESC LIMIT 500;";		
 		
 		try ( Connection conn = ConnectionManager.getConnection();
 			  PreparedStatement pst = conn.prepareStatement(sql);
@@ -62,11 +56,9 @@ public ArrayList<Video> getAll() {
 					v = new Video();
 					v.setId( rs.getLong("id"));
 					v.setNombre( rs.getString("nombre"));
-					v.setUrl(rs.getString("url"));
-					// añadir en array
+					v.setUrl(rs.getString("url"));					
 					listado.add(v);
-				}catch (Exception e) {
-					System.out.println("usuario no valido");
+				}catch (Exception e) {					
 					e.printStackTrace();
 				}		
 			} // while	
@@ -76,4 +68,40 @@ public ArrayList<Video> getAll() {
 		}		
 		return listado;
 	}
+	
+	
+	public ArrayList<Video> getAllByNombre( String nombre ) {
+		
+		ArrayList<Video> listado = new ArrayList<Video>();
+		String sql = "SELECT id, nombre, url FROM oscar WHERE NOMBRE LIKE ? ORDER BY id DESC LIMIT 500;";		
+		
+		try ( Connection conn = ConnectionManager.getConnection();
+			  PreparedStatement pst = conn.prepareStatement(sql);
+			
+			){
+			
+			pst.setString(1, "%" + nombre + "%");	
+			
+			try( ResultSet rs = pst.executeQuery() ){
+			
+				Video v = null;
+				while(rs.next()) { 			
+					try {
+						v = new Video();
+						v.setId( rs.getLong("id"));
+						v.setNombre( rs.getString("nombre"));
+						v.setUrl(rs.getString("url"));					
+						listado.add(v);
+					}catch (Exception e) {						
+						e.printStackTrace();
+					}		
+				} // while	
+			}	
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}		
+		return listado;
+	}
+
 }
