@@ -1,3 +1,3 @@
-YUYUY soy princila.jsp
 
-${usuario}
+<h1>Principal</h1>
+${videos}

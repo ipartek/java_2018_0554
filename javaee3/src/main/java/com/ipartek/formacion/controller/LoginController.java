@@ -51,6 +51,7 @@ public class LoginController extends HttpServlet {
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
 		String view = VIEW_LOGIN;
+		boolean redirect = false;
 		
 		try {
 		
@@ -65,15 +66,11 @@ public class LoginController extends HttpServlet {
 			if ( violations.size() > 0) {			// validacion NO PASA
 				
 				 String errores = "<ul>"; 
-				 for (ConstraintViolation<Usuario> violation : violations) {
-					 	
-					 errores += "<li>" + violation.getPropertyPath() + ": " +violation.getMessage() + "</li>";
-						
-						// violation.getPropertyPath()
+				 for (ConstraintViolation<Usuario> violation : violations) {					 	
+					 errores += String.format("<li> %s : %s </li>" , violation.getPropertyPath(), violation.getMessage() );					
 				 }
-				 errores += "</ul>"; 
-				request.setAttribute("errores", violations);
-				request.setAttribute("mensaje", errores);
+				 errores += "</ul>";				 
+				request.setAttribute("mensaje", errores);				
 				
 			}else {                                // validacion OK
 			
@@ -86,7 +83,7 @@ public class LoginController extends HttpServlet {
 					
 					HttpSession session = request.getSession();
 					session.setAttribute("usuario", usuario);
-					view = VIEW_PRICIPAL;
+					redirect = true;					
 				}
 			}	
 				
@@ -95,7 +92,12 @@ public class LoginController extends HttpServlet {
 			
 			e.printStackTrace();
 		}finally {
-			request.getRequestDispatcher(view).forward(request, response);	
+			
+			if(redirect) {				
+				response.sendRedirect(CONTROLLER_VIDEOS);
+			}else {
+				request.getRequestDispatcher(view).forward(request, response);
+			}
 		}
 			
 		
