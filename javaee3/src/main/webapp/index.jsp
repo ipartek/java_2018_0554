@@ -24,9 +24,9 @@
       <img class="mb-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC4B14eczpGQrbfGNpc72jeBel2-dAEVoLkhwaVUTVoRCNYjym" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Introduzca sus credenciales</h1>
       <label for="email" class="sr-only">Email</label>
-      <input type="email" id="email" name="email" class="form-control" placeholder="usuario@mail.com" value="ander@solana.com" required autofocus>
+      <input type="email" id="email" name="email" class="form-control" placeholder="usuario@mail.com" required autofocus>
       <label for="pass" class="sr-only">Password</label>
-      <input type="password" id="pass" name="pass" class="form-control" placeholder="Password" value="Pa$$w0rd" required>
+      <input type="password" id="pass" name="pass" class="form-control" placeholder="Password" required>
       <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Recordar Usuario
