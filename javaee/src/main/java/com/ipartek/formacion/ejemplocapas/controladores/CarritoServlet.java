@@ -33,7 +33,10 @@ public class CarritoServlet extends HttpServlet {
 		//recibir parametros --> id
 		String id = request.getParameter("id");
 		Long idV = Long.parseLong(id);
+		
+		
 		//buscar en base de datos el video por id
+		try {
 		VideosDao dao = new VideosDao();
 		Video vid = dao.getById(idV);
 		
@@ -54,9 +57,14 @@ public class CarritoServlet extends HttpServlet {
 		//guardamos el carrito en session con el nuevo video
 		session.setAttribute("carrito", videoscarr);
 		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			//redirect a --> http://localhost:8080/javaee/videos
+			String url = request.getContextPath() + "/videos";
+			response.sendRedirect(url);
+		}
 		
-		//redirect a --> http://localhost:8080/javaee/videos
-		response.sendRedirect("videos");
 	}
 
 }
