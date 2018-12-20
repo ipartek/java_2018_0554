@@ -51,6 +51,7 @@ padding: 5px 10px;
 <!-- CARRITO DE LA COMPRA -->
 <% 
 //se crea la coleccion de videos con la variable implicita de session que recoge lo que contiene sesion y se getAttribute carrito
+//SESSION ES UNA VARIABLE IMPLICITA DE JSP
 ArrayList<Video> carrito = (ArrayList<Video>)session.getAttribute("carrito") ;
 //Si es igual a nulo, no existe
 if(carrito == null){

@@ -26,27 +26,33 @@ public class CarritoController extends HttpServlet {
 		//RECIBIR PARAMETROS EN ESTE CASO EL id
 		String id = request.getParameter("id");
 		
-		
-		//BUSCAR EN BASE DATOS EL VIDEO POR ID
-		VideoDao dao = new VideoDao();
-		Video videoRecogido= dao.getById(Long.parseLong(id));
-		
-		//RECUPERAMOS CARRITO DE SESION DEL USUARIO
-		HttpSession session= request.getSession();
-		ArrayList<Video> carrito = (ArrayList<Video>)session.getAttribute("carrito") ;
-		
-		if(carrito == null){
-			carrito = new ArrayList<>();
-
+		try {
+			//BUSCAR EN BASE DATOS EL VIDEO POR ID
+			VideoDao dao = new VideoDao();
+			Video videoRecogido= dao.getById(Long.parseLong(id));
+			
+			//RECUPERAMOS CARRITO DE SESION DEL USUARIO
+			//
+			HttpSession session= request.getSession();
+			ArrayList<Video> carrito = (ArrayList<Video>)session.getAttribute("carrito") ;
+			
+			if(carrito == null){
+				carrito = new ArrayList<Video>();
+	
+			}
+			//AÑADIR EL NUEVO VIDEO A LA SESION DEL CARRITO
+			carrito.add(videoRecogido);
+			
+			//GUARDAMOS EL CARRITO EN SESION DE NUEVO
+			session.setAttribute("carrito", carrito);		
+	
+		}catch(Exception e) {
+			
+		}finally {
+			//REDIRECT A VIDEOCONTROLLER
+			String url=request.getContextPath()+"/videos";
+			response.sendRedirect(url);
 		}
-		//AÑADIR EL NUEVO VIDEO A LA SESION DEL CARRITO
-		carrito.add(videoRecogido);
-		
-		//GUARDAMOS EL CARRITO EN SESION DE NUEVO
-		session.setAttribute("carrito", carrito);
-		
-		//REDIRECT A VIDEOCONTROLLER
-		response.sendRedirect("videos");
 	}
 
 	/**
