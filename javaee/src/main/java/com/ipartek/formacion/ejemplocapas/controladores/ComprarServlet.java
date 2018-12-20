@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ipartek.formacion.modelo.daos.GatoDAO;
 import com.ipartek.formacion.modelo.pojos.Gato;
 
 /**
@@ -21,29 +22,36 @@ public class ComprarServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		ArrayList<Gato> gatos = (ArrayList<Gato>)session.getAttribute("gatos");
-		ArrayList<String> gatosComprados = new ArrayList<String>();
-		
-		gatosComprados = (ArrayList<String>)session.getAttribute("gatosComprados");
-		
-		Long id = Long.parseLong(request.getParameter("id"));
-		for (Gato g : gatos) {
-			if (g.getId() == id) {
-				gatosComprados.add(g.getRaza() + " - " + g.getNombre());
-				break;
-			}
-		}
-		
-		session.setAttribute("gatosComprados", gatosComprados);
-		response.sendRedirect("gatos");
+		doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		String id = request.getParameter("id");
+		
+		try {
+			GatoDAO dao = new GatoDAO();
+			Gato g = dao.getById(Long.parseLong(id));
+			
+			HttpSession session = request.getSession();
+			ArrayList<Gato> gatosComprados = (ArrayList<Gato>) session.getAttribute("gatosComprados");
+			
+			if (gatosComprados == null) {
+				gatosComprados = new ArrayList<Gato>();
+			}
+			
+			gatosComprados.add(g);
+			
+			session.setAttribute("gatosComprados", gatosComprados);
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			String url = request.getContextPath() + "/gatos";
+			response.sendRedirect(url);
+		}
 	}
 
 }
