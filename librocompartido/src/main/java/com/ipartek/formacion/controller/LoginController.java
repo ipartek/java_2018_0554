@@ -29,8 +29,8 @@ public class LoginController extends HttpServlet {
 	private ValidatorFactory factory;
 	private Validator validator;
 	
-	public static final String VIEW_LOGIN = "index.jsp";
-	public static final String CONTROLLER_VIDEOS = "privado/videos";
+	public static final String VIEW_LOGIN = "login";
+	public static final String CONTROLLER_PAGINA = "pagina";
 	
        
     @Override
@@ -97,7 +97,7 @@ public class LoginController extends HttpServlet {
 		}finally {
 			
 			if(redirect) {				
-				response.sendRedirect(CONTROLLER_VIDEOS);
+				response.sendRedirect(CONTROLLER_PAGINA);
 			}else {
 				request.getRequestDispatcher(view).forward(request, response);
 			}
@@ -110,3 +110,15 @@ public class LoginController extends HttpServlet {
 	
 
 }
+
+
+		
+		
+		//redireccionar a la interfaz de edicion de paginas del libro
+		
+		
+//		response.sendRedirect(CONTROLLER_PAGINAS);
+		
+		//Si no tiene permitido ir adelante:
+//		request.getRequestDispatcher(view).forward(request, response);
+	

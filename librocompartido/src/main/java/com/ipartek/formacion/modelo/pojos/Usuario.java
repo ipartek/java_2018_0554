@@ -6,23 +6,17 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-//import org.hibernate.validator.constraints.Email;
-
-
-
-
 public class Usuario {
-	
+
 	private Long id;
-		
-	//TODO mirar porque no funciona @Email
-	
+
+	//validaciones al declarar 3.0
 	@NotEmpty
 	@Email
 	private String email;
-	
+
 	@NotNull
-	@Size(min=5, max=50)
+	@Size(min = 5, max = 50)
 	private String password;
 
 	public Usuario() {
@@ -30,6 +24,7 @@ public class Usuario {
 		this.id = (long) -1;
 		this.email = "";
 		this.password = "";
+
 	}
 
 	public Usuario(Long id, String email, String password) {
@@ -67,4 +62,5 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [id=" + id + ", email=" + email + ", password=" + password + "]";
 	}
+
 }
