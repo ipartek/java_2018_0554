@@ -19,7 +19,11 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
 /**
  * Servlet Filter implementation class SeguridadFilter
  */
-@WebFilter(dispatcherTypes = {DispatcherType.REQUEST }
+@WebFilter(dispatcherTypes = {
+			DispatcherType.REQUEST, 
+			DispatcherType.FORWARD, 
+			DispatcherType.INCLUDE, 
+			DispatcherType.ERROR }
 					, urlPatterns = { "/privado/*" })
 public class SeguridadFilter implements Filter {
 
@@ -49,10 +53,10 @@ public class SeguridadFilter implements Filter {
 		
 		Usuario userLogeado = (Usuario) session.getAttribute("usuario");
 		if(userLogeado!= null) {
-			session.setAttribute("error", "Tienes que logearte para entrar a ver los videos");
 			// pass the request along the filter chain
 			chain.doFilter(request, response);
 		}else {
+			session.setAttribute("error", "Tienes que logearte para entrar a ver los videos");
 			resp.sendRedirect(req.getContextPath() +"/login");
 		}
 		

@@ -77,21 +77,20 @@ public class LoginController extends HttpServlet {
 			if (violations.size() > 0) {// Validaciones NO PASADAS
 				String errores = "<ul>";
 				for (ConstraintViolation<Usuario> violation : violations) {
-					errores += "<li>" + violation.getPropertyPath() + ": " + violation.getMessage() + "</li>";
-
+					errores += String.format("<li> %s : %s </li>", violation.getPropertyPath(), violation.getMessage());
 				}
-				errores +="</lu>";
+				errores += "</ul>";
 				request.setAttribute("mensaje", errores);
+
 			} else {// Validaciones correctas
 
 				usuarioLogin = dao.login(email, pass);
 				if (usuarioLogin != null) {
 					vista = CONTROLER_VIDEOS;
-					
+
 					HttpSession session = request.getSession();
-					session.setMaxInactiveInterval(60*5); //5minutos
+					session.setMaxInactiveInterval(60 * 5); // 5minutos
 					session.setAttribute("usuario", usuarioLogin);
-					
 
 				} else {
 					request.setAttribute("mensaje", "Usuario no valido");
@@ -100,12 +99,12 @@ public class LoginController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(vista.equals(CONTROLER_VIDEOS)) {
+			if (vista.equals(CONTROLER_VIDEOS)) {
 				response.sendRedirect(CONTROLER_VIDEOS);
-			}else {
+			} else {
 				request.getRequestDispatcher(vista).forward(request, response);
 			}
-			
+
 		}
 	}
 
