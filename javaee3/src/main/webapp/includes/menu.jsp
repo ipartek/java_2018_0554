@@ -18,9 +18,17 @@
             <a class="nav-link disabled" href="#">Disabled</a>
           </li> -->
 			</ul>
+			<ul class="navbar-nav mr-auto border border-success">
+			<li class="nav-item">
+            <i class="fa fa-user-o fa-2x text-success" aria-hidden="true"></i>
+          	</li>
+          	<li class="nav-item">
+          	<span class="text-warning">${sessionScope.usuario_logueado.email }</span>
+          	</li>
+			</ul>
+			
+				
 			<form class="form-inline mt-2 mt-md-0" action="logout" method="POST">
-				<!-- <input class="form-control mr-sm-2" type="text" placeholder="Buscar"
-					aria-label="Buscar"> -->
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerrar Sesión</button>
 			</form>
 		</div>
