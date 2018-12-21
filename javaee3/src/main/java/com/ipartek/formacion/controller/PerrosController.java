@@ -12,24 +12,22 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import com.ipartek.formacion.modelo.daos.UsuarioDAO;
-import com.ipartek.formacion.modelo.daos.VideoDAO;
+import com.ipartek.formacion.modelo.daos.PerroDAO;
 
 /**
- * Servlet implementation class VideosController
+ * Servlet implementation class PerrosController
  */
-@WebServlet("/privado/videos")
-public class VideosController extends HttpServlet {
-	
+@WebServlet("/privado/perros")
+public class PerrosController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private VideoDAO dao;
+	private PerroDAO dao;
 	private ValidatorFactory factory;
 	private Validator validator;
        
     @Override
     public void init(ServletConfig config) throws ServletException {    
     	super.init(config);
-    	dao = VideoDAO.getInstance();    	
+    	dao = PerroDAO.getInstance();    	
     	factory  = Validation.buildDefaultValidatorFactory();
     	validator  = factory.getValidator();
     }
@@ -40,9 +38,9 @@ public class VideosController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		request.setAttribute("videos", dao.getAll());
+		request.setAttribute("perros", dao.getAll());
 		
-		request.getRequestDispatcher("principal.jsp").forward(request, response);
+		request.getRequestDispatcher("perros.jsp").forward(request, response);
 		
 	}
 

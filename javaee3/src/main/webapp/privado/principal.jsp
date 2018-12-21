@@ -1,16 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-<p>Hola ${usuario.email}</p>
-<p>${videos}</p>
+<%@ include file="../includes/header.jsp"  %>
+<%@ include file="../includes/navbar.jsp"  %>
+<%@ include file="../includes/mensajes.jsp"  %>
+
+  
+
+<main role="main" class="container">
+	<div class="jumbotron">
+		<ul>
+			<c:forEach items="${videos}" var="v">
+				<li>${v.id} + ${v.nombre}</li>
+			</c:forEach>
+		</ul>
+	</div>
+</main>
 
 
-	
-</body>
-</html>
+
+  
+<%@ include file="../includes/footer.jsp"  %>  

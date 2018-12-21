@@ -16,11 +16,9 @@ public class Video {
 		this.url = "https://www.youtube.com/watch?v=LPDhuthFD98";
 	}
 	
-	public Video(long id, String nombre, String url) {
+	public Video(String nombre) {
 		this();
-		setId(id);
-		setNombre(nombre);
-		setUrl(url);
+		this.nombre = nombre;
 	}
 	
 
@@ -56,5 +54,5 @@ public class Video {
 	public String toString() {
 		return "Video [id=" + id + ", nombre=" + nombre + ", url=" + url + "]";
 	}
-	
+
 }
