@@ -27,8 +27,8 @@ public class LoginSrvLt extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
 		dao = UsuarioDAO.getInstance();
-		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-		Validator validator = factory.getValidator();
+		factory = Validation.buildDefaultValidatorFactory();
+		validator = factory.getValidator();
 
 	}
 
@@ -47,16 +47,30 @@ public class LoginSrvLt extends HttpServlet {
 			usuario.setEmail(usuariof);
 			usuario.setPassword(passf);
 			Set<ConstraintViolation<Usuario>> violations=validator.validate(usuario);
-			usuario = dao.loginCorrecto(usuariof, passf);
-			if (usuario != null) {
-				HttpSession session = request.getSession();
-				session.setMaxInactiveInterval(60 * 5);
-				session.setAttribute("usuario_logueado", usuario);
-				request.getRequestDispatcher("principal.jsp").forward(request, response);
-			} else {
-				request.setAttribute("error", "Login incorrecto");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+			if ( violations.size() > 0) {			
+				
+				 String errores = "<ul>"; 
+				 for (ConstraintViolation<Usuario> violation : violations) {					 	
+					 errores += String.format("<li> %s : %s </li>" , violation.getPropertyPath(), violation.getMessage() );					
+				 }
+				 errores += "</ul>";				 
+				request.setAttribute("mensaje", errores);				
+				
+			}else {             
+				
+				usuario = dao.loginCorrecto(usuariof, passf);
+				if (usuario != null) {
+					HttpSession session = request.getSession();
+					session.setMaxInactiveInterval(60 * 5);
+					session.setAttribute("usuario_logueado", usuario);
+					//request.getRequestDispatcher("principal.jsp").forward(request, response);
+					response.sendRedirect("pral");
+				} else {
+					request.setAttribute("error", "Login incorrecto");
+					request.getRequestDispatcher("index.jsp").forward(request, response);
+				}
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
