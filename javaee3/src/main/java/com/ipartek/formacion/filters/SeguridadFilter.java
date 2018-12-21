@@ -1,4 +1,4 @@
-package com.ipartek.formacion.filter;
+package com.ipartek.formacion.filters;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ipartek.formacion.modelo.pojos.Usuario;
+import com.ipartek.formacion.pojo.Usuario;
 
 /**
  * Servlet Filter implementation class SeguridadFilter

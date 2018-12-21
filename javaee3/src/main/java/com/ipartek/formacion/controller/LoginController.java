@@ -22,7 +22,7 @@ import com.ipartek.formacion.pojo.Usuario;
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String VISTA_LOGIN = "index.jsp";
-	private static final String VISTA_PRINCIPAL = "/privado/videos";
+	private static final String VIDEOS_CONTROLLER = "/privado/videos";
 	private UsuarioDAO dao;
 	private ValidatorFactory factory;
 	private Validator validator;
@@ -75,9 +75,8 @@ public class LoginController extends HttpServlet {
 
 					HttpSession session = request.getSession();
 					session.setAttribute("usuario", u);
-					vista = VISTA_PRINCIPAL;
+					vista = VIDEOS_CONTROLLER;
 				}
-
 			}
 		} catch (Exception e) {
 			request.setAttribute("mensaje", "El usuario o la contraseña no son correctos");

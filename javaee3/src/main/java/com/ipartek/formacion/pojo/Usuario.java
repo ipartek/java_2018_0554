@@ -3,11 +3,15 @@ package com.ipartek.formacion.pojo;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Usuario {
-	@NotNull
+	
+	@NotEmpty
 	@Size(min = 1, max = 45)
 	private String nombre;
-	@NotNull
+	
+	@NotEmpty
 	@Size(min = 6, max = 20)
 	private String pass;
 	private long id;

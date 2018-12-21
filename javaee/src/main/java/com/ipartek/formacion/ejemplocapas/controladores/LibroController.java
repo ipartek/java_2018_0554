@@ -10,18 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ipartek.formacion.modelo.pojos.Libro;
 
-
-
-/**
- * Servlet implementation class VideoController
- */
 public class LibroController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArrayList<Libro> libros = new ArrayList<Libro>();
@@ -39,20 +30,16 @@ public class LibroController extends HttpServlet {
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String busqueda = request.getParameter("busqueda");
+		//String busqueda = request.getParameter("busqueda");
 		
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		
 		libros.add(new Libro(1,"La conjura de los necios", "John Kennedy Toole","https://www.anagrama-ed.es/uploads/media/portadas/0001/20/fe3abb0d94d574517d0160e09ce080edff62814b.jpeg"));
-		
-				
+						
 		request.setAttribute("libros", libros);		
-		request.setAttribute("busqueda", busqueda);
+		//request.setAttribute("busqueda", busqueda);
 		request.getRequestDispatcher("libros.jsp").forward(request, response);
 	}
 

@@ -3,15 +3,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ipartek.formacion</groupId>
-	<artifactId>javaee3</artifactId>
+	<artifactId>compartirLibro</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>javaee3</name>
-	<url>http://localhost:8080/javaee3/</url>
+	<name>compartirLibro</name>
+	<url>http://localhost:8080/compartirLibro/</url>
 
 	<!-- variables comunes para todo el POM -->
 	<properties>
-		<app.name>javaee3</app.name>
+		<app.name>compartirLibro</app.name>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java-version>1.8</java-version>
 		<junit.version>4.12</junit.version>
