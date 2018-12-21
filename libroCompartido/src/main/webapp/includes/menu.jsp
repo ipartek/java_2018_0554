@@ -18,7 +18,7 @@
             <a class="nav-link disabled" href="#">Disabled</a>
           </li> -->
 			</ul>
-			<form class="form-inline mt-2 mt-md-0" action="logout" method="POST">
+			<form class="form-inline mt-2 mt-md-0" action="login" method="POST">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Iniciar Sesión</button>
 			</form>
 		</div>
