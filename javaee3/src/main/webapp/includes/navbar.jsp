@@ -10,13 +10,12 @@
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="/privado/videos">Perros</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
+          </li>         
         </ul>
-        ${usuario}
-        <a href="/logout">LOGOUT</a>
+        <ul class="navbar-nav float-right">
+        	<li><span class="badge badge-light mr-3">${usuario.email}</span></li>
+        	<li><a href="/logout" class="btn btn-outline-danger">SALIR</a></li>
+        </ul>
         
       </div>
     </nav>
