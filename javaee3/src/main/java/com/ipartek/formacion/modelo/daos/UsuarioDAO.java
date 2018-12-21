@@ -1,14 +1,30 @@
 package com.ipartek.formacion.modelo.daos;
 
 import java.sql.Connection;
-
-import com.ipartek.formacion.modelo.pojos.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class UsuarioDAO {
+import com.ipartek.formacion.modelo.pojos.Usuario;
 
+public class UsuarioDAO {
+	
+	private static UsuarioDAO INSTANCE = null;
+	
+	// constructor privado, solo acceso por getInstance()
+	private UsuarioDAO() {
+		super();
+	}	
+	
+	public synchronized static UsuarioDAO getInstance() {
+		
+		if ( INSTANCE == null ) {
+			INSTANCE = new UsuarioDAO();
+		}
+		return INSTANCE;
+	}
+	
+	
 	
 	/**
 	 * comprobar si existe el usuario en la bbdd

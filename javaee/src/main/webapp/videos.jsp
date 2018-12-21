@@ -35,16 +35,12 @@
 	<p style="color:red">No existen videos</p>
 <% } //endif %>
 <ol>
-	<%
-		for( Video video: videos){
-			%>
-					<li><%=video.getNombre()%></li>
-					<iframe width="560" height="315" src="https://www.youtube.com/embed/<%=video.getUrl() %>/embed" frameborder="0" 
+	<c:forEach items="${video} var="video">
+					<li>${video.nombre}</li>
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/${video.url}/embed" frameborder="0" 
 					allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
 					allowfullscreen></iframe>
-					<a href="carrito?id=<%=video.getId()%>">Añadir al carrito</a>
-			<%	
-		}	
-	%>
+				
+</c:forEach>
 </ol>
 
