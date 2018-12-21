@@ -38,10 +38,10 @@
 	  </c:if>   
       
       <label for="email" class="sr-only">Correo Electronico:</label>
-      <input type="email" name="email" class="form-control" value="maria@gmail.com" placeholder="tu@email.com" required autofocus>
+      <input type="email" name="email" class="form-control" value="xabier@ipartek.com" placeholder="tu@email.com" required autofocus>
       
       <label for="pass" class="sr-only">Contraseña</label>
-      <input type="password" name="pass" class="form-control" value="12345678" placeholder="minimo 6 caracteres" required>
+      <input type="password" name="pass" class="form-control" value="Pa$$w0rd" placeholder="minimo 6 caracteres" required>
       
       <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
       
