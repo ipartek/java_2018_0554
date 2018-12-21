@@ -1,4 +1,4 @@
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
 <h1>LIBRO COMPARTIDO</h1>
 
@@ -9,9 +9,15 @@
 
 <p>${paginaactual+1}/${paginastotales}</p>
 
+<c:if test = "${paginaactual !=0}">
+   <span><a href="paginas?actual=${paginaactual-1}">Anterior</a></span>
+</c:if>
+<c:if test = "${paginaactual !=paginastotales}">
+   <span><a href="paginas?actual=${paginaactual+1}">Siguiente</a></span>
+</c:if>
 
-<span><a href="#">Anterior</a></span>
-<span><a href="paginas?actual=${paginaactual+1}">Siguiente</a></span>
+
+
 
 
 <form>
