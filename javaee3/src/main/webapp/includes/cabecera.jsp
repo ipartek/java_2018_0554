@@ -1,4 +1,3 @@
- <base href="${pageContext.request.contextPath}/" target="_blank">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
 		<a class="navbar-brand" href="#">Videos</a>
@@ -19,7 +18,7 @@
             <a class="nav-link disabled" href="#">Disabled</a>
           </li> -->
 			</ul>
-			<form class="form-inline mt-2 mt-md-0" action="logout" method="POST">
+			<form class="form-inline mt-2 mt-md-0" action="${pageContext.request.contextPath}/logout" method="POST">
 				<!-- <input class="form-control mr-sm-2" type="text" placeholder="Buscar"
 					aria-label="Buscar"> -->
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerrar Sesión</button>

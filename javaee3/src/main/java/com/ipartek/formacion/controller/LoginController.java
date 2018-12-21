@@ -71,7 +71,7 @@ public class LoginController extends HttpServlet {
 				
 				String errores = "<ul>";
 				for (ConstraintViolation<Usuario> violation : violations) {
-					errores += "<li>" + violation.getMessage() + " (" + violation.getPropertyPath() + ")</li>";
+					errores += String.format("<li> %s : %s </li>", violation.getPropertyPath(), violation.getMessage());
 				}
 				errores += "</ul>";
 				request.setAttribute("mensaje", errores);
