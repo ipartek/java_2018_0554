@@ -24,88 +24,88 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String ENLACE_LOGIN="index.jsp";
-	private static final String ENLACE_PRINCIPAL="privado/videos";
 	private UsuarioDAO dao;
 	private ValidatorFactory factory;
 	private Validator validator;
+	
+	public static final String VIEW_LOGIN = "index.jsp";
+	public static final String CONTROLLER_VIDEOS = "privado/videos";
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 
 		super.init(config);
-		dao = UsuarioDAO.getInstance();
-		
-		//Crear Factoria y Validador
-		  factory = Validation.buildDefaultValidatorFactory();
-		  validator = factory.getValidator();
+    	dao = UsuarioDAO.getInstance();
+    	//Crear Factoria y Validador
+    	factory  = Validation.buildDefaultValidatorFactory();
+    	validator  = factory.getValidator();
 	}
 	
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
-
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		
-		String vista = ENLACE_LOGIN;
-		
 		String email = request.getParameter("mail");
-		String password = request.getParameter("pass");		
-		
+		String pass = request.getParameter("pass");
+		String view = VIEW_LOGIN;
 		boolean redirect = false;
 		
 		try {
+		
+			// validar
 			Usuario usuario = new Usuario();
 			usuario.setEmail(email);
-			usuario.setPassword(password);
+			usuario.setPassword(pass);
 			
-			// se le pasa el pojo para k valide si las cumpel la coleccion violations estara vacio
 			Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario);
-			if (violations.size() > 0) {
-				/* No ha pasado la valiadacion, iterar sobre los mensajes de validacion */
-				
-				String errores = "<ul>"; 
-				 for (ConstraintViolation<Usuario> violation : violations) {
-					 	
-					 errores += "<li>" + violation.getPropertyPath() + ": " +violation.getMessage() + "</li>";
-						
-						// violation.getPropertyPath()
-				 }
-				 errores += "</ul>"; 
-				//request.setAttribute("error", violations);
-				request.setAttribute("error", errores);
-			}else{
-				    /* No tenemos ningun fallo, la Validacion es correcta */
 			
-					usuario = dao.login(email, password);
+			
+			if ( violations.size() > 0) {			// validacion NO PASA
+				
+				 String errores = "<ul>"; 
+				 for (ConstraintViolation<Usuario> violation : violations) {					 	
+					 errores += String.format("<li> %s : %s </li>" , violation.getPropertyPath(), violation.getMessage() );					
+				 }
+				 errores += "</ul>";				 
+				request.setAttribute("error", errores);				
+				
+			}else {                                // validacion OK
+			
+				usuario = dao.login(email, pass);
+				
+				if ( usuario == null ) {
 					
-					if ( usuario != null ) {
-						vista = ENLACE_PRINCIPAL;				
-						request.setAttribute("usuario", usuario);
-						HttpSession session= request.getSession(); 
-						//session.setMaxInactiveInterval(60*5);//5min
-						session.setAttribute("usuario_logeado", usuario);
-							
-					}else {				
-						request.setAttribute("error", "Credenciales incorrectas");				
-					}	
-			}		
-					}catch (Exception e) {
-						e.printStackTrace();
-						
-					}finally {
-							request.getRequestDispatcher(vista).forward(request, response);
-						
-						
-					}
-		
+					request.setAttribute("error", "Credenciales incorrectas");
+				}else {
+					
+					HttpSession session = request.getSession();
+					session.setAttribute("usuario_logeado", usuario);
+					redirect = true;					
+				}
+			}	
+				
+			
+		}catch (Exception e) {
+			
+			e.printStackTrace();
+		}finally {
+			
+			if(redirect) {				
+				response.sendRedirect(CONTROLLER_VIDEOS);
+			}else {
+				request.getRequestDispatcher(view).forward(request, response);
+			}
+		}
+			
 		
 		
 	}
 
-	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.getRequestDispatcher(VIEW_LOGIN).forward(request, response);
+	}
 
 }

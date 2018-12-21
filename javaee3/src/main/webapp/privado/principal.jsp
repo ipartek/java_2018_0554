@@ -32,7 +32,7 @@
 	      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 	        <ul class="navbar-nav mr-auto">
 	          <li class="nav-item">
-	            <a class="nav-link" href="#">Cerrar Sesion</a>
+	            <a class="nav-link" href="../logout">Cerrar Sesion</a>
 	          </li>
 	      </div>
 	    </nav>
@@ -50,15 +50,22 @@
           <tr>
           <th>ID</th>
           <th>Nombre</th>
-          <th>URL</th>
+          <th>VIDEO</th>
           </tr>
           
       	 <c:forEach items="${videos}" var="video">
       	 <tr>
           <td>${video.id}</td>
           <td>${video.nombre}</td>
-          <td><img src="https://i.ytimg.com/vi/'tthCwSHOqzA'/hqdefault.jpg?sqp=-oaymwEjCPYBEIoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLC-0TQpZmGU71vmEVPvBis7neeyqg"></td>
-          <td>${video.url.split("=")[1]}</td>
+          <td>
+          	<iframe width="160" 
+			height="90" 
+			src="https://www.youtube.com/embed/${video.url.split("=")[1]}" 
+			rameborder="0" 
+			allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+			allowfullscreen>
+			</iframe>
+          </td>
           </tr>
    			 
 		</c:forEach>       

@@ -19,7 +19,12 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
 /**
  * Servlet Filter implementation class SeguridadFilter
  */
-@WebFilter(dispatcherTypes = {DispatcherType.REQUEST }
+@WebFilter(dispatcherTypes = {
+		DispatcherType.REQUEST,
+		DispatcherType.INCLUDE, 
+		DispatcherType.FORWARD, 
+		DispatcherType.ERROR 
+		}
 , urlPatterns = { "/privado/*" })
 public class SeguridadFilter implements Filter {
 
@@ -35,6 +40,7 @@ public class SeguridadFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		
 		
 		HttpServletRequest req= (HttpServletRequest)request;
 		

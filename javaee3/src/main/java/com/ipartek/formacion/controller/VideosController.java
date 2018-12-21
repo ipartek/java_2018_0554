@@ -19,6 +19,7 @@ import com.ipartek.formacion.modelo.daos.VideoDAO;
  */
 @WebServlet("/privado/videos")
 public class VideosController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	private VideoDAO dao;
 	private ValidatorFactory factory;
@@ -31,12 +32,14 @@ public class VideosController extends HttpServlet {
     	factory  = Validation.buildDefaultValidatorFactory();
     	validator  = factory.getValidator();
     }
-   
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-				
-		request.setAttribute("videos", dao.getAll() );
+		
+		request.setAttribute("videos", dao.getAll());
 		
 		request.getRequestDispatcher("principal.jsp").forward(request, response);
 		
@@ -45,10 +48,9 @@ public class VideosController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
-		
 	}
 
 }
