@@ -1,0 +1,27 @@
+		if (posActualStr != null) {
+			posActual = Integer.parseInt(posActualStr);
+		}
+		ArrayList<Libro> paginas = new ArrayList<>();
+		paginas.add(new Libro(1L, "Héctor1",
+				"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."));
+		paginas.add(new Libro(2L, "Héctor2",
+				"Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. "));
+		paginas.add(new Libro(3L, "Héctor3",
+				"Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae."));
+		paginas.add(new Libro(4L, "Héctor4",
+				"Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."));
+		paginas.add(new Libro(5L, "Héctor5",
+				"Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"));
+		request.setAttribute("libro", paginas);
+		if (accion == null) {
+			posActual = 0;
+			request.setAttribute("posicionActual", posActual);
+		}
+		else if ("alante".equals(accion)){
+			posActual++;
+			request.setAttribute("posicionActual", posActual);
+		}
+		else if ("atras".equals(accion)){
+			posActual--;
+			request.setAttribute("posicionActual", posActual);
+		}
