@@ -47,7 +47,7 @@ public class SeguridadFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse)response;
 		
 		HttpSession session = req.getSession();
-		Usuario uLogeado = (Usuario)session.getAttribute("usuario");
+		Usuario uLogeado = (Usuario)session.getAttribute("usuarioLogeado");
 		
 		if ( uLogeado != null ) {
 			// contnia la peticion del usuario al servlet/jsp
