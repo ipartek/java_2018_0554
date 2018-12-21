@@ -30,7 +30,7 @@ public class LoginController extends HttpServlet {
 	private Validator validator;
 	
 	public static final String VIEW_LOGIN = "index.jsp";
-	public static final String CONTROLLER_VIDEOS = "videos";
+	public static final String CONTROLLER_VIDEOS = "privado/videos";
 	
        
     @Override
@@ -50,7 +50,7 @@ public class LoginController extends HttpServlet {
 		
 		
 			
-		doPost(request, response);
+		request.getRequestDispatcher(VIEW_LOGIN).forward(request, response);
 		
 	}
 
@@ -64,6 +64,7 @@ public class LoginController extends HttpServlet {
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
 		String view = VIEW_LOGIN;
+		boolean redirect = false;
 		
 		try {
 		
@@ -80,12 +81,11 @@ public class LoginController extends HttpServlet {
 				 String errores = "<ul>"; 
 				 for (ConstraintViolation<Usuario> violation : violations) {
 					 	
-					 errores += "<li>" + violation.getPropertyPath() + ": " +violation.getMessage() + "</li>";
+					 errores += String.format("<li> %s : %s </li>" , violation.getPropertyPath(), violation.getMessage() );
 						
 						// violation.getPropertyPath()
 				 }
 				 errores += "</ul>"; 
-				request.setAttribute("errores", violations);
 				request.setAttribute("mensaje", errores);
 				
 			}else {                                // validacion OK
@@ -99,7 +99,7 @@ public class LoginController extends HttpServlet {
 					
 					HttpSession session = request.getSession();
 					session.setAttribute("usuario", usuario);
-					view = CONTROLLER_VIDEOS ;
+					redirect = true;
 				}
 			}	
 				
@@ -108,7 +108,11 @@ public class LoginController extends HttpServlet {
 			
 			e.printStackTrace();
 		}finally {
-			request.getRequestDispatcher(view).forward(request, response);	
+			if(redirect) {				
+				response.sendRedirect(CONTROLLER_VIDEOS);
+			}else {
+				request.getRequestDispatcher(view).forward(request, response);
+			}
 		}
 	}
 

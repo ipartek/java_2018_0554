@@ -13,14 +13,14 @@
     <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
      <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.css" rel="stylesheet">
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+     
   </head>
 
   <body>
     <div class="container">
       <div class="jumbotron mt-3">
-        <h2>Bienvenido: ${requestScope.usuario.email}</h2>
-        <p class="lead">This example is a quick exercise to illustrate how the bottom navbar works.</p>
-        <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">View navbar docs &raquo;</a>
+        <h2>Bienvenido: ${usuario.email}</h2>
+        <a class="btn btn-lg btn-primary" href="../logout" role="button">LOGOUT &raquo;</a>
       </div>
     </div>
     <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
@@ -68,9 +68,12 @@
       <tr>
         <td>${v.id}</td>
         <td>${v.nombre}</td>
-        <td>${v.url}</td>
+        <td><iframe width="150" height="150" src="https://www.youtube.com/embed/${v.url}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+								
+								
+								
       </tr>
-      
+      </c:forEach>
     </tbody>
   </table>
   </div>
