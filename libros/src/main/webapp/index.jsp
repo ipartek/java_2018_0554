@@ -3,6 +3,10 @@
 <%@page import="com.ipartek.formacion.modelo.pojos.Pagina"%>
 
 
+
+
+<h1>funciona</h1>
+
 <c:forEach items="${libro}" var="pagina">
 
 	<h1>${pagina.autor}</h1>
