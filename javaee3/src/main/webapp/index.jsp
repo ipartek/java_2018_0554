@@ -15,7 +15,7 @@
 			<div class="alert alert-danger ">${mensaje}</div>
 		</c:if>
 		<c:if test="${sessionScope.error != null}">
-			<div class="alert alert-danger ">${mensaje}</div>
+			<div class="alert alert-danger ">${error}</div>
 		</c:if>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
 	</form>

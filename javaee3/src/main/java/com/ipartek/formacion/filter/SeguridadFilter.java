@@ -49,7 +49,7 @@ public class SeguridadFilter implements Filter {
 		
 		Usuario userLogeado = (Usuario) session.getAttribute("usuario");
 		if(userLogeado!= null) {
-			session.setAttribute("mensaje", "Tienes que logearte para entrar a ver los videos");
+			session.setAttribute("error", "Tienes que logearte para entrar a ver los videos");
 			// pass the request along the filter chain
 			chain.doFilter(request, response);
 		}else {

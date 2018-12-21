@@ -1,5 +1,5 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
- <base href="${pageContext.request.contextPath}/">
+ <%-- <base href="${pageContext.request.contextPath}/"> --%>
 
 <!doctype html>
 <html lang="es">

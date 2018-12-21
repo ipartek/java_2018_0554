@@ -1,7 +1,9 @@
 #estas carpetas no se sincronizan con el repositorio
 
 **/target/
+
 **/bin/
 **/.classpath
 **/.project
+
 **/.settings/

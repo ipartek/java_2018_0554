@@ -2,6 +2,7 @@ package com.ipartek.formacion.modelo.pojo;
 
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 
@@ -13,7 +14,7 @@ public class Usuario {
 	private Long id;
 	//TODO Mirar porque no funcion @Email
 	@NotEmpty
-	@Size(min=5, max=65)
+	@Email
 	private String email;
 	@NotEmpty
 	@Size(min=5, max=65)
