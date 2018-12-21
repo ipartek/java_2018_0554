@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 
@@ -12,10 +13,8 @@ public class Usuario {
 	
 	private Long id;
 		
-	//TODO mirar porque no funciona @Email
-	
-	@NotNull
-	@Size(min=5, max=50)
+	@NotEmpty
+	@Email
 	private String email;
 	
 	@NotNull
