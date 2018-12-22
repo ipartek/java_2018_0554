@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Fixed top navbar example for Bootstrap</title>
+    <title>El perrito perrón</title>
 	<base href="${pageContext.request.contextPath}/">
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
