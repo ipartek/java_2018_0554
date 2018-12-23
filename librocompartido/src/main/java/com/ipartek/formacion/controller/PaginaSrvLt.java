@@ -45,7 +45,7 @@ public class PaginaSrvLt extends HttpServlet {
 		request.setAttribute("totalpaginas", libro.size());
 		request.setAttribute("pagina", libro.get(paginaactual));
 
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getRequestDispatcher("libro.jsp").forward(request, response);
 
 	}
 
