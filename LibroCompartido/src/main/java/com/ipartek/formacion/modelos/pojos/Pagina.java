@@ -1,17 +1,8 @@
 package com.ipartek.formacion.modelos.pojos;
 
 public class Pagina {
-	private int id;
 	private String autor;
 	private String contenido;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getAutor() {
 		return autor;
@@ -29,9 +20,8 @@ public class Pagina {
 		this.contenido = contenido;
 	}
 
-	public Pagina(int id, String autor, String contenido) {
+	public Pagina(String autor, String contenido) {
 		this();
-		setId(id);
 		setAutor(autor);
 		setContenido(contenido);
 	}
@@ -42,7 +32,7 @@ public class Pagina {
 
 	@Override
 	public String toString() {
-		return "Pagina [id=" + id + ", autor=" + autor + ", contenido=" + contenido + "]";
+		return "Pagina [autor=" + autor + ", contenido=" + contenido + "]";
 	}
 
 }

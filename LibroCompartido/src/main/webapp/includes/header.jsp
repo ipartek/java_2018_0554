@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,6 +11,7 @@
     <title>El perrito perrón</title>
 	<base href="${pageContext.request.contextPath}/">
     <!-- Bootstrap core CSS -->
+    <link href="css/estilos.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
