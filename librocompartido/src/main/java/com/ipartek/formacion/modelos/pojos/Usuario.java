@@ -15,17 +15,22 @@ public class Usuario {
 	@NotEmpty
 	@Size(min = 8, max = 25)
 	private String password;
+	
+	@NotEmpty
+	private String nombre;
 
-	public Usuario(String email, String password) {
+	public Usuario(String email, String password,String nombre) {
 		setId(-1);
 		setEmail(email);
 		setPassword(password);
+		setNombre(nombre);
 	}
 
-	public Usuario(int id, String email, String password) {
+	public Usuario(int id, String email, String password, String nombre) {
 		setId(id);
 		setEmail(email);
 		setPassword(password);
+		setNombre(nombre);
 	}
 
 	public Usuario() {
@@ -56,9 +61,17 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", email=" + email + ", password=" + password + "]";
+		return "Usuario [id=" + id + ", email=" + email + ", password=" + password +", nombre=" + nombre + "]";
 	}
 }

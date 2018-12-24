@@ -22,9 +22,9 @@ public class LoginSrvLt extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 		usuarios = new ArrayList<Usuario>();
-		usuarios.add(new Usuario(1, "uno@uno.com", "Pa$$w0rd"));
-		usuarios.add(new Usuario(2, "dos@dos.com", "Pa$$w0rd"));
-		usuarios.add(new Usuario(3, "tres@tres.com", "Pa$$w0rd"));
+		usuarios.add(new Usuario(1, "uno@uno.com", "Pa$$w0rd","autor1"));
+		usuarios.add(new Usuario(2, "dos@dos.com", "Pa$$w0rd","autor2"));
+		usuarios.add(new Usuario(3, "tres@tres.com", "Pa$$w0rd","autor3"));
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -49,6 +49,7 @@ public class LoginSrvLt extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setMaxInactiveInterval(60 * 5);
 			session.setAttribute("usuario", usuario);
+			session.setAttribute("libro", request.getAttribute("libro"));
 
 			request.getRequestDispatcher("/edicion/agregarlibro.jsp").forward(request, response);
 

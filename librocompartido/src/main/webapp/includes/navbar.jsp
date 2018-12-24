@@ -11,9 +11,9 @@
 			<li class="nav-item active"></li>
 		</ul>
 		<ul class="navbar-nav float-right">
-			<li><span class="badge badge-light mr-3">${usuario.email}</span></li>
+			<li><span class="badge badge-light mr-3">${usuario.nombre}</span></li>
 			<c:choose>
-				<c:when test="${usuario.email!=null}">
+				<c:when test="${usuario.nombre!=null}">
 					<li><a href="logout" class="btn btn-outline-danger">SALIR</a></li>
 				</c:when>
 				<c:otherwise>

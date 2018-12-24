@@ -1,7 +1,13 @@
 package com.ipartek.formacion.modelos.pojos;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Pagina {
+	
+	@NotEmpty
 	private String autor;
+	
+	@NotEmpty
 	private String contenido;
 
 	public String getAutor() {
