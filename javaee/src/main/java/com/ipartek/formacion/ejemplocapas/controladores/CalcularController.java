@@ -53,7 +53,8 @@ public class CalcularController extends HttpServlet {
 				request.setAttribute("resultado", i1 / i2);
 				break;
 			}
-
+			request.setAttribute("valor1", p1);
+			request.setAttribute("valor2", p2);
 			request.getRequestDispatcher("resultado.jsp").forward(request, response);
 
 		} catch (Exception e) {

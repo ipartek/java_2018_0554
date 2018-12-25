@@ -11,7 +11,9 @@
 %>
 
 <%
-	int num1 = (Integer)request.getAttribute("p1");
+String valor1 = request.getParameter("p1");
+String valor2 = request.getParameter("p2");
 %>
 
-<p> = <%=resultado%></p>
+
+<p><%=valor1 %> (+ - * /) <%=valor2 %> = <%=resultado%></p>
