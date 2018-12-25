@@ -3,17 +3,20 @@ package com.ipartek.formacion.modelo.pojos;
 public class Libro {
 	private String autor;
 	private String texto;
+	private String placeholder;
 
 	public Libro(String autor, String texto) {
-		super();
 		setAutor(autor);
 		setTexto(texto);
 	}
+
+	public Libro(String autor) {
+		setAutor("Anónimo");
+	}
 	
 	public Libro() {
-		super();
-		this.autor = "";
-		this.texto = "";
+		setAutor("Anónimo");
+		setTexto("");
 	}
 
 	public String getAutor() {
@@ -29,7 +32,20 @@ public class Libro {
 	}
 
 	public void setTexto(String texto) {
-		this.texto = texto;
+		if("".equals(texto)) {
+			setPlaceholder("Aquí se escribirá la página de tu libro. Dale a editar para escribirla. Si no ves el enlace para editarla inicia sesión");
+		}
+		else {
+			this.texto = texto;
+		}
+	}
+
+	public void setPlaceholder(String placeholder) {
+		this.placeholder = placeholder;
+	}
+	
+	public String getPlaceholder() {
+		return placeholder;
 	}
 
 	@Override
