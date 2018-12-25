@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>El perrito perrón</title>
+    <title>El libro gordo de petete</title>
 	<base href="${pageContext.request.contextPath}/">
     <!-- Bootstrap core CSS -->
     <link href="css/estilos.css" rel="stylesheet">

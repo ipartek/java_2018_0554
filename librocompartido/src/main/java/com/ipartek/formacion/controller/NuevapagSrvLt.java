@@ -49,6 +49,7 @@ public class NuevapagSrvLt extends HttpServlet {
 			direccion+=libro.size()-1;
 			request.getServletContext().setAttribute("libro", libro);
 		}else {
+			direccion+=0;
 			request.setAttribute("error", "No se ha escrito ningun texto");
 			
 		}

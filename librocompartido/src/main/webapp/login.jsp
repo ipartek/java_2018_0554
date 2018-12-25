@@ -29,7 +29,7 @@
     <link href="https://getbootstrap.com/docs/4.2/examples/sign-in/signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
-    <form action="login" class="form-signin">
+    <form novalidate="novalidate" action="login" class="form-signin" method="post">
   <img class="mb-4" src="https://getbootstrap.com/docs/4.2/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">Bienvenido</h1>
   <label for="inputEmail" class="sr-only">Usuario</label>
@@ -42,7 +42,7 @@
     </label>
   </div>
   <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-  <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+  <p class="mt-5 mb-3 text-muted">${error}</p>
 </form>
 </body>
 </html>

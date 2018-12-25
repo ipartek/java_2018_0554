@@ -41,6 +41,7 @@ public class PaginaSrvLt extends HttpServlet {
 		
 		int paginaactual = 0;
 		
+		String error= (String) request.getAttribute("error");
 		ArrayList<Pagina> libro=(ArrayList<Pagina>) request.getServletContext().getAttribute("libro");
 		String recibepagina = request.getParameter("pag");
 		if (recibepagina != null) {
@@ -50,7 +51,7 @@ public class PaginaSrvLt extends HttpServlet {
 		request.setAttribute("paginaactual", paginaactual);
 		request.setAttribute("totalpaginas", libro.size());
 		request.setAttribute("pagina", libro.get(paginaactual));
-
+		request.setAttribute("error", error);
 
 		request.getRequestDispatcher("libro.jsp").forward(request, response);
 

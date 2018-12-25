@@ -10,7 +10,7 @@
 		<ul class="navbar-nav mr-auto">
 			<c:if test="${usuario.nombre!=null}">
 				<li class="nav-item"><a class="btn btn-outline-primary"
-					href="pagina=pag=0">Ver Libro</a></li>
+					href="pagina?pag=0">Ver Libro</a></li>
 				<li>&nbsp;</li>
 				<li class="nav-item"><a class="btn btn-outline-primary"
 					href="edicion/agregarlibro.jsp">Escribir en Libro</a></li>
