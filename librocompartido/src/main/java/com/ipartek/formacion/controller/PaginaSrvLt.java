@@ -16,6 +16,8 @@ public class PaginaSrvLt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ArrayList<Pagina> libro;
 
+
+
 	@Override
 	public void init() throws ServletException {
 		super.init();
@@ -23,10 +25,13 @@ public class PaginaSrvLt extends HttpServlet {
 		libro.add(new Pagina("autor1", "texto1"));
 		libro.add(new Pagina("autor2", "texto2"));
 		libro.add(new Pagina("autor3", "texto3"));
+		
+		
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.getServletContext().setAttribute("libro", libro);
 		doPost(request, response);
 
 	}
@@ -35,7 +40,8 @@ public class PaginaSrvLt extends HttpServlet {
 			throws ServletException, IOException {
 		
 		int paginaactual = 0;
-
+		
+		ArrayList<Pagina> libro=(ArrayList<Pagina>) request.getServletContext().getAttribute("libro");
 		String recibepagina = request.getParameter("pag");
 		if (recibepagina != null) {
 			paginaactual = Integer.parseInt(recibepagina);
@@ -44,7 +50,7 @@ public class PaginaSrvLt extends HttpServlet {
 		request.setAttribute("paginaactual", paginaactual);
 		request.setAttribute("totalpaginas", libro.size());
 		request.setAttribute("pagina", libro.get(paginaactual));
-		request.setAttribute("libro", libro);
+
 
 		request.getRequestDispatcher("libro.jsp").forward(request, response);
 

@@ -8,7 +8,6 @@
     <link rel="icon" href="https://getbootstrap.com/favicon.ico">
 
     <title></title>
->
     <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="https://getbootstrap.com/docs/4.1/examples/cover/cover.css" rel="stylesheet">

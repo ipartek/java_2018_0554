@@ -8,7 +8,13 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarCollapse">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active"></li>
+			<c:if test="${usuario.nombre!=null}">
+				<li class="nav-item"><a class="btn btn-outline-primary"
+					href="pagina=pag=0">Ver Libro</a></li>
+				<li>&nbsp;</li>
+				<li class="nav-item"><a class="btn btn-outline-primary"
+					href="edicion/agregarlibro.jsp">Escribir en Libro</a></li>
+			</c:if>
 		</ul>
 		<ul class="navbar-nav float-right">
 			<li><span class="badge badge-light mr-3">${usuario.nombre}</span></li>

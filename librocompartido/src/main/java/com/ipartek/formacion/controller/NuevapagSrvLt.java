@@ -17,6 +17,8 @@ import com.ipartek.formacion.modelos.pojos.Usuario;
 @WebServlet("/nuevapag")
 public class NuevapagSrvLt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String URL="pagina?pag=";
+	
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -31,8 +33,9 @@ public class NuevapagSrvLt extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String texto=request.getParameter("texto");
+		String direccion=URL;
 		HttpSession session= request.getSession();
-		ArrayList<Pagina> libro= (ArrayList<Pagina>) session.getAttribute("libro");
+		ArrayList<Pagina> libro= (ArrayList<Pagina>) request.getServletContext().getAttribute("libro");
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		Pagina pagina;
 		if(texto!=null && texto!="") {
@@ -43,12 +46,13 @@ public class NuevapagSrvLt extends HttpServlet {
 			
 			libro.add(pagina);
 			
-			session.setAttribute("libro", libro);
+			direccion+=libro.size()-1;
+			request.getServletContext().setAttribute("libro", libro);
 		}else {
 			request.setAttribute("error", "No se ha escrito ningun texto");
 			
 		}
-		request.getRequestDispatcher("libro.jsp").forward(request, response);
+		request.getRequestDispatcher(direccion).forward(request, response);
 		
 	}
 
