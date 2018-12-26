@@ -1,9 +1,17 @@
 package com.ipartek.formacion.libroCompartido.modelo.pojo;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Pagina {
 
 	private Long id;
+	@NotEmpty
+	@Size(min=25, max=255)
 	private String texto;
+	@NotEmpty
+	@Size(min=2, max=50)
 	private String autor;
 	
 	public Pagina() {

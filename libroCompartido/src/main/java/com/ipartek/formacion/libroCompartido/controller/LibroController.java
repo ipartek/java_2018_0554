@@ -1,6 +1,8 @@
 package com.ipartek.formacion.libroCompartido.controller;
 
-import java.io.IOException;import java.util.HashMap;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Set;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -8,6 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import com.ipartek.formacion.libroCompartido.modelo.pojo.Libro;
 import com.ipartek.formacion.libroCompartido.modelo.pojo.Pagina;
@@ -20,6 +26,8 @@ public class LibroController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HashMap<Long, Pagina> paginas;
 	private Libro libroPrincipal;
+ 	private ValidatorFactory factory;
+ 	private Validator validator;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -31,6 +39,9 @@ public class LibroController extends HttpServlet {
 			paginas.put(3L,new Pagina(3L,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas feugiat sollicitudin neque, a rhoncus ipsum hendrerit ac. Suspendisse ac ligula justo. Mauris arcu magna, tristique eget lobortis mollis, feugiat et ipsum. Vivamus eu interdum nisl, ut venenatis sem. Aenean at massa vel orci porttitor ultricies in eget sem. Proin nunc. ","Daniel"));
 
 		 libroPrincipal = new Libro(1L, 1, paginas, paginas.size());
+		 
+		 factory  = Validation.buildDefaultValidatorFactory();
+	     	validator  = factory.getValidator();
 	}
 	
 	@Override
@@ -46,20 +57,32 @@ public class LibroController extends HttpServlet {
 			throws ServletException, IOException {
 
 		String pagina = request.getParameter("pagina");
-		
-		
-		if(pagina == null ) {
-			pagina ="1";
-		}
-		
-		Pagina paginaMostrar= libroPrincipal.getPaginas().get(Long.parseLong(pagina));
-		
-		request.setAttribute("paginaMostrar", paginaMostrar);
-		request.setAttribute("paginasTotales", libroPrincipal.getTotalPaginas());
+		Pagina paginaMostrar = null;
+		int paginaActual = 1;
+		try {
+			
+			if ( pagina != null ) {
+				paginaActual = Integer.parseInt(pagina);
+				if ( paginaActual <= 0 ) {
+					paginaActual = 1;
+				}
+				if ( paginaActual > libroPrincipal.getTotalPaginas()) {
+					paginaActual = 1;
+				}						
+				paginaMostrar = libroPrincipal.getPaginas().get((long)paginaActual);		
+			}else {
+				paginaMostrar=libroPrincipal.getPaginas().get(1L);
+			}			
+			
+		} catch (Exception e) {
+			request.setAttribute("alerta", "Pagina no disponible");
+			paginaMostrar=libroPrincipal.getPaginas().get(1L);
+		}finally {
+			request.setAttribute("paginaMostrar", paginaMostrar);
+			request.setAttribute("paginasTotales", libroPrincipal.getTotalPaginas());
 
-		request.getRequestDispatcher("index.jsp").forward(request, response);
-		
-		
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	/**
@@ -68,7 +91,41 @@ public class LibroController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
+		String autor = request.getParameter("autor");
+		String texto = request.getParameter("texto");
+		Pagina p  = new Pagina();
+		
+		
+		int paginaActual = 1;
+		
+		
+		try {
+			Long paginNueva=(long)(libroPrincipal.getPaginas().size() + 1);
+  			p = new Pagina(paginNueva, texto, autor);
+ 
+  			//validar			
+ 		    Set<ConstraintViolation<Pagina>> violations = validator.validate(p);
+ 		    if ( violations.isEmpty() ) {
+ 
+  		    	libroPrincipal.getPaginas().put(paginNueva, p);
+  		    	libroPrincipal.setTotalPaginas(libroPrincipal.getPaginas().size());
+ 
+  		    }else {
+ 
+  		    	request.setAttribute("alerta", "Por favor rellena el autor y texto");
+ 		    }
+ 
+  			paginaActual = libroPrincipal.getTotalPaginas();
+ 
+  		}catch (Exception e) {
+ 			request.setAttribute("alerta", "Error Escribiendo pagina" );
+ 
+  		}finally {
+  			
+ 			request.setAttribute("paginaMostrar", p );
+ 			request.setAttribute("paginasTotales",  libroPrincipal.getTotalPaginas());
+ 			request.getRequestDispatcher("index.jsp").forward(request, response);
+ 		}
 	}
 
 }

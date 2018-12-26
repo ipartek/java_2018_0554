@@ -1,6 +1,7 @@
 <%@include file="/includes/navbar.jsp" %>
 	<main role="main" class="container">
 	<div class="jumbotron">
+	<%@include file="/includes/mensajes.jsp" %>
 		<h1>Mi libro, Luna de Pluton, es número uno en ventas</h1>
 		<h2>Autor: ${paginaMostrar.autor}</h2>
 		<p>${paginaMostrar.texto}</p>
@@ -31,5 +32,10 @@
 		<li class="page-item"><a class="page-link"
 			href="index?pagina=${paginasTotales}">Última página</a></li>
 	</ul>
+	
+	<form action="index" method="get">
+		<input type="text" name="pagina" value="${paginaMostrar.id}">
+		<input type="submit" value="buscar">
+	</form>
 	</main>
 <%@include file="/includes/footer.jsp" %>
