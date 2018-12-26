@@ -4,8 +4,8 @@
 
 
     <main role="main" class="container">
-      <div class="jumbotron">      
-				<p>auto <span class="badge badge-secondary">${pagina.autor}</span></p>
+      <div class="jumbotron">
+				<p><span class="badge badge-secondary">${pagina.autor}</span></p>
 				<div class="border border-secondary p-3">${pagina.texto}</div>
 				<hr>
 				<p>pagina ${paginaActual+1} / ${paginasTotal} </p>			
