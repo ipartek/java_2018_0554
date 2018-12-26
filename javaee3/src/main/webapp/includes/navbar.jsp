@@ -6,26 +6,20 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/privado/videos">Videos</a>
+            <a class="nav-link" href="privado/videos">Videos</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="discos">Discos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Perros</a>
-          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="privado/libro">Libro</a>
+          </li>  
+          <li class="nav-item active">
+            <a class="nav-link" href="privado/usuarios.jsp">Usuarios Conectados</a>
+          </li>         
         </ul>
-        <form class="form-inline mt-2 mt-md-0">
-          <a class="btn btn-light" href="../logout" role="button">LOGOUT &raquo;</a>
-        </form>
+        <ul class="navbar-nav float-right">
+        	<li><span class="badge badge-light mr-3">${usuario.email}</span></li>
+        	<li><a href="logout" class="btn btn-outline-danger">SALIR</a></li>
+        </ul>
+        
       </div>
     </nav>
-  
-  
-  
-   <div class="container">
-      <div class="jumbotron mt-3">
-        <h2>Bienvenido: ${usuario.email}</h2>
-      </div>
-    </div>
     

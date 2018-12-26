@@ -29,7 +29,7 @@ public class LoginController extends HttpServlet {
 	private ValidatorFactory factory;
 	private Validator validator;
 	
-	public static final String VIEW_LOGIN = "index.jsp";
+	public static final String VIEW_LOGIN = "login.jsp";
 	public static final String CONTROLLER_VIDEOS = "privado/videos";
 	
        
@@ -43,23 +43,13 @@ public class LoginController extends HttpServlet {
     }
 
 	
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-			
-		request.getRequestDispatcher(VIEW_LOGIN).forward(request, response);
-		
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		request.getRequestDispatcher(VIEW_LOGIN).forward(request, response);
+	}
+    
+    
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
 		
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
@@ -79,14 +69,11 @@ public class LoginController extends HttpServlet {
 			if ( violations.size() > 0) {			// validacion NO PASA
 				
 				 String errores = "<ul>"; 
-				 for (ConstraintViolation<Usuario> violation : violations) {
-					 	
-					 errores += String.format("<li> %s : %s </li>" , violation.getPropertyPath(), violation.getMessage() );
-						
-						// violation.getPropertyPath()
+				 for (ConstraintViolation<Usuario> violation : violations) {					 	
+					 errores += String.format("<li> %s : %s </li>" , violation.getPropertyPath(), violation.getMessage() );					
 				 }
-				 errores += "</ul>"; 
-				request.setAttribute("mensaje", errores);
+				 errores += "</ul>";				 
+				request.setAttribute("mensaje", errores);				
 				
 			}else {                                // validacion OK
 			
@@ -98,8 +85,9 @@ public class LoginController extends HttpServlet {
 				}else {
 					
 					HttpSession session = request.getSession();
+					// asociamos un listener para listar usuarios @see UsuariosListener
 					session.setAttribute("usuario", usuario);
-					redirect = true;
+					redirect = true;					
 				}
 			}	
 				
@@ -108,12 +96,18 @@ public class LoginController extends HttpServlet {
 			
 			e.printStackTrace();
 		}finally {
+			
 			if(redirect) {				
 				response.sendRedirect(CONTROLLER_VIDEOS);
 			}else {
 				request.getRequestDispatcher(view).forward(request, response);
 			}
 		}
+			
+		
+		
 	}
+
+	
 
 }

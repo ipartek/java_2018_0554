@@ -19,27 +19,29 @@ import com.ipartek.formacion.modelo.pojos.Usuario;
 public class UsuariosListener implements HttpSessionAttributeListener {
 	// public static HashMap<String, Usuario> usuariosLogeados
 	public static ArrayList<Usuario> usuariosLogeados = new ArrayList<Usuario>();
-	
 
 	public void attributeAdded(HttpSessionBindingEvent event) {
-		//System.out.println("attributeAdded");
+		// System.out.println("attributeAdded");
 
-		usuariosLogeados.add(new Usuario(1l, "manoli", "aasasasasas"));
-		usuariosLogeados.add(new Usuario(2l, "pepe", "aasasasasas"));
-		usuariosLogeados.add(new Usuario(3l, "federico", "aasasasasas"));
+		System.out.println("attributeAdded");
 
-		
-		
-		ServletContext appContext = event.getSession().getServletContext();		
-		appContext.setAttribute("usuariosLogeados", usuariosLogeados);
-		
-		
-		
+		if ("usuario".equals(event.getName())) {
 
+			usuariosLogeados.add((Usuario) event.getValue());
+
+			ServletContext appContext = event.getSession().getServletContext();
+			appContext.setAttribute("usuariosLogeados", usuariosLogeados);
+		}
 	}
 
 	public void attributeRemoved(HttpSessionBindingEvent event) {
-		System.out.println("attributeRemoved");
+		if ("usuario".equals(event.getName())) {
+
+			usuariosLogeados.remove((Usuario) event.getValue());
+
+			ServletContext appContext = event.getSession().getServletContext();
+			appContext.setAttribute("usuariosLogeados", usuariosLogeados);
+		}
 	}
 
 	public void attributeReplaced(HttpSessionBindingEvent event) {
