@@ -38,12 +38,12 @@ public class SeguridadFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) res;
 
 		HttpSession session = request.getSession();
-		Usuario uLogueado = (Usuario) session.getAttribute("usuarioLogueado");
+		Usuario uLogueado = (Usuario) session.getAttribute("logueado");
 		if (uLogueado != null) {
 			chain.doFilter(req, res);
 		}
 		else {
-			response.sendRedirect(request.getContextPath() + "/login.jsp");
+			response.sendRedirect(request.getContextPath() + "/login");
 		}
 	}
 

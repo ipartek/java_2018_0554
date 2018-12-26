@@ -30,26 +30,31 @@ public class LibroController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String paginaStr = request.getParameter("pagina");
+		String buscarStr = request.getParameter("buscar");
 		try {
 			if (paginaStr != null) {
 				paginaActual = Integer.parseInt(paginaStr);
-				if (paginaActual >= libro.size() || paginaActual < 0) {
-					if (paginaActual < 0) {
-						paginaActual = 0;
-					}
-					if (paginaActual > libro.size() - 1) {
-						paginaActual = libro.size()-1;
-					}
+			} else if (buscarStr != null) {
+				paginaActual = Integer.parseInt(buscarStr);
+				paginaActual--;
+			}
+			if (paginaActual >= libro.size() || paginaActual < 0) {
+				if (paginaActual < 0) {
+					paginaActual = 0;
+				}
+				if (paginaActual > libro.size() - 1) {
+					paginaActual = libro.size() - 1;
 				}
 			}
-		error = (String) request.getAttribute("error");
+			error = (String) request.getAttribute("error");
 		} catch (NumberFormatException e) {
 			error = "Página NO disponible";
 			paginaActual = 0;
 		} finally {
 			ServletContext context = request.getSession().getServletContext();
-			context.setAttribute("arrayPaginas", libro); // ArrayList de libros recogidos en una variable de aplicación llamada
-													// "paginas"
+			context.setAttribute("arrayPaginas", libro); // ArrayList de libros recogidos en una variable de aplicación
+															// llamada
+			// "paginas"
 			request.setAttribute("pagina", libro.get(paginaActual)); // Al ArrayList "libro" se le pasa la página actual
 																		// del getParameter para introducirla en el
 																		// método get del ArryList y obtener el índice
@@ -59,7 +64,7 @@ public class LibroController extends HttpServlet {
 																// actual se pasa en el atributo llamado "paginaActual"
 			request.setAttribute("paginasTotal", libro.size()); // La cantidad de objetos libro se obtiene con el método
 																// size y se envia el atributo llamado "paginasTotal"
-			
+
 			request.setAttribute("error", error);
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
