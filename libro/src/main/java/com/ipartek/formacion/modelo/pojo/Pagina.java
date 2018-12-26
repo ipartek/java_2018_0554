@@ -1,35 +1,31 @@
 package com.ipartek.formacion.modelo.pojo;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Pagina {
 	
-	private Long id;
+	@NotEmpty
+	@Size(min=2, max=50)
 	private String autor;
+	
+	@NotEmpty
+	@Size(min=10, max=55)
 	private String texto;
 	
 	//Constructores
 		public Pagina() {
 			super();
-			this.id = (long) -1;
 			this.autor ="";
 			this.texto ="";
 		}
 		
 
-		public Pagina(Long id,String autor, String texto) {
+		public Pagina(String autor, String texto) {
 			this();
-			setId(id);
 			setAutor(autor);
 			setTexto(texto);
-		}
-
-
-		public Long getId() {
-			return id;
-		}
-
-
-		public void setId(Long id) {
-			this.id = id;
 		}
 
 
@@ -55,8 +51,11 @@ public class Pagina {
 
 		@Override
 		public String toString() {
-			return "Pagina [id=" + id + ", autor=" + autor + ", texto=" + texto + "]";
+			return "Pagina [autor=" + autor + ", texto=" + texto + "]";
 		}
+
+
+	
 		
 
 }

@@ -11,12 +11,16 @@
           <li class="nav-item active">
             <a class="nav-link" href="/privado/videos">Perros</a>
           </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/privado/usuarioslog">Usuarios Conectados</a>
+          </li>
+          
           <li class="nav-item">
             <a class="nav-link disabled" href="#">Disabled</a>
           </li>
         </ul>
         ${usuario}
-        <a href="/logout">LOGOUT</a>
+        <a href="logout">LOGOUT</a>
         
       </div>
 </nav>
