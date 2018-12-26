@@ -5,7 +5,6 @@
 
     <main role="main" class="container">
       <div class="jumbotron">
-      		<p>${error}</p>
    			<p>publicada por: ${pagina.autor}</p>
    			<textarea readonly cols="115" rows="20">
    			 		${pagina.contenido}	
