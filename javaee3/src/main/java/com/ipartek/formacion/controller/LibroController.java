@@ -2,6 +2,7 @@ package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -9,6 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import com.ipartek.formacion.modelo.pojo.Pagina;
 
@@ -19,11 +24,18 @@ import com.ipartek.formacion.modelo.pojo.Pagina;
 public class LibroController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Pagina> libro;
+	private ArrayList<Pagina> libro;	
+	private ValidatorFactory factory;
+	private Validator validator;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {	
 		super.init(config);
+		
+		factory  = Validation.buildDefaultValidatorFactory();
+    	validator  = factory.getValidator();
+		
+		
 		libro = new  ArrayList<Pagina>();
 		libro.add( new Pagina("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et velit porttitor, condimentum dui ut, rhoncus mi. Nunc lacinia arcu nec neque mattis elementum. Praesent pellentesque nibh et enim interdum, at tincidunt felis tempus. Aliquam sit amet risus posuere, cursus libero vitae, aliquet est. Etiam condimentum ac ex id consectetur. Nunc placerat odio interdum tellus facilisis tempus. Nunc a quam eros. Nulla facilisi. Maecenas ullamcorper porttitor tortor, ut laoreet nulla dictum a. Aenean molestie eu nibh id iaculis. Nulla sodales venenatis nibh, id egestas metus.", "autor1"));
 		libro.add( new Pagina("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec nulla ullamcorper, commodo arcu quis, tincidunt dui. Fusce consectetur pretium magna vitae semper. Praesent sed metus vel purus varius vestibulum. Nullam sagittis ex odio, a pellentesque diam molestie ut. Nam velit nisi, aliquet vel ultrices in, pulvinar quis ex. Integer feugiat rutrum arcu, vitae sagittis lacus interdum et.", "autor2"));
@@ -37,15 +49,7 @@ public class LibroController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int paginaActual = 0;
+		int paginaActual = 1;
 		int paginasTotal = libro.size();
 		Pagina paginaMostrar = new Pagina();
 		
@@ -55,12 +59,12 @@ public class LibroController extends HttpServlet {
 				if ( pagina != null ) {
 					paginaActual = Integer.parseInt(pagina);
 					if ( paginaActual <= 0 ) {
-						paginaActual = 0;
+						paginaActual = 1;
 					}
-					if ( paginaActual >= paginasTotal ) {
-						paginaActual = 0;
+					if ( paginaActual > paginasTotal ) {
+						paginaActual = 1;
 					}						
-					paginaMostrar = libro.get(paginaActual);			
+					paginaMostrar = libro.get(--paginaActual);			
 				}else {
 					paginaMostrar = libro.get(0);
 				}
@@ -75,6 +79,44 @@ public class LibroController extends HttpServlet {
 			request.setAttribute("paginaActual", paginaActual);
 			request.setAttribute("paginasTotal",  paginasTotal );
 			
+			request.getRequestDispatcher("libro.jsp").forward(request, response);
+		}		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String autor = request.getParameter("autor");
+		String texto = request.getParameter("texto");
+		Pagina p = new Pagina();
+		int paginaActual = 0;
+		
+		try {
+		
+			p = new Pagina(texto, autor);
+			
+			//validar			
+		    Set<ConstraintViolation<Pagina>> violations = validator.validate(p);
+		    if ( violations.isEmpty() ) {
+		    	
+		    	libro.add(p);
+		    	
+		    }else {
+		    	
+		    	request.setAttribute("alerta", "Por favor rellena el autor y texto");
+		    }
+			
+			paginaActual = libro.size();
+				
+		}catch (Exception e) {
+			request.setAttribute("alerta", "Error Escribiendo pagina" );
+			
+		}finally {
+			request.setAttribute("pagina", p );
+			request.setAttribute("paginaActual", --paginaActual );
+			request.setAttribute("paginasTotal",  libro.size() );
 			request.getRequestDispatcher("libro.jsp").forward(request, response);
 		}		
 			
