@@ -48,6 +48,8 @@ public class LoginSrvLt extends HttpServlet {
 		}
 		if (usuario != null) {
 			HttpSession session = request.getSession();
+			//listener contador
+			
 			session.setMaxInactiveInterval(60 * 5);
 			session.setAttribute("usuario", usuario);
 			session.setAttribute("libro", request.getAttribute("libro"));
