@@ -8,7 +8,7 @@
 	<textarea rows="10" cols="130" class="border border-secondary p-3"
 		readonly placeholder="${pagina.placeholder}">${pagina.texto}</textarea>
 	<hr>
-	<a href="usuariosLogueados.jsp">Usuarios Conectados</a>
+	<a href="usuariosLogueados">Usuarios Conectados</a>
 	<hr>
 	<p>Página ${paginaActual+1} / ${paginasTotal}</p>
 	<form class="float-right" action="libro" method="get">

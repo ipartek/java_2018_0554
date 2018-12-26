@@ -8,26 +8,39 @@ import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
 import com.ipartek.formacion.modelo.pojos.Usuario;
-
 @WebListener
 public class UsuariosListener implements HttpSessionAttributeListener {
+	public static ArrayList<Usuario> usuariosLogueados = new ArrayList<Usuario>();
 
-	public static ArrayList<Usuario> usuariosLogeados = new ArrayList<Usuario>();
-
+	/**
+	 * @see HttpSessionAttributeListener#attributeAdded(HttpSessionBindingEvent)
+	 */
 	public void attributeAdded(HttpSessionBindingEvent event) {
-		if ("usuario".equals(event.getName())) {
-			usuariosLogeados.add((Usuario) event.getValue());
+		System.out.println("attributeAdded");
+
+		if ("logueado".equals(event.getName())) {
+
+			usuariosLogueados.add((Usuario) event.getValue());
+
+			ServletContext appContext = event.getSession().getServletContext();
+			appContext.setAttribute("usuariosLogueados", usuariosLogueados);
 		}
-		ServletContext appContext = event.getSession().getServletContext();
-		appContext.setAttribute("usuariosLogeados", usuariosLogeados);
 	}
 
+	/**
+	 * @see HttpSessionAttributeListener#attributeRemoved(HttpSessionBindingEvent)
+	 */
 	public void attributeRemoved(HttpSessionBindingEvent event) {
-		System.out.println("attributeRemoved");
-	}
+		if ("usuario".equals(event.getName())) {
 
+			usuariosLogueados.remove((Usuario) event.getValue());
+
+			ServletContext appContext = event.getSession().getServletContext();
+			appContext.setAttribute("usuariosLogueados", usuariosLogueados);
+		}
+	}
 	public void attributeReplaced(HttpSessionBindingEvent event) {
-		System.out.println("attributeReplaced");
+
 	}
 
 }

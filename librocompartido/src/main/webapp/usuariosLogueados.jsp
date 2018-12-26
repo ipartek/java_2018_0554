@@ -7,7 +7,7 @@
 		<tbody>
 			<c:forEach items="${usuariosLogueados}" var="usuario">
 				<td>${usuario.email}</td>
-				<td>${usuario.autor}</td>
+				<td>${usuario.password}</td>
 			</c:forEach>
 		</tbody>
 	</table>
