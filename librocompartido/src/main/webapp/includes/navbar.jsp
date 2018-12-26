@@ -7,18 +7,18 @@
 	</button>
 	<div class="collapse navbar-collapse text-white" id="navbarCollapse">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active"><a class="nav-link"
-				href="#"></a></li>
 		</ul>
 		<ul class="navbar-nav">
 			<li class="text-white">${usuarioLogueado.email}</li>
 		</ul>
 		<c:choose>
 			<c:when test="${usuarioLogueado.email == null}">
-				<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/login">LOGIN</a>
+				<a class="btn btn-outline-primary"
+					href="${pageContext.request.contextPath}/login">LOGIN</a>
 			</c:when>
 			<c:otherwise>
-				<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/logout">LOGOUT</a>
+				<a class="btn btn-outline-primary"
+					href="${pageContext.request.contextPath}/logout">LOGOUT</a>
 			</c:otherwise>
 		</c:choose>
 	</div>

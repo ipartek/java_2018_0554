@@ -1,17 +1,38 @@
 <%@include file="includes/header.jsp"%>
 <%@include file="includes/navbar.jsp"%>
-<p>Autor: ${pagina.autor}</p>
-<textarea rows="20" cols="50" readonly placeholder="${pagina.placeholder}">${pagina.texto}</textarea>
-<c:if test="${usuarioLogueado.email != null}">
-	<a href="mantenimiento?accion=insertar&autor=${usuarioLogueado.email}">Insertar</a>
-</c:if>
-<c:if test="${usuarioLogueado.email == pagina.autor}">
-	<a href="mantenimiento?accion=editar&pagina=${paginaActual}&texto=${pagina.texto}&autor=${pagina.autor}">Editar</a>
-	<a href="mantenimiento?accion=borrar&pagina=${paginaActual}">Borrar</a>
-</c:if>
-
-Página:
-<a href="libro?pagina=${paginaActual-1}"> < </a>
-${paginaActual+1} / ${paginasTotal}
-<a href="libro?pagina=${paginaActual+1}"> > </a>
+<main role="main" class="container">
+<div class="jumbotron">
+	<p>
+		<span class="badge badge-secondary">${pagina.autor}</span>
+	</p>
+	<textarea rows="10" cols="130" class="border border-secondary p-3"
+		readonly placeholder="${pagina.placeholder}">${pagina.texto}</textarea>
+	<hr>
+	<p>Página ${paginaActual+1} / ${paginasTotal}</p>
+	<form class="float-right" action="libro" method="get">
+		<input type="text" name="pagina" value="${paginaActual+1}" required>
+		<input type="submit" value="buscar">
+	</form>
+	<nav aria-label="Page navigation">
+		<span class="float-left"><a class="page-link"
+			href="libro?pagina=${paginaActual-1}">Anterior</a></span> <span
+			class="float-right"><a class="page-link"
+			href="libro?pagina=${paginaActual+1}">Siguiente</a></span>
+		<ul>
+			<c:if test="${usuarioLogueado.email != null}">
+				<li class="nav-item active"><a class="nav-link"
+					href="mantenimiento?accion=insertar&autor=${usuarioLogueado.email}">Insertar</a></li>
+			</c:if>
+			<c:if test="${usuarioLogueado.email == pagina.autor}">
+				<li class="nav-item active"><a class="nav-link"
+					href="mantenimiento?accion=editar&pagina=${paginaActual}&texto=${pagina.texto}&autor=${usuarioLogueado.email}">Editar</a></li>
+				<li class="nav-item active"><a class="nav-link"
+					href="mantenimiento?accion=borrar&pagina=${paginaActual}">Borrar</a>
+				</li>
+			</c:if>
+		</ul>
+	</nav>
+	<%@include file="includes/mensajes.jsp"%>
+</div>
+</main>
 <%@include file="includes/footer.jsp"%>
