@@ -6,4 +6,14 @@
 	<welcome-file-list>
 		<welcome-file>libro</welcome-file>
 	</welcome-file-list>
+	<!-- No recomendable error 500 en producción -->
+	<error-page>
+	<error-code>404</error-code>
+	<location>/error/404.jsp</location>
+	</error-page>
+	<!-- También se puede por tipo de Excepción (No recomendable en producción) 
+	<error-page>
+	<exception-type>NullPointer</exception-type>
+	<location>/login.jsp</location>
+	</error-page> -->
 </web-app>
