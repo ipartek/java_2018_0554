@@ -36,6 +36,7 @@ public class LoginFilter implements Filter {
 		Usuario uLogueado =(Usuario)session.getAttribute("usuario");
 		
 		if (uLogueado!=null) {
+			session.removeAttribute("error");
 			chain.doFilter(request, response);
 		}else {
 			session.setAttribute("error", "necesitas logear para añadir una página");
