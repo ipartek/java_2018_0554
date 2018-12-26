@@ -1,31 +1,30 @@
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" href="../../../../favicon.ico">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+   
+    <title>Videos</title>
 
-<title>Leer Libros</title>
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Bootstrap core CSS -->
-<link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="signin.css" rel="stylesheet">
-
-<link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.css"
-	rel="stylesheet">
-<link rel="stylesheet" href="CSS/login.css">
-</head>
+    <!-- Custom styles for this template -->
+    <link href="CSS/login.css" rel="stylesheet">
+  </head>
 
   <body class="text-center"> 	
+  
+  
+  
+ 
+  
 
 
-    <form novalidate action="login" method="post" class="form-signin">    
+    <form novalidate action="privado/libro" method="post" class="form-signin">    
     
      <c:if test="${not empty mensaje}">	  
 		 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -33,11 +32,11 @@
 		 </div>	 	
 	  </c:if>   
       
-      <label for="nombre" class="sr-only">Nombre</label>
-      <input type="text" name="nombre" class="form-control" value="" placeholder="Nombre" required autofocus>
+      <label for="email" class="sr-only">Correo Electronico:</label>
+      <input type="email" name="email" class="form-control" value="maria@gmail.com" placeholder="tu@email.com" required autofocus>
       
-      <label for="password" class="sr-only">Contraseña</label>
-      <input type="password" name="password" class="form-control" value="" placeholder="minimo 6 caracteres" required>
+      <label for="pass" class="sr-only">Contraseña</label>
+      <input type="password" name="pass" class="form-control" value="12345678" placeholder="minimo 6 caracteres" required>
       
       <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
       

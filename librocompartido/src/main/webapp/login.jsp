@@ -1,7 +1,7 @@
 <form action="login" method="post">
 	<p>
-		<label for="nombre">Nombre</label>
-		<input type="text" name="nombre" id="nombre" />
+		<label for="nick">Nombre</label>
+		<input type="text" name="nick" id="nombre" />
 	</p>
 	<p>
 		<label for="password">Password</label>
