@@ -9,10 +9,10 @@
 		<ul class="navbar-nav mr-auto">
 		</ul>
 		<ul class="navbar-nav">
-			<li class="text-white">${usuarioLogueado.email}</li>
+			<li class="text-white">${logueado.email}</li>
 		</ul>
 		<c:choose>
-			<c:when test="${usuarioLogueado.email == null}">
+			<c:when test="${logueado.email == null}">
 				<a class="btn btn-outline-primary"
 					href="${pageContext.request.contextPath}/login">LOGIN</a>
 			</c:when>

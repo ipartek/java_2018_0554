@@ -90,7 +90,7 @@ public class Mantenimiento extends HttpServlet {
 		}
 		if (error) {
 			// TODO Cambiar sendRedirect por RequestDispatcher
-			response.sendRedirect("libro?errorStr");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		else {
 			response.sendRedirect("libro");

@@ -6,7 +6,7 @@
 		<form method="post" action="mantenimiento">
 			<input type="hidden" name="pagina" value="${pagina}"> <input
 				type="text" name="autor" readonly class="form-control"
-				value="${usuarioLogueado.email}">
+				value="${logueado.email}">
 			<textarea rows="10" cols="130" placeholder="minimo 50 caracteres" name="texto"
 				class="border border-secondary p-3">${texto}</textarea>
 			<button type="submit" class="btn btn-primary">Enviar</button>
