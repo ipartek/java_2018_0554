@@ -42,7 +42,7 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		request.getRequestDispatcher(VISTA_LOGIN).forward(request, response);
 	}
 
 	/**
@@ -50,6 +50,7 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String vista = VISTA_LOGIN;
+		
 		
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
@@ -59,8 +60,14 @@ public class LoginController extends HttpServlet {
 		for (Usuario u : usuarios) {
 			if (u.getEmail().equals(usuario.getEmail()) && u.getPassword().equals(usuario.getPassword())) {
 				vista = CONTROLLER_PAGINAS;
+				HttpSession session = request.getSession();
+				session.setAttribute("usuario_logueado", usuario);
 				break;
 			}
+		}
+		
+		if (vista.equals(VISTA_LOGIN)) {
+			request.setAttribute("mensaje", "Usuario no válido");
 		}
 		
 		request.getRequestDispatcher(vista).forward(request, response);

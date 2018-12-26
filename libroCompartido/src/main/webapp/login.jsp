@@ -36,13 +36,10 @@
      <c:if test="${mensaje != null}">
      <div class="alert alert-danger">${mensaje }</div>
      </c:if>
-     <c:if test="${sessionScope.sesionNoIniciada != null}">
+     <%-- <c:if test="${sessionScope.sesionNoIniciada != null}">
      <div class="alert alert-danger">${sesionNoIniciada }</div>
-     </c:if>
-    <%-- <a href="login?usuario=manolo&pass=lolailo">Link al Login</a>
-    <h2>Video</h2>
-    ${requestScope.video.nombre}  
-    ${video} --%>
+     </c:if> --%>
+    <a href="libro" class="btn btn-lg btn-danger btn-block">Volver a "Leer páginas"</a>
     </form>
   </body>
 </html>
