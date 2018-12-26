@@ -18,12 +18,6 @@
 
   <body class="text-center"> 	
   
-  
-  
- 
-  
-
-
     <form novalidate action="login" method="post" class="form-signin">    
     
      <c:if test="${not empty mensaje}">	  
@@ -42,9 +36,6 @@
       
     </form>
 
-    
-    
-    
     
   </body>
 </html>

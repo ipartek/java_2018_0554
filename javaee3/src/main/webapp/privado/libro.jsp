@@ -26,9 +26,17 @@
 		
 		<h2>Escribir nueva Página</h2>
 		<form action="privado/libro" method="post">
-			<input type="text" name="autor" value="${usuario.email}"><br>
-			<textarea name="texto" placeholder="minimo 50 caracteres"></textarea><br>
-			<input type="submit" value="Nueva">
+			<div class="form-group">
+				<input type="text" name="autor" value="${usuario.email}"  class="form-control">
+			</div>	
+			
+			<div class="form-group">	
+				<textarea name="texto" placeholder="minimo 50 caracteres"  class="form-control"></textarea>
+			</div>	
+			
+			<div class="form-group">
+				<input type="submit" value="Nueva" class="btn btn-primary btn-block">
+			</div>	
 		</form>
 		
 		
