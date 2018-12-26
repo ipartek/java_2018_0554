@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC4B14eczpGQrbfGNpc72jeBel2-dAEVoLkhwaVUTVoRCNYjym">
 
-    <title>Login JavaEE3</title>
+    <title>Login LibroCompartido</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet"
@@ -36,9 +36,9 @@
      <c:if test="${mensaje != null}">
      <div class="alert alert-danger">${mensaje }</div>
      </c:if>
-     <%-- <c:if test="${sessionScope.sesionNoIniciada != null}">
+     <c:if test="${sesionNoIniciada != null}">
      <div class="alert alert-danger">${sesionNoIniciada }</div>
-     </c:if> --%>
+     </c:if>
     <a href="libro" class="btn btn-lg btn-danger btn-block">Volver a "Leer páginas"</a>
     </form>
   </body>

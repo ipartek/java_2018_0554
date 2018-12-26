@@ -2,8 +2,6 @@ package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Set;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,12 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-
-import com.ipartek.formacion.modelo.dao.UsuarioDAO;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 
 /**
@@ -68,6 +60,7 @@ public class LoginController extends HttpServlet {
 		
 		if (vista.equals(VISTA_LOGIN)) {
 			request.setAttribute("mensaje", "Usuario no válido");
+			request.getSession().invalidate();
 		}
 		
 		request.getRequestDispatcher(vista).forward(request, response);

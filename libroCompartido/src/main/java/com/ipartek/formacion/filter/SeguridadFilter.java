@@ -23,16 +23,10 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
 					, urlPatterns = { "/privado/*" })
 public class SeguridadFilter implements Filter {
 
-	/**
-	 * @see Filter#destroy()
-	 */
 	public void destroy() {
 
 	}
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
@@ -50,11 +44,8 @@ public class SeguridadFilter implements Filter {
 		
 	}
 
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
+		
 	}
 
 }
