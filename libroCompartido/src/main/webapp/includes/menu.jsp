@@ -8,9 +8,12 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarCollapse">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link" href="#">Inicio
+				<li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath }">Inicio
 						<span class="sr-only">(current)</span>
 				</a></li>
+				<li class="nav-item active">
+				<a class="nav-link" href="usuarios_logueados.jsp">Usuarios logueados</a>
+				</li>
 				<!-- <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
           </li>

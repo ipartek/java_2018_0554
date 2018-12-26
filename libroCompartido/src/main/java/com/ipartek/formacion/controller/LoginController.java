@@ -53,6 +53,7 @@ public class LoginController extends HttpServlet {
 			if (u.getEmail().equals(usuario.getEmail()) && u.getPassword().equals(usuario.getPassword())) {
 				vista = CONTROLLER_PAGINAS;
 				HttpSession session = request.getSession();
+				//Asociamos un listener para listar usuarios @see UsuariosListener
 				session.setAttribute("usuario_logueado", usuario);
 				break;
 			}
