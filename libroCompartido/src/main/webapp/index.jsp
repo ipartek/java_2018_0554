@@ -1,5 +1,6 @@
 <%@ include file="includes/cabecera.jsp" %>
 <%@ include file="includes/menu.jsp" %>
+<%@ include file="includes/mensajes.jsp" %>
 <div class="container">
 	<div class="jumbotron">
 		<h1>Libro Compartido</h1>
@@ -36,5 +37,9 @@
     </c:otherwise>
 	</c:choose>
 </ul>
+<form action="libro" method="get">
+<input type="text" name="pagina" id="pagina" value="${paginaActual }" required>
+<input type="submit" value="Buscar">
+</form>
 </div>
 <%@ include file="includes/pie.jsp" %>
