@@ -64,7 +64,8 @@ public class LoginSrvLt extends HttpServlet {
 					session.setMaxInactiveInterval(60 * 5);
 					session.setAttribute("usuario_logueado", usuario);
 					//request.getRequestDispatcher("principal.jsp").forward(request, response);
-					response.sendRedirect("pral");
+					//response.sendRedirect("pral");
+					response.sendRedirect(request.getContextPath()+"/listadolistener.jsp");
 				} else {
 					request.setAttribute("error", "Login incorrecto");
 					request.getRequestDispatcher("index.jsp").forward(request, response);
