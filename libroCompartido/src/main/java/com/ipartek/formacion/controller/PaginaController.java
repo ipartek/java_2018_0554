@@ -61,6 +61,7 @@ public class PaginaController extends HttpServlet {
 		if (violations.isEmpty()) {
 			paginas.put(pagina.getId(), pagina);
 			session.setAttribute("paginas", paginas);
+			request.setAttribute("creacion", "Página creada con éxito");
 			request.getRequestDispatcher("libro").forward(request, response);
 		}else {
 			request.setAttribute("alerta", "Existen fallos en los datos para la creación de la nueva página");

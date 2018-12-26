@@ -18,16 +18,25 @@
             <a class="nav-link disabled" href="#">Disabled</a>
           </li> -->
 			</ul>
+			<ul class="navbar-nav mr-auto border border-success">
+			<li class="nav-item">
+            <i class="fa fa-user-o fa-2x text-success" aria-hidden="true"></i>
+          	</li>
+          	<li class="nav-item">
+          	<span class="text-warning">${sessionScope.usuario_logueado.email }</span>
+          	</li>
+			</ul>
 			<c:choose>
 			    <c:when test="${sessionScope.usuario_logueado!=null}">
+			    <a href="privado/pagina.jsp" class="btn btn-outline-primary my-2 my-sm-0">Crear página</a>
 			    <form class="form-inline mt-2 mt-md-0" action="logout" method="POST">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerrar Sesión</button>
-			</form>   
-			    </c:when>    
-			    <c:otherwise>
-			     <form class="form-inline mt-2 mt-md-0" action="login" method="GET">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Iniciar Sesión</button>
-			</form>
+					</form>   
+					    </c:when>    
+					    <c:otherwise>
+					     <form class="form-inline mt-2 mt-md-0" action="login" method="GET">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Iniciar Sesión</button>
+					</form>
 			    </c:otherwise>
 			</c:choose>
 		</div>
