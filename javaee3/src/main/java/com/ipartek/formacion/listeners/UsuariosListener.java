@@ -27,27 +27,34 @@ public class UsuariosListener implements HttpSessionAttributeListener {
     public void attributeAdded(HttpSessionBindingEvent event)  { 
         System.out.println("attributeAdded");
         
-        usuariosLogeados.add( new Usuario(1l, "manoli", "aasasasasas"));
-        usuariosLogeados.add( new Usuario(2l, "pepe", "aasasasasas"));
-        usuariosLogeados.add( new Usuario(3l, "federico", "aasasasasas"));
-        
-        
-        ServletContext appContext = event.getSession().getServletContext();        
-        appContext.setAttribute("usuariosLogeados", usuariosLogeados);
+        if ( "usuario".equals(event.getName())) {
+        	
+        	usuariosLogeados.add( (Usuario) event.getValue() );        	
+        	
+        	ServletContext appContext = event.getSession().getServletContext();        
+            appContext.setAttribute("usuariosLogeados", usuariosLogeados);
+        }
     }
 
 	/**
      * @see HttpSessionAttributeListener#attributeRemoved(HttpSessionBindingEvent)
      */
     public void attributeRemoved(HttpSessionBindingEvent event)  { 
-    	System.out.println("attributeRemoved");
+    	 if ( "usuario".equals(event.getName())) {
+          	
+          	usuariosLogeados.remove((Usuario) event.getValue() );        	
+          	
+          	ServletContext appContext = event.getSession().getServletContext();        
+              appContext.setAttribute("usuariosLogeados", usuariosLogeados);
+          }
     }
 
 	/**
      * @see HttpSessionAttributeListener#attributeReplaced(HttpSessionBindingEvent)
      */
     public void attributeReplaced(HttpSessionBindingEvent event)  { 
-    	System.out.println("attributeReplaced");
+    	
+    	
     }
 	
 }
