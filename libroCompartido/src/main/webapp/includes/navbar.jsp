@@ -11,6 +11,9 @@
 				<li class="nav-item active"><a class="nav-link" href="index">Libro
 						<span class="sr-only">(current)</span>
 				</a></li>
+				<li class="nav-item active"><a class="nav-link" href="usuariosLogeados.jsp">Usuarios Conectados
+						<span class="sr-only">(current)</span>
+				</a></li>
 				<c:choose>
 					<c:when test="${empty sessionScope.usuarioLogeado.usuario}">
       					

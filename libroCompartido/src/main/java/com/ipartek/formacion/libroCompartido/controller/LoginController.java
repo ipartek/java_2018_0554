@@ -53,6 +53,7 @@ public class LoginController extends HttpServlet {
 						usuarioLogeado = u;
 						
 						HttpSession session = request.getSession();
+						//Asocioamos un listener para listar usuarios conectados @see UsuarioListener
 						session.setMaxInactiveInterval(60 * 5); // 5minutos
 						session.setAttribute("usuarioLogeado", usuarioLogeado);
 						vista= CONTROLER_CREARPAGINA;
