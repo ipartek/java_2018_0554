@@ -85,6 +85,7 @@ public class LoginController extends HttpServlet {
 				}else {
 					
 					HttpSession session = request.getSession();
+					// asociamos un listener para listar usuarios @see UsuariosListener
 					session.setAttribute("usuario", usuario);
 					redirect = true;					
 				}
