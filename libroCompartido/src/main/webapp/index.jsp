@@ -33,9 +33,9 @@
 			href="index?pagina=${paginasTotales}">Última página</a></li>
 	</ul>
 	
-	<form action="index" method="get">
-		<input type="text" name="pagina" value="${paginaMostrar.id}">
-		<input type="submit" value="buscar">
+	<form action="index" method="get"  class="d-flex flex-row bd-highlight mb-3">
+		<input type="text" name="pagina" class="form-control p-2 bd-highlight" value="${paginaMostrar.id}">
+		<input type="submit" value="buscar" class="btn btn-primary p-2 bd-highlight">
 	</form>
 	</main>
 <%@include file="/includes/footer.jsp" %>
