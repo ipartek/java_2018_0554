@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,9 +48,9 @@ public class PaginaController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		ServletContext appContext = request.getServletContext();
 		
-		HashMap<Long, Pagina> paginas = (HashMap<Long, Pagina>) session.getAttribute("paginas");
+		HashMap<Long, Pagina> paginas = (HashMap<Long, Pagina>) appContext.getAttribute("paginas");
 		
 		String autor = request.getParameter("autor");
 		String texto = request.getParameter("texto");
@@ -60,7 +61,7 @@ public class PaginaController extends HttpServlet {
 		
 		if (violations.isEmpty()) {
 			paginas.put(pagina.getId(), pagina);
-			session.setAttribute("paginas", paginas);
+			appContext.setAttribute("paginas", paginas);
 			request.setAttribute("creacion", "Página creada con éxito");
 			request.getRequestDispatcher("libro").forward(request, response);
 		}else {

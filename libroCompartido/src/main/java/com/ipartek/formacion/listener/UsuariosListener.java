@@ -38,7 +38,7 @@ public class UsuariosListener implements HttpSessionAttributeListener {
      */
     public void attributeRemoved(HttpSessionBindingEvent event)  { 
          if (event.getName().equals("usuario_logueado")) {
-        	 Usuario usuario = (Usuario) event.getValue();
+        	Usuario usuario = (Usuario) event.getValue();
 			usuariosLogueados.remove(usuario.getEmail());
 		}
          
