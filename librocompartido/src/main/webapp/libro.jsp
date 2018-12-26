@@ -7,7 +7,7 @@
       <div class="jumbotron">
       		<p>${error}</p>
    			<p>publicada por: ${pagina.autor}</p>
-   			<textarea cols="115" rows="20">
+   			<textarea readonly cols="115" rows="20">
    			 		${pagina.contenido}	
    			</textarea>
    			<p>página <c:choose><c:when test="${totalpaginas <= 0}">0</c:when><c:otherwise>${paginaactual+1}</c:otherwise></c:choose> de ${totalpaginas}</p> 

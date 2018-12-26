@@ -45,8 +45,12 @@ public class PaginaSrvLt extends HttpServlet {
 			error = (String) request.getAttribute("error");
 			libro = (ArrayList<Pagina>) request.getServletContext().getAttribute("libro");
 			String recibepagina = request.getParameter("pag");
+			String recibedonde = request.getParameter("donde");
 			if (recibepagina != null) {
 				paginaactual = Integer.parseInt(recibepagina);
+				if (recibedonde!=null) {
+					paginaactual-=1;
+				}
 				if (paginaactual > libro.size() - 1) {
 					error="Pagina no valida";
 					paginaactual = libro.size() - 1;

@@ -17,6 +17,12 @@
 			</c:if>
 		</ul>
 		<ul class="navbar-nav float-right">
+		
+			<li><form action="pagina" method="get"><input name="pag" type="text" size="50"><input name="donde" type="hidden" value="busc"> &nbsp;&nbsp;<button href="logout" class="btn btn-outline-primary ">BUSCAR</button></form></li>
+			
+			<li>&nbsp;&nbsp;&nbsp;</li>
+		</ul>
+		<ul class="navbar-nav float-right">
 			<li><span class="badge badge-light mr-3">${usuario.nombre}</span></li>
 			<c:choose>
 				<c:when test="${usuario.nombre!=null}">
