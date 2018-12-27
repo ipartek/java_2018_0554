@@ -43,6 +43,9 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String usuario= request.getParameter("usuario");
 		String password =request.getParameter("pass");
+		String idiomaSeleccionado = request.getParameter("idiomaSeleccionar");
+		
+		
 		String vista = VIEW_LOGIN;
 		Usuario usuarioLogeado= null;
 		try {
@@ -56,6 +59,12 @@ public class LoginController extends HttpServlet {
 						//Asocioamos un listener para listar usuarios conectados @see UsuarioListener
 						session.setMaxInactiveInterval(60 * 5); // 5minutos
 						session.setAttribute("usuarioLogeado", usuarioLogeado);
+						
+						
+							//Selecciona el idioma de la app web
+							session.setAttribute("language", idiomaSeleccionado);
+					
+						
 						vista= CONTROLER_CREARPAGINA;
 						return;
 						
