@@ -12,6 +12,7 @@ public class UsuarioDAO {
 	private static UsuarioDAO INSTANCE = null;
 	
 	//CONSTRUCTOR PRIVADO SOLO ACCESO POR getInstance
+	//PATRON SINGLETON
 	private UsuarioDAO() {
 		super();
 	}
