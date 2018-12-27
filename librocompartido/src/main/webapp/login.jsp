@@ -1,6 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : 'es_ES'}" scope="session" />
+<fmt:setLocale value="${language}" /> 
+<fmt:setBundle basename="i18nmessages" /> 
 <!doctype html>
-<html lang="en">
+<base href="${pageContext.request.contextPath}/">
+<html lang="${language}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -31,18 +36,19 @@
   <body class="text-center">
     <form novalidate="novalidate" action="login" class="form-signin" method="post">
   <img class="mb-4" src="https://getbootstrap.com/docs/4.2/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-  <h1 class="h3 mb-3 font-weight-normal">Bienvenido</h1>
-  <label for="inputEmail" class="sr-only">Usuario</label>
-  <input type="email" name="usu" id="inputEmail" class="form-control" placeholder="Usuario" required autofocus>
-  <label for="inputPassword" class="sr-only">Contraseña</label>
-  <input type="password" name="pass"id="inputPassword" class="form-control" placeholder="Contraseña" required>
+  <h1 class="h3 mb-3 font-weight-normal"><fmt:message key="bienvenida.login"/></h1>
+  <label for="inputEmail" class="sr-only"><fmt:message key="lu.login"/></label>
+  <input type="email" name="usu" id="inputEmail" class="form-control" placeholder="<fmt:message key="lu.login"/>" required autofocus>
+  <label for="inputPassword" class="sr-only"><fmt:message key="lc.login"/></label>
+  <input type="password" name="pass"id="inputPassword" class="form-control" placeholder="<fmt:message key="lc.login"/>" required>
   <div class="checkbox mb-3">
     <label>
-      <input type="checkbox" value="remember-me"> Recordarme
+      <input type="checkbox" value="remember-me"> <fmt:message key="rec.chk"/>
     </label>
   </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+  <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="login.boton"/></button>
   <p class="mt-5 mb-3 text-muted">${error}</p>
+  <p><a href="cambioidioma?i=es_ES">Castellano</a>&nbsp;<a href="cambioidioma?i=eu_ES">Euskera</a></p>
 </form>
 </body>
 </html>

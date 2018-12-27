@@ -21,6 +21,7 @@ public class LogoutSrvLt extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
 		session.removeAttribute("usuario");
+		session.removeAttribute("language");
 		session.invalidate();
 		session=null;
 		response.sendRedirect("pagina");

@@ -1,6 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : 'es_ES'}" scope="session" />
+<fmt:setLocale value="${language}" /> 
+<fmt:setBundle basename="i18nmessages" /> 
 <!doctype html>
-<html lang="en">
+<html lang="${language}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -8,7 +12,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>El libro gordo de petete</title>
+    <title></title>
 	<base href="${pageContext.request.contextPath}/">
     <!-- Bootstrap core CSS -->
     <link href="css/estilos.css" rel="stylesheet">
