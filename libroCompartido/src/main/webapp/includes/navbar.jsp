@@ -19,7 +19,7 @@
       					
 					</c:when>
 					<c:otherwise>
-						<li class="nav-item"><a class="nav-link disabled" href="privado/nuevaPagina"><fmt:message key="navbar.nuevaPagina" /></a>
+						<li class="nav-item"><a class="nav-link disabled" href="privado/nuevaPagina"><fmt:message key="navbar.nuevaPagina"/></a>
 					</c:otherwise>
 				</c:choose>				
 			</ul>
@@ -32,7 +32,11 @@
 				</form>
 			</c:when>
 			<c:otherwise>
-				<span class="text-success nav-link">${sessionScope.usuarioLogeado.usuario}</span>
+			<!-- Mostrar fecha de ultima conexion -->
+			<%-- <c:set var="cFechaConexion" value="${not empty cookie.cFechaConexion ? cookie.cFechaConexion : ''}" scope="session" /> --%>
+				<%--  ${cFechaConexion} --%>
+				<span class="text-success nav-link">${sessionScope.usuarioLogeado.usuario}:</span>
+				
 				<form class="form-inline mt-2 mt-md-0" action="desconectar" method="">
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit"><fmt:message key="navbar.logOut"/></button>
 				</form>

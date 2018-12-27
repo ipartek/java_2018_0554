@@ -2,6 +2,7 @@ package com.ipartek.formacion.libroCompartido.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -74,6 +75,12 @@ public class LoginController extends HttpServlet {
 			Cookie cUsuario= new Cookie("cUsuario", usuario);
 			cUsuario.setMaxAge(60*100);
 			response.addCookie(cUsuario);
+			
+//			//Crear cookie de la fecha en la que se ha conectado
+//			Date fechaActual = new Date();
+//			Cookie cFechaConexion = new Cookie("cFechaConexion",fechaActual.toString());
+//			cFechaConexion.setMaxAge(60*100);
+//			response.addCookie(cFechaConexion);
 			
 			for (Usuario u : usuariosRegistrados) {
 				if(u.getUsuario().equals(usuario)) {

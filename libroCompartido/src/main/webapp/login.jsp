@@ -40,6 +40,8 @@
 				key="login.usuario" /></label> <input type="text" id="usuario"
 			name="usuario" class="form-control" value="${cUsuario}"
 			placeholder="<fmt:message key="login.usuario"/>" required autofocus>
+		
+		
 
 		<label for="pass" class="sr-only"><fmt:message
 				key="login.password" /></label> <input type="password" id="pass" name="pass"
