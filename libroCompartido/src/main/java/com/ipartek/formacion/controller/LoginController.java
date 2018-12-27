@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import com.ipartek.formacion.modelo.dao.ConnectionManager;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 
 /**
@@ -27,7 +27,7 @@ public class LoginController extends HttpServlet {
 	private static final String VISTA_LOGIN = "login.jsp";
 	private static final String CONTROLLER_PAGINAS = "privado/pagina.jsp";
     private ArrayList<Usuario> usuarios;
-    private final static Logger LOG = Logger.getLogger(ConnectionManager.class);
+    private final static Logger LOG = Logger.getLogger(LoginController.class);
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
@@ -55,6 +55,10 @@ public class LoginController extends HttpServlet {
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
 		String idioma = request.getParameter("idioma");
+		String recuerdame = request.getParameter("recuerdame");
+		
+		
+		HttpSession session = request.getSession();
 		
 		//Idioma
 		
@@ -62,12 +66,25 @@ public class LoginController extends HttpServlet {
 		ResourceBundle messages = ResourceBundle.getBundle("i18nmessages", locale);
 		LOG.debug("idioma=" + idioma);
 		
+		//Guardar cookies
+		Cookie cIdioma = new Cookie("cIdioma", idioma);
+		cIdioma.setMaxAge(60 * 60 * 24 * 365 * 10);
+		response.addCookie(cIdioma);
+		
+		if (recuerdame != null) {
+			Cookie cEmail = new Cookie("cEmail", email);
+			cEmail.setMaxAge(60 * 60 * 24 * 365 * 10);
+			response.addCookie(cEmail);
+		}
+		
+		
+		
 		Usuario usuario = new Usuario(null, email, pass, "");
 		
 		for (Usuario u : usuarios) {
 			if (u.getEmail().equals(usuario.getEmail()) && u.getPassword().equals(usuario.getPassword())) {
 				vista = CONTROLLER_PAGINAS;
-				HttpSession session = request.getSession();
+			
 				//Asociamos un listener para listar usuarios @see UsuariosListener
 				session.setAttribute("language", idioma);
 				session.setAttribute("usuario_logueado", usuario);

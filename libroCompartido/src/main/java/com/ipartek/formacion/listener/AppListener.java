@@ -7,6 +7,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.controller.LoginController;
 import com.ipartek.formacion.modelo.pojo.Pagina;
 
 /**
@@ -15,14 +18,14 @@ import com.ipartek.formacion.modelo.pojo.Pagina;
  */
 @WebListener
 public class AppListener implements ServletContextListener {
-
+	private final static Logger LOG = Logger.getLogger(AppListener.class);
 
 	/**
      * @see ServletContextListener#contextDestroyed(ServletContextEvent)
      */
     public void contextDestroyed(ServletContextEvent sce)  { 
          // Cuando para
-    	System.out.println("Para o destruye la App");
+    	LOG.trace("Para o destruye la App");
     }
 
 	/**
@@ -30,7 +33,7 @@ public class AppListener implements ServletContextListener {
      */
     public void contextInitialized(ServletContextEvent sce)  { 
          // Cuando arranca
-    	System.out.println("Arranca la App o el Contexto de Servlets");
+    	LOG.trace("Arranca la App o el Contexto de Servlets");
     	HashMap<Long, Pagina> paginas = new HashMap<Long, Pagina>();
 		paginas.put(1L, new Pagina(0L, "Peter", "A parte del colombiano Jeison Murillo, que a partir del año que viene podrá ser alineado para dar oxígeno a Gerard Piqué y Clément Lenglet, el Barça tiene previsto inscribir en la Champions League, de cara a las rondas finales, a Moussa Wague. Así lo confirmó Ernesto Valverde en la rueda de prensa previa al encuentro contra el Celta de Vigo, donde se le cuestionó por la poca presencia de jugadores del filial en el primer equipo."));
 		paginas.put(1L, new Pagina(1L, "Ander", "El lateral derecho senegalés, que el pasado verano se convirtió en el africano más joven en marcar un gol en un Mundial, podrá unirse a los Riqui Puig, Miranda y compañía sobre todo en la Copa del Rey, donde el 'Txingurri' tiene previsto dar descanso a los jugadores titulares, siempre y cuando el cuadro del torneo no se empine mucho."));

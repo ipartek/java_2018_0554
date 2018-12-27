@@ -15,12 +15,9 @@
 				<li class="nav-item active">
 				<a class="nav-link" href="usuarios_logueados.jsp"><fmt:message key="navbar.usuarios.conectados"/></a>
 				</li>
-				<!-- <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li> -->
+				<li class="nav-item active">
+				<a class="nav-link" href="carrito"><fmt:message key="navbar.compra"/></a>
+				</li>
 			</ul>
 			<ul class="navbar-nav mr-auto border border-success">
 			<li class="nav-item">

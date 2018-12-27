@@ -7,6 +7,9 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.controller.LoginController;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 
 /**
@@ -15,14 +18,14 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
  */
 @WebListener
 public class UsuariosListener implements HttpSessionAttributeListener {
-	
+	private final static Logger LOG = Logger.getLogger(UsuariosListener.class);
 	public static HashMap<String, Usuario> usuariosLogueados = new HashMap<String, Usuario>();
 
 	/**
      * @see HttpSessionAttributeListener#attributeAdded(HttpSessionBindingEvent)
      */
     public void attributeAdded(HttpSessionBindingEvent event)  { 
-         System.out.println("Atributo añadido");
+         LOG.trace("Atributo añadido");
          
          if (event.getName().equals("usuario_logueado")) {
         	 Usuario usuario = (Usuario) event.getValue();
@@ -37,6 +40,7 @@ public class UsuariosListener implements HttpSessionAttributeListener {
      * @see HttpSessionAttributeListener#attributeRemoved(HttpSessionBindingEvent)
      */
     public void attributeRemoved(HttpSessionBindingEvent event)  { 
+    	LOG.trace("Atributo eliminado");
          if (event.getName().equals("usuario_logueado")) {
         	Usuario usuario = (Usuario) event.getValue();
 			usuariosLogueados.remove(usuario.getEmail());
@@ -50,7 +54,7 @@ public class UsuariosListener implements HttpSessionAttributeListener {
      * @see HttpSessionAttributeListener#attributeReplaced(HttpSessionBindingEvent)
      */
     public void attributeReplaced(HttpSessionBindingEvent event)  { 
-    	System.out.println("Atributo reemplazado");
+    	LOG.trace("Atributo reemplazado");
     }
 	
 }
