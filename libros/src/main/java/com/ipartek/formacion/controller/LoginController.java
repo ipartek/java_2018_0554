@@ -53,6 +53,7 @@ public class LoginController extends HttpServlet {
 		
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
+		String idioma = request.getParameter("idioma");
 		String view = VIEW_LOGIN;
 		boolean redirect = false;
 		
@@ -88,6 +89,7 @@ public class LoginController extends HttpServlet {
 					
 //					asociamos un listener para listar usuarios @see UsuariosListener
 					session.setAttribute("usuario", usuario);
+					session.setAttribute("idioma", idioma);
 		
 					redirect = true;					
 				}

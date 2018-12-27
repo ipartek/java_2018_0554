@@ -5,6 +5,8 @@
 
  <meta http-equiv="refresh" content="5 ;URL='http://localhost:8080/javaee3/privado/listado.jsp'" />
  <!-- Recargar la pagina -->
+ <main role="main" class="container">
+<div class="jumbotron">
  <p>Recargar cada 5 segundos</p>
 ${usuariosLogeados }
 <table class="table">
@@ -35,6 +37,7 @@ ${usuariosLogeados }
 </table>
 
 
-
+</div>
+</main>
 
 <%@ include file="../includes/footer.jsp"%>
