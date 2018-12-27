@@ -1,0 +1,15 @@
+nav span{
+	color: #fff;
+}
+.table td, .table th {
+    padding: 0.75rem 3rem;
+}
+.en-dos{
+	display: flex;
+}
+.en-dos .jumbotron {
+    width: 50%;
+    margin: 5px;
+    text-align: center;
+    display: flex;
+}

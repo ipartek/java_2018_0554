@@ -1,8 +1,6 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
-import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.servlet.ServletConfig;
@@ -32,7 +30,7 @@ public class LoginController extends HttpServlet {
 	private Validator validator;
 	
 	public static final String VIEW_LOGIN = "login.jsp";
-	public static final String CONTROLLER_VIDEOS = "privado/videos";
+	public static final String CONTROLLER_LIBROS = "libros";
 	
        
     @Override
@@ -55,16 +53,10 @@ public class LoginController extends HttpServlet {
 		
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
-		String idioma = request.getParameter("idioma");
 		String view = VIEW_LOGIN;
 		boolean redirect = false;
 		
 		try {
-			
-			//idioma
-			Locale locale = new Locale("eu_ES");
-			ResourceBundle messages = ResourceBundle.getBundle ( "i18nmessages", locale );
-			
 		
 			// validar
 			Usuario usuario = new Usuario();
@@ -89,13 +81,11 @@ public class LoginController extends HttpServlet {
 				
 				if ( usuario == null ) {
 					
-					request.setAttribute("mensaje", messages.getString("login.incorrecto"));
+					request.setAttribute("mensaje", "Credenciales incorrectas");
 				}else {
 					
 					HttpSession session = request.getSession();
-					// asociamos un listener para listar usuarios @see UsuariosListener
 					session.setAttribute("usuario", usuario);
-					session.setAttribute("language", idioma);
 					redirect = true;					
 				}
 			}	
@@ -107,7 +97,7 @@ public class LoginController extends HttpServlet {
 		}finally {
 			
 			if(redirect) {				
-				response.sendRedirect(CONTROLLER_VIDEOS);
+				response.sendRedirect(CONTROLLER_LIBROS);
 			}else {
 				request.getRequestDispatcher(view).forward(request, response);
 			}
