@@ -24,6 +24,9 @@
 
   <body class="text-center"> 	
   
+  	  
+  	
+  
     <form novalidate action="login" method="post" class="form-signin">    
     
      <c:if test="${not empty mensaje}">	  
@@ -38,11 +41,13 @@
       <label for="pass" class="sr-only">Contraseña</label>
       <input type="password" name="pass" class="form-control" value="12345678" placeholder="minimo 6 caracteres" required>
       
-      
+      <!-- leer cookie para Idioma -->	  
+      <c:set var="cIdioma" value="${not empty cookie.cIdioma ? cookie.cIdioma.value : 'es_ES'}" scope="session" />
+  	
       <label for="idioma">Selecciona un Idioma</label>
       <select name="idioma" class="form-control mb-5">
-      	<option value="eu_ES" selected>Euskera</option>
-      	<option value="es_ES">Castellano</option>      	
+      	<option value="eu_ES" ${(cIdioma=="eu_ES")?"selected":""}>Euskera</option>
+      	<option value="es_ES" ${(cIdioma=="es_ES")?"selected":""}>Castellano</option>      	
       </select>
       
       <button class="btn btn-lg btn-primary btn-block" type="submit">
