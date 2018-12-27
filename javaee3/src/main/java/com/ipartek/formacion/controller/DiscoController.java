@@ -24,7 +24,14 @@ public class DiscoController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Disco> discos = new ArrayList<Disco>();
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+ArrayList<Disco> discos = new ArrayList<Disco>();
 		
 		discos.add(new Disco());
 		discos.add(new Disco(1L, "Trapped!","Rage", "PortadaRage", "1992"));
@@ -36,14 +43,6 @@ public class DiscoController extends HttpServlet {
 		request.setAttribute("lista", discos);
 		
 		request.getRequestDispatcher("discos.jsp").forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

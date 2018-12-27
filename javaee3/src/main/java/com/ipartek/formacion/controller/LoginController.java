@@ -1,11 +1,15 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Set;
+
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +21,8 @@ import javax.validation.ValidatorFactory;
 
 import com.ipartek.formacion.modelo.daos.UsuarioDAO;
 import com.ipartek.formacion.modelo.pojos.Usuario;
+import com.ipartek.formacion.modelo.daos.ConnectionManager;
+import org.apache.log4j.Logger;
 
 /**
  * Servlet implementation class LoginController
@@ -25,6 +31,8 @@ import com.ipartek.formacion.modelo.pojos.Usuario;
 public class LoginController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	private final static Logger LOG = Logger.getLogger(LoginController.class);
+	
 	private UsuarioDAO dao;
 	private ValidatorFactory factory;
 	private Validator validator;
@@ -53,11 +61,27 @@ public class LoginController extends HttpServlet {
 		
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
+		String idioma = request.getParameter("idioma");
 		String view = VIEW_LOGIN;
 		boolean redirect = false;
 		
-		try {
 		
+		
+		try {
+			
+			HttpSession session = request.getSession();
+		
+			//idioma TODO ver por que no funciona con euskera
+			Locale locale = new Locale("es_ES");
+			ResourceBundle messages = ResourceBundle.getBundle("i18nmessages", locale );
+			LOG.debug("idioma=" + idioma);
+			
+			//Guardar cookie
+			
+			Cookie cIdioma = new Cookie("cIdioma", idioma);
+			cIdioma.setMaxAge(60*10);
+			response.addCookie(cIdioma);
+			
 			// validar
 			Usuario usuario = new Usuario();
 			usuario.setEmail(email);
@@ -81,13 +105,16 @@ public class LoginController extends HttpServlet {
 				
 				if ( usuario == null ) {
 					
-					request.setAttribute("mensaje", "Credenciales incorrectas");
+					request.setAttribute("mensaje", messages.getString("login.incorrecto"));
 				}else {
 					
-					HttpSession session = request.getSession();
+					session.setMaxInactiveInterval(60*5);
 					// asociamos un listener para listar usuarios @see UsuariosListener
 					session.setAttribute("usuario", usuario);
-					redirect = true;					
+					session.setAttribute("language", idioma);
+					redirect = true;	
+					
+					LOG.debug("guardamos en session usuario e idioma");
 				}
 			}	
 				
