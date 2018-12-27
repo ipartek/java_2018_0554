@@ -58,21 +58,20 @@ public class LoginController extends HttpServlet {
 			ResourceBundle message = ResourceBundle.getBundle("i18nmessages", locale);
 			
 			// Cookie
-			Cookie cookie = null;
-			Cookie[] cookies = request.getCookies();
-			if (cookies != null) {
-				for(int i = 0; i < cookies.length; i++) {
-					cookie = cookies[i];
-					if(cookie.getName().equals("cIdioma")) {
-						cookie.setMaxAge(0);
-						response.addCookie(cookie);
-						
-						Cookie cIdioma = new Cookie("cIdioma", idioma);
-						cIdioma.setMaxAge(2147483647); // 68 años
-						response.addCookie(cIdioma);
-					}
-				}
-			}
+//			Cookie cookie = null;
+//			Cookie[] cookies = request.getCookies();
+//			if (cookies != null) {
+//				for(int i = 0; i < cookies.length; i++) {
+//					cookie = cookies[i];
+//					if(cookie.getName().equals("cIdioma")) {
+//						cookie.setMaxAge(0);
+//						response.addCookie(cookie);
+//					}
+//						Cookie cIdioma = new Cookie("cIdioma", idioma);
+//						cIdioma.setMaxAge(2147483647); // 68 años
+//						response.addCookie(cIdioma);
+//				}
+//			}
 			
 			Cookie cIdioma = new Cookie("cIdioma", idioma);
 			Cookie cVisita = new Cookie("cVisita", "visita");
