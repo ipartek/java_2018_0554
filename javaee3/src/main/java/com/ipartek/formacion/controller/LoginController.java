@@ -17,6 +17,9 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.modelo.ConnectionManager;
 import com.ipartek.formacion.modelo.dao.UsuarioDAO;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 
@@ -27,6 +30,8 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
 public class LoginController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	private final static Logger LOG = Logger.getLogger(LoginController.class);
+	
 	private UsuarioDAO dao;
 	private ValidatorFactory factory;
 	private Validator validator;
@@ -64,7 +69,7 @@ public class LoginController extends HttpServlet {
 			//idioma  TODO ver porque no funciona con Euskera
 			Locale locale = new Locale("eu_ES");
 			ResourceBundle messages = ResourceBundle.getBundle("i18nmessages", locale );
-						
+			LOG.debug("idioma=" + idioma);			
 			
 			// validar
 			Usuario usuario = new Usuario();
@@ -81,7 +86,7 @@ public class LoginController extends HttpServlet {
 					 errores += String.format("<li> %s : %s </li>" , violation.getPropertyPath(), violation.getMessage() );					
 				 }
 				 errores += "</ul>";				 
-				request.setAttribute("mensaje", errores);				
+				 request.setAttribute("mensaje", errores);				
 				
 			}else {                                // validacion OK
 			
@@ -97,13 +102,13 @@ public class LoginController extends HttpServlet {
 					session.setAttribute("usuario", usuario);
 					session.setAttribute("idioma", idioma );
 					redirect = true;					
+					LOG.debug("guardamos en session usuario e idioma");			
 				}
 			}	
 				
 			
-		}catch (Exception e) {
-			
-			e.printStackTrace();
+		}catch (Exception e) {			
+			LOG.error(e);
 		}finally {
 			
 			if(redirect) {				
