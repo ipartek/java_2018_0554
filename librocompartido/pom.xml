@@ -3,15 +3,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ipartek.formacion</groupId>
-	<artifactId>LibroCompartido</artifactId>
+	<artifactId>librocompartido</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>LibroCompartido</name>
-	<url>http://localhost:8080/LibroCompartido/</url>
+	<name>librocompartido</name>
+	<url>http://localhost:8080/librocompartido/</url>
 
 	<!-- variables comunes para todo el POM -->
 	<properties>
-		<app.name>LibroCompartido</app.name>
+		<app.name>librocompartido</app.name>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java-version>1.8</java-version>
 		<junit.version>4.12</junit.version>
