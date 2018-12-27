@@ -24,6 +24,13 @@ public class Video {
 
 	// Getters y Setters
 
+	public Video(Long id, String nombre, String url) {
+		this();
+		this.id = id;
+		this.nombre = nombre;
+		this.url = url;
+	}
+
 	public long getId() {
 		return id;
 	}
