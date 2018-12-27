@@ -27,6 +27,7 @@
 <link href="css/miCss.css" rel="stylesheet">
 </head>
 <body class="text-center">
+
 	<form class="form-signin" action="login" method="post" novalidate>
 		<%@include file="/includes/mensajes.jsp"%>
 		<img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt=""
@@ -55,9 +56,12 @@
 			</div>
 		</c:if>
 		<label> <fmt:message key="login.idiomas"/> </label>
+		<!-- leer cookie para idioma -->
+		<c:set var="cIdioma" value="${not empty cookie.cIdioma ? cookie.cIdioma.value : 'eu_ES'}" scope="session" />
+		<%-- <p>Idioma cookie: ${cIdioma} </p> --%>
 		<select  class="form-control mb-5" id="idiomaSeleccionar" name="idiomaSeleccionar">
-			<option value="eu_ES" selected>Euskera</option>
-			<option value="es_ES">Castellano</option>
+			<option value="eu_ES" ${(cIdioma=="eu_ES")?"selected":""}>Euskera</option>
+			<option value="es_ES" ${(cIdioma=="es_ES")?"selected":""}>Castellano</option>
 		</select>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">
 			<fmt:message key="login.boton" />
