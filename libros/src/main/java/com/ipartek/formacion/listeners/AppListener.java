@@ -4,13 +4,15 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import org.apache.log4j.Logger;
+
 /**
  * Application Lifecycle Listener implementation class AppListener
  *
  */
 @WebListener
 public class AppListener implements ServletContextListener {
-
+	private final static Logger LOG = Logger.getLogger(AppListener.class);
 
 
 	/**
@@ -18,7 +20,7 @@ public class AppListener implements ServletContextListener {
      */
     public void contextDestroyed(ServletContextEvent sce)  { 
          // TODO Auto-generated method stub
-    	System.out.println("se para o destruye la aplicacion");
+    	LOG.info("Aplicacion parada");
     }
 
 	/**
@@ -26,7 +28,7 @@ public class AppListener implements ServletContextListener {
      */
     public void contextInitialized(ServletContextEvent sce)  { 
          // TODO Auto-generated method stub
-    	System.out.println("Aranca la aplicacion o el contexto servlets");
+    	LOG.info("Aplicacion arrancada");
     }
 	
 }

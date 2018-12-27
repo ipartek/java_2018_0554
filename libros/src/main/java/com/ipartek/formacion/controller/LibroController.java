@@ -15,6 +15,8 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.modelo.pojo.Pagina;
 
 /**
@@ -23,6 +25,7 @@ import com.ipartek.formacion.modelo.pojo.Pagina;
 @WebServlet("/privado/libro")
 public class LibroController extends HttpServlet {
 	
+	private final static Logger LOG = Logger.getLogger(LibroController.class);
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Pagina> libro;	
 	private ValidatorFactory factory;
@@ -60,9 +63,13 @@ public class LibroController extends HttpServlet {
 					paginaActual = Integer.parseInt(pagina);
 					if ( paginaActual <= 0 ) {
 						paginaActual = 1;
+						
+						LOG.debug("pagina" + paginaActual);
 					}
 					if ( paginaActual > paginasTotal ) {
 						paginaActual = 1;
+						
+						LOG.debug("pagina" + paginaActual);
 					}						
 					paginaMostrar = libro.get(--paginaActual);			
 				}else {
@@ -73,6 +80,7 @@ public class LibroController extends HttpServlet {
 			request.setAttribute("alerta", "Pagina NO disponible" );
 			paginaMostrar = libro.get(0);
 			paginaActual = 0;
+			LOG.error("pagina no disponible");
 			
 		}finally {
 			request.setAttribute("pagina", paginaMostrar );
@@ -102,6 +110,7 @@ public class LibroController extends HttpServlet {
 		    if ( violations.isEmpty() ) {
 		    	
 		    	libro.add(p);
+		    	LOG.info("libro valida y se anyade");
 		    	
 		    }else {
 		    	
@@ -112,6 +121,7 @@ public class LibroController extends HttpServlet {
 				
 		}catch (Exception e) {
 			request.setAttribute("alerta", "Error Escribiendo pagina" );
+			LOG.error("error escribiendo la pagina");
 			
 		}finally {
 			request.setAttribute("pagina", p );

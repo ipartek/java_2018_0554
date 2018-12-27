@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.controller.LibroController;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 
 /**
@@ -16,7 +19,7 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
  */
 @WebListener
 public class UsuariosListener implements HttpSessionAttributeListener {
-
+	private final static Logger LOG = Logger.getLogger(UsuariosListener.class);
 	//public static HashMap<String, Usuario> usuariosLogeados = new  HashMap<String, Usuario>(); 
 	public static ArrayList<Usuario> usuariosLogeados = new ArrayList<Usuario>();
 	
@@ -25,11 +28,12 @@ public class UsuariosListener implements HttpSessionAttributeListener {
      * @see HttpSessionAttributeListener#attributeAdded(HttpSessionBindingEvent)
      */
     public void attributeAdded(HttpSessionBindingEvent event)  { 
-        System.out.println("attributeAdded");
+    	
         if ("usuario".equals(event.getName())) {
         	usuariosLogeados.add((Usuario)event.getValue());
         	 ServletContext appContext = event.getSession().getServletContext();        
              appContext.setAttribute("usuariosLogeados", usuariosLogeados);
+             LOG.info("atributo anyadido : usuarioslogeados");
         }
         
 //        usuariosLogeados.add( new Usuario(1l, "manoli", "aasasasasas"));
@@ -51,14 +55,14 @@ public class UsuariosListener implements HttpSessionAttributeListener {
          	 ServletContext appContext = event.getSession().getServletContext();        
               appContext.setAttribute("usuariosLogeados", usuariosLogeados);
          }
-    	System.out.println("attributeRemoved");
+    	 LOG.info("atributo removido : usuarioslogeados");
     }
 
 	/**
      * @see HttpSessionAttributeListener#attributeReplaced(HttpSessionBindingEvent)
      */
     public void attributeReplaced(HttpSessionBindingEvent event)  { 
-    	System.out.println("attributeReplaced");
+    	LOG.info("atributo reemplazado : usuarioslogeados");
     }
 	
 }
