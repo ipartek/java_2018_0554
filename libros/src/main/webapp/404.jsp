@@ -68,11 +68,10 @@
          <h2>Error 404. La pagina no existe</h2>
         <p>
         La pagina solicitada no existe<br />
-       Contacta con el administrador si el problema persiste. Please check back shortly.
+       Contacta con el administrador si el problema persiste. Lo sentimos
         </p>
         <p>
-        If you are the owner of the account and are regularly seeing this error, please read more about it in our <a href="http://www.namecheap.com/support/knowledgebase/article.aspx/1128/103/what-happens-when-my-account-reaches-lve-limits-diagnosing-and-resolving">knowledgebase</a>.
-        If you have any questions, please contact our Technical Support department.
+        Si quieres volver a la pagina principal <a href="http://localhost:8080/libros/">pincha en este link</a>.
         </p>
         </div>
     </div>
