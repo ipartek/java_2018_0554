@@ -1,6 +1,8 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.servlet.ServletConfig;
@@ -15,6 +17,9 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.modelo.ConnectionManager;
 import com.ipartek.formacion.modelo.dao.UsuarioDAO;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 
@@ -24,6 +29,7 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 	
+	private final static Logger LOG = Logger.getLogger(LoginController.class);
 	private static final long serialVersionUID = 1L;
 	private UsuarioDAO dao;
 	private ValidatorFactory factory;
@@ -59,6 +65,10 @@ public class LoginController extends HttpServlet {
 		
 		try {
 		
+			//idioma TODO ver por que no funciona el euskera
+			Locale locale = new Locale("eu_ES");
+			ResourceBundle messages = ResourceBundle.getBundle("i18nmessages", locale);
+			LOG.debug("idioma="+idioma);
 			// validar
 			Usuario usuario = new Usuario();
 			usuario.setEmail(email);
@@ -82,7 +92,7 @@ public class LoginController extends HttpServlet {
 				
 				if ( usuario == null ) {
 					
-					request.setAttribute("mensaje", "Credenciales incorrectas");
+					request.setAttribute("mensaje", messages.getString("login.incorrecto"));
 				}else {
 					
 					HttpSession session = request.getSession();
@@ -91,14 +101,15 @@ public class LoginController extends HttpServlet {
 					session.setAttribute("usuario", usuario);
 					session.setAttribute("idioma", idioma);
 		
-					redirect = true;					
+					redirect = true;	
+					LOG.debug("guardamos en sesion usuario e idioma");
 				}
 			}	
 				
 			
 		}catch (Exception e) {
 			
-			e.printStackTrace();
+			LOG.error(e);
 		}finally {
 			
 			if(redirect) {				
