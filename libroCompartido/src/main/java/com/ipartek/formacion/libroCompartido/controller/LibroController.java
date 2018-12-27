@@ -15,6 +15,8 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.libroCompartido.modelo.pojo.Libro;
 import com.ipartek.formacion.libroCompartido.modelo.pojo.Pagina;
 
@@ -24,6 +26,9 @@ import com.ipartek.formacion.libroCompartido.modelo.pojo.Pagina;
 @WebServlet("/index")
 public class LibroController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private final static Logger LOG = Logger.getLogger(LibroController.class);
+	
 	private HashMap<Long, Pagina> paginas;
 	private Libro libroPrincipal;
  	private ValidatorFactory factory;
@@ -75,6 +80,7 @@ public class LibroController extends HttpServlet {
 			}			
 			
 		} catch (Exception e) {
+			LOG.debug("Pagina no disponible" , e);
 			request.setAttribute("alerta", "Pagina no disponible");
 			paginaMostrar=libroPrincipal.getPaginas().get(1L);
 		}finally {
@@ -118,6 +124,7 @@ public class LibroController extends HttpServlet {
   			paginaActual = libroPrincipal.getTotalPaginas();
  
   		}catch (Exception e) {
+  			LOG.debug("Error Escribiendo pagina" , e);
  			request.setAttribute("alerta", "Error Escribiendo pagina" );
  
   		}finally {
