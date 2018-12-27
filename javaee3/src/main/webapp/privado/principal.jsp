@@ -6,13 +6,13 @@
     <main role="main">
 	<div class="jumbotron">
 	<div class="container">
-	 <h1 class="display-3">Principal</h1>
+	 <h1 class="display-3"> <fmt:message key="principal.titulo" /></h1>
      <form class="form-inline" method="post" action="privado/videos">
 	  <div class="form-group mx-sm-3 mb-2">
 	    <label for="textobuscar" class="sr-only">Buscador por texto</label>
 	    <input type="text" class="form-control" id="textobuscar" name="textobuscar" placeholder="Rallye">
 	  </div>
-	  <button type="submit" class="btn btn-primary mb-2">Buscar</button>
+	  <button type="submit" class="btn btn-primary mb-2"><fmt:message key="buscar.boton" /></button>
 	</form>
  		
  		 <div class="row">
@@ -25,9 +25,7 @@
                 <div class="card-body">
                   <p class="card-text">${video.nombre.toUpperCase()}</p>
                   <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Añadir</button>
-                    </div><!-- /btn-group -->
+                   
                    </div><!-- /d-flex justify-content-between align-items-center -->
                   </div><!-- /card-body -->
               </div><!-- /card mb-4 shadow-sm -->

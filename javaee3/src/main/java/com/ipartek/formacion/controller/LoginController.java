@@ -1,11 +1,14 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +17,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+
+import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.daos.UsuarioDAO;
 import com.ipartek.formacion.modelo.pojo.Usuario;
@@ -31,6 +36,11 @@ public class LoginController extends HttpServlet {
 	public static final String VIEW_LOGIN = "index.jsp";
 	public static final String CONTROLLER_VIDEOS = "privado/videos";
 	
+	private static final String ES_ES="es_ES";
+	private static final String EU_ES="eu_ES";
+	
+	private final static Logger LOG = Logger.getLogger(LoginController.class);
+	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 
@@ -46,17 +56,41 @@ public class LoginController extends HttpServlet {
 
 		String email = request.getParameter("mail");
 		String pass = request.getParameter("pass");
+		String idioma = request.getParameter("idioma");
+		
+		if(idioma.equals("es")) {
+			idioma=ES_ES;
+		}else if(idioma.equals("eu")) {
+			idioma=EU_ES;
+		}else {
+			idioma=ES_ES;
+		}
+		
 		String view = VIEW_LOGIN;
 		boolean redirect = false;
 		
 		try {
-		
+			HttpSession session = request.getSession();
+			
+			//IDIOMA
+			Locale locale = new Locale(EU_ES);
+			ResourceBundle messages = ResourceBundle.getBundle("i18nmessages", locale );
+			LOG.debug("idioma="+idioma);
+			
+			//guardar cookie
+			Cookie cIdioma = new Cookie("cIdioma",idioma);
+			cIdioma.setMaxAge(60 * 60 * 24 * 365 * 10);
+			response.addCookie(cIdioma);
+			
+			
+			
 			// validar
 			Usuario usuario = new Usuario();
 			usuario.setEmail(email);
 			usuario.setPassword(pass);
 			
 			Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario);
+			
 			
 			
 			if ( violations.size() > 0) {			// validacion NO PASA
@@ -74,11 +108,14 @@ public class LoginController extends HttpServlet {
 				
 				if ( usuario == null ) {
 					
-					request.setAttribute("error", "Credenciales incorrectas");
+					//request.setAttribute("error", "Credenciales incorrectas");
+					request.setAttribute("error", messages.getString("login.incorrecto"));
 				}else {
 					
-					HttpSession session = request.getSession();
+					
+					session.setMaxInactiveInterval(60*10);
 					session.setAttribute("usuario_logeado", usuario);
+					session.setAttribute("language", idioma);
 					redirect = true;					
 				}
 			}	
@@ -86,7 +123,7 @@ public class LoginController extends HttpServlet {
 			
 		}catch (Exception e) {
 			
-			e.printStackTrace();
+			LOG.error(e);
 		}finally {
 			
 			if(redirect) {				

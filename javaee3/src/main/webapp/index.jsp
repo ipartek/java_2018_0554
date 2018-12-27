@@ -1,6 +1,15 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : 'eu_ES'}" scope="session" />
+
+
+
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18nmessages" /> 
+
 <!doctype html>
-<html lang="es">
+<html lang="${language}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,6 +26,11 @@
   </head>
 
   <body class="text-center">
+  	
+  	
+  	<c:set var="cIdioma" value="${not empty cookie.cIdioma ? scookie.cIdioma.value : 'es_ES'}" scope="session" />
+  	<p>Idioma cookie "${cookie.cIdioma.getName()}= ${cookie.cIdioma.getValue()}"</p>
+  
     <form  novalidate class="form-signin" method="post" action="login">
     	
     	<!-- 
@@ -30,7 +44,16 @@
       <label for="pass" class="sr-only">Contraseña</label>
       <input type="password" id="pass" name="pass" class="form-control" value="Pa$$w0rd" >
       
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Acceder</button>
+      <label for="pass" class="sr-only">Contraseña</label>
+      
+       <select name="idioma" class="form-control">
+		  <option value="es" ${(cIdioma=="eu_ES")?"selected":""}>Español</option>
+		  <option value="eu" ${(cIdioma=="eu_ES")?"selected":""}>Euskera</option>
+		</select> 
+      
+      <button class="btn btn-lg btn-primary btn-block" type="submit">
+      <fmt:message key="login.boton" />
+      </button>
       
 	<c:if test="${error != null }">
      <div class="alert alert-warning alert-dismissible fade show" role="alert">

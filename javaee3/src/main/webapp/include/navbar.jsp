@@ -9,19 +9,16 @@
 	      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 	        <ul class="navbar-nav mr-auto">
 	          <li class="nav-item">
-	            <a class="nav-link" href="/privado/videos">Videos</a>
+	            <a class="nav-link" href="privado/videos"><fmt:message key="navbar.videos" /></a>
 	          </li>
 	           <li class="nav-item">
-	            <a class="nav-link" href="#">Coches</a>
+	            <a class="nav-link" href="#"><fmt:message key="navbar.libro" /></a>
 	          </li>
 	           <li class="nav-item">
-	            <a class="nav-link" href="#">Varios</a>
-	          </li>
-	          <li class="nav-item">
-	            <a class="nav-link" href="#">Varios</a>
+	            <a class="nav-link" href="#"><fmt:message key="navbar.usuarios.conectados" /></a>
 	          </li>
 	          </ul>
-	            <a href="logout">${usuario_logeado.email} - Salir</a>
+	            <a href="logout">${usuario_logeado.email} - <fmt:message key="navbar.logout" /></a>
 	      </div>
 	    </nav>
 	</header>
