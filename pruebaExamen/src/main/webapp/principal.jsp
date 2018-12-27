@@ -26,7 +26,7 @@
 		<%= usuario.getEmail() %></h1>
 
 <a href="videos">Ver todos los videos</a>
-
+<a href="retro">Nuestros juegos TOP</a>
 <h2>Estos son los datos de los usuarios que nos has proporcionado</h2>
 	<table>
 		<thead>

@@ -11,10 +11,10 @@
             <a class="nav-link" href="videos">Videos</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="/privado/videos">Perros</a>
+            <a class="nav-link" href="retro">Top Retro</a>
           </li>
            <li class="nav-item active">
-            <a class="nav-link" href="listadoUsuarios.jsp">Usuarios</a>
+            <a class="nav-link" href="listadoUsuarios.jsp">Proximamente</a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="#">Disabled</a>
