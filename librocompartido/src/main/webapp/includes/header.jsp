@@ -1,10 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : 'es_ES'}" scope="session" />
-<fmt:setLocale value="${language}" /> 
+<!--<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : 'es_ES'}" scope="session" />-->
+<c:set var="cIdioma" value="${not empty cookie.cIdioma ? cookie.cIdioma.value : 'es_ES'}" scope="session" />
+<fmt:setLocale value="${cIdioma}" /> 
 <fmt:setBundle basename="i18nmessages" /> 
 <!doctype html>
-<html lang="${language}">
+<html lang="${cIdioma}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
