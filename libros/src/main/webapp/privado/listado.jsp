@@ -3,7 +3,7 @@
 <%@ include file="../includes/mensajes.jsp"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
- <meta http-equiv="refresh" content="5 ;URL='http://localhost:8080/javaee3/privado/listado.jsp'" />
+ <meta http-equiv="refresh" content="5 ;URL='http://localhost:8080/libros/privado/listado.jsp'" />
  <!-- Recargar la pagina -->
  <main role="main" class="container">
 <div class="jumbotron">

@@ -52,7 +52,7 @@ public class LibroController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int paginaActual = 1;
+		int paginaActual = 0;
 		int paginasTotal = libro.size();
 		Pagina paginaMostrar = new Pagina();
 		
