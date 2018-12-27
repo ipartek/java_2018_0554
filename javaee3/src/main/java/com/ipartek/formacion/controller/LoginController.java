@@ -1,6 +1,8 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.servlet.ServletConfig;
@@ -53,11 +55,17 @@ public class LoginController extends HttpServlet {
 		
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
+		String idioma = request.getParameter("idioma");
 		String view = VIEW_LOGIN;
 		boolean redirect = false;
 		
 		try {
 		
+			//idioma  TODO ver porque no funciona con Euskera
+			Locale locale = new Locale("eu_ES");
+			ResourceBundle messages = ResourceBundle.getBundle("i18nmessages", locale );
+						
+			
 			// validar
 			Usuario usuario = new Usuario();
 			usuario.setEmail(email);
@@ -81,12 +89,13 @@ public class LoginController extends HttpServlet {
 				
 				if ( usuario == null ) {
 					
-					request.setAttribute("mensaje", "Credenciales incorrectas");
+					request.setAttribute("mensaje", messages.getString("login.incorrecto"));
 				}else {
 					
 					HttpSession session = request.getSession();
 					// asociamos un listener para listar usuarios @see UsuariosListener
 					session.setAttribute("usuario", usuario);
+					session.setAttribute("idioma", idioma );
 					redirect = true;					
 				}
 			}	

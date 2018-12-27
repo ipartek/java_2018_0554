@@ -1,12 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : 'es_ES'}" scope="session" />
-<fmt:setLocale value="${language}" />
+<c:set var="idioma" value="${not empty sessionScope.idioma ? sessionScope.idioma : 'es_ES'}" scope="session" />
+<fmt:setLocale value="${idioma}" />
 <fmt:setBundle basename="i18nmessages" /> 
 
 <!doctype html>
-<html lang="${language}">
+<html lang="${idioma}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,6 +37,13 @@
       
       <label for="pass" class="sr-only">Contraseña</label>
       <input type="password" name="pass" class="form-control" value="12345678" placeholder="minimo 6 caracteres" required>
+      
+      
+      <label for="idioma">Selecciona un Idioma</label>
+      <select name="idioma" class="form-control mb-5">
+      	<option value="eu_ES" selected>Euskera</option>
+      	<option value="es_ES">Castellano</option>      	
+      </select>
       
       <button class="btn btn-lg btn-primary btn-block" type="submit">
       	<fmt:message key="login.boton"/>
