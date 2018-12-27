@@ -1,21 +1,16 @@
-<%@page import="com.ipartek.formacion.modelo.pojos.Disco"%>
-<%@page import="java.util.ArrayList"%>
+<%@ include file="../includes/header.jsp"  %>
+<%@ include file="../includes/navbar.jsp"  %>
+<%@ include file="../includes/mensajes.jsp"  %>
 
-<h1>Listado de Discos</h1>
-
-<!-- <form action="discos" method="get"> -->
-
-<%
-	ArrayList<Disco> discos = (ArrayList<Disco>)request.getAttribute("lista");
-	
-%>
-	
 
 
 
 
 
-<table>
+<h1>Listado de Discos</h1>
+
+
+<table class="table">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -27,19 +22,21 @@
 		</thead>
 		
 		<tbody>
-		
-			<% for(Disco dis : discos) { 
+		<c:forEach items="${disco}" var="dis">
+	
 			
-			%>
 			
 			<tr>
-				<th><%=dis.getId() %></th>
-				<td><%=dis.getTitulo()%></td>
-				<td><%=dis.getArtista()%></td>
-				<td><%=dis.getPortada()%></td>
-				<td><%=dis.getYear()%></td>
+			
+				<td>${dis.id}</td>
+				<td>${dis.titulo}</td>
+				<td>${dis.artista}</td>
+				<td>${dis.portada}</td>
+				<td>${dis.year}</td>
 			</tr>
 			
-			<% } %>
+			</c:forEach>
 		</tbody>
 	</table>
+	
+	<%@ include file="../includes/footer.jsp"%>

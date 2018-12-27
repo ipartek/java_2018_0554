@@ -22,7 +22,7 @@
 		</thead>
 		
 		<tbody>
-		<c:forEach items="${discos}" var="dis">
+		<c:forEach items="${disco}" var="dis">
 	
 			
 			
