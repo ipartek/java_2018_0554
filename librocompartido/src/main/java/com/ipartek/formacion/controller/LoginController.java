@@ -1,6 +1,9 @@
 package com.ipartek.formacion.controller;
 
+
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.servlet.ServletConfig;
@@ -15,8 +18,12 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.modelo.daos.ConnectionManager;
 import com.ipartek.formacion.modelo.daos.UsuarioDAO;
 import com.ipartek.formacion.modelo.pojos.Usuario;
+
 
 /**
  * Servlet implementation class LoginController
@@ -25,12 +32,14 @@ import com.ipartek.formacion.modelo.pojos.Usuario;
 public class LoginController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	private final static Logger LOG = Logger.getLogger(LoginController.class);
+	
 	private UsuarioDAO dao;
 	private ValidatorFactory factory;
 	private Validator validator;
 	
-	public static final String VIEW_LOGIN = "index.jsp";
-	public static final String CONTROLLER_VIDEOS = "listadoUsuarios.jsp";
+	public static final String VIEW_LOGIN = "login.jsp";
+	public static final String CONTROLLER_VIDEOS = "privado/libro";
 	
        
     @Override
@@ -53,11 +62,17 @@ public class LoginController extends HttpServlet {
 		
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
+		String idioma = request.getParameter("idioma");
 		String view = VIEW_LOGIN;
 		boolean redirect = false;
 		
 		try {
 		
+			//idioma  TODO ver porque no funciona con Euskera
+			Locale locale = new Locale("eu_ES");
+			ResourceBundle messages = ResourceBundle.getBundle("i18nmessages", locale );
+			LOG.debug("idioma=" + idioma);			
+			
 			// validar
 			Usuario usuario = new Usuario();
 			usuario.setEmail(email);
@@ -73,7 +88,7 @@ public class LoginController extends HttpServlet {
 					 errores += String.format("<li> %s : %s </li>" , violation.getPropertyPath(), violation.getMessage() );					
 				 }
 				 errores += "</ul>";				 
-				request.setAttribute("mensaje", errores);				
+				 request.setAttribute("mensaje", errores);				
 				
 			}else {                                // validacion OK
 			
@@ -81,19 +96,21 @@ public class LoginController extends HttpServlet {
 				
 				if ( usuario == null ) {
 					
-					request.setAttribute("mensaje", "Credenciales incorrectas");
+					request.setAttribute("mensaje", messages.getString("login.incorrecto"));
 				}else {
 					
 					HttpSession session = request.getSession();
+					// asociamos un listener para listar usuarios @see UsuariosListener
 					session.setAttribute("usuario", usuario);
+					session.setAttribute("idioma", idioma );
 					redirect = true;					
+					LOG.debug("guardamos en session usuario e idioma");			
 				}
 			}	
 				
 			
-		}catch (Exception e) {
-			
-			e.printStackTrace();
+		}catch (Exception e) {			
+			LOG.error(e);
 		}finally {
 			
 			if(redirect) {				
@@ -110,13 +127,3 @@ public class LoginController extends HttpServlet {
 	
 
 }
-		
-		
-		//redireccionar a la interfaz de edicion de paginas del libro
-		
-		
-//		response.sendRedirect(CONTROLLER_PAGINAS);
-		
-		//Si no tiene permitido ir adelante:
-//		request.getRequestDispatcher(view).forward(request, response);
-	

@@ -8,10 +8,10 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/privado/videos">Videos</a>
+            <a class="nav-link" href="privado/videos">Videos</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="/privado/videos">Perros</a>
+            <a class="nav-link" href="privado/carrito">Carrito</a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="#">Disabled</a>

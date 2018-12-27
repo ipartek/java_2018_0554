@@ -9,11 +9,21 @@ public class Videos {
 
 	// Constructores
 
+	public Videos(Long id, String nombre, String url) {
+		super();
+		setId(id);
+		setNombre(nombre);
+		setUrl(url);
+		
+		
+		
+	}
+	
 	public Videos() {
 		super();
 		this.id = -1;
-		this.nombre = "Surf Search Spot 2 0 video promo";
-		this.url = "https://www.youtube.com/watch?v=LPDhuthFD98";
+		this.nombre = "";
+		this.url = "";
 	}
 
 	public Videos(String nombre) {
