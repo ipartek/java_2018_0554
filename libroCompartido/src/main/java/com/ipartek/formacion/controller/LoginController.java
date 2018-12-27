@@ -2,6 +2,9 @@ package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.modelo.dao.ConnectionManager;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 
 /**
@@ -20,6 +27,7 @@ public class LoginController extends HttpServlet {
 	private static final String VISTA_LOGIN = "login.jsp";
 	private static final String CONTROLLER_PAGINAS = "privado/pagina.jsp";
     private ArrayList<Usuario> usuarios;
+    private final static Logger LOG = Logger.getLogger(ConnectionManager.class);
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
@@ -46,6 +54,13 @@ public class LoginController extends HttpServlet {
 		
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
+		String idioma = request.getParameter("idioma");
+		
+		//Idioma
+		
+		Locale locale = new Locale("eu_ES");
+		ResourceBundle messages = ResourceBundle.getBundle("i18nmessages", locale);
+		LOG.debug("idioma=" + idioma);
 		
 		Usuario usuario = new Usuario(null, email, pass, "");
 		
@@ -54,13 +69,14 @@ public class LoginController extends HttpServlet {
 				vista = CONTROLLER_PAGINAS;
 				HttpSession session = request.getSession();
 				//Asociamos un listener para listar usuarios @see UsuariosListener
+				session.setAttribute("language", idioma);
 				session.setAttribute("usuario_logueado", usuario);
 				break;
 			}
 		}
 		
 		if (vista.equals(VISTA_LOGIN)) {
-			request.setAttribute("mensaje", "Usuario no válido");
+			request.setAttribute("mensaje", messages.getString("login.incorrecto"));
 			request.getSession().invalidate();
 		}
 		

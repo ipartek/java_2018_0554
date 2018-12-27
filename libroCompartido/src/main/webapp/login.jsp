@@ -32,7 +32,7 @@
       	<fmt:message key="login.texto"/>
       </h1>
       <label for="idioma"><fmt:message key="login.idioma"/></label>
-      <select id="idioma" name="idioma">
+      <select class="form-control mb-5" id="idioma" name="idioma">
 		          		<option value="ee_ES">Castellano</option>
 		          		<option value="eu_ES">Euskera</option>
 	  </select>
