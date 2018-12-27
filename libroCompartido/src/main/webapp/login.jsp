@@ -35,10 +35,10 @@
 		<h1 class="h3 mb-3 font-weight-normal">
 			<fmt:message key="login.titulo" />
 		</h1>
-
+		<c:set var="cUsuario" value="${not empty cookie.cUsuario ? cookie.cUsuario.value : ''}" scope="session" />
 		<label for="usuario" class="sr-only"><fmt:message
 				key="login.usuario" /></label> <input type="text" id="usuario"
-			name="usuario" class="form-control"
+			name="usuario" class="form-control" value="${cUsuario}"
 			placeholder="<fmt:message key="login.usuario"/>" required autofocus>
 
 		<label for="pass" class="sr-only"><fmt:message

@@ -65,10 +65,15 @@ public class LoginController extends HttpServlet {
 			ResourceBundle messages = ResourceBundle.getBundle("i18nmessages", locale );
 			
 			
-			//guardar cookie
+			//guardar cookie del idioma
 			Cookie cIdioma = new Cookie("cIdioma", idiomaSeleccionado);
 			cIdioma.setMaxAge(60*10); //TODO que no expire
 			response.addCookie(cIdioma);
+			
+			//guardar cookie del nombre del Usuario
+			Cookie cUsuario= new Cookie("cUsuario", usuario);
+			cUsuario.setMaxAge(60*100);
+			response.addCookie(cUsuario);
 			
 			for (Usuario u : usuariosRegistrados) {
 				if(u.getUsuario().equals(usuario)) {
