@@ -48,6 +48,7 @@ public class LoginController extends HttpServlet {
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("activologin", "active");
 		request.getRequestDispatcher(LOGIN_JSP).forward(request, response);
 	}
 
@@ -98,6 +99,7 @@ public class LoginController extends HttpServlet {
 			if(redirect) {				
 				response.sendRedirect(PRIVADO_INSERTAR_JSP);
 			}else {
+				request.setAttribute("activologin", "active");
 				request.getRequestDispatcher(view).forward(request, response);
 			}
 		}

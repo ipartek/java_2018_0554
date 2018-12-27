@@ -24,8 +24,9 @@
           <a class="nav-link" href="paginas">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item ${activologin}">
-          <a class="nav-link" href="login">Login</a>
+       			<a class="nav-link" href=${not empty usuario_logeado.email ? "logout" : "login"}>${not empty usuario_logeado.email ? "Logout" : "Login"}</a>
         </li>
+       
       </ul>
     </div>
   </nav>
