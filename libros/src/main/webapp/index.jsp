@@ -30,17 +30,18 @@
 <body class="text-center">
 
 
-
-
-
-
+	<c:set var="cIdioma"
+	value="${not empty cookie.cIdioma ? cookie.cIdioma.value : 'es_ES'}"
+	scope="session" />
+	
 
 	<form novalidate action="login" method="post" class="form-signin">
 	<div class="form-group">
+	<p>Idioma de la cookie ${cIdioma}</p>
 		Idioma<select name="idioma" class="form-control form-control-sm">
-			<option value="eu_ES">Euskera</option>
-			<option value="es_ES">Español</option>
-			<option value="en_EN">Ingles</option>
+			<option value="eu_ES"${(cIdioma=="eu_ES")?"selected":""}>Euskera</option>
+			<option value="es_ES"${(cIdioma=="es_ES")?"selected":""}>Español</option>
+			<option value="en_EN" ${(cIdioma=="en_EN")?"selected":""}>Ingles</option>
 		</select>
 	</div>
 	

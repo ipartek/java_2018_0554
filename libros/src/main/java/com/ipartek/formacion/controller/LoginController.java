@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -65,11 +66,20 @@ public class LoginController extends HttpServlet {
 		
 		try {
 		
-			//idioma TODO ver por que no funciona el euskera
+			HttpSession session = request.getSession();
+			
+//			idioma TODO ver por que no funciona el euskera
 			Locale locale = new Locale("eu_ES");
 			ResourceBundle messages = ResourceBundle.getBundle("i18nmessages", locale);
 			LOG.debug("idioma="+idioma);
-			// validar
+			
+//			Guardar cookie
+			Cookie cIdioma = new Cookie("cIdioma", idioma);
+			cIdioma.setMaxAge(60*5); //TODO poner que no expire
+			response.addCookie(cIdioma);
+			
+			
+//			validar
 			Usuario usuario = new Usuario();
 			usuario.setEmail(email);
 			usuario.setPassword(pass);
@@ -95,8 +105,8 @@ public class LoginController extends HttpServlet {
 					request.setAttribute("mensaje", messages.getString("login.incorrecto"));
 				}else {
 					
-					HttpSession session = request.getSession();
 					
+						session.setMaxInactiveInterval(60*5);
 //					asociamos un listener para listar usuarios @see UsuariosListener
 					session.setAttribute("usuario", usuario);
 					session.setAttribute("idioma", idioma);
