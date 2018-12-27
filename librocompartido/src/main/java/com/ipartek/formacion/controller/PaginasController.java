@@ -103,6 +103,7 @@ public class PaginasController extends HttpServlet {
 			    	
 			    	request.setAttribute("alerta", "Por favor rellena el autor y texto");
 			    }
+			    libro=getAll();
 				
 				paginaActual = libro.size();
 					
@@ -111,8 +112,8 @@ public class PaginasController extends HttpServlet {
 				
 			}finally {
 				request.setAttribute("pagina", p );
-				request.setAttribute("paginaactual", --paginaActual );
-				request.setAttribute("paginastotales",  libro.size() );
+				request.setAttribute("paginaactual", paginaActual );
+				request.setAttribute("paginastotales",  libro.size()+1 );
 				request.getRequestDispatcher("libro.jsp").forward(request, response);
 			}
 			
