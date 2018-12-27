@@ -11,5 +11,6 @@
      </ul>
    </div>
    <span>${usuario.email}</span>
-   <a href="/logout">logout</a>
+   <a href="${pageContext.request.contextPath}/login">login</a>
+   <a href="${pageContext.request.contextPath}/logout">logout</a>
  </nav>

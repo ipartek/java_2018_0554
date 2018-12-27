@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -64,6 +65,12 @@ public class LoginController extends HttpServlet {
 			//idioma
 			Locale locale = new Locale("eu_ES");
 			ResourceBundle messages = ResourceBundle.getBundle ( "i18nmessages", locale );
+			
+			
+			//guardar cookie
+			Cookie cIdioma = new Cookie("cIdioma", idioma);
+			cIdioma.setMaxAge(60*10);
+			response.addCookie(cIdioma);
 			
 		
 			// validar

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ include file="../includes/header.jsp"  %>
-<%@ include file="../includes/navbar.jsp"  %>
 <%@ include file="../includes/mensajes.jsp"  %>
   
+  <p>Idioma cookie ${cookie.cIdioma.value}</p>
  <form class="form-signin" action="login" method="post">
       <h1 class="h3 mb-3 font-weight-normal">Regístrate</h1>
       <label for="inputEmail" class="sr-only">Email</label>

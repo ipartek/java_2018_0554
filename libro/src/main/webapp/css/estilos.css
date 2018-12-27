@@ -13,3 +13,6 @@ nav span{
     text-align: center;
     display: flex;
 }
+form{
+	width: 100%;
+}
