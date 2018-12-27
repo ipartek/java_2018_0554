@@ -54,10 +54,9 @@
 				${error}
 			</div>
 		</c:if>
-		
-		<select  class="form-control" id="idiomaSeleccionar" name="idiomaSeleccionar">
-			<option value="" disabled selected><fmt:message key="login.idiomas"/></option>
-			<option value="eu_ES">Euskera</option>
+		<label> <fmt:message key="login.idiomas"/> </label>
+		<select  class="form-control mb-5" id="idiomaSeleccionar" name="idiomaSeleccionar">
+			<option value="eu_ES" selected>Euskera</option>
 			<option value="es_ES">Castellano</option>
 		</select>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">
