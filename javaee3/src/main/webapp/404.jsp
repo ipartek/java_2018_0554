@@ -2,7 +2,7 @@
 <%@ include file="../includes/navbar.jsp"  %>
 <%@ include file="../includes/mensajes.jsp"  %>
 
-	<meta http-equiv="refresh" content="5; URL=${pageContext.request.contextPath}/login">
+	<meta http-equiv="refresh" content="10; URL=${pageContext.request.contextPath}/login">
 
     <main role="main" class="container">
       <div class="jumbotron">

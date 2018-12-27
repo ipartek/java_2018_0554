@@ -1,6 +1,12 @@
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : 'es_ES'}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="i18nmessages" /> 
+
 <!doctype html>
-<html lang="en">
+<html lang="${language}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -32,7 +38,9 @@
       <label for="pass" class="sr-only">Contraseña</label>
       <input type="password" name="pass" class="form-control" value="12345678" placeholder="minimo 6 caracteres" required>
       
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">
+      	<fmt:message key="login.boton"/>
+      </button>
       
     </form>
 
