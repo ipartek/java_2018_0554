@@ -31,45 +31,57 @@
 
 
 	<c:set var="cIdioma"
-	value="${not empty cookie.cIdioma ? cookie.cIdioma.value : 'es_ES'}"
-	scope="session" />
-	
+		value="${not empty cookie.cIdioma ? cookie.cIdioma.value : 'es_ES'}"
+		scope="session" />
+
+	<c:set var="cEmail"
+		value="${not empty cookie.cEmail ? cookie.cEmail.value : ''}"
+		scope="session" />
+
+	<c:set var="cEmailTrue"
+		value="${not empty cookie.cEmailTrue ? cookie.cEmailTrue.value : ''}"
+		scope="session" />
+
+	<c:set var="cUltimaVisita"
+		value="${not empty cookie.cUltimaVisita ? cookie.cUltimaVisita.value : ''}"
+		scope="session" />
+
 
 	<form novalidate action="login" method="post" class="form-signin">
-	<div class="form-group">
-	<p>Idioma de la cookie ${cIdioma}</p>
-		Idioma<select name="idioma" class="form-control form-control-sm">
-			<option value="eu_ES"${(cIdioma=="eu_ES")?"selected":""}>Euskera</option>
-			<option value="es_ES"${(cIdioma=="es_ES")?"selected":""}>Español</option>
-			<option value="en_EN" ${(cIdioma=="en_EN")?"selected":""}>Ingles</option>
-		</select>
-	</div>
-	
-	<div class="form-group">
-		<c:if test="${not empty mensaje}">
-			<div class="alert alert-danger alert-dismissible fade show"
-				role="alert">${mensaje}</div>
-		</c:if>
-	</div>
-	
-	<div class="form-group">
-		<label for="email" class="sr-only">Correo Electronico:</label> Email<input
-			type="email" name="email" class="form-control"
-			value="xabier@ipartek.com" placeholder="tu@email.com" required
-			autofocus> 
-	</div>
-	
-	<div class="form-group">
-			<label for="pass" class="sr-only">Contraseña</label>
-		Password<input type="password" name="pass" class="form-control"
-			value="Pa$$w0rd" placeholder="minimo 6 caracteres" required>
-	</div>
-	
-	<div class="form-group">
-		<button class="btn btn-lg btn-primary btn-block" type="submit">
-			<fmt:message key="login.boton" />
-		</button>
-	</div>
+		<div class="form-group">
+			<p>Tu ultima visita fue : ${cUltimaVisita}</p>
+			<p>Idioma de la cookie ${cIdioma}</p>
+			Idioma<select name="idioma" class="form-control form-control-sm">
+				<option value="eu_ES" ${(cIdioma=="eu_ES")?"selected":""}>Euskera</option>
+				<option value="es_ES" ${(cIdioma=="es_ES")?"selected":""}>Español</option>
+				<option value="en_EN" ${(cIdioma=="en_EN")?"selected":""}>Ingles</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<c:if test="${not empty mensaje}">
+				<div class="alert alert-danger alert-dismissible fade show"
+					role="alert">${mensaje}</div>
+			</c:if>
+		</div>
+
+		<div class="form-group">
+			<label for="email" class="sr-only">Correo Electronico:</label> Email<input
+				type="email" name="email" class="form-control" value="${cEmail}"
+				placeholder="tu@email.com" required autofocus>
+		</div>
+
+		<div class="form-group">
+			<label for="pass" class="sr-only">Contraseña</label> Password<input
+				type="password" name="pass" class="form-control"
+				placeholder="minimo 6 caracteres" required>
+		</div>
+
+		<div class="form-group">
+			<button class="btn btn-lg btn-primary btn-block" type="submit">
+				<fmt:message key="login.boton" />
+			</button>
+		</div>
 	</form>
 
 

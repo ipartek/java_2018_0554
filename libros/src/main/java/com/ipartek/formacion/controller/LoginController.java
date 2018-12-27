@@ -1,6 +1,8 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -38,7 +40,7 @@ public class LoginController extends HttpServlet {
 	
 	public static final String VIEW_LOGIN = "index.jsp";
 	public static final String CONTROLLER_VIDEOS = "privado/videos";
-	
+	 private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd-HH:mm:ss");
        
     @Override
     public void init(ServletConfig config) throws ServletException {    
@@ -73,11 +75,26 @@ public class LoginController extends HttpServlet {
 			ResourceBundle messages = ResourceBundle.getBundle("i18nmessages", locale);
 			LOG.debug("idioma="+idioma);
 			
-//			Guardar cookie
+//			Guardar cookie IDIOMA
 			Cookie cIdioma = new Cookie("cIdioma", idioma);
-			cIdioma.setMaxAge(60*5); //TODO poner que no expire
+			cIdioma.setMaxAge(60*60*24*365*5); //TODO poner que no expire
 			response.addCookie(cIdioma);
 			
+			
+//			Guardar cookie EMAIL
+			Cookie cEmail = new Cookie("cEmail", email);
+			cEmail.setMaxAge(60*60*24*365*5); //TODO poner que no expire
+			response.addCookie(cEmail);
+			
+			
+//			Guardar cookie ULTIMA VISITA
+			LocalDateTime now = LocalDateTime.now();
+	        String fecha = dtf.format(now);
+			Cookie cUltimaVisita = new Cookie("cUltimaVisita", fecha);
+			cUltimaVisita.setMaxAge(60*60*24*365*5); //TODO poner que no expire
+			response.addCookie(cUltimaVisita);
+			
+
 			
 //			validar
 			Usuario usuario = new Usuario();
@@ -106,7 +123,7 @@ public class LoginController extends HttpServlet {
 				}else {
 					
 					
-						session.setMaxInactiveInterval(60*5);
+						session.setMaxInactiveInterval(60*60*24*365*5);
 //					asociamos un listener para listar usuarios @see UsuariosListener
 					session.setAttribute("usuario", usuario);
 					session.setAttribute("idioma", idioma);
