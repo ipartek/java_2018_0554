@@ -1,4 +1,4 @@
-package com.ipartek.formacin.pojo;
+package com.ipartek.formacion.pojo;
 
 public class Pagina {
 

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ipartek.formacin.pojo.Pagina;
+import com.ipartek.formacion.pojo.Pagina;
 
 
 @WebServlet("/paginas")
