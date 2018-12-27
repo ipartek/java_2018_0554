@@ -121,7 +121,8 @@ public class LoginController extends HttpServlet {
 			
 		}catch (Exception e) {
 			
-			e.printStackTrace();
+			//e.printStackTrace();
+			LOG.error(e);
 		}finally {
 			
 			if(redirect) {				
