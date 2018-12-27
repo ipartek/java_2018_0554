@@ -1,6 +1,8 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -69,6 +71,9 @@ public class LoginController extends HttpServlet {
 		String view = VIEW_LOGIN;
 		boolean redirect = false;
 		
+		
+		 
+		
 		try {
 			HttpSession session = request.getSession();
 			
@@ -77,10 +82,18 @@ public class LoginController extends HttpServlet {
 			ResourceBundle messages = ResourceBundle.getBundle("i18nmessages", locale );
 			LOG.debug("idioma="+idioma);
 			
+			
+			
 			//guardar cookie
 			Cookie cIdioma = new Cookie("cIdioma",idioma);
 			cIdioma.setMaxAge(60 * 60 * 24 * 365 * 10);
 			response.addCookie(cIdioma);
+			
+			Date date = new Date();
+	        SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
+	        Cookie cVisita = new Cookie("cVisita",formateador.format(date));
+			cVisita.setMaxAge(60 * 60 * 24 * 365 * 10);
+			response.addCookie(cVisita);
 			
 			
 			
@@ -112,6 +125,12 @@ public class LoginController extends HttpServlet {
 					request.setAttribute("error", messages.getString("login.incorrecto"));
 				}else {
 					
+					Cookie cEmail = new Cookie("cEmail",usuario.getEmail());
+					cEmail.setMaxAge(60 * 60 * 24 * 365 * 10);
+					response.addCookie(cEmail);
+					
+					
+				
 					
 					session.setMaxInactiveInterval(60*10);
 					session.setAttribute("usuario_logeado", usuario);

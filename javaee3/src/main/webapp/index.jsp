@@ -29,17 +29,21 @@
   	
   	
   	<c:set var="cIdioma" value="${not empty cookie.cIdioma ? scookie.cIdioma.value : 'es_ES'}" scope="session" />
-  	<p>Idioma cookie "${cookie.cIdioma.getName()}= ${cookie.cIdioma.getValue()}"</p>
+  
+  
+  
   
     <form  novalidate class="form-signin" method="post" action="login">
-    	
+    <p>${cookie.cIdioma.getValue()}"</p>
+    <p> ${cookie.cEmail.getValue()}</p>
+  	<p>${cookie.cVisita.getValue()}</p>
     	<!-- 
       <img class="mb-4" src="img/logo.jpg" alt="" width="100" height="100">
       <h1 class="h3 mb-3 font-weight-normal">LOGIN BRUTAL</h1>
       -->
       
       <label for="mail" class="sr-only">Email</label>
-      <input type="email" id="mail" name=mail class="form-control"  value="ima@gmail.com">
+      <input type="email" id="mail" name=mail class="form-control"  value="${cookie.cEmail.getValue()}"  >
       
       <label for="pass" class="sr-only">Contraseña</label>
       <input type="password" id="pass" name="pass" class="form-control" value="Pa$$w0rd" >
