@@ -29,17 +29,11 @@ public class UsuariosListener implements HttpSessionAttributeListener {
 	}
 
 	public void attributeRemoved(HttpSessionBindingEvent event) {
-//		ServletContext appContext = (ServletContext) event.getSession().getServletContext();
-//
-//		HttpSession session = event.getSession();
-//
-//		Usuario usuario = (Usuario) session.getAttribute("usuario");
-//
-//		usuariosLogeados = (ArrayList<Usuario>) appContext.getAttribute("usuariosLogeados");
+		//quitar de la lista
 	}
 
 	public void attributeReplaced(HttpSessionBindingEvent event) {
-		System.out.println("attributeReplaced");
+		// hacer logout y volver a cargar usuario
 	}
 
 }
