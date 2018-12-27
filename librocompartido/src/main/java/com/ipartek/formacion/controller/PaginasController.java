@@ -2,12 +2,18 @@ package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import com.ipartek.formacion.pojo.Pagina;
 
@@ -15,6 +21,9 @@ import com.ipartek.formacion.pojo.Pagina;
 @WebServlet("/paginas")
 public class PaginasController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private ValidatorFactory factory;
+	private Validator validator;
 	
 	private static ArrayList<Pagina> getAll(){
 		ArrayList<Pagina> libro= new ArrayList<Pagina>();
@@ -31,6 +40,13 @@ public class PaginasController extends HttpServlet {
 		libro.add(new Pagina(autor, texto));
 	}
 	
+	@Override
+	public void init(ServletConfig config) throws ServletException {	
+		super.init(config);
+		factory  = Validation.buildDefaultValidatorFactory();
+    	validator  = factory.getValidator();
+		
+	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int actual=0;
@@ -67,30 +83,67 @@ public class PaginasController extends HttpServlet {
 		ArrayList<Pagina> libro= new ArrayList<Pagina>();
 		libro=getAll();
 		
-		try {
-			Integer paginaInt=Integer.parseInt(pagina);
-			actual=Integer.parseInt(pagina);
-			if(actual>libro.size() || actual==0) {
-				request.setAttribute("error", "No existe esa pagina");
-				doGet(request, response);
-			}
-			actual=actual-1;
-			
-				
-			
-		}catch(Exception e) {
-			request.setAttribute("error", "Inserta un valor numerico");
-			doGet(request, response);
-		}finally {
-			
-			request.setAttribute("paginastotales", libro.size());
-			request.setAttribute("pagina", libro.get(actual));
-			request.setAttribute("paginaactual", libro.indexOf(libro.get(actual)));
-			request.setAttribute("paginaintroducida", actual+1);
-			request.getRequestDispatcher("libro.jsp").forward(request, response);
-		}
+		String autor = request.getParameter("autor");
+		String texto = request.getParameter("textoinsertado");
+		Pagina p = new Pagina();
+		int paginaActual = 0;
 		
+		if(autor!=null) {
+			try {
+				
+				p = new Pagina(autor, texto);
+				
+				//validar			
+			    Set<ConstraintViolation<Pagina>> violations = validator.validate(p);
+			    if ( violations.isEmpty() ) {
+			    	
+			    	libro.add(p);
+			    	
+			    }else {
+			    	
+			    	request.setAttribute("alerta", "Por favor rellena el autor y texto");
+			    }
+				
+				paginaActual = libro.size();
+					
+			}catch (Exception e) {
+				request.setAttribute("alerta", "Error Escribiendo pagina" );
+				
+			}finally {
+				request.setAttribute("pagina", p );
+				request.setAttribute("paginaactual", --paginaActual );
+				request.setAttribute("paginastotales",  libro.size() );
+				request.getRequestDispatcher("libro.jsp").forward(request, response);
+			}
+			
+		}/*FIN IF*/
+		
+		if(pagina!=null) {
+			try {
+			
+				Integer paginaInt=Integer.parseInt(pagina);
+				actual=Integer.parseInt(pagina);
+				if(actual>libro.size() || actual==0) {
+					request.setAttribute("error", "No existe esa pagina");
+					doGet(request, response);
+				}
+				actual=actual-1;
+			
+					
+				
+			}catch(Exception e) {
+				request.setAttribute("error", "Inserta un valor numerico");
+				doGet(request, response);
+			}finally {
+				request.setAttribute("paginastotales", libro.size());
+				request.setAttribute("pagina", libro.get(actual));
+				request.setAttribute("paginaactual", libro.indexOf(libro.get(actual)));
+				request.setAttribute("paginaintroducida", actual+1);
+				request.getRequestDispatcher("libro.jsp").forward(request, response);
+			}
+		}
 	}
+
 
 	
 	
