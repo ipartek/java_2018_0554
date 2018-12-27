@@ -1,10 +1,11 @@
-package com.ipartek.formacion.controller;
+package com.ipartek.formacion.daos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.ipartek.formacion.modelo.ConnectionManager;
 import com.ipartek.formacion.modelo.pojos.Usuario;
 
 public class UsuarioDAO {
