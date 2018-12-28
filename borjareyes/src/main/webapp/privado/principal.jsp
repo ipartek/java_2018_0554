@@ -4,13 +4,8 @@
 
 <main role="main" class="container">
 <div class="jumbotron">
+<h4>Opciones</h4>
 	<table class="table table-hover">
-		<tr>
-			<th>Opciones</th>
-		</tr>
-		<tr>
-			<td></td>
-		</tr>
 		<tr>
 			<td><a class="list-group-item" href="saludars?met=post">Saludar
 					por POST</a></td>
