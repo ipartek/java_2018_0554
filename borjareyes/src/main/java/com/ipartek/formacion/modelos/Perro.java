@@ -14,7 +14,7 @@ public class Perro {
 	private boolean padrino;
 	@NotEmpty
 	@Pattern(regexp="[0-9]{2}-[0-9]{4}-[0-9]{4}")
-	private String chip;
+	private String chip;//luego sera un objeto para almacenar la localizacion
 	
 	public Perro() {
 		super();
