@@ -17,7 +17,7 @@
 		<tbody>
 			<c:forEach items="${perros}" var="p">
 				<tr>
-					<th scope="row">${p.id}</td>
+					<th scope="row">${p.id}</th>
 					<td>${p.raza}</td>
 					<td><img src="${p.img}" alt="${p.raza}" width="300"></td>
 				</tr>
