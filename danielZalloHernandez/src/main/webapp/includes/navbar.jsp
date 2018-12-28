@@ -12,7 +12,7 @@
 				</a></li>
 				<li class="nav-item active"><a class="nav-link" href="privado/saludarGet?nombre=Dani&apellido=Zallo">Saludar Get<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item active"><a class="nav-link" href="#">Listar Perros<span class="sr-only">(current)</span>
+				<li class="nav-item active"><a class="nav-link" href="privado/perros">Listar Perros<span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item active"><a class="nav-link" href="#">Formulario Nuevo Perro<span class="sr-only">(current)</span>
 				</a></li>

@@ -8,7 +8,9 @@
 		<table class="table">
 			<thead class="thead-dark">
 				<tr>
+					
 					<th>Nombre</th>
+					
 				</tr>
 			</thead>
 			<tbody class="bg-success">
