@@ -19,7 +19,7 @@
 				<a class="nav-link" href="privada/saludar_get.jsp">Saludar.GET</a>
 				</li>
 				<li class="nav-item active">
-				<a class="nav-link" href="privada/perros.jsp">Listar</a>
+				<a class="nav-link" href="perros">Listar</a>
 				</li>
 			</ul>
 			<ul class="navbar-nav mr-auto border border-success">
@@ -32,7 +32,7 @@
 			</ul>
 			<c:choose>
 			    <c:when test="${sessionScope.usuario_logueado!=null}">
-			    <a href="privado/pagina.jsp" class="btn btn-outline-primary my-2 my-sm-0">Nuevo Perro</a>
+			    <a href="alta" class="btn btn-outline-primary my-2 my-sm-0">Nuevo Perro</a>
 			    <form class="form-inline mt-2 mt-md-0" action="logout" method="POST">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerrar Sesión</button>
 				</form>   
