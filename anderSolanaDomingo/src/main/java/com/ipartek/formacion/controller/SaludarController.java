@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class SaludarController
  */
-@WebServlet("/saludar")
+@WebServlet("/privada/saludar")
 public class SaludarController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -26,7 +26,7 @@ public class SaludarController extends HttpServlet {
 		session.setAttribute("nombre_saludo", nombre);
 		session.setAttribute("apellido_saludo", apellido);
 		
-		request.getRequestDispatcher("privada/saludar.jsp").forward(request, response);
+		request.getRequestDispatcher("/privada/saludar.jsp").forward(request, response);
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class SaludarController extends HttpServlet {
 		session.setAttribute("nombre_saludo", nombre);
 		session.setAttribute("apellido_saludo", apellido);
 		
-		request.getRequestDispatcher("privada/saludar.jsp").forward(request, response);
+		request.getRequestDispatcher("/privada/saludar.jsp").forward(request, response);
 	}
 
 }

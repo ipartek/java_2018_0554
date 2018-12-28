@@ -17,7 +17,7 @@
 	  				</ul>
 	  			</li>
 	  		</ul>
-	  		<a class="btn btn-success" href="perro?nombre=${p.nombre}">Ver ficha completa</a>
+	  		<a class="btn btn-success" href="privada/perro?nombre=${p.nombre}">Ver ficha completa</a>
   		</div>
 		</c:forEach>
 	</div>

@@ -21,7 +21,7 @@
 				
 				<c:choose>
     			<c:when test="${perro.peso != 0.0}">
-        		<li><span class="text-warning">Peso: </span>${perro.peso}</li>
+        		<li><span class="text-warning">Peso: </span>${perro.peso} Kgs</li>
 			    </c:when>    
 			    <c:otherwise>
 			    <li><span class="text-warning">Peso: </span><span  class="text-danger">No especificado</span></li>   
@@ -45,11 +45,12 @@
 	  				</ul>
 	  			</li>
 	  		</ul>
+	  		<a class="btn btn-success" href="privada/perros">Volver a la lista de todos los perros</a>
   		</div>
     </c:when>    
     <c:otherwise>
         <div class="alert alert-danger" role="alert">
-  			Lo sentimos, el perro que buscas no existe. <a href="perros">Volver a la lista de todos los perros</a>
+  			Lo sentimos, el perro que buscas no existe. <a href="privada/perros">Volver a la lista de todos los perros</a>
 		</div>
     </c:otherwise>
 	</c:choose>

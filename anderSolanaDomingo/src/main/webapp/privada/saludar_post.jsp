@@ -3,7 +3,7 @@
 
 <div class="container">
 	<div class="jumbotron">
-		<form action="saludar" method="POST">
+		<form action="privada/saludar" method="POST">
 			<div class="form-group">
    				<label for="nombre">Nombre</label>
     			<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" value="${sessionScope.usuario_logueado.nombre }">

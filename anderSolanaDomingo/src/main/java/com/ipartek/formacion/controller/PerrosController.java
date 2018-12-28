@@ -17,7 +17,7 @@ import com.ipartek.formacion.modelo.pojo.Perro;
 /**
  * Servlet implementation class PerrosController
  */
-@WebServlet("/perros")
+@WebServlet("/privada/perros")
 public class PerrosController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Perro> perros;
@@ -40,7 +40,7 @@ public class PerrosController extends HttpServlet {
 		
 		request.setAttribute("perros", perros);
 		
-		request.getRequestDispatcher("privada/perros.jsp").forward(request, response);
+		request.getRequestDispatcher("/privada/perros.jsp").forward(request, response);
 	}
 
 	/**
