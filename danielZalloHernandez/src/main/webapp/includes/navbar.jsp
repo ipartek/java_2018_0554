@@ -14,7 +14,7 @@
 				</a></li>
 				<li class="nav-item active"><a class="nav-link" href="privado/perros">Listar Perros<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item active"><a class="nav-link" href="#">Formulario Nuevo Perro<span class="sr-only">(current)</span>
+				<li class="nav-item active"><a class="nav-link" href="privado/insertarPerro">Formulario Nuevo Perro<span class="sr-only">(current)</span>
 				</a></li>
 			</ul>
 			

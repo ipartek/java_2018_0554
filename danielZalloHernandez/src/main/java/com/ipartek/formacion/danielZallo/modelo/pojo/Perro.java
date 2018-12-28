@@ -49,6 +49,10 @@ public class Perro {
 		return raza;
 	}
 	public void setRaza(String raza) {
+		if(raza.equals("")) {
+			raza="milrazas";
+		}
+		
 		this.raza = raza;
 	}
 	public Double getPeso() {
