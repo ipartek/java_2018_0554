@@ -111,7 +111,7 @@ public class LoginController extends HttpServlet {
 					session.setMaxInactiveInterval(60*5);
 					// asociamos un listener para listar usuarios @see UsuariosListener
 					session.setAttribute("usuario", usuario);
-					session.setAttribute("language", idioma);
+					session.setAttribute("idioma", idioma);
 					redirect = true;	
 					
 					LOG.debug("guardamos en session usuario e idioma");
