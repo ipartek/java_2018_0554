@@ -49,9 +49,10 @@ public class NuevoPerroSrvLt extends HttpServlet {
 			
 			if (violations.size() > 0) {	
 				request.setAttribute("error", "algo no va bien con los datos introducidos");
-				request.getRequestDispatcher("/privado/principal.jsp").forward(request, response);
+				request.getRequestDispatcher("/privado/nuevoperro.jsp").forward(request, response);
 				
 			}else {
+				
 				
 				perros.add(perro);
 				

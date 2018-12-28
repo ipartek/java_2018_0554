@@ -1,5 +1,7 @@
 package com.ipartek.formacion.modelos;
 
+import javax.validation.constraints.Pattern;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class Perro {
@@ -11,7 +13,7 @@ public class Perro {
 	private Double peso;
 	private boolean padrino;
 	@NotEmpty
-	
+	@Pattern(regexp="[0-9]{2}-[0-9]{4}-[0-9]{4}")
 	private String chip;
 	
 	public Perro() {

@@ -13,9 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/saludars")
 public class SaludarSrvLt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	String error=null;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		
 		String nombre=request.getParameter("nombre");
 		String apellidos=request.getParameter("apellidos");
@@ -29,12 +30,27 @@ public class SaludarSrvLt extends HttpServlet {
 			
 			request.getRequestDispatcher("/privado/formsaludo.jsp").forward(request, response);
 		}else {
-
-			request.setAttribute("nombre", nombre);
-			request.setAttribute("apellidos", apellidos);
-			request.setAttribute("metodo", "get");
+			if (nombre==null || nombre=="") {
+				error="el nombre no puede estar vacio";
+				
+			}else if (apellidos==null || apellidos=="") {
+				error="los apellidos no pueden estar vacios";
+			}
 			
-			request.getRequestDispatcher("/privado/saludar.jsp").forward(request, response);
+			if(error!=null) {
+				request.setAttribute("error", error);
+				request.setAttribute("metodo", "get");
+				
+				request.getRequestDispatcher("/privado/formsaludo.jsp").forward(request, response);
+			}else {
+				request.setAttribute("nombre", nombre);
+				request.setAttribute("apellidos", apellidos);
+				request.setAttribute("metodo", "get");
+				
+				request.getRequestDispatcher("/privado/saludar.jsp").forward(request, response);
+			}
+			
+			
 			
 		}
 		
@@ -49,11 +65,29 @@ public class SaludarSrvLt extends HttpServlet {
 		String nombre=request.getParameter("nombre");
 		String apellidos=request.getParameter("apellidos");
 		
-		request.setAttribute("nombre", nombre);
-		request.setAttribute("apellidos", apellidos);
-		request.setAttribute("metodo", "post");
+		if (nombre==null || nombre=="") {
+			error="el nombre no puede estar vacio";
+			
+		}else if (apellidos==null || apellidos=="") {
+			error="los apellidos no pueden estar vacios";
+		}
 		
-		request.getRequestDispatcher("/privado/saludar.jsp").forward(request, response);
+		if(error!=null) {
+			request.setAttribute("error", error);
+			request.setAttribute("metodo", "get");
+			
+			request.getRequestDispatcher("/privado/formsaludo.jsp").forward(request, response);
+		}else {
+			request.setAttribute("nombre", nombre);
+			request.setAttribute("apellidos", apellidos);
+			request.setAttribute("metodo", "post");
+			
+			request.getRequestDispatcher("/privado/saludar.jsp").forward(request, response);
+		}
+		
+		
+		
+		
 		
 	}
 

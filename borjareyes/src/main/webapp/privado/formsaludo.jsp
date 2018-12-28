@@ -1,7 +1,7 @@
 <%@ include file="../includes/header.jsp" %>   
 <%@ include file="../includes/navbar.jsp" %>  
 <%@ include file="../includes/mensajes.jsp" %> 
-<main>
+<main class="container">
 <form action="saludars" method="${metodo}">
   <div class="form-group">
     <label for="exampleInputEmail1">Nombre</label>
@@ -12,7 +12,7 @@
     <input type="text" class="form-control" name="apellidos" id="exampleInputPassword1" placeholder="Password">
   </div>
 
-  <button type="submit" class="btn btn-primary">Enviar</button>
+  <button type="submit" class="btn btn-primary">Mandar Saludo</button>
 </form>
 
 </main>
