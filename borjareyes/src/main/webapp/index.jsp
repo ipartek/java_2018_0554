@@ -31,7 +31,7 @@
   </head>
   <body class="text-center">
     <form class="form-signin" action="login" method="post">
-  <img class="mb-4" src="/docs/4.2/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+  <img class="mb-4" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Animal_footprint.svg/500px-Animal_footprint.svg.png" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">BIENVENIDO</h1>
   <label for="usuario" class="sr-only">Email</label>
   <input type="text" name="usu" id="usuario" class="form-control" placeholder="Usuario" required autofocus value="scooby">
