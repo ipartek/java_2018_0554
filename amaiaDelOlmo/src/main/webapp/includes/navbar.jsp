@@ -8,6 +8,12 @@
       <li class="nav-item active">
         <a class="nav-link" href="${pageContext.request.contextPath}/privado/saludar.jsp">Saludar</a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="${pageContext.request.contextPath}/perro">Perros</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="${pageContext.request.contextPath}/privado/nuevoperro.jsp">Nuevo perro</a>
+      </li>
     </ul>
   </div>
 </nav>

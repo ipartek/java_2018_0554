@@ -56,6 +56,43 @@ public class PerroCont extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-	}
-	
+		String nombre = request.getParameter("nombre");
+		String chip = request.getParameter("chip");
+		String raza = request.getParameter("raza");
+		int edad = Integer.parseInt(request.getParameter("edad"));
+		int peso = Integer.parseInt(request.getParameter("peso"));
+		String apadrinado = request.getParameter("apadrinado");
+		String localizacion = request.getParameter("localizacion");
+		Perro p = new Perro();
+		
+		try {
+		
+			p = new Perro(nombre, edad, raza, peso, apadrinado, chip, localizacion);
+			
+			//validar			
+		    Set<ConstraintViolation<Perro>> violations = validator.validate(p);
+		    if ( violations.isEmpty() ) {
+		    	
+		    	perros.add(p);
+		    	
+		    }else {
+		    	
+		    	request.setAttribute("alerta", "Por favor rellena el nombre, chip y raza del perro");
+		    }
+			
+				
+		}catch (Exception e) {
+			request.setAttribute("alerta", "Error escribiendo perro" );
+			
+		}finally {
+			request.setAttribute("nombre", nombre );
+			request.setAttribute("chip", chip );
+			request.setAttribute("raza",  raza );
+			request.setAttribute("edad", edad );
+			request.setAttribute("peso",  peso );
+			request.setAttribute("apadrinado", apadrinado );
+			request.setAttribute("localizacion",  localizacion );
+			request.getRequestDispatcher("perro").forward(request, response);
+		}		
+	}	
 }

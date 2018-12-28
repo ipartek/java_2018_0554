@@ -8,7 +8,6 @@
 			<label class="sr-only">Contraseña</label>
 			<input type="password" name="pass" class="form-control mb-3" value="galletas" placeholder="Contraseña" required>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>
-			<p class="error">${mensaje}</p>
 		</form>
 	</div>
 </main>
