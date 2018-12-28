@@ -28,7 +28,7 @@ public class LoginController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		
-		usuariosRegistrados.add(new Usuario(1L, "scobby", "galletas", "Dooooooo"));
+		usuariosRegistrados.add(new Usuario(1L, "scobby", "galletas", "Do"));
 	}
 
 	/**
