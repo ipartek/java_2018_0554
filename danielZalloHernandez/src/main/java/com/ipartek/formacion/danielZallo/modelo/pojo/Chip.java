@@ -21,10 +21,6 @@ public class Chip {
 		return num_identifiacion;
 	}
 	public void setNum_identifiacion(String num_identifiacion) {
-		if() {
-			
-		}
-		
 		this.num_identifiacion = num_identifiacion;
 	}
 	public String getLatitud() {
