@@ -11,7 +11,7 @@
             <a class="nav-link" href="privado/videos">Videos</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="privado/carrito">Carrito</a>
+            <a class="nav-link" href="privado/usuarios">Usuarios</a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="#">Disabled</a>
