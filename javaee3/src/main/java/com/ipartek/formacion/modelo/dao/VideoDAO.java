@@ -41,7 +41,7 @@ public class VideoDAO {
 				videos.add(video);
 				}catch (Exception e) {
 					
-					System.out.println("Video no v�lido");
+					System.out.println("Video no válido");
 					e.printStackTrace();
 				}
 			}
@@ -74,7 +74,7 @@ public class VideoDAO {
 					videos.add(video);
 					}catch (Exception e) {
 						
-						System.out.println("Video no v�lido");
+						System.out.println("Video no válido");
 						e.printStackTrace();
 					}
 				}

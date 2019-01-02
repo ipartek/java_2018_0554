@@ -9,46 +9,46 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.ipartek.formacion.modelo.dao.VideoDAO;
-import com.ipartek.formacion.modelo.pojo.Video;
+
+import com.ipartek.formacion.modelo.dao.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojo.Usuario;
 
 /**
- * Servlet implementation class VideosController
+ * Servlet implementation class UsuariosController
  */
-@WebServlet("/privado/videos")
-public class VideosController extends HttpServlet {
+@WebServlet("/privado/usuarios")
+public class UsuariosController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	//private VideoDAO dao;
+	private UsuarioDAO dao;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		//dao = VideoDAO.getInstance();
+		dao = UsuarioDAO.getInstance();
 	}
-	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Video> videos = new ArrayList<Video>();
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		
 		try {
 			
-			//videos = dao.getAll();
+			usuarios = dao.getAll();
 			
-			request.setAttribute("videos", videos);
-			request.getRequestDispatcher("principal.jsp").forward(request, response);
+			request.setAttribute("usuarios", usuarios);
+			request.getRequestDispatcher("usuarios/index.jsp").forward(request, response);
 			
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
-		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -20,17 +20,17 @@ public class Usuario {
 	@Size(min=6, max=50)
 	private String password;
 	
-	private String gitHub;
+	//private String gitHub;
 	
 	public Usuario() throws PojoException{
 		super();
 		this.id = (long) -1;
 		this.email  = "";
 		this.password = "";
-		this.gitHub = "";
+		//this.gitHub = "";
 	}
 	
-	public Usuario(Long id, String email, String password, String gitHub) throws PojoException{
+	public Usuario(Long id, String email, String password) throws PojoException{
 		this();
 		setId(id);
 		setEmail(email);
@@ -77,13 +77,13 @@ public class Usuario {
 		this.password = password;
 	}
 	
-	public String getGitHub() {
+	/*public String getGitHub() {
 		return gitHub;
 	}
 	
 	public void setGitHub(String gitHub) {
 		this.gitHub = gitHub;
-	}
+	}*/
 
 	@Override
 	public String toString() {
