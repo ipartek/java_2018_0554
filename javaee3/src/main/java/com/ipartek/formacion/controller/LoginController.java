@@ -146,7 +146,8 @@ public class LoginController extends HttpServlet {
 		}finally {
 			
 			if(redirect) {				
-				response.sendRedirect(CONTROLLER_VIDEOS);
+				//response.sendRedirect(CONTROLLER_VIDEOS);
+				response.sendRedirect( request.getContextPath() + "/privado/usuarios");
 			}else {
 				request.getRequestDispatcher(view).forward(request, response);
 			}

@@ -3,6 +3,7 @@ package com.ipartek.formacion.modelo.daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ipartek.formacion.modelo.pojo.Usuario;
@@ -113,6 +114,29 @@ public class UsuarioDAO {
 				e.printStackTrace();
 			}
 		return usuariosmal;
+	}
+	
+	
+	
+	
+	public boolean insert( Usuario u) throws SQLException {
+		
+		boolean resul = false;
+		String sql = "INSERT INTO `usuario` (`email`, `password`) VALUES (?,?);";
+		try ( Connection conn = ConnectionManager.getConnection();
+			  PreparedStatement pst = conn.prepareStatement(sql);				   
+			){
+			
+			pst.setString(1, u.getEmail());
+			pst.setString(2, u.getPassword());			
+			int affectedRows = pst.executeUpdate();
+			if ( affectedRows == 1 ) {
+				resul = true;
+			}
+			
+		}
+		return resul;
+		
 	}
 	
 
