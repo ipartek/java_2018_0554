@@ -35,7 +35,7 @@ public class UsuarioDAO {
 	public Usuario login (String email, String pass) {
 		
 		Usuario usuario = null;
-		String sql = "SELECT id, nombre, password FROM usuario WHERE nombre = ? AND password = ?;";
+		String sql = "SELECT id, email, password FROM usuario WHERE email = ? AND password = ?;";
 		
 		try ( Connection conn = ConnectionManager.getConnection();
 			  PreparedStatement pst = conn.prepareStatement(sql);
@@ -46,7 +46,7 @@ public class UsuarioDAO {
 							while(rs.next()) { // hemos encontrado usuario								
 								usuario = new Usuario();
 								usuario.setId( rs.getLong("id"));
-								usuario.setEmail( rs.getString("nombre"));
+								usuario.setEmail( rs.getString("emails"));
 								usuario.setPassword(rs.getString("password"));								
 							}						
 					}
@@ -59,7 +59,7 @@ public class UsuarioDAO {
 	public ArrayList<Usuario> getAll() {
 		
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-		String sql = "SELECT id, nombre, password FROM usuario ORDER BY id DESC LIMIT 500";		
+		String sql = "SELECT id, email, password FROM usuario ORDER BY id DESC LIMIT 500";		
 		
 		try ( Connection conn = ConnectionManager.getConnection();
 			  PreparedStatement pst = conn.prepareStatement(sql);
@@ -70,7 +70,7 @@ public class UsuarioDAO {
 				try {
 					Usuario usuario = new Usuario();
 					usuario.setId( rs.getLong("id"));
-					usuario.setEmail( rs.getString("nombre"));
+					usuario.setEmail( rs.getString("email"));
 					usuario.setPassword(rs.getString("password"));
 					// a�adir en array
 					usuarios.add(usuario);

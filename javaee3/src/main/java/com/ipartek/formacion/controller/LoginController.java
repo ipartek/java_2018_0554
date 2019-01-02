@@ -38,7 +38,7 @@ public class LoginController extends HttpServlet {
 	private Validator validator;
 	
 	public static final String VIEW_LOGIN = "login.jsp";
-	public static final String CONTROLLER_VIDEOS = "privado/videos";
+	//public static final String CONTROLLER_VIDEOS = "privado/videos";
 	
        
     @Override
@@ -122,7 +122,7 @@ public class LoginController extends HttpServlet {
 		}finally {
 			
 			if(redirect) {				
-				response.sendRedirect(CONTROLLER_VIDEOS);
+				response.sendRedirect( request.getContextPath() + "/privado/usuarios");
 			}else {
 				request.getRequestDispatcher(view).forward(request, response);
 			}
