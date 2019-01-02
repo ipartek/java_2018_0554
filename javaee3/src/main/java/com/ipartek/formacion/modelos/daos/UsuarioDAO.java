@@ -105,6 +105,58 @@ public class UsuarioDAO {
 		}
 		return resul;
 	}
+	
+	public boolean update(Usuario u) throws SQLException {
+		boolean resul= false;
+		String sql ="UPDATE usuario SET email=?, `password`=? WHERE id=?;";
+		
+		try(Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(sql);
+			){
+			pst.setString(1, u.getEmail());
+			pst.setString(2, u.getPassword());
+			pst.setLong(3, u.getId());
+			int affectedRows = pst.executeUpdate();
+			
+			if(affectedRows == 1) {
+				resul = true;
+			}
+			
+		}
+		
+		return resul;
+	}
+	public void eliminar(String id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * Metodo que busca un usuario por su id
+	 * @param id
+	 * @return
+	 */
+	public Usuario getById(Long id) {
+		Usuario usuario = null;
+		String sql = "SELECT id,email,password FROM usuario WHERE id=?";
+		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+			pst.setLong(1, id);
+	
+			try (ResultSet rs = pst.executeQuery();) {
+				while (rs.next()) { // hemos encontrado ususario
+					usuario = new Usuario();
+					usuario.setId(rs.getLong("id"));
+					usuario.setEmail(rs.getString("email"));
+					usuario.setPassword(rs.getString("password"));
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return usuario;
+	}
+
 
 
 }

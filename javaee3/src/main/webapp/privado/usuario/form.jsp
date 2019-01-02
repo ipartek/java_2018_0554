@@ -3,7 +3,7 @@
 
 <main role="main" class="container p-3 ">
  <%@ include file="../../includes/mensajes.jsp" %>
- ${usuario}
+
 <div class="jumbotron">
 
 	<form action="privado/usuarios" method="post">

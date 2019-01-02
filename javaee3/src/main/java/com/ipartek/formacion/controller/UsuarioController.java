@@ -2,7 +2,7 @@ package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Set;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -10,11 +10,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.pojo.Usuario;
 import com.ipartek.formacion.modelos.daos.UsuarioDAO;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 /**
  * Servlet implementation class UsuarioController
@@ -32,6 +37,9 @@ public class UsuarioController extends HttpServlet {
 	private static final String OP_GUARDAR="3"; //id == -1 insert, id> 1 update
 	private static final String OP_ELIMINAR="4";
 	
+	private ValidatorFactory factory;
+	private Validator validator;
+	
 	private String alerta="";
 	
 	//parametros a recibir
@@ -46,6 +54,9 @@ public class UsuarioController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		dao = UsuarioDAO.getInstance();
+		// Crear Factoria y Validador
+		factory = Validation.buildDefaultValidatorFactory();
+		validator = factory.getValidator();
 	}
 	
 	@Override
@@ -95,7 +106,7 @@ public class UsuarioController extends HttpServlet {
 			//enviar atributos 	
 		}catch (Exception e) {
 			LOG.error(e);
-			alerta="Error inexperadom sentimos las molestias";
+			alerta="Error inexperados sentimos las molestias";
 			
 		}finally {
 			//mensaje para el usuario
@@ -103,10 +114,6 @@ public class UsuarioController extends HttpServlet {
 			//ir a una vista
 			request.getRequestDispatcher(vista).forward(request, response);
 		}
-
-		
-		
-		
 	}
 	
 	/**
@@ -119,11 +126,12 @@ public class UsuarioController extends HttpServlet {
 	}
 
 	private void eliminar(HttpServletRequest request) {
-		
-		
+			
+		dao.eliminar(id);
+		alerta = "El usuario se ha eliminado correctamente";
 	}
 
-	private void guardar(HttpServletRequest request) throws SQLException {
+	private void guardar(HttpServletRequest request)  {
 		Usuario u = new Usuario();
 		int identificador = Integer.parseInt(id);
 			//Al crear no hace falta poque la base de datos lo inserta automicamente
@@ -131,23 +139,47 @@ public class UsuarioController extends HttpServlet {
 		u.setPassword(password);
 		
 		//TODO validar POJO
+		Set<ConstraintViolation<Usuario>> violations = validator.validate(u);
 		
-		//Si valicion no correcta
+		
+		if(violations.size()>0) {//Si valicion no correcta
 			//alerta al usuario
-		
-			//volver al formulario, cuidado que no se pierdan los valores
-		
-		//Si validacion correcta
-			if(identificador>0) {
-				alerta="Update de un Usuario";
-				//TODO dao.update
-		
-			}else {
-				alerta="Crear un nuevo Usuario";
-				dao.insert(u);
+			String errores = "<ul>";
+			for (ConstraintViolation<Usuario> violation : violations) {
+				errores += String.format("<li> %s : %s </li>", violation.getPropertyPath(), violation.getMessage());
 			}
+			errores += "</ul>";
+			request.setAttribute("mensaje", errores);
+			
+			//volver al formulario, cuidado que no se pierdan los valores
+			request.setAttribute("usuario", u);
 		
-			listar(request);
+			vista= VIEW_FORM;
+			
+		}else {//Si validacion correcta
+			
+			try {
+				if(identificador>0) {
+					alerta="Update de un Usuario";
+					dao.update(u);
+			
+				}else {
+					alerta="Se ha creado el nuevo usuario correctamente";
+					dao.insert(u);
+					vista= VIEW_INDEX;
+				}
+			}catch (MySQLIntegrityConstraintViolationException e) {
+				//Este try esta por si el email esta duplicado y lanza una exception se capture
+				alerta="Email duplicado";
+				request.setAttribute("usuario", u);
+				vista= VIEW_FORM;
+			}catch (Exception e) {
+				alerta="No sabes ni tu lo que ha pasado";
+				request.setAttribute("usuario", u);
+				vista= VIEW_FORM;
+			}
+		}
+		listar(request);
 	}
 
 	private void irFormulario(HttpServletRequest request) {
@@ -156,10 +188,8 @@ public class UsuarioController extends HttpServlet {
 		
 		int identificador = Integer.parseInt(id);
 		if(identificador>0) {
-			alerta="Detalle de un Usuario";
-			//TODO llmar dao getById
-			u.setId((long)identificador);
-			u.setEmail("TODO llmar dao getById");
+			//Mostrar datos de un usuario seleccionado
+			u= dao.getById((long)identificador);
 		}else {
 			alerta="Crear un nuevo Usuario";
 		}

@@ -92,7 +92,7 @@ public class LoginController extends HttpServlet {
 					vista = CONTROLER_USUARIOS;
 
 					HttpSession session = request.getSession();
-					session.setMaxInactiveInterval(60 * 5); // 5minutos
+					session.setMaxInactiveInterval(60 * 1000); // 5minutos
 					session.setAttribute("usuario", usuarioLogin);
 
 				} else {

@@ -6,3 +6,7 @@
   </button>
 </div>
 </c:if>
+
+	<c:if test="${mensaje != null}">
+		<div class="alert alert-danger ">${mensaje}</div>
+	</c:if>
