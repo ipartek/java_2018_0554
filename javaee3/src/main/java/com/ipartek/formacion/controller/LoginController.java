@@ -15,12 +15,16 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.modelo.ConnectionManager;
 import com.ipartek.formacion.modelo.daos.UsuarioDAO;
 import com.ipartek.formacion.modelo.pojos.Usuario;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final static Logger LOG = Logger.getLogger(LoginController.class);
 	private ValidatorFactory factory;
 	private Validator validator;
 
@@ -70,11 +74,12 @@ public class LoginController extends HttpServlet {
 				} else {
 					request.setAttribute("usuario", usuario);
 					request.setAttribute("pass", pass);
-					request.setAttribute("error", "Usuario Inválido");
+					request.setAttribute("alerta", "Usuario Inválido");
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
+			request.setAttribute("alerta", e);
 		} finally {
 			if (redirect) {
 				response.sendRedirect(request.getContextPath()+"/privado/usuarios");

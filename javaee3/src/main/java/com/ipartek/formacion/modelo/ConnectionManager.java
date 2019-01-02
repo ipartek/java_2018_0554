@@ -11,6 +11,9 @@ public class ConnectionManager {
 
 	private final static Logger LOG = Logger.getLogger(ConnectionManager.class);
 	private static Connection conn;
+	static String url = null;
+	static String user = null;
+	static String pass = null;
 
 	public static Connection getConnection() {
 
@@ -26,16 +29,7 @@ public class ConnectionManager {
 			Class.forName(prop.getProperty("ddbb.driver")).newInstance();
 			LOG.debug("Existe driver mysql");
 			// crear conexion
-			if (System.getProperty("user.name").equals("Pankorbo")) {
-				// Equipo personal
-				conn = DriverManager.getConnection(prop.getProperty("ddbb.pankorbo.url"),
-						prop.getProperty("ddbb.pankorbo.user"), prop.getProperty("ddbb.pankorbo.pass"));
-			} else {
-				// Equipo en Ipartek
-				conn = DriverManager.getConnection(prop.getProperty("ddbb.ipartek.url"),
-						prop.getProperty("ddbb.ipartek.user"), prop.getProperty("ddbb.ipartek.pass"));
-			}
-
+			conn = DriverManager.getConnection(prop.getProperty("ddbb.url"), prop.getProperty("ddbb.user"), prop.getProperty("ddbb.pass"));
 			LOG.info("Conexión establecida");
 
 		} catch (Exception e) {
