@@ -51,7 +51,7 @@ public class UsuarioDAO {
 	public ArrayList<Usuario> getAll() {
 
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-		String sql = "SELECT id, email, password FROM usuario ORDER BY id DESC LIMIT 500";
+		String sql = "SELECT id, email, password FROM usuario ORDER BY id ASC LIMIT 500";
 
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(sql);
@@ -70,12 +70,31 @@ public class UsuarioDAO {
 					System.out.println("usuario no valido");
 					e.printStackTrace();
 				}
-			} // while
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return usuarios;
+	}
+	
+	public boolean delete(long ident) {
+
+		boolean resul=false;
+		Usuario usuario = null;
+		String sql = "DELETE FROM usuario WHERE id = ? ;";
+
+		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+			pst.setLong(1,ident);
+			
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				resul = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resul;
 	}
 
 	public Usuario getById(long ident) {

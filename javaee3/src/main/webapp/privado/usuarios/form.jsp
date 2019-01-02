@@ -3,15 +3,15 @@
 <%@ include file="../../includes/mensajes.jsp"%>
 
 
-<main role="main" class="container"> ${usuario }
+<main role="main" class="container"> 
 <form action="privado/usuarios" method="post">
 	<div class="form-group">
-		<label for="exampleInputEmail1">Usuario (id)</label> <input
+		<label for="exampleInputEmail1">Id</label> <input
 			type="number" class="form-control" id="exampleInputEmail1"
 			name="id" value="${usuario.id }" readonly>
 	</div>
 	<div class="form-group">
-		<label for="exampleInputEmail1">Usuario (email)</label> <input
+		<label for="exampleInputEmail1">Email</label> <input
 			type="email" class="form-control" id="exampleInputEmail1"
 			name="email" value="${usuario.email }"  placeholder="tu@email.com">
 	</div>
@@ -21,10 +21,10 @@
 			name="password" value="${usuario.password }" placeholder="Contraseña">
 	</div>
 	<input type="hidden" name="op" value="3">
-	<button type="submit" class="btn btn-primary">Nuevo</button>
+	<button type="submit" class="btn btn-primary btn-block"><c:if test="${usuario.id>0 }">Modificar</c:if><c:if test="${usuario.id<0 }">Nuevo</c:if></button>
 </form>
-<c:if test="${usuario.id==-1 }">
-<a href="#" class="btn btn-primary">Eliminar</a>
+<c:if test="${usuario.id>0 }">
+<a href="privado/usuarios?op=4&id=${usuario.id }" class="btn btn-danger btn-block mt-3">Eliminar</a>
 </c:if>
 
 </main>

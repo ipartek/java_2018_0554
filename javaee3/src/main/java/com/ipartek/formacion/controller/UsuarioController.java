@@ -19,9 +19,7 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.modelo.dao.UsuarioDAO;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 
-/**
- * Servlet implementation class UsuarioController
- */
+
 @WebServlet("/privado/usuarios")
 public class UsuarioController extends HttpServlet {
 
@@ -108,24 +106,29 @@ public class UsuarioController extends HttpServlet {
 	
 	}
 	private void listar(HttpServletRequest request) {
-		alerta="Lista de usuarios";
 		request.setAttribute("usuarios", dao.getAll());
 		
 	}
 	private void eliminar(HttpServletRequest request) {
 		int ident=Integer.parseInt(id);
 		if(ident>0) {
-			//borrar
-
-			//getbyid
+			if(dao.delete(ident)) {
+				listar(request);
+			}else {
+				alerta="ocurrio un error en el borrado";
+				vista=VIEW_FORM;
+				
+			}
 		}else {
-			//error y vuelta
+			alerta="no existe el usuario en la base de datos";
+			vista=VIEW_FORM;
 		}
 	}
 
 	private void guardar(HttpServletRequest request) {
 		Usuario u = new Usuario();
 		int ident=Integer.parseInt(id);
+		u.setId((long) ident);
 		u.setEmail(email);
 		u.setPassword(password);
 		vista=VIEW_INDEX;
@@ -134,21 +137,24 @@ public class UsuarioController extends HttpServlet {
 		
 		if(violations.size()>0) {
 			alerta="Los datos proporcionados no son correctos";
+			request.setAttribute("usuario", u);
 			vista=VIEW_FORM;
 		}else {
 			try {
 				if(ident>0) {
 					if(dao.update(u)) {
-						vista=VIEW_INDEX;
+						listar(request);
 					}else {
 						alerta="El correo ya existe";
+						request.setAttribute("usuario", u);
 						vista=VIEW_FORM;
 					}
 				}else {
 					if(dao.insert(u)) {
-						vista=VIEW_INDEX;
+						listar(request);
 					}else {
 						alerta="El correo ya existe";
+						request.setAttribute("usuario", u);
 						vista=VIEW_FORM;
 					}
 				}

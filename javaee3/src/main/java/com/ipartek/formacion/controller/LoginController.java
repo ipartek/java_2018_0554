@@ -69,14 +69,14 @@ public class LoginController extends HttpServlet {
 			
 			HttpSession session = request.getSession();
 		
-			//idioma  TODO ver porque no funciona con Euskera
+			//idioma 
 			Locale locale = new Locale("eu_ES");
 			ResourceBundle messages = ResourceBundle.getBundle("i18nmessages", locale );
 			LOG.debug("idioma=" + idioma);		
 			
 			//guardar cookie
 			Cookie cIdioma = new Cookie("cIdioma", idioma);
-			cIdioma.setMaxAge(60*10); //TODO poner que no expire nunca			
+			cIdioma.setMaxAge(60*10); 		
 			response.addCookie(cIdioma);
 			
 			
