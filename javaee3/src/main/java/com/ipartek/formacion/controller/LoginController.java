@@ -121,11 +121,12 @@ public class LoginController extends HttpServlet {
 			
 		}catch (Exception e) {
 			
-			e.printStackTrace();
+			//e.printStackTrace();
+			LOG.error(e);
 		}finally {
 			
 			if(redirect) {				
-				response.sendRedirect(CONTROLLER_VIDEOS);
+				response.sendRedirect(request.getContextPath() + "/privado/usuarios");
 			}else {
 				request.getRequestDispatcher(view).forward(request, response);
 			}

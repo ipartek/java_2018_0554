@@ -10,11 +10,14 @@
           <li class="nav-item active">
             <a class="nav-link" href="privado/libro"><fmt:message key="navbar.libro"/></a>
           </li>  
-          <li class="nav-item active">
+          <!-- <li class="nav-item active">
             <a class="nav-link" href="privado/usuarios.jsp"><fmt:message key="navbar.usuarios.conectados"/></a>
-          </li>
+          </li> -->
+           <li class="nav-item active">
+            <a class="nav-link" href="privado/usuarios"><fmt:message key="navbar.usuario"/></a>
+          </li>  
           <li class="nav-item active">
-            <a class="nav-link" href="privado/discos.jsp"><fmt:message key="navbar.discos"/></a>
+            <a class="nav-link" href="privado/discos"><fmt:message key="navbar.discos"/></a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="privado/carrito.jsp"><fmt:message key="navbar.carrito"/></a>

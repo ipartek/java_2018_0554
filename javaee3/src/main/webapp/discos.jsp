@@ -10,7 +10,7 @@
 <h1>Listado de Discos</h1>
 
 
-<table class="table">
+<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -31,7 +31,7 @@
 				<td>${dis.id}</td>
 				<td>${dis.titulo}</td>
 				<td>${dis.artista}</td>
-				<td>${dis.portada}</td>
+				<td><img width=150 height=150 src="${dis.portada}" alt="imagen"></td>
 				<td>${dis.year}</td>
 			</tr>
 			

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.modelo.pojos.Usuario;
 
 /**
@@ -19,11 +21,11 @@ import com.ipartek.formacion.modelo.pojos.Usuario;
 public class UsuariosListener implements HttpSessionAttributeListener {
 	// public static HashMap<String, Usuario> usuariosLogeados
 	public static ArrayList<Usuario> usuariosLogeados = new ArrayList<Usuario>();
+	private final static Logger LOG = Logger.getLogger(UsuariosListener.class);
 
 	public void attributeAdded(HttpSessionBindingEvent event) {
 		// System.out.println("attributeAdded");
-
-		System.out.println("attributeAdded");
+		LOG.trace("attributeAdded");
 
 		if ("usuario".equals(event.getName())) {
 
@@ -35,6 +37,8 @@ public class UsuariosListener implements HttpSessionAttributeListener {
 	}
 
 	public void attributeRemoved(HttpSessionBindingEvent event) {
+		LOG.trace("attributeRemoved");
+		
 		if ("usuario".equals(event.getName())) {
 
 			usuariosLogeados.remove((Usuario) event.getValue());
@@ -45,7 +49,8 @@ public class UsuariosListener implements HttpSessionAttributeListener {
 	}
 
 	public void attributeReplaced(HttpSessionBindingEvent event) {
-		System.out.println("attributeReplaced");
+		//System.out.println("attributeReplaced");
+		LOG.trace("attributeReplaced");
 	}
 
 }
