@@ -5,69 +5,28 @@
 
     <main role="main" class="container">
 	
-		${usuarios}
+		
 		
 		<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">id</th>
+		      <th scope="col">Email</th>
+		      <th scope="col">Password</th>		      
+		    </tr>
+		  </thead>
+		  <tbody>
+		 	 <c:forEach items="${usuarios}" var="u">
+			    <tr>
+			      <th scope="row">${u.id}</th>
+			      <td>${u.email}</td>
+			      <td>${u.password}</td>		      
+			    </tr>    
+		    </c:forEach>
+		  </tbody>
+		</table>
 
-<table class="table">
-  <thead class="thead-light">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+
 	</main>				
 
 
