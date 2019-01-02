@@ -77,7 +77,7 @@ public class LoginController extends HttpServlet {
 			e.printStackTrace();
 		} finally {
 			if (redirect) {
-				response.sendRedirect("privado/videos");
+				response.sendRedirect(request.getContextPath()+"/privado/usuarios");
 			}
 			else {
 				request.getRequestDispatcher("index.jsp").forward(request, response);

@@ -9,13 +9,8 @@
 			type="password" id="pass" class="form-control"
 			placeholder="Mínimo 6 caractéres" name="pass" value="${pass}"
 			required>
-		<div class="checkbox mb-3">
-			<label> <input type="checkbox" value="remember-me">
-				Recuérdame
-			</label>
-		</div>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
 		<%@include file="includes/mensajes.jsp"%>
 		<p class="mt-5 mb-3 text-muted">&copy; Héctor Serrano 2018</p>
 	</form>
-	<%@include file="includes/footer.jsp"%>
+<%@include file="includes/footer.jsp"%>

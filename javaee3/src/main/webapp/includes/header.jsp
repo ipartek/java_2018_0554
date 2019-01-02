@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -16,3 +16,4 @@
 <link href="css/logueo.css" rel="stylesheet">
 <link href="css/misestilos.css" rel="stylesheet">
 </head>
+<body>

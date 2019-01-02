@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpSession;
-
+import com.ipartek.formacion.modelo.ConnectionManager;
 import com.ipartek.formacion.modelo.pojos.Video;
 
 public class VideoDAO {
