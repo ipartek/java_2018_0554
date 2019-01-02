@@ -39,7 +39,7 @@ public class ConnectionManager {
 
 		}catch (Exception e) {
 			
-			LOG.fatal("Erro estableciendo conexion base datos" , e);
+			LOG.fatal("Error estableciendo conexion base datos" , e);
 			
 		}	
 		return conn;
