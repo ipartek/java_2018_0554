@@ -5,6 +5,7 @@ import java.sql.Connection;
 import com.ipartek.formacion.modelo.pojos.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UsuarioDAO {
@@ -82,6 +83,68 @@ public class UsuarioDAO {
 		return usuarios;
 	}
 
+public boolean insert( Usuario u) throws SQLException {
+		
+		boolean resul = false;
+		String sql = "INSERT INTO `usuario` (`email`, `password`) VALUES (?,?);";
+		try ( Connection conn = ConnectionManager.getConnection();
+			  PreparedStatement pst = conn.prepareStatement(sql);				   
+			){
+			
+			pst.setString(1, u.getEmail());
+			pst.setString(2, u.getPassword());			
+			int affectedRows = pst.executeUpdate();
+			if ( affectedRows == 1 ) {
+				resul = true;
+			}
+			
+		}
+		return resul;
+		
+	}
 	
+public Usuario getById (long id) {
+	
+	Usuario usuario = null;
+	String sql = "SELECT id, email, password FROM usuario WHERE id = ?;";
+	
+	try ( Connection conn = ConnectionManager.getConnection();
+		  PreparedStatement pst = conn.prepareStatement(sql);
+			){						
+				pst.setLong(1, id); //sustituimos la primera ? por el id
+				
+				try ( ResultSet rs = pst.executeQuery() ){											
+						while(rs.next()) { // hemos encontrado usuario								
+							usuario = new Usuario();
+							usuario.setId( rs.getLong("id"));
+							usuario.setEmail( rs.getString("email"));
+							usuario.setPassword(rs.getString("password"));								
+						}						
+				}
+	}catch (Exception e) {
+		e.printStackTrace();
+	}		
+	return usuario;
+}
+
+public boolean eliminar( Usuario u) throws SQLException {
+	
+	boolean resul = false;
+	String sql = "DELETE FROM `usuario` WHERE `id`=?;";
+	try ( Connection conn = ConnectionManager.getConnection();
+		  PreparedStatement pst = conn.prepareStatement(sql);				   
+		){
+		
+		pst.setLong(1, u.getId());			
+		int affectedRows = pst.executeUpdate();
+		if ( affectedRows == 1 ) {
+			resul = true;
+		}
+		
+	}
+	return resul;
+	
+}
+
 
 }

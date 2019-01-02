@@ -8,6 +8,8 @@
 <h1>Listado de Usuarios</h1>
 
 
+<a href="privado/usuarios?op=2&id=-1">Crear Nuevo Registro</a>
+
 <table class="table table-striped">
 		<thead>
 			<tr>
@@ -18,20 +20,21 @@
 		</thead>
 		
 		<tbody>
-		<c:forEach items="${usuarios}" var="usu">
+		<c:forEach items="${usuarios}" var="u">
 	
 			
 			
 			<tr>
 			
-				<td>${usu.id}</td>
-				<td>${usu.email}</td>
-				<td>${usu.password}</td>
+				<th scope="row">${u.id}</th>
+				<td><a href="privado/usuarios?op=2&id=${u.id}">${u.email}</a></td>
+				<td>${u.password}</td>
 			</tr>
 			
 			</c:forEach>
 		</tbody>
 	</table>
+
 
 
 
