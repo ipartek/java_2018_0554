@@ -12,7 +12,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import com.ipartek.formacion.modelo.dao.UsuarioDAO;
+
 import com.ipartek.formacion.modelo.dao.VideoDAO;
 
 /**

@@ -1,7 +1,6 @@
 package com.ipartek.formacion.listeners;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.annotation.WebListener;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpSessionBindingEvent;
 
 import org.apache.log4j.Logger;
 
-import com.ipartek.formacion.controller.LibroController;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 
 /**

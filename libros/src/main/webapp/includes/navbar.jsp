@@ -13,7 +13,10 @@
           </li>  
            <li class="nav-item active">
             <a class="nav-link" href="privado/listado.jsp"><fmt:message key="navbar.listado"/></a>
-          </li>          
+          </li>    
+             <li class="nav-item active">
+            <a class="nav-link" href="privado/usuarios">Usuarios</a>
+          </li>        
         </ul>
            <div class="btn-group" role="group">
     <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
