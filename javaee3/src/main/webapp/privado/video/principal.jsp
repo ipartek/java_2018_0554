@@ -1,10 +1,11 @@
-<%@ include file="../includes/cabecera.jsp"%>
-<%@ include file="../includes/navbar.jsp" %>
+<%@ include file="../../includes/cabecera.jsp"%>
+<%@ include file="../../includes/navbar.jsp" %>
 
  <main role="main" class="container p-3 ">
       <div class="jumbotron">
-        <h1>Videos almacenados</h1>
-        <table class="table-striped col-md-12">
+        <h1>Bienvenido</h1>
+        
+        <%-- <table class="table-striped col-md-12">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -25,9 +26,9 @@
 				</tr>
 			</c:forEach>
 		</tbody>
-	</table>
+	</table> --%>
         
         </div>
     </main>
 
-<%@ include file="../includes/footer.jsp"%>
+<%@ include file="../../includes/footer.jsp"%>

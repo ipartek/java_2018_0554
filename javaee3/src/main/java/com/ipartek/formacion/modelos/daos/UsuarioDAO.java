@@ -3,6 +3,7 @@ package com.ipartek.formacion.modelos.daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ipartek.formacion.modelo.pojo.Usuario;
@@ -32,7 +33,7 @@ public class UsuarioDAO {
 	 */
 	public Usuario login(String email, String password) {
 		Usuario usuario = null;
-		String sql = "Select id,nombre,password from usuario where nombre=? and password=?";
+		String sql = "SELECT id,email,password FROM usuario WHERE email=? AND password=?";
 		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 			pst.setString(1, email);
 			pst.setString(2, password);
@@ -40,7 +41,7 @@ public class UsuarioDAO {
 				while (rs.next()) { // hemos encontrado ususario
 					usuario = new Usuario();
 					usuario.setId(rs.getLong("id"));
-					usuario.setEmail(rs.getString("nombre"));
+					usuario.setEmail(rs.getString("email"));
 					usuario.setPassword(rs.getString("password"));
 				}
 			}
@@ -59,7 +60,7 @@ public class UsuarioDAO {
 	public ArrayList<Usuario> getAll() {
 		ArrayList<Usuario> usuarios = new ArrayList<>();
 
-		String sql = "Select id,nombre,password from usuario order by id desc limit 500";
+		String sql = "Select id,email,password from usuario order by id desc limit 500";
 
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(sql);
@@ -68,7 +69,7 @@ public class UsuarioDAO {
 				try {
 					Usuario usuario = new Usuario();
 					usuario.setId(rs.getLong("id"));
-					usuario.setEmail(rs.getString("nombre"));
+					usuario.setEmail(rs.getString("email"));
 					usuario.setPassword(rs.getString("password"));
 					// a�adir en array
 					usuarios.add(usuario);
@@ -84,6 +85,25 @@ public class UsuarioDAO {
 		}
 
 		return usuarios;
+	}
+	
+	public boolean insert(Usuario u ) throws SQLException {
+		boolean resul= false;
+		String sql ="INSERT INTO usuario (email,`password`) VALUES(?,?);";
+		
+		try(
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement pst = conn.prepareStatement(sql);
+			){
+			pst.setString(1, u.getEmail());
+			pst.setString(2, u.getPassword());
+			int affectedRows = pst.executeUpdate();
+			
+			if(affectedRows == 1) {
+				resul = true;
+			}
+		}
+		return resul;
 	}
 
 

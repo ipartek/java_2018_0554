@@ -15,6 +15,8 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.modelo.pojo.Usuario;
 import com.ipartek.formacion.modelos.daos.UsuarioDAO;
 
@@ -25,10 +27,11 @@ import com.ipartek.formacion.modelos.daos.UsuarioDAO;
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String VIEW_LOGIN = "index.jsp";
-	private static final String CONTROLER_VIDEOS = "privado/videos";
+	private static final String CONTROLER_USUARIOS= "/privado/usuarios";
 	private ValidatorFactory factory;
 	private Validator validator;
 	private UsuarioDAO dao;
+	private final static Logger LOG = Logger.getLogger(LoginController.class);
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -86,7 +89,7 @@ public class LoginController extends HttpServlet {
 
 				usuarioLogin = dao.login(email, pass);
 				if (usuarioLogin != null) {
-					vista = CONTROLER_VIDEOS;
+					vista = CONTROLER_USUARIOS;
 
 					HttpSession session = request.getSession();
 					session.setMaxInactiveInterval(60 * 5); // 5minutos
@@ -94,13 +97,14 @@ public class LoginController extends HttpServlet {
 
 				} else {
 					request.setAttribute("mensaje", "Usuario no valido");
+					LOG.trace("Credenciales incorrectas");
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if (vista.equals(CONTROLER_VIDEOS)) {
-				response.sendRedirect(CONTROLER_VIDEOS);
+			if (vista.equals(CONTROLER_USUARIOS)) {
+				response.sendRedirect(request.getContextPath() + CONTROLER_USUARIOS);
 			} else {
 				request.getRequestDispatcher(vista).forward(request, response);
 			}
