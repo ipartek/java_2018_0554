@@ -46,7 +46,7 @@ public class UsuarioDAO {
 							while(rs.next()) { // hemos encontrado usuario								
 								usuario = new Usuario();
 								usuario.setId( rs.getLong("id"));
-								usuario.setEmail( rs.getString("emails"));
+								usuario.setEmail( rs.getString("email"));
 								usuario.setPassword(rs.getString("password"));								
 							}						
 					}
