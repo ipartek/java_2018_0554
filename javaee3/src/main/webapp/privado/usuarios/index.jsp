@@ -6,8 +6,6 @@
 <main role="main" class="container">
 
 
-
-
 <table class="table">
 	<thead class="thead-dark">
 		<tr>
@@ -20,15 +18,16 @@
 
 		<c:forEach items="${usuarios}" var="u">
 			<tr>
-				<th scope="row">$u.id</th>
-				<td>$u.email</td>
-				<td>$u.password</td>
+				<th scope="row">${u.id }</th>
+				<td><a href="privado/usuarios?op=2&id=${u.id }">${u.email }</a></td>
+				<td>${u.password }</td>
 			</tr>
 		</c:forEach>
 
 
 	</tbody>
 </table>
+<p><a href="privado/usuarios?op=2&id=-1" class="btn btn-primary"> Nuevo usuario </a></p>
 
 </main>
 
