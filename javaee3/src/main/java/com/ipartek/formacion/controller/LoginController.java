@@ -2,6 +2,7 @@ package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import java.util.Set;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -24,6 +25,7 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final static Logger LOG = Logger.getLogger(LoginController.class);
 	private static final String VISTA_LOGIN = "index.jsp";
 	private static final String CONTROLLER_VIDEOS = "privado/videos";
     private UsuarioDAO dao;
@@ -68,7 +70,7 @@ public class LoginController extends HttpServlet {
 			if (!session.isNew()) {
 			
 			if (violations.size() > 0) {
-				
+				LOG.error("Se han encontrado " + violations.size() + " violaciones en la validación");
 				String errores = "<ul>";
 				for (ConstraintViolation<Usuario> violation : violations) {
 					errores += String.format("<li> %s : %s </li>", violation.getPropertyPath(), violation.getMessage());
@@ -78,10 +80,12 @@ public class LoginController extends HttpServlet {
 			}else {
 			
 			usuario = dao.login(email, pass);
-			
+			LOG.info("Se está intentando hacer login con el email: " + email + " y contraseña: " + pass);
 				if (usuario == null) {
+					LOG.error("El usuario no existe en la DB");
 					request.setAttribute("mensaje", "Usuario erróneo '" + email + "'");
 				}else {
+					LOG.info("Usuario encontrado en la DB");
 					vista = CONTROLLER_VIDEOS;
 					session = request.getSession();
 					session.setMaxInactiveInterval(60 * 5); // 5 min, también se puede configurar en WEB.XML [Para configurarlo para toda aplicación]
@@ -92,6 +96,7 @@ public class LoginController extends HttpServlet {
 			}
 			
 		}catch (Exception e) {
+			LOG.error("Ha habido un error en el proceso de Login");
 			e.printStackTrace();
 		}finally {
 			if (vista.equals(CONTROLLER_VIDEOS)) {
