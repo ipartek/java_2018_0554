@@ -5,7 +5,7 @@
 
     <main role="main" class="container">
 	
-		
+		<a href="privado/usuarios?op=2&id=-1">Crear Nuevo Registro</a>
 		
 		<table class="table">
 		  <thead class="thead-dark">
@@ -19,7 +19,7 @@
 		 	 <c:forEach items="${usuarios}" var="u">
 			    <tr>
 			      <th scope="row">${u.id}</th>
-			      <td>${u.email}</td>
+			      <td><a href="privado/usuarios?op=2&id=${u.id}">${u.email}</a></td>
 			      <td>${u.password}</td>		      
 			    </tr>    
 		    </c:forEach>
