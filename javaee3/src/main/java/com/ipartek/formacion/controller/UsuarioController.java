@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.View;
 
 import org.apache.log4j.Logger;
 
@@ -150,14 +149,8 @@ public class UsuarioController extends HttpServlet {
 		Usuario u = new Usuario();
 		
 		int identificador = Integer.parseInt(id);
-		if ( identificador > 0 ) {
-			alerta = "Detalle de un Usuario " + identificador;
-			// TODO llamar dao getById
-			
-			u.setId((long)identificador);
-			u.setEmail("TODO llamar dao getById");
-			
-			
+		if ( identificador > 0 ) {			
+			u = dao.getById(identificador);
 		}else {
 			alerta = "Crear un nuevo Usuario";
 		}
