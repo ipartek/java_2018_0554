@@ -34,10 +34,11 @@
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
      <c:if test="${mensaje != null}">
-     <div class="alert alert-danger">${mensaje }</div>
+     <div class="alert alert-danger">${mensaje.alerta }</div>
+     ${sessionScope.sesionNoIniciada = null}
      </c:if>
      <c:if test="${sessionScope.sesionNoIniciada != null}">
-     <div class="alert alert-danger">${sesionNoIniciada }</div>
+     <div class="alert alert-${sesionNoIniciada.tipo}">${sesionNoIniciada.alerta}</div>
      </c:if>
     <%-- <a href="login?usuario=manolo&pass=lolailo">Link al Login</a>
     <h2>Video</h2>

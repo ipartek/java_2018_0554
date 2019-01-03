@@ -17,6 +17,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import com.ipartek.formacion.modelo.dao.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojo.Mensaje;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 
 /**
@@ -54,6 +55,8 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String vista = VISTA_LOGIN;
 		
+		Mensaje alerta = new Mensaje();
+		
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
 		
@@ -76,14 +79,24 @@ public class LoginController extends HttpServlet {
 					errores += String.format("<li> %s : %s </li>", violation.getPropertyPath(), violation.getMessage());
 				}
 				errores += "</ul>";
-				request.setAttribute("mensaje", errores);
+				
+				if (session.getAttribute("sesionNoIniciada") == null) {
+					alerta.setAlerta(errores);
+					alerta.setTipo("danger");
+				}else {
+					alerta = null;
+				}
+				
+				request.setAttribute("mensaje", alerta);
 			}else {
 			
 			usuario = dao.login(email, pass);
 			LOG.info("Se está intentando hacer login con el email: " + email + " y contraseña: " + pass);
 				if (usuario == null) {
 					LOG.error("El usuario no existe en la DB");
-					request.setAttribute("mensaje", "Usuario erróneo '" + email + "'");
+					alerta.setAlerta("Usuario erróneo '" + email + "'");
+					alerta.setTipo("danger");
+					request.setAttribute("mensaje", alerta);
 				}else {
 					LOG.info("Usuario encontrado en la DB");
 					vista = CONTROLLER_VIDEOS;

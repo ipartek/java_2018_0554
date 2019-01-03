@@ -1,6 +1,6 @@
-<c:if test="${not empty alerta}">
-	<div class="alert alert-warning">
-	  ${alerta}
+<c:if test="${not empty mensaje.alerta}">
+	<div class="alert alert-${mensaje.tipo}">
+	  ${mensaje.alerta}
 	</div>
 </c:if>
 <%-- <c:if test="${not empty creacion}">

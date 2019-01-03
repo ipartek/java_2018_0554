@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ipartek.formacion.modelo.pojo.Mensaje;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 
 /**
@@ -40,10 +41,14 @@ public class SeguridadFilter implements Filter {
 		HttpSession session = req.getSession();
 		Usuario uLogueado = (Usuario) session.getAttribute("usuario_logueado");
 		
+		Mensaje alerta = new Mensaje();
+		
 		if (uLogueado!=null) {
 			chain.doFilter(request, response);
 		}else {
-			session.setAttribute("sesionNoIniciada", "No tienes permiso, por favor, logueate");
+			alerta.setAlerta("No tienes permiso, por favor, logueate");
+			alerta.setTipo("danger");
+			session.setAttribute("sesionNoIniciada", alerta);
 			resp.sendRedirect(req.getContextPath() + "/login");
 		}
 		

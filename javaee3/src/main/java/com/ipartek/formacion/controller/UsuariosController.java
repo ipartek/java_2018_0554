@@ -19,6 +19,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import com.ipartek.formacion.modelo.dao.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojo.Mensaje;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
@@ -42,7 +43,7 @@ public class UsuariosController extends HttpServlet {
 	private static final String OP_GUARDAR = "3"; // id == -1 insert, id > 0 update
 	private static final String OP_ELIMINAR = "4";
 	
-	private String alerta="";
+	private Mensaje alerta;
 	
 	//Parametros
 	private String op;
@@ -82,7 +83,7 @@ public class UsuariosController extends HttpServlet {
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		vista = VIEW_INDEX;
-		alerta = "";
+		alerta = new Mensaje();
 		try {
 			//Recoger parámetros
 			getParametros(request);
@@ -108,10 +109,11 @@ public class UsuariosController extends HttpServlet {
 	
 		}catch (Exception e) {
 			LOG.error(e);
-			alerta = "Error inesperado, sentimos las molestias";
+			alerta.setAlerta("Error inesperado, sentimos las molestias");
+			alerta.setTipo("danger");
 		}finally {
 			//Mensaje para el usuario
-			request.setAttribute("alerta", alerta);
+			request.setAttribute("mensaje", alerta);
 			//Ir a una vista
 			request.getRequestDispatcher(vista).forward(request, response);
 		}
@@ -136,13 +138,16 @@ public class UsuariosController extends HttpServlet {
 		Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario_logueado");
 		
 		if (usuarioLogueado.getEmail().equals(u.getEmail())) {
-			alerta="No puedes eliminar el usuario con el que estás logueado";
+			alerta.setAlerta("No puedes eliminar el usuario con el que estás logueado");
+			alerta.setTipo("danger");
 		}else {
 			try {
 				dao.delete(identificador);
-				alerta="El usuario ha sido eliminado correctamente";
+				alerta.setAlerta("El usuario ha sido eliminado correctamente");
+				alerta.setTipo("success");
 			} catch (SQLException e) {
-				alerta = "No ha sido posible eliminar el usuario";
+				alerta.setAlerta("No ha sido posible eliminar el usuario");
+				alerta.setTipo("danger");
 				LOG.error(e.getMessage() + "[ID user: " + identificador + "]");
 			}
 		}
@@ -164,14 +169,15 @@ public class UsuariosController extends HttpServlet {
 		//Si validación no correcta
 		if (violations.size() > 0) {
 			LOG.error("Se han encontrado " + violations.size() + " violaciones en la validación");
-			alerta = "<ul>";
+			String alertaTexto = "<ul>";
 			for (ConstraintViolation<Usuario> violation : violations) {
-				alerta += String.format("<li> %s : %s </li>", violation.getPropertyPath(), violation.getMessage());
+				alertaTexto += String.format("<li> %s : %s </li>", violation.getPropertyPath(), violation.getMessage());
 			}
-			alerta += "</ul>";
-			
+			alertaTexto += "</ul>";
+			alerta.setAlerta(alertaTexto);
+			alerta.setTipo("danger");
 			//Alerta al usuario
-			request.setAttribute("alerta", alerta);
+			request.setAttribute("mensaje", alerta);
 			//Volver al formulario (conservando los valores)
 			request.setAttribute("usuario", u);
 			vista = VIEW_FORM;
@@ -185,10 +191,12 @@ public class UsuariosController extends HttpServlet {
 						u.setId(identificador);
 						
 						if (usuario.getEmail().equals(u.getEmail()) && usuario.getPassword().equals(u.getPassword())) {
-							alerta = "No se ha realizado ningún cambio sobre el usuario: " + u.toString();
+							alerta.setAlerta("No se ha realizado ningún cambio sobre el usuario: " + u.toString());
+							alerta.setTipo("warning");
 						}else {
 							dao.update(u);
-							alerta="Update Usuario: " + usuario.toString() + " >> " + u.toString();
+							alerta.setAlerta("Update Usuario: " + usuario.toString() + " >> " + u.toString());
+							alerta.setTipo("success");
 							LOG.info(usuario.toString() + " cambiado a " + u.toString());
 							
 							HttpSession session = request.getSession();
@@ -196,7 +204,8 @@ public class UsuariosController extends HttpServlet {
 							
 							if (usuario.getEmail().equals(usuarioLogueado.getEmail())) {
 								session.setAttribute("usuario_logueado", u);
-								alerta = "Has actualizado el usuario con el que estás logueado.";
+								alerta.setAlerta("Has actualizado el usuario con el que estás logueado.");
+								alerta.setTipo("info");
 							}
 						}
 						
@@ -206,7 +215,8 @@ public class UsuariosController extends HttpServlet {
 					}
 					
 				}else {
-					alerta="Crear un nuevo Usuario";
+					alerta.setAlerta("Crear un nuevo Usuario");
+					alerta.setTipo("info");
 					
 					Usuario usuario = dao.getById(identificador);
 					
@@ -220,12 +230,14 @@ public class UsuariosController extends HttpServlet {
 					}
 				}
 			}catch (MySQLIntegrityConstraintViolationException e) {
-				alerta = "El email introducido ya está registrado, por favor, introduzca uno nuevo.";
+				alerta.setAlerta("El email introducido ya está registrado, por favor, introduzca uno nuevo.");
+				alerta.setTipo("danger");
 				//u.setId(-1L);
 				request.setAttribute("usuario", u);
 				vista=VIEW_FORM;
 			}catch (Exception e) {
-				alerta = "Lo sentimos, error inesperado";
+				alerta.setAlerta("Lo sentimos, error inesperado");
+				alerta.setTipo("danger");
 				LOG.error(e.getMessage());
 			}
 		}
@@ -244,7 +256,8 @@ public class UsuariosController extends HttpServlet {
 		if (identificador > 0) {
 			u = dao.getById(identificador);
 		}else {
-			alerta="Crear un nuevo Usuario";
+			alerta.setAlerta("Crear un nuevo Usuario");
+			alerta.setTipo("info");
 		}
 		request.setAttribute("usuario", u);		
 	}
