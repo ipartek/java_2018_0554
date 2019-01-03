@@ -7,7 +7,7 @@
 			placeholder="Tu@usuario" value="${usuario}" required autofocus>
 		<label for="pass" class="sr-only">Password</label> <input
 			type="password" id="pass" class="form-control"
-			placeholder="Mínimo 6 caractéres" name="pass" value="${pass}"
+			placeholder="Mínimo 6 caractéres" name="password" value="${password}"
 			required>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
 		<%@include file="includes/mensajes.jsp"%>

@@ -1,10 +1,9 @@
 <%@ include file="../../includes/header.jsp"%>
 <%@ include file="../../includes/navbar.jsp"%>
-<%@ include file="../../includes/mensajes.jsp"%>
 
 <main role="main" class="container">
-
-<a href="usuarios?op=2&id=-1">Crear Nuevo Registro</a>
+<%@ include file="../../includes/mensajes.jsp"%>
+<a href="usuarios?op=2&id=-1" class="mb-4 btn btn-outline-success">Crear Nuevo Registro</a>
 
 <table class="table">
 	<thead class="thead-dark">

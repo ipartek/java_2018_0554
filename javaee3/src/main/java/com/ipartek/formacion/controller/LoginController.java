@@ -19,6 +19,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.ConnectionManager;
 import com.ipartek.formacion.modelo.daos.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojos.Mensaje;
 import com.ipartek.formacion.modelo.pojos.Usuario;
 
 @WebServlet("/login")
@@ -27,7 +28,9 @@ public class LoginController extends HttpServlet {
 	private final static Logger LOG = Logger.getLogger(LoginController.class);
 	private ValidatorFactory factory;
 	private Validator validator;
-
+	
+	private Mensaje mensaje = null;
+	
 	private UsuarioDAO dao;
 
 	@Override
@@ -46,12 +49,12 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String usuario = request.getParameter("usuario");
-		String pass = request.getParameter("pass");
+		String password = request.getParameter("password");
 		Usuario u = new Usuario();
 		boolean redirect = false;
 		try {
 			u.setEmail(usuario);
-			u.setPassword(pass);
+			u.setPassword(password);
 			Set<ConstraintViolation<Usuario>> violations = validator.validate(u);
 			if (violations.size() > 0) { // validacion NO PASA
 
@@ -63,23 +66,25 @@ public class LoginController extends HttpServlet {
 					// violation.getPropertyPath()
 				}
 				errores += "</ul>";
-				request.setAttribute("errores", violations);
-				request.setAttribute("mensajeError", errores);
+				mensaje = new Mensaje(mensaje.MENSAJE_DANGER, errores);
+				request.setAttribute("mensaje", mensaje);
 			} else {
-				u = dao.login(usuario, pass);
+				u = dao.login(usuario, password);
 				if (u != null) {
 					redirect = true;
 					HttpSession session = request.getSession();
 					session.setAttribute("usuarioLogueado", u);
 				} else {
 					request.setAttribute("usuario", usuario);
-					request.setAttribute("pass", pass);
-					request.setAttribute("alerta", "Usuario Inválido");
+					request.setAttribute("password", password);
+					mensaje = new Mensaje(mensaje.MENSAJE_DANGER, "Usuario Inválido");
+					request.setAttribute("mensaje", mensaje);
 				}
 			}
 		} catch (Exception e) {
 			LOG.error(e);
-			request.setAttribute("alerta", e);
+			mensaje = new Mensaje(mensaje.MENSAJE_DANGER, e.getMessage());
+			request.setAttribute("mensaje", mensaje);
 		} finally {
 			if (redirect) {
 				response.sendRedirect(request.getContextPath()+"/privado/usuarios");

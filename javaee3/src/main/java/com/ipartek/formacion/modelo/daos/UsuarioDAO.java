@@ -97,6 +97,21 @@ public class UsuarioDAO {
 		return r;
 	}
 	
+	public boolean update(Usuario u) throws SQLException {
+		boolean r = false;
+		String sql = "UPDATE usuario SET email = ?, `password` = ? WHERE id = ?;";
+		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+			pst.setString(1, u.getEmail());
+			pst.setString(2, u.getPassword());
+			pst.setLong(3, u.getId());
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				r = true;
+			}
+		}
+		return r;
+	}
+	
 	public Usuario getById(long id) {
 
 		Usuario u = null;
