@@ -17,7 +17,7 @@ public class Usuario {
 	@NotEmpty
 	private String email;
 	
-	
+	@NotEmpty
 	@Size(min = 5, max=45)
 	private String password;
 

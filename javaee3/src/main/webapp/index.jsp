@@ -43,7 +43,7 @@
       -->
       
       <label for="mail" class="sr-only">Email</label>
-      <input type="email" id="mail" name=mail class="form-control"  value="${cookie.cEmail.getValue()}"  >
+      <input type="email" id="mail" name=mail class="form-control"  value="${not empty cookie.cEmail ? cookie.cEmail.value : 'mail_uno@mail.com'}"  >
       
       <label for="pass" class="sr-only">Contraseña</label>
       <input type="password" id="pass" name="pass" class="form-control" value="Pa$$w0rd" >

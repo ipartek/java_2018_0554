@@ -22,12 +22,15 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
 public class UsuarioController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	//LOG
 	private final static Logger LOG = Logger.getLogger(UsuarioController.class);
 	
+	//VISTAS
 	private static final String VIEW_INDEX = "usuarios/index.jsp";
 	private static final String VIEW_FORM = "usuarios/form.jsp";
 	private String vista;
 	
+	//OPERACIONES
 	public static final String OP_LISTAR = "1";
 	public static final String OP_IR_FORMULARIO = "2";
 	public static final String OP_GUARDAR = "3"; // id == -1 insert , id > 0 update
