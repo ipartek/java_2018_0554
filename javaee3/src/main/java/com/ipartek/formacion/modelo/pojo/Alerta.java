@@ -1,6 +1,9 @@
 package com.ipartek.formacion.modelo.pojo;
 
 public class Alerta {
+	public static final String OK = "success";
+	public static final String KO = "danger";
+	
 	private String mensaje;
 	private String tipo;
 	

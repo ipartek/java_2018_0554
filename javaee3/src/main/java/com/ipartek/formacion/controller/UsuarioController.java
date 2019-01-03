@@ -40,8 +40,7 @@ public class UsuarioController extends HttpServlet {
 	private static final String OP_ELIMINAR = "4";
 	
 	Alerta alerta;
-	private static final String OK = "success";
-	private static final String KO = "danger";
+	
 	
 	//parametros
 	
@@ -101,7 +100,7 @@ public class UsuarioController extends HttpServlet {
 		}catch (Exception e){
 			LOG.error(e);
 			alerta.setMensaje(e.toString());
-			alerta.setTipo(KO);
+			alerta.setTipo(alerta.KO);
 		} finally {
 			//mensaje usuario
 			request.setAttribute("alerta", alerta);
@@ -116,7 +115,7 @@ public class UsuarioController extends HttpServlet {
 			request.setAttribute("usuarios", dao.getAll());
 		} catch (SQLException e) {
 			alerta.setMensaje(e.toString());
-			alerta.setTipo(KO);
+			alerta.setTipo(alerta.KO);
 		}
 		
 	}
@@ -125,17 +124,17 @@ public class UsuarioController extends HttpServlet {
 		if(ident>0) {
 			if(dao.delete(ident)) {
 				alerta.setMensaje("Eliminado con éxito");
-				alerta.setTipo(OK);
+				alerta.setTipo(alerta.OK);
 				listar(request);
 			}else {
 				alerta.setMensaje("No se pudo eliminar el usuario");
-				alerta.setTipo(KO);
+				alerta.setTipo(alerta.KO);
 				vista=VIEW_FORM;
 				
 			}
 		}else {
 			alerta.setMensaje("No se encontro usuario");
-			alerta.setTipo(KO);
+			alerta.setTipo(alerta.KO);
 			vista=VIEW_FORM;
 		}
 	}
@@ -152,7 +151,7 @@ public class UsuarioController extends HttpServlet {
 		
 		if(violations.size()>0) {
 			alerta.setMensaje("Los datos proporcionados no son correctos");
-			alerta.setTipo(KO);
+			alerta.setTipo(alerta.KO);
 			request.setAttribute("usuario", u);
 			vista=VIEW_FORM;
 		}else {
@@ -165,7 +164,7 @@ public class UsuarioController extends HttpServlet {
 					dao.insert(u) ;
 				}
 				alerta.setMensaje("Guardado con éxito");
-				alerta.setTipo(OK);
+				alerta.setTipo(alerta.OK);
 				listar(request);
 					
 				
@@ -174,7 +173,7 @@ public class UsuarioController extends HttpServlet {
 				LOG.debug(e);
 				
 				alerta.setMensaje("El usuario ya existe");
-				alerta.setTipo(KO);
+				alerta.setTipo(alerta.KO);
 				request.setAttribute("usuario", u);
 				vista=VIEW_FORM;
 			}
@@ -196,7 +195,7 @@ public class UsuarioController extends HttpServlet {
 			request.setAttribute("usuario", u);
 		} catch (SQLException e) {
 			alerta.setMensaje(e.toString());
-			alerta.setTipo(KO);
+			alerta.setTipo(alerta.KO);
 		}
 		
 	}
