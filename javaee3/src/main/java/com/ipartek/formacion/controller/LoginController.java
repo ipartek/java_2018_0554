@@ -25,6 +25,7 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
  */
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
+	private static final String ALERTA_DANGER = "danger";
 	private static final long serialVersionUID = 1L;
 	private final static Logger LOG = Logger.getLogger(LoginController.class);
 	private static final String VISTA_LOGIN = "index.jsp";
@@ -82,7 +83,7 @@ public class LoginController extends HttpServlet {
 				
 				if (session.getAttribute("sesionNoIniciada") == null) {
 					alerta.setAlerta(errores);
-					alerta.setTipo("danger");
+					alerta.setTipo(ALERTA_DANGER);
 				}else {
 					alerta = null;
 				}
@@ -95,7 +96,7 @@ public class LoginController extends HttpServlet {
 				if (usuario == null) {
 					LOG.error("El usuario no existe en la DB");
 					alerta.setAlerta("Usuario erróneo '" + email + "'");
-					alerta.setTipo("danger");
+					alerta.setTipo(ALERTA_DANGER);
 					request.setAttribute("mensaje", alerta);
 				}else {
 					LOG.info("Usuario encontrado en la DB");

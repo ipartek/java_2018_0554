@@ -24,6 +24,8 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
 					, urlPatterns = { "/privado/*" })
 public class SeguridadFilter implements Filter {
 
+	private static final String ALERTA_DANGER = "danger";
+
 	/**
 	 * @see Filter#destroy()
 	 */
@@ -47,7 +49,7 @@ public class SeguridadFilter implements Filter {
 			chain.doFilter(request, response);
 		}else {
 			alerta.setAlerta("No tienes permiso, por favor, logueate");
-			alerta.setTipo("danger");
+			alerta.setTipo(ALERTA_DANGER);
 			session.setAttribute("sesionNoIniciada", alerta);
 			resp.sendRedirect(req.getContextPath() + "/login");
 		}

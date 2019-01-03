@@ -28,6 +28,10 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
  */
 @WebServlet("/privado/usuarios")
 public class UsuariosController extends HttpServlet {
+	private static final String ALERTA_INFO = "info";
+	private static final String ALERTA_WARNING = "warning";
+	private static final String ALERTA_SUCCESS = "success";
+	private static final String ALERTA_DANGER = "danger";
 	private static final long serialVersionUID = 1L;
 	private final static Logger LOG = Logger.getLogger(UsuariosController.class);
 	private UsuarioDAO dao = null;
@@ -110,7 +114,7 @@ public class UsuariosController extends HttpServlet {
 		}catch (Exception e) {
 			LOG.error(e);
 			alerta.setAlerta("Error inesperado, sentimos las molestias");
-			alerta.setTipo("danger");
+			alerta.setTipo(ALERTA_DANGER);
 		}finally {
 			//Mensaje para el usuario
 			request.setAttribute("mensaje", alerta);
@@ -139,15 +143,15 @@ public class UsuariosController extends HttpServlet {
 		
 		if (usuarioLogueado.getEmail().equals(u.getEmail())) {
 			alerta.setAlerta("No puedes eliminar el usuario con el que estás logueado");
-			alerta.setTipo("danger");
+			alerta.setTipo(ALERTA_DANGER);
 		}else {
 			try {
 				dao.delete(identificador);
 				alerta.setAlerta("El usuario ha sido eliminado correctamente");
-				alerta.setTipo("success");
+				alerta.setTipo(ALERTA_SUCCESS);
 			} catch (SQLException e) {
 				alerta.setAlerta("No ha sido posible eliminar el usuario");
-				alerta.setTipo("danger");
+				alerta.setTipo(ALERTA_DANGER);
 				LOG.error(e.getMessage() + "[ID user: " + identificador + "]");
 			}
 		}
@@ -175,7 +179,7 @@ public class UsuariosController extends HttpServlet {
 			}
 			alertaTexto += "</ul>";
 			alerta.setAlerta(alertaTexto);
-			alerta.setTipo("danger");
+			alerta.setTipo(ALERTA_DANGER);
 			//Alerta al usuario
 			request.setAttribute("mensaje", alerta);
 			//Volver al formulario (conservando los valores)
@@ -192,11 +196,11 @@ public class UsuariosController extends HttpServlet {
 						
 						if (usuario.getEmail().equals(u.getEmail()) && usuario.getPassword().equals(u.getPassword())) {
 							alerta.setAlerta("No se ha realizado ningún cambio sobre el usuario: " + u.toString());
-							alerta.setTipo("warning");
+							alerta.setTipo(ALERTA_WARNING);
 						}else {
 							dao.update(u);
 							alerta.setAlerta("Update Usuario: " + usuario.toString() + " >> " + u.toString());
-							alerta.setTipo("success");
+							alerta.setTipo(ALERTA_SUCCESS);
 							LOG.info(usuario.toString() + " cambiado a " + u.toString());
 							
 							HttpSession session = request.getSession();
@@ -205,7 +209,7 @@ public class UsuariosController extends HttpServlet {
 							if (usuario.getEmail().equals(usuarioLogueado.getEmail())) {
 								session.setAttribute("usuario_logueado", u);
 								alerta.setAlerta("Has actualizado el usuario con el que estás logueado.");
-								alerta.setTipo("info");
+								alerta.setTipo(ALERTA_INFO);
 							}
 						}
 						
@@ -216,7 +220,7 @@ public class UsuariosController extends HttpServlet {
 					
 				}else {
 					alerta.setAlerta("Crear un nuevo Usuario");
-					alerta.setTipo("info");
+					alerta.setTipo(ALERTA_INFO);
 					
 					Usuario usuario = dao.getById(identificador);
 					
@@ -231,13 +235,13 @@ public class UsuariosController extends HttpServlet {
 				}
 			}catch (MySQLIntegrityConstraintViolationException e) {
 				alerta.setAlerta("El email introducido ya está registrado, por favor, introduzca uno nuevo.");
-				alerta.setTipo("danger");
-				//u.setId(-1L);
+				alerta.setTipo(ALERTA_DANGER);
+
 				request.setAttribute("usuario", u);
 				vista=VIEW_FORM;
 			}catch (Exception e) {
 				alerta.setAlerta("Lo sentimos, error inesperado");
-				alerta.setTipo("danger");
+				alerta.setTipo(ALERTA_DANGER);
 				LOG.error(e.getMessage());
 			}
 		}
@@ -257,7 +261,7 @@ public class UsuariosController extends HttpServlet {
 			u = dao.getById(identificador);
 		}else {
 			alerta.setAlerta("Crear un nuevo Usuario");
-			alerta.setTipo("info");
+			alerta.setTipo(ALERTA_INFO);
 		}
 		request.setAttribute("usuario", u);		
 	}
