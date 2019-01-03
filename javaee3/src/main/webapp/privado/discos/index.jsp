@@ -1,6 +1,6 @@
-<%@ include file="../includes/header.jsp"  %>
-<%@ include file="../includes/navbar.jsp"  %>
-<%@ include file="../includes/mensajes.jsp"  %>
+<%@ include file="../../includes/header.jsp"  %>
+<%@ include file="../../includes/navbar.jsp"  %>
+<%@ include file="../../includes/mensajes.jsp"  %>
 
 
 
@@ -29,9 +29,9 @@
 			<tr>
 			
 				<td>${dis.id}</td>
-				<td>${dis.titulo}</td>
+				<td><a href="privado/discos?op=2&id=${dis.id}">${dis.titulo}</td>
 				<td>${dis.artista}</td>
-				<td>${dis.portada}</td>
+				<td><img width=150 height=150 src="${dis.portada}" alt="imagen"></td>
 				<td>${dis.year}</td>
 			</tr>
 			
@@ -39,4 +39,4 @@
 		</tbody>
 	</table>
 	
-	<%@ include file="../includes/footer.jsp"%>
+	<%@ include file="../../includes/footer.jsp"%>

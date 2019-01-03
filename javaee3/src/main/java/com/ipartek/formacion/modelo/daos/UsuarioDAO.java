@@ -127,7 +127,7 @@ public Usuario getById (long id) {
 	return usuario;
 }
 
-public boolean eliminar( Usuario u) throws SQLException {
+public boolean eliminar( long id) throws SQLException {
 	
 	boolean resul = false;
 	String sql = "DELETE FROM `usuario` WHERE `id`=?;";
@@ -135,7 +135,7 @@ public boolean eliminar( Usuario u) throws SQLException {
 		  PreparedStatement pst = conn.prepareStatement(sql);				   
 		){
 		
-		pst.setLong(1, u.getId());			
+		pst.setLong(1, id);			
 		int affectedRows = pst.executeUpdate();
 		if ( affectedRows == 1 ) {
 			resul = true;

@@ -1,14 +1,30 @@
 package com.ipartek.formacion.modelo.pojos;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Disco {
 
 	
 
 
 	private long id;
+	
+	@NotEmpty
+	@Size(min=5, max=150)
 	private String titulo;
+	
+	@NotEmpty
+	@Size(min=5, max=150)
 	private String artista;
+	
+	@NotEmpty
+	@Size(min=5, max=150)
 	private String portada;
+	
+	@NotEmpty
+	@Size(min=4, max=4)
 	private String year;
 	
 	

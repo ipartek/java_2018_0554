@@ -2,6 +2,7 @@ package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Set;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -9,11 +10,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import org.jboss.logging.Logger;
 
 import com.ipartek.formacion.modelo.daos.UsuarioDAO;
 import com.ipartek.formacion.modelo.pojos.Usuario;
+import com.ipartek.formacion.modelo.pojos.Alerta;
 
 /**
  * Servlet implementation class UsuariosController
@@ -32,20 +38,30 @@ public class UsuariosController extends HttpServlet {
 	public static final String OP_GUARDAR = "3"; // id==-1 insert, id>0 update
 	public static final String OP_ELIMINAR = "4";
 
-	private String alerta = "";
+	private Alerta alerta;
 
 	// parametros
 	private String op;
 	private String id;
 	private String email;
 	private String password;
+	
+	//parametros alerta
+	private String texto;
+	private String tipo;
 
 	private static UsuarioDAO dao = null;
+	
+	private ValidatorFactory factory;
+	private Validator validator;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		dao = UsuarioDAO.getInstance();
+		//Crear Factoria y Validador
+    	factory  = Validation.buildDefaultValidatorFactory();
+    	validator  = factory.getValidator();
 	}
 
 	/**
@@ -73,7 +89,9 @@ public class UsuariosController extends HttpServlet {
 			throws ServletException, IOException {
 
 		vista= VIEW_INDEX;
-		alerta = "";
+		//reseteamos alerta a vacio
+		//alerta = "";
+		alerta = null;
 		try {
 
 			// recoger parametros
@@ -98,7 +116,8 @@ public class UsuariosController extends HttpServlet {
 
 		} catch (Exception e) {
 			LOG.error(e);
-			alerta = "Error inesperado, sentimos las molestias";
+			
+			alerta = new Alerta(Alerta.TIPO_DANGER, "Error inesperado, sentimos las molestias"); //rojo
 		} finally {
 
 			// mensaje para el usuario
@@ -113,38 +132,65 @@ public class UsuariosController extends HttpServlet {
 				request.setAttribute("usuarios", dao.getAll());
 	}
 
-	private void eliminar(HttpServletRequest request) {
-		//request.setAttribute("usuarios", dao.eliminar());
+	private void eliminar(HttpServletRequest request) throws SQLException {
+		
+		int identificador = Integer.parseInt(id);
+		
+		
+		if(dao.eliminar(identificador)) {
+			alerta = new Alerta(Alerta.TIPO_SUCCESS,"Registro eliminado con exito"); //verde
+		}else {
+			alerta = new Alerta(Alerta.TIPO_DANGER,"Registro NO eliminado");  //rojo
+		}
+		listar(request);
 
 	}
 
 	private void guardar(HttpServletRequest request) throws SQLException {
 		Usuario u = new Usuario();
 		int identificador = Integer.parseInt(id);
-		
-		// u.setId((long)identificador);
+		//crear usuario con los parametros
+				u.setId((long)identificador);
 				u.setEmail(email);
 				u.setPassword(password);
 				
-				//TODO validar POJO
+				// validar usuario
 				
-				//si validacion no correcta
-				   
-				  // alerta al usuario
+				Set<ConstraintViolation<Usuario>> violations = validator.validate(u);
 				
-				  // volver al formulario, cuidado que no se pierdan los valores en el form
-		
-				// Si validacion correcta
-				if ( identificador > 0 ) {
-					alerta = "UPDATE Usuario ";
-					// TODO dao.update	
+				
+				
+				//if(!violations.isEmpty())
+				if(violations.size() > 0) { //si validacion NO correcta
 					
+				
+				  // if(u.getEmail().equals(email)) {}
+				  // alerta al usuario
+					alerta = new Alerta(Alerta.TIPO_DANGER, "Los campos introducidos no son correctos, por favor intentelo de nuevo"); //rojo
+				   vista = VIEW_FORM;
+				  // volver al formulario, cuidado que no se pierdan los valores en el form
+				request.setAttribute("usuario", u);
+				}else {// Si validacion correcta				
+				   
+				try {
+				if ( identificador > 0 ) {
+					
+					// TODO dao.update	
+					dao.update(u);
+										
 				}else {
-					alerta = "Crear un nuevo Usuario";
 					dao.insert(u);
 				}
-			
+				alerta = new Alerta(Alerta.TIPO_SUCCESS, "Registro guardado con exito");  //verde
 				listar(request);
+				
+			}catch ( SQLException e) {
+				alerta = new Alerta(Alerta.TIPO_WARNING,"Lo sentimos pero el EMAIL ya existe"); //warning
+				vista = VIEW_FORM;
+				request.setAttribute("usuario", u);
+			}	
+		}	
+		
 	}
 
 	private void irFormulario(HttpServletRequest request) {
@@ -158,7 +204,7 @@ public class UsuariosController extends HttpServlet {
 			u = dao.getById(identificador);
 			
 		}else {
-			alerta ="Crear nuevo Usuario" ;
+			alerta = new Alerta(Alerta.TIPO_PRIMARY,"Crear nuevo Usuario") ;
 		}
 		
 		request.setAttribute("usuario", u);
@@ -179,6 +225,9 @@ public class UsuariosController extends HttpServlet {
 		email = request.getParameter("email");
 		password = request.getParameter("password");
 		
+			
 		LOG.debug(String.format("parametros: op=%s id=%s email=%s password=%s ", op, id, email, password));
 	}
+	
+	
 }

@@ -1,7 +1,9 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Set;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -9,20 +11,52 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.jboss.logging.Logger;
+
+import com.ipartek.formacion.modelo.daos.DiscoDAO;
+import com.ipartek.formacion.modelo.daos.VideoDAO;
+import com.ipartek.formacion.modelo.pojos.Alerta;
 import com.ipartek.formacion.modelo.pojos.Disco;
+import com.ipartek.formacion.modelo.pojos.Video;
 
 /**
  * Servlet implementation class DiscoController
  */
-@WebServlet("/disco")
+@WebServlet("/privado/disco")
 public class DiscoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final static Logger LOG = Logger.getLogger(UsuariosController.class);
     
-	private ArrayList<Disco> disco;	
+	private static final String VIEW_INDEX = "discos/index.jsp";
+	private static final String VIEW_FORM = "discos/form.jsp";
+	private String vista;
+
+	public static final String OP_LISTAR = "1";
+	public static final String OP_IR_FORMULARIO = "2";
+	public static final String OP_GUARDAR = "3"; // id==-1 insert, id>0 update
+	public static final String OP_ELIMINAR = "4";
+
+	private Alerta alerta;
+
+	// parametros
+	private String op;
+	private String id;
+	private String titulo;
+	private String artista;
+	private String portada;
+	private String year;
+	
+	//parametros alerta
+	private String texto;
+	private String tipo;
+
+	private static DiscoDAO dao = null;
+	
 	private ValidatorFactory factory;
 	private Validator validator;
 
@@ -30,42 +64,171 @@ public class DiscoController extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {	
 		super.init(config);
-		
+		dao = DiscoDAO.getInstance(); 
 		factory  = Validation.buildDefaultValidatorFactory();
     	validator  = factory.getValidator();
 		
 		
-		disco = new  ArrayList<Disco>();
-		disco.add(new Disco(1L, "Trapped!","Rage", "https://images-na.ssl-images-amazon.com/images/I/718mNFu5jfL._SY355_.jpg", "1992"));
-		disco.add(new Disco(2L, "Firepower","Judas Priest", "https://diablorock.com/wp-content/uploads/2018/03/firepower_portada.jpg", "2018"));
-		disco.add(new Disco(3L, "01011001","Ayreon", "https://upload.wikimedia.org/wikipedia/en/a/ae/Ayreon_-_01011001.jpg", "2008"));
-		disco.add(new Disco(4L, "The Bottom Deep","Communic", "https://upload.wikimedia.org/wikipedia/en/thumb/f/f1/Communic-2011.jpg/220px-Communic-2011.jpg", "2011"));
-		disco.add(new Disco(5L, "Apocalypse","Primal Fear", "https://i2.wp.com/rockangels.com/web/wp-content/uploads/2018/08/primalfearapocalypsecd.jpg", "2018"));
-		disco.add(new Disco(6L, "Voyage", "The Vintage Caravan","https://rockthebestmusic.com/wp-content/uploads/2014/01/the-vintage-caravan-voyage.png","2014"));
-		disco.add(new Disco(7L, "Killing The Dragon", "Dio", "https://upload.wikimedia.org/wikipedia/en/c/cd/DioKillingTheDragon.jpg", "2002"));
-		disco.add(new Disco(7L, "Dehumanizer", "Black Sabbath", "https://upload.wikimedia.org/wikipedia/en/1/12/Black-sabbath-dehumanizer.jpg", "1992"));
 	}
-	
-	
-	
-	
-	
+		
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		doPost(request, response);
+		doProcess(request, response);
 	}
+
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.setAttribute("disco", disco);
+		doProcess(request, response);
+	}
+	
+	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		vista= VIEW_INDEX;
+		//reseteamos alerta a vacio
+		//alerta = "";
+		alerta = null;
+		try {
+
+			// recoger parametros
+			getParametros(request);
+			// realizar operacion
+			switch (op) {
+			case OP_IR_FORMULARIO:
+				irFormulario(request);
+				break;
+			case OP_GUARDAR:
+				guardar(request);
+				break;
+			case OP_ELIMINAR:
+				eliminar(request);
+				break;
+			default:
+				listar(request);
+				break;
+			}
+
+			// enviar atributos
+
+		} catch (Exception e) {
+			LOG.error(e);
+			
+		 alerta = new Alerta(Alerta.TIPO_DANGER, "Error inesperado, sentimos las molestias"); //rojo
+		} finally {
+
+			// mensaje para el usuario
+			request.setAttribute("alerta", alerta);
+			// ir a una vista
+			request.getRequestDispatcher(vista).forward(request, response);
+		}
 		
-		request.getRequestDispatcher("discos.jsp").forward(request, response);
+		
+	}
+	
+	private void listar(HttpServletRequest request) {
+		// alerta = "Lista de Usuarios";
+				request.setAttribute("disco", dao.getAll());
+	}
+	
+	private void eliminar(HttpServletRequest request) throws SQLException {
+		int identificador = Integer.parseInt(id);
+		
+		
+		if(dao.eliminar(identificador)) {
+			alerta = new Alerta(Alerta.TIPO_SUCCESS,"Disco eliminado con exito"); //verde
+		}else {
+			alerta = new Alerta(Alerta.TIPO_DANGER,"Disco NO eliminado");  //rojo
+		}
+		listar(request);
 	}
 
+	private void guardar(HttpServletRequest request) {
+		Disco d = new Disco();
+		int identificador = Integer.parseInt(id);
+		//crear usuario con los parametros
+				d.setId((long)identificador);
+				d.setTitulo(titulo);
+				d.setArtista(artista);
+				d.setPortada(portada);
+				d.setYear(year);
+				
+				// validar disco
+				
+				Set<ConstraintViolation<Disco>> violations = validator.validate(d);
+				
+				
+				
+				//if(!violations.isEmpty())
+				if(violations.size() > 0) { //si validacion NO correcta
+					
+				
+				  
+				  // alerta al usuario
+					alerta = new Alerta(Alerta.TIPO_DANGER, "Los campos introducidos no son correctos, por favor intentelo de nuevo"); //rojo
+				   vista = VIEW_FORM;
+				  // volver al formulario, cuidado que no se pierdan los valores en el form
+				request.setAttribute("disco", d);
+				}else {// Si validacion correcta				
+				   
+				try {
+				if ( identificador > 0 ) {
+					
+					
+					dao.update(d);
+										
+				}else {
+					dao.insert(d);
+				}
+				alerta = new Alerta(Alerta.TIPO_SUCCESS, "Registro guardado con exito");  //verde
+				listar(request);
+				
+			}catch ( SQLException e) {
+				alerta = new Alerta(Alerta.TIPO_WARNING,"Lo sentimos pero el DISCO ya existe"); //warning
+				vista = VIEW_FORM;
+				request.setAttribute("disco", d);
+			}	
+		}	
+		
+	}
+
+	private void irFormulario(HttpServletRequest request) {
+		vista = VIEW_FORM;
+		
+		Disco d = new Disco();
+		
+		int identificador = Integer.parseInt(id);
+		if(identificador > 0) {
+			//alerta = "Detalle de un Usuario"+ identificador;
+			d = dao.getById(identificador);
+			
+		}else {
+			alerta = new Alerta(Alerta.TIPO_PRIMARY,"Crear nuevo Disco") ;
+		}
+		
+		request.setAttribute("disco", d);
+		
+	}
+
+	private void getParametros(HttpServletRequest request) {
+		op= request.getParameter("op");
+		if(op == null) {
+			op= OP_LISTAR;
+		}
+		
+		id = request.getParameter("id");
+		titulo = request.getParameter("titulo");
+		artista = request.getParameter("artista");
+		portada = request.getParameter("portada");
+		year = request.getParameter("year");
+		
+			
+		LOG.debug(String.format("parametros: op=%s id=%s titulo=%s artista=%s portada=%s year=%s ", op, id, titulo, artista, portada, year));
+		
+	}
 }

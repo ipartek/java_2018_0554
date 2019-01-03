@@ -17,7 +17,7 @@
             <a class="nav-link" href="privado/usuarios"><fmt:message key="navbar.usuario"/></a>
           </li>  
           <li class="nav-item active">
-            <a class="nav-link" href="privado/discos"><fmt:message key="navbar.discos"/></a>
+            <a class="nav-link" href="privado/disco"><fmt:message key="navbar.discos"/></a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="privado/carrito.jsp"><fmt:message key="navbar.carrito"/></a>
