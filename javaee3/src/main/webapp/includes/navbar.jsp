@@ -9,6 +9,9 @@
           <li class="nav-item active">
             <a class="nav-link"href="privado/usuarios"> Usuarios<span class="sr-only">(current)</span></a>
           </li>
+          <li class="nav-item active">
+            <a class="nav-link"href="privado/videos"> Videos<span class="sr-only">(current)</span></a>
+          </li>
         </ul>
         <form class="form-inline mt-2 mt-md-0" action="${pageContext.request.contextPath}/desconectar" method="POST">
           <span class="nav-link text-light">${sessionScope.usuario.email}</span>

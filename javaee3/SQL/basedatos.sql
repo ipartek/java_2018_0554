@@ -31,7 +31,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `nombre_UNIQUE` (`email`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,8 +40,34 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (10,'danielzallo@gmail.com','Daniel1234.'),(13,'andersolana@gmail.com','Ander1234.'),(21,'javier@lete.com','Lete1234.4');
+INSERT INTO `usuario` VALUES (10,'danielzallo@gmail.com','Daniel1234.'),(13,'andersolana@gmail.com','Ander1234.'),(21,'javier@lete.com','Lete1234.');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `video`
+--
+
+DROP TABLE IF EXISTS `video`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `video` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(150) NOT NULL,
+  `codigo` varchar(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `codigo_UNIQUE` (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `video`
+--
+
+LOCK TABLES `video` WRITE;
+/*!40000 ALTER TABLE `video` DISABLE KEYS */;
+INSERT INTO `video` VALUES (1,'Mi libro Luna de Pluton','g0AoA0I9WFA'),(2,'Noriyaro Ae86 ','orOZD7Wl26o'),(3,'Lucas Spider','_2Bib94U35Y'),(4,'Madrid Riders','CN5gedYFGjc');
+/*!40000 ALTER TABLE `video` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -57,4 +83,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-03 11:57:09
+-- Dump completed on 2019-01-03 14:25:36

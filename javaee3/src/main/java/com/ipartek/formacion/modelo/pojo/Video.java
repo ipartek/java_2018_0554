@@ -1,22 +1,33 @@
 package com.ipartek.formacion.modelo.pojo;
 
-public class Video {
-	private Long id;
-	private String nombre;
-	private String url;
+import javax.validation.constraints.Size;
 
-	public Video(Long id, String nombre, String url) {
+import org.hibernate.validator.constraints.NotEmpty;
+
+public class Video {
+	
+	private Long id;
+	
+	@NotEmpty
+	@Size(min=5 , max=150)
+	private String nombre;
+	
+	@NotEmpty
+	@Size(min=11,max=11)
+	private String codigo;
+
+	public Video(Long id, String nombre, String codigo) {
 		this();
 		setId(id);
 		setNombre(nombre);
-		setUrl(url);
+		setCodigo(codigo);
 	}
 
 	public Video() {
 		super();
 		this.id = (long) -1;
 		this.nombre = "";
-		this.url = "";
+		this.codigo = "";
 	}
 
 	public Long getId() {
@@ -35,21 +46,21 @@ public class Video {
 		this.nombre = nombre;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getCodigo() {
+		return codigo;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		result = prime * result + ((url == null) ? 0 : url.hashCode());
 		return result;
 	}
 
@@ -62,6 +73,11 @@ public class Video {
 		if (getClass() != obj.getClass())
 			return false;
 		Video other = (Video) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -72,16 +88,13 @@ public class Video {
 				return false;
 		} else if (!nombre.equals(other.nombre))
 			return false;
-		if (url == null) {
-			if (other.url != null)
-				return false;
-		} else if (!url.equals(other.url))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Video [id=" + id + ", nombre=" + nombre + ", url=" + url + "]";
+		return "Video [id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + "]";
 	}
+
+	
 }

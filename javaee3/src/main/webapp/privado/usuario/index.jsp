@@ -14,8 +14,6 @@
 				<th>Nombre</th>
 				<th>Password</th>
 				<th></th>
-
-				
 			</tr>
 		</thead>
 		<tbody>

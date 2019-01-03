@@ -225,8 +225,7 @@ public class UsuarioController extends HttpServlet {
 			u= dao.getById((long)identificador);
 		}else {
 			//alerta="Crear un nuevo Usuario";
-			
-			LOG.trace("Se ha generado el usuario correctamente");
+			LOG.trace("Crear un nuevo Usuario");
 		}
 		
 		request.setAttribute("usuario", u);
