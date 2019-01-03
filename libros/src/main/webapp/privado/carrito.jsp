@@ -22,7 +22,7 @@
   <c:forEach items="${carrito}" var="vid">
     <tr>
       <th scope="row">${vid.nombre}</th>
-      <td><iframe width="560" height="315" src="//www.youtube.com/embed/${vid.url}" allowfullscreen=""></iframe></td>
+      <td><iframe width="560" height="315" src="//www.youtube.com/embed/${vid.codigo}" allowfullscreen=""></iframe></td>
      
     </tr>
     </c:forEach>

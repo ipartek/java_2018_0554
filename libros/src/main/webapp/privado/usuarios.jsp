@@ -6,7 +6,7 @@
 
 <main role="main" class="container">
 <div class="jumbotron">
-	<td><a href="privado/usuarios?op=2&id=-1">Crear nuevo registro</a></td>
+	<a href="privado/usuarios?op=2&id=-1">Crear nuevo registro</a>
 	<h1>Usuarios</h1>
 	<table class="table">
 

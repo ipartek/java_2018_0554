@@ -50,6 +50,8 @@ public class UsuarioController extends HttpServlet {
 
 	private ValidatorFactory factory;
 	private Validator validator;
+	
+	private Alerta alerta;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -95,14 +97,14 @@ public class UsuarioController extends HttpServlet {
 
 		} catch (Exception e) {
 			LOG.error(e);
-			Alerta alerta = new Alerta();
-			alerta.setTexto("Error inesperado, sentimos las molestias");
-			alerta.setTipo("danger");
-			request.setAttribute("alerta", alerta);
+			alerta = new Alerta("danger","Error inesperado, sentimos las molestias");
+
+			
 
 		} finally {
 			// mensaje para el usuario
 			// ir a una vista
+			request.setAttribute("alerta", alerta);
 			request.getRequestDispatcher(vista).forward(request, response);
 		}
 	}
@@ -115,18 +117,16 @@ public class UsuarioController extends HttpServlet {
 	}
 
 	private void eliminar(HttpServletRequest request) throws SQLException {
-		Alerta alerta = new Alerta();
+
 		int identificador = Integer.parseInt(id);
 
 		if (dao.delete(identificador)) {
-			alerta.setTexto("Registro eliminado");
-			alerta.setTipo("warning");
-			request.setAttribute("alerta", alerta);
+			alerta = new Alerta("warning","Registro eliminado");
+
 
 		} else {
-			alerta.setTexto("Registro no eliminado");
-			alerta.setTipo("danger");
-			request.setAttribute("alerta", alerta);
+			alerta = new Alerta("danger","Registro no eliminado");
+
 		}
 		
 		listar(request);
@@ -135,7 +135,6 @@ public class UsuarioController extends HttpServlet {
 
 	private void guardar(HttpServletRequest request) throws SQLException {
 		
-		Alerta alerta = new Alerta();
 		Usuario u = new Usuario();
 		int identificador = Integer.parseInt(id);
 
@@ -162,20 +161,15 @@ public class UsuarioController extends HttpServlet {
 
 				listar(request);
 			} catch (SQLException e) {
-				alerta.setTexto("El email introducido ya existe");
-				alerta.setTipo("warning");
-				request.setAttribute("alerta", alerta);
+				alerta = new Alerta("warning","El email introducido ya existe");
+
 				vista = VIEW_FORM;
 				request.setAttribute("usuario", u);
 			}
 		}
 		// si validacion no correcta
 		else {
-
-			// alerta al usuario
-			alerta.setTexto("El formato del email o password no cumple los requisitos");
-			alerta.setTipo("danger");
-			request.setAttribute("alerta", alerta);
+			alerta = new Alerta("danger","El formato del email o password no cumple los requisitos");
 			// volver al formulario, cuidado que no se pierdan los valores en el form
 			vista = VIEW_FORM;
 			request.setAttribute("usuario", u);
@@ -187,7 +181,6 @@ public class UsuarioController extends HttpServlet {
 	private void irFormulario(HttpServletRequest request) {
 
 		vista = VIEW_FORM;
-		Alerta alerta = new Alerta();
 		Usuario u = new Usuario();
 
 		int identificador = Integer.parseInt(id);
@@ -200,9 +193,8 @@ public class UsuarioController extends HttpServlet {
 //			u.setPassword(password);
 
 		} else {
-			alerta.setTexto("Crear nuevo usuario");
-			alerta.setTipo("info");
-			request.setAttribute("alerta", alerta);
+			alerta = new Alerta("info","Crear nuevo usuario");
+
 		}
 
 		request.setAttribute("usuario", u);
