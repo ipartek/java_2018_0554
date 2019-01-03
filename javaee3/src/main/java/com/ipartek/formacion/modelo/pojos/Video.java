@@ -1,26 +1,28 @@
 package com.ipartek.formacion.modelo.pojos;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Video {
 
 	// Atributos
-	private long id;
-	private String nombre;
-	private String url;
+	private long id; // (PK) Not Null, AI
+	@NotNull
+	@Size(min=1, max=150)
+	private String nombre; // Not Null
+	@NotNull
+	@Size(min=11, max=11)
+	private String codigo; // Not Null, Unique
 
 	// Constructores
 
 	public Video() {
 		super();
-		this.id = -1;
-		this.nombre = "Surf Search Spot 2 0 video promo";
-		this.url = "LPDhuthFD98";
+		setId(-1);
+		setNombre(nombre);
+		setCodigo(codigo);
 	}
-
-	public Video(String nombre) {
-		super();
-		this.nombre = nombre;
-	}
-
+	
 	// Getters y Setters
 
 	public long getId() {
@@ -39,19 +41,19 @@ public class Video {
 		this.nombre = nombre;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getCodigo() {
+		return codigo;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setCodigo(String url) {
+		this.codigo = url;
 	}
 
 	// Otros metodos => toString
 
 	@Override
 	public String toString() {
-		return "Video [id=" + id + ", nombre=" + nombre + ", url=" + url + "]";
+		return "Video [id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + "]";
 	}
 
 }

@@ -43,6 +43,32 @@ LOCK TABLES `usuario` WRITE;
 INSERT INTO `usuario` VALUES (3,'Hector@Serrano.com','753!Qw3rt1?951'),(4,'Nuevo@Email.com','123456'),(6,'PilarSanchez@gmail.com','metalslug'),(11,'Ainhoa@herrero.es','poiuyt'),(12,'123345@1234.es','contraseña');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `video`
+--
+
+DROP TABLE IF EXISTS `video`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `video` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(150) NOT NULL,
+  `codigo` varchar(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `codigo_UNIQUE` (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `video`
+--
+
+LOCK TABLES `video` WRITE;
+/*!40000 ALTER TABLE `video` DISABLE KEYS */;
+INSERT INTO `video` VALUES (2,'Freak Kitchen - Confusion To The Enemy','AdzokBL0JNM'),(3,'PERIPHERY - Absolomb','gdP3O8L_MV4'),(4,'Sithu Aye - Primary Ignition','nvawnDjdkIM'),(5,'Tigran Hamasyan \"The Court Jester\"','Fh_cKPFVsVI'),(6,'Squarepusher × Z-MACHINES','VkUq4sO4LQM');
+/*!40000 ALTER TABLE `video` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -53,4 +79,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-03 11:57:08
+-- Dump completed on 2019-01-03 14:16:16

@@ -30,8 +30,6 @@ public class UsuarioController extends HttpServlet {
 	
 	// Objeto de mensaje de alerta
 	private Mensaje mensaje;
-	
-	// Constantes mensajes de alerta
 
 	// Vistas
 	private String vista;
@@ -177,8 +175,7 @@ public class UsuarioController extends HttpServlet {
 			u = dao.getById((long) identificador);
 		} else {
 			mensaje = new Mensaje(mensaje.MENSAJE_INFO, "Crear un nuevo usuario");
-			u.setId((long) identificador);
-			u.setEmail(email);
+
 		}
 		request.setAttribute("usuario", u);
 	}

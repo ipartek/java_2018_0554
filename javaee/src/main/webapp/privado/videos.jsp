@@ -42,7 +42,7 @@
 		for (Video video : videos) {
 	%>
 	<li><%=video.getNombre()%> <iframe width="250" height="250"
-			src="https://www.youtube.com/embed/<%=video.getUrl()%>"
+			src="https://www.youtube.com/embed/<%=video.getCodigo()%>"
 			frameborder="0"
 			allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 			allowfullscreen></iframe></li>

@@ -9,7 +9,7 @@
 	<div class="collapse navbar-collapse text-white" id="navbarCollapse">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active"><a class="nav-link"
-				href="${pageContext.request.contextPath}/videos">Videos</a></li>
+				href="${pageContext.request.contextPath}/privado/videos">Videos</a></li>
 			<li class="nav-item active"><a class="nav-link"
 				href="${pageContext.request.contextPath}/albumes">Albumes</a></li>
 			<li class="nav-item active"><a class="nav-link"
