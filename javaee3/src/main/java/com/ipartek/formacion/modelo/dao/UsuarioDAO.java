@@ -6,12 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.controller.LoginController;
 import com.ipartek.formacion.modelo.ConnectionManager;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 
 public class UsuarioDAO {
 
 	private static UsuarioDAO INSTANCE = null;
+	private final static Logger LOG = Logger.getLogger(LoginController.class);
 
 	// constructor privado, solo acceso por getInstance()
 	private UsuarioDAO() {
@@ -48,7 +52,7 @@ public class UsuarioDAO {
 		return usuario;
 	}
 
-	public ArrayList<Usuario> getAll() {
+	public ArrayList<Usuario> getAll() throws SQLException {
 
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		String sql = "SELECT id, email, password FROM usuario ORDER BY id ASC LIMIT 500";
@@ -72,13 +76,11 @@ public class UsuarioDAO {
 				}
 			}
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} 
 		return usuarios;
 	}
 	
-	public boolean delete(long ident) {
+	public boolean delete(long ident) throws SQLException {
 
 		boolean resul=false;
 		Usuario usuario = null;
@@ -97,7 +99,7 @@ public class UsuarioDAO {
 		return resul;
 	}
 
-	public Usuario getById(long ident) {
+	public Usuario getById(long ident) throws SQLException {
 
 
 		Usuario usuario = null;
@@ -114,13 +116,11 @@ public class UsuarioDAO {
 					usuario.setPassword(rs.getString("password"));
 				}
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} 
 		return usuario;
 	}
 
-	public boolean insert(Usuario u) {
+	public boolean insert(Usuario u) throws SQLException {
 		boolean resul = false;
 		String sql = "INSERT INTO usuario (email, `password`) VALUES (?,?);";
 		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
@@ -132,14 +132,12 @@ public class UsuarioDAO {
 			if (affectedRows == 1) {
 				resul = true;
 			}
-		} catch (Exception e) {
-
 		}
 		return resul;
 
 	}
 	
-	public boolean update(Usuario u) {
+	public boolean update(Usuario u) throws SQLException {
 		boolean resul = false;
 		String sql = "UPDATE usuario SET email=?, `password`=? WHERE id=?;";
 		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
@@ -152,9 +150,7 @@ public class UsuarioDAO {
 			if (affectedRows == 1) {
 				resul = true;
 			}
-		} catch (SQLException e) {
-			
-		}
+		} 
 		return resul;
 
 	}

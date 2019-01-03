@@ -1,9 +1,8 @@
 package com.ipartek.formacion.modelo.pojo;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 
@@ -14,10 +13,10 @@ public class Usuario {
 	private Long id;
 		
 	@NotEmpty
-	@Email
+	@Pattern(regexp = "^[A-Za-z0-9](([_\\.\\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\\.\\-]?[a-zA-Z0-9]+)*)\\.([A-Za-z]{2,})$")
 	private String email;
 	
-	@NotNull
+	@NotEmpty
 	@Size(min=5, max=50)
 	private String password;
 

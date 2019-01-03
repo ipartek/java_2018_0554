@@ -1,6 +1,7 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Set;
 
 import javax.servlet.ServletConfig;
@@ -17,6 +18,7 @@ import javax.validation.ValidatorFactory;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.dao.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojo.Alerta;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 
 
@@ -37,7 +39,9 @@ public class UsuarioController extends HttpServlet {
 	private static final String OP_GUARDAR = "3"; // id==-1 insert id>0 update
 	private static final String OP_ELIMINAR = "4";
 	
-	private String alerta="";
+	Alerta alerta;
+	private static final String OK = "success";
+	private static final String KO = "danger";
 	
 	//parametros
 	
@@ -54,6 +58,7 @@ public class UsuarioController extends HttpServlet {
 		factory  = Validation.buildDefaultValidatorFactory();
     	validator  = factory.getValidator();
 		dao = UsuarioDAO.getInstance();
+		alerta=new Alerta();
 	}
 
 
@@ -95,7 +100,8 @@ public class UsuarioController extends HttpServlet {
 			
 		}catch (Exception e){
 			LOG.error(e);
-			alerta="Error inesperado";
+			alerta.setMensaje(e.toString());
+			alerta.setTipo(KO);
 		} finally {
 			//mensaje usuario
 			request.setAttribute("alerta", alerta);
@@ -106,21 +112,30 @@ public class UsuarioController extends HttpServlet {
 	
 	}
 	private void listar(HttpServletRequest request) {
-		request.setAttribute("usuarios", dao.getAll());
+		try {
+			request.setAttribute("usuarios", dao.getAll());
+		} catch (SQLException e) {
+			alerta.setMensaje(e.toString());
+			alerta.setTipo(KO);
+		}
 		
 	}
-	private void eliminar(HttpServletRequest request) {
-		int ident=Integer.parseInt(id);
+	private void eliminar(HttpServletRequest request) throws SQLException {
+		int ident=Integer.parseInt(id);		
 		if(ident>0) {
 			if(dao.delete(ident)) {
+				alerta.setMensaje("Eliminado con éxito");
+				alerta.setTipo(OK);
 				listar(request);
 			}else {
-				alerta="ocurrio un error en el borrado";
+				alerta.setMensaje("No se pudo eliminar el usuario");
+				alerta.setTipo(KO);
 				vista=VIEW_FORM;
 				
 			}
 		}else {
-			alerta="no existe el usuario en la base de datos";
+			alerta.setMensaje("No se encontro usuario");
+			alerta.setTipo(KO);
 			vista=VIEW_FORM;
 		}
 	}
@@ -131,36 +146,37 @@ public class UsuarioController extends HttpServlet {
 		u.setId((long) ident);
 		u.setEmail(email);
 		u.setPassword(password);
-		vista=VIEW_INDEX;
+		
 		
 		Set<ConstraintViolation<Usuario>> violations = validator.validate(u);
 		
 		if(violations.size()>0) {
-			alerta="Los datos proporcionados no son correctos";
+			alerta.setMensaje("Los datos proporcionados no son correctos");
+			alerta.setTipo(KO);
 			request.setAttribute("usuario", u);
 			vista=VIEW_FORM;
 		}else {
 			try {
 				if(ident>0) {
-					if(dao.update(u)) {
-						listar(request);
-					}else {
-						alerta="El correo ya existe";
-						request.setAttribute("usuario", u);
-						vista=VIEW_FORM;
-					}
+					dao.update(u) ;
+					
+					
 				}else {
-					if(dao.insert(u)) {
-						listar(request);
-					}else {
-						alerta="El correo ya existe";
-						request.setAttribute("usuario", u);
-						vista=VIEW_FORM;
-					}
+					dao.insert(u) ;
 				}
-			} catch (Exception e) {
+				alerta.setMensaje("Guardado con éxito");
+				alerta.setTipo(OK);
+				listar(request);
+					
 				
-				e.printStackTrace();
+			} catch (SQLException e) {
+				
+				LOG.debug(e);
+				
+				alerta.setMensaje("El usuario ya existe");
+				alerta.setTipo(KO);
+				request.setAttribute("usuario", u);
+				vista=VIEW_FORM;
 			}
 		}
 		
@@ -171,12 +187,17 @@ public class UsuarioController extends HttpServlet {
 		Usuario u;
 		
 		int ident=Integer.parseInt(id);
-		if(ident>0) {
-			u= dao.getById(ident);
-		}else {
-			u= new Usuario();
+		try {
+			if(ident>0) {
+				u= dao.getById(ident);
+			}else {
+				u= new Usuario();
+			}
+			request.setAttribute("usuario", u);
+		} catch (SQLException e) {
+			alerta.setMensaje(e.toString());
+			alerta.setTipo(KO);
 		}
-		request.setAttribute("usuario", u);
 		
 	}
 
