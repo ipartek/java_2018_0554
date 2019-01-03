@@ -8,12 +8,17 @@ import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
-import com.ipartek.formacion.controller.UsuariosController;
-import com.ipartek.formacion.modelo.pojo.Usuario;
 import com.ipartek.formacion.modelo.pojo.Video;
 
 public class VideoDAO {
 	
+	private static final String SQL_DELETE = "DELETE FROM video WHERE id = ? ;";
+	private static final String SQL_INSERT = "INSERT INTO `video` (`nombre`, `codigo`) VALUES (?, ?) ;";
+	private static final String SQL_UPDATE = "UPDATE video SET nombre = ?, codigo = ? WHERE id= ? ;";
+	private static final String SQL_GETALL = "SELECT id, nombre, codigo FROM video ORDER BY id DESC LIMIT 500";
+	private static final String SQL_SEARCHBYNAME = "SELECT id, nombre, codigo FROM video WHERE nombre LIKE ? ORDER BY id DESC LIMIT 500";
+	private static final String SQL_GETBYID = "SELECT id, nombre, codigo FROM video WHERE id=? ;";
+
 	private static VideoDAO INSTANCE = null;
 	
 	private final static Logger LOG = Logger.getLogger(VideoDAO.class);
@@ -32,7 +37,7 @@ public class VideoDAO {
 	
 	public ArrayList<Video> getAll(){
 		ArrayList<Video> videos = new ArrayList<Video>();
-		String sql = "SELECT id, nombre, codigo FROM video ORDER BY id DESC LIMIT 500";
+		String sql = SQL_GETALL;
 		try(Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery()
@@ -40,12 +45,7 @@ public class VideoDAO {
 			
 			while(rs.next()) {
 				try {
-					
-				Video video = new Video();
-				video.setId(rs.getLong("id"));
-				video.setNombre(rs.getString("nombre"));
-				video.setCodigo(rs.getString("codigo"));
-				videos.add(video);
+				videos.add(rowMapper(rs));
 				}catch (Exception e) {
 					
 					System.out.println("Video no válido");
@@ -62,7 +62,7 @@ public class VideoDAO {
 	
 	public ArrayList<Video> buscarVideo(String nombre){
 		ArrayList<Video> videos = new ArrayList<Video>();
-		String sql = "SELECT id, nombre, codigo FROM video WHERE nombre LIKE ? ORDER BY id DESC LIMIT 500";
+		String sql = SQL_SEARCHBYNAME;
 		try(Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);
 		) {
@@ -73,14 +73,8 @@ public class VideoDAO {
 			){
 				while(rs.next()) {
 					try {
-						
-					Video video = new Video();
-					video.setId(rs.getLong("id"));
-					video.setNombre(rs.getString("nombre"));
-					video.setCodigo(rs.getString("codigo"));
-					videos.add(video);
+					videos.add(rowMapper(rs));
 					}catch (Exception e) {
-						
 						System.out.println("Video no válido");
 						e.printStackTrace();
 					}
@@ -89,9 +83,6 @@ public class VideoDAO {
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
-			
-			
-			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -102,17 +93,14 @@ public class VideoDAO {
 	public Video getById(Long identificador) {
 		Video video = null;
 		
-		String sql = "SELECT id, nombre, codigo FROM video WHERE id=? ;";
+		String sql = SQL_GETBYID;
 		try( Connection conn = ConnectionManager.getConnection();
 			 PreparedStatement pst = conn.prepareStatement(sql);
 			){
 			pst.setLong(1, identificador);
 			try ( ResultSet rs = pst.executeQuery() ){											
 				while(rs.next()) { // hemos encontrado usuario								
-					video = new Video();
-					video.setId( rs.getLong("id"));
-					video.setNombre( rs.getString("nombre"));
-					video.setCodigo(rs.getString("codigo"));								
+					video = rowMapper(rs);								
 				}						
 			}
 		} catch (SQLException e) {
@@ -122,9 +110,18 @@ public class VideoDAO {
 		return video;
 	}
 
+	private Video rowMapper(ResultSet rs) throws SQLException {
+		Video video = new Video();
+		video.setId( rs.getLong("id"));
+		video.setNombre( rs.getString("nombre"));
+		video.setCodigo(rs.getString("codigo"));
+		
+		return video;
+	}
+
 	public boolean update(Video v) throws SQLException {
 		boolean result = false;
-		String sql = "UPDATE video SET nombre = ?, codigo = ? WHERE id= ? ;";
+		String sql = SQL_UPDATE;
 		try( Connection conn = ConnectionManager.getConnection();
 			 PreparedStatement pst = conn.prepareStatement(sql);
 			){
@@ -142,7 +139,7 @@ public class VideoDAO {
 
 	public boolean insert(Video v) throws SQLException {
 		boolean result = false;
-		String sql = "INSERT INTO `video` (`nombre`, `codigo`) VALUES (?, ?) ;";
+		String sql = SQL_INSERT;
 		try( Connection conn = ConnectionManager.getConnection();
 			 PreparedStatement pst = conn.prepareStatement(sql);
 			){
@@ -159,7 +156,7 @@ public class VideoDAO {
 
 	public boolean delete(Long identificador) throws SQLException {
 		boolean result = false;
-		String sql = "DELETE FROM video WHERE id = ? ;";
+		String sql = SQL_DELETE;
 		try( Connection conn = ConnectionManager.getConnection();
 			 PreparedStatement pst = conn.prepareStatement(sql);
 			){

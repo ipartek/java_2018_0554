@@ -2,7 +2,6 @@ package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Set;
 
 import javax.servlet.ServletConfig;
@@ -20,7 +19,6 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.dao.VideoDAO;
 import com.ipartek.formacion.modelo.pojo.Mensaje;
-import com.ipartek.formacion.modelo.pojo.Usuario;
 import com.ipartek.formacion.modelo.pojo.Video;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
