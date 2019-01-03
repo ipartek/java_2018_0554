@@ -11,3 +11,6 @@ nav span{
 body {
     min-height: auto;
 }
+a.btn.btn-primary {
+    display: block;
+}

@@ -32,7 +32,7 @@ public class LoginController extends HttpServlet {
 	private ValidatorFactory factory;
 	private Validator validator;
 	
-	public static final String VIEW_LOGIN = "login.jsp";
+	public static final String VIEW_LOGIN = "index.jsp";
 	public static final String CONTROLLER_VIDEOS = "privado/videos";
 	
        

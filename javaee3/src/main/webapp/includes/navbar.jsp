@@ -11,6 +11,9 @@
        <li class="nav-item active">
          <a class="nav-link" href="${pageContext.request.contextPath}/privado/perros"><fmt:message key="navbar.perros"/></a>
        </li>
+       <li class="nav-item active">
+         <a class="nav-link" href="${pageContext.request.contextPath}/privado/usuarios">Usuarios</a>
+       </li>
      </ul>
    </div>
    <span>${usuario.email}</span>
