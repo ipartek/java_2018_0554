@@ -2,6 +2,7 @@ package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Set;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -9,6 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 
@@ -24,6 +29,9 @@ public class UsuarioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	//LOG
 	private final static Logger LOG = Logger.getLogger(UsuarioController.class);
+	
+	private ValidatorFactory factory;
+	private Validator validator;
 	
 	//VISTAS
 	private static final String VIEW_INDEX = "usuarios/index.jsp";
@@ -50,6 +58,8 @@ public class UsuarioController extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {    
     	super.init(config);
     	dao = UsuarioDAO.getInstance();
+    	factory  = Validation.buildDefaultValidatorFactory();
+    	validator  = factory.getValidator();
     }
     
    	
@@ -120,35 +130,43 @@ public class UsuarioController extends HttpServlet {
 	}
 
 
-	private void guardar(HttpServletRequest request) throws SQLException {
+	private void guardar(HttpServletRequest request) {
 
+		//crear usuario mediante parametros del formulario
 		Usuario u = new Usuario();
-		int identificador = Integer.parseInt(id);
-		// u.setId((long)identificador);
+		int identificador = Integer.parseInt(id);	
+		u.setId( (long)identificador);
 		u.setEmail(email);
 		u.setPassword(password);
 		
-		//TODO validar POJO
+		//validar usuario		
+		Set<ConstraintViolation<Usuario>> violations = validator.validate(u);
 		
-		//si validacion no correcta
-		   
-		  // alerta al usuario
 		
+		if ( violations.size() > 0 ) {              // validacion NO correcta
+		 
+		  alerta = "Los campos introduciodos no son correctos, por favor intentalo de nuevo";		 
+		  vista = VIEW_FORM; 
 		  // volver al formulario, cuidado que no se pierdan los valores en el form
+		  request.setAttribute("usuario", u);	
+		  
+		}else {									  //  validacion correcta
 		
-		
-		// Si validacion correcta
-			if ( identificador > 0 ) {
-				alerta = "UPDATE Usuario ";
-				// TODO dao.update	
+			try {
+				if ( identificador > 0 ) {
+					dao.update(u);				
+				}else {				
+					dao.insert(u);
+				}
+				alerta = "Registro guardado con exito";
+				listar(request);
 				
-			}else {
-				alerta = "Crear un nuevo Usuario";
-				dao.insert(u);
-			}
-		
-			listar(request);
-		
+			}catch ( SQLException e) {
+				alerta = "Lo sentimos pero el EMAIL ya existe";
+				vista = VIEW_FORM;
+				request.setAttribute("usuario", u);
+			}	
+		}	
 		
 	}
 

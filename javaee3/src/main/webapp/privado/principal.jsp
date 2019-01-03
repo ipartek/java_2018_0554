@@ -20,7 +20,7 @@
            	<div class="col-md-4">
               <div class="card mb-4 shadow-sm">
               	<div class="embed-responsive embed-responsive-16by9">
-					 	 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/${video.url.split("=")[1]}" allowfullscreen></iframe>
+					 	 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/${video.url}" allowfullscreen></iframe>
 				</div>
                 <div class="card-body">
                   <p class="card-text">${video.nombre.toUpperCase()}</p>
