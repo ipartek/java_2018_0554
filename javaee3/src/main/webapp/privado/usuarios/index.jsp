@@ -5,7 +5,7 @@
 
     <main role="main" class="container">
 	
-		<a href="privado/usuarios?op=2&id=-1">Crear Nuevo Registro</a>
+		<a href="privado/usuarios?op=2&id=-1" class="btn btn-outline-success mb-2">Crear Nuevo Registro</a>
 		
 		<table class="table">
 		  <thead class="thead-dark">
