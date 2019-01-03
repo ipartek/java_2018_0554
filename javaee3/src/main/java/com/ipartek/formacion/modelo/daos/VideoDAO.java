@@ -26,7 +26,7 @@ public class VideoDAO {
 public Video getById( long id ) {
 		
 		Video registro = null;
-		String sql = "SELECT id, nombre, url FROM imanol WHERE id= ?;";		
+		String sql = "SELECT id, nombre, url FROM video WHERE id= ?;";		
 		try ( Connection conn = ConnectionManager.getConnection();
 			  PreparedStatement pst = conn.prepareStatement(sql);
 			){
@@ -59,7 +59,7 @@ public Video getById( long id ) {
 	public ArrayList<Video> getAll() {
 		ArrayList<Video> listadoVideos = new ArrayList<Video>();
 		Video video = null;
-		String sql = "SELECT id, nombre, url FROM imanol ORDER BY id DESC LIMIT 500";
+		String sql = "SELECT id, nombre, url FROM video ORDER BY id DESC LIMIT 500";
 		try (
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);
@@ -87,7 +87,7 @@ public Video getById( long id ) {
 		String texto = texto1;
 		ArrayList<Video> listadoVideosBuscados = new ArrayList<Video>();
 		Video video = null;
-		String sql = "SELECT id, nombre, url FROM imanol WHERE nombre LIKE ? ORDER BY nombre ASC LIMIT 500";
+		String sql = "SELECT id, nombre, url FROM video WHERE nombre LIKE ? ORDER BY nombre ASC LIMIT 500";
 		try (
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);

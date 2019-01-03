@@ -36,7 +36,7 @@ public class UsuarioDAO {
 	public Usuario login (String email, String pass) {
 		
 		Usuario usuario = null;
-		String sql = "SELECT id, nombre, password FROM usuario WHERE nombre = ? AND password = ?;";
+		String sql = "SELECT id, email, password FROM usuario WHERE email = ? AND password = ?;";
 		
 		try ( Connection conn = ConnectionManager.getConnection();
 			  PreparedStatement pst = conn.prepareStatement(sql);
@@ -47,7 +47,7 @@ public class UsuarioDAO {
 							while(rs.next()) { 						
 								usuario = new Usuario();
 								usuario.setId( rs.getLong("id"));
-								usuario.setEmail( rs.getString("nombre"));
+								usuario.setEmail( rs.getString("email"));
 								usuario.setPassword(rs.getString("password"));								
 							}						
 					}
@@ -56,11 +56,35 @@ public class UsuarioDAO {
 		}		
 		return usuario;
 	}
+	
+	
+	public Usuario getById(long id) {
+
+		Usuario usuario = null;
+		String sql = "SELECT id, email, password FROM usuario WHERE id = ?;";
+
+		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+			pst.setLong(1, id);
+			
+			try (ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) { // hemos encontrado usuario
+					usuario = new Usuario();
+					usuario.setId(rs.getLong("id"));
+					usuario.setEmail(rs.getString("email"));
+					usuario.setPassword(rs.getString("password"));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return usuario;
+	}
+	
 
 	public ArrayList<Usuario> getAll() {
 		
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-		String sql = "SELECT id, nombre, password FROM usuario ORDER BY id DESC LIMIT 500";		
+		String sql = "SELECT id, email, password FROM usuario ORDER BY id DESC LIMIT 500";		
 		
 		try ( Connection conn = ConnectionManager.getConnection();
 			  PreparedStatement pst = conn.prepareStatement(sql);
@@ -71,7 +95,7 @@ public class UsuarioDAO {
 				try {
 					Usuario usuario = new Usuario();
 					usuario.setId( rs.getLong("id"));
-					usuario.setEmail( rs.getString("nombre"));
+					usuario.setEmail( rs.getString("email"));
 					usuario.setPassword(rs.getString("password"));
 					// a�adir en array
 					usuarios.add(usuario);
@@ -90,7 +114,7 @@ public class UsuarioDAO {
 	public ArrayList<String> getAllNoValid() {
 		
 		ArrayList<String> usuariosmal= new ArrayList<String>();
-		String sql = "SELECT id, nombre, password FROM usuario ORDER BY id DESC LIMIT 500";		
+		String sql = "SELECT id, email, password FROM usuario ORDER BY id DESC LIMIT 500";		
 		
 		try ( Connection conn = ConnectionManager.getConnection();
 				  PreparedStatement pst = conn.prepareStatement(sql);
@@ -101,11 +125,11 @@ public class UsuarioDAO {
 					try {
 						Usuario usuario = new Usuario();
 						//usuario.setId( rs.getLong("id"));
-						usuario.setEmail( rs.getString("nombre"));
+						usuario.setEmail( rs.getString("email"));
 						usuario.setPassword(rs.getString("password"));
 						
 					}catch (Exception e) {
-						String nombre = rs.getString("nombre");
+						String nombre = rs.getString("email");
 						usuariosmal.add(nombre);
 					}	
 				} // while	
@@ -139,5 +163,25 @@ public class UsuarioDAO {
 		
 	}
 	
+
+	
+	public boolean delete( long id ) throws SQLException {
+
+		boolean resul = false;
+		String sql = "DELETE FROM `usuario` WHERE id = ?;";
+		try (Connection conn = ConnectionManager.getConnection(); 
+			 PreparedStatement pst = conn.prepareStatement(sql);) {
+
+			pst.setLong(1, id);
+			
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				resul = true;
+			}
+
+		}
+		return resul;
+
+	}
 
 }

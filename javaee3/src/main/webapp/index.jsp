@@ -34,8 +34,8 @@
   
   
     <form  novalidate class="form-signin" method="post" action="login">
-    <p>${cookie.cIdioma.getValue()}"</p>
-    <p> ${cookie.cEmail.getValue()}</p>
+    <p>${cookie.cIdioma.getValue()}</p>
+    <p>${cookie.cEmail.getValue()}</p>
   	<p>${cookie.cVisita.getValue()}</p>
     	<!-- 
       <img class="mb-4" src="img/logo.jpg" alt="" width="100" height="100">

@@ -1,6 +1,6 @@
-<%@ include file="../../includes/header.jsp"  %>
-<%@ include file="../../includes/navbar.jsp"  %>
-<%@ include file="../../includes/mensajes.jsp"  %>
+<%@ include file="../../include/header.jsp"  %>
+<%@ include file="../../include/navbar.jsp"  %>
+<%@ include file="../../include/mensajes.jsp"  %>
 
 
     <main role="main" class="container">
@@ -30,4 +30,4 @@
 	</main>				
 
 
-<%@ include file="../../includes/footer.jsp"  %>  
+<%@ include file="../../include/footer.jsp"  %>  

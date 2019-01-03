@@ -43,7 +43,6 @@ public class UsuarioController extends HttpServlet {
 	
     private static UsuarioDAO dao = null;   
 	
-	
     @Override
     public void init(ServletConfig config) throws ServletException {    
     	super.init(config);
@@ -104,9 +103,17 @@ public class UsuarioController extends HttpServlet {
 	}
 
 
-	private void eliminar(HttpServletRequest request) {
-		// TODO Auto-generated method stub
+	private void eliminar(HttpServletRequest request) throws SQLException {
+	
+		int identificador = Integer.parseInt(id);		
 		
+		if ( dao.delete(identificador) ) {
+			alerta = "Registro eliminado con exito";
+		}else {
+			alerta = "Registro NO eliminado, sentimos las molestias";
+		}
+				
+		listar(request);		
 	}
 
 
@@ -149,14 +156,8 @@ public class UsuarioController extends HttpServlet {
 		Usuario u = new Usuario();
 		
 		int identificador = Integer.parseInt(id);
-		if ( identificador > 0 ) {
-			alerta = "Detalle de un Usuario " + identificador;
-			// TODO llamar dao getById
-			
-			u.setId((long)identificador);
-			u.setEmail("TODO llamar dao getById");
-			
-			
+		if ( identificador > 0 ) {			
+			u = dao.getById(identificador);
 		}else {
 			alerta = "Crear un nuevo Usuario";
 		}
