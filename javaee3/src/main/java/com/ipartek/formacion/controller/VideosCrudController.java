@@ -24,7 +24,7 @@ import com.ipartek.formacion.modelo.pojo.Video;
 /**
  * Servlet implementation class VideosCrudController
  */
-@WebServlet("/privado/cvideo")
+@WebServlet("/privado/video")
 public class VideosCrudController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	//LOG

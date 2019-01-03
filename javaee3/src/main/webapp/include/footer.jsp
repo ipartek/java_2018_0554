@@ -1,7 +1,5 @@
-
-    <footer class="container">
-      <p>DESARROLLO AVANZADO CON JAVA </p>
-    </footer>
+</div><!--class="container-fluid">  -->
+</div><!--class="row">  -->
   <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

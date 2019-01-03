@@ -52,11 +52,12 @@ public class SeguridadFilter implements Filter {
 		
 		if(uLogeado!=null) {
 			// continua la peticion del usuauir
+			session.setAttribute("navegador",req.getHeader("USER-AGENT"));
 			chain.doFilter(request, response);
 		}else {
 			//vuleta al login pork se ha saltado o se ha acabado la  sesion
 			//res.sendRedirect("../login");
-		
+			
 			session.setAttribute("error", "Inicia sesion para acceder a la zona privada");
 			res.sendRedirect(req.getContextPath()+"/index.jsp");
 			

@@ -1,6 +1,7 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -31,6 +32,7 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 	
+	
 	private static final long serialVersionUID = 1L;
 	private final static Logger LOG = Logger.getLogger(LoginController.class);
 	
@@ -39,7 +41,7 @@ public class LoginController extends HttpServlet {
 	private Validator validator;
 	
 	public static final String VIEW_LOGIN = "login.jsp";
-	//public static final String CONTROLLER_VIDEOS = "privado/videos";
+	private static final String PRIVADO_PRINCIPAL = "/privado/principal";
 	
 	private static final String ES_ES="es_ES";
 	private static final String EU_ES="eu_ES";
@@ -144,6 +146,7 @@ public class LoginController extends HttpServlet {
 					
 					session.setAttribute("usuario_logeado", usuario);
 					session.setAttribute("language", idioma);
+					session.setAttribute("ip", InetAddress.getLocalHost().getHostAddress());
 					redirect = true;					
 				}
 			}	
@@ -156,7 +159,7 @@ public class LoginController extends HttpServlet {
 			
 			if(redirect) {				
 				//response.sendRedirect(CONTROLLER_VIDEOS);
-				response.sendRedirect( request.getContextPath() + "/privado/usuarios");
+				response.sendRedirect( request.getContextPath() + PRIVADO_PRINCIPAL);
 			}else {
 				request.getRequestDispatcher(view).forward(request, response);
 			}
