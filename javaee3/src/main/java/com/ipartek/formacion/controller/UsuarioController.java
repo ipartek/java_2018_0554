@@ -18,6 +18,7 @@ import javax.validation.ValidatorFactory;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.dao.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojo.Alerta;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 
 /**
@@ -41,7 +42,7 @@ public class UsuarioController extends HttpServlet {
 	public static final String OP_GUARDAR = "3"; // id == -1 insert , id > 0 update
 	public static final String OP_ELIMINAR = "4";
 	
-	private String alerta = "";
+	private Alerta alerta;
 	
 	//parametros	
 	private String op;
@@ -72,7 +73,7 @@ public class UsuarioController extends HttpServlet {
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		vista = VIEW_INDEX;
-		alerta = "";
+		alerta = null;
 		try {
 			// recoger parametros
 			getParametros(request);
@@ -95,7 +96,7 @@ public class UsuarioController extends HttpServlet {
 			
 		}catch (Exception e) {
 			LOG.error(e);		
-			alerta = "Error inexperado, sentimos las molestias";
+			alerta = new Alerta( Alerta.TIPO_DANGER, "Error inexesperado sentimos las molestias.");
 			
 		}finally {
 			// mensaje para el usuario
@@ -119,9 +120,9 @@ public class UsuarioController extends HttpServlet {
 		int identificador = Integer.parseInt(id);		
 		
 		if ( dao.delete(identificador) ) {
-			alerta = "Registro eliminado con exito";
+			alerta = new Alerta( Alerta.TIPO_SUCCESS, "Registro eliminado con exito");
 		}else {
-			alerta = "Registro NO eliminado, sentimos las molestias";
+			alerta = new Alerta( Alerta.TIPO_WARNING, "Registro NO eliminado, sentimos las molestias");
 		}
 				
 		listar(request);		
@@ -143,7 +144,7 @@ public class UsuarioController extends HttpServlet {
 		
 		if ( violations.size() > 0 ) {              // validacion NO correcta
 		 
-		  alerta = "Los campos introduciodos no son correctos, por favor intentalo de nuevo";		 
+		  alerta = new Alerta( Alerta.TIPO_WARNING, "Los campos introduciodos no son correctos, por favor intentalo de nuevo");		 
 		  vista = VIEW_FORM; 
 		  // volver al formulario, cuidado que no se pierdan los valores en el form
 		  request.setAttribute("usuario", u);	
@@ -156,11 +157,11 @@ public class UsuarioController extends HttpServlet {
 				}else {				
 					dao.insert(u);
 				}
-				alerta = "Registro guardado con exito";
+				alerta = new Alerta( Alerta.TIPO_SUCCESS, "Registro guardado con exito");
 				listar(request);
 				
 			}catch ( SQLException e) {
-				alerta = "Lo sentimos pero el EMAIL ya existe";
+				alerta = new Alerta( Alerta.TIPO_WARNING, "Lo sentimos pero el EMAIL ya existe");
 				vista = VIEW_FORM;
 				request.setAttribute("usuario", u);
 			}	
@@ -177,10 +178,7 @@ public class UsuarioController extends HttpServlet {
 		int identificador = Integer.parseInt(id);
 		if ( identificador > 0 ) {			
 			u = dao.getById(identificador);
-		}else {
-			alerta = "Crear un nuevo Usuario";
 		}
-		
 		request.setAttribute("usuario", u);		
 	}
 
