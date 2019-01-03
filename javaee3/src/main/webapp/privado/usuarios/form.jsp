@@ -27,38 +27,41 @@
 			</div>
 			
 			<input type="hidden" name="op" value="3">
-			<button type="submit" class="btn btn-primary btn-block">GUARDAR</button>
+			
+			<div class="btn-group btn-group-lg" role="group">
+			
+			<button type="submit" class="btn btn-outline-primary">GUARDAR</button>
 		</form>
 		
-		<c:if test="${usuario.id > 0}">
-			<!-- Button trigger modal -->
-			<button type="button" class="btn btn-outline-danger btn-block mt-4" data-toggle="modal" data-target="#exampleModal">
-			  ELIMINAR
-			</button>
-
-			<!-- Modal -->
-			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLabel">Atención</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-			        ¿ Estás seguro de que deseas eliminar el registro ?
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-			        <a href="privado/usuarios?op=4&id=${usuario.id}" class="btn btn-danger">ELIMINAR</a>
-			      </div>
-			    </div>
-			  </div>
+				<c:if test="${usuario.id > 0}">
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">
+					  ELIMINAR
+					</button>
+		
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">Atención</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					        ¿ Estás seguro de que deseas eliminar el registro ?
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+					        <a href="privado/usuarios?op=4&id=${usuario.id}" class="btn btn-danger">ELIMINAR</a>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					
+				</c:if>
 			</div>
-			
-		</c:if>
-	
 	</main>
 
 <%@include file="../../includes/pie.jsp"%>

@@ -183,16 +183,21 @@ public class UsuariosController extends HttpServlet {
 					
 					if (usuario!=null) {
 						u.setId(identificador);
-						dao.update(u);
-						alerta="Update Usuario: " + usuario.toString() + " >> " + u.toString();
-						LOG.info(usuario.toString() + " cambiado a " + u.toString());
 						
-						HttpSession session = request.getSession();
-						Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario_logueado");
-						
-						if (usuario.getEmail().equals(usuarioLogueado.getEmail())) {
-							session.setAttribute("usuario_logueado", u);
-							alerta = "Has actualizado el usuario con el que estás logueado.";
+						if (usuario.getEmail().equals(u.getEmail()) && usuario.getPassword().equals(u.getPassword())) {
+							alerta = "No se ha realizado ningún cambio sobre el usuario: " + u.toString();
+						}else {
+							dao.update(u);
+							alerta="Update Usuario: " + usuario.toString() + " >> " + u.toString();
+							LOG.info(usuario.toString() + " cambiado a " + u.toString());
+							
+							HttpSession session = request.getSession();
+							Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario_logueado");
+							
+							if (usuario.getEmail().equals(usuarioLogueado.getEmail())) {
+								session.setAttribute("usuario_logueado", u);
+								alerta = "Has actualizado el usuario con el que estás logueado.";
+							}
 						}
 						
 					}else {
