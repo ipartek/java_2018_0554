@@ -17,6 +17,7 @@ import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.modelo.pojo.Mensaje;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 import com.ipartek.formacion.modelos.daos.UsuarioDAO;
 
@@ -31,6 +32,7 @@ public class LoginController extends HttpServlet {
 	private ValidatorFactory factory;
 	private Validator validator;
 	private UsuarioDAO dao;
+	private Mensaje mensaje = new Mensaje();
 	private final static Logger LOG = Logger.getLogger(LoginController.class);
 
 	@Override
@@ -96,7 +98,9 @@ public class LoginController extends HttpServlet {
 					session.setAttribute("usuario", usuarioLogin);
 
 				} else {
-					request.setAttribute("mensaje", "Usuario no valido");
+					mensaje.setTexto("Usuario no valido");
+					mensaje.setTipo("danger");
+					request.setAttribute("mensaje", mensaje);
 					LOG.trace("Credenciales incorrectas");
 				}
 			}

@@ -18,6 +18,7 @@ import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.modelo.pojo.Mensaje;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 import com.ipartek.formacion.modelos.daos.UsuarioDAO;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
@@ -41,7 +42,8 @@ public class UsuarioController extends HttpServlet {
 	private ValidatorFactory factory;
 	private Validator validator;
 	
-	private String alerta="";
+	private Mensaje mensaje;
+	//private String alerta="";
 	
 	//parametros a recibir
 	private String op;
@@ -83,7 +85,7 @@ public class UsuarioController extends HttpServlet {
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		 vista = VIEW_INDEX;
-		alerta="";
+		 mensaje=new Mensaje();
 		try{
 			
 			//recoger parametros
@@ -107,11 +109,12 @@ public class UsuarioController extends HttpServlet {
 			//enviar atributos 	
 		}catch (Exception e) {
 			LOG.error(e);
-			alerta="Error inexperados sentimos las molestias";
+			mensaje =new Mensaje(Mensaje.TIPO_DANGER,"Error Inexperado");
+			//alerta="Error inexperados sentimos las molestias";
 			
 		}finally {
 			//mensaje para el usuario
-			request.setAttribute("alerta", alerta);
+			request.setAttribute("mensaje", mensaje);
 			//ir a una vista
 			request.getRequestDispatcher(vista).forward(request, response);
 		}
@@ -131,9 +134,11 @@ public class UsuarioController extends HttpServlet {
 		try {
 			Long identificador = Long.parseLong(id);
 			if(dao.eliminar(identificador)) {
-				alerta = "El usuario se ha eliminado correctamente";
+				mensaje =new Mensaje(Mensaje.TIPO_SUCCESS,"Registro eliminado correctamente");
+				//alerta = "El usuario se ha eliminado correctamente";
 			}else {
-				alerta = "No se ha podido eliminar correctamente";
+				mensaje =new Mensaje(Mensaje.TIPO_WARNING,"El registro no se ha eliminado correctamente");
+				//alerta = "No se ha podido eliminar correctamente";
 			}
 			
 		}finally {
@@ -174,7 +179,8 @@ public class UsuarioController extends HttpServlet {
 				if(identificador>0) {
 					Usuario userViejo = dao.getById((long)identificador);
 					if(userViejo!=null) {
-						alerta="Update de un Usuario";
+						//alerta="Update de un Usuario";
+						mensaje =new Mensaje(Mensaje.TIPO_PRIMARY,"Update de un usuario");
 						u.setId((long)identificador);
 						dao.update(u);
 						HttpSession session = request.getSession();
@@ -186,17 +192,21 @@ public class UsuarioController extends HttpServlet {
 
 			
 				}else {
-					alerta="Se ha creado el nuevo usuario correctamente";
+					//alerta="Se ha creado el nuevo usuario correctamente";
+					mensaje =new Mensaje(Mensaje.TIPO_SUCCESS,"Se ha creado el nuevo usuario correctamente");
 					dao.insert(u);
 					vista= VIEW_INDEX;
 				}
 			}catch (MySQLIntegrityConstraintViolationException e) {
 				//Este try esta por si el email esta duplicado y lanza una exception se capture
-				alerta="Email duplicado";
+				//alerta="Email duplicado";
+				mensaje =new Mensaje(Mensaje.TIPO_WARNING,"Email duplicado");
+				
 				request.setAttribute("usuario", u);
 				vista= VIEW_FORM;
 			}catch (Exception e) {
-				alerta="Ha ocurrido un error inesperado";
+				mensaje =new Mensaje(Mensaje.TIPO_DANGER,"Error Inexperado");
+				//alerta="Ha ocurrido un error inesperado";
 				LOG.trace("Ha ocurrido un error inesperado: " + e);
 				request.setAttribute("usuario", u);
 				vista= VIEW_FORM;
@@ -214,7 +224,8 @@ public class UsuarioController extends HttpServlet {
 			//Mostrar datos de un usuario seleccionado
 			u= dao.getById((long)identificador);
 		}else {
-			alerta="Crear un nuevo Usuario";
+			//alerta="Crear un nuevo Usuario";
+			
 			LOG.trace("Se ha generado el usuario correctamente");
 		}
 		

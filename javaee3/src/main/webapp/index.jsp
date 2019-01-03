@@ -31,7 +31,7 @@
 			placeholder="Password" required>
 		<div class="checkbox mb-3"></div>
 		<c:if test="${mensaje != null}">
-			<div class="alert alert-danger ">${mensaje}</div>
+			<div class="alert alert-${mensaje.tipo} ">${mensaje.texto}</div>
 		</c:if>
 		<c:if test="${sessionScope.error != null}">
 			<div class="alert alert-danger alert-dismissible fade show ">
