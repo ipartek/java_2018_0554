@@ -25,11 +25,13 @@
 		
 	  <button type="submit" class="btn btn-primary btn-block">Guardar</button>
 	</form>
+	
 	<c:if test="${usuario.id > 0}">
+		<c:if test="${requestScope.usuario.email != sessionScope.usuario.email}">
 		<button type="button" class="btn btn-outline-danger btn-block mt-4" data-toggle="modal" data-target="#exampleModal">
  			Eliminar
 		</button>
-
+		</c:if>
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" role="document">

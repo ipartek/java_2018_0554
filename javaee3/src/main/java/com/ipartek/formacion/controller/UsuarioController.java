@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -171,8 +172,18 @@ public class UsuarioController extends HttpServlet {
 			
 			try {
 				if(identificador>0) {
-					alerta="Update de un Usuario";
-					dao.update(u);
+					Usuario userViejo = dao.getById((long)identificador);
+					if(userViejo!=null) {
+						alerta="Update de un Usuario";
+						u.setId((long)identificador);
+						dao.update(u);
+						HttpSession session = request.getSession();
+						Usuario userLogueado = (Usuario) session.getAttribute("usuario");
+						if(userViejo.getEmail().equals(userLogueado.getEmail())) {
+							session.setAttribute("usuario", u);
+						}
+					}
+
 			
 				}else {
 					alerta="Se ha creado el nuevo usuario correctamente";
@@ -185,8 +196,8 @@ public class UsuarioController extends HttpServlet {
 				request.setAttribute("usuario", u);
 				vista= VIEW_FORM;
 			}catch (Exception e) {
-				alerta="No sabes ni tu lo que ha pasado";
-				LOG.trace("Ha ocurrido un error inesperado");
+				alerta="Ha ocurrido un error inesperado";
+				LOG.trace("Ha ocurrido un error inesperado: " + e);
 				request.setAttribute("usuario", u);
 				vista= VIEW_FORM;
 			}
