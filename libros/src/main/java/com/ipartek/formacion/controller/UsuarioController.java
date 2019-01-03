@@ -18,8 +18,8 @@ import javax.validation.ValidatorFactory;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.dao.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojo.Alerta;
 import com.ipartek.formacion.modelo.pojo.Usuario;
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 /**
  * Servlet implementation class UsuarioController
@@ -39,7 +39,6 @@ public class UsuarioController extends HttpServlet {
 	public static final String OP_GUARDAR = "3"; // id == -1 insert , id > 0 update
 	public static final String OP_ELIMINAR = "4";
 
-	private String alerta = "";
 
 	// parametros
 	private String op;
@@ -74,7 +73,7 @@ public class UsuarioController extends HttpServlet {
 			throws ServletException, IOException {
 
 		vista = VIEW_INDEX;
-		alerta = "";
+		
 		try {
 			// recoger parametros
 			getParametros(request);
@@ -96,11 +95,13 @@ public class UsuarioController extends HttpServlet {
 
 		} catch (Exception e) {
 			LOG.error(e);
-			alerta = "Error inexperado, sentimos las molestias";
+			Alerta alerta = new Alerta();
+			alerta.setTexto("Error inesperado, sentimos las molestias");
+			alerta.setTipo("danger");
+			request.setAttribute("alerta", alerta);
 
 		} finally {
 			// mensaje para el usuario
-			request.setAttribute("alerta", alerta);
 			// ir a una vista
 			request.getRequestDispatcher(vista).forward(request, response);
 		}
@@ -114,20 +115,27 @@ public class UsuarioController extends HttpServlet {
 	}
 
 	private void eliminar(HttpServletRequest request) throws SQLException {
+		Alerta alerta = new Alerta();
 		int identificador = Integer.parseInt(id);
 
 		if (dao.delete(identificador)) {
-			alerta = "Registro eliminado";
-		} else {
-			alerta = "Registro no eliminado";
-		}
+			alerta.setTexto("Registro eliminado");
+			alerta.setTipo("warning");
+			request.setAttribute("alerta", alerta);
 
+		} else {
+			alerta.setTexto("Registro no eliminado");
+			alerta.setTipo("danger");
+			request.setAttribute("alerta", alerta);
+		}
+		
 		listar(request);
 
 	}
 
 	private void guardar(HttpServletRequest request) throws SQLException {
-
+		
+		Alerta alerta = new Alerta();
 		Usuario u = new Usuario();
 		int identificador = Integer.parseInt(id);
 
@@ -154,7 +162,9 @@ public class UsuarioController extends HttpServlet {
 
 				listar(request);
 			} catch (SQLException e) {
-				alerta = "El email ya existe en la bbdd";
+				alerta.setTexto("El email introducido ya existe");
+				alerta.setTipo("warning");
+				request.setAttribute("alerta", alerta);
 				vista = VIEW_FORM;
 				request.setAttribute("usuario", u);
 			}
@@ -163,8 +173,9 @@ public class UsuarioController extends HttpServlet {
 		else {
 
 			// alerta al usuario
-			alerta = "Los datos no corresponden al formato exigido";
-
+			alerta.setTexto("El formato del email o password no cumple los requisitos");
+			alerta.setTipo("danger");
+			request.setAttribute("alerta", alerta);
 			// volver al formulario, cuidado que no se pierdan los valores en el form
 			vista = VIEW_FORM;
 			request.setAttribute("usuario", u);
@@ -176,6 +187,7 @@ public class UsuarioController extends HttpServlet {
 	private void irFormulario(HttpServletRequest request) {
 
 		vista = VIEW_FORM;
+		Alerta alerta = new Alerta();
 		Usuario u = new Usuario();
 
 		int identificador = Integer.parseInt(id);
@@ -188,7 +200,9 @@ public class UsuarioController extends HttpServlet {
 //			u.setPassword(password);
 
 		} else {
-			alerta = "Crear un nuevo Usuario";
+			alerta.setTexto("Crear nuevo usuario");
+			alerta.setTipo("info");
+			request.setAttribute("alerta", alerta);
 		}
 
 		request.setAttribute("usuario", u);

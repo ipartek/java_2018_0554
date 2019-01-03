@@ -22,8 +22,8 @@ import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 
-import com.ipartek.formacion.modelo.ConnectionManager;
 import com.ipartek.formacion.modelo.dao.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojo.Alerta;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 
 /**
@@ -104,7 +104,7 @@ public class LoginController extends HttpServlet {
 			
 			Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario);
 			
-			
+			Alerta alerta = new Alerta();
 			if ( violations.size() > 0) {			// validacion NO PASA
 				
 				 String errores = "<ul>"; 
@@ -112,7 +112,9 @@ public class LoginController extends HttpServlet {
 					 errores += String.format("<li> %s : %s </li>" , violation.getPropertyPath(), violation.getMessage() );					
 				 }
 				 errores += "</ul>";				 
-				request.setAttribute("mensaje", errores);				
+					alerta.setTexto(errores);
+					alerta.setTipo("danger");	
+					request.setAttribute("alerta", alerta);
 				
 			}else {                                // validacion OK
 			
@@ -120,7 +122,10 @@ public class LoginController extends HttpServlet {
 				
 				if ( usuario == null ) {
 					
-					request.setAttribute("mensaje", messages.getString("login.incorrecto"));
+
+					alerta.setTexto(messages.getString("login.incorrecto"));
+					alerta.setTipo("danger");	
+					request.setAttribute("alerta", alerta);
 				}else {
 					
 					

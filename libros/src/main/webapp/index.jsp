@@ -59,9 +59,9 @@
 		</div>
 
 		<div class="form-group">
-			<c:if test="${not empty mensaje}">
-				<div class="alert alert-danger alert-dismissible fade show"
-					role="alert">${mensaje}</div>
+			<c:if test="${not empty alerta}">
+				<div class="alert alert-${alerta.tipo} alert-dismissible fade show"
+					role="alert">${alerta.texto}</div>
 			</c:if>
 		</div>
 
