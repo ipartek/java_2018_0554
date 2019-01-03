@@ -124,4 +124,44 @@ public class UsuarioDAO {
 		return resul;
 		
 	}
+
+	
+public boolean update( int id, String email, String pass) throws SQLException {
+		
+		boolean resul = false;
+		String sql = "UPDATE `usuario` SET `email`=? AND `password`=? WHERE `id`=?";
+		try ( Connection conn = ConnectionManager.getConnection();
+			  PreparedStatement pst = conn.prepareStatement(sql);				   
+			){
+			
+			pst.setString(1, email);
+			pst.setString(2, pass);
+			pst.setInt(3, id);	
+			int affectedRows = pst.executeUpdate();
+			if ( affectedRows == 1 ) {
+				resul = true;
+			}
+			
+		}
+		return resul;
+	}
+
+public boolean delete( long id) throws SQLException {
+		
+		boolean resul = false;
+		String sql = "DELETE from `usuario` where id=?";
+		try ( Connection conn = ConnectionManager.getConnection();
+			  PreparedStatement pst = conn.prepareStatement(sql);				   
+			){
+			
+			pst.setLong(1, id);		
+			int affectedRows = pst.executeUpdate();
+			if ( affectedRows == 1 ) {
+				resul = true;
+			}
+			
+		}
+		return resul;
+		
+	}
 }

@@ -74,7 +74,7 @@
 		<div class="form-group">
 			<label for="pass" class="sr-only">Contraseña</label> Password<input
 				type="password" name="pass" class="form-control"
-				placeholder="minimo 6 caracteres" required>
+				placeholder="minimo 6 caracteres" value="Pa$$w0rd" required>
 		</div>
 
 		<div class="form-group">

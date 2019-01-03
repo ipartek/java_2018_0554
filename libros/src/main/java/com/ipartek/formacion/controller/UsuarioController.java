@@ -115,8 +115,17 @@ public class UsuarioController extends HttpServlet {
 	}
 
 
-	private void eliminar(HttpServletRequest request) {
-		// TODO Auto-generated method stub
+	private void eliminar(HttpServletRequest request) throws SQLException {
+		int identificador = Integer.parseInt(id);
+		
+		
+		if(dao.delete(identificador)){
+			alerta="Registro eliminado";
+		}else {
+			alerta="Registro no eliminado";
+		}
+		
+		listar(request);
 		
 	}
 
@@ -136,8 +145,12 @@ public class UsuarioController extends HttpServlet {
 	    	// Si validacion correcta
 	    	// Comprobar si existe
 	    				if ( identificador > 0 ) {
-	    					alerta = "UPDATE Usuario ";
-	    					// TODO dao.update	
+	    					try {
+	    						dao.update(identificador, email, password);
+	    					}catch(MySQLIntegrityConstraintViolationException e) {
+	    						
+	    					}
+	    					
 	    					
 	    				}else {
 	    					alerta = "Crear un nuevo Usuario";
