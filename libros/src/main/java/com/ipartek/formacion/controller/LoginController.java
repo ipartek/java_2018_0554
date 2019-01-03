@@ -98,6 +98,7 @@ public class LoginController extends HttpServlet {
 			
 //			validar
 			Usuario usuario = new Usuario();
+			usuario.setId(1L);
 			usuario.setEmail(email);
 			usuario.setPassword(pass);
 			
