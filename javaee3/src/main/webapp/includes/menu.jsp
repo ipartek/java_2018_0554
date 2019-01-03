@@ -14,6 +14,9 @@
 			<li class="nav-item active"><a class="nav-link" href="privado/usuarios">Usuarios
 						<span class="sr-only">(current)</span>
 				</a></li>
+			<li class="nav-item active"><a class="nav-link" href="privado/videos">Videos
+						<span class="sr-only">(current)</span>
+				</a></li>
 			</ul>
 			<ul class="navbar-nav mr-auto border border-success">
 			<li class="nav-item">
