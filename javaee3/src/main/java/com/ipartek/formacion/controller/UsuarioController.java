@@ -125,10 +125,21 @@ public class UsuarioController extends HttpServlet {
 		request.setAttribute("usuarios", dao.getAll());
 	}
 
-	private void eliminar(HttpServletRequest request) {
+	private void eliminar(HttpServletRequest request) throws SQLException {
 			
-		dao.eliminar(id);
-		alerta = "El usuario se ha eliminado correctamente";
+		try {
+			Long identificador = Long.parseLong(id);
+			if(dao.eliminar(identificador)) {
+				alerta = "El usuario se ha eliminado correctamente";
+			}else {
+				alerta = "No se ha podido eliminar correctamente";
+			}
+			
+		}finally {
+			listar(request);
+		}
+		
+		
 	}
 
 	private void guardar(HttpServletRequest request)  {
@@ -175,6 +186,7 @@ public class UsuarioController extends HttpServlet {
 				vista= VIEW_FORM;
 			}catch (Exception e) {
 				alerta="No sabes ni tu lo que ha pasado";
+				LOG.trace("Ha ocurrido un error inesperado");
 				request.setAttribute("usuario", u);
 				vista= VIEW_FORM;
 			}
@@ -192,6 +204,7 @@ public class UsuarioController extends HttpServlet {
 			u= dao.getById((long)identificador);
 		}else {
 			alerta="Crear un nuevo Usuario";
+			LOG.trace("Se ha generado el usuario correctamente");
 		}
 		
 		request.setAttribute("usuario", u);

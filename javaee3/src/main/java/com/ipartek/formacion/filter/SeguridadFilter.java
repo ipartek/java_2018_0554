@@ -56,7 +56,7 @@ public class SeguridadFilter implements Filter {
 			// pass the request along the filter chain
 			chain.doFilter(request, response);
 		}else {
-			session.setAttribute("error", "Tienes que logearte para entrar a ver los videos");
+			session.setAttribute("error", "Tienes que logearte para entrar a la zona privada");
 			resp.sendRedirect(req.getContextPath() +"/login");
 		}
 		

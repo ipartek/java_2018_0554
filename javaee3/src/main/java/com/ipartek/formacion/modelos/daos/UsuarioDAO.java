@@ -126,9 +126,29 @@ public class UsuarioDAO {
 		
 		return resul;
 	}
-	public void eliminar(String id) {
-		// TODO Auto-generated method stub
+	/**
+	 * Metodo que elimina un usuario de la base de datos mediante el id
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
+	public boolean eliminar(Long id) throws SQLException {
+		boolean resul=false;
+		String sql="DELETE FROM usuario WHERE id=?";
 		
+		
+		try(
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement pst = conn.prepareStatement(sql);
+			){
+			pst.setLong(1, id);
+			int affectedRows = pst.executeUpdate();
+			
+			if(affectedRows == 1) {
+				resul = true;
+			}
+		}
+		return resul;
 	}
 
 	/**
