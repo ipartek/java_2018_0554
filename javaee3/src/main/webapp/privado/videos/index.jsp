@@ -4,10 +4,32 @@
 
 
     <main role="main">
+    <a href="privado/cvideo?op=2&id=-1" class="btn btn-outline-success mb-2">Insertar nuevo video</a>
+              
+       <table class="table container">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">id</th>
+		      <th scope="col">Titulo</th>
+		      <th scope="col">Codigo</th>		      
+		    </tr>
+		  </thead>
+		  <tbody>
+		 	 <c:forEach items="${videos}" var="video">
+			    <tr>
+			      <th scope="row">${video.id}</th>
+			      <td><a href="privado/cvideo?op=2&id=${video.id}">${video.titulo}</a></td>
+			      <td>${video.codigo}</td>		      
+			    </tr>    
+		    </c:forEach>
+		  </tbody>
+		</table>
+		
+		
 	<div class="jumbotron">
 	<div class="container">
 	 <h1 class="display-5">VIDEOS</h1>
-	 <a href="privado/cvideos?op=2&id=-1" class="btn btn-outline-success mb-2">Insertar nuevo video</a>
+	 
 	 <%-- 
      <form class="form-inline" method="post" action="privado/videos">
 	  <div class="form-group mx-sm-3 mb-2">
@@ -17,7 +39,10 @@
 	  <button type="submit" class="btn btn-primary mb-2"><fmt:message key="buscar.boton" /></button>
 	</form>
 	--%>
- 		
+ 	
+
+
+	
  		 <div class="row">
           <c:forEach items="${videos}" var="video">
            	<div class="col-md-4">
@@ -36,26 +61,7 @@
             
            </c:forEach>  
             
-          </div><!-- /row -->
-          
-       <table class="table">
-		  <thead class="thead-dark">
-		    <tr>
-		      <th scope="col">id</th>
-		      <th scope="col">Titulo</th>
-		      <th scope="col">Codigo</th>		      
-		    </tr>
-		  </thead>
-		  <tbody>
-		 	 <c:forEach items="${videos}" var="video">
-			    <tr>
-			      <th scope="row">${video.id}</th>
-			      <td><a href="privado/usuarios?op=2&id=${video.id}">${video.titulo}</a></td>
-			      <td>${video.codigo}</td>		      
-			    </tr>    
-		    </c:forEach>
-		  </tbody>
-		</table>
+          </div><!-- /row -->		
        
        
      	

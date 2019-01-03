@@ -21,7 +21,7 @@ public class Video {
 		super();
 		this.id=-1;
 		this.titulo = "Video Promocional";
-		this.codigo = "https://www.youtube.com/watch?v=yUPeEbgDNK0";
+		this.codigo = "yUPeEbgDNK0";
 	}
 	public Video(String nombre){
 		super();

@@ -3,6 +3,7 @@ package com.ipartek.formacion.modelo.daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ipartek.formacion.modelo.pojo.Video;
@@ -109,4 +110,65 @@ public Video getById( long id ) {
 		return listadoVideosBuscados;
 	}
 	
+	
+	
+	
+	public boolean insert(Video video) throws SQLException {
+
+		boolean resul = false;
+		String sql = "INSERT INTO `video` (`titulo`, `codigo`) VALUES (?,?);";
+		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+
+			pst.setString(1, video.getTitulo());
+			pst.setString(2, video.getCodigo());
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				resul = true;
+			}
+
+		}
+		return resul;
+	}
+	
+	public boolean update(Video video) throws SQLException {
+
+		boolean resul = false;
+		String sql = "UPDATE `video` SET titulo = ? , codigo = ? WHERE id = ?;";
+		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+			
+			pst.setString(1, video.getTitulo());
+			pst.setString(2, video.getCodigo());
+			pst.setLong(3, video.getId());
+			
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				resul = true;
+			}
+
+		}
+		return resul;
+
+	}
+	
+	
+	public boolean delete( long id ) throws SQLException {
+
+		boolean resul = false;
+		String sql = "DELETE FROM `video` WHERE id = ?;";
+		try (Connection conn = ConnectionManager.getConnection(); 
+			 PreparedStatement pst = conn.prepareStatement(sql);) {
+
+			pst.setLong(1, id);
+			
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				resul = true;
+			}
+
+		}
+		return resul;
+
+	}
+
 }
+

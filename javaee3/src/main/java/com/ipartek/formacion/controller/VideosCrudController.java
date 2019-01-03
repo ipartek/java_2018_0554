@@ -1,6 +1,8 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Set;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -8,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -16,6 +19,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.daos.VideoDAO;
 import com.ipartek.formacion.modelo.pojo.Alerta;
+import com.ipartek.formacion.modelo.pojo.Video;
 
 /**
  * Servlet implementation class VideosCrudController
@@ -24,7 +28,7 @@ import com.ipartek.formacion.modelo.pojo.Alerta;
 public class VideosCrudController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	//LOG
-	private final static Logger LOG = Logger.getLogger(UsuarioController.class);
+	private final static Logger LOG = Logger.getLogger(VideosCrudController.class);
 	
 	private ValidatorFactory factory;
 	private Validator validator;
@@ -45,8 +49,8 @@ public class VideosCrudController extends HttpServlet {
 		//parametros	
 		private String op;
 		private String id;
-		private String email;
-		private String password;
+		private String titulo;
+		private String codigo;
 		
 	    private static VideoDAO dao = null;
 	
@@ -85,10 +89,37 @@ public class VideosCrudController extends HttpServlet {
 		
 		vista = VIEW_INDEX;
 		alerta = null;
-		listar(request);
-		request.getRequestDispatcher(vista).forward(request, response);
-					
+		try {
+			// recoger parametros
+			getParametros(request);
+			// realizar operacion
+			switch (op) {
+				case OP_IR_FORMULARIO:
+					irFormulario(request);
+					break;
+				case OP_GUARDAR:
+					guardar(request);
+					break;	
+				case OP_ELIMINAR:
+					eliminar(request);
+					break;	
+				default:
+					listar(request);
+					break;
+			}
 			
+			
+		}catch (Exception e) {
+			LOG.error(e);	
+			alerta = new Alerta( Alerta.TIPO_DANGER, "Error inexesperado sentimos las molestias.");
+			//alerta = "Error inexperado, sentimos las molestias";
+			
+		}finally {
+			// mensaje para el usuario
+			request.setAttribute("alerta", alerta);
+			// ir a una vista
+			request.getRequestDispatcher(vista).forward(request, response);
+		}	
 	}
 
 
@@ -99,12 +130,78 @@ public class VideosCrudController extends HttpServlet {
 		
 	}
 
+	private void eliminar(HttpServletRequest request) throws SQLException {
+		
+		int identificador = Integer.parseInt(id);		
+		
+		if ( dao.delete(identificador) ) {
+			alerta = new Alerta( Alerta.TIPO_SUCCESS, "Registro eliminado con exito");
+			//alerta = "Registro eliminado con exito";
+		}else {
+			alerta = new Alerta( Alerta.TIPO_WARNING, "Registro NO eliminado, sentimos las molestias");
+			//alerta = "Registro NO eliminado, sentimos las molestias";
+		}
+				
+		listar(request);		
+	}
 
 
+	private void guardar(HttpServletRequest request) {
 	
+		//crear video mediante parametros del formulario
+				Video video = new Video();
+				int identificador = Integer.parseInt(id);	
+				video.setId( (long)identificador);
+				video.setTitulo(titulo);
+				video.setCodigo(codigo);
+				
+				//validar usuario		
+				Set<ConstraintViolation<Video>> violations = validator.validate(video);
+				
+				
+				if ( violations.size() > 0 ) {              // validacion NO correcta
+				 alerta = new Alerta( Alerta.TIPO_WARNING, "Los campos introduciodos no son correctos, por favor intentalo de nuevo");		 
+				 vista = VIEW_FORM; 
+				 request.setAttribute("video", video);	
+				  
+				}else {									  //  validacion correcta
+				
+					try {
+						if ( identificador > 0 ) {
+							dao.update(video);				
+						}else {				
+							dao.insert(video);
+						}
+						alerta = new Alerta( Alerta.TIPO_SUCCESS, "Registro guardado con exito");
+						listar(request);
+						
+					}catch ( SQLException e) {
+						alerta = new Alerta( Alerta.TIPO_WARNING, "Lo sentimos pero el codigo del video existe");
+						vista = VIEW_FORM;
+						request.setAttribute("video", video);
+					}	
+					
+					
+				}	
+				
+			}
 
 
-	
+	private void irFormulario(HttpServletRequest request) {
+		
+		vista = VIEW_FORM; 
+		Video video = new Video();
+		
+		int identificador = Integer.parseInt(id);
+		if ( identificador > 0 ) {			
+			video = dao.getById(identificador);
+		}else {
+			alerta = new Alerta( Alerta.TIPO_PRIMARY, "Insertar nuevo video");
+			//alerta = "Crear un nuevo Usuario";
+		}
+		
+		request.setAttribute("video", video);		
+	}
 
 	
 	private void getParametros(HttpServletRequest request) {
@@ -116,20 +213,13 @@ public class VideosCrudController extends HttpServlet {
 		
 		
 		id = request.getParameter("id");
-		email = request.getParameter("email");
-		password = request.getParameter("password");
+		titulo = request.getParameter("titulo");
+		codigo = request.getParameter("codigo");
 		
-		LOG.debug( String.format("parametros: op=%s id=%s email=%s password=%s", op, id, email, password ));
+		LOG.debug( String.format("parametros: op=%s id=%s email=%s password=%s", op, id, titulo, codigo ));
 		
 	}
 	
 	
 
 }
-
-	
-	
-	
-	
-	
-	

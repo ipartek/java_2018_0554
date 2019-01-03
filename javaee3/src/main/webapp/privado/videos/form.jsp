@@ -5,28 +5,28 @@
 <main role="main" class="container">
 	
 	
-		<form action="privado/usuarios" method="post">
+		<form action="privado/cvideo" method="post">
 		
 			<div class="form-group">
 			    <label for="id">Identificador</label>
-			    <input type="text" name="id" value="${usuario.id}" readonly class="form-control">			    
+			    <input type="text" name="id" value="${video.id}" readonly class="form-control">			    
 			</div>	
 			
 			<div class="form-group">
-			    <label for="email">Correo Electornico</label>
-			    <input type="email" name="email" value="${usuario.email}" class="form-control" placeholder="tucorreo@electronico.com">			    
+			    <label for="titulo">Título del video</label> 
+			    <input type="text" name="titulo" value="${video.titulo}" class="form-control" placeholder="Rallye Costa Esmeralda 2012">			    
 			</div>
 			
 			<div class="form-group">
-			    <label for="password">Contraseña</label>
-			    <input type="password" name="password" value="${usuario.password}" class="form-control" placeholder="minimo 5 maximo 50 caracteres">			    
+			    <label for="codigo">Codigo</label>
+			    <input type="text" name="codigo" value="${video.codigo}" class="form-control" placeholder="11 caracteres">			    
 			</div>
 			
 			<input type="hidden" name="op" value="3">
 			<button type="submit" class="btn btn-primary btn-block">GUARDAR</button>
 		</form>
 		
-		<c:if test="${usuario.id > 0}">
+		<c:if test="${video.id > 0}">
 				
 			<!-- Button trigger modal -->
 			<button type="button" class="btn btn-outline-danger btn-block mt-4" data-toggle="modal" data-target="#exampleModal">
@@ -48,7 +48,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-			        <a href="privado/usuarios?op=4&id=${usuario.id}" class="btn btn-danger">ELIMINAR</a>
+			        <a href="privado/cvideo?op=4&id=${video.id}" class="btn btn-danger">ELIMINAR</a>
 			      </div>
 			    </div>
 			  </div>
