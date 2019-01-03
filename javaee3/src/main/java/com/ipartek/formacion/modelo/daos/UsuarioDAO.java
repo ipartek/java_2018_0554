@@ -7,9 +7,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ipartek.formacion.modelo.pojo.Usuario;
+import com.ipartek.formacion.modelo.pojo.Video;
 
 public class UsuarioDAO {
 	
+	private static final String SQL_DELETE = "DELETE FROM `usuario` WHERE id = ?;";
+	private static final String SQL_UPDATE = "UPDATE `usuario` SET email = ? , password = ? WHERE id = ?;";
+	private static final String SQL_INSERT = "INSERT INTO `usuario` (`email`, `password`) VALUES (?,?);";
+	private static final String SQL_GET_ALL = "SELECT id, email, password FROM usuario ORDER BY id DESC LIMIT 500";
+	private static final String SQL_GET_BY_ID = "SELECT id, email, password FROM usuario WHERE id = ?;";
+	private static final String SQL_LOGIN = "SELECT id, email, password FROM usuario WHERE email = ? AND password = ?;";
 	private static UsuarioDAO INSTANCE = null;
 	
 	//CONSTRUCTOR PRIVADO SOLO ACCESO POR getInstance
@@ -36,7 +43,7 @@ public class UsuarioDAO {
 	public Usuario login (String email, String pass) {
 		
 		Usuario usuario = null;
-		String sql = "SELECT id, email, password FROM usuario WHERE email = ? AND password = ?;";
+		String sql = SQL_LOGIN;
 		
 		try ( Connection conn = ConnectionManager.getConnection();
 			  PreparedStatement pst = conn.prepareStatement(sql);
@@ -45,10 +52,7 @@ public class UsuarioDAO {
 					pst.setString(2, pass);			
 					try ( ResultSet rs = pst.executeQuery() ){											
 							while(rs.next()) { 						
-								usuario = new Usuario();
-								usuario.setId( rs.getLong("id"));
-								usuario.setEmail( rs.getString("email"));
-								usuario.setPassword(rs.getString("password"));								
+								usuario = rowMapper(rs);								
 							}						
 					}
 		}catch (Exception e) {
@@ -61,17 +65,14 @@ public class UsuarioDAO {
 	public Usuario getById(long id) {
 
 		Usuario usuario = null;
-		String sql = "SELECT id, email, password FROM usuario WHERE id = ?;";
+		String sql = SQL_GET_BY_ID;
 
 		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 			pst.setLong(1, id);
 			
 			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) { // hemos encontrado usuario
-					usuario = new Usuario();
-					usuario.setId(rs.getLong("id"));
-					usuario.setEmail(rs.getString("email"));
-					usuario.setPassword(rs.getString("password"));
+					usuario = rowMapper(rs);
 				}
 			}
 		} catch (Exception e) {
@@ -84,7 +85,8 @@ public class UsuarioDAO {
 	public ArrayList<Usuario> getAll() {
 		
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-		String sql = "SELECT id, email, password FROM usuario ORDER BY id DESC LIMIT 500";		
+		String sql = SQL_GET_ALL;	
+		Usuario usuario = null;
 		
 		try ( Connection conn = ConnectionManager.getConnection();
 			  PreparedStatement pst = conn.prepareStatement(sql);
@@ -93,11 +95,7 @@ public class UsuarioDAO {
 			
 			while(rs.next()) { 			
 				try {
-					Usuario usuario = new Usuario();
-					usuario.setId( rs.getLong("id"));
-					usuario.setEmail( rs.getString("email"));
-					usuario.setPassword(rs.getString("password"));
-					// a�adir en array
+					usuario = rowMapper(rs);
 					usuarios.add(usuario);
 				}catch (Exception e) {
 					System.out.println("usuario no valido");
@@ -110,35 +108,41 @@ public class UsuarioDAO {
 		}		
 		return usuarios;
 	}
+	
+	
+	
 
-	public ArrayList<String> getAllNoValid() {
-		
-		ArrayList<String> usuariosmal= new ArrayList<String>();
-		String sql = "SELECT id, email, password FROM usuario ORDER BY id DESC LIMIT 500";		
-		
-		try ( Connection conn = ConnectionManager.getConnection();
-				  PreparedStatement pst = conn.prepareStatement(sql);
-				  ResultSet rs = pst.executeQuery() 
-				){
-				
-				while(rs.next()) { 			
-					try {
-						Usuario usuario = new Usuario();
-						//usuario.setId( rs.getLong("id"));
-						usuario.setEmail( rs.getString("email"));
-						usuario.setPassword(rs.getString("password"));
-						
-					}catch (Exception e) {
-						String nombre = rs.getString("email");
-						usuariosmal.add(nombre);
-					}	
-				} // while	
-				
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-		return usuariosmal;
-	}
+//	public ArrayList<String> getAllNoValid() {
+//		
+//		ArrayList<String> usuariosmal= new ArrayList<String>();
+//		String sql = SQL_GET_ALL;		
+//		
+//		try ( Connection conn = ConnectionManager.getConnection();
+//				  PreparedStatement pst = conn.prepareStatement(sql);
+//				  ResultSet rs = pst.executeQuery() 
+//				){
+//				
+//				while(rs.next()) { 			
+//					try {
+//						Usuario usuario = new Usuario();
+//						//usuario.setId( rs.getLong("id"));
+//						usuario.setEmail( rs.getString("email"));
+//						usuario.setPassword(rs.getString("password"));
+//						
+//					}catch (Exception e) {
+//						String nombre = rs.getString("email");
+//						usuariosmal.add(nombre);
+//					}	
+//				} // while	
+//				
+//			}catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		return usuariosmal;
+//	}
+	
+	
+	
 	
 	
 	
@@ -146,7 +150,7 @@ public class UsuarioDAO {
 	public boolean insert(Usuario u) throws SQLException {
 
 		boolean resul = false;
-		String sql = "INSERT INTO `usuario` (`email`, `password`) VALUES (?,?);";
+		String sql = SQL_INSERT;
 		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 
 			pst.setString(1, u.getEmail());
@@ -164,7 +168,7 @@ public class UsuarioDAO {
 	public boolean update(Usuario u) throws SQLException {
 
 		boolean resul = false;
-		String sql = "UPDATE `usuario` SET email = ? , password = ? WHERE id = ?;";
+		String sql = SQL_UPDATE;
 		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 			
 			pst.setString(1, u.getEmail());
@@ -185,7 +189,7 @@ public class UsuarioDAO {
 	public boolean delete( long id ) throws SQLException {
 
 		boolean resul = false;
-		String sql = "DELETE FROM `usuario` WHERE id = ?;";
+		String sql = SQL_DELETE;
 		try (Connection conn = ConnectionManager.getConnection(); 
 			 PreparedStatement pst = conn.prepareStatement(sql);) {
 
@@ -199,6 +203,14 @@ public class UsuarioDAO {
 		}
 		return resul;
 
+	}
+	
+	private Usuario rowMapper(ResultSet rs) throws SQLException {
+		Usuario registro = new Usuario();
+		registro.setId( rs.getLong("id"));
+		registro.setEmail( rs.getString("email"));
+		registro.setPassword(rs.getString("password"));		
+		return registro;
 	}
 
 }

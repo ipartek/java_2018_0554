@@ -4,9 +4,10 @@
 
 
     <main role="main">
-    <a href="privado/cvideo?op=2&id=-1" class="btn btn-outline-success mb-2">Insertar nuevo video</a>
+    
               
        <table class="table container">
+       <a href="privado/cvideo?op=2&id=-1" class="btn btn-outline-success mb-2 mt-2">Insertar nuevo video</a>
 		  <thead class="thead-dark">
 		    <tr>
 		      <th scope="col">id</th>

@@ -20,8 +20,8 @@ public class Video {
 	public Video(){
 		super();
 		this.id=-1;
-		this.titulo = "Video Promocional";
-		this.codigo = "yUPeEbgDNK0";
+		this.titulo = "";
+		this.codigo = "";
 	}
 	public Video(String nombre){
 		super();

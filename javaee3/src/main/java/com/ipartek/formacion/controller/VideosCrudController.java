@@ -39,10 +39,10 @@ public class VideosCrudController extends HttpServlet {
 	private String vista;
  
 	//OPERACIONES
-		public static final String OP_LISTAR = "1";
-		public static final String OP_IR_FORMULARIO = "2";
-		public static final String OP_GUARDAR = "3"; // id == -1 insert , id > 0 update
-		public static final String OP_ELIMINAR = "4";
+	public static final String OP_LISTAR = "1";
+	public static final String OP_IR_FORMULARIO = "2";
+	public static final String OP_GUARDAR = "3"; // id == -1 insert , id > 0 update
+	public static final String OP_ELIMINAR = "4";
 		
 		private Alerta alerta;
 		
@@ -54,6 +54,9 @@ public class VideosCrudController extends HttpServlet {
 		
 	    private static VideoDAO dao = null;
 	
+	    
+	    
+	    
 	    @Override
 	    public void init(ServletConfig config) throws ServletException {    
 	    	super.init(config);
@@ -112,7 +115,6 @@ public class VideosCrudController extends HttpServlet {
 		}catch (Exception e) {
 			LOG.error(e);	
 			alerta = new Alerta( Alerta.TIPO_DANGER, "Error inexesperado sentimos las molestias.");
-			//alerta = "Error inexperado, sentimos las molestias";
 			
 		}finally {
 			// mensaje para el usuario
@@ -124,10 +126,7 @@ public class VideosCrudController extends HttpServlet {
 
 
 	private void listar(HttpServletRequest request) {
-
-		// alerta = "Lista de Usuarios";
-		request.setAttribute("videos", dao.getAll());		
-		
+		request.setAttribute("videos", dao.getAll());				
 	}
 
 	private void eliminar(HttpServletRequest request) throws SQLException {
@@ -136,10 +135,8 @@ public class VideosCrudController extends HttpServlet {
 		
 		if ( dao.delete(identificador) ) {
 			alerta = new Alerta( Alerta.TIPO_SUCCESS, "Registro eliminado con exito");
-			//alerta = "Registro eliminado con exito";
 		}else {
 			alerta = new Alerta( Alerta.TIPO_WARNING, "Registro NO eliminado, sentimos las molestias");
-			//alerta = "Registro NO eliminado, sentimos las molestias";
 		}
 				
 		listar(request);		
@@ -148,14 +145,14 @@ public class VideosCrudController extends HttpServlet {
 
 	private void guardar(HttpServletRequest request) {
 	
-		//crear video mediante parametros del formulario
+		//crear pojo mediante parametros del formulario
 				Video video = new Video();
 				int identificador = Integer.parseInt(id);	
 				video.setId( (long)identificador);
 				video.setTitulo(titulo);
 				video.setCodigo(codigo);
 				
-				//validar usuario		
+				//validar 		
 				Set<ConstraintViolation<Video>> violations = validator.validate(video);
 				
 				
@@ -197,7 +194,6 @@ public class VideosCrudController extends HttpServlet {
 			video = dao.getById(identificador);
 		}else {
 			alerta = new Alerta( Alerta.TIPO_PRIMARY, "Insertar nuevo video");
-			//alerta = "Crear un nuevo Usuario";
 		}
 		
 		request.setAttribute("video", video);		

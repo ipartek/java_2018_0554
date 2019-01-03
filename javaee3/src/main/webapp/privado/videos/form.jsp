@@ -14,7 +14,7 @@
 			
 			<div class="form-group">
 			    <label for="titulo">Título del video</label> 
-			    <input type="text" name="titulo" value="${video.titulo}" class="form-control" placeholder="Rallye Costa Esmeralda 2012">			    
+			    <input type="text" name="titulo" value="${video.titulo}" class="form-control" placeholder="minimo 5 maximo 150">			    
 			</div>
 			
 			<div class="form-group">
