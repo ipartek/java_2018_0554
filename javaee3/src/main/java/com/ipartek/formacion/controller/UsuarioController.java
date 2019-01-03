@@ -125,13 +125,13 @@ public class UsuarioController extends HttpServlet {
 			if(dao.delete(ident)) {
 				alerta.setMensaje("Eliminado con éxito");
 				alerta.setTipo(alerta.OK);
-				listar(request);
+				
 			}else {
 				alerta.setMensaje("No se pudo eliminar el usuario");
 				alerta.setTipo(alerta.KO);
-				vista=VIEW_FORM;
 				
 			}
+			listar(request);
 		}else {
 			alerta.setMensaje("No se encontro usuario");
 			alerta.setTipo(alerta.KO);
