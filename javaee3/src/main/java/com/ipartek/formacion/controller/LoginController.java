@@ -30,18 +30,21 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
+	private final static Logger LOG = Logger.getLogger(LoginController.class);
+	
 	private UsuarioDAO dao;
 	private ValidatorFactory factory;
 	private Validator validator;
 	
 	public static final String VIEW_LOGIN = "login.jsp";
-	public static final String CONTROLLER_VIDEOS = "privado/videos";
+	//public static final String CONTROLLER_VIDEOS = "privado/videos";
 	
 	private static final String ES_ES="es_ES";
 	private static final String EU_ES="eu_ES";
 	
-	private final static Logger LOG = Logger.getLogger(LoginController.class);
+	
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -53,12 +56,18 @@ public class LoginController extends HttpServlet {
     	validator  = factory.getValidator();
 	}
 	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
+			request.getRequestDispatcher(VIEW_LOGIN).forward(request, response);
+		}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String email = request.getParameter("mail");
 		String pass = request.getParameter("pass");
 		String idioma = request.getParameter("idioma");
+		String view = VIEW_LOGIN;
+		boolean redirect = false;
 		
 		if(idioma.equals("es")) {
 			idioma=ES_ES;
@@ -68,14 +77,14 @@ public class LoginController extends HttpServlet {
 			idioma=ES_ES;
 		}
 		
-		String view = VIEW_LOGIN;
-		boolean redirect = false;
+		
 		
 		
 		 
 		
 		try {
 			HttpSession session = request.getSession();
+			session.setMaxInactiveInterval(60*10*10*360);
 			
 			//IDIOMA
 			Locale locale = new Locale(EU_ES);
@@ -132,7 +141,7 @@ public class LoginController extends HttpServlet {
 					
 				
 					
-					session.setMaxInactiveInterval(60*10);
+					
 					session.setAttribute("usuario_logeado", usuario);
 					session.setAttribute("language", idioma);
 					redirect = true;					
@@ -157,12 +166,6 @@ public class LoginController extends HttpServlet {
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.getRequestDispatcher(VIEW_LOGIN).forward(request, response);
-	}
+	
 
 }

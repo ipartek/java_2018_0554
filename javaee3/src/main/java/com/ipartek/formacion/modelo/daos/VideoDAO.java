@@ -87,7 +87,7 @@ public Video getById( long id ) {
 		String texto = texto1;
 		ArrayList<Video> listadoVideosBuscados = new ArrayList<Video>();
 		Video video = null;
-		String sql = "SELECT id, titulo, idurl FROM video WHERE nombre LIKE ? ORDER BY nombre ASC LIMIT 500";
+		String sql = "SELECT id, titulo, idurl FROM video WHERE titulo LIKE ? ORDER BY titulo ASC LIMIT 500";
 		try (
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);
