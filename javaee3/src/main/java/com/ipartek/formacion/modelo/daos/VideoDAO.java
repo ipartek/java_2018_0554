@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.ipartek.formacion.modelo.pojos.Usuario;
+
 import com.ipartek.formacion.modelo.pojos.Video;
 
 public class VideoDAO {

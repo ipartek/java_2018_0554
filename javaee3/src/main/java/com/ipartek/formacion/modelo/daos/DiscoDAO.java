@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ipartek.formacion.modelo.pojos.Disco;
-import com.ipartek.formacion.modelo.pojos.Video;
+
 
 public class DiscoDAO {
 	

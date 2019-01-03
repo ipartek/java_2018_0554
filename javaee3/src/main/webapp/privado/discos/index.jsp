@@ -4,11 +4,12 @@
 
 
 
-
+<main role="main" class="container">
 
 
 <h1>Listado de Discos</h1>
 
+<a href="privado/discos?op=2&id=-1" class="btn btn-outline-success mb-2">Añadir Nuevo Disco</a>
 
 <table class="table">
 		<thead>
@@ -28,15 +29,17 @@
 			
 			<tr>
 			
-				<td>${dis.id}</td>
+				<th>${dis.id}</th>
 				<td><a href="privado/discos?op=2&id=${dis.id}">${dis.titulo}</td>
 				<td>${dis.artista}</td>
-				<td><img width=150 height=150 src="${dis.portada}" alt="imagen"></td>
+				<td><img class="rounded mx-auto d-block" src=" ${dis.portada}" alt="${dis.titulo}"></td>
 				<td>${dis.year}</td>
 			</tr>
 			
 			</c:forEach>
 		</tbody>
 	</table>
+	
+</main>	
 	
 	<%@ include file="../../includes/footer.jsp"%>

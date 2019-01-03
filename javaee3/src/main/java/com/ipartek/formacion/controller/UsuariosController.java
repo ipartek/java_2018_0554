@@ -46,9 +46,7 @@ public class UsuariosController extends HttpServlet {
 	private String email;
 	private String password;
 	
-	//parametros alerta
-	private String texto;
-	private String tipo;
+	
 
 	private static UsuarioDAO dao = null;
 	

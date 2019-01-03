@@ -17,10 +17,8 @@ import javax.validation.ValidatorFactory;
 
 import org.jboss.logging.Logger;
 
-import com.ipartek.formacion.modelo.daos.UsuarioDAO;
 import com.ipartek.formacion.modelo.daos.VideoDAO;
 import com.ipartek.formacion.modelo.pojos.Alerta;
-import com.ipartek.formacion.modelo.pojos.Usuario;
 import com.ipartek.formacion.modelo.pojos.Video;
 
 /**
@@ -48,10 +46,7 @@ public class VideoController extends HttpServlet {
 	private String nombre;
 	private String codigo;
 	
-	//parametros alerta
-	private String texto;
-	private String tipo;
-
+	
 	private static VideoDAO dao = null;
 	
 	private ValidatorFactory factory;

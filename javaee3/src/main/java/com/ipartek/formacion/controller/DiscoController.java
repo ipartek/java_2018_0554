@@ -2,7 +2,6 @@ package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Set;
 
 import javax.servlet.ServletConfig;
@@ -19,10 +18,8 @@ import javax.validation.ValidatorFactory;
 import org.jboss.logging.Logger;
 
 import com.ipartek.formacion.modelo.daos.DiscoDAO;
-import com.ipartek.formacion.modelo.daos.VideoDAO;
 import com.ipartek.formacion.modelo.pojos.Alerta;
 import com.ipartek.formacion.modelo.pojos.Disco;
-import com.ipartek.formacion.modelo.pojos.Video;
 
 /**
  * Servlet implementation class DiscoController
@@ -51,9 +48,7 @@ public class DiscoController extends HttpServlet {
 	private String portada;
 	private String year;
 	
-	//parametros alerta
-	private String texto;
-	private String tipo;
+	
 
 	private static DiscoDAO dao = null;
 	
@@ -185,7 +180,7 @@ public class DiscoController extends HttpServlet {
 				}else {
 					dao.insert(d);
 				}
-				alerta = new Alerta(Alerta.TIPO_SUCCESS, "Registro guardado con exito");  //verde
+				alerta = new Alerta(Alerta.TIPO_SUCCESS, "Disco guardado con exito");  //verde
 				listar(request);
 				
 			}catch ( SQLException e) {
