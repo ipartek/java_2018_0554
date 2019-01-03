@@ -6,7 +6,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class Video {
 
-	@NotEmpty
 	private long id;
 	
 	@NotEmpty
@@ -30,8 +29,9 @@ public class Video {
 		setNombre( nombre);
 	}
 	
-	public Video(String nombre, String codigo) {
+	public Video(Long id,String nombre, String codigo) {
 		this();
+		setId(id);
 		setNombre( nombre);
 		setCodigo( codigo);
 	}

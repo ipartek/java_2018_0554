@@ -4,7 +4,7 @@
 
 
 <main role="main" class="container"> 
-<form action="privado/usuarios" method="post">
+<form action="privado/videos" method="post">
 	<div class="form-group">
 		<label for="exampleInputEmail1">Id</label> <input
 			type="number" class="form-control" id="exampleInputEmail1"
@@ -12,12 +12,12 @@
 	</div>
 	<div class="form-group">
 		<label for="exampleInputEmail1">Nombre</label> <input
-			type="email" class="form-control" id="exampleInputEmail1"
+			type="text" class="form-control" id="exampleInputEmail1"
 			name="nombre" value="${video.nombre }"  placeholder="Titulo">
 	</div>
 	<div class="form-group">
 		<label for="exampleInputPassword1">Codigo</label> <input
-			type="password" class="form-control" id="exampleInputPassword1"
+			type="text0" maxlength="11" class="form-control" id="exampleInputPassword1"
 			name="codigo" value="${video.codigo }" placeholder="11 caracteres">
 	</div>
 	<input type="hidden" name="op" value="3">

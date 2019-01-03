@@ -36,10 +36,10 @@
 	  </c:if>   
       
       <label for="email" class="sr-only">Correo Electronico:</label>
-      <input type="email" name="email" class="form-control" value="auraga@ipartek.com" placeholder="tu@email.com" required autofocus>
+      <input type="email" name="email" class="form-control" value="uno@uno.com" placeholder="tu@email.com" required autofocus>
       
       <label for="pass" class="sr-only">Contraseña</label>
-      <input type="password" name="pass" class="form-control" value="12345678" placeholder="minimo 6 caracteres" required>
+      <input type="password" name="pass" class="form-control" value="123456" placeholder="minimo 6 caracteres" required>
       
       <!-- leer cookie para Idioma -->	  
       <c:set var="cIdioma" value="${not empty cookie.cIdioma ? cookie.cIdioma.value : 'es_ES'}" scope="session" />

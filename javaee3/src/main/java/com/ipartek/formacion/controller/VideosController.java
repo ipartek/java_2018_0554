@@ -31,7 +31,7 @@ public class VideosController extends HttpServlet {
 	private final static Logger LOG = Logger.getLogger(UsuarioController.class);
 
 	private static final String VIEW_INDEX = "videos/index.jsp";
-	private static final String VIEW_FORM = "videoss/form.jsp";
+	private static final String VIEW_FORM = "videos/form.jsp";
 	private String vista;
 
 	private static final String OP_LISTAR = "1";
@@ -39,7 +39,7 @@ public class VideosController extends HttpServlet {
 	private static final String OP_GUARDAR = "3";
 	private static final String OP_ELIMINAR = "4";
 
-	Alerta alerta;
+	Alerta alerta=null;
 
 	private String id;
 	private String op;
@@ -100,7 +100,7 @@ public class VideosController extends HttpServlet {
 		vista=VIEW_INDEX;
 		int ident=Integer.parseInt(id);
 		
-		Video v =new Video(nombre,codigo);
+		Video v =new Video((long)ident,nombre,codigo);
 		
 		Set<ConstraintViolation<Video>> violations = validator.validate(v);
 		

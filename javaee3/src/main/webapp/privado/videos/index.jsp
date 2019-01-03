@@ -11,7 +11,7 @@
 		<tr>
 			<th scope="col">#</th>
 			<th scope="col">Nombre</th>
-			<th scope="col">Codigo</th>
+			<th scope="col">Prev.</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -20,14 +20,14 @@
 			<tr>
 				<th scope="row">${v.id }</th>
 				<td><a href="privado/videos?op=2&id=${v.id }">${v.nombre }</a></td>
-				<td>${v.codigo }</td>
+				<td><iframe width="280" height="160" src="https://www.youtube.com/embed/${v.codigo }" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
 			</tr>
 		</c:forEach>
 
 
 	</tbody>
 </table>
-<p><a href="privado/usuarios?op=2&id=-1" class="btn btn-primary"> Nuevo video </a></p>
+<p><a href="privado/videos?op=2&id=-1" class="btn btn-primary"> Nuevo video </a></p>
 
 </main>
 
