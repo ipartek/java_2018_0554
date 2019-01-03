@@ -36,7 +36,7 @@ public class UsuarioDAO {
 	public Usuario login (String email, String pass) {
 		
 		Usuario usuario = null;
-		String sql = "SELECT id, email, password FROM usuario WHERE email = ? AND password = ?;";
+		String sql = "SELECT id, email, password FROM usuario WHERE email = ? AND password = ? ;";
 		
 		try ( Connection conn = ConnectionManager.getConnection();
 			  PreparedStatement pst = conn.prepareStatement(sql);
@@ -59,7 +59,7 @@ public class UsuarioDAO {
 
 	public ArrayList<Usuario> getAll() {
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-		String sql = "SELECT id, email, password FROM usuario ORDER BY id DESC LIMIT 500";
+		String sql = "SELECT id, email, password FROM usuario ORDER BY id DESC LIMIT 500 ;";
 		try(Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery()
@@ -89,7 +89,7 @@ public class UsuarioDAO {
 	
 	public boolean insert(Usuario u) throws SQLException {
 		boolean result = false;
-		String sql = "INSERT INTO `usuario` (`email`, `password`) VALUES (?, ?)";
+		String sql = "INSERT INTO `usuario` (`email`, `password`) VALUES (?, ?) ;";
 		try( Connection conn = ConnectionManager.getConnection();
 			 PreparedStatement pst = conn.prepareStatement(sql);
 			){
@@ -106,7 +106,7 @@ public class UsuarioDAO {
 	public Usuario getById(Long identificador) {
 		Usuario usuario = null;
 		
-		String sql = "SELECT id, email, `password` FROM usuario WHERE id=?";
+		String sql = "SELECT id, email, `password` FROM usuario WHERE id=? ;";
 		try( Connection conn = ConnectionManager.getConnection();
 			 PreparedStatement pst = conn.prepareStatement(sql);
 			){
@@ -145,8 +145,19 @@ public class UsuarioDAO {
 	
 
 
-	public void delete(Long identificador) {
-		// TODO Auto-generated method stub
+	public boolean delete(Long identificador) throws SQLException {
+		boolean result = false;
+		String sql = "DELETE FROM usuario WHERE id = ? ;";
+		try( Connection conn = ConnectionManager.getConnection();
+			 PreparedStatement pst = conn.prepareStatement(sql);
+			){
+			pst.setLong(1, identificador);
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				result = true;
+			}
+		}
+		return result;
 		
 	}
 

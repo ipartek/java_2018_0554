@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -108,7 +109,6 @@ public class UsuariosController extends HttpServlet {
 		}catch (Exception e) {
 			LOG.error(e);
 			alerta = "Error inesperado, sentimos las molestias";
-			
 		}finally {
 			//Mensaje para el usuario
 			request.setAttribute("alerta", alerta);
@@ -129,9 +129,25 @@ public class UsuariosController extends HttpServlet {
 	
 	private void eliminar(HttpServletRequest request) {
 		Long identificador = Long.parseLong(id);
-		dao.delete(identificador);
 		
-		alerta="El usuario ha sido eliminado correctamente";
+		Usuario u = dao.getById(identificador);
+		HttpSession session = request.getSession();
+		
+		Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario_logueado");
+		
+		if (usuarioLogueado.getEmail().equals(u.getEmail())) {
+			alerta="No puedes eliminar el usuario con el que estás logueado";
+		}else {
+			try {
+				dao.delete(identificador);
+				alerta="El usuario ha sido eliminado correctamente";
+			} catch (SQLException e) {
+				alerta = "No ha sido posible eliminar el usuario";
+				LOG.error(e.getMessage() + "[ID user: " + identificador + "]");
+			}
+		}
+		
+		listar(request);
 	}
 	
 	
@@ -163,14 +179,25 @@ public class UsuariosController extends HttpServlet {
 			try {
 				//Si validación correcta
 				if (identificador > 0) {
-					alerta="Update Usuario " + identificador;
 					Usuario usuario = dao.getById(identificador);
 					
 					if (usuario!=null) {
-						dao.update(usuario);
+						u.setId(identificador);
+						dao.update(u);
+						alerta="Update Usuario: " + usuario.toString() + " >> " + u.toString();
+						LOG.info(usuario.toString() + " cambiado a " + u.toString());
+						
+						HttpSession session = request.getSession();
+						Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario_logueado");
+						
+						if (usuario.getEmail().equals(usuarioLogueado.getEmail())) {
+							session.setAttribute("usuario_logueado", u);
+							alerta = "Has actualizado el usuario con el que estás logueado.";
+						}
+						
 					}else {
 						vista = VIEW_FORM;
-						LOG.error("El usuario no existe en la DB");
+						LOG.error("El usuario con ID: " + identificador + " no existe en la DB");
 					}
 					
 				}else {
@@ -189,8 +216,12 @@ public class UsuariosController extends HttpServlet {
 				}
 			}catch (MySQLIntegrityConstraintViolationException e) {
 				alerta = "El email introducido ya está registrado, por favor, introduzca uno nuevo.";
+				//u.setId(-1L);
+				request.setAttribute("usuario", u);
+				vista=VIEW_FORM;
 			}catch (Exception e) {
-				alerta = e.getMessage();
+				alerta = "Lo sentimos, error inesperado";
+				LOG.error(e.getMessage());
 			}
 		}
 		
