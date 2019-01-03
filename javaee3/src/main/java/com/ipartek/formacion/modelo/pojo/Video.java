@@ -1,58 +1,66 @@
 package com.ipartek.formacion.modelo.pojo;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Video {
 	//ATRIBUTOS
 	private long id;
-	private String nombre;
-	private String url;
+	
+	@NotEmpty
+	@Size(min = 5, max=150)
+	private String titulo;
+	
+	@NotEmpty
+	@Size(min = 11, max=11)
+	private String codigo;
 	
 	//CONSTRUCTORES
 	public Video(){
 		super();
 		this.id=-1;
-		this.nombre = "Video Promocional";
-		this.url = "https://www.youtube.com/watch?v=yUPeEbgDNK0";
+		this.titulo = "Video Promocional";
+		this.codigo = "https://www.youtube.com/watch?v=yUPeEbgDNK0";
 	}
 	public Video(String nombre){
 		super();
-		this.nombre=nombre;
+		this.titulo=nombre;
 		
 		
 	}
 	
 	public Video(Long id,String nombre, String url) {
 		super();
-		setNombre(nombre);
-		setUrl(url);
+		setTitulo(nombre);
+		setCodigo(url);
 	}
 	
 	
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 	
-	
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
-
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
-
+	public String getTitulo() {
+		return titulo;
+	}
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
 	@Override
 	public String toString() {
-		return "Video [id=" + id + ", nombre=" + nombre + ", url=" + url + "]";
+		return "Video [id=" + id + ", nombre=" + titulo + ", codigo=" + codigo + "]";
 	}
 	
+	
+
 }

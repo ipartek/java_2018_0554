@@ -51,7 +51,7 @@ public class VideosController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-String texto = request.getParameter("textobuscar");
+		String texto = request.getParameter("textobuscar");
 		
 		try {
 			//VideoDao dao = new VideoDao();

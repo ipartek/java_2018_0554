@@ -26,7 +26,7 @@ public class VideoDAO {
 public Video getById( long id ) {
 		
 		Video registro = null;
-		String sql = "SELECT id, titulo, idurl FROM video WHERE id= ?;";		
+		String sql = "SELECT id, titulo, codigo FROM video WHERE id= ?;";		
 		try ( Connection conn = ConnectionManager.getConnection();
 			  PreparedStatement pst = conn.prepareStatement(sql);
 			){
@@ -38,8 +38,8 @@ public Video getById( long id ) {
 				while(rs.next()) { 		
 					registro = new Video();
 					registro.setId( rs.getLong("id"));
-					registro.setNombre( rs.getString("titulo"));
-					registro.setUrl(rs.getString("idurl"));		
+					registro.setTitulo( rs.getString("titulo"));
+					registro.setCodigo(rs.getString("codigo"));		
 				}
 			}
 			
@@ -59,7 +59,7 @@ public Video getById( long id ) {
 	public ArrayList<Video> getAll() {
 		ArrayList<Video> listadoVideos = new ArrayList<Video>();
 		Video video = null;
-		String sql = "SELECT id, titulo, idurl FROM video ORDER BY id DESC LIMIT 500";
+		String sql = "SELECT id, titulo, codigo FROM video ORDER BY id DESC LIMIT 500";
 		try (
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);
@@ -68,8 +68,8 @@ public Video getById( long id ) {
 					while(rs.next()) { // hemos encontrado usuario								
 						video = new Video();
 						video.setId( rs.getLong("id"));
-						video.setNombre( rs.getString("titulo"));
-						video.setUrl(rs.getString("idurl"));	
+						video.setTitulo( rs.getString("titulo"));
+						video.setCodigo(rs.getString("codigo"));	
 						listadoVideos.add(video);
 					}				
 			}	
@@ -87,7 +87,7 @@ public Video getById( long id ) {
 		String texto = texto1;
 		ArrayList<Video> listadoVideosBuscados = new ArrayList<Video>();
 		Video video = null;
-		String sql = "SELECT id, titulo, idurl FROM video WHERE titulo LIKE ? ORDER BY titulo ASC LIMIT 500";
+		String sql = "SELECT id, titulo, codigo FROM video WHERE titulo LIKE ? ORDER BY titulo ASC LIMIT 500";
 		try (
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);
@@ -97,8 +97,8 @@ public Video getById( long id ) {
 					while(rs.next()) { 							
 						video = new Video();
 						video.setId( Long.parseLong(rs.getString("id")));
-						video.setNombre( rs.getString("titulo"));
-						video.setUrl(rs.getString("idurl"));	
+						video.setTitulo( rs.getString("titulo"));
+						video.setCodigo(rs.getString("codigo"));	
 						listadoVideosBuscados.add(video);
 					}						
 			}

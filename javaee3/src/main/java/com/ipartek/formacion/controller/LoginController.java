@@ -84,7 +84,7 @@ public class LoginController extends HttpServlet {
 		
 		try {
 			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(60*10*10*360);
+			session.setMaxInactiveInterval(60 * 60 * 24 * 365 * 10);
 			
 			//IDIOMA
 			Locale locale = new Locale(EU_ES);

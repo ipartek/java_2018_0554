@@ -17,7 +17,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Principal ${usuario_logeado.email.split("@")[0].toUpperCase()}</title>
+    <title> ${usuario_logeado.email.split("@")[0].toUpperCase()}</title>
    
     <base href="${pageContext.request.contextPath}/">
 
