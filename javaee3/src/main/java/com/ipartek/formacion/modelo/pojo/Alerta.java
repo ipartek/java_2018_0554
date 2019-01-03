@@ -18,7 +18,7 @@ public class Alerta {
 	
 	
 	
-	public Alerta(String texto, String tipo) {
+	public Alerta( String tipo, String texto) {
 		this();
 		setTexto(texto);
 		setTipo(tipo);
