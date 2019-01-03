@@ -123,5 +123,25 @@ public class UsuarioDAO {
 		return resul;
 
 	}
+	
+	
+	public boolean delete( long id ) throws SQLException {
+
+		boolean resul = false;
+		String sql = "DELETE FROM `usuario` WHERE id = ?;";
+		try (Connection conn = ConnectionManager.getConnection(); 
+			 PreparedStatement pst = conn.prepareStatement(sql);) {
+
+			pst.setLong(1, id);
+			
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				resul = true;
+			}
+
+		}
+		return resul;
+
+	}
 
 }

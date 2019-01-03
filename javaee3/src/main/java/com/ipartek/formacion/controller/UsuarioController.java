@@ -104,9 +104,17 @@ public class UsuarioController extends HttpServlet {
 	}
 
 
-	private void eliminar(HttpServletRequest request) {
-		// TODO Auto-generated method stub
+	private void eliminar(HttpServletRequest request) throws SQLException {
+	
+		int identificador = Integer.parseInt(id);		
 		
+		if ( dao.delete(identificador) ) {
+			alerta = "Registro eliminado con exito";
+		}else {
+			alerta = "Registro NO eliminado, sentimos las molestias";
+		}
+				
+		listar(request);		
 	}
 
 
