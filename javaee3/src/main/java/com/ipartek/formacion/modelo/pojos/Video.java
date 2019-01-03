@@ -6,7 +6,7 @@ public class Video {
 	
 	private long id;
 	private String nombre;
-	private String url;
+	private String codigo;
 
 	// Constructores
 	
@@ -14,16 +14,16 @@ public class Video {
 		super();
 		this.id = -1;
 		this.nombre = "Cannibal Corpse - Hammer Smashed Face (HD)";
-		this.url = "https://www.youtube.com/watch?v=BT0jvduweTQ";
+		this.codigo = "https://www.youtube.com/watch?v=BT0jvduweTQ";
 	}
 
 	
 
-	public Video(int id, String nombre, String url) {
+	public Video(int id, String nombre, String codigo) {
 		this();
 		setId(id);
 		setNombre(nombre);
-		setUrl(url);
+		setCodigo(codigo);
 	}
 	
 	
@@ -46,19 +46,19 @@ public class Video {
 		this.nombre = nombre;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getCodigo() {
+		return codigo;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 	
 	//Otros metodos 
 	
 	@Override
 	public String toString() {
-		return "Video [id=" + id + ", nombre=" + nombre + ", url=" + url + "]";
+		return "Video [id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + "]";
 	}
 
 

@@ -1,5 +1,6 @@
 
 
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,36 +9,30 @@
     <meta name="description" content="">
     <meta name="author" content="">
    
-    <title>Signin Template for Bootstrap</title>
+    <title>Videos</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="https://getbootstrap.com/docs/4.1/examples/sign-in/signin.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
   </head>
 
   <body class="text-center"> 	
   
   
   
-  <div class="row">
-	  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-		  ${mensaje}
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		    <span aria-hidden="true">&times;</span>
-		  </button>
-		</div>
-  </div>	
+ 
   
-  
-  <div class="row">
-  
-  
-  ${errores}
-  
-    <form novalidate action="login" method="post" class="form-signin">
-      
+
+
+    <form novalidate action="login" method="post" class="form-signin">    
+    
+     <c:if test="${not empty mensaje}">	  
+		 <div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  ${mensaje}			 
+		 </div>	 	
+	  </c:if>   
       
       <label for="email" class="sr-only">Correo Electronico:</label>
       <input type="email" name="email" class="form-control" value="maria@gmail.com" placeholder="tu@email.com" required autofocus>
@@ -48,12 +43,10 @@
       <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
       
     </form>
-   </div> 
+
     
     
     
     
   </body>
 </html>
-
-© 2018 GitHub, Inc.

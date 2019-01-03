@@ -1,13 +1,20 @@
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ include file="../includes/header.jsp"  %>
+<%@ include file="../includes/navbar.jsp"  %>
+<%@ include file="../includes/mensajes.jsp"  %>
 
-${usuario}
-<h1>Listado videos</h1>
+  
 
+    <main role="main" class="container">
+      <div class="jumbotron">
+       
+			<ol>
+				<c:forEach items="${videos}" var="v">
+					<li>${v.id} + ${v.nombre}</li>
+				</c:forEach>
+			</ol>
+       
+      </div>
+    </main>
 
-<ol>
-	<c:forEach items="${videos}" var="video">
-	<li>${video.nombre}</li>
-	</c:forEach>
-	
-</ol>
-
+  
+<%@ include file="../includes/footer.jsp"  %>  
