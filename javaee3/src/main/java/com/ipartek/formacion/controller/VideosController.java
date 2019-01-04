@@ -172,8 +172,9 @@ public class VideosController extends HttpServlet {
 				}else {
 					//TODO CORREGIR porque pone el id -1
 					dao.insert(v);
+					mensaje =new Mensaje(Mensaje.TIPO_SUCCESS,"Se ha creado el nuevo video correctamente");
 				}
-				mensaje =new Mensaje(Mensaje.TIPO_SUCCESS,"Se ha creado el nuevo video correctamente");
+				
 				vista= VIEW_INDEX;
 			}catch (MySQLIntegrityConstraintViolationException e) {
 				//Esto es para que el codigo del video no este duplicado y lanza una excepcion

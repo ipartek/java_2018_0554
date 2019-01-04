@@ -29,18 +29,24 @@
 			<div class="form-group">
 				<label for="id_usuario">Selecciona el dueño del video</label>
 				<select name="id_usuario" class="form-control">
-					<c:forEach items="${usuarios}" var="u">
-					
-						<%-- <c:choose>
-							
-							        <c:when test = "${u.email = video.usuario.email}">
-           								 <option value="${u.id}" selected>${u.email}</option>
-         							</c:when>
-        							<c:otherwise> --%>
-            							<option value="${u.id}">${u.email}</option>
-         							<%-- </c:otherwise>
-         				</c:choose> --%>
-					</c:forEach>
+				<c:choose>
+  					<c:when test="${video.id != -1}">
+						<c:forEach items="${usuarios}" var="u">
+	            			<option value="${u.id}" ${(u.id ==video.usuario.id)?"selected":"" }>${u.email}</option>
+						</c:forEach>
+  					</c:when>
+				 	<c:otherwise>
+				    	<c:forEach items="${usuarios}" var="u">
+	            			<option value="${u.id}" ${(u.id ==sessionScope.usuario.id)?"selected":"" }>${u.email}</option>
+						</c:forEach>
+				  	</c:otherwise>
+				</c:choose>
+				
+				
+				
+				
+				
+
 					
 				</select>
 			</div>	
