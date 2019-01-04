@@ -2,39 +2,34 @@
 <%@ include file="../../includes/navbar.jsp"  %>
 <%@ include file="../../includes/mensajes.jsp"  %>
 
-  
 
-<main role="main" class="container">
-	<div class="jumbotron">
-		<ul>
-			<c:forEach items="${videos}" var="v">
-				<li>${v.id} + ${v.nombre}</li>
-			</c:forEach>
-		</ul>
-		<table  class="table table-striped">
-		<thead>
-			<tr>
-				<th scope="col">Id</th>
-				<th scope="col">Nombre</th>
-				<th scope="col">Vídeo</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${videos}" var="v">
-				<tr>
-					<th scope="row">${v.id}</th>
-					<td>${v.nombre}</td>
-					<td><iframe width="560" height="315" src="https://www.youtube.com/embed/${v.codigo}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
-					<td><a href="privado/videos?op=2&id=${u.id}"><span class="icon-pencil2"></span></a> / <a href="privado/videos?op=4&id=${u.id}"><span class="icon-bin"></span></a></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	</div>
-</main>
+    <main role="main" class="container">
+	
+		<a href="privado/videos?op=2&id=-1" class="btn btn-outline-success mb-2">Crear Nuevo Registro</a>
+		
+		<table class="table">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">id</th>
+		      <th scope="col">nombre</th>
+		      <th scope="col">codigo</th>
+		      <th scope="col">usuario</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		 	 <c:forEach items="${videos}" var="v">
+			    <tr>		    	
+			      <th scope="row">${v.id}</th>
+			      <td><a href="privado/videos?op=2&id=${v.id}">${v.nombre}</a></td>
+			      <th scope="row"><iframe width="450" height="200" src="https://www.youtube.com/embed/${v.codigo}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></th>			      		      
+			      <th scope="row">${v.usuario.email}</th>
+			    </tr>    
+		    </c:forEach>
+		  </tbody>
+		</table>
 
 
+	</main>				
 
-  
-<%@ include file="../../includes/footer.jsp"  %>  
+
+<%@ include file="../../includes/footer.jsp"  %>

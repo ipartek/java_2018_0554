@@ -24,17 +24,13 @@ import com.ipartek.formacion.modelo.pojos.Usuario;
 import com.ipartek.formacion.modelo.pojos.Video;
 
 /**
- * Servlet implementation class VideosController
+ * Servlet implementation class UsuarioController
  */
 @WebServlet("/privado/videos")
 public class VideosController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	private VideoDAO dao1;
-	private ValidatorFactory factory1;
-	private Validator validator1;
-    
-private final static Logger LOG = Logger.getLogger(VideosController.class);
+	private final static Logger LOG = Logger.getLogger(VideosController.class);
 	
 	private ValidatorFactory factory;
 	private Validator validator;
@@ -55,179 +51,165 @@ private final static Logger LOG = Logger.getLogger(VideosController.class);
 	private String id;
 	private String nombre;
 	private String codigo;
+	private String id_usuario;
 	
-    private static VideoDAO dao = null;   
+    private static VideoDAO daoVideo = null;   
+    private static UsuarioDAO daoUsuario = null;
 	
 	
     @Override
     public void init(ServletConfig config) throws ServletException {    
     	super.init(config);
-    	dao1 = VideoDAO.getInstance();    	
-    	factory1  = Validation.buildDefaultValidatorFactory();
-    	validator1  = factory1.getValidator();
+    	daoVideo = VideoDAO.getInstance();
+    	daoUsuario = UsuarioDAO.getInstance();
+    	factory  = Validation.buildDefaultValidatorFactory();
+    	validator  = factory.getValidator();
     }
-
-	/*
+    
+   	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		request.setAttribute("videos", dao.getAll());
-		
-		request.getRequestDispatcher("videos/index.jsp").forward(request, response);
-		
-	}
+		doProcess(request, response);		
+	}	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		doProcess(request, response);
 	}
-
-}
-
-
---------------------
-*/
-
 	
-protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	doProcess(request, response);		
-}	
-
-protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	doProcess(request, response);
-}
-
-private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	vista = VIEW_INDEX;
-	alerta = null;
-	try {
-		// recoger parametros
-		getParametros(request);
-		// realizar operacion
-		switch (op) {
-			case OP_IR_FORMULARIO:
-				irFormulario(request);
-				break;
-			case OP_GUARDAR:
-				guardar(request);
-				break;	
-			case OP_ELIMINAR:
-				eliminar(request);
-				break;	
-			default:
-				listar(request);
-				break;
-		}
+	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-	}catch (Exception e) {
-		LOG.error(e);		
-		alerta = new Alerta( Alerta.TIPO_DANGER, "Error inexesperado sentimos las molestias.");
-		
-	}finally {
-		// mensaje para el usuario
-		request.setAttribute("alerta", alerta);
-		// ir a una vista
-		request.getRequestDispatcher(vista).forward(request, response);
-	}	
-}
-
-
-private void listar(HttpServletRequest request) {
-
-	// alerta = "Lista de Usuarios";
-	request.setAttribute("videos", dao1.getAll());		
-	
-}
-
-
-private void eliminar(HttpServletRequest request) throws SQLException {
-
-	int identificador = Integer.parseInt(id);		
-	
-	if ( dao1.delete(identificador) ) {
-		alerta = new Alerta( Alerta.TIPO_SUCCESS, "Registro eliminado con exito");
-	}else {
-		alerta = new Alerta( Alerta.TIPO_WARNING, "Registro NO eliminado, sentimos las molestias");
-	}
-			
-	listar(request);		
-}
-
-
-private void guardar(HttpServletRequest request) {
-
-	//crear usuario mediante parametros del formulario
-	Video v = new Video();
-	int identificador = Integer.parseInt(id);	
-	v.setId( (long)identificador);
-	String nombre = null;
-	v.setNombre(nombre);
-	String codigo = null;
-	v.setCodigo(codigo);
-	
-	//validar usuario		
-	Set<ConstraintViolation<Video>> violations = validator1.validate(v);
-	
-	
-	if ( violations.size() > 0 ) {              // validacion NO correcta
-	 
-	  alerta = new Alerta( Alerta.TIPO_WARNING, "Los campos introduciodos no son correctos, por favor intentalo de nuevo");		 
-	  vista = VIEW_FORM; 
-	  // volver al formulario, cuidado que no se pierdan los valores en el form
-	  request.setAttribute("video", v);	
-	  
-	}else {									  //  validacion correcta
-	
+		vista = VIEW_INDEX;
+		alerta = null;
 		try {
-			if ( identificador > 0 ) {
-				dao1.update(v);				
-			}else {				
-				dao1.insert(v);
+			// recoger parametros
+			getParametros(request);
+			// realizar operacion
+			switch (op) {
+				case OP_IR_FORMULARIO:
+					irFormulario(request);
+					break;
+				case OP_GUARDAR:
+					guardar(request);
+					break;	
+				case OP_ELIMINAR:
+					eliminar(request);
+					break;	
+				default:
+					listar(request);
+					break;
 			}
-			alerta = new Alerta( Alerta.TIPO_SUCCESS, "Registro guardado con exito");
-			listar(request);
 			
-		}catch ( SQLException e) {
-			alerta = new Alerta( Alerta.TIPO_WARNING, "Lo sentimos pero el EMAIL ya existe");
-			vista = VIEW_FORM;
-			request.setAttribute("video", v);
+			
+		}catch (Exception e) {
+			LOG.error(e);		
+			alerta = new Alerta( Alerta.TIPO_DANGER, "Error inexesperado sentimos las molestias.");
+			
+		}finally {
+			// mensaje para el usuario
+			request.setAttribute("alerta", alerta);
+			// ir a una vista
+			request.getRequestDispatcher(vista).forward(request, response);
 		}	
-	}	
-	
-}
-
-
-private void irFormulario(HttpServletRequest request) {
-	
-	vista = VIEW_FORM; 
-	Video v = new Video();
-	
-	int identificador = Integer.parseInt(id);
-	if ( identificador > 0 ) {			
-		v = dao1.getById(identificador);
 	}
-	request.setAttribute("video", v);		
-}
 
 
-private void getParametros(HttpServletRequest request) {
+	private void listar(HttpServletRequest request) {
+		
+		request.setAttribute("videos", daoVideo.getAll());		
+		
+	}
 
-	op = request.getParameter("op");
-	if( op == null ) {
-		op = OP_LISTAR;
-	} 
+
+	private void eliminar(HttpServletRequest request) throws SQLException {
+	
+		int identificador = Integer.parseInt(id);		
+		
+		if ( daoVideo.delete(identificador) ) {
+			alerta = new Alerta( Alerta.TIPO_SUCCESS, "Registro eliminado con exito");
+		}else {
+			alerta = new Alerta( Alerta.TIPO_WARNING, "Registro NO eliminado, sentimos las molestias");
+		}
+				
+		listar(request);		
+	}
+
+
+	private void guardar(HttpServletRequest request) {
+
+		//crear video mediante parametros del formulario
+		Video v = new Video();
+		int identificador = Integer.parseInt(id);	
+		v.setId( (long)identificador);
+		v.setCodigo(codigo);
+		v.setNombre(nombre);
+		
+		Usuario u = new Usuario();
+		u.setId( Long.parseLong(id_usuario));
+		v.setUsuario(u);
+		
+		//validar usuario		
+		Set<ConstraintViolation<Video>> violations = validator.validate(v);
+		
+		
+		if ( violations.size() > 0 ) {              // validacion NO correcta
+		 
+		  alerta = new Alerta( Alerta.TIPO_WARNING, "Los campos introduciodos no son correctos, por favor intentalo de nuevo");		 
+		  vista = VIEW_FORM; 
+		  // volver al formulario, cuidado que no se pierdan los valores en el form
+		  request.setAttribute("video", v);		  
+		  request.setAttribute("usuarios", daoUsuario.getAll() );
+		  
+		}else {									  //  validacion correcta
+		
+			try {
+				if ( identificador > 0 ) {
+					daoVideo.update(v);				
+				}else {				
+					daoVideo.insert(v);
+				}
+				alerta = new Alerta( Alerta.TIPO_SUCCESS, "Registro guardado con exito");
+				listar(request);
+				
+			}catch ( SQLException e) {
+				alerta = new Alerta( Alerta.TIPO_WARNING, "Lo sentimos pero el EMAIL ya existe");
+				vista = VIEW_FORM;
+				request.setAttribute("video", v);
+				request.setAttribute("usuarios", daoUsuario.getAll() );
+			}	
+		}	
+		
+	}
+
+
+	private void irFormulario(HttpServletRequest request) {
+		
+		vista = VIEW_FORM; 
+		Video v = new Video();
+		
+		int identificador = Integer.parseInt(id);
+		if ( identificador > 0 ) {			
+			v = daoVideo.getById(identificador);
+		}
+		request.setAttribute("video", v);
+		request.setAttribute("usuarios", daoUsuario.getAll() );
+		
+				
+	}
+
+	
+	private void getParametros(HttpServletRequest request) {
+
+		op = request.getParameter("op");
+		if( op == null ) {
+			op = OP_LISTAR;
+		} 
+		
+		
+		id = request.getParameter("id");
+		nombre = request.getParameter("nombre");
+		codigo = request.getParameter("codigo");
+		id_usuario = request.getParameter("id_usuario");		
+	}
 	
 	
-	id = request.getParameter("id");
-	nombre = request.getParameter("nombre");
-	codigo = request.getParameter("codigo");
-	
-	LOG.debug( String.format("parametros: op=%s id=%s nombre=%s codigo=%s", op, id, nombre, codigo ));
-	
-}
-
-
 
 }
