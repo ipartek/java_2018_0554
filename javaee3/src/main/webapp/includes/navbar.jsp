@@ -7,12 +7,12 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <a class="nav-link" href="privado/videos"><fmt:message key="navbar.videos"/></a>
+          </li>          
+          <li class="nav-item active">
+            <a class="nav-link" href="privado/usuarios">Usuarios</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="privado/libro"><fmt:message key="navbar.libro"/></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="privado/usuarios">Usuarios</a>
           </li> 
         </ul>
         <ul class="navbar-nav float-right">
