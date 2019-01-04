@@ -41,13 +41,6 @@
 						</c:forEach>
 				  	</c:otherwise>
 				</c:choose>
-				
-				
-				
-				
-				
-
-					
 				</select>
 			</div>	
 

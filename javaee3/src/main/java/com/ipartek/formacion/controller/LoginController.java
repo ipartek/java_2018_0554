@@ -28,6 +28,7 @@ import com.ipartek.formacion.modelos.daos.UsuarioDAO;
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String VIEW_LOGIN = "index.jsp";
+	private static final String CONTROLER_PRINCIPAL = "/privado/backoffice";
 	private static final String CONTROLER_USUARIOS= "/privado/usuarios";
 	private ValidatorFactory factory;
 	private Validator validator;
@@ -91,7 +92,7 @@ public class LoginController extends HttpServlet {
 
 				usuarioLogin = dao.login(email, pass);
 				if (usuarioLogin != null) {
-					vista = CONTROLER_USUARIOS;
+					vista = CONTROLER_PRINCIPAL;
 
 					HttpSession session = request.getSession();
 					session.setMaxInactiveInterval(60 * 1000); // 5minutos
@@ -107,8 +108,8 @@ public class LoginController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if (vista.equals(CONTROLER_USUARIOS)) {
-				response.sendRedirect(request.getContextPath() + CONTROLER_USUARIOS);
+			if (vista.equals(CONTROLER_PRINCIPAL)) {
+				response.sendRedirect(request.getContextPath() + CONTROLER_PRINCIPAL);
 			} else {
 				request.getRequestDispatcher(vista).forward(request, response);
 			}

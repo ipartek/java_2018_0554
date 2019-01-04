@@ -1,7 +1,7 @@
 <%@ include file="../../includes/cabecera.jsp"%>
 <%@ include file="../../includes/navbar.jsp" %>
 
- <main role="main" class="container pt-3 ">
+ <main role="main" class="container">
      <%@ include file="../../includes/mensajes.jsp" %>
       <div class="jumbotron">
         <h1>Listado de videos</h1>

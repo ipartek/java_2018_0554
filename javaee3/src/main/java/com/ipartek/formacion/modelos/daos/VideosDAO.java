@@ -18,6 +18,7 @@ public class VideosDAO {
 	private static final String SQL_GETBYID = "SELECT v.id as id_video,u.id as id_usuario,v.nombre,v.codigo,u.email,u.password FROM video AS v INNER JOIN usuario AS u ON v.id_usuario = u.id WHERE v.id=?;";
 	private static final String SQL_GETBYNOMBRE = "Select id,nombre, codigo from video where nombre like ? order by id desc limit 100";
 	private static final String SQL_GETALL = "Select v.id as id_video,u.id as id_usuario,v.nombre,v.codigo,u.email,u.password FROM video AS v INNER JOIN usuario AS u ON v.id_usuario = u.id order by v.id desc limit 100";
+	private static final String SQL_COUNTVIDEOS="SELECT count(*) AS totalVideos FROM video";
 	private final static Logger LOG = Logger.getLogger(VideosDAO.class);
 	private static VideosDAO INSTANCE = null;
 	
@@ -37,7 +38,27 @@ public class VideosDAO {
 		return INSTANCE;
 	}
 
-	
+	/**
+	 * Metodo que cuenta el total de videos que hay en la base de datos
+	 * @return Devuelve un int --> el total de videos en la BBDD
+	 */
+	public int count() {
+		int numTotalVideos= 0;
+		String sql = SQL_COUNTVIDEOS;
+		try(Connection conn = ConnectionManager.getConnection();
+			PreparedStatement pst = conn.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery()
+			){
+			while(rs.next()) {
+				numTotalVideos= rs.getInt("totalVideos");
+			}
+		} catch (Exception e) {
+			LOG.trace(e);
+		}
+		
+		
+		return numTotalVideos;
+	}
 	/**
 	 * Metodo que obtiene todos los videos de la tabla daniel
 	 * 

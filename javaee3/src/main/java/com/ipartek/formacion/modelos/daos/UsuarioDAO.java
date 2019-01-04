@@ -6,11 +6,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.modelo.pojo.Usuario;
 
 
 public class UsuarioDAO {
-	 private static UsuarioDAO INSTANCE = null;
+	private static final String SQL_GETBYID = "SELECT id,email,password FROM usuario WHERE id=?";
+	private static final String SQL_DELETE = "DELETE FROM usuario WHERE id=?";
+	private static final String SQL_UPDATE = "UPDATE usuario SET email=?, `password`=? WHERE id=?;";
+	private static final String SQL_INSERT = "INSERT INTO usuario (email,`password`) VALUES(?,?);";
+	private static final String SQL_GETALL = "Select id,email,password from usuario order by id desc limit 500";
+	private static final String SQL_LOGIN = "SELECT id,email,password FROM usuario WHERE email=? AND password=?";
+	private static final String SQL_COUNTUSUARIOS="SELECT count(*) AS totalUsuarios FROM usuario";
+	private final static Logger LOG = Logger.getLogger(UsuarioDAO.class);
+	private static UsuarioDAO INSTANCE = null;
 	 
 	 //constructor privado, solo acceso por getInstance
 	 private UsuarioDAO() {
@@ -33,7 +43,7 @@ public class UsuarioDAO {
 	 */
 	public Usuario login(String email, String password) {
 		Usuario usuario = null;
-		String sql = "SELECT id,email,password FROM usuario WHERE email=? AND password=?";
+		String sql = SQL_LOGIN;
 		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 			pst.setString(1, email);
 			pst.setString(2, password);
@@ -60,7 +70,7 @@ public class UsuarioDAO {
 	public ArrayList<Usuario> getAll() {
 		ArrayList<Usuario> usuarios = new ArrayList<>();
 
-		String sql = "Select id,email,password from usuario order by id desc limit 500";
+		String sql = SQL_GETALL;
 
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(sql);
@@ -86,10 +96,28 @@ public class UsuarioDAO {
 
 		return usuarios;
 	}
-	
+	/**
+	 * Metodo que cuenta el total de usuarios que hay en la base de datos
+	 * @return Devuelve un int --> el total de usuarios en la BBDD
+	 */
+	public int count() {
+		int numTotalUsuarios= 0;
+		String sql = SQL_COUNTUSUARIOS;
+		try(Connection conn = ConnectionManager.getConnection();
+			PreparedStatement pst = conn.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery()
+			){
+			while(rs.next()) {
+				numTotalUsuarios= rs.getInt("totalUsuarios");
+			}
+		} catch (Exception e) {
+			LOG.trace(e);
+		}
+		return numTotalUsuarios;
+	}
 	public boolean insert(Usuario u ) throws SQLException {
 		boolean resul= false;
-		String sql ="INSERT INTO usuario (email,`password`) VALUES(?,?);";
+		String sql =SQL_INSERT;
 		
 		try(
 			Connection conn = ConnectionManager.getConnection();
@@ -108,7 +136,7 @@ public class UsuarioDAO {
 	
 	public boolean update(Usuario u) throws SQLException {
 		boolean resul= false;
-		String sql ="UPDATE usuario SET email=?, `password`=? WHERE id=?;";
+		String sql =SQL_UPDATE;
 		
 		try(Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(sql);
@@ -134,7 +162,7 @@ public class UsuarioDAO {
 	 */
 	public boolean eliminar(Long id) throws SQLException {
 		boolean resul=false;
-		String sql="DELETE FROM usuario WHERE id=?";
+		String sql=SQL_DELETE;
 		
 		
 		try(
@@ -158,7 +186,7 @@ public class UsuarioDAO {
 	 */
 	public Usuario getById(Long id) {
 		Usuario usuario = null;
-		String sql = "SELECT id,email,password FROM usuario WHERE id=?";
+		String sql = SQL_GETBYID;
 		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 			pst.setLong(1, id);
 	

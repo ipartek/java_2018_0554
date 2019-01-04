@@ -160,6 +160,7 @@ public class VideosController extends HttpServlet {
 			  vista = VIEW_FORM; 
 			  // volver al formulario, cuidado que no se pierdan los valores en el form
 			  request.setAttribute("video", v);
+			  request.setAttribute("usuarios", daoUsuario.getAll());
 			
 		}else { // validacion correcta
 			try {
@@ -180,12 +181,14 @@ public class VideosController extends HttpServlet {
 				//Esto es para que el codigo del video no este duplicado y lanza una excepcion
 				mensaje = new Mensaje(Mensaje.TIPO_WARNING,"Ese código ya esta registrado");
 				request.setAttribute("video", v);
+				request.setAttribute("usuarios", daoUsuario.getAll());
 				vista = VIEW_FORM;
 			}catch (Exception e) {
 				mensaje =new Mensaje(Mensaje.TIPO_DANGER,"Error Inexperado");
 				//alerta="Ha ocurrido un error inesperado";
 				LOG.trace("Ha ocurrido un error inesperado: " + e);
 				request.setAttribute("video", v);
+				request.setAttribute("usuarios", daoUsuario.getAll());
 				vista= VIEW_FORM;
 			}
 		}
