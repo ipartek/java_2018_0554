@@ -17,6 +17,7 @@ public class UsuarioDAO {
 	private static final String SQL_GET_ALL = "SELECT id, email, password FROM usuario ORDER BY id DESC LIMIT 500";
 	private static final String SQL_GET_BY_ID = "SELECT id, email, password FROM usuario WHERE id = ?;";
 	private static final String SQL_LOGIN = "SELECT id, email, password FROM usuario WHERE email = ? AND password = ?;";
+	private static final String SQL_CONTADOR = "SELECT  COUNT(*) AS 'total' FROM usuario;";
 	private static UsuarioDAO INSTANCE = null;
 	
 	//CONSTRUCTOR PRIVADO SOLO ACCESO POR getInstance
@@ -212,5 +213,26 @@ public class UsuarioDAO {
 		registro.setPassword(rs.getString("password"));		
 		return registro;
 	}
+	
+	public Integer getCount() {
+		Integer total =0;
+		String sql = SQL_CONTADOR;	
+		try ( Connection conn = ConnectionManager.getConnection();
+				  PreparedStatement pst = conn.prepareStatement(sql);
+				){
+				
+				try( ResultSet rs = pst.executeQuery() ){
+					while (rs.next()) { 
+						total =rs.getInt("total");
+					}
+				}
+				
+					
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return total;
+	}
+	
 
 }

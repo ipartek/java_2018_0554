@@ -24,15 +24,12 @@ public class VideosController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	private VideoDAO dao;
-	private ValidatorFactory factory;
-	private Validator validator;
        
     @Override
     public void init(ServletConfig config) throws ServletException {    
     	super.init(config);
     	dao = VideoDAO.getInstance();    	
-    	factory  = Validation.buildDefaultValidatorFactory();
-    	validator  = factory.getValidator();
+    	
     }
 
 

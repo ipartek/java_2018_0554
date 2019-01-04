@@ -45,6 +45,19 @@
         </div>
       </div>
       
+       <div class="card mb-3 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">Datos de la aplicación</h4>
+        </div>
+        <div class="card-body">
+        <h1 class="card-title pricing-card-title h5">${sessionScope.usuario_logeado.email}</h1>
+          <ul class="list-unstyled mt-3 mb-4">
+			<li class=" h6">Videos: ${contadorvideos}</li>
+			<li class=" h6">Usuarios: ${contadorusuarios}</li>
+          </ul>
+        </div>
+      </div>
+      
  
 
 

@@ -161,6 +161,7 @@ public class VideosCrudController extends HttpServlet {
 				video.setTitulo(titulo);
 				video.setCodigo(codigo);
 				
+				//preparamos el usuario para insertarlo
 				Usuario u = new Usuario();;
 				u.setId( (long)Integer.parseInt(usuario_id));
 				video.setUsuario(u);
@@ -178,7 +179,7 @@ public class VideosCrudController extends HttpServlet {
 				
 					try {
 						if ( identificador > 0 ) {
-							videoDAO.update(video);				
+							videoDAO.update(video);	
 						}else {				
 							videoDAO.insert(video);
 						}
@@ -211,6 +212,7 @@ public class VideosCrudController extends HttpServlet {
 		
 		request.setAttribute("video", video);	
 
+		//envio todos los usuarios 
 		request.setAttribute("usuarios", usuarioDAO.getAll());
 	}
 

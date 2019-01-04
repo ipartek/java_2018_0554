@@ -33,6 +33,8 @@ public class VideoDAO {
 	private static final String SQL_GET_ALL_BY_NOMBRE =
 	"SELECT v.id AS 'video_id', v.titulo AS 'video_titulo', v.codigo AS 'video_codigo', u.id AS 'usuario_id',  u.email AS 'usuario_email' , u.password  AS 'usuario_pass' FROM video AS v, usuario AS u WHERE titulo LIKE ?  AND v.id_usuario=u.id ORDER BY titulo ASC LIMIT 500;";
 	
+	private static final String SQL_CONTADOR = "SELECT COUNT(*) AS 'total_video' FROM video;";
+	
 	private static VideoDAO INSTANCE = null;
 
 	// constructor privado, solo acceso por getInstance()
@@ -48,7 +50,48 @@ public class VideoDAO {
 		return INSTANCE;
 	}
 	
-public Video getById( long id ) {
+	
+	private Video rowMapper(ResultSet rs) throws SQLException {
+		Video registro = new Video();
+		registro.setId( rs.getLong("video_id"));
+		registro.setCodigo( rs.getString("video_codigo"));
+		registro.setTitulo(rs.getString("video_titulo"));		
+		
+		Usuario u = new Usuario();
+		u.setId(rs.getLong("usuario_id"));
+		u.setEmail( rs.getString("usuario_email"));
+		u.setPassword( rs.getString("usuario_pass"));
+		
+		registro.setUsuario(u);
+		
+		return registro;
+	}
+	
+	public Integer getCount() {
+		Integer total =0;
+		String sql = SQL_CONTADOR;	
+		try ( Connection conn = ConnectionManager.getConnection();
+				  PreparedStatement pst = conn.prepareStatement(sql);
+				){
+				
+				try( ResultSet rs = pst.executeQuery() ){
+					while (rs.next()) { 
+						total =rs.getInt("total_video");
+					}
+				}
+				
+					
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return total;
+	}
+	
+
+	
+	
+	
+	public Video getById( long id ) {
 		
 		Video video = null;
 		String sql = SQL_GETBYID;		
@@ -72,21 +115,7 @@ public Video getById( long id ) {
 		return video;
 	}
 	
-private Video rowMapper(ResultSet rs) throws SQLException {
-	Video registro = new Video();
-	registro.setId( rs.getLong("video_id"));
-	registro.setCodigo( rs.getString("video_codigo"));
-	registro.setTitulo(rs.getString("video_titulo"));		
-	
-	Usuario u = new Usuario();
-	u.setId(rs.getLong("usuario_id"));
-	u.setEmail( rs.getString("usuario_email"));
-	u.setPassword( rs.getString("usuario_pass"));
-	
-	registro.setUsuario(u);
-	
-	return registro;
-}
+
 	
 	
 

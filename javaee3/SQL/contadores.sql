@@ -1,0 +1,5 @@
+/*TOTAL USUARIOS */
+SELECT COUNt(*) FROM usuario;
+
+/*TOTAL VIDEOS*/
+SELECT COUNt(*) FROM video;
