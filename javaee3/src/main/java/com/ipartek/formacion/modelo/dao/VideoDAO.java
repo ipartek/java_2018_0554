@@ -1,4 +1,5 @@
 package com.ipartek.formacion.modelo.dao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -6,14 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ipartek.formacion.modelo.ConnectionManager;
-import com.ipartek.formacion.modelo.pojo.Usuario;
 import com.ipartek.formacion.modelo.pojo.Video;
 
 public class VideoDAO {
 
 	private static VideoDAO INSTANCE = null;
 	
-	//Los final Strings
+	private static final String SQL_GETBYID = "SELECT id, nombre, codigo FROM video WHERE id = ?;";
+	private static final String SQL_GETALL = "SELECT id, nombre, codigo FROM video ORDER BY id DESC LIMIT 1000;";
+	private static final String SQL_INSERT = "INSERT INTO video  (nombre, codigo) VALUES( ? , ?);";
+	private static final String SQL_UPDATE = "UPDATE video SET nombre = ? , codigo = ? WHERE id = ?;";
+	private static final String SQL_DELETE = "DELETE FROM video WHERE id = ?;";
 
 	// constructor privado, solo acceso por getInstance()
 	private VideoDAO() {
@@ -28,58 +32,41 @@ public class VideoDAO {
 		return INSTANCE;
 	}
 
-	/**
-	 * comprobar si existe el usuario en la bbdd
-	 * 
-	 * @param email String
-	 * @param pass  String contrase�a
-	 * @return usuario con datos si existe, null si no existe
-	 */
 	
 
-	public Usuario getById(long id) {
+	public Video getById(long id) {
 
-		Usuario usuario = null;
-		String sql = "SELECT id, nombre, codigo FROM video WHERE id = ?;";
+		Video v = null;
+		
 
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+		try (Connection conn = ConnectionManager.getConnection(); 
+				PreparedStatement pst = conn.prepareStatement(SQL_GETBYID);) {
 			pst.setLong(1, id);
-
+			
 			try (ResultSet rs = pst.executeQuery()) {
-				while (rs.next()) { // hemos encontrado usuario
-					v=rowMapper(rs);
-					
-//					usuario = new Usuario();
-//					usuario.setId(rs.getLong("id"));
-//					usuario.setEmail(rs.getString("email"));
-//					usuario.setPassword(rs.getString("password"));
+				while (rs.next()) { 
+					v = rowMapper(rs);
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return usuario;
+		return v;
 	}
 
+	
 
+	public ArrayList<Video> getAll() {
 
-	public ArrayList<Usuario> getAll() {
-
-		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-		String sql = "SELECT id, email, password FROM usuario ORDER BY id DESC LIMIT 500";
-
+		ArrayList<Video> videos = new ArrayList<Video>();
+	
 		try (Connection conn = ConnectionManager.getConnection();
-				PreparedStatement pst = conn.prepareStatement(sql);
+				PreparedStatement pst = conn.prepareStatement(SQL_GETALL);
 				ResultSet rs = pst.executeQuery()) {
 
 			while (rs.next()) {
-				try {
-					Usuario usuario = new Usuario();
-					usuario.setId(rs.getLong("id"));
-					usuario.setEmail(rs.getString("email"));
-					usuario.setPassword(rs.getString("password"));
-					// a�adir en array
-					usuarios.add(usuario);
+				try {					
+					videos.add(rowMapper(rs));
 				} catch (Exception e) {
 					System.out.println("usuario no valido");
 					e.printStackTrace();
@@ -89,17 +76,18 @@ public class VideoDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return usuarios;
+		return videos;
 	}
 
-	public boolean insert(Usuario u) throws SQLException {
+	public boolean insert(Video v) throws SQLException {
 
 		boolean resul = false;
-		String sql = "INSERT INTO `usuario` (`email`, `password`) VALUES (?,?);";
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+	
+		try (Connection conn = ConnectionManager.getConnection(); 
+				PreparedStatement pst = conn.prepareStatement(SQL_INSERT);) {
 
-			pst.setString(1, u.getEmail());
-			pst.setString(2, u.getPassword());
+			pst.setString(1, v.getNombre() );
+			pst.setString(2, v.getCodigo() );
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
 				resul = true;
@@ -109,18 +97,37 @@ public class VideoDAO {
 		return resul;
 
 	}
+	
+	public boolean update(Video v) throws SQLException {
 
-	public boolean delete(long id) throws SQLException {
+		boolean resul = false;		
+		try (Connection conn = ConnectionManager.getConnection();
+			 PreparedStatement pst = conn.prepareStatement(SQL_UPDATE);) {
+			
+			pst.setString(1, v.getNombre());
+			pst.setString(2, v.getCodigo());
+			pst.setLong(3, v.getId());
+			
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				resul = true;
+			}
+		}
+		return resul;
 
-		boolean resul = false;
-		
-		String sql = "DELETE FROM `usuario` WHERE id = ?;"; //SQL
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+	}
+	
+	
+	public boolean delete( long id ) throws SQLException {
 
-			pst.setLong(1, id); //cambiamos uno, donde diga el id
+		boolean resul = false;		
+		try (Connection conn = ConnectionManager.getConnection(); 
+			 PreparedStatement pst = conn.prepareStatement(SQL_DELETE);) {
 
-			int affectedRows = pst.executeUpdate(); //valor 1??
-			if (affectedRows == 1) {  //cambios
+			pst.setLong(1, id);
+			
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
 				resul = true;
 			}
 
@@ -128,33 +135,15 @@ public class VideoDAO {
 		return resul;
 
 	}
-
-	public boolean update(Usuario u) throws SQLException { //throw para irse los errores
-		boolean resul = false;
-		
-		//UPDATE table_name SET column1 = value1, column2 = value2, ... WHERE condition;
-		
-		String sql = "UPDATE `usuario` SET email=? , password=?  WHERE id = ?;"; //SQL
-		
-	try(	Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
-
-		pst.setString(1,  u.getEmail());
-		pst.setString(2, u.getPassword());
-		pst.setLong(3, u.getId());
-		
-		int affectedRows = pst.executeUpdate(); //valor 1??
-		if (affectedRows == 1) {  //cambios
-			resul = true;
-		}
-	}
-return resul;
-}
 	
-	private Object rowMapper(ResultSet rs) throws SQLException {
+	
+	private Video rowMapper(ResultSet rs) throws SQLException {
 		Video v = new Video();
-	v.setId(rs.getLong("id"));
+		v.setId( rs.getLong("id"));
+		v.setCodigo( rs.getString("codigo"));
 		v.setNombre(rs.getString("nombre"));
-		v.setCodigo(rs.getString("codigo"));
-		return null;
+		return v;
 	}
+	
+	
 }
