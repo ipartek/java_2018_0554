@@ -7,16 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ipartek.formacion.modelo.dao.ConnectionManager;
+import com.ipartek.formacion.modelo.pojo.Usuario;
 import com.ipartek.formacion.modelo.pojo.Video;
 
 public class VideosDao {
 
 	private static VideosDao INSTANCE = null;
 	
-	private static final String SQL_GETBYID = "SELECT id, nombre, codigo FROM video WHERE id = ?;";
-	private static final String SQL_GETALL = "SELECT id, nombre, codigo FROM video ORDER BY id DESC LIMIT 1000;";
-	private static final String SQL_INSERT = "INSERT INTO video  (nombre, codigo) VALUES( ? , ?);";
-	private static final String SQL_UPDATE = "UPDATE video SET nombre = ? , codigo = ? WHERE id = ?;";
+	private static final String SQL_GETBYID = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id AND v.id = ?;";
+	private static final String SQL_GETALL  = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id ORDER BY v.id DESC LIMIT 1000;";
+	private static final String SQL_INSERT = "INSERT INTO video  (nombre, codigo, id_usuario) VALUES( ? , ?, ?);";
+	private static final String SQL_UPDATE = "UPDATE video SET nombre = ? , codigo = ?, id_usuario = ? WHERE id = ?;";
 	private static final String SQL_DELETE = "DELETE FROM video WHERE id = ?;";
 
 	// constructor privado, solo acceso por getInstance()
@@ -88,6 +89,7 @@ public class VideosDao {
 
 			pst.setString(1, v.getNombre() );
 			pst.setString(2, v.getCodigo() );
+			pst.setLong(3, v.getUsuario().getId());
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
 				resul = true;
@@ -106,7 +108,8 @@ public class VideosDao {
 			
 			pst.setString(1, v.getNombre());
 			pst.setString(2, v.getCodigo());
-			pst.setLong(3, v.getId());
+			pst.setLong(3, v.getUsuario().getId());
+			pst.setLong(4, v.getId());
 			
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
@@ -139,9 +142,16 @@ public class VideosDao {
 	
 	private Video rowMapper(ResultSet rs) throws SQLException {
 		Video v = new Video();
-		v.setId( rs.getLong("id"));
+		v.setId( rs.getLong("id_video"));
 		v.setCodigo( rs.getString("codigo"));
 		v.setNombre(rs.getString("nombre"));
+		
+		Usuario u = new Usuario();
+		u.setId(rs.getLong("id_usuario"));
+		u.setEmail(rs.getString("email"));
+		u.setPassword(rs.getString("password"));
+		
+		v.setUsuario(u);
 		return v;
 	}
 	

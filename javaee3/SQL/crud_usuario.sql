@@ -1,6 +1,6 @@
 /* operaciones de CRUD basicas */
 
-use javaee;
+use endika;
 
 -- getAll
 SELECT id,email, password FROM usuario ORDER BY id DESC LIMIT 1000;
