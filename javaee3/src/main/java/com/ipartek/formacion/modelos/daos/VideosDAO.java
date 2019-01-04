@@ -15,7 +15,7 @@ import com.ipartek.formacion.modelo.pojo.Video;
 public class VideosDAO {
 	private static final String SQL_DELETE = "DELETE FROM video WHERE id=?";
 	private static final String SQL_UPDATE = "UPDATE video SET nombre=?, codigo=? WHERE id=?;";
-	private static final String SQL_INSERT = "INSERT INTO video (id,nombre,codigo) VALUES(?,?,?);";
+	private static final String SQL_INSERT = "INSERT INTO video (nombre,codigo) VALUES(?,?);";
 	private static final String SQL_GETBYID = "SELECT id,nombre,codigo FROM video WHERE id=?;";
 	private static final String SQL_GETBYNOMBRE = "Select id,nombre, codigo from video where nombre like ? order by id desc limit 100";
 	private static final String SQL_GETALL = "Select id, nombre, codigo from video order by id desc limit 100";
@@ -119,9 +119,9 @@ public class VideosDAO {
 		try(Connection conn= ConnectionManager.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);
 			){
-			pst.setLong(1, v.getId());
-			pst.setString(2, v.getNombre());
-			pst.setString(3, v.getCodigo());
+			
+			pst.setString(1, v.getNombre());
+			pst.setString(2, v.getCodigo());
 			
 			int affectedRows = pst.executeUpdate();
 			if(affectedRows== 1){
