@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.modelo.daos.UsuarioDAO;
 import com.ipartek.formacion.modelo.daos.VideoDAO;
 import com.ipartek.formacion.modelo.pojo.Alerta;
+import com.ipartek.formacion.modelo.pojo.Usuario;
 import com.ipartek.formacion.modelo.pojo.Video;
 
 /**
@@ -53,18 +54,20 @@ public class VideosCrudController extends HttpServlet {
 		private String titulo;
 		private String codigo;
 		
+		private String usuario_id;
+		
 	
 		
-	    private static VideoDAO dao = null;
-	    private static UsuarioDAO udao = null;
+	    private static VideoDAO videoDAO = null;
+	    private static UsuarioDAO usuarioDAO = null;
 	    
 	    
 	    
 	    @Override
 	    public void init(ServletConfig config) throws ServletException {    
 	    	super.init(config);
-	    	dao = VideoDAO.getInstance();
-	    	udao = UsuarioDAO.getInstance();
+	    	videoDAO = videoDAO.getInstance();
+	    	usuarioDAO = UsuarioDAO.getInstance();
 	    	factory  = Validation.buildDefaultValidatorFactory();
 	    	validator  = factory.getValidator();
 	    	
@@ -124,7 +127,6 @@ public class VideosCrudController extends HttpServlet {
 		}finally {
 			// mensaje para el usuario
 			request.setAttribute("alerta", alerta);
-			request.setAttribute("udao", udao.getAll());
 			// ir a una vista
 			request.getRequestDispatcher(vista).forward(request, response);
 		}	
@@ -132,7 +134,7 @@ public class VideosCrudController extends HttpServlet {
 
 
 	private void listar(HttpServletRequest request) {
-		request.setAttribute("videos", dao.getAll());	
+		request.setAttribute("videos", videoDAO.getAll());	
 		
 	}
 
@@ -140,7 +142,7 @@ public class VideosCrudController extends HttpServlet {
 		
 		int identificador = Integer.parseInt(id);		
 		
-		if ( dao.delete(identificador) ) {
+		if ( videoDAO.delete(identificador) ) {
 			alerta = new Alerta( Alerta.TIPO_SUCCESS, "Registro eliminado con exito");
 		}else {
 			alerta = new Alerta( Alerta.TIPO_WARNING, "Registro NO eliminado, sentimos las molestias");
@@ -159,6 +161,10 @@ public class VideosCrudController extends HttpServlet {
 				video.setTitulo(titulo);
 				video.setCodigo(codigo);
 				
+				Usuario u = new Usuario();;
+				u.setId( (long)Integer.parseInt(usuario_id));
+				video.setUsuario(u);
+				
 				//validar 		
 				Set<ConstraintViolation<Video>> violations = validator.validate(video);
 				
@@ -172,9 +178,9 @@ public class VideosCrudController extends HttpServlet {
 				
 					try {
 						if ( identificador > 0 ) {
-							dao.update(video);				
+							videoDAO.update(video);				
 						}else {				
-							dao.insert(video);
+							videoDAO.insert(video);
 						}
 						alerta = new Alerta( Alerta.TIPO_SUCCESS, "Registro guardado con exito");
 						listar(request);
@@ -198,12 +204,14 @@ public class VideosCrudController extends HttpServlet {
 		
 		int identificador = Integer.parseInt(id);
 		if ( identificador > 0 ) {			
-			video = dao.getById(identificador);
+			video = videoDAO.getById(identificador);
 		}else {
 			alerta = new Alerta( Alerta.TIPO_PRIMARY, "Insertar nuevo video");
 		}
 		
-		request.setAttribute("video", video);		
+		request.setAttribute("video", video);	
+
+		request.setAttribute("usuarios", usuarioDAO.getAll());
 	}
 
 	
@@ -218,6 +226,8 @@ public class VideosCrudController extends HttpServlet {
 		id = request.getParameter("id");
 		titulo = request.getParameter("titulo");
 		codigo = request.getParameter("codigo");
+		
+		usuario_id = request.getParameter("usuario_id");
 		
 	
 		

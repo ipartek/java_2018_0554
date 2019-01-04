@@ -32,11 +32,10 @@
 			</div>
 			
 			<div class="form-group">
-			<label for="id_usuario">ID usuario</label>
-				<select name="id_usuario" class="form-control">
-				<option value="null" selected>Seleccionado</option> 
-				<c:forEach items="${udao}" var="u">
-			   		<option value="${u.id}" >${u.email}  </option> 
+			<label for="usuario_id">Usuario</label>
+				<select name=usuario_id class="form-control">
+				<c:forEach items="${usuarios}" var="u">
+			   		<option value="${u.id}" ${(u.id==video.usuario.id)?"selected":"" } >${u.email}  </option> 
 		    	</c:forEach>
 				</select>		    
 			</div>
@@ -79,9 +78,6 @@
 		</c:if>
 			
 		</form>
-		
-		
-		
 
 	</main>				
 		

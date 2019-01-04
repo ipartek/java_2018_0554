@@ -10,22 +10,25 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
 import com.ipartek.formacion.modelo.pojo.Video;
 
 public class VideoDAO {
-	private static final String SQL_DELETE = "DELETE FROM `video` WHERE id = ?;";
-	private static final String SQL_UPDATE = "UPDATE `video` SET titulo = ? , codigo = ? WHERE id = ?;";
-	private static final String SQL_INSERT = "INSERT INTO `video` (`titulo`, `codigo`) VALUES (?,?);";
+	
 	private static final String SQL_GET_ALL_BY_NOMBRE = "SELECT id, titulo, codigo FROM video WHERE titulo LIKE ? ORDER BY titulo ASC LIMIT 500";
 	
 //	private static final String SQL_GETALL = "SELECT id, titulo, codigo FROM video ORDER BY id DESC LIMIT 500";
 //	private static final String SQL_GETBYID = "SELECT id, titulo, codigo FROM video WHERE id= ?;";
-	
+//	private static final String SQL_DELETE = "DELETE FROM `video` WHERE id = ?;";
+//	private static final String SQL_UPDATE = "UPDATE `video` SET titulo = ? , codigo = ? WHERE id = ?;";
+//	private static final String SQL_INSERT = "INSERT INTO `video` (`titulo`, `codigo`) VALUES (?,?);";
 	
 
 	private static final String SQL_GETALL = 
-	"SELECT v.id AS 'video_id', v.titulo AS 'video_titulo', v.codigo AS 'video_codigo', u.id AS 'usuario_id',  u.email AS 'usuario_email' , u.password  AS 'usuario_pass'FROM video as v, usuario as u WHERE v.id_usuario = u.id ;";
+	"SELECT v.id AS 'video_id', v.titulo AS 'video_titulo', v.codigo AS 'video_codigo', u.id AS 'usuario_id',  u.email AS 'usuario_email' , u.password  AS 'usuario_pass'FROM video as v, usuario as u WHERE v.id_usuario = u.id ORDER BY v.id ASC LIMIT 500;";
 	private static final String SQL_GETBYID = 
-		"SELECT v.id AS 'video_id', v.titulo AS 'video_titulo', v.codigo AS 'video_codigo', u.id AS 'usuario_id',  u.email AS 'usuario_email' , u.password  AS 'usuario_pass'FROM video as v, usuario as u WHERE v.id_usuario = u.id AND v.id= ?;";
-		
-		
+	"SELECT v.id AS 'video_id', v.titulo AS 'video_titulo', v.codigo AS 'video_codigo', u.id AS 'usuario_id',  u.email AS 'usuario_email' , u.password  AS 'usuario_pass'FROM video as v, usuario as u WHERE v.id_usuario = u.id AND v.id= ?;";
+	private static final String SQL_INSERT = 
+	"INSERT INTO video (titulo, codigo, id_usuario)  VALUES (?,?,?);";
+	private static final String SQL_UPDATE = 
+	"UPDATE video SET  titulo = ?, codigo = ?, id_usuario = ? WHERE id = ?;";
+	private static final String SQL_DELETE = "DELETE FROM `video` WHERE id = ?;";
 	
 	private static VideoDAO INSTANCE = null;
 
@@ -142,6 +145,7 @@ private Video rowMapper(ResultSet rs) throws SQLException {
 
 			pst.setString(1, video.getTitulo());
 			pst.setString(2, video.getCodigo());
+			pst.setLong(3, video.getUsuario().getId());
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
 				resul = true;
@@ -159,7 +163,8 @@ private Video rowMapper(ResultSet rs) throws SQLException {
 			
 			pst.setString(1, video.getTitulo());
 			pst.setString(2, video.getCodigo());
-			pst.setLong(3, video.getId());
+			pst.setLong(3, video.getUsuario().getId());
+			pst.setLong(4, video.getId());
 			
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
