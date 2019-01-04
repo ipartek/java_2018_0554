@@ -167,7 +167,7 @@ public class VideosController extends HttpServlet {
 			Usuario u = new Usuario();
 			HttpSession session = request.getSession();
 			u = (Usuario) session.getAttribute("usuarioLogueado");
-			request.setAttribute("videos", daoVideo.getByUser(u));
+			request.setAttribute("videos", daoVideo.getByUser(u.getId()));
 			mensaje = new Mensaje(mensaje.MENSAJE_INFO, "Lista de tus vídeos");
 		}
 		else {

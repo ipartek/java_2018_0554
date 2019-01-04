@@ -52,13 +52,13 @@ public class VideoDAO {
 		return v;
 	}
 	
-	public ArrayList<Video> getByUser(Usuario u) {
+	public ArrayList<Video> getByUser(Long id) {
 		
 		ArrayList<Video> v = new ArrayList<Video>();
 
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_GETBYUSER);) {
-			pst.setLong(1, u.getId());
+			pst.setLong(1, id);
 
 			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
