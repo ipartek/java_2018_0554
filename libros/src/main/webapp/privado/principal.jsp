@@ -15,15 +15,17 @@
     <tr>
       <th scope="col">Titulo</th>
       <th scope="col">Video</th>
+      <th scope="col">Propietario</th>
       <th scope="col">Comprar?</th>
     </tr>
   </thead>
   <tbody>
-  <c:forEach items="${videos}" var="v">
+  <c:forEach items="${videos}" var="vid">
     <tr>
-      <td><a href="privado/videos?op=2&id=${v.id}&nombre=${v.nombre}&codigo=${v.codigo}">${v.nombre}</a></td>
-      <td><iframe width="560" height="315" src="//www.youtube.com/embed/${v.codigo}" allowfullscreen=""></iframe></td>
-      <td><a href="privado/comprar?idVideo=${v.id}">Añadir al carrito</a></td>
+      <td><a href="privado/videos?op=2&id=${vid.id}&nombre=${vid.nombre}&codigo=${vid.codigo}">${vid.nombre}</a></td>
+      <td><iframe width="360" height="215" src="//www.youtube.com/embed/${vid.codigo}" allowfullscreen=""></iframe></td>
+      <td>${vid.usuario.email}</td>
+      <td><a href="privado/comprar?idVideo=${vid.id}">Añadir al carrito</a></td>
     </tr>
     </c:forEach>
 

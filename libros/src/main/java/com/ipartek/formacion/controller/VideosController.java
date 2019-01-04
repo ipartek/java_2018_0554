@@ -17,8 +17,10 @@ import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.modelo.dao.UsuarioDAO;
 import com.ipartek.formacion.modelo.dao.VideoDAO;
 import com.ipartek.formacion.modelo.pojo.Alerta;
+import com.ipartek.formacion.modelo.pojo.Usuario;
 import com.ipartek.formacion.modelo.pojo.Video;
 
 /**
@@ -45,8 +47,10 @@ public class VideosController extends HttpServlet {
 	private String id;
 	private String nombre;
 	private String codigo;
+	private String idUsuario;
 
-	private static VideoDAO dao = null;
+	private static VideoDAO daoVideo = null;
+	private static UsuarioDAO daoUsuario = null;
 
 	private ValidatorFactory factory;
 	private Validator validator;
@@ -56,7 +60,8 @@ public class VideosController extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		dao = VideoDAO.getInstance();
+		daoVideo = VideoDAO.getInstance();
+		daoUsuario = UsuarioDAO.getInstance();
 		factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
 	}
@@ -120,6 +125,7 @@ public class VideosController extends HttpServlet {
 		id = request.getParameter("id");
 		nombre = request.getParameter("nombre");
 		codigo = request.getParameter("codigo");
+		idUsuario = request.getParameter("idUsuario");
 
 		LOG.debug(String.format("parametros: op=%s id=%s nombre=%s codigo=%s", op, id, nombre, codigo));
 
@@ -127,7 +133,7 @@ public class VideosController extends HttpServlet {
 	private void listar(HttpServletRequest request) {
 
 		// alerta = "Lista de Usuarios";
-		request.setAttribute("videos", dao.getAll());
+		request.setAttribute("videos", daoVideo.getAll());
 
 	}
 
@@ -135,7 +141,7 @@ public class VideosController extends HttpServlet {
 
 		int identificador = Integer.parseInt(id);
 
-		if (dao.delete(identificador)) {
+		if (daoVideo.delete(identificador)) {
 			alerta = new Alerta("warning","Registro eliminado");
 
 
@@ -152,10 +158,16 @@ public class VideosController extends HttpServlet {
 		
 		Video v = new Video();
 		int identificador = Integer.parseInt(id);
-
+		int idUsu = Integer.parseInt(idUsuario);
+		
 		v.setId((long) identificador);
 		v.setNombre(nombre);
 		v.setCodigo(codigo);
+		
+		Usuario u = new Usuario();
+		u.setId((long)idUsu);
+		
+		v.setUsuario(u);
 
 		// validar
 		Set<ConstraintViolation<Video>> violations = validator.validate(v);
@@ -166,12 +178,12 @@ public class VideosController extends HttpServlet {
 				if (identificador > 0) {
 //	    			UPDATE DE USUARIO
 
-					dao.update(v);
+					daoVideo.update(v);
 
 				} else {
 //	    			INSERT DE NUEVO Video
 
-					dao.insert(v);
+					daoVideo.insert(v);
 				}
 				listar(request);
 			} catch (SQLException e) {
@@ -179,6 +191,7 @@ public class VideosController extends HttpServlet {
 
 				vista = VIEW_FORM;
 				request.setAttribute("video", v);
+				request.setAttribute("usuarios", daoUsuario.getAll());
 			}
 		}
 		// si validacion no correcta
@@ -187,6 +200,7 @@ public class VideosController extends HttpServlet {
 			// volver al formulario, cuidado que no se pierdan los valores en el form
 			vista = VIEW_FORM;
 			request.setAttribute("video", v);
+			request.setAttribute("usuarios", daoUsuario.getAll());
 
 		}
 
@@ -196,10 +210,10 @@ public class VideosController extends HttpServlet {
 
 		vista = VIEW_FORM;
 		Video v = new Video();
-
+		
 		int identificador = Integer.parseInt(id);
 		if (identificador > 0) {
-			v = dao.getById(identificador);
+			v = daoVideo.getById(identificador);
 
 //			
 //			u.setId((long)identificador);
@@ -212,6 +226,7 @@ public class VideosController extends HttpServlet {
 		}
 
 		request.setAttribute("video", v);
+		request.setAttribute("usuarios", daoUsuario.getAll());
 	}
 
 

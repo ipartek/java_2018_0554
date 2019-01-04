@@ -12,11 +12,11 @@ import com.ipartek.formacion.modelo.pojo.Video;
 
 public class VideoDAO {
 
-	public static final String SQL_GETALL = "SELECT id, nombre, codigo FROM video ORDER BY id DESC LIMIT 500;";
-	public static final String SQL_GETBYID = "SELECT id, nombre, codigo FROM video WHERE id= ?;";
+	public static final String SQL_GETALL = "SELECT v.id as id_video, u.id as id_usuario, email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario=u.id;";
+	public static final String SQL_GETBYID = "SELECT v.id as id_video, u.id as id_usuario, email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario=u.id AND v.id= ?;";
 	public static final String SQL_GETALLBYNOMBRE = "SELECT id, nombre, codigo FROM video WHERE NOMBRE LIKE ? ORDER BY id DESC LIMIT 500;";
-	public static final String SQL_INSERT = "INSERT INTO `video` (`nombre`, `codigo`) VALUES (?,?);";
-	public static final String SQL_UPDATE = "UPDATE `video` SET nombre=? , codigo=? WHERE id=?";
+	public static final String SQL_INSERT = "INSERT INTO `video` (`nombre`, `codigo`, `id_usuario`) VALUES (?,?,?);";
+	public static final String SQL_UPDATE = "UPDATE `video` SET nombre=? , codigo=?, id_usuario=? WHERE id=?";
 	public static final String SQL_DELETE = "DELETE from `video` where id=?";
 	
 	private static VideoDAO INSTANCE = null;
@@ -45,10 +45,8 @@ public class VideoDAO {
 			try (ResultSet rs = pst.executeQuery()) {
 
 				while (rs.next()) {
-					registro = new Video();
-					registro.setId(rs.getLong("id"));
-					registro.setNombre(rs.getString("nombre"));
-					registro.setCodigo(rs.getString("codigo"));
+					registro = rowMapper(rs);
+
 				}
 			}
 
@@ -69,11 +67,8 @@ public class VideoDAO {
 			Video v = null;
 			while (rs.next()) {
 				try {
-					v = new Video();
-					v.setId(rs.getLong("id"));
-					v.setNombre(rs.getString("nombre"));
-					v.setCodigo(rs.getString("codigo"));
-					listado.add(v);
+
+					listado.add(rowMapper(rs));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -126,7 +121,8 @@ public boolean insert( Video v) throws SQLException {
 			){
 			
 			pst.setString(1, v.getNombre());
-			pst.setString(2, v.getCodigo());			
+			pst.setString(2, v.getCodigo());	
+			pst.setLong(3, v.getUsuario().getId());
 			int affectedRows = pst.executeUpdate();
 			if ( affectedRows == 1 ) {
 				resul = true;
@@ -148,7 +144,9 @@ public boolean update(Video v) throws SQLException {
 			
 			pst.setString(1, v.getNombre());
 			pst.setString(2, v.getCodigo());
-			pst.setLong(3,v.getId());	
+			pst.setLong(3, v.getUsuario().getId());
+			pst.setLong(4, v.getId());
+				
 			int affectedRows = pst.executeUpdate();
 			if ( affectedRows == 1 ) {
 				resul = true;
@@ -177,12 +175,21 @@ public boolean delete( long id) throws SQLException {
 		
 	}
 
-//private Video rowMapper{
-//	v = new Video();
-//	v.setId(rs.getLong("id"));
-//	v.setNombre(rs.getString("nombre"));
-//	v.setCodigo(rs.getString("codigo"));
-//	listado.add(v);
-//}
+private Video rowMapper(ResultSet rs) throws SQLException{
+	Video v = new Video();
+	v.setId(rs.getLong("id_video"));
+	v.setNombre(rs.getString("nombre"));
+	v.setCodigo(rs.getString("codigo"));
+
+	 
+	 Usuario u = new Usuario();
+	 u.setId(rs.getLong("id_usuario"));
+	 u.setEmail(rs.getString("email"));
+	 u.setPassword(rs.getString("password"));
+	 
+	 v.setUsuario(u);
+	 
+	 return v;
+}
 
 }
