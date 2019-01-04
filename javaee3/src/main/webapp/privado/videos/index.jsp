@@ -24,13 +24,16 @@
 		
 		<tbody>
 		<c:forEach items="${videos}" var="v">
-			    <tr>		    	
-			      <th scope="row">${v.id}</th>
-			      <td><a href="privado/videos?op=2&id=${v.id}">${v.nombre}</a></td>
-			      <th scope="row">${v.codigo}</th>			      		      
-			      <th scope="row">${v.usuario.email}</th>
-			    </tr>    
-		    </c:forEach>
+				
+			<tr>
+			
+				<th scope="row">${v.id}</th>
+				<td><a href="privado/videos?op=2&id=${v.id}">${v.nombre}</a></td>
+				<td><iframe width="350" height="250" src="https://www.youtube.com/embed/${v.codigo}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>			      		      
+			    <th scope="row">${v.usuario.email}</th>
+			</tr>
+			
+			</c:forEach>
 		</tbody>
 	</table>
 
