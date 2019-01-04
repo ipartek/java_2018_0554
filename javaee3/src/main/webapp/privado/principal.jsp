@@ -17,18 +17,7 @@
 		  </thead>
 			
 			<tbody>
-			<c:forEach items="${videos}" var="v">
-				<tr>
-			      <th scope="row">${v.id}</th>
-			      <td>${v.nombre}</td>
-			      <td><iframe width="150" 
-												        height="150" 
-												        src="https://www.youtube.com/embed/${v.url}" 
-												        frameborder="0" 
-												        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-												        allowfullscreen></iframe></td>
-			    </tr>
-			</c:forEach>
+		
 			</tbody>
       	 </table>
       </div>

@@ -1,27 +1,49 @@
 package com.ipartek.formacion.modelo.pojo;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Video {
-	
-	//Atributos
+
+	// Atributos
 	private long id;
-	private String nombre;
-	private String url;
 	
-	//Constructores
+	@NotEmpty
+	@Size(min=5, max=150)
+	private String nombre;
+	
+	@NotEmpty
+	@Size(min=11, max=11)
+	private String codigo;
+
+	private Usuario usuario;
+	
+	// Constructores
+
 	public Video() {
 		super();
 		this.id = -1;
-		this.nombre ="";
-		this.url ="";
+		this.nombre = "";
+		this.codigo = "";
+		this.usuario = new Usuario();
 	}
 	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public Video(String nombre) {
 		this();
 		this.nombre = nombre;
-	
 	}
+	
 
+	// Getters y Setters
 
 	public long getId() {
 		return id;
@@ -39,19 +61,19 @@ public class Video {
 		this.nombre = nombre;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getCodigo() {
+		return codigo;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	@Override
 	public String toString() {
-		return "Video [id=" + id + ", nombre=" + nombre + ", url=" + url + "]";
+		return "Video [id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + ", usuario=" + usuario + "]";
 	}
-	
-	
-	
+
+
+
 }

@@ -32,7 +32,7 @@ public class LogoutServlet extends HttpServlet {
 		session.invalidate();
 		session = null;
 		
-		response.sendRedirect(request.getContextPath() + "/index.jsp");
+		response.sendRedirect(request.getContextPath() + "/index");
 	}
 
 }
