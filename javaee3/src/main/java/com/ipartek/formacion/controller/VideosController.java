@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -17,8 +18,10 @@ import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.modelo.daos.UsuarioDAO;
 import com.ipartek.formacion.modelo.daos.VideoDAO;
 import com.ipartek.formacion.modelo.pojos.Mensaje;
+import com.ipartek.formacion.modelo.pojos.Usuario;
 import com.ipartek.formacion.modelo.pojos.Video;
 
 @WebServlet("/privado/videos")
@@ -46,20 +49,23 @@ public class VideosController extends HttpServlet {
 	private String id;
 	private String nombre;
 	private String codigo;
+	private String id_usuario;
 	// String que contiene la operacion
 	private String op;
 	
 	// String de alerta donde se almacenan las alertas del validator del pojo
 	private String alerta;
 	
-	VideoDAO dao;
+	VideoDAO daoVideo;
+	UsuarioDAO daoUsuario;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
-		dao = VideoDAO.getInstance();
+		daoVideo = VideoDAO.getInstance();
+		daoUsuario = UsuarioDAO.getInstance();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -88,7 +94,6 @@ public class VideosController extends HttpServlet {
 				break;
 			default:
 				listar(request);
-				mensaje = new Mensaje(mensaje.MENSAJE_INFO, "Lista de videos");
 				break;
 			}
 		} catch (Exception e) {
@@ -108,19 +113,21 @@ public class VideosController extends HttpServlet {
 		v.setNombre(nombre);
 		v.setCodigo(codigo);
 		v.setId((long) identificador);
+		v.setUsuario(new Usuario(Long.parseLong(id_usuario)));
 		Set<ConstraintViolation<Video>> violations = validator.validate(v);
 		if (violations.isEmpty()) {
 			try {
 				if (identificador > 0) {
-					dao.update(v);
+					daoVideo.update(v);
 					mensaje = new Mensaje(mensaje.MENSAJE_SUCCESS, "Usuario actualizado");
 				} else {
-					dao.insert(v);
+					daoVideo.insert(v);
 					mensaje = new Mensaje(mensaje.MENSAJE_SUCCESS, "Usuario introducido");
 				}
 			} catch (SQLException e) {
 				mensaje = new Mensaje(mensaje.MENSAJE_WARNING, "Lo sentimos pero el vídeo ya existe");
 				request.setAttribute("video", v);
+				request.setAttribute("usuarios", daoUsuario.getAll());
 				vista = VIEW_FORM;
 			}
 		} else {
@@ -133,15 +140,16 @@ public class VideosController extends HttpServlet {
 			alerta += "</ul>";
 			vista = VIEW_FORM;
 			mensaje = new Mensaje(mensaje.MENSAJE_DANGER, alerta);
+			request.setAttribute("usuarios", daoUsuario.getAll());
 			request.setAttribute("video", v);
 		}
 		listar(request);		
 	}
 
-	private void eliminar(HttpServletRequest request) {
+	private void eliminar(HttpServletRequest request) throws SQLException {
 		vista = VIEW_INDEX;
 		int identificador = Integer.parseInt(id);
-		if (dao.delete((long) identificador)) {
+		if (daoVideo.delete((long) identificador)) {
 			mensaje = new Mensaje(mensaje.MENSAJE_SUCCESS, "Vídeo eliminado");
 		} else {
 			Video v = new Video();
@@ -155,7 +163,17 @@ public class VideosController extends HttpServlet {
 	}
 
 	private void listar(HttpServletRequest request) {
-		request.setAttribute("videos", dao.getAll());
+		if ("0".equals(id)) {
+			Usuario u = new Usuario();
+			HttpSession session = request.getSession();
+			u = (Usuario) session.getAttribute("usuarioLogueado");
+			request.setAttribute("videos", daoVideo.getByUser(u));
+			mensaje = new Mensaje(mensaje.MENSAJE_INFO, "Lista de tus vídeos");
+		}
+		else {
+			request.setAttribute("videos", daoVideo.getAll());
+			mensaje = new Mensaje(mensaje.MENSAJE_INFO, "Lista de videos");
+		}
 	}
 	
 	private void irFormulario(HttpServletRequest request) {
@@ -164,11 +182,13 @@ public class VideosController extends HttpServlet {
 		int identificador = Integer.parseInt(id);
 		if (identificador > 0) {
 			mensaje = new Mensaje(mensaje.MENSAJE_INFO, "Detalle de un vídeo");
-			v = dao.getById((long) identificador);
-		} else {
+			v = daoVideo.getById((long) identificador);
+		} 
+		else {
 			mensaje = new Mensaje(mensaje.MENSAJE_INFO, "Registrar un nuevo vídeo");
 		}
 		request.setAttribute("video", v);
+		request.setAttribute("usuarios", daoUsuario.getAll());
 	}
 
 	protected void getParametros(HttpServletRequest request) {
@@ -179,6 +199,7 @@ public class VideosController extends HttpServlet {
 		id = request.getParameter("id");
 		nombre = request.getParameter("nombre");
 		codigo = request.getParameter("codigo");
+		id_usuario = request.getParameter("id_usuario");
 
 		LOG.debug(String.format("parametros: op=%s id=%s email=%s password=%s", op, id, nombre, codigo));
 	}

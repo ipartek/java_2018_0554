@@ -29,6 +29,11 @@ public class Usuario {
 		setEmail(email);
 		setPassword(password);
 	}
+	
+	public Usuario(Long id) {
+		this();
+		setId(id);
+	}
 
 	public Long getId() {
 		return id;

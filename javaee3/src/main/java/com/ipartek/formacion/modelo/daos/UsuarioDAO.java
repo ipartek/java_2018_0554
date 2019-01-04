@@ -12,6 +12,7 @@ import com.ipartek.formacion.modelo.pojos.Video;
 
 public class UsuarioDAO {
 	private static UsuarioDAO INSTANCE = null;
+	private static final String SQL_GETBYUSER = "SELECT v.id as 'id_video', u.id as 'id_usuario', nombre, codigo, email, `password` FROM video as v, usuario as u WHERE v.id_usuario = u.id AND v.id_usuario = ? ORDER BY v.id DESC LIMIT 5;";
 	// Constructor privado, solo acceso por getInstance()
 	private UsuarioDAO(){
 		super();
@@ -83,6 +84,23 @@ public class UsuarioDAO {
 		}
 		return usuarios;
 	}
+	
+	public Usuario getByUser(Usuario u) {
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_GETBYUSER);) {
+			pst.setLong(1, u.getId());
+
+			try (ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) {
+					u = rowMapper(rs);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return u;
+	}
+	
 	public boolean insert(Usuario u) throws SQLException {
 		boolean r = false;
 		String sql = "INSERT INTO `usuario` (`email`, `password`) VALUES (?, ?);";
@@ -151,5 +169,13 @@ public class UsuarioDAO {
 			e.printStackTrace();
 		}
 		return r;
+	}
+	
+	private Usuario rowMapper(ResultSet rs) throws SQLException {
+		Usuario u = new Usuario();
+		u.setId(rs.getLong("id_usuario"));
+		u.setEmail(rs.getString("email"));
+		u.setPassword(rs.getString("password"));
+		return u;
 	}
 }

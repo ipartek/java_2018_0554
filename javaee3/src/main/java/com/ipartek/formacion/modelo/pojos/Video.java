@@ -13,6 +13,7 @@ public class Video {
 	@NotNull
 	@Size(min=11, max=11)
 	private String codigo; // Not Null, Unique
+	private Usuario usuario;
 
 	// Constructores
 
@@ -21,6 +22,7 @@ public class Video {
 		setId(-1);
 		setNombre(nombre);
 		setCodigo(codigo);
+		setUsuario(new Usuario());
 	}
 	
 	// Getters y Setters
@@ -47,6 +49,14 @@ public class Video {
 
 	public void setCodigo(String url) {
 		this.codigo = url;
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario id_usuario) {
+		this.usuario = id_usuario;
 	}
 
 	// Otros metodos => toString

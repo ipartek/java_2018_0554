@@ -3,14 +3,15 @@
 
 <main role="main" class="container">
 <%@ include file="../../includes/mensajes.jsp"%>
-<a href="videos?op=2&id=-1" class="mb-4 btn btn-outline-success">Registrar Nuevo Vídeo</a>
-
+<a href="videos?op=2&id=-1" class="mb-4 btn btn-outline-success">Registrar nuevo vídeo</a>
+<a href="videos?&id=0" class="mb-4 btn btn-outline-success">Ver mis vídeos</a>
 <table class="table">
 	<thead class="thead-dark">
 		<tr>
 			<th scope="col">Id</th>
 			<th scope="col">Nombre</th>
-			<th scope="col">Vídeo</th>
+			<th scope="col">Código</th>
+			<th scope="col">Usuario</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -21,9 +22,10 @@
 					<a href="videos?op=2&id=${v.id}">${v.nombre}</a>
 				</td>
 				<td>
-					<iframe width="250" height="250" src="https://www.youtube.com/embed/${v.codigo}" 
-					frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-					allowfullscreen></iframe>
+					${v.codigo}
+				</td>
+				<td>
+					${v.usuario.email}
 				</td>
 			</tr>
 		</c:forEach>
