@@ -17,6 +17,7 @@ import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.modelo.daos.UsuarioDAO;
 import com.ipartek.formacion.modelo.daos.VideoDAO;
 import com.ipartek.formacion.modelo.pojos.Videos;
 import com.ipartek.formacion.modelo.pojos.Alerta;
@@ -50,13 +51,15 @@ public class VideosController extends HttpServlet {
 	private String nombre;
 	private String codigo;
 	
-    private static VideoDAO dao = null;   
-	
+    private static VideoDAO daoVideo = null;   
+      
+    private static UsuarioDAO daoUsuario = null;
 	
     @Override
     public void init(ServletConfig config) throws ServletException {    
     	super.init(config);
-    	dao = VideoDAO.getInstance();
+    	daoVideo = VideoDAO.getInstance();
+    	daoUsuario = UsuarioDAO.getInstance();
     	factory  = Validation.buildDefaultValidatorFactory();
     	validator  = factory.getValidator();
     }
@@ -109,7 +112,7 @@ public class VideosController extends HttpServlet {
 
 	private void listar(HttpServletRequest request) {
 		
-		request.setAttribute("videos", dao.getAll());		
+		request.setAttribute("videos", daoVideo.getAll());		
 		
 	}
 
@@ -118,7 +121,7 @@ public class VideosController extends HttpServlet {
 	
 		int identificador = Integer.parseInt(id);		
 		
-		if ( dao.delete(identificador) ) {
+		if ( daoVideo.delete(identificador) ) {
 			alerta = new Alerta( Alerta.TIPO_SUCCESS, "Registro eliminado con exito");
 		}else {
 			alerta = new Alerta( Alerta.TIPO_WARNING, "Registro NO eliminado, sentimos las molestias");
@@ -152,15 +155,15 @@ public class VideosController extends HttpServlet {
 		
 			try {
 				if ( identificador > 0 ) {
-					dao.update(v);				
+					daoVideo.update(v);				
 				}else {				
-					dao.insert(v);
+					daoVideo.insert(v);
 				}
 				alerta = new Alerta( Alerta.TIPO_SUCCESS, "Registro guardado con exito");
 				listar(request);
 				
 			}catch ( SQLException e) {
-				alerta = new Alerta( Alerta.TIPO_WARNING, "Lo sentimos pero el EMAIL ya existe");
+				alerta = new Alerta( Alerta.TIPO_WARNING, "Lo sentimos, no se ha podido continuar con el registro");
 				vista = VIEW_FORM;
 				request.setAttribute("video", v);
 			}	
@@ -176,12 +179,12 @@ public class VideosController extends HttpServlet {
 		
 		int identificador = Integer.parseInt(id);
 		if ( identificador > 0 ) {			
-			v = dao.getById(identificador);
+			v = daoVideo.getById(identificador);
 		}
 		request.setAttribute("video", v);
+		request.setAttribute("usuarios", daoUsuario.getAll() );
 		
-		//TODO enviar atributo usuarios
-		
+				
 	}
 
 	

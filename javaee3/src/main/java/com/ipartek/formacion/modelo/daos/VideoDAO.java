@@ -108,6 +108,7 @@ public class VideoDAO {
 			pst.setString(2, v.getCodigo());
 			pst.setLong(3, v.getId());
 			
+			
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
 				resul = true;

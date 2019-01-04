@@ -39,7 +39,19 @@
 					<option value="6">marianiko@pepemail.com</option>
 				</select>
 			</div> -->
-
+			
+			
+			<!--  NO FUNCIONA! -->
+			<div class="form-group">
+			<select name="id_usuario" class="form-control">						
+					 	<c:forEach items="${usuarios}" var="u">
+					 		<option value="${u.id}" ${(u.id==video.usuario.id)?"selected":""}>${u.email}</option>
+					 	</c:forEach>
+			</select>
+			
+			<!--  -->
+			
+			</div>
 			<input type="hidden" name="op" value="3">
 			<button type="submit" class="btn btn-primary btn-block">GUARDAR</button>
 		</form>
