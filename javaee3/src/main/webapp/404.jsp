@@ -1,6 +1,6 @@
-<%@ include file="../includes/header.jsp"  %>
-<%@ include file="../includes/navbar.jsp"  %>
-<%@ include file="../includes/mensajes.jsp"  %>
+<%@ include file="includes/header.jsp"  %>
+<%@ include file="includes/navbar.jsp"  %>
+<%@ include file="includes/mensajes.jsp"  %>
 
 	<meta http-equiv="refresh" content="10; URL=${pageContext.request.contextPath}/login">
 
@@ -13,4 +13,4 @@
 	</main>				
 
 
-<%@ include file="../includes/footer.jsp"  %>  
+<%@ include file="includes/footer.jsp"  %>  

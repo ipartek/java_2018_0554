@@ -6,18 +6,29 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class Video {
 
+	// Atributos
 	private long id;
 	
 	@NotEmpty
-	@Size(min=4, max=150)
+	@Size(min=5, max=150)
 	private String nombre;
 	
 	@NotEmpty
-	@Size(min=11,max=11)
+	@Size(min=11, max=11)
 	private String codigo;
 
 	private Usuario usuario;
+	
+	// Constructores
 
+	public Video() {
+		super();
+		this.id = -1;
+		this.nombre = "";
+		this.codigo = "";
+		this.usuario = new Usuario();
+	}
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -26,25 +37,13 @@ public class Video {
 		this.usuario = usuario;
 	}
 
-	public Video() {
-		super();
-		this.id = -1;
-		this.nombre = "Surf Search Spot 2 0 video promo";
-		this.codigo = "LPDhuthFD98";
-		this.usuario=new Usuario();
-	}
-	
 	public Video(String nombre) {
 		this();
-		setNombre( nombre);
+		this.nombre = nombre;
 	}
 	
-	public Video(Long id,String nombre, String codigo) {
-		this();
-		setId(id);
-		setNombre( nombre);
-		setCodigo( codigo);
-	}
+
+	// Getters y Setters
 
 	public long getId() {
 		return id;
@@ -72,9 +71,8 @@ public class Video {
 
 	@Override
 	public String toString() {
-		return "Video [id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + "]";
+		return "Video [id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + ", usuario=" + usuario + "]";
 	}
-	
 
 
 

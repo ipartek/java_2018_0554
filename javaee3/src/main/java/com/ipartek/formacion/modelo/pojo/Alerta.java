@@ -1,41 +1,46 @@
 package com.ipartek.formacion.modelo.pojo;
 
 public class Alerta {
-	public static final String OK = "success";
-	public static final String KO = "danger";
 	
-	private String mensaje;
+	public static final String TIPO_PRIMARY = "primary";
+	public static final String TIPO_SUCCESS = "success";
+	public static final String TIPO_DANGER = "danger";
+	public static final String TIPO_WARNING = "warning";
+	
+	private String texto;
 	private String tipo;
-	
-	public String getMensaje() {
-		return mensaje;
-	}
-	public void setMensaje(String mensaje) {
-		this.mensaje = mensaje;
-	}
-	public String getTipo() {
-		return tipo;
-	}
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-	
 	
 	public Alerta() {
 		super();
-		this.mensaje=mensaje;
-		this.tipo=tipo;
+		this.texto = "Error Inexperado";
+		this.tipo = TIPO_DANGER;
 	}
-	public Alerta(String mensaje, String tipo) {
+
+	public Alerta(String tipo, String texto) {
 		this();
-		setMensaje(mensaje);
-		setTipo(tipo);
+		this.texto = texto;
+		this.tipo = tipo;
 	}
+
+	public String getTexto() {
+		return texto;
+	}
+
+	public void setTexto(String texto) {
+		this.texto = texto;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
 	@Override
 	public String toString() {
-		return "Alerta [mensaje=" + mensaje + ", tipo=" + tipo + "]";
+		return "Alerta [texto=" + texto + ", tipo=" + tipo + "]";
 	}
 	
-	
-
 }

@@ -1,30 +1,35 @@
-<%@ include file="../../includes/header.jsp"%>
-<%@ include file="../../includes/navbar.jsp"%>
-<%@ include file="../../includes/mensajes.jsp"%>
+<%@ include file="../../includes/header.jsp"  %>
+<%@ include file="../../includes/navbar.jsp"  %>
+<%@ include file="../../includes/mensajes.jsp"  %>
 
 
-<main role="main" class="container"> 
-<form action="privado/usuarios" method="post">
-	<div class="form-group">
-		<label for="exampleInputEmail1">Id</label> <input
-			type="number" class="form-control" id="exampleInputEmail1"
-			name="id" value="${usuario.id }" readonly>
-	</div>
-	<div class="form-group">
-		<label for="exampleInputEmail1">Email</label> <input
-			type="email" class="form-control" id="exampleInputEmail1"
-			name="email" value="${usuario.email }"  placeholder="tu@email.com">
-	</div>
-	<div class="form-group">
-		<label for="exampleInputPassword1">Contraseña</label> <input
-			type="password" class="form-control" id="exampleInputPassword1"
-			name="password" value="${usuario.password }" placeholder="Contraseña">
-	</div>
-	<input type="hidden" name="op" value="3">
-	<button type="submit" class="btn btn-primary btn-block"><c:if test="${usuario.id>0 }">Modificar</c:if><c:if test="${usuario.id<0 }">Nuevo</c:if></button>
-</form>
-<c:if test="${usuario.id>0 }">
-<!-- Button trigger modal -->
+    <main role="main" class="container">
+	
+	
+		<form action="privado/usuarios" method="post">
+		
+			<div class="form-group">
+			    <label for="id">Identificador</label>
+			    <input type="text" name="id" value="${usuario.id}" readonly class="form-control">			    
+			</div>	
+			
+			<div class="form-group">
+			    <label for="email">Correo Electornico</label>
+			    <input type="email" name="email" value="${usuario.email}" class="form-control" placeholder="tucorreo@electronico.com">			    
+			</div>
+			
+			<div class="form-group">
+			    <label for="password">Contraseña</label>
+			    <input type="password" name="password" value="${usuario.password}" class="form-control" placeholder="minimo 5 maximo 50 caracteres">			    
+			</div>
+			
+			<input type="hidden" name="op" value="3">
+			<button type="submit" class="btn btn-primary btn-block">GUARDAR</button>
+		</form>
+		
+		<c:if test="${usuario.id > 0}">
+				
+			<!-- Button trigger modal -->
 			<button type="button" class="btn btn-outline-danger btn-block mt-4" data-toggle="modal" data-target="#exampleModal">
 			  ELIMINAR
 			</button>
@@ -49,10 +54,11 @@
 			    </div>
 			  </div>
 			</div>
+		
+		</c:if>
+		
 
-</c:if>
-
-</main>
+	</main>				
 
 
-<%@ include file="../../includes/footer.jsp"%>
+<%@ include file="../../includes/footer.jsp"  %>  
