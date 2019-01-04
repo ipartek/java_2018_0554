@@ -17,9 +17,9 @@ import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 
-import com.ipartek.formacion.modelo.dao.VideoDAO;
-import com.ipartek.formacion.modelo.pojo.Alerta;
-import com.ipartek.formacion.modelo.pojo.Video;
+import com.ipartek.formacion.modelo.daos.VideoDAO;
+import com.ipartek.formacion.modelo.pojos.Videos;
+import com.ipartek.formacion.modelo.pojos.Alerta;
 
 /**
  * Servlet implementation class UsuarioController
@@ -131,14 +131,14 @@ public class VideosController extends HttpServlet {
 	private void guardar(HttpServletRequest request) {
 
 		//crear video mediante parametros del formulario
-		Video v = new Video();
+		Videos v = new Videos();
 		int identificador = Integer.parseInt(id);	
 		v.setId( (long)identificador);
 		v.setCodigo(codigo);
 		v.setNombre(nombre);
 		
 		//validar usuario		
-		Set<ConstraintViolation<Video>> violations = validator.validate(v);
+		Set<ConstraintViolation<Videos>> violations = validator.validate(v);
 		
 		
 		if ( violations.size() > 0 ) {              // validacion NO correcta
@@ -172,7 +172,7 @@ public class VideosController extends HttpServlet {
 	private void irFormulario(HttpServletRequest request) {
 		
 		vista = VIEW_FORM; 
-		Video v = new Video();
+		Videos v = new Videos();
 		
 		int identificador = Integer.parseInt(id);
 		if ( identificador > 0 ) {			

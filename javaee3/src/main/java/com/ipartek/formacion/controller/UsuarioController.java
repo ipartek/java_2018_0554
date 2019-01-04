@@ -1,6 +1,6 @@
 package com.ipartek.formacion.controller;
 
-
+ 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Set;
@@ -14,11 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+
 import org.apache.log4j.Logger;
 
-import com.ipartek.formacion.modelo.dao.UsuarioDAO;
-import com.ipartek.formacion.modelo.pojo.Alerta;
-import com.ipartek.formacion.modelo.pojo.Usuario;
+import com.ipartek.formacion.modelo.daos.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojos.Usuario;
+import com.ipartek.formacion.modelo.pojos.Alerta;
 
 /**
  * Servlet implementation class UsuarioController
@@ -229,4 +230,13 @@ private void guardar(HttpServletRequest request) {
 	
 	
 
-}
+}	
+		
+	
+
+
+
+	
+	
+
+
