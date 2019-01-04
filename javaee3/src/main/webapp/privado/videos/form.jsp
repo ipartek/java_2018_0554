@@ -34,9 +34,16 @@
 			
 			<div class="form-group">
 				<label for="id_usuario">Seleccionar Usuario</label>
-				<select name="id_usuario" id="id_usuario">
+				<select name="id_usuario" id="id_usuario" class="form-control">
 					<c:forEach items="${usuarios}" var="u">
-					<option value="${u.id}">${u.email}</option>
+					<c:choose>
+					  <c:when test="${video.id==-1}">
+					    <option value="${u.id}" ${(u.id == sessionScope.usuario_logueado.id)?"selected":""}>${u.email}</option>
+					  </c:when>
+					  <c:otherwise>
+					    <option value="${u.id}" ${(u.id == video.usuario.id)?"selected":""}>${u.email}</option>
+					  </c:otherwise>
+					</c:choose>
 					</c:forEach>
 				</select>
 			</div>
