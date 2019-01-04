@@ -16,12 +16,22 @@ public class Video {
 	@Size(min=11,max=11)
 	private String codigo;
 
+	private Usuario usuario;
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public Video() {
 		super();
 		this.id = -1;
 		this.nombre = "Surf Search Spot 2 0 video promo";
 		this.codigo = "LPDhuthFD98";
+		this.usuario=new Usuario();
 	}
 	
 	public Video(String nombre) {

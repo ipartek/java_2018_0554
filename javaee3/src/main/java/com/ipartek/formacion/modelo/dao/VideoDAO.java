@@ -13,6 +13,11 @@ import com.ipartek.formacion.modelo.pojo.Video;
 public class VideoDAO {
 
 	private static VideoDAO INSTANCE = null;
+	private static final String SQL_GET_BY_ID="SELECT v.id as id_video, nombre, codigo FROM video AS v, usuario AS u WHERE v.id_usuario = u.id AND v.id= ?;";
+	private static final String SQL_GET_ALL="SELECT v.id as id_video, nombre, codigo FROM video AS v, usuario AS u WHERE v.id_usuario = u.id ORDER BY id DESC LIMIT 500;";
+	private static final String SQL_UPDATE="SELECT v.id as id_video, nombre, codigo FROM video AS v, usuario AS u WHERE v.id_usuario = u.id ORDER BY id DESC LIMIT 500;";
+	private static final String SQL_INSERT="SELECT v.id as id_video, nombre, codigo FROM video AS v, usuario AS u WHERE v.id_usuario = u.id ORDER BY id DESC LIMIT 500;";
+	private static final String SQL_DELETE="DELETE FROM video WHERE id = ? ;";
 
 	private VideoDAO() {
 		super();
@@ -29,8 +34,7 @@ public class VideoDAO {
 	public Video getById(long id) throws SQLException {
 
 		Video registro = null;
-		String sql = "SELECT id, nombre, codigo FROM video WHERE id= ?;";
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(SQL_GET_BY_ID);) {
 
 			pst.setLong(1, id);
 
@@ -52,19 +56,14 @@ public class VideoDAO {
 	public ArrayList<Video> getAll() throws SQLException {
 
 		ArrayList<Video> listado = new ArrayList<Video>();
-		String sql = "SELECT id, nombre, codigo FROM video ORDER BY id DESC LIMIT 500;";
 
 		try (Connection conn = ConnectionManager.getConnection();
-				PreparedStatement pst = conn.prepareStatement(sql);
+				PreparedStatement pst = conn.prepareStatement(SQL_GET_ALL);
 				ResultSet rs = pst.executeQuery()) {
 			Video v = null;
 			while (rs.next()) {
 				try {
-					v = new Video();
-					v.setId(rs.getLong("id"));
-					v.setNombre(rs.getString("nombre"));
-					v.setCodigo(rs.getString("codigo"));
-					listado.add(v);
+					listado.add(rowMapper(rs));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -109,9 +108,8 @@ public class VideoDAO {
 
 		boolean resul = false;
 		Video video = null;
-		String sql = "DELETE FROM video WHERE id = ? ;";
 
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(SQL_DELETE);) {
 			pst.setLong(1, ident);
 
 			int affectedRows = pst.executeUpdate();
@@ -158,6 +156,20 @@ public class VideoDAO {
 	}
 	
 	
-	// TODO rowMapper
+	private Video rowMapper(ResultSet rs) throws SQLException {
+		Video v = new Video();
+		v.setId( rs.getLong("id_video"));
+		v.setCodigo( rs.getString("codigo"));
+		v.setNombre(rs.getString("nombre"));
+		
+		Usuario u = new Usuario();
+		u.setId(rs.getLong("id_usuario"));
+		u.setEmail(rs.getString("email"));
+		u.setPassword(rs.getString("password"));
+		
+		v.setUsuario(u);
+		
+		return v;
+	}
 
 }
