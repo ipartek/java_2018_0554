@@ -12,7 +12,7 @@
 		    <tr>
 		      <th scope="col">id</th>
 		      <th scope="col">nombre</th>
-		      <th scope="col">codigo</th>		      
+		      <th scope="col">codigo</th>		      		      
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -20,7 +20,7 @@
 			    <tr>
 			      <th scope="row">${v.id}</th>
 			      <td><a href="privado/videos?op=2&id=${v.id}">${v.nombre}</a></td>
-			      <td>${v.codigo}</td>		      
+			      <th scope="row">${v.codigo}</th>			      		      
 			    </tr>    
 		    </c:forEach>
 		  </tbody>
