@@ -32,7 +32,7 @@
 				<th>${dis.id}</th>
 				<td><a href="privado/discos?op=2&id=${dis.id}">${dis.titulo}</td>
 				<td>${dis.artista}</td>
-				<td><img class="rounded mx-auto d-block" src=" ${dis.portada}" alt="${dis.titulo}"></td>
+				<td><img width=150 height=150 class="rounded mx-auto d-block" src=" ${dis.portada}" alt="${dis.titulo}"></td>
 				<td>${dis.year}</td>
 			</tr>
 			

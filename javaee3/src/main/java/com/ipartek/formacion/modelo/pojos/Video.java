@@ -19,6 +19,9 @@ public class Video {
 	private String codigo;
 	
 	
+	private Usuario usuario;
+	
+	
 	//constructores
 	
 	public Video() {
@@ -26,6 +29,7 @@ public class Video {
 		this.id=-1;
 		this.nombre = "";
 		this.codigo = "";
+		this.usuario = new Usuario();
 	}
 
 
@@ -70,11 +74,24 @@ public class Video {
 
 	
 	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+
+	
+
+
 	//otros metodos =>string
+	
 	@Override
 	public String toString() {
-		return "Video [id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + "]";
+		return "Video [id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + ", usuario=" + usuario + "]";
 	}
-	
 	
 }

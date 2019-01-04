@@ -34,10 +34,10 @@ public class Disco {
 	public Disco() {
 		super();
 		this.id = -1;
-		this.titulo = "Dystopia";
-		this.artista = "Megadeth";
-		this.portada = "PortadaDystopia";
-		this.year = "2016";
+		this.titulo = "";
+		this.artista = "";
+		this.portada = "";
+		this.year = "";
 		
 		
 			

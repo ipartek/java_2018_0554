@@ -68,6 +68,8 @@ public class DiscoDAO {
 					d.setId(rs.getLong("id"));
 					d.setTitulo(rs.getString("titulo"));
 					d.setArtista(rs.getString("artista"));
+					d.setPortada(rs.getString("portada"));
+					d.setYear(rs.getString("year"));
 					disco.add(d);
 				} catch (Exception e) {
 					e.printStackTrace();
