@@ -28,6 +28,15 @@
 				    <small id="codigo" class="form-text text-muted">11 caracteres</small>			    
 				</div>
 				
+				
+				<div class="form-group">
+					<label for="id_usuario">Selecciona Usuario</label>
+					<select name="id_usuario">
+					  <option value="1">admin@adsmin.com</option>
+					  <option value="6">marianiko@pepemail.com</option>   
+					</select>
+				</div>	
+					
 				<input type="hidden" name="op" value="3">
 				<button type="submit" class="btn btn-primary btn-block">GUARDAR</button>
 			</form>

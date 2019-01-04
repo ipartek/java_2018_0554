@@ -17,6 +17,8 @@ public class Video {
 	@Size(min=11, max=11)
 	private String codigo;
 
+	private Usuario usuario;
+	
 	// Constructores
 
 	public Video() {
@@ -24,8 +26,17 @@ public class Video {
 		this.id = -1;
 		this.nombre = "";
 		this.codigo = "";
+		this.usuario = new Usuario();
 	}
 	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public Video(String nombre) {
 		this();
 		this.nombre = nombre;
@@ -60,7 +71,9 @@ public class Video {
 
 	@Override
 	public String toString() {
-		return "Video [id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + "]";
+		return "Video [id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + ", usuario=" + usuario + "]";
 	}
+
+
 
 }

@@ -12,15 +12,17 @@
 		    <tr>
 		      <th scope="col">id</th>
 		      <th scope="col">nombre</th>
-		      <th scope="col">codigo</th>		      		      
+		      <th scope="col">codigo</th>
+		      <th scope="col">usuario</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		 	 <c:forEach items="${videos}" var="v">
-			    <tr>
+			    <tr>		    	
 			      <th scope="row">${v.id}</th>
 			      <td><a href="privado/videos?op=2&id=${v.id}">${v.nombre}</a></td>
 			      <th scope="row">${v.codigo}</th>			      		      
+			      <th scope="row">${v.usuario.email}</th>
 			    </tr>    
 		    </c:forEach>
 		  </tbody>

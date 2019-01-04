@@ -178,7 +178,10 @@ public class VideoController extends HttpServlet {
 		if ( identificador > 0 ) {			
 			v = dao.getById(identificador);
 		}
-		request.setAttribute("video", v);		
+		request.setAttribute("video", v);
+		
+		//TODO enviar atributo usuarios
+		
 	}
 
 	
@@ -193,6 +196,8 @@ public class VideoController extends HttpServlet {
 		id = request.getParameter("id");
 		nombre = request.getParameter("nombre");
 		codigo = request.getParameter("codigo");
+		
+		//TODO nuevo parametro para id_usuario
 		
 	}
 	
