@@ -2,6 +2,8 @@ package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 
 import javax.servlet.ServletConfig;
@@ -18,7 +20,9 @@ import javax.validation.ValidatorFactory;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.pojo.Mensaje;
+import com.ipartek.formacion.modelo.pojo.Usuario;
 import com.ipartek.formacion.modelo.pojo.Video;
+import com.ipartek.formacion.modelos.daos.UsuarioDAO;
 import com.ipartek.formacion.modelos.daos.VideosDAO;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
@@ -48,18 +52,26 @@ public class VideosController extends HttpServlet {
 	private String id;
 	private String nombre;
 	private String codigo;
+	private String id_usuario;
+	
 	
 	private VideosDAO dao = null;
+	private UsuarioDAO daoUsuario = null;
 	
 	
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
 		super.init(config);
 		dao = VideosDAO.getInstance();
+		daoUsuario= UsuarioDAO.getInstance();
+		
 		// Crear Factoria y Validador
 		factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
 	}
+
 	
 	@Override
 	public void destroy() {
@@ -151,6 +163,8 @@ public class VideosController extends HttpServlet {
 			
 		}else { // validacion correcta
 			try {
+				Usuario usuarioSeleccionado = daoUsuario.getById(Long.parseLong(id_usuario));
+				v.setUsuario(usuarioSeleccionado);
 				if(identificador>0) {
 					mensaje =new Mensaje(Mensaje.TIPO_PRIMARY,"Update de un video");
 					v.setId( (long)identificador);
@@ -190,6 +204,10 @@ public class VideosController extends HttpServlet {
 			LOG.trace("Crear un nuevo Video");
 		}
 		request.setAttribute("video", v);
+		
+		//TODO Enviar atributos usuarios
+		ArrayList<Usuario> usuarios  =daoUsuario.getAll();
+		request.setAttribute("usuarios", usuarios);
 	}
 
 	private void listar(HttpServletRequest request) {
@@ -209,6 +227,7 @@ public class VideosController extends HttpServlet {
 		id= request.getParameter("id");
 		nombre = request.getParameter("nombre");
 		codigo= request.getParameter("codigo");
+		id_usuario=request.getParameter("id_usuario");
 		
 		LOG.debug(String.format("parametros: op=%s id =%s nombre=%s codigo=%s",op,id,nombre,codigo));
 

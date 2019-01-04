@@ -8,17 +8,16 @@ import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
-import com.ipartek.formacion.controller.VideosController;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 import com.ipartek.formacion.modelo.pojo.Video;
 
 public class VideosDAO {
 	private static final String SQL_DELETE = "DELETE FROM video WHERE id=?";
-	private static final String SQL_UPDATE = "UPDATE video SET nombre=?, codigo=? WHERE id=?;";
-	private static final String SQL_INSERT = "INSERT INTO video (nombre,codigo) VALUES(?,?);";
-	private static final String SQL_GETBYID = "SELECT id,nombre,codigo FROM video WHERE id=?;";
+	private static final String SQL_UPDATE = "UPDATE video SET nombre=?, codigo=?, id_usuario=? WHERE id=?;";
+	private static final String SQL_INSERT = "INSERT INTO video (nombre,codigo,id_usuario) VALUES(?,?,?);";
+	private static final String SQL_GETBYID = "SELECT v.id as id_video,u.id as id_usuario,v.nombre,v.codigo,u.email,u.password FROM video AS v INNER JOIN usuario AS u ON v.id_usuario = u.id WHERE v.id=?;";
 	private static final String SQL_GETBYNOMBRE = "Select id,nombre, codigo from video where nombre like ? order by id desc limit 100";
-	private static final String SQL_GETALL = "Select id, nombre, codigo from video order by id desc limit 100";
+	private static final String SQL_GETALL = "Select v.id as id_video,u.id as id_usuario,v.nombre,v.codigo,u.email,u.password FROM video AS v INNER JOIN usuario AS u ON v.id_usuario = u.id order by v.id desc limit 100";
 	private final static Logger LOG = Logger.getLogger(VideosDAO.class);
 	private static VideosDAO INSTANCE = null;
 	
@@ -122,6 +121,7 @@ public class VideosDAO {
 			
 			pst.setString(1, v.getNombre());
 			pst.setString(2, v.getCodigo());
+			pst.setLong(3, v.getUsuario().getId());
 			
 			int affectedRows = pst.executeUpdate();
 			if(affectedRows== 1){
@@ -140,7 +140,8 @@ public class VideosDAO {
 			){
 			pst.setString(1, v.getNombre());
 			pst.setString(2, v.getCodigo());
-			pst.setLong(3, v.getId());
+			pst.setLong(3, v.getUsuario().getId());
+			pst.setLong(4, v.getId());
 			int affectedRows = pst.executeUpdate();
 			if(affectedRows == 1) {
 				resul = true;
@@ -168,10 +169,17 @@ public class VideosDAO {
 		return resul;
 	}
 	private Video rowMapper(ResultSet rs) throws SQLException {
-		Video video = new Video();
-		video.setId(rs.getLong("id"));
-		video.setNombre(rs.getString("nombre"));
-		video.setCodigo(rs.getString("codigo"));
-		return video;
+		Video v = new Video();
+		v.setId(rs.getLong("id_video"));
+		v.setNombre(rs.getString("nombre"));
+		v.setCodigo(rs.getString("codigo"));
+		
+		Usuario u = new Usuario();
+		u.setId(rs.getLong("id_usuario"));
+		u.setEmail(rs.getString("email"));
+		u.setPassword(rs.getString("password"));
+		
+		v.setUsuario(u);
+		return v;
 	}
 }
