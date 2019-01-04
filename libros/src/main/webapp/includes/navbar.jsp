@@ -25,6 +25,9 @@
 			<li class="nav-item active"><a class="nav-link"
 				href="privado/listado.jsp"><fmt:message key="navbar.listado" /></a>
 			</li>
+						<li class="nav-item active"><a class="nav-link"
+				href="privado/categoria"><fmt:message key="navbar.listado" /></a>
+			</li>
 			<li class="nav-item active"><a class="nav-link"
 				href="privado/usuarios">Usuarios</a></li>
 		</ul>
