@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.modelo.dao.UsuarioDAO;
 import com.ipartek.formacion.modelo.dao.VideoDAO;
 import com.ipartek.formacion.modelo.pojo.Alerta;
+import com.ipartek.formacion.modelo.pojo.Usuario;
 import com.ipartek.formacion.modelo.pojo.Video;
 
 /**
@@ -50,6 +51,7 @@ public class VideoController extends HttpServlet {
 	private String id;
 	private String nombre;
 	private String codigo;
+	private String id_usuario;
 	
     private static VideoDAO daoVideo = null;   
     private static UsuarioDAO daoUsuario = null;
@@ -140,6 +142,10 @@ public class VideoController extends HttpServlet {
 		v.setCodigo(codigo);
 		v.setNombre(nombre);
 		
+		Usuario u = new Usuario();
+		u.setId( Long.parseLong(id_usuario));
+		v.setUsuario(u);
+		
 		//validar usuario		
 		Set<ConstraintViolation<Video>> violations = validator.validate(v);
 		
@@ -149,7 +155,8 @@ public class VideoController extends HttpServlet {
 		  alerta = new Alerta( Alerta.TIPO_WARNING, "Los campos introduciodos no son correctos, por favor intentalo de nuevo");		 
 		  vista = VIEW_FORM; 
 		  // volver al formulario, cuidado que no se pierdan los valores en el form
-		  request.setAttribute("video", v);	
+		  request.setAttribute("video", v);		  
+		  request.setAttribute("usuarios", daoUsuario.getAll() );
 		  
 		}else {									  //  validacion correcta
 		
@@ -166,6 +173,7 @@ public class VideoController extends HttpServlet {
 				alerta = new Alerta( Alerta.TIPO_WARNING, "Lo sentimos pero el EMAIL ya existe");
 				vista = VIEW_FORM;
 				request.setAttribute("video", v);
+				request.setAttribute("usuarios", daoUsuario.getAll() );
 			}	
 		}	
 		
@@ -199,9 +207,7 @@ public class VideoController extends HttpServlet {
 		id = request.getParameter("id");
 		nombre = request.getParameter("nombre");
 		codigo = request.getParameter("codigo");
-		
-		//TODO nuevo parametro para id_usuario
-		
+		id_usuario = request.getParameter("id_usuario");		
 	}
 	
 	
