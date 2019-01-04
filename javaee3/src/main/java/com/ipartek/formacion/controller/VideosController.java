@@ -17,6 +17,7 @@ import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.modelo.dao.UsuarioDAO;
 import com.ipartek.formacion.modelo.dao.VideoDAO;
 import com.ipartek.formacion.modelo.pojo.Mensaje;
 import com.ipartek.formacion.modelo.pojo.Video;
@@ -38,7 +39,8 @@ public class VideosController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private String vista;
-	private VideoDAO dao = null;
+	private VideoDAO videoDao = null;
+	private UsuarioDAO usuarioDao = null;
 	private final static Logger LOG = Logger.getLogger(VideosController.class);
 
 	private ValidatorFactory factory;
@@ -59,12 +61,14 @@ public class VideosController extends HttpServlet {
 	private String id;
 	private String nombre;
 	private String codigo;
+	private String usuario;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		dao = VideoDAO.getInstance();
-
+		videoDao = VideoDAO.getInstance();
+		usuarioDao = UsuarioDAO.getInstance();
+		
 		factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
 	}
@@ -125,7 +129,7 @@ public class VideosController extends HttpServlet {
 		Long identificador = Long.parseLong(id);
 		
 		try {
-			dao.delete(identificador);
+			videoDao.delete(identificador);
 			alerta.setAlerta("El vídeo ha sido eliminado correctamente");
 			alerta.setTipo(ALERTA_SUCCESS);
 		} catch (SQLException e) {
@@ -144,6 +148,7 @@ public class VideosController extends HttpServlet {
 		//v.setId(identificador);
 		v.setNombre(nombre);
 		v.setCodigo(codigo);
+		
 		
 		//Validación del video
 		Set<ConstraintViolation<Video>> violations = validator.validate(v);
@@ -165,15 +170,16 @@ public class VideosController extends HttpServlet {
 			//Validación correcta
 			try {
 				if (identificador > 0) {
-					Video video = dao.getById(identificador);
-					
+					Video video = videoDao.getById(identificador);
+					v.setUsuario(usuarioDao.getById(Long.parseLong(usuario)));
 					if (video != null) {
 						v.setId(identificador);
-						if (video.getNombre().equals(v.getNombre()) && video.getCodigo().equals(v.getCodigo())) {
+						
+						if (video.getNombre().equals(v.getNombre()) && video.getCodigo().equals(v.getCodigo()) && video.getUsuario().getId().equals(v.getUsuario().getId())) {
 							alerta.setAlerta("No se ha realizado ningún cambio sobre el vídeo " + v.toString());
 							alerta.setTipo(ALERTA_WARNING);
 						}else {
-							dao.update(v);
+							videoDao.update(v);
 							alerta.setAlerta("Vídeo modificado: " + video.toString() + " >> " + v.toString());
 							alerta.setTipo(ALERTA_SUCCESS);
 							LOG.info(video.toString() + " cambiado a " + v.toString());
@@ -185,20 +191,23 @@ public class VideosController extends HttpServlet {
 				}else {
 					alerta.setAlerta("Crear un nuevo Vídeo");
 					alerta.setTipo(ALERTA_INFO);
-					
-					Video video = dao.getById(identificador);
+					v.setUsuario(usuarioDao.getById(Long.parseLong(usuario)));
+					Video video = videoDao.getById(identificador);
 					
 					if (video != null) {
 						vista = VIEW_FORM;
 						LOG.error("El vídeo ya existe en la DB");
 					}else {
-						dao.insert(v);
+						videoDao.insert(v);
+						alerta.setAlerta("Video creado con éxito " + v.toString());
+						alerta.setTipo(ALERTA_SUCCESS);
 					}
 				}
 			}catch (MySQLIntegrityConstraintViolationException e) {
 				alerta.setAlerta("Ya existe un vídeo registrado con el código introducido, por favor, introduzca un código nuevo.");
 				alerta.setTipo(ALERTA_DANGER);
 				request.setAttribute("video", v);
+				request.setAttribute("usuarios", usuarioDao.getAll());
 				vista = VIEW_FORM;
 				LOG.error(e.getMessage());
 			} catch (SQLException e) {
@@ -217,16 +226,17 @@ public class VideosController extends HttpServlet {
 		
 		Long identificador = Long.parseLong(id);
 		if (identificador > 0) {
-			v = dao.getById(identificador);
+			v = videoDao.getById(identificador);
 		}else {
 			alerta.setAlerta("Crear un nuevo Video");
 			alerta.setTipo(ALERTA_INFO);
 		}
 		request.setAttribute("video", v);
+		request.setAttribute("usuarios", usuarioDao.getAll());
 	}
 
 	private void listar(HttpServletRequest request) {
-		request.setAttribute("videos", dao.getAll());
+		request.setAttribute("videos", videoDao.getAll());
 		
 	}
 
@@ -239,8 +249,9 @@ public class VideosController extends HttpServlet {
 		id = request.getParameter("id");
 		nombre = request.getParameter("nombre");
 		codigo = request.getParameter("codigo");
+		usuario = request.getParameter("id_usuario");
 		
-		LOG.debug(String.format("Parametros: op=%s id=%s nombre=%s codigo=%s", op, id, nombre, codigo));
+		LOG.debug(String.format("Parametros: op=%s id=%s nombre=%s codigo=%s usuario=%s", op, id, nombre, codigo, usuario));
 	}
 
 }

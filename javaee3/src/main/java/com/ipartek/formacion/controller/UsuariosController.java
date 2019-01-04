@@ -167,7 +167,7 @@ public class UsuariosController extends HttpServlet {
 		u.setEmail(email);
 		u.setPassword(password);
 		
-		//TODO Validar POJO (Email y Password)
+		// Validar POJO (Email y Password)
 		Set<ConstraintViolation<Usuario>> violations = validator.validate(u);
 		
 		//Si validación no correcta

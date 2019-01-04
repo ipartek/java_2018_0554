@@ -40,7 +40,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'ander@solana.com','Pa$$w0rd'),(2,'daniel@zallo.com','1234'),(3,'manolo@bombo.com','1234'),(4,'juan@perez.com','1234'),(5,'sancho@panza.com','1234'),(6,'ander@gmail.com','hhhhhhhhhhh'),(7,'a@b.c.d','1234ab'),(16,'ander@ander','123456');
+INSERT INTO `usuario` VALUES (1,'admin@admin.com','Pa$$w0rd'),(2,'daniel@zallo.com','1234'),(3,'manolo@bombo.com','1234'),(4,'juan@perez.com','1234'),(5,'sancho@panza.com','1234'),(6,'ander@gmail.com','hhhhhhhhhhh'),(7,'a@b.c.d','1234ab'),(16,'ander@solana.com','Pa$$w0rd');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,8 +55,11 @@ CREATE TABLE `video` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(150) NOT NULL,
   `codigo` varchar(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `codigo_UNIQUE` (`codigo`)
+  UNIQUE KEY `codigo_UNIQUE` (`codigo`),
+  KEY `id_idx` (`id_usuario`),
+  CONSTRAINT `FK_USUARIO` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -66,7 +69,7 @@ CREATE TABLE `video` (
 
 LOCK TABLES `video` WRITE;
 /*!40000 ALTER TABLE `video` DISABLE KEYS */;
-INSERT INTO `video` VALUES (1,'Coldplay - Princess Of China ft. Rihanna','1Uw6ZkbsAH8'),(2,'Rihanna - What Now (Official)','b-3BI9AspYc'),(3,'Katy Perry - Dark Horse (Official) ft. Juicy J','0KSOMA3QBU0'),(8,'Lady Gaga - Born This Way','wV1FrqwZyKw');
+INSERT INTO `video` VALUES (1,'Coldplay - Princess Of China ft. Rihanna','1Uw6ZkbsAH8',1),(2,'Rihanna - What Now (Official)','b-3BI9AspYc',1),(3,'Katy Perry - Dark Horse (Official) ft. Juicy J','0KSOMA3QBU0',1),(8,'Lady Gaga - Born This Way','wV1FrqwZyKw',1);
 /*!40000 ALTER TABLE `video` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -79,4 +82,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-03 13:53:33
+-- Dump completed on 2019-01-04  9:12:00

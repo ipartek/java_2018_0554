@@ -10,6 +10,7 @@
 		<th>ID</th>
 		<th>Nombre</th>
 		<th>Codigo</th>
+		<th>Usuario</th>
 		<th>Editar/Borrar</th>
 		<th><a href="privado/videos?op=2&id=-1" class="btn btn-success">Crear Nuevo</a></th>
 		</tr>
@@ -18,11 +19,8 @@
 		<c:forEach items="${videos}" var="v">
 		<tr>
   			<td>${v.id}</td> <td>${v.nombre}</td> 
-  			<td>
-  			<iframe width="300" height="200" src="https://www.youtube.com/embed/${v.codigo}"
-  			 frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-  			 allowfullscreen></iframe>
-  			</td> 
+  			<td>${v.codigo}</td>
+  			<td>${v.usuario.email}</td> 
   			
   			<td colspan="2"><a href="privado/videos?op=2&id=${v.id}" class="btn btn-info">Editar/Borrar</a></td>
   			

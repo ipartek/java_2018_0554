@@ -3,7 +3,10 @@
 <%@ include file="../../includes/mensajes.jsp" %>
 
 	<main role="main" class="container">
-	<div class="jumbotron">
+
+	<div class="row">
+	
+		<div class="col-6">
 	<h2>Información del vídeo</h2>
 		<form action="privado/videos" method="POST">
 			
@@ -27,6 +30,15 @@
 			    		id="codigo" name="codigo" value="${video.codigo}"
 			    		minlength="11" maxlength="11"
 			    		placeholder="Código de 11 dígitos de YouTube">
+			</div>
+			
+			<div class="form-group">
+				<label for="id_usuario">Seleccionar Usuario</label>
+				<select name="id_usuario" id="id_usuario">
+					<c:forEach items="${usuarios}" var="u">
+					<option value="${u.id}">${u.email}</option>
+					</c:forEach>
+				</select>
 			</div>
 			
 			<input type="hidden" name="op" value="3">
@@ -65,6 +77,10 @@
 				</c:if>
 			</div>
 			</div>
+			<div class="col-6">
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/${video.codigo}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>
+
 	</main>
 
 <%@include file="../../includes/pie.jsp"%>
