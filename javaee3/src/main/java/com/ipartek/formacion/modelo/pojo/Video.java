@@ -19,6 +19,8 @@ public class Video {
 
 	private Usuario usuario;
 	
+	private Categoria categoria;
+	
 	// Constructores
 
 	public Video() {
@@ -27,6 +29,7 @@ public class Video {
 		this.nombre = "";
 		this.codigo = "";
 		this.usuario = new Usuario();
+		this.categoria = new Categoria();
 	}
 	
 	public Usuario getUsuario() {
@@ -69,10 +72,15 @@ public class Video {
 		this.codigo = codigo;
 	}
 
-	@Override
-	public String toString() {
-		return "Video [id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + ", usuario=" + usuario + "]";
+	public Categoria getCategoria() {
+		return categoria;
 	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+
 
 
 
