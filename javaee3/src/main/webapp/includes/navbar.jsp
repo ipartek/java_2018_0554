@@ -10,9 +10,6 @@
           <li class="nav-item active">
             <a class="nav-link" href="privado/libro"><fmt:message key="navbar.libro"/></a>
           </li>  
-          <!-- <li class="nav-item active">
-            <a class="nav-link" href="privado/usuarios.jsp"><fmt:message key="navbar.usuarios.conectados"/></a>
-          </li> -->
            <li class="nav-item active">
             <a class="nav-link" href="privado/usuarios"><fmt:message key="navbar.usuario"/></a>
           </li>  

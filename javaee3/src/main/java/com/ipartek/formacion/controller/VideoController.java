@@ -17,6 +17,7 @@ import javax.validation.ValidatorFactory;
 
 import org.jboss.logging.Logger;
 
+import com.ipartek.formacion.modelo.daos.UsuarioDAO;
 import com.ipartek.formacion.modelo.daos.VideoDAO;
 import com.ipartek.formacion.modelo.pojos.Alerta;
 import com.ipartek.formacion.modelo.pojos.Video;
@@ -47,7 +48,10 @@ public class VideoController extends HttpServlet {
 	private String codigo;
 	
 	
-	private static VideoDAO dao = null;
+	
+	
+	private static VideoDAO daoVideo = null;
+	private static UsuarioDAO daoUsuario = null;
 	
 	private ValidatorFactory factory;
 	private Validator validator;
@@ -55,7 +59,8 @@ public class VideoController extends HttpServlet {
 	 @Override
 	    public void init(ServletConfig config) throws ServletException {    
 	    	super.init(config);
-	    	dao = VideoDAO.getInstance();    	
+	    	daoVideo = VideoDAO.getInstance();    
+	    	daoUsuario =  UsuarioDAO.getInstance();
 	    	factory  = Validation.buildDefaultValidatorFactory();
 	    	validator  = factory.getValidator();
 	    }
@@ -121,14 +126,14 @@ public class VideoController extends HttpServlet {
 		
 		private void listar(HttpServletRequest request) {
 			// alerta = "Lista de Usuarios";
-					request.setAttribute("listado", dao.getAll());
+					request.setAttribute("videos", daoVideo.getAll());
 		}
 
 		private void eliminar(HttpServletRequest request) throws SQLException {
 			int identificador = Integer.parseInt(id);
 			
 			
-			if(dao.eliminar(identificador)) {
+			if(daoVideo.eliminar(identificador)) {
 				alerta = new Alerta(Alerta.TIPO_SUCCESS,"Video eliminado con exito"); //verde
 			}else {
 				alerta = new Alerta(Alerta.TIPO_DANGER,"Video NO eliminado");  //rojo
@@ -160,17 +165,17 @@ public class VideoController extends HttpServlet {
 						alerta = new Alerta(Alerta.TIPO_DANGER, "Los campos introducidos no son correctos, por favor intentelo de nuevo"); //rojo
 					   vista = VIEW_FORM;
 					  // volver al formulario, cuidado que no se pierdan los valores en el form
-					request.setAttribute("listado", v);
+					request.setAttribute("videos", v);
 					}else {// Si validacion correcta				
 					   
 					try {
 					if ( identificador > 0 ) {
 						
 						
-						dao.update(v);
+						daoVideo.update(v);
 											
 					}else {
-						dao.insert(v);
+						daoVideo.insert(v);
 					}
 					alerta = new Alerta(Alerta.TIPO_SUCCESS, "Registro guardado con exito");  //verde
 					listar(request);
@@ -178,7 +183,7 @@ public class VideoController extends HttpServlet {
 				}catch ( SQLException e) {
 					alerta = new Alerta(Alerta.TIPO_WARNING,"Lo sentimos pero el VIDEO ya existe"); //warning
 					vista = VIEW_FORM;
-					request.setAttribute("listado", v);
+					request.setAttribute("videos", v);
 				}	
 			}	
 			
@@ -192,13 +197,14 @@ public class VideoController extends HttpServlet {
 			int identificador = Integer.parseInt(id);
 			if(identificador > 0) {
 				//alerta = "Detalle de un Usuario"+ identificador;
-				v = dao.getById(identificador);
+				v = daoVideo.getById(identificador);
 				
 			}else {
 				alerta = new Alerta(Alerta.TIPO_PRIMARY,"Crear nuevo Video") ;
 			}
 			
-			request.setAttribute("listado", v);
+			request.setAttribute("videos", v);
+			request.setAttribute("usuarios", daoUsuario.getAll());
 			
 		}
 
@@ -211,6 +217,8 @@ public class VideoController extends HttpServlet {
 			id = request.getParameter("id");
 			nombre = request.getParameter("nombre");
 			codigo = request.getParameter("codigo");
+			
+			
 			
 				
 			LOG.debug(String.format("parametros: op=%s id=%s nombre=%s codigo=%s ", op, id, nombre, codigo));

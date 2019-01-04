@@ -10,28 +10,27 @@
 
 <a href="privado/videos?op=2&id=-1" class="btn btn-outline-success mb-2">Añadir Nuevo Video</a>
 
+
+
 <table class="table table-striped">
 		<thead>
 			<tr>
-				<th>ID</th>
-				<th>Nombre</th>
-				<th>Video</th>
+			<th scope="col">Id</th>
+		      <th scope="col">Nombre</th>
+		      <th scope="col">Video</th>
+		      <th scope="col">Usuario</th>
 			</tr>
 		</thead>
 		
 		<tbody>
-		<c:forEach items="${listado}" var="vid">
-	
-			
-			
-			<tr>
-			
-				<th scope="row">${vid.id}</th>
-				<td><a href="privado/videos?op=2&id=${vid.id}">${vid.nombre}</a></td>
-				<td><iframe width="350" height="250" src="https://www.youtube.com/embed/${vid.codigo}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
-			</tr>
-			
-			</c:forEach>
+		<c:forEach items="${videos}" var="v">
+			    <tr>		    	
+			      <th scope="row">${v.id}</th>
+			      <td><a href="privado/videos?op=2&id=${v.id}">${v.nombre}</a></td>
+			      <th scope="row">${v.codigo}</th>			      		      
+			      <th scope="row">${v.usuario.email}</th>
+			    </tr>    
+		    </c:forEach>
 		</tbody>
 	</table>
 

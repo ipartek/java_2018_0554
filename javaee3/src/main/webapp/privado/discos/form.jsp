@@ -8,7 +8,7 @@
 	
 		${disco}
 	
-		<form action="privado/discos" method="post">
+		<form action="privado/disco" method="post">
 		
 			<div class="form-group">
 			    <label for="id">Identificador</label>
@@ -60,7 +60,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-		<a href="privado/discos?op=4&id=${disco.id}" class="btn btn-danger">ELIMINAR</a>
+		<a href="privado/disco?op=4&id=${disco.id}" class="btn btn-danger">ELIMINAR</a>
       </div>
     </div>
   </div>
