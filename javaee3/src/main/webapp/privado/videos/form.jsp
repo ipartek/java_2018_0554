@@ -31,9 +31,10 @@
 				
 				<div class="form-group">
 					<label for="id_usuario">Selecciona Usuario</label>
-					<select name="id_usuario">
-					  <option value="1">admin@adsmin.com</option>
-					  <option value="6">marianiko@pepemail.com</option>   
+					<select name="id_usuario" class="form-control">						
+					 	<c:forEach items="${usuarios}" var="u">
+					 		<option value="${u.id}" ${(u.id==video.usuario.id)?"selected":""}>${u.email}</option>
+					 	</c:forEach>
 					</select>
 				</div>	
 					
