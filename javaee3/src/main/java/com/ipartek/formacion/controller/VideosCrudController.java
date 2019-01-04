@@ -17,6 +17,7 @@ import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.modelo.daos.UsuarioDAO;
 import com.ipartek.formacion.modelo.daos.VideoDAO;
 import com.ipartek.formacion.modelo.pojo.Alerta;
 import com.ipartek.formacion.modelo.pojo.Video;
@@ -55,7 +56,7 @@ public class VideosCrudController extends HttpServlet {
 	
 		
 	    private static VideoDAO dao = null;
-	
+	    private static UsuarioDAO udao = null;
 	    
 	    
 	    
@@ -63,8 +64,10 @@ public class VideosCrudController extends HttpServlet {
 	    public void init(ServletConfig config) throws ServletException {    
 	    	super.init(config);
 	    	dao = VideoDAO.getInstance();
+	    	udao = UsuarioDAO.getInstance();
 	    	factory  = Validation.buildDefaultValidatorFactory();
 	    	validator  = factory.getValidator();
+	    	
 	    }
 	    
 	   
@@ -121,6 +124,7 @@ public class VideosCrudController extends HttpServlet {
 		}finally {
 			// mensaje para el usuario
 			request.setAttribute("alerta", alerta);
+			request.setAttribute("udao", udao.getAll());
 			// ir a una vista
 			request.getRequestDispatcher(vista).forward(request, response);
 		}	
@@ -128,7 +132,8 @@ public class VideosCrudController extends HttpServlet {
 
 
 	private void listar(HttpServletRequest request) {
-		request.setAttribute("videos", dao.getAll());				
+		request.setAttribute("videos", dao.getAll());	
+		
 	}
 
 	private void eliminar(HttpServletRequest request) throws SQLException {

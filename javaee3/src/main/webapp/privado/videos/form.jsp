@@ -31,6 +31,19 @@
 			    <small id="nombre" class="form-text text-muted">11 caracteres</small>		    
 			</div>
 			
+			<div class="form-group">
+			<label for="id_usuario">ID usuario</label>
+				<select name="id_usuario" class="form-control">
+				<option value="null" selected>Seleccionado</option> 
+				<c:forEach items="${udao}" var="u">
+			   		<option value="${u.id}" >${u.email}  </option> 
+		    	</c:forEach>
+				</select>		    
+			</div>
+			
+			
+			
+			
 			<input type="hidden" name="op" value="3">
 			<button type="submit" class="btn btn-primary btn-block">GUARDAR</button>
 			
