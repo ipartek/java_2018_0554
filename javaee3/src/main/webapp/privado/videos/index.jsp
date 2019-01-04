@@ -3,13 +3,21 @@
 <%@ include file="../../include/mensajes.jsp"  %>
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-<h1 class="h2">Videos registrados: ${videos.size() }</h1>
+<h1 class="h2">Videos : ${videos.size() }</h1>
 <div class="btn-toolbar mb-2 mb-md-0">
 <div class="btn-group mr-2">
 <a href="privado/video?op=2&id=-1" class="btn btn-outline-info mb-2 mt-2">Insertar nuevo video</a>
 </div> 
 </div>
 </div>
+
+<form class="form-inline" method="post" action="privado/buscar">
+	  <div class="form-group mx-sm-3 mb-2">
+	    <label for="textobuscar" class="sr-only">Buscador por texto</label>
+	    <input type="text" class="form-control" id="textobuscar" name="textobuscar" placeholder="Rallye">
+	  </div>
+	  <button type="submit" class="btn btn-primary mb-2"><fmt:message key="buscar.boton" /></button>
+	</form>
 
 	<table class="table col-md-12">
 		  <thead class="thead-dark">

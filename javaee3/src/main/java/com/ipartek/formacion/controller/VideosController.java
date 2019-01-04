@@ -16,11 +16,11 @@ import javax.validation.ValidatorFactory;
 import com.ipartek.formacion.modelo.daos.VideoDAO;
 import com.ipartek.formacion.modelo.pojo.Video;
 
-/**
- * Servlet implementation class VideosController
- */
-@WebServlet("/privado/videos")
+@WebServlet("/privado/buscar")
 public class VideosController extends HttpServlet {
+	//VISTAS
+		private static final String VIEW_INDEX = "videos/index.jsp";
+		private static final String VIEW_FORM = "videos/form.jsp";
 	
 	private static final long serialVersionUID = 1L;
 	private VideoDAO dao;
@@ -35,38 +35,23 @@ public class VideosController extends HttpServlet {
     	validator  = factory.getValidator();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		request.setAttribute("videos", dao.getAll());
-		
-		request.getRequestDispatcher("principal.jsp").forward(request, response);
-		
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);}
+
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String texto = request.getParameter("textobuscar");
 		
 		try {
-			//VideoDao dao = new VideoDao();
 			ArrayList<Video> listadoVideosbuscados = dao.getAllByNombre(texto);
 			request.setAttribute("videos", listadoVideosbuscados);
 			request.setAttribute("texto", texto);
-			
-			/*VideoDao dao2 = new VideoDao();
-			ArrayList<Video> listadoVideos = dao2.listarVideos();
-			request.setAttribute("listadoVideos", listadoVideos);*/
 		}catch(Exception e) {
 			e.printStackTrace();
 		
 		}finally {
-			request.getRequestDispatcher("principal.jsp").forward(request, response);
+			request.getRequestDispatcher(VIEW_INDEX).forward(request, response);
 		}
 	}
 
