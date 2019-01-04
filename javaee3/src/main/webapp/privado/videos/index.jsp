@@ -6,6 +6,8 @@
     <main role="main" class="container">
 	
 		<a href="privado/videos?op=2&id=-1" class="btn btn-outline-success mb-2">Crear Nuevo Registro</a>
+		<a href="privado/videos?view=all" class="btn btn-outline-info mb-2">Ver todos los videos</a>
+		<a href="privado/videos?view=my" class="btn btn-outline-info mb-2">Ver mis videos</a>
 		
 		<table class="table">
 		  <thead class="thead-dark">

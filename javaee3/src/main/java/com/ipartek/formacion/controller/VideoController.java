@@ -24,9 +24,7 @@ import com.ipartek.formacion.modelo.pojo.Alerta;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 import com.ipartek.formacion.modelo.pojo.Video;
 
-/**
- * Servlet implementation class UsuarioController
- */
+
 @WebServlet("/privado/videos")
 public class VideoController extends HttpServlet {
 
@@ -53,7 +51,8 @@ public class VideoController extends HttpServlet {
 	private String nombre;
 	private String codigo;
 	private String id_usuario;
-
+	private String ver;
+	Usuario usuario;
 	private static VideoDAO dao = null;
 	private static UsuarioDAO daou = null;
 
@@ -113,8 +112,16 @@ public class VideoController extends HttpServlet {
 	}
 
 	private void listar(HttpServletRequest request) {
-
-		request.setAttribute("videos", dao.getAll());
+		
+		if (ver==null ) {
+			ver="all";
+		}
+		if ("all".equals(ver)) {
+			request.setAttribute("videos", dao.getAll());
+		}else {
+			request.setAttribute("videos", dao.getAllUsu(usuario.getId()));
+		}
+		
 
 	}
 
@@ -203,6 +210,8 @@ public class VideoController extends HttpServlet {
 		nombre = request.getParameter("nombre");
 		codigo = request.getParameter("codigo");
 		id_usuario = request.getParameter("id_usuario");
+		usuario=(Usuario) request.getSession().getAttribute("usuario");
+		ver=(String) request.getParameter("view");
 
 		// TODO nuevo parametro para id_usuario
 
