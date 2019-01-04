@@ -12,6 +12,13 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
 
 public class UsuarioDAO {
 	
+	private static final String SQL_COUNT = "SELECT COUNT(*) as n_usuarios FROM usuario";
+	private static final String SQL_DELETE = "DELETE FROM usuario WHERE id = ? ;";
+	private static final String SQL_UPDATE = "UPDATE usuario SET email = ?, `password` = ? WHERE id= ? ;";
+	private static final String SQL_GETBYID = "SELECT id, email, `password` FROM usuario WHERE id=? ;";
+	private static final String SQL_INSERT = "INSERT INTO `usuario` (`email`, `password`) VALUES (?, ?) ;";
+	private static final String SQL_GETALL = "SELECT id, email, password FROM usuario ORDER BY id DESC LIMIT 500 ;";
+	private static final String SQL_LOGIN = "SELECT id, email, password FROM usuario WHERE email = ? AND password = ? ;";
 	private static UsuarioDAO INSTANCE = null;
 	private final static Logger LOG = Logger.getLogger(UsuarioDAO.class);
 	
@@ -36,7 +43,7 @@ public class UsuarioDAO {
 	public Usuario login (String email, String pass) {
 		
 		Usuario usuario = null;
-		String sql = "SELECT id, email, password FROM usuario WHERE email = ? AND password = ? ;";
+		String sql = SQL_LOGIN;
 		
 		try ( Connection conn = ConnectionManager.getConnection();
 			  PreparedStatement pst = conn.prepareStatement(sql);
@@ -59,7 +66,7 @@ public class UsuarioDAO {
 
 	public ArrayList<Usuario> getAll() {
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-		String sql = "SELECT id, email, password FROM usuario ORDER BY id DESC LIMIT 500 ;";
+		String sql = SQL_GETALL;
 		try(Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery()
@@ -89,7 +96,7 @@ public class UsuarioDAO {
 	
 	public boolean insert(Usuario u) throws SQLException {
 		boolean result = false;
-		String sql = "INSERT INTO `usuario` (`email`, `password`) VALUES (?, ?) ;";
+		String sql = SQL_INSERT;
 		try( Connection conn = ConnectionManager.getConnection();
 			 PreparedStatement pst = conn.prepareStatement(sql);
 			){
@@ -106,7 +113,7 @@ public class UsuarioDAO {
 	public Usuario getById(Long identificador) {
 		Usuario usuario = null;
 		
-		String sql = "SELECT id, email, `password` FROM usuario WHERE id=? ;";
+		String sql = SQL_GETBYID;
 		try( Connection conn = ConnectionManager.getConnection();
 			 PreparedStatement pst = conn.prepareStatement(sql);
 			){
@@ -128,7 +135,7 @@ public class UsuarioDAO {
 	
 	public boolean update(Usuario u) throws SQLException {
 		boolean result = false;
-		String sql = "UPDATE usuario SET email = ?, `password` = ? WHERE id= ? ;";
+		String sql = SQL_UPDATE;
 		try( Connection conn = ConnectionManager.getConnection();
 			 PreparedStatement pst = conn.prepareStatement(sql);
 			){
@@ -147,7 +154,7 @@ public class UsuarioDAO {
 
 	public boolean delete(Long identificador) throws SQLException {
 		boolean result = false;
-		String sql = "DELETE FROM usuario WHERE id = ? ;";
+		String sql = SQL_DELETE;
 		try( Connection conn = ConnectionManager.getConnection();
 			 PreparedStatement pst = conn.prepareStatement(sql);
 			){
@@ -159,6 +166,26 @@ public class UsuarioDAO {
 		}
 		return result;
 		
+	}
+	
+	public int countUsers() {
+		int usuarios = 0;
+		
+		String sql = SQL_COUNT;
+		try( Connection conn = ConnectionManager.getConnection();
+			 PreparedStatement pst = conn.prepareStatement(sql);
+			){
+			
+			try ( ResultSet rs = pst.executeQuery() ){											
+				while(rs.next()) { // hemos encontrado usuario								
+					usuarios =  rs.getInt("n_usuarios");	
+				}						
+			}
+		} catch (SQLException e) {
+			LOG.error(e);
+		}
+		
+		return usuarios;
 	}
 
 }

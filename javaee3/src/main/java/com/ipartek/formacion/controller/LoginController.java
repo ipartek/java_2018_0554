@@ -29,7 +29,7 @@ public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final static Logger LOG = Logger.getLogger(LoginController.class);
 	private static final String VISTA_LOGIN = "index.jsp";
-	private static final String CONTROLLER_VIDEOS = "privado/videos";
+	private static final String CONTROLLER_BACKOFFICE = "privado/backoffice";
     private UsuarioDAO dao;
     private ValidatorFactory factory;
     private Validator validator;
@@ -100,7 +100,7 @@ public class LoginController extends HttpServlet {
 					request.setAttribute("mensaje", alerta);
 				}else {
 					LOG.info("Usuario encontrado en la DB");
-					vista = CONTROLLER_VIDEOS;
+					vista = CONTROLLER_BACKOFFICE;
 					session = request.getSession();
 					session.setMaxInactiveInterval(60 * 5); // 5 min, también se puede configurar en WEB.XML [Para configurarlo para toda aplicación]
 					session.setAttribute("usuario_logueado", usuario);
@@ -113,8 +113,8 @@ public class LoginController extends HttpServlet {
 			LOG.error("Ha habido un error en el proceso de Login");
 			e.printStackTrace();
 		}finally {
-			if (vista.equals(CONTROLLER_VIDEOS)) {
-			response.sendRedirect(CONTROLLER_VIDEOS);
+			if (vista.equals(CONTROLLER_BACKOFFICE)) {
+			response.sendRedirect(CONTROLLER_BACKOFFICE);
 			}else {
 			request.getRequestDispatcher(vista).forward(request, response);
 		}

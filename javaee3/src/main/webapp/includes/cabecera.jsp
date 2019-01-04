@@ -18,6 +18,9 @@
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	
+<!-- Custom CSS -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="css/navbar-top.css" rel="stylesheet">

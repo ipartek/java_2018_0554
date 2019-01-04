@@ -13,6 +13,7 @@ import com.ipartek.formacion.modelo.pojo.Video;
 
 public class VideoDAO {
 	
+	private static final String SQL_COUNT = "SELECT COUNT(*) as n_videos FROM video";
 	private static final String SQL_DELETE = "DELETE FROM video WHERE id = ? ;";
 	private static final String SQL_INSERT = "INSERT INTO `javaee`.`video` (`nombre`, `codigo`, `id_usuario`) VALUES (?, ?, ?);";
 	private static final String SQL_UPDATE = "UPDATE video SET nombre = ?, codigo = ?, id_usuario = ? WHERE id= ? ;";
@@ -179,6 +180,26 @@ public class VideoDAO {
 		}
 		return result;
 		
+	}
+	
+	public int countVideos() {
+		int videos = 0;
+		
+		String sql = SQL_COUNT;
+		try( Connection conn = ConnectionManager.getConnection();
+			 PreparedStatement pst = conn.prepareStatement(sql);
+			){
+			
+			try ( ResultSet rs = pst.executeQuery() ){											
+				while(rs.next()) { // hemos encontrado usuario								
+					videos =  rs.getInt("n_videos");	
+				}						
+			}
+		} catch (SQLException e) {
+			LOG.error(e);
+		}
+		
+		return videos;
 	}
 
 }
