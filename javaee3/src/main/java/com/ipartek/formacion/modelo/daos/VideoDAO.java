@@ -15,8 +15,8 @@ public class VideoDAO {
 	
 	private static final String SQL_GETBYID = "SELECT id, nombre, codigo FROM video WHERE id = ?;";
 	private static final String SQL_GETALL = "SELECT id, nombre, codigo FROM video ORDER BY id DESC LIMIT 1000;";
-	private static final String SQL_INSERT = "INSERT INTO video  (nombre, codigo) VALUES( ? , ?);";
-	private static final String SQL_UPDATE = "UPDATE video SET nombre = ? , codigo = ? WHERE id = ?;";
+	private static final String SQL_INSERT = "INSERT INTO video  (nombre, codigo, id_usuario) VALUES( ? , ?, ?);";
+	private static final String SQL_UPDATE = "UPDATE video SET nombre = ? , codigo = ?, id_usuario = ? WHERE id = ?;";
 	private static final String SQL_DELETE = "DELETE FROM video WHERE id = ?;";
 
 	// constructor privado, solo acceso por getInstance()
@@ -85,9 +85,12 @@ public class VideoDAO {
 	
 		try (Connection conn = ConnectionManager.getConnection(); 
 				PreparedStatement pst = conn.prepareStatement(SQL_INSERT);) {
-
+//Interrogantes
 			pst.setString(1, v.getNombre() );
 			pst.setString(2, v.getCodigo() );
+			pst.setLong(3, v.getUsuario().getId() );
+			
+			
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
 				resul = true;
@@ -106,7 +109,8 @@ public class VideoDAO {
 			
 			pst.setString(1, v.getNombre());
 			pst.setString(2, v.getCodigo());
-			pst.setLong(3, v.getId());
+			pst.setLong(3, v.getUsuario().getId()); //comprobar si es asi o no
+			pst.setLong(4, v.getId());
 			
 			
 			int affectedRows = pst.executeUpdate();
@@ -143,6 +147,7 @@ public class VideoDAO {
 		v.setId( rs.getLong("id"));
 		v.setCodigo( rs.getString("codigo"));
 		v.setNombre(rs.getString("nombre"));
+		
 		return v;
 	}
 	

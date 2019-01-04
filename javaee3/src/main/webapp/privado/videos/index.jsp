@@ -24,7 +24,7 @@
 				<th scope="row">${v.id}</th>
 				<td><a href="privado/videos?op=2&id=${v.id}">${v.nombre}</a></td>
 				<th scope="row">${v.codigo}</th>
-				<th scope="row">${v.usuario.email}</th>
+				<th scope="row">${v.usuario.email}</th>  <!-- Que se vea el usuario d -->
 			</tr>
 		</c:forEach>
 	</tbody>

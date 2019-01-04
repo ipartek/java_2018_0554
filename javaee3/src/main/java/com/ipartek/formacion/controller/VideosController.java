@@ -21,6 +21,7 @@ import com.ipartek.formacion.modelo.daos.UsuarioDAO;
 import com.ipartek.formacion.modelo.daos.VideoDAO;
 import com.ipartek.formacion.modelo.pojos.Videos;
 import com.ipartek.formacion.modelo.pojos.Alerta;
+import com.ipartek.formacion.modelo.pojos.Usuario;
 
 /**
  * Servlet implementation class UsuarioController
@@ -50,6 +51,7 @@ public class VideosController extends HttpServlet {
 	private String id;
 	private String nombre;
 	private String codigo;
+	private String id_usuario;
 	
     private static VideoDAO daoVideo = null;   
       
@@ -140,6 +142,13 @@ public class VideosController extends HttpServlet {
 		v.setCodigo(codigo);
 		v.setNombre(nombre);
 		
+		Usuario u = new Usuario();
+		u.setId( Long.parseLong(id_usuario));
+		v.setUsuario(u);
+		
+		
+		
+		
 		//validar usuario		
 		Set<ConstraintViolation<Videos>> violations = validator.validate(v);
 		
@@ -166,6 +175,7 @@ public class VideosController extends HttpServlet {
 				alerta = new Alerta( Alerta.TIPO_WARNING, "Lo sentimos, no se ha podido continuar con el registro");
 				vista = VIEW_FORM;
 				request.setAttribute("video", v);
+				request.setAttribute("usuarios", daoUsuario.getAll() );
 			}	
 		}	
 		
@@ -199,8 +209,8 @@ public class VideosController extends HttpServlet {
 		id = request.getParameter("id");
 		nombre = request.getParameter("nombre");
 		codigo = request.getParameter("codigo");
-		
-		//TODO nuevo parametro para id_usuario
+		id_usuario = request.getParameter("id_usuario");
+	
 		
 	}
 	
