@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.ipartek.formacion.modelo.pojo.Usuario;
 import com.ipartek.formacion.modelo.pojo.Video;
 
 public class VideoDAO {
@@ -13,8 +14,19 @@ public class VideoDAO {
 	private static final String SQL_UPDATE = "UPDATE `video` SET titulo = ? , codigo = ? WHERE id = ?;";
 	private static final String SQL_INSERT = "INSERT INTO `video` (`titulo`, `codigo`) VALUES (?,?);";
 	private static final String SQL_GET_ALL_BY_NOMBRE = "SELECT id, titulo, codigo FROM video WHERE titulo LIKE ? ORDER BY titulo ASC LIMIT 500";
-	private static final String SQL_GETALL = "SELECT id, titulo, codigo FROM video ORDER BY id DESC LIMIT 500";
-	private static final String SQL_GETBYID = "SELECT id, titulo, codigo FROM video WHERE id= ?;";
+	
+//	private static final String SQL_GETALL = "SELECT id, titulo, codigo FROM video ORDER BY id DESC LIMIT 500";
+//	private static final String SQL_GETBYID = "SELECT id, titulo, codigo FROM video WHERE id= ?;";
+	
+	
+
+	private static final String SQL_GETALL = 
+	"SELECT v.id AS 'video_id', v.titulo AS 'video_titulo', v.codigo AS 'video_codigo', u.id AS 'usuario_id',  u.email AS 'usuario_email' , u.password  AS 'usuario_pass'FROM video as v, usuario as u WHERE v.id_usuario = u.id ;";
+	private static final String SQL_GETBYID = 
+		"SELECT v.id AS 'video_id', v.titulo AS 'video_titulo', v.codigo AS 'video_codigo', u.id AS 'usuario_id',  u.email AS 'usuario_email' , u.password  AS 'usuario_pass'FROM video as v, usuario as u WHERE v.id_usuario = u.id AND v.id= ?;";
+		
+		
+	
 	private static VideoDAO INSTANCE = null;
 
 	// constructor privado, solo acceso por getInstance()
@@ -54,7 +66,21 @@ public Video getById( long id ) {
 		return video;
 	}
 	
+private Video rowMapper(ResultSet rs) throws SQLException {
+	Video registro = new Video();
+	registro.setId( rs.getLong("video_id"));
+	registro.setCodigo( rs.getString("video_codigo"));
+	registro.setTitulo(rs.getString("video_titulo"));		
 	
+	Usuario u = new Usuario();
+	u.setId(rs.getLong("usuario_id"));
+	u.setEmail( rs.getString("usuario_email"));
+	u.setPassword( rs.getString("usuario_pass"));
+	
+	registro.setUsuario(u);
+	
+	return registro;
+}
 	
 	
 
@@ -167,13 +193,7 @@ public Video getById( long id ) {
 	
 	
 	
-	private Video rowMapper(ResultSet rs) throws SQLException {
-		Video registro = new Video();
-		registro.setId( rs.getLong("id"));
-		registro.setCodigo( rs.getString("codigo"));
-		registro.setTitulo(rs.getString("titulo"));		
-		return registro;
-	}
+
 
 }
 

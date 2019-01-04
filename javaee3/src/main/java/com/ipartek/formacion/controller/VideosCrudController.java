@@ -52,6 +52,8 @@ public class VideosCrudController extends HttpServlet {
 		private String titulo;
 		private String codigo;
 		
+	
+		
 	    private static VideoDAO dao = null;
 	
 	    
@@ -211,6 +213,8 @@ public class VideosCrudController extends HttpServlet {
 		id = request.getParameter("id");
 		titulo = request.getParameter("titulo");
 		codigo = request.getParameter("codigo");
+		
+	
 		
 		LOG.debug( String.format("parametros: op=%s id=%s email=%s password=%s", op, id, titulo, codigo ));
 		

@@ -11,27 +11,28 @@
 </div>
 </div>
 
-	<table class="table col-md-10 offset-md-1">
+	<table class="table col-md-12">
 		  <thead class="thead-dark">
 		    <tr>
 		      <th scope="col">ID</th>
 		      <th scope="col">TITULO</th>
 		      <th scope="col">CODIGO</th>
 		      <th scope="col">VIDEO</th>
-		      		      
+		      <th scope="col">USUARIO</th>		      
 		    </tr>
 		  </thead>
 		  <tbody>
 		 	 <c:forEach items="${videos}" var="video">
 			    <tr>
-			      <th scope="row" class="col-md-1">${video.id}</th>
-			      <td class="col-md-4"><a href="privado/video?op=2&id=${video.id}">${video.titulo}</a></td>
-			      <td class="col-md-2">${video.codigo}</td>	
-			      <td class="col-md-5 ">
+			      <th scope="row" >${video.id}</th>
+			      <td><a href="privado/video?op=2&id=${video.id}">${video.titulo}</a></td>
+			      <td >${video.codigo}</td>	
+			      <td>
 			     	<div class="embed-responsive embed-responsive-16by9">
 					 	 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/${video.codigo}" allowfullscreen></iframe>
 				</div>
-					</td>	      
+					</td>	
+					<td scope="row">${video.usuario.email}</td>      
 			    	</tr>    
 		    </c:forEach>
 		  </tbody>

@@ -16,12 +16,15 @@ public class Video {
 	@Size(min = 11, max=11)
 	private String codigo;
 	
+	private Usuario usuario;
+	
 	//CONSTRUCTORES
 	public Video(){
 		super();
 		this.id=-1;
 		this.titulo = "";
 		this.codigo = "";
+		this.usuario= new Usuario();
 	}
 	public Video(String nombre){
 		super();
@@ -30,10 +33,11 @@ public class Video {
 		
 	}
 	
-	public Video(Long id,String nombre, String url) {
+	public Video(Long id,String nombre, String url, Usuario u) {
 		super();
 		setTitulo(nombre);
 		setCodigo(url);
+		setUsuario(u);
 	}
 	
 	
@@ -56,10 +60,24 @@ public class Video {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+	
+	
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	
 	@Override
 	public String toString() {
-		return "Video [id=" + id + ", nombre=" + titulo + ", codigo=" + codigo + "]";
+		return "Video [id=" + id + ", titulo=" + titulo + ", codigo=" + codigo + ", usuario=" + usuario + "]";
 	}
+	
+	
+	
 	
 	
 

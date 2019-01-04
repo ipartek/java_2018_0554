@@ -12,7 +12,7 @@
 </div>
 	
 	
-		<form action="privado/video" method="post" class="col-md-8 offset-md-2">
+		<form action="privado/video" method="post" class="col-md-6">
 		
 			<div class="form-group">
 			    <label for="id">Identificador</label>

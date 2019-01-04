@@ -44,7 +44,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></span>
       </div>
-      <input type="email" id="mail" name=mail class="form-control"  value="${not empty cookie.cEmail ? cookie.cEmail.value : 'mail_uno@mail.com'}"  >
+      <input type="email" id="mail" name=mail class="form-control"  value="${not empty cookie.cEmail ? cookie.cEmail.value : 'admin@admin.com'}"  >
     </div>
   </div> 
   
