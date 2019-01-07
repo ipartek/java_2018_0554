@@ -1,0 +1,13 @@
+use dgt;
+-- listado de todos los agentes y multas que han puesto en el 2019
+	-- select agente.nombre, agente.placa, multa.importe, multa.concepto 
+	-- from multa
+	-- right join agente on multa.id_agente=agente.id 
+    -- where year(fecha) = 2019 or fecha is null; 
+-- detalle de todas las multas del coche con matricula ='3548MKZ' y sacar nombre y placa del agente
+	-- select multa.concepto, coche.modelo, agente.nombre, agente.placa
+	-- from multa 
+	-- inner join coche on multa.id=coche.id 
+	-- inner join agente on multa.id=agente.id
+	-- where coche.matricula='3548MKZ'
+	-- group by id_agente;

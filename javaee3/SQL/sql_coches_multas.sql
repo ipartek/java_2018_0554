@@ -1,0 +1,23 @@
+use dgt;
+-- INSERT INTO multa (importe, concepto, id_coche) VALUES (600,'Empinar el codo2',3);
+-- delete from coche where id= 4;
+-- update coche set modelo='Toyota Yaris1' where id= 1;
+-- SELECT * FROM dgt.multa;
+-- SELECT * FROM dgt.coche;
+
+-- total de multas en el año 2019
+   -- select * from multa where fecha like'2019%';
+   -- select count(*) as 'multas_2019' from multa where year(fecha) = 2019;
+-- listado de coches multados en el 2019
+	-- select coche.modelo, coche.matricula from multa
+    -- inner join coche on multa.id=coche.id;
+-- detalle de todas las multas del coche con matricula ='3548MKZ'
+	-- select * from multa inner join coche on multa.id=coche.id where coche.matricula='3548MKZ';
+-- listado de coches > 1000multa
+	-- select * from coche where km >= 1000 order by id desc limit 1000;
+-- sumar el total de km de todos los coches
+	-- select sum(km) as 'total_kilometros' from coche;
+-- sumar las multas de 2019
+	-- select sum(importe) as 'Total_de_multas' from multa where fecha like '2019%';
+-- listado de coches con mas de una multa
+	-- select distinct coche.modelo, coche.matricula, count(*) as total_multas from multa inner join coche on multa.id_coche=coche.id group by id_coche having count(id_coche)>1;
