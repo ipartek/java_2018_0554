@@ -45,3 +45,9 @@ SELECT coche.matricula AS Matricula_Coche,
        INNER JOIN agente ON multa.id_agente = agente.id
        WHERE coche.matricula='3548MKZ'
        ORDER BY agente.id DESC;
+       
+       
+-- Todos los empleados que tengan departamentos
+-- Listado de todos los empleados que no tengan departamento
+-- Todos los departamentos que no tengan empleados
+
