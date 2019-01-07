@@ -1,6 +1,11 @@
+<%-- <%@ include file="../../includes/materialize/cabecera.jsp" %>
+<%@ include file="../../includes/materialize/menu.jsp" %>
+<%@ include file="../../includes/materialize/mensajes.jsp" %> --%>
+
 <%@ include file="../../includes/cabecera.jsp" %>
 <%@ include file="../../includes/menu.jsp" %>
 <%@ include file="../../includes/mensajes.jsp" %>
+
 	<main role="main" class="container">
 	<div class="jumbotron">
 		<h3>BackOffice</h3>
@@ -43,3 +48,4 @@
 	</div>
 	</main>
 <%@include file="../../includes/pie.jsp"%>
+<%-- <%@include file="../../includes/materialize/pie.jsp"%> --%>
