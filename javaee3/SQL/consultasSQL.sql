@@ -1,0 +1,41 @@
+use dgt;
+-- INSERT INTO multa (importe, concepto,id_coche) VALUES (700,'por empinar codo 8.0',1);
+	-- SELECT * FROM multa;
+-- EJERCICIOS DE CONSULTAS
+-- TOTAL DE MULTAS EN EL AÑO 2019
+	-- Select count(id) AS total_multas_2019 from multa WHERE YEAR(fecha) =2019;
+-- Listado de coches multados en el 2019
+	-- Select c.id,c.matricula,c.modelo,m.concepto,m.importe, m.fecha from coche AS c INNER JOIN multa AS m ON c.id = m.id_coche WHERE YEAR(fecha) =2019;
+-- Detalle de todas las multas del coche  con matrícula '3548MKZ'
+	-- Select c.matricula,m.importe,m.concepto, m.fecha from coche AS c INNER JOIN multa AS m ON c.id = m.id_coche WHERE c.matricula ='3548MKZ';
+-- listado de coches con mas de mil kilometros
+	-- SELECT c.id, c.modelo, c.matricula, c.km FROM coche AS c WHERE km >1000 ORDER BY c.id limit 1000;
+-- Sumar el total de kilometros de todos los coches
+	-- SELECT count(id) AS Total_Coches, sum(km) AS Km_Totales from coche;
+-- Sumar los euros recaudados en 2019 con multas
+	-- SELECT count(id) AS Multas_Totales_2019, sum(importe) AS Euros_Recaudados  from multa WHERE YEAR(fecha) =2019;
+-- Listado de coche con más de una multa
+-- 	SELECT 
+-- 		c.id,
+-- 		c.matricula,
+-- 		c.modelo,
+-- 		c.km 
+-- 	from coche AS c 
+--    where c.id IN(SELECT 
+-- 					m.id_coche 
+-- 				from multa AS m 
+--                GROUP BY m.id_coche HAVING COUNT(m.id_coche) >1	);
+
+-- Listado de todos los agente con multas en 2019
+
+-- SELECT a.id,a.nombre, a.placa, m.id, m.concepto,m.importe,m.fecha
+-- FROM agente AS a 
+-- LEFT JOIN multa AS m ON a.id = m.id_agente 
+-- WHERE YEAR(m.fecha) = 2019 OR fecha IS NULL;
+
+-- Inner join tres tablas, datalle de todas las multas del coche '3548MKZ', ademas del nombre del agente y la placa
+-- Select c.matricula,m.importe,m.concepto, m.fecha, a.nombre, a.placa
+--  FROM coche AS c 
+--  INNER JOIN multa AS m ON c.id = m.id_coche 
+--  INNER JOIN agente AS a ON a.id=m.id_agente 
+--  WHERE c.matricula ='3548MKZ' ORDER BY a.placa DESC LIMIT 100;
