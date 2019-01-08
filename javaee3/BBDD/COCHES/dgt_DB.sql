@@ -28,7 +28,10 @@ CREATE TABLE `agente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   `placa` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_departamento` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_departamento_idx` (`id_departamento`),
+  CONSTRAINT `fk_departamento` FOREIGN KEY (`id_departamento`) REFERENCES `departamento` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -38,7 +41,7 @@ CREATE TABLE `agente` (
 
 LOCK TABLES `agente` WRITE;
 /*!40000 ALTER TABLE `agente` DISABLE KEYS */;
-INSERT INTO `agente` VALUES (1,'majonei',111),(2,'jony walker',222),(3,'monk',333),(4,'takelberri',444),(5,'tontini',555);
+INSERT INTO `agente` VALUES (1,'majonei',111,37),(2,'jony walker',222,36),(3,'monk',333,38),(4,'takelberri',444,39),(5,'tontini',555,39);
 /*!40000 ALTER TABLE `agente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,6 +70,56 @@ LOCK TABLES `coche` WRITE;
 /*!40000 ALTER TABLE `coche` DISABLE KEYS */;
 INSERT INTO `coche` VALUES (1,'3548MKZ','toyota yaris',500),(2,'9605EFH','fiat multipla',800),(3,'5674MBD','GTR',1800),(4,'BI0020AZ','flagoneta',47500);
 /*!40000 ALTER TABLE `coche` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `departamento`
+--
+
+DROP TABLE IF EXISTS `departamento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `departamento` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nombre_UNIQUE` (`nombre`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `departamento`
+--
+
+LOCK TABLES `departamento` WRITE;
+/*!40000 ALTER TABLE `departamento` DISABLE KEYS */;
+INSERT INTO `departamento` VALUES (36,'Alcoholemia'),(38,'Fealdad'),(33,'Ingeniería'),(35,'Mercadeo'),(39,'Oficinistas'),(34,'Producción'),(37,'Velocidad'),(31,'Ventas');
+/*!40000 ALTER TABLE `departamento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empleado`
+--
+
+DROP TABLE IF EXISTS `empleado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `empleado` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `apellido` varchar(45) NOT NULL,
+  `id_departamento` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empleado`
+--
+
+LOCK TABLES `empleado` WRITE;
+/*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
+INSERT INTO `empleado` VALUES (1,'Andrade',31),(2,'Jordán',33),(3,'Steinberg',33),(4,'Róbinson',34),(5,'Zolano',34),(6,'Gaspar',36);
+/*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -114,4 +167,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-07 13:18:37
+-- Dump completed on 2019-01-08  9:35:29
