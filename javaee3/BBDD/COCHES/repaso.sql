@@ -2,12 +2,12 @@
 
 -- estadisticas del total empleados,  toal sueldos, total comosiones, min, max, avg => sueldos para todos los empleados
 SELECT 
-COUNT(*) AS 'total_empleados',
-SUM(salario) AS 'total_sueldos',
-SUM(comision) AS 'total_cominiones',
-MIN(salario) AS 'minimo_salario',
-MAX(salario) AS 'maximo_salario',
-ROUND(AVG(salario),2) AS 'media_salario'
+	COUNT(*) AS 'total_empleados',
+	SUM(salario) AS 'total_sueldos',
+	SUM(comision) AS 'total_cominiones',
+	MIN(salario) AS 'minimo_salario',
+	MAX(salario) AS 'maximo_salario',
+	ROUND(AVG(salario),2) AS 'media_salario'
 FROM empleado;
 
 -- lo mismo agrupado por departamento
@@ -30,12 +30,12 @@ GROUP BY
 
 -- lo mismo agrupado por departamento, pero empleados con antiguedad > 3 años
 SELECT 
-COUNT(*) AS 'total_empleados',
-SUM(salario) AS 'total_sueldos',
-SUM(comision) AS 'total_cominiones',
-MIN(salario) AS 'minimo_salario',
-MAX(salario) AS 'maximo_salario',
-ROUND(AVG(salario),2) AS 'media_salario'
+	COUNT(*) AS 'total_empleados',
+	SUM(salario) AS 'total_sueldos',
+	SUM(comision) AS 'total_cominiones',
+	MIN(salario) AS 'minimo_salario',
+	MAX(salario) AS 'maximo_salario',
+	ROUND(AVG(salario),2) AS 'media_salario'
 FROM empleado;
 
 -- lo mismo agrupado por departamento
@@ -54,7 +54,7 @@ FROM
 WHERE 
 	e.id_departamento = d.id
 AND 
-	YEAR(fecha_contrato)<2016
+	(YEAR(now())- YEAR(fecha_contrato)) > 3
 GROUP BY 
 	id_departamento;
 
@@ -85,21 +85,76 @@ GROUP BY
 
 
 -- detalle empleados del departamento Oficina = 38 ordenados por puesto de trabajo
-SELECT *
-FROM empleado AS e
-WHERE id_departamento=38
-ORDER BY id_puesto ASC;
+SELECT 
+	e.id AS 'empleado_id', 
+	e.id_puesto AS 'id_puesto',
+    d.id AS 'id_departamento',
+    e.nombre AS 'empleado_nombre',
+    d.nombre AS 'departamento_nombre',
+    j.nombre AS 'nombre_jefe',
+    e.fecha_contrato AS 'fecha_contrato', 
+    e.salario AS 'empleado_salario', 
+    e.comision AS 'empleado_comision', 
+    p.nombre  AS 'empleado_nombre'
+    
+FROM 
+	empleado AS e,
+    empleado AS j,
+    departamento AS d,
+    puesto AS p
+WHERE e.id_departamento=d.id
+AND e.id_puesto = p.id
+AND j.id=e.id_jefe
+AND e.id_departamento=38
+ORDER BY e.id_puesto ASC;
+
+
 
 -- detalle empleados del departamento Oficina = 38 ordenados por salario
-SELECT *
-FROM empleado AS e
-WHERE id_departamento=38
-ORDER BY salario ASC;
+SELECT 
+	e.id AS 'empleado_id', 
+	e.id_puesto AS 'id_puesto',
+    d.id AS 'id_departamento',
+    e.nombre AS 'empleado_nombre',
+    d.nombre AS 'departamento_nombre',
+    j.nombre AS 'nombre_jefe',
+    e.fecha_contrato AS 'fecha_contrato', 
+    e.salario AS 'empleado_salario', 
+    e.comision AS 'empleado_comision', 
+    p.nombre  AS 'empleado_nombre'
+    
+FROM 
+	empleado AS e,
+    empleado AS j,
+    departamento AS d,
+    puesto AS p
+WHERE e.id_departamento=d.id
+AND e.id_puesto = p.id
+AND j.id=e.id_jefe
+AND e.id_departamento=38
+ORDER BY e.salario ASC;
 
 -- detalle empleados del departamento Oficina = 38 ordenados por fecha contrato
-SELECT *
-FROM empleado AS e
-WHERE id_departamento=38
-ORDER BY fecha_contrato DESC;
+SELECT 
+	e.id AS 'empleado_id', 
+	e.id_puesto AS 'id_puesto',
+    d.id AS 'id_departamento',
+    e.nombre AS 'empleado_nombre',
+    d.nombre AS 'departamento_nombre',
+    j.nombre AS 'nombre_jefe',
+    e.fecha_contrato AS 'fecha_contrato', 
+    e.salario AS 'empleado_salario', 
+    e.comision AS 'empleado_comision', 
+    p.nombre  AS 'empleado_nombre'
+FROM 
+	empleado AS e,
+    empleado AS j,
+    departamento AS d,
+    puesto AS p
+WHERE e.id_departamento=d.id
+AND e.id_puesto = p.id
+AND j.id=e.id_jefe
+AND e.id_departamento=38
+ORDER BY e.fecha_contrato DESC;
 -- no se me ocuure mas, vosotros mismos
 
