@@ -1,64 +1,46 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 	<title>DataTables example - Class name</title>
-	<link rel="shortcut icon" type="image/png" href="/media/images/favicon.png">
-	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.datatables.net/rss.xml">
-	<link rel="stylesheet" type="text/css" href="/media/css/site-examples.css?_=19472395a2969da78c8a4c707e72123a">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
-	<style type="text/css" class="init">
-	
-	</style>
-	<script type="text/javascript" src="/media/js/site.js?_=5e8f232afab336abc1a1b65046a73460"></script>
-	<script type="text/javascript" src="/media/js/dynamic.php?comments-page=extensions%2Fresponsive%2Fexamples%2Finitialisation%2FclassName.html" async></script>
-	<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-	<script type="text/javascript" language="javascript" src="https://datatables.net/examples/resources/demo.js"></script>
-	<script type="text/javascript" class="init">
 	
 
-
-$(document).ready(function() {
-	$('#example').DataTable();
-} );
-
-
-
-	</script>
+<!-- CSS NECESARIO PARA DATATABLE -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+<!-- /CSS NECESARIO PARA DATATABLE -->
 </head>
-<body class="wide comments example">
 
-				<table id="example" class="display responsive nowrap" style="width:100%">
-					<thead>
-						<tr>
-							<th>First name</th>
-							<th>Last name</th>
-							<th>Position</th>
-							<th>Office</th>
-							<th>Age</th>
-							<th>Start date</th>
-							<th>Salary</th>
-							<th>Extn.</th>
-							<th>E-mail</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Tiger</td>
-							<td>Nixon</td>
-							<td>System Architect</td>
-							<td>Edinburgh</td>
-							<td>61</td>
-							<td>2011/04/25</td>
-							<td>$320,800</td>
-							<td>5421</td>
-							<td>t.nixon@datatables.net</td>
-						</tr>
-						<tr>
+<body>
+<table id="datatable" class="display responsive nowrap" style="width:100%">
+<thead>
+<tr>
+<th>First name</th>
+<th>Last name</th>
+<th>Position</th>
+<th>Office</th>
+<th>Age</th>
+<th>Start date</th>
+<th>Salary</th>
+<th>Extn.</th>
+<th>E-mail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tiger</td>
+<td>Nixon</td>
+<td>System Architect</td>
+<td>Edinburgh</td>
+<td>61</td>
+<td>2011/04/25</td>
+<td>$320,800</td>
+<td>5421</td>
+<td>t.nixon@datatables.net</td>
+</tr>
+							<tr>
 							<td>Garrett</td>
 							<td>Winters</td>
 							<td>Accountant</td>
@@ -68,8 +50,8 @@ $(document).ready(function() {
 							<td>$170,750</td>
 							<td>8422</td>
 							<td>g.winters@datatables.net</td>
-						</tr>
-						<tr>
+							</tr>
+							<tr>
 							<td>Ashton</td>
 							<td>Cox</td>
 							<td>Junior Technical Author</td>
@@ -674,19 +656,26 @@ $(document).ready(function() {
 							<td>4226</td>
 							<td>d.snider@datatables.net</td>
 						</tr>
-					</tbody>
-				</table>
+</tbody>
+</table>
 			
-	<script type="text/javascript">
-				  var _gaq = _gaq || [];
-				  _gaq.push(['_setAccount', 'UA-365466-5']);
-				  _gaq.push(['_trackPageview']);
 
-				  (function() {
-					var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-					ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-				  })();
-	</script>
+<!-- JS  NECESARIO PARA DATATABLE ----------------------------------------------------------------------------------------------------------------- -->
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" class="init">
+$(document).ready(function() {
+    $('#datatable').DataTable({
+        responsive: true,
+        language: {
+            url: 'http://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json' //Ubicacion del archivo con el json del idioma.
+        }
+    });
+});
+</script>
+<!-- /JS  NECESARIO PARA DATATABLE ----------------------------------------------------------------------------------------------------------------------------------- -->
+
+
 </body>
 </html>
