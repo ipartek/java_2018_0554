@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `javaee` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `javaee`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: javaee
+-- Host: 127.0.0.1    Database: javaee
 -- ------------------------------------------------------
 -- Server version	5.7.14
 
@@ -31,7 +31,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -56,11 +56,12 @@ CREATE TABLE `video` (
   `nombre` varchar(150) NOT NULL,
   `codigo` varchar(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
+  `fecha` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `codigo_UNIQUE` (`codigo`),
   KEY `FK_USUARIO_idx` (`id_usuario`),
   CONSTRAINT `FK_USUARIO` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +70,7 @@ CREATE TABLE `video` (
 
 LOCK TABLES `video` WRITE;
 /*!40000 ALTER TABLE `video` DISABLE KEYS */;
-INSERT INTO `video` VALUES (1,'Surf Search Spot 2 0 video promo','LPDhuthFD98',1),(2,'Soja','94HwzFGH5gY',1);
+INSERT INTO `video` VALUES (1,'Surf Search Spot 2 0 video promo','LPDhuthFD98',1,'2019-01-14 08:48:01'),(2,'Sojahfjsrduj','94HwzFGH5gY',6,'2019-01-14 08:48:01'),(4,'Fito & Fitipaldis - Los huesos de los besos (Videoclip oficial)','nmoXDU4BAgI',15,'2019-01-14 08:48:01'),(5,'La Fuga - Por verte sonreir','hdQ99wLYc2g',6,'2019-01-14 08:48:01');
 /*!40000 ALTER TABLE `video` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -82,4 +83,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-04  9:10:48
+-- Dump completed on 2019-01-14  9:23:57
