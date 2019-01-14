@@ -14,6 +14,7 @@
 		      <th scope="col">nombre</th>
 		      <th scope="col">codigo</th>
 		      <th scope="col">usuario</th>
+		      <th scope="col">fecha</th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -23,6 +24,9 @@
 			      <td><a href="privado/videos?op=2&id=${v.id}">${v.nombre}</a></td>
 			      <th scope="row">${v.codigo}</th>			      		      
 			      <th scope="row">${v.usuario.email}</th>
+			      <th scope="row">
+			      	<fmt:formatDate value="${v.fecha}" pattern="yyyy-MM-dd hh:mm:ss"/>
+			      </th>
 			    </tr>    
 		    </c:forEach>
 		  </tbody>

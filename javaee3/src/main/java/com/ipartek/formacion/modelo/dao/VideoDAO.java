@@ -1,10 +1,12 @@
 package com.ipartek.formacion.modelo.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import com.ipartek.formacion.modelo.ConnectionManager;
@@ -15,8 +17,8 @@ public class VideoDAO {
 
 	private static VideoDAO INSTANCE = null;
 	
-	private static final String SQL_GETBYID = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id AND v.id = ?;";
-	private static final String SQL_GETALL  = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id ORDER BY v.id DESC LIMIT 1000;";
+	private static final String SQL_GETBYID = "SELECT v.id as 'id_video', fecha, u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id AND v.id = ?;";
+	private static final String SQL_GETALL  = "SELECT v.id as 'id_video', fecha, u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id ORDER BY v.id DESC LIMIT 1000;";
 	private static final String SQL_INSERT = "INSERT INTO video  (nombre, codigo, id_usuario) VALUES( ? , ?, ?);";
 	private static final String SQL_UPDATE = "UPDATE video SET nombre = ? , codigo = ?, id_usuario = ? WHERE id = ?;";
 	private static final String SQL_DELETE = "DELETE FROM video WHERE id = ?;";
@@ -152,6 +154,10 @@ public class VideoDAO {
 		v.setId( rs.getLong("id_video"));
 		v.setCodigo( rs.getString("codigo"));
 		v.setNombre(rs.getString("nombre"));
+		
+		//convertir fecha TimeStamp a java.util.Date
+		Timestamp timestamp = rs.getTimestamp("fecha");
+		v.setFecha( new java.util.Date(timestamp.getTime()) );
 		
 		Usuario u = new Usuario();
 		u.setId(rs.getLong("id_usuario"));
