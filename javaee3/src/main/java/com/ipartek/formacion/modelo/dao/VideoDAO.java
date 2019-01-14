@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.ipartek.formacion.modelo.ConnectionManager;
@@ -85,13 +86,19 @@ public class VideoDAO {
 		boolean resul = false;
 	
 		try (Connection conn = ConnectionManager.getConnection(); 
-				PreparedStatement pst = conn.prepareStatement(SQL_INSERT);) {
+				PreparedStatement pst = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS );) {
 
 			pst.setString(1, v.getNombre() );
 			pst.setString(2, v.getCodigo() );
 			pst.setLong(3, v.getUsuario().getId() );
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
+				
+				ResultSet rs = pst.getGeneratedKeys();
+				if (rs.next()) {
+				    long id  = rs.getLong(1);
+				    v.setId(id);				    
+				}					
 				resul = true;
 			}
 
