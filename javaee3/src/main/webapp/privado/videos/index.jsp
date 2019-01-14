@@ -7,7 +7,7 @@
 	
 		<a href="privado/videos?op=2&id=-1" class="btn btn-outline-success mb-2">Crear Nuevo Registro</a>
 		
-		<table class="table">
+		<table class="table tablaOrdenable">
 		  <thead class="thead-dark">
 		    <tr>
 		      <th scope="col">id</th>
@@ -31,7 +31,6 @@
 		    </c:forEach>
 		  </tbody>
 		</table>
-
 
 	</main>				
 
