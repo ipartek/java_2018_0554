@@ -7,7 +7,7 @@
 	
 		<a href="privado/usuarios?op=2&id=-1" class="btn btn-outline-success mb-2">Crear Nuevo Registro</a>
 		
-		<table class="table">
+		<table class="table tablaOrdenable responsive nowrap">
 		  <thead class="thead-dark">
 		    <tr>
 		      <th scope="col">id</th>
