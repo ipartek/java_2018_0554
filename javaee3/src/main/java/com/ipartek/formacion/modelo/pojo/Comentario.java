@@ -3,7 +3,7 @@ package com.ipartek.formacion.modelo.pojo;
 public class Comentario {
 private Long id;
 
-private Usuario usuario;
+private Agente usuario;
 
 private Video video;
 
@@ -19,11 +19,11 @@ public void setId(Long id) {
 	this.id = id;
 }
 
-public Usuario getUsuario() {
+public Agente getUsuario() {
 	return usuario;
 }
 
-public void setUsuario(Usuario usuario) {
+public void setUsuario(Agente usuario) {
 	this.usuario = usuario;
 }
 
@@ -51,7 +51,7 @@ public void setFecha(String fecha) {
 	this.fecha = fecha;
 }
 
-public Comentario(Long id, Usuario usuario, Video video, String texto, String fecha) {
+public Comentario(Long id, Agente usuario, Video video, String texto, String fecha) {
 	this();
 	setId(id);
 	setUsuario(usuario);
@@ -63,7 +63,7 @@ public Comentario(Long id, Usuario usuario, Video video, String texto, String fe
 public Comentario() {
 	super();
 	this.id=-1l;
-	this.usuario=new Usuario();
+	this.usuario=new Agente();
 	this.video=new Video();
 	this.texto="";
 	this.fecha="";

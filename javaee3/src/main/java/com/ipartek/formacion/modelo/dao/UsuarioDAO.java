@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.ipartek.formacion.modelo.ConnectionManager;
-import com.ipartek.formacion.modelo.pojo.Usuario;
+import com.ipartek.formacion.modelo.pojo.Agente;
 
 public class UsuarioDAO {
 
@@ -33,9 +33,9 @@ public class UsuarioDAO {
 	 * @param pass  String contrase�a
 	 * @return usuario con datos si existe, null si no existe
 	 */
-	public Usuario login(String email, String pass) {
+	public Agente login(String email, String pass) {
 
-		Usuario usuario = null;
+		Agente usuario = null;
 		String sql = "SELECT id, email, password FROM usuario WHERE email = ? AND password = ?;";
 
 		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
@@ -43,7 +43,7 @@ public class UsuarioDAO {
 			pst.setString(2, pass);
 			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) { // hemos encontrado usuario
-					usuario = new Usuario();
+					usuario = new Agente();
 					usuario.setId(rs.getLong("id"));
 					usuario.setEmail(rs.getString("email"));
 					usuario.setPassword(rs.getString("password"));
@@ -55,9 +55,9 @@ public class UsuarioDAO {
 		return usuario;
 	}
 
-	public Usuario getById(long id) {
+	public Agente getById(long id) {
 
-		Usuario usuario = null;
+		Agente usuario = null;
 		String sql = "SELECT id, email, password FROM usuario WHERE id = ?;";
 
 		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
@@ -65,7 +65,7 @@ public class UsuarioDAO {
 			
 			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) { // hemos encontrado usuario
-					usuario = new Usuario();
+					usuario = new Agente();
 					usuario.setId(rs.getLong("id"));
 					usuario.setEmail(rs.getString("email"));
 					usuario.setPassword(rs.getString("password"));
@@ -77,9 +77,9 @@ public class UsuarioDAO {
 		return usuario;
 	}
 
-	public ArrayList<Usuario> getAll() {
+	public ArrayList<Agente> getAll() {
 
-		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		ArrayList<Agente> usuarios = new ArrayList<Agente>();
 		String sql = "SELECT id, email, password FROM usuario ORDER BY id DESC LIMIT 500";
 
 		try (Connection conn = ConnectionManager.getConnection();
@@ -88,7 +88,7 @@ public class UsuarioDAO {
 
 			while (rs.next()) {
 				try {
-					Usuario usuario = new Usuario();
+					Agente usuario = new Agente();
 					usuario.setId(rs.getLong("id"));
 					usuario.setEmail(rs.getString("email"));
 					usuario.setPassword(rs.getString("password"));
@@ -106,7 +106,7 @@ public class UsuarioDAO {
 		return usuarios;
 	}
 
-	public boolean insert(Usuario u) throws SQLException {
+	public boolean insert(Agente u) throws SQLException {
 
 		boolean resul = false;
 		String sql = "INSERT INTO `usuario` (`email`, `password`) VALUES (?,?);";
@@ -124,7 +124,7 @@ public class UsuarioDAO {
 
 	}
 	
-	public boolean update(Usuario u) throws SQLException {
+	public boolean update(Agente u) throws SQLException {
 
 		boolean resul = false;
 		String sql = "UPDATE `usuario` SET email = ? , password = ? WHERE id = ?;";

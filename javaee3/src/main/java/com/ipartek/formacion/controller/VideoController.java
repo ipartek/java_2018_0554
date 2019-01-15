@@ -21,7 +21,7 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.modelo.dao.UsuarioDAO;
 import com.ipartek.formacion.modelo.dao.VideoDAO;
 import com.ipartek.formacion.modelo.pojo.Alerta;
-import com.ipartek.formacion.modelo.pojo.Usuario;
+import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Video;
 
 
@@ -52,7 +52,7 @@ public class VideoController extends HttpServlet {
 	private String codigo;
 	private String id_usuario;
 	private String ver;
-	Usuario usuario;
+	Agente usuario;
 	private static VideoDAO dao = null;
 	private static UsuarioDAO daou = null;
 
@@ -142,7 +142,7 @@ public class VideoController extends HttpServlet {
 
 		// crear video mediante parametros del formulario
 		Video v = new Video();
-		Usuario u = new Usuario();
+		Agente u = new Agente();
 		u.setId(Long.parseLong(id_usuario));
 		int identificador = Integer.parseInt(id);
 		v.setId((long) identificador);
@@ -210,7 +210,7 @@ public class VideoController extends HttpServlet {
 		nombre = request.getParameter("nombre");
 		codigo = request.getParameter("codigo");
 		id_usuario = request.getParameter("id_usuario");
-		usuario=(Usuario) request.getSession().getAttribute("usuario");
+		usuario=(Agente) request.getSession().getAttribute("usuario");
 		ver=(String) request.getParameter("view");
 
 		// TODO nuevo parametro para id_usuario

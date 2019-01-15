@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 
 
-public class Usuario {
+public class Agente {
 	
 	private Long id;
 		
@@ -21,14 +21,14 @@ public class Usuario {
 	@Size(min=5, max=50)
 	private String password;
 
-	public Usuario() {
+	public Agente() {
 		super();
-		this.id = (long) -1;
+		this.id = -1l;
 		this.email = "";
 		this.password = "";
 	}
 
-	public Usuario(Long id, String email, String password) {
+	public Agente(Long id, String email, String password) {
 		this();
 		setId(id);
 		setEmail(email);

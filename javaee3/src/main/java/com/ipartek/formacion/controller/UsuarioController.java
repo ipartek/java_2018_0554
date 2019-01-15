@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.dao.UsuarioDAO;
 import com.ipartek.formacion.modelo.pojo.Alerta;
-import com.ipartek.formacion.modelo.pojo.Usuario;
+import com.ipartek.formacion.modelo.pojo.Agente;
 
 /**
  * Servlet implementation class UsuarioController
@@ -132,14 +132,14 @@ public class UsuarioController extends HttpServlet {
 	private void guardar(HttpServletRequest request) {
 
 		//crear usuario mediante parametros del formulario
-		Usuario u = new Usuario();
+		Agente u = new Agente();
 		int identificador = Integer.parseInt(id);	
 		u.setId( (long)identificador);
 		u.setEmail(email);
 		u.setPassword(password);
 		
 		//validar usuario		
-		Set<ConstraintViolation<Usuario>> violations = validator.validate(u);
+		Set<ConstraintViolation<Agente>> violations = validator.validate(u);
 		
 		
 		if ( violations.size() > 0 ) {              // validacion NO correcta
@@ -173,7 +173,7 @@ public class UsuarioController extends HttpServlet {
 	private void irFormulario(HttpServletRequest request) {
 		
 		vista = VIEW_FORM; 
-		Usuario u = new Usuario();
+		Agente u = new Agente();
 		
 		int identificador = Integer.parseInt(id);
 		if ( identificador > 0 ) {			

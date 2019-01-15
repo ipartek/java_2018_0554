@@ -22,7 +22,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.ConnectionManager;
 import com.ipartek.formacion.modelo.dao.UsuarioDAO;
-import com.ipartek.formacion.modelo.pojo.Usuario;
+import com.ipartek.formacion.modelo.pojo.Agente;
 
 /**
  * Servlet implementation class LoginController
@@ -81,17 +81,17 @@ public class LoginController extends HttpServlet {
 			
 			
 			// validar
-			Usuario usuario = new Usuario();
+			Agente usuario = new Agente();
 			usuario.setEmail(email);
 			usuario.setPassword(pass);
 			
-			Set<ConstraintViolation<Usuario>> violations = validator.validate(usuario);
+			Set<ConstraintViolation<Agente>> violations = validator.validate(usuario);
 			
 			
 			if ( violations.size() > 0) {			// validacion NO PASA
 				
 				 String errores = "<ul>"; 
-				 for (ConstraintViolation<Usuario> violation : violations) {					 	
+				 for (ConstraintViolation<Agente> violation : violations) {					 	
 					 errores += String.format("<li> %s : %s </li>" , violation.getPropertyPath(), violation.getMessage() );					
 				 }
 				 errores += "</ul>";				 

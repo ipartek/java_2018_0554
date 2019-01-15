@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ipartek.formacion.modelo.pojo.Usuario;
+import com.ipartek.formacion.modelo.pojo.Agente;
 
 
 
@@ -47,7 +47,7 @@ public class SeguridadFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse)response;
 		
 		HttpSession session = req.getSession();
-		Usuario uLogeado = (Usuario)session.getAttribute("usuario");
+		Agente uLogeado = (Agente)session.getAttribute("usuario");
 		
 		if ( uLogeado != null ) {
 			// contnia la peticion del usuario al servlet/jsp

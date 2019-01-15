@@ -1,13 +1,11 @@
 package com.ipartek.formacion.modelo.pojo;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class Categoria {
 	private Long id;
 	
 	@NotEmpty
-	@Email
 	private String nombre;
 
 	public Long getId() {

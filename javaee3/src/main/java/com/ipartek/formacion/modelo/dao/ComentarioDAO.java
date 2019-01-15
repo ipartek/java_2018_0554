@@ -12,9 +12,9 @@ import com.ipartek.formacion.modelo.ConnectionManager;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Video;
 
-public class VideoDAO {
+public class ComentarioDAO {
 
-	private static VideoDAO INSTANCE = null;
+	private static ComentarioDAO INSTANCE = null;
 	HttpSession session;
 
 	private static final String SQL_GETBYID = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id AND v.id = ?;";
@@ -25,14 +25,14 @@ public class VideoDAO {
 	private static final String SQL_DELETE = "DELETE FROM video WHERE id = ?;";
 
 	// constructor privado, solo acceso por getInstance()
-	private VideoDAO() {
+	private ComentarioDAO() {
 		super();
 	}
 
-	public synchronized static VideoDAO getInstance() {
+	public synchronized static ComentarioDAO getInstance() {
 
 		if (INSTANCE == null) {
-			INSTANCE = new VideoDAO();
+			INSTANCE = new ComentarioDAO();
 		}
 		return INSTANCE;
 	}

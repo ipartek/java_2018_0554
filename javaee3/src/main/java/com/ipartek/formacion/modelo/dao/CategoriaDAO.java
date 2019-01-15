@@ -9,37 +9,38 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
 import com.ipartek.formacion.modelo.ConnectionManager;
+import com.ipartek.formacion.modelo.pojo.Categoria;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Video;
 
-public class VideoDAO {
+public class CategoriaDAO {
 
-	private static VideoDAO INSTANCE = null;
+	private static CategoriaDAO INSTANCE = null;
 	HttpSession session;
 
-	private static final String SQL_GETBYID = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id AND v.id = ?;";
+	private static final String SQL_GETBYID = "SELECT c.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id AND v.id = ?;";
 	private static final String SQL_GETALL = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id ORDER BY v.id DESC LIMIT 1000;";
 	private static final String SQL_GETALL_USU = "SELECT v.id as 'id_video', u.id as 'id_usuario', email, password, nombre, codigo FROM video as v, usuario as u WHERE v.id_usuario = u.id AND v.id_usuario = ? ORDER BY v.id DESC LIMIT 1000;";
-	private static final String SQL_INSERT = "INSERT INTO video  (nombre, codigo, id_usuario) VALUES( ? , ?, ?);";
+	private static final String SQL_INSERT = "INSERT INTO categoria  (texto) VALUES( ? );";
 	private static final String SQL_UPDATE = "UPDATE video SET nombre = ? , codigo = ? , id_usuario = ?  WHERE id = ?;";
 	private static final String SQL_DELETE = "DELETE FROM video WHERE id = ?;";
 
 	// constructor privado, solo acceso por getInstance()
-	private VideoDAO() {
+	private CategoriaDAO() {
 		super();
 	}
 
-	public synchronized static VideoDAO getInstance() {
+	public synchronized static CategoriaDAO getInstance() {
 
 		if (INSTANCE == null) {
-			INSTANCE = new VideoDAO();
+			INSTANCE = new CategoriaDAO();
 		}
 		return INSTANCE;
 	}
 
-	public Video getById(long id) {
+	public Categoria getById(long id) {
 
-		Video v = null;
+		Categoria c = null;
 
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_GETBYID);) {
@@ -47,18 +48,18 @@ public class VideoDAO {
 
 			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
-					v = rowMapper(rs);
+					c = rowMapper(rs);
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return v;
+		return c;
 	}
 
-	public ArrayList<Video> getAll() {
+	public ArrayList<Categoria> getAll() {
 
-		ArrayList<Video> videos = new ArrayList<Video>();
+		ArrayList<Categoria> videos = new ArrayList<Categoria>();
 
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_GETALL);
@@ -68,7 +69,7 @@ public class VideoDAO {
 				try {
 					videos.add(rowMapper(rs));
 				} catch (Exception e) {
-					System.out.println("usuario no valido");
+					System.out.println("categoria no valida");
 					e.printStackTrace();
 				}
 			} // while
@@ -79,42 +80,14 @@ public class VideoDAO {
 		return videos;
 	}
 
-	public ArrayList<Video> getAllUsu(long id) {
-
-		ArrayList<Video> videos = new ArrayList<Video>();
-
-		try (Connection conn = ConnectionManager.getConnection();
-				PreparedStatement pst = conn.prepareStatement(SQL_GETALL_USU);) {
-
-			pst.setLong(1, id);
-
-			try (ResultSet rs = pst.executeQuery()) {
-				while (rs.next()) {
-					try {
-						videos.add(rowMapper(rs));
-					} catch (Exception e) {
-						System.out.println("usuario no valido");
-						e.printStackTrace();
-					}
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return videos;
-	}
-
-	public boolean insert(Video v) throws SQLException {
+	public boolean insert(Categoria c) throws SQLException {
 
 		boolean resul = false;
 
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_INSERT);) {
 
-			pst.setString(1, v.getNombre());
-			pst.setString(2, v.getCodigo());
-			pst.setLong(3, v.getUsuario().getId());
+			pst.setString(1, c.getNombre());
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
 				resul = true;
@@ -163,20 +136,12 @@ public class VideoDAO {
 
 	}
 
-	private Video rowMapper(ResultSet rs) throws SQLException {
-		Video v = new Video();
-		v.setId(rs.getLong("id_video"));
-		v.setCodigo(rs.getString("codigo"));
-		v.setNombre(rs.getString("nombre"));
+	private Categoria rowMapper(ResultSet rs) throws SQLException {
+		Categoria c = new Categoria();
+		c.setId(rs.getLong("id"));
+		c.setNombre(rs.getString("nombre"));
 
-		Agente u = new Agente();
-		u.setId(rs.getLong("id_usuario"));
-		u.setEmail(rs.getString("email"));
-		u.setPassword(rs.getString("password"));
-
-		v.setUsuario(u);
-
-		return v;
+		return c;
 	}
 
 }

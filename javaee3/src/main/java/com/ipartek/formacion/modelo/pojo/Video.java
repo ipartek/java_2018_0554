@@ -17,7 +17,7 @@ public class Video {
 	@Size(min=11, max=11)
 	private String codigo;
 
-	private Usuario usuario;
+	private Agente usuario;
 	
 	private Categoria categoria;
 	
@@ -28,15 +28,15 @@ public class Video {
 		this.id = -1;
 		this.nombre = "";
 		this.codigo = "";
-		this.usuario = new Usuario();
+		this.usuario = new Agente();
 		this.categoria = new Categoria();
 	}
 	
-	public Usuario getUsuario() {
+	public Agente getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(Agente usuario) {
 		this.usuario = usuario;
 	}
 
