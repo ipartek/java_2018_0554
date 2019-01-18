@@ -1,0 +1,23 @@
+
+h1 {
+    color: red;
+}
+
+#ahorcado {
+    height: 290px;
+    width: 235px;
+    background-image: url('../images/sprite.jpg');
+    border: 1px solid red;
+}
+
+.fallo0{
+    background-position-x: 0;
+}
+
+.fallo1{
+    background-position-x: 300px;
+}
+
+.fallo6{
+    background-position-x: 476px;
+}
