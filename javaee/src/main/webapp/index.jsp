@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +5,9 @@
 <title>Ejemplo JSP</title>
 </head>
 <body>
- <%@ include file="cabecera.jsp" %>
+
+<%@ include file="cabecera.jsp"  %>
+
 ¡Hola a todos!
 
 <%-- Scriptlets --%>
