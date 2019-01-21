@@ -1,0 +1,7 @@
+Jocelyn,Adkins,Los Corrales,41,JocelynJAdkins@spambob.com,17908715H,CLIENTE
+Adam,Martinez,Ribadeo,27,AdamAMartinez@mailinator.com,31288338N,TRABAJADOR
+Ivan,White,Pasaia,20,IvanLWhite@trashymail.com,74395771V,TRABAJADOR
+Ryan,Doucet,Osorno La Mayor,34,RyanCDoucet@trashymail.com,8415482N,TRABAJADOR
+Shawn,Whitlow,Cidamón,26,ShawnLWhitlow@trashymail.com,68908734K,TRABAJADOR
+Chance,Lopez,Guntín,27,ChanceRLopez@spambob.com,25988330D
+Scott,Rake,Meco,18,ScottPRake@dodgit.com,58096004M,TRABAJADOR
