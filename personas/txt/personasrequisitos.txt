@@ -1,0 +1,14 @@
+Requisitos:
+
+-toda linea que no tenga siete registros no hay que insertarla (no valida)
+-menores de edad no se pueden insertar en la base de datos.
+-de la persona solo queremos: nombre ,apellido1 ,apellido2 ,edad ,email y dni
+
+pistas:
+ linea --> split --> te devuelve un array con todas las separaciones que ha 
+			realizado.
+resultado:
+- numero de lineas leidas.
+- número de personas insertadas.
+- número de lineas que no tiene 7 campos.
+- número de personas menores de edad
