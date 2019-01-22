@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://UASI/WS_GRAL.wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://UASI/WS_GRAL.wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://UASI/WS_GRAL.wsdl">
+      <s:element name="wsnoticias">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="plengua" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pfechaini" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsnoticiasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsnoticiasResult" type="tns:ArrayOfClaseNoticias" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfClaseNoticias">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ClaseNoticias" nillable="true" type="tns:ClaseNoticias" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ClaseNoticias">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="idnoticia" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="titulo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="contenido" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="imagen" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="fechapublicacion" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="tipo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="idsitio" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="nombresitio" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="wsdiasfestivos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="plengua" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pcurso" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsdiasfestivosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsdiasfestivosResult" type="tns:ArrayOfClaseDiasFestivos" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfClaseDiasFestivos">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ClaseDiasFestivos" nillable="true" type="tns:ClaseDiasFestivos" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ClaseDiasFestivos">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="caca" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fechaini" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fechafin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ambito" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nomambito" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tipo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nomtipo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="codcen" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="wsx500">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="plengua" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ptexto" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsx500Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsx500Result" type="tns:ArrayOfClaseX500" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfClaseX500">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ClaseX500" nillable="true" type="tns:ClaseX500" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ClaseX500">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="colectivo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cod_persona" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="apellido1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="apellido2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="idsubunidad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="subunidad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="idcargo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cargo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="idunidad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="unidad" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tipoestudio" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="estudios" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="url" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="telefono1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="telefono2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fax1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fax2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="movil" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nif" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="foto" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="wsalojamientos">
+        <s:complexType />
+      </s:element>
+      <s:element name="wsalojamientosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsalojamientosResult" type="tns:ArrayOfClaseAlojamiento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfClaseAlojamiento">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ClaseAlojamiento" nillable="true" type="tns:ClaseAlojamiento" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ClaseAlojamiento">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="idalojamiento" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="direccion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="contacto" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="precio" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fecha" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="observaciones" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="idtipo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="descripciontipo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="codigotipo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="idregimen" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="descripcionregimen" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="codigoregimen" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="idzona" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="descripcionzona" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fechaalta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="latitud" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="longitud" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="telefono" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="habitaciones" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="plazas" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="urlinfo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="urladicional" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="emailcontacto" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="wsvideo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="plengua" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pfechadesde" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsvideoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsvideoResult" type="tns:ArrayOfClaseVideo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfClaseVideo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ClaseVideo" nillable="true" type="tns:ClaseVideo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ClaseVideo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="idfoto" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="imagen" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="titulo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="autor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="resumen" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nombrevideo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="codec" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tamano" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="duracion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="palabras_clave" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fecha_publicado" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="zona" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="id_lugar" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="menu" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="rama" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ramava" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="idtipo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fechanum" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="categoria_itunesu" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="orden_itunesu" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tamano_videomovil" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="videomovil" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="wsnoticiasSoapIn">
+    <wsdl:part name="parameters" element="tns:wsnoticias" />
+  </wsdl:message>
+  <wsdl:message name="wsnoticiasSoapOut">
+    <wsdl:part name="parameters" element="tns:wsnoticiasResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsdiasfestivosSoapIn">
+    <wsdl:part name="parameters" element="tns:wsdiasfestivos" />
+  </wsdl:message>
+  <wsdl:message name="wsdiasfestivosSoapOut">
+    <wsdl:part name="parameters" element="tns:wsdiasfestivosResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsx500SoapIn">
+    <wsdl:part name="parameters" element="tns:wsx500" />
+  </wsdl:message>
+  <wsdl:message name="wsx500SoapOut">
+    <wsdl:part name="parameters" element="tns:wsx500Response" />
+  </wsdl:message>
+  <wsdl:message name="wsalojamientosSoapIn">
+    <wsdl:part name="parameters" element="tns:wsalojamientos" />
+  </wsdl:message>
+  <wsdl:message name="wsalojamientosSoapOut">
+    <wsdl:part name="parameters" element="tns:wsalojamientosResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsvideoSoapIn">
+    <wsdl:part name="parameters" element="tns:wsvideo" />
+  </wsdl:message>
+  <wsdl:message name="wsvideoSoapOut">
+    <wsdl:part name="parameters" element="tns:wsvideoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="pub_gralSoap">
+    <wsdl:operation name="wsnoticias">
+      <wsdl:input message="tns:wsnoticiasSoapIn" />
+      <wsdl:output message="tns:wsnoticiasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsdiasfestivos">
+      <wsdl:input message="tns:wsdiasfestivosSoapIn" />
+      <wsdl:output message="tns:wsdiasfestivosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsx500">
+      <wsdl:input message="tns:wsx500SoapIn" />
+      <wsdl:output message="tns:wsx500SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsalojamientos">
+      <wsdl:input message="tns:wsalojamientosSoapIn" />
+      <wsdl:output message="tns:wsalojamientosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsvideo">
+      <wsdl:input message="tns:wsvideoSoapIn" />
+      <wsdl:output message="tns:wsvideoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="pub_gralSoap" type="tns:pub_gralSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="wsnoticias">
+      <soap:operation soapAction="http://UASI/WS_GRAL.wsdl/wsnoticias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsdiasfestivos">
+      <soap:operation soapAction="http://UASI/WS_GRAL.wsdl/wsdiasfestivos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsx500">
+      <soap:operation soapAction="http://UASI/WS_GRAL.wsdl/wsx500" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsalojamientos">
+      <soap:operation soapAction="http://UASI/WS_GRAL.wsdl/wsalojamientos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsvideo">
+      <soap:operation soapAction="http://UASI/WS_GRAL.wsdl/wsvideo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="pub_gralSoap12" type="tns:pub_gralSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="wsnoticias">
+      <soap12:operation soapAction="http://UASI/WS_GRAL.wsdl/wsnoticias" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsdiasfestivos">
+      <soap12:operation soapAction="http://UASI/WS_GRAL.wsdl/wsdiasfestivos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsx500">
+      <soap12:operation soapAction="http://UASI/WS_GRAL.wsdl/wsx500" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsalojamientos">
+      <soap12:operation soapAction="http://UASI/WS_GRAL.wsdl/wsalojamientos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsvideo">
+      <soap12:operation soapAction="http://UASI/WS_GRAL.wsdl/wsvideo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="pub_gral">
+    <wsdl:port name="pub_gralSoap" binding="tns:pub_gralSoap">
+      <soap:address location="https://cvnet.cpd.ua.es/servicioweb/publicos/pub_gral.asmx" />
+    </wsdl:port>
+    <wsdl:port name="pub_gralSoap12" binding="tns:pub_gralSoap12">
+      <soap12:address location="https://cvnet.cpd.ua.es/servicioweb/publicos/pub_gral.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
