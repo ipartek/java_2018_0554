@@ -3,11 +3,15 @@ package com.ipartek.formacion.migracion;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import java.sql.PreparedStatement;
 
 public class App {
 
 	// nombre fichero a leer
-	static final String FILE_PERSONAS = "C:\\0554\\workspace\\java_2018_0554\\migracion\\src\\main\\resources\\personas.min.txt";
+	static final String FILE_PERSONAS = "C:\\0554\\workspace\\java_2018_0554\\migracion\\src\\main\\resources\\personas.txt";
 
 	// contadores
 	static int contLineasLeidas = 0;
@@ -23,53 +27,76 @@ public class App {
 	static final int CAMPO_EMAIL = 4;
 	static final int CAMPO_DNI = 5;
 	// static final int CAMPO_PUESTO = 6;
+	
+	
+	static final String SQL_INSERT = "INSERT INTO `persona` (`nombre`, `apellido1`, `apellido2`, `edad`, `email`, `dni`) VALUES (?,?,?,?,?,?);";
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		System.out.println("Comezamos migracion....");
 
+		try(Connection conn = ConnectionManager.getConnection()){
+		
+			try (BufferedReader br = new BufferedReader(new FileReader(new File(FILE_PERSONAS)))) {
 	
-
-		try ( BufferedReader br = new BufferedReader( new FileReader( new File( FILE_PERSONAS ) )) ){
-			
-			// Lectura del fichero linea a linea
-			String linea;
-			while ((linea = br.readLine()) != null) {
-				
-				contLineasLeidas++;				
-				System.out.println(linea);
-				
-				String[] aCampos = linea.split(",");
-				if ( aCampos.length == NUMERO_CAMPOS_LINEA ) {
-					
-		
-					try {
-						int edad = Integer.parseInt(aCampos[CAMPO_EDAD]);
-						if( edad >= 18 ) {            
-							
-		  // insert en bbdd
-							contInsert++;
-		
-							
-		 // menor edad					
-						}else {
+				// Lectura del fichero linea a linea
+				String linea;
+				while ((linea = br.readLine()) != null) {
+	
+					contLineasLeidas++;
+					System.out.println(linea);
+	
+					String[] aCampos = linea.split(",");
+					if (aCampos.length == NUMERO_CAMPOS_LINEA) {
+	
+						try {
+							int edad = Integer.parseInt(aCampos[CAMPO_EDAD]);
+							if (edad >= 18) {
+	
+								// insert en bbdd
+								try( PreparedStatement pst = conn.prepareStatement(SQL_INSERT)){
+									
+									pst.setString(1, aCampos[CAMPO_NOMBRE]);
+									pst.setString(2, aCampos[CAMPO_APELLIDO1]);
+									pst.setString(3, aCampos[CAMPO_APELLIDO2]);
+									pst.setInt(4, edad);
+									pst.setString(5, aCampos[CAMPO_EMAIL]);
+									pst.setString(6, aCampos[CAMPO_DNI]);
+									
+									if ( pst.executeUpdate() == 1 ) {
+										contInsert++;
+									}
+									
+								}
+								
+								// menor edad
+							} else {
+								contEdad++;
+							}
+						} catch (Exception e) {
 							contEdad++;
-						}						
-					}catch (Exception e) {						
-						contEdad++;
-					}	
-		 // No tenemos 7 campos	
-				}else {                                           
-					cont7Campos++;
-				}
+						}
+						// No tenemos 7 campos
+					} else {
+						cont7Campos++;
+					}
+	
+				} // end while
 				
-
+				/* 
+				if ( true) {
+					throw new Exception("lanzamo adrede para que no comite");
+				}*/
 				
-			}
+				conn.commit();
+	
+			} catch (Exception e) {
+				e.printStackTrace();
+				conn.rollback();
+				
+			} // end 2º try
+			
+		} // end 1º try	
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
 		mostrarResumen();
 
 	}
