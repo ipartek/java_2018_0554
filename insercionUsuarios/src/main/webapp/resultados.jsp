@@ -18,6 +18,7 @@
 <p  class="text-success">Personas insertadas: ${insertadas }</p>
 <p class="text-danger">Personas incompletas: ${personasIncompletas }</p>
 <p class="text-warning">Menores de edad: ${menores}</p>
+<p class="text-secondary">Tiempo empleado: ${tiempo} segundos</p>
 </div>
 </div>
 </body>

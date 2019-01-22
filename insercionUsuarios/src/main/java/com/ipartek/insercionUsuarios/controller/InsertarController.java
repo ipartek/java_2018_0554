@@ -42,10 +42,13 @@ public class InsertarController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//Archivo almacenado en el directorio del proyecto
-		String csvFile = "C:\\0554\\workspace\\insercionUsuarios\\ArchivoInsercion\\personas.txt";
+		String csvFile = "C:\\0554\\workspace\\java_2018_0554\\insercionUsuarios\\ArchivoInsercion\\personas.txt";
 		LOG.info("Se insertaran las lineas del fichero: [ " + csvFile + " ]");
 		String line = "";
 		String cvsSplitBy = ",";
+		Long inicio = 0L;
+		Long fin = 0L;
+		Long total = 0L;
 
 		int lineas = 0;
 		int personasIncompletas = 0;
@@ -55,6 +58,8 @@ public class InsertarController extends HttpServlet {
 
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 			while ((line = br.readLine()) != null) {
+				inicio = System.currentTimeMillis();
+				LOG.debug("Tiempo de inicio: " + inicio / 1000);
 				LOG.debug("Leyendo línea...");
 				// use comma as separator
 				String[] parametro = line.split(cvsSplitBy);
@@ -96,15 +101,21 @@ public class InsertarController extends HttpServlet {
 			e.printStackTrace();
 			LOG.error("Excepción de SQL: " + e.getStackTrace());
 		} finally {
+			fin = System.currentTimeMillis();
+			LOG.debug("Tiempo fin: " + fin / 1000);
+			
+			total = ((fin - inicio) / 1000);
+			LOG.debug("Tiempo total: " + total);
+			
 			request.setAttribute("lineas", lineas);
 			request.setAttribute("insertadas", insertadas);
 			request.setAttribute("personasIncompletas", personasIncompletas);
 			request.setAttribute("menores", menores);
+			request.setAttribute("tiempo", total);
 
 			LOG.debug("Redirigiendo a la página de resultados.");
 			
 			request.getRequestDispatcher("resultados.jsp").forward(request, response);
-
 		}
 
 	}
