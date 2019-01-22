@@ -77,11 +77,13 @@ public class IndexController extends HttpServlet {
                //Increnmento de las lineas que se han leido, una por cada vuelta
                lineasLeidas++;
             }
-            
+            Long segundosInicio = System.currentTimeMillis();
             //Insertamos todo el array
             dao.insertArray(personasInsertar);
+            Long segundosFinales = System.currentTimeMillis();
             
-            mostrarResumen(response);
+            Long total = segundosFinales - segundosInicio;
+            mostrarResumen(response,total);
 
 		} catch (FileNotFoundException  e) {
 			e.printStackTrace();
@@ -102,7 +104,7 @@ public class IndexController extends HttpServlet {
 		
 	}
 
-	private void mostrarResumen(HttpServletResponse response) throws IOException {
+	private void mostrarResumen(HttpServletResponse response, Long total) throws IOException {
 		
 		System.out.println("");
 		response.getWriter().println("-------  RESUMEN --------------------");
@@ -110,6 +112,7 @@ public class IndexController extends HttpServlet {
 		response.getWriter().println("Número de líneas leidas: " + lineasLeidas);
 		response.getWriter().println("Número de menores de edad: " + menoresEdad);
 		response.getWriter().println("Número de personas que se han insertado: " + personasInsertadas);
+		response.getWriter().println("Se ha tardado : " + total/1000 + " segundos en realizar la insercción ");
 		response.getWriter().println("-------  FIN RESUMEN --------------------");
 	}
 
