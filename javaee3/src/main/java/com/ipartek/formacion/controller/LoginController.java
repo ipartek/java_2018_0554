@@ -25,7 +25,7 @@ import com.ipartek.formacion.modelo.dao.UsuarioDAO;
 import com.ipartek.formacion.modelo.pojo.Usuario;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet implementation class LoginController//
  */
 @WebServlet("/login")//
 public class LoginController extends HttpServlet {
