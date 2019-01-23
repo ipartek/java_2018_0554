@@ -27,7 +27,7 @@ import com.ipartek.formacion.modelo.pojo.Usuario;
 /**
  * Servlet implementation class LoginController
  */
-@WebServlet("/login")
+@WebServlet("/login")//
 public class LoginController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
