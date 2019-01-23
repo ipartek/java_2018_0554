@@ -1,0 +1,56 @@
+body.fondo {
+	background: url("../media/fondo.jpg") no-repeat center center;
+	background-size: 115% 115%;
+}
+body.sinespacio{
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
+  background: url("../media/27-pattern.jpg") !important;
+}
+
+.container {
+	height: 91vh;
+}
+input[type="search" i] {
+    padding: 1px;
+    width: 115px;
+    text-align:center;
+}
+.nocumple{
+	background-color: rgba(255,0,0,0.15);
+}
+.cumple{
+	background-color: rgba(0,255,0,0.15);
+}
+.transparente{
+	background-color: rgba(0,0,0,0) !important;
+}
+.transparente:hover{
+	background-color: rgba(0,0,0,0.1) !important;
+}
+.nocumpletxt{
+	color: red;
+}
+.cumpletxt{
+	color: green;
+}
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
+  z-index: 13000;
+  height: 100%;
+}
+ 
+.preloader_image {
+  width: 169px;
+  height: 124px;
+  position: absolute;
+  left: 45%;
+  top: 50%;
+  background: url(../media/load.gif) no-repeat 50% 50% transparent;
+  margin: -50px 0 0 -50px;
+}
