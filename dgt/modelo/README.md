@@ -1,53 +1,88 @@
-# DGT Multapp
+# Project Title
 
-## Introduccion
+One Paragraph of project description goes here
 
-App para la gestion de multas para uso de Agente de tráfico.
+## Getting Started
 
-### Funciones:
-* Listado de Multas.
-* Busqueda por matrícula
-* Inserción, anulación y modificación de un registro
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
+### Prerequisites
 
-## Desarollo
-En esta app se ha desarollado en un proyecto **Maven 3.1** con la tecnología de **Java Enterprise Edition 1.8** empleado tanto para definir los controladores que manejarán las acciones del usuario como la vista mediante ficheros **JSP** para mostrar los resultados con un formato correcto.
+What things you need to install the software and how to install them
 
-### Bases de Datos
+```
+Give examples
+```
 
-Multapp trabaja con Bases de Datos diseñadas en **MySQL InnoBD** con el fin de asegurar la integridad de los registros.
+### Installing
 
-**dgt.sql**: Se encuentra en la carpeta *SQL* en la rama del proyecto. Contiene el script que genera la base de datos y su contenido.
+A step by step series of examples that tell you how to get a development env running
 
-**database.properties**: archivo con los datos necesarios para la conexion con la BBDD. Están hubicados en la carpeta *resources* del proyecto.
+Say what the step will be
 
+```
+Give the example
+```
 
-El siguiente esquema representa la BBDD:
+And repeat
 
-<img src="https://github.com/andonishiraiwa/dgt/blob/master/SQL/multas.png"></img>
+```
+until finished
+```
 
+End with an example of getting some data out of the system or using it for a little demo
 
+## Running the tests
 
-## Diseño 
-La app cuenta con un diseño responsive que se adapta a todos los dispositivos móviles en lo referente a dimensión de pantalla:
- 
-  A continuación mostramos unos ejemplos de la vista:
-  
- ### Página Principal
- <img src="https://github.com/andonishiraiwa/dgt/blob/master/src/main/webapp/images/readme/index.png" width="250" height="500">
-  
- ### Listado y gestión de Multas
- 
-<table>
-<tr>
-<td width="20%"><img src="https://github.com/andonishiraiwa/dgt/blob/master/src/main/webapp/images/readme/buscar.png"></td>
-<td width="20%"><img src="https://github.com/andonishiraiwa/dgt/blob/master/src/main/webapp/images/readme/redactar.png"></td>
-<td width="20%"><img src="https://github.com/andonishiraiwa/dgt/blob/master/src/main/webapp/images/readme/lista.png"></td>
+Explain how to run the automated tests for this system
 
- </tr>
- 
- </table>
- 
+### Break down into end to end tests
 
-## Desarrolladores
-App desarollada por **andonishiraiwa** y **Xabage**
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+### And coding style tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+## Deployment
+
+Add additional notes about how to deploy this on a live system
+
+## Built With
+
+* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+
+## Authors
+
+* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Hat tip to anyone whose code was used
+* Inspiration
+* etc
+
