@@ -1,0 +1,3 @@
+use dgt;
+ALTER TABLE agente
+ADD `password` VARCHAR(50) NOT NULL DEFAULT '12345678';
