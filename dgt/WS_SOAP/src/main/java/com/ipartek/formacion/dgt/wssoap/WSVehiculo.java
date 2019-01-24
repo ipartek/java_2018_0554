@@ -21,12 +21,6 @@ public class WSVehiculo {
 			c = cocheDAO.getByMatricula(matricula);
 		}	
 		
-		if( c == null ) {
-			c = new Coche();
-			c.setModelo("No se ha encontrado ningun Vehiculo");
-			c.setMatricula(matricula);			
-		}
-		
 		return c;
 	}
 
