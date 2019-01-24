@@ -25,6 +25,18 @@
 		  <h1 class="display-4">Web Service SOAP Vehiculos</h1>
 		  <p class="lead">Servicio para poder consultar los datos de un Vehiculo a partir de su matricula</p>
 		  <a class="btn btn-primary btn-lg" href="services/WSVehiculo?wsdl" role="button">Endpoint: WSDL</a>
+		  
+		  <h2>Metodos publicos</h2>
+		  <p>Los Servicios Web públicos  no precisan de ningún usuario y clave para poder acceder a ellos. En ellos se devuelve información pública y accesible por todo el mundo.
+			</p>
+		  <ul>
+		  	<li>
+		  		obtenerDatos()
+		  		<ul>
+		  			<li>Devuelve los datos de un coche segun su matricula</li>
+		  		</ul>
+		  	</li>
+		  </ul>
 		</div>
 	</main>	
 		
