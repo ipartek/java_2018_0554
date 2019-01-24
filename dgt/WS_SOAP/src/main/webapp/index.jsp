@@ -24,7 +24,8 @@
 <main class="container">
 	<div class="jumbotron">
 		<h1>Web Service SOAP Vehículos</h1>
-		<p>"obtenerDatos" : este servicio sirve para buscar un coche a partir de una matricula, en caso de no existir dicha matrícula se devolverá null</p>
+		
+		<p><strong>"obtenerDatos()": </strong> Este servicio sirve para buscar un coche a partir de una matricula, en caso de no existir dicha matrícula se devolverá null.</p>
 		<a class="btn btn-primary btn-lg" href="services/WSVehiculo?wsdl">End Point: WSDL</a>
 	</div>
 </main>
