@@ -42,6 +42,11 @@ public class CocheDAO {
 	}
 
 	public Coche getByMatricula(String mat) {
+		/**
+		 * Obtenemos un Coche por su matricula
+		 * @param matricula
+		 * @return Coche si encuentra, null en caso contrario
+		 */
 		Coche c = null;
 		try (Connection conn = ConnectionManager.getConnection();
 				CallableStatement cs = conn.prepareCall(SQL_GETMATRICULA);) {
