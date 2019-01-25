@@ -23,12 +23,12 @@ public class VehiculoController {
 	
 	@RequestMapping( value= {"/api/vehiculo"}, method = RequestMethod.GET)
 	public ArrayList<Coche> listar(){
-		ArrayList<Coche> coches = new ArrayList<Coche>();
+		//ArrayList<Coche> coches = new ArrayList<Coche>();
 		
-		coches.add(new Coche(1L, "BI000CM", "Fiat", 34555L));
-		coches.add(new Coche(2L, "ZA000HK", "Flagoneta", 34555L));
+		//coches.add(new Coche(1L, "BI000CM", "Fiat", 34555L));
+		//coches.add(new Coche(2L, "ZA000HK", "Flagoneta", 34555L));
 		
-		return coches;
+		return cocheDao.getAll();
 	}
 	
 }
