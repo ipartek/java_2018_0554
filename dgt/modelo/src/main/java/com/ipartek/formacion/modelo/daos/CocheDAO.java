@@ -1,27 +1,27 @@
 package com.ipartek.formacion.modelo.daos;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.cm.ConnectionManager;
 import com.ipartek.formacion.modelo.pojo.Coche;
-import com.ipartek.formacion.modelo.pojo.Multa;
 
 public class CocheDAO {
 
 	private final static Logger LOG = Logger.getLogger(CocheDAO.class);
 	private static CocheDAO INSTANCE = null;
 
-	private static final String SQL_GETMATRICULA = "select id, matricula, modelo, km from coche where id=?;";
+	private static final String SQL_GETMATRICULA = "select id, matricula, modelo, km from coche where matricula=?;";
+	private static final String SQL_GETID = "select id, matricula, modelo, km from coche where id=?;";
 	private static final String SQL_GETALL = "select id, matricula, modelo, km from coche;";
 	private static final String SQL_DELETE = "delete from coche where id = ?;";
+	private static final String SQL_DARDEBAJAPORID = "update coche set fecha_baja = current_timestamp where id=?;";
+	private static final String SQL_DARDEBAJAPORMATRICULA = "update coche set fecha_baja = current_timestamp where matricula=?;";
 
 	// constructor privado, solo acceso por getInstance()
 	private CocheDAO() {
@@ -54,11 +54,34 @@ public class CocheDAO {
 	public Coche getById(long id) {
 		Coche c = null;
 		try (Connection conn = ConnectionManager.getConnection();
-				CallableStatement cs = conn.prepareCall(SQL_GETMATRICULA);) {
+				PreparedStatement pst = conn.prepareStatement(SQL_GETID);) {
 
-			cs.setLong(1, id);
+			pst.setLong(1, id);
 
-			try (ResultSet rs = cs.executeQuery()) {
+			try (ResultSet rs = pst.executeQuery()) {
+				try {
+					while (rs.next()) {
+						c = rowMapper(rs);
+					}
+				} catch (Exception e) {
+					LOG.warn(e);
+				}
+			}
+
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+		return c;
+	}
+
+	public Coche getByMatricula(String matricula) {
+		Coche c = null;
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_GETMATRICULA);) {
+
+			pst.setString(1, matricula);
+
+			try (ResultSet rs = pst.executeQuery()) {
 				try {
 					while (rs.next()) {
 						c = rowMapper(rs);
@@ -104,6 +127,44 @@ public class CocheDAO {
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_DELETE);) {
 			pst.setLong(1, id);
+
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+
+				resul = true;
+			}
+
+		}
+		return resul;
+
+	}
+	
+	public boolean darDeBajaPorId(long id) throws SQLException {
+
+		boolean resul = false;
+
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_DARDEBAJAPORID);) {
+			pst.setLong(1, id);
+
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+
+				resul = true;
+			}
+
+		}
+		return resul;
+
+	}
+	
+	public boolean darDeBajaPorMatricula(String matricula) throws SQLException {
+
+		boolean resul = false;
+
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_DARDEBAJAPORMATRICULA);) {
+			pst.setString(1, matricula);
 
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
