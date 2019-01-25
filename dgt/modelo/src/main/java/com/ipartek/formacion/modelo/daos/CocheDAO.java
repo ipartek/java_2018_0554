@@ -2,8 +2,10 @@ package com.ipartek.formacion.modelo.daos;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
@@ -16,6 +18,7 @@ public class CocheDAO {
 	private final static Logger LOG = Logger.getLogger(CocheDAO.class);
 	private static CocheDAO INSTANCE = null;	
 	private static final String SQL_GETMATRICULA = "{call pa_coche_getByMatricula(?)}";
+	private static final String SQL_GETALL = "SELECT * FROM dgt.coche;";
 
 	
 	private CocheDAO() {
@@ -54,7 +57,30 @@ public class CocheDAO {
 		}
 		return c;
 	}
-	
+	public ArrayList<Coche> getCoche() {
+
+		ArrayList<Coche> coches = new ArrayList<Coche>();
+
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_GETALL);
+				ResultSet rs = pst.executeQuery()) {
+
+			while (rs.next()) {
+				try {
+					coches.add(rowMapper(rs));
+				} catch (Exception e) {
+					System.out.println("coche no válido");
+					e.printStackTrace();
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return coches;
+	}
+
 	
 	private Coche rowMapper(ResultSet rs) throws SQLException {
 		Coche c = new Coche();
