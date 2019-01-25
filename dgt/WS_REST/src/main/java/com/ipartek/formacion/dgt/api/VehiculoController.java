@@ -112,8 +112,19 @@ public class VehiculoController {
 	public ResponseEntity<Coche> modificar(
 			@PathVariable long id,
 			@RequestBody Coche coche){
-		// TODO realizar update
-		return new ResponseEntity<Coche>(HttpStatus.NOT_IMPLEMENTED);
+		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);//404
+		
+		try {
+			if(cocheDAO.updateCoche(coche)) {
+				response = new ResponseEntity<Coche>(HttpStatus.OK);//200
+			}
+		}catch (MySQLIntegrityConstraintViolationException e) {
+			response = new ResponseEntity<Coche>(HttpStatus.CONFLICT);//409
+			e.printStackTrace();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return response;
 	}
 	
 
@@ -124,11 +135,18 @@ public class VehiculoController {
 	 * @return
 	 */
 	@RequestMapping(value=("/api/vehiculo/{id}"),method=RequestMethod.PATCH)
-	public ResponseEntity<Coche> darDeBaja(@PathVariable long id,@RequestBody Coche coche){
+	public ResponseEntity<Coche> darDeBaja(@PathVariable long id){
+		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);//404
 		
-		// TODO realizar update parcial
+		try {
+			if(cocheDAO.darDeBajaCoche(id)) {
+				response = new ResponseEntity<Coche>(HttpStatus.OK);//200
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-		return new ResponseEntity<Coche>(HttpStatus.NOT_IMPLEMENTED);
+		return response;
 	}
 	
 	
