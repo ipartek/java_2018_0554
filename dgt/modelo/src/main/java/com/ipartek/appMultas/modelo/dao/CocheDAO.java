@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
@@ -11,6 +12,7 @@ import com.ipartek.appMultas.modelo.pojo.Coche;
 
 public class CocheDAO {
 
+	private final static String SQL_GETALL = "{call coche_getAll()}";
 	private final static String SQL_GETBYMATRICULA = "{call coche_getByMatricula(?)}";
 	private final static String SQL_GETBYID = "{call coche_getById(?)}";
 
@@ -29,6 +31,29 @@ public class CocheDAO {
 		}
 		return INSTANCE;
 	}
+	
+	/**
+	 * Obtiene todos los vehiculos de la base de datos
+	 * @return ArrayList de coches
+	 */
+	public ArrayList<Coche> getAll(){
+		ArrayList<Coche> coches = new ArrayList<Coche>();
+		Coche c = null;
+		String sql = SQL_GETALL;
+
+		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(sql);) {
+			try (ResultSet rs = cs.executeQuery();) {
+				while (rs.next()) {
+					c = rowMapper(rs);
+					coches.add(c);
+				}
+			}
+		} catch (Exception e) {
+			LOG.debug(e);
+		}
+		return coches;
+	}
+	
 	/**
 	 * Obtiene un coche a partir de la matrícula que recibe por parámetro. 
 	 * @param matricula Matrícula del coche
