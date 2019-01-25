@@ -23,12 +23,12 @@ public class VehiculoController {
 	
 	@RequestMapping(value=("/api/vehiculo"), method=RequestMethod.GET)
 	public ArrayList<Coche> listar(){
-		//TODO hacer metodo getAll de coches
-		ArrayList<Coche> coches = new ArrayList<Coche>();
-		coches.add(new Coche((long)1, "BI000CM", "Fiat", (long)34555));
-		coches.add(new Coche((long)2, "ZA000HK", "Flagoneta", (long)34555));
 		
-		return coches;
+		//ArrayList<Coche> coches = new ArrayList<Coche>();
+		//coches.add(new Coche((long)1, "BI000CM", "Fiat", (long)34555));
+		//coches.add(new Coche((long)2, "ZA000HK", "Flagoneta", (long)34555));
+		
+		return cocheDAO.getAll();
 	}
 
 }
