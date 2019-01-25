@@ -19,6 +19,9 @@ public class CocheDAO {
 	private static CocheDAO INSTANCE = null;	
 	private static final String SQL_GETMATRICULA = "{call pa_coche_getByMatricula(?)}";
 	private static final String SQL_GETALL = "SELECT * FROM dgt.coche;";
+	private static final String SQL_BYID = "SELECT id, matricula, modelo, km FROM coche WHERE id = ? ;";
+	private static final String SQL_DELETE = "DELETE FROM coche WHERE id = ?;";
+	private static final String SQL_INSERT = "INSERT INTO coche  (matricula, modelo, km) VALUES( ? , ?, ?);";
 
 	
 	private CocheDAO() {
@@ -57,6 +60,28 @@ public class CocheDAO {
 		}
 		return c;
 	}
+	
+	
+	public Coche getById(long id) {
+		
+		Coche c = null;
+		
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_BYID);) {
+			pst.setLong(1, id);
+
+			try (ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) {
+					c = rowMapper(rs);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return c;
+	
+
+	}
 	public ArrayList<Coche> getCoche() {
 
 		ArrayList<Coche> coches = new ArrayList<Coche>();
@@ -80,6 +105,47 @@ public class CocheDAO {
 
 		return coches;
 	}
+	
+	// ELIMINAR
+
+		public boolean eliminar(long id) throws SQLException {
+
+			boolean resul = false;
+			try (Connection conn = ConnectionManager.getConnection();
+					PreparedStatement pst = conn.prepareStatement(SQL_DELETE);) {
+
+				pst.setLong(1, id);
+
+				int affectedRows = pst.executeUpdate();
+				if (affectedRows == 1) {
+					resul = true;
+				}
+
+			}
+			return resul;
+
+		}
+		
+		// INSERTAR
+
+		public boolean insert(Coche c) throws SQLException {
+
+			boolean resul = false;
+
+			try (Connection conn = ConnectionManager.getConnection();
+					PreparedStatement pst = conn.prepareStatement(SQL_INSERT);) {
+
+				pst.setString(1, c.getMatricula());
+				pst.setString(2, c.getModelo());
+				pst.setInt(3,  c.getKm());;
+				int affectedRows = pst.executeUpdate();
+				if (affectedRows == 1) {
+					resul = true;
+				}
+
+			}
+			return resul;
+		}
 
 	
 	private Coche rowMapper(ResultSet rs) throws SQLException {
