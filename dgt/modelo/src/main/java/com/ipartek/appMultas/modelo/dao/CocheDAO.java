@@ -4,17 +4,23 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
 import com.ipartek.appMultas.modelo.pojo.Coche;
+import com.ipartek.appMultas.modelo.pojo.Multa;
 
 public class CocheDAO {
 
 	private final static String SQL_GETALL = "{call coche_getAll()}";
 	private final static String SQL_GETBYMATRICULA = "{call coche_getByMatricula(?)}";
 	private final static String SQL_GETBYID = "{call coche_getById(?)}";
+	private final static String SQL_DELETE = "{call coche_delete(?)}";
+	private static final String SQL_DAR_DE_BAJA = "{call coche_dar_de_baja(?)}";
+	private static final String SQL_INSERT = "{call coche_insert(?,?,?,?)}";
+	private static final String SQL_UPDATE = "{call coche_insert(?,?,?)}";
 
 	private final static Logger LOG = Logger.getLogger(CocheDAO.class);
 	private static CocheDAO INSTANCE = null;
@@ -98,6 +104,103 @@ public class CocheDAO {
 		}
 		return c;
 	}
+	
+	/**
+	 * Método para insertar un objeto Coche nuevo en la BD
+	 * @param c Coche a insertar en la BD
+	 * @return True si la inserción ha sido correcta.
+	 * @return False si no se ha podido insertar el coche.
+	 * @throws SQLException P.E: Si algún dato no llega en el formato esperado.
+	 */
+	public boolean insert(Coche c) throws SQLException {
+		boolean resul = false;
+		String sql = SQL_INSERT;
+		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(sql);) {
+			// parametros de entrada
+			cs.setString(1, c.getMatricula());
+			cs.setString(2, c.getModelo());
+			cs.setLong(3, c.getKm());
+			
+			// parametros de salida
+			cs.registerOutParameter(4, Types.INTEGER);
+
+			int affectedRows = cs.executeUpdate();
+			if (affectedRows == 1) {
+				// conseguir id generado
+				c.setId(cs.getLong(4));
+				resul = true;
+			}
+		}
+		return resul;
+	}
+	
+	/**
+	 * Método para actualizar los datos de un coche específico en la BD. 
+	 * @param c Datos nuevos para actualizar el coche existente. 
+	 * @return True si la inserción ha sido correcta.
+	 * @return False si no se ha podido insertar el coche. 
+	 * @throws SQLException P.E: Si algún dato no llega en el formato esperado.
+	 */
+	public boolean update(Coche c) throws SQLException {
+		boolean result = false;
+		String sql = SQL_UPDATE;
+
+		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(sql);) {
+			cs.setString(1, c.getMatricula());
+			cs.setString(2, c.getModelo());
+			cs.setLong(3, c.getKm());
+
+			int affectedRows = cs.executeUpdate();
+			if (affectedRows == 1) {
+				result = true;
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param id del coche a eliminar en la BD. 
+	 * @return True si la inserción ha sido correcta.
+	 * @return False si no se ha podido insertar el coche.
+	 * @throws SQLException Si hay algún problema con la consulta a la BD.
+	 */
+	public boolean delete(Long id) throws SQLException {
+		boolean result = false;
+		String sql = SQL_DELETE;
+
+		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(sql);) {
+			cs.setLong(1, id);
+			int affectedRows = cs.executeUpdate();
+			if (affectedRows == 1) {
+				result = true;
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * Método que actualiza la fecha de baja del coche en la base de datos.
+	 * Da de baja el coche, pero no lo elimina. 
+	 * @param id del coche a dar de baja
+	 * @return True si la inserción ha sido correcta.
+	 * @return False si no se ha podido insertar el coche.
+	 * @throws SQLException Si hay algún problema con la consulta a la BD.
+	 */
+	public boolean darDeBaja(Long id) throws SQLException {
+		boolean result = false;
+		String sql = SQL_DAR_DE_BAJA;
+
+		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(sql);) {
+			cs.setLong(1, id);
+			int affectedRows = cs.executeUpdate();
+			if (affectedRows == 1) {
+				result = true;
+			}
+		}
+		return result;
+	}
+	
 	/**
 	 * Constructor del coche mediante una consulta a la BD. 
 	 * @param rs REsultSet de la consulta realizada a la BD. 
