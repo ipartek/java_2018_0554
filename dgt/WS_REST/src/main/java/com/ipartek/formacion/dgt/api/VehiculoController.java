@@ -65,12 +65,19 @@ public class VehiculoController {
 	 */
 	@RequestMapping(value=("/api/vehiculo"), method=RequestMethod.POST)
 	public ResponseEntity<Coche> crear(@RequestBody Coche coche){
-		
-		// TODO realizar crear
-		//404 datos del coche no son correctos, ej sin matricula o vacia
-		//201 creado y retonrar coche con id actualizado
-		//409 ya existe la matricula unique key
-		return new ResponseEntity<Coche>(HttpStatus.NOT_IMPLEMENTED);
+		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);//404
+	
+		try {
+			if(cocheDAO.insert(coche)) {
+				response = new ResponseEntity<Coche>(HttpStatus.CREATED);//201
+			}
+		} catch (MySQLIntegrityConstraintViolationException e) {
+			response = new ResponseEntity<Coche>(HttpStatus.CONFLICT);//409
+			e.printStackTrace();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return response;
 	}
 	
 	/**
