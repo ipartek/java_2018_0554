@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
@@ -13,6 +14,7 @@ public class CocheDAO {
 
 	private final static String SQL_GETBYMATRICULA = "{call coche_getByMatricula(?)}";
 	private final static String SQL_GETBYID = "{call coche_getById(?)}";
+	private final static String SQL_GETALL = "{call coche_getAll()}";
 
 	private final static Logger LOG = Logger.getLogger(CocheDAO.class);
 	private static CocheDAO INSTANCE = null;
@@ -51,6 +53,35 @@ public class CocheDAO {
 		}
 		return c;
 	}
+	
+	/**
+	 * Obtiene todos los coches de la BD
+	 * @return Un arrayList de coches
+	 */
+	public ArrayList<Coche> getAll(){
+		ArrayList<Coche> coches = new ArrayList<Coche>();
+		Coche c = null;
+		String sql =SQL_GETALL;
+		
+		try(
+			Connection conn = ConnectionManager.getConnection();
+			CallableStatement cs = conn.prepareCall(sql);
+			ResultSet rs = cs.executeQuery();	
+			){
+			while (rs.next()) {
+				
+				c = rowMapper(rs);
+				coches.add(c);
+			}
+			
+		}catch (Exception e) {
+			LOG.debug(e);
+		}
+		
+		return coches;
+	}
+	
+	
 	/**
 	 * Obtiene un coche a partir del ID que recibe por parámetro. 
 	 * @param id ID del coche en la BD.

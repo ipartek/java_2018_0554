@@ -5,7 +5,7 @@
 	<groupId>com.ipartek.formacion.dgt</groupId>
 	<artifactId>modelo</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0</version>
+	<version>1.1</version>
 	<name>modelo</name>
 	<url>http://localhost:8080/modelo/</url>
 
