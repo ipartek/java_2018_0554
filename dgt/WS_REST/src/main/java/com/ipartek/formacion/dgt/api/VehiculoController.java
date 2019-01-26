@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ipartek.formacion.modelo.daos.CocheDAO;
 import com.ipartek.formacion.modelo.pojo.Coche;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 @CrossOrigin
 
@@ -112,8 +113,22 @@ public class VehiculoController {
 
 	}
 	
-	@RequestMapping(value = { "/api/vehiculo" }, method = RequestMethod.POST)
-	public  ResponseEntity<Coche> crear(@RequestBody Coche coche){
+	@RequestMapping(value=("/api/vehiculo"), method=RequestMethod.POST)
+	public ResponseEntity<Coche> crear(@RequestBody Coche coche){
+		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);//404
+	
+		try {
+			if(cocheDAO.insert(coche)) {
+				response = new ResponseEntity<Coche>(HttpStatus.CREATED);//201
+			}
+		} catch (MySQLIntegrityConstraintViolationException e) {
+			response = new ResponseEntity<Coche>(HttpStatus.CONFLICT);//409
+			e.printStackTrace();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return response;
+	}
 		
 		
 		
@@ -121,9 +136,9 @@ public class VehiculoController {
 		//201 creado y retornar coche con id actualizado
 		//400 datos del coche no son correctos, por ejemplo sin matricula o vacia
 		//409 ya existe la matricula UK 
-		return new ResponseEntity<Coche>(HttpStatus.NOT_IMPLEMENTED);
+	
 		
-	}
+	
 	
 	@RequestMapping(value = { "/api/vehiculo/{id}" }, method = RequestMethod.PUT)
 	public ResponseEntity<Coche> modificar(@PathVariable long id, @RequestBody Coche coche ) {

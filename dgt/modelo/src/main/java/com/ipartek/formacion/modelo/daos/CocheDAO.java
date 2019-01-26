@@ -126,6 +126,8 @@ public class CocheDAO {
 
 		}
 		
+		
+		
 		// INSERTAR
 
 		public boolean insert(Coche c) throws SQLException {
@@ -137,7 +139,7 @@ public class CocheDAO {
 
 				pst.setString(1, c.getMatricula());
 				pst.setString(2, c.getModelo());
-				pst.setInt(3,  c.getKm());;
+				pst.setInt(3,  c.getKm());
 				int affectedRows = pst.executeUpdate();
 				if (affectedRows == 1) {
 					resul = true;
