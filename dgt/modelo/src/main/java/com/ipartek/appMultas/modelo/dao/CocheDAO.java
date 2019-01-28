@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 import com.ipartek.appMultas.modelo.pojo.Coche;
-import com.ipartek.appMultas.modelo.pojo.Multa;
 
 public class CocheDAO {
 

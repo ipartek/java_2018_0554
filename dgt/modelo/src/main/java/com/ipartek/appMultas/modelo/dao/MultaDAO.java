@@ -63,7 +63,7 @@ public class MultaDAO {
 	 * Obtiene todas las multas activas de un agente concreto. 
 	 * @param idAgente ID del agente sobre el que se quieren obtener las multas. 
 	 * @return HashMap de multas. 
-	 * @throws SQLException
+	 * @throws SQLException Si el agente no tiene ninguna multa asignada.
 	 */
 	public HashMap<Long, Multa> getAllByIdAgente(Long idAgente) throws SQLException {
 		HashMap<Long, Multa> multasAgente = new HashMap<>();
@@ -86,7 +86,7 @@ public class MultaDAO {
 	 * Obtiene todas las multas anuladas de un agente concreto. 
 	 * @param idAgente ID del agente sobre el que se quieren obtener las multas. 
 	 * @return HashMap de multas anuladas. 
-	 * @throws SQLException
+	 * @throws SQLException Si el agente no tiene ninguna multa anulada.
 	 */
 	public HashMap<Long, Multa> getAllByIdAgenteDarBaja(Long idAgente) throws SQLException {
 		HashMap<Long, Multa> multasAgente = new HashMap<>();
@@ -110,7 +110,7 @@ public class MultaDAO {
 	 * @param m Objeto multa
 	 * @param id_agente ID del creador de la multa
 	 * @return True si todo es correcto. False si la inserción es errónea. 
-	 * @throws SQLException
+	 * @throws SQLException Si alguno de los datos viene en formato erróneo.
 	 */
 	public boolean insert(Multa m, Long id_agente) throws SQLException {
 		boolean resul = false;
@@ -139,7 +139,7 @@ public class MultaDAO {
 	 * Método que anula una multa en la BD.
 	 * @param id Identificador de la multa a anular
 	 * @return True si todo es correcto. False si la actualización es errónea.
-	 * @throws SQLException
+	 * @throws SQLException Si no puede borrarse la multa por las constraints.
 	 */
 	public boolean darBajaMulta(Long id) throws SQLException {
 		boolean result = false;
