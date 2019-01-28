@@ -24,6 +24,7 @@ public class CocheDAO {
 	private static final String SQL_GET_BY_ID = "{call pa_coche_getById(?)}";
 	private static final String SQL_DELETE = "{call pa_coche_borrar(?,?)}";
 	private static final String SQL_INSERT = "{call pa_coche_insertar(?,?,?,?)}";
+	private static final String SQL_UPDATE = "{call pa_coche_update(?,?,?)}";
 	// constructor privado, solo acceso por getInstance()
 	private CocheDAO() {
 		super();
@@ -47,8 +48,8 @@ public class CocheDAO {
 	}
 
 	/**
-	 * Devuelve todos los coches de la base de datos
-	 * @return ArrayList<Coche>
+	 * Obtiene una coleccion de coches ordneados por id descendente y limitado a 100
+	 * @return ArrayList<Coche> si no existe devuelve la coleccion inicializada a 0.
 	 */
 	public ArrayList<Coche> getAll(){
 		ArrayList<Coche> coches = new ArrayList<Coche>();
@@ -57,14 +58,9 @@ public class CocheDAO {
 		try (Connection conn = ConnectionManager.getConnection();
 				CallableStatement cs = conn.prepareCall(sql);) {
 			try (ResultSet rs = cs.executeQuery()) {
-				try {
-					while (rs.next()) {
-						c = rowMapper(rs);
-						coches.add(c);
+				while (rs.next()) {
+					coches.add(rowMapper(rs));
 					}
-				} catch (Exception e) {					
-					LOG.warn(e);
-				}
 			}
 
 		} catch (Exception e) {
@@ -77,7 +73,7 @@ public class CocheDAO {
 	/**
 	 * Recibe un parametro de entrada, una matricula (tipo String), una vez procesado, 
 	 * se obtendrán los datos requeridos del coche.
-	 * @param matricula
+	 * @param matricula String
 	 * @return Coche si encuentra, null en caso contrario
 	 */
 	public Coche getByMatricula(String matricula) {
@@ -104,8 +100,7 @@ public class CocheDAO {
 	}
 	
 	
-	/**
-	 * Buscar un coche por su id
+	/** Obtener un coche por su identificador
 	 * @param id es el identifacdor de coche no maricula
 	 * @return si encuentra devuelve un coche sino devuleve null
 	 */
@@ -116,14 +111,10 @@ public class CocheDAO {
 				CallableStatement cs = conn.prepareCall(SQL_GET_BY_ID);) {
 
 			cs.setLong(1, id);
-			try (ResultSet rs = cs.executeQuery()) {
-				try {
+			try (ResultSet rs = cs.executeQuery()) {		
 					while (rs.next()) {
 						c = rowMapper(rs);
-					}
-				} catch (Exception e) {					
-					LOG.warn(e);
-				}
+					}	
 			}
 
 		} catch (Exception e) {
@@ -134,20 +125,18 @@ public class CocheDAO {
 	
 	
 	/**
-	 * 
-	 * @param id
-	 * @return
-	 * @throws SQLException
+	 * Eliminar una Coche de la base de datos
+	 * @param id, identificador del coche
+	 * @return true si elimina, false en caso contrario
+	 * @throws SQLException cuando no se pueda eliminar el coche con multas asociadas (integridad referencial)
 	 */
 	public boolean delete( long id ) throws SQLException {
 
 		boolean resul = false;
 		String sql = SQL_DELETE;
 		try (Connection conn = ConnectionManager.getConnection();
-				CallableStatement cs = conn.prepareCall(sql);) {
-			
-			cs.setLong(1, id);		
-			//parametro de salida
+			CallableStatement cs = conn.prepareCall(sql);) {	
+			cs.setLong(1, id);
 			cs.registerOutParameter(2, Types.INTEGER );
 			int affectedRows = cs.executeUpdate();
 			if (affectedRows == 1) {
@@ -156,48 +145,59 @@ public class CocheDAO {
 
 		}
 		return resul;
-
 	}
 	
 	
 	
 	
 	/**
-	 * Devuelve true o false
-	 * @param c es un objeto de tipo coche
-	 * @return true si inserta false si no inserta
+	 * Insertar un nuevo Coche
+	 * @param coche con datos
+	 * @return Coche con los mismos datos y la id generada
+	 * @throws SQLException si la matricula ya existe
+	 */
+	public Coche insert(Coche coche) throws SQLException {
+
+		try (Connection conn = ConnectionManager.getConnection();
+				CallableStatement cs = conn.prepareCall(SQL_INSERT);) {
+			cs.setString(1, coche.getMatricula());
+			cs.setString(2, coche.getModelo());
+			cs.setInt(3, coche.getKm());
+			cs.registerOutParameter(4, Types.INTEGER);
+			
+			if ( cs.executeUpdate() == 1) {
+				coche.setId(cs.getLong(4));
+			} else {
+				throw new SQLException("No se puede insertar el coche " + coche );
+			}
+		}
+		return coche;
+	}
+	
+	
+	/**
+	 * 
+	 * @param c(coche)
+	 * @return
 	 * @throws SQLException
 	 */
-	public boolean insert(Coche c) throws SQLException {
+	public boolean update(Coche c) throws SQLException {
 
 		boolean resul = false;
-		String sql = SQL_INSERT;
-		try (Connection conn = ConnectionManager.getConnection(); 
-			CallableStatement cs = conn.prepareCall(sql);) {
-			
-			// parametros de entrada
-			cs.setString(1, c.getMatricula());
-			cs.setString(2, c.getModelo());
-			cs.setLong(3, c.getKm());
-		
-			//parametro de salida
-			cs.registerOutParameter(4, Types.INTEGER );
+		try (Connection conn = ConnectionManager.getConnection();
+				CallableStatement cs = conn.prepareCall(SQL_UPDATE);) {
 
+			cs.setString(1, c.getModelo());
+			cs.setInt(2, c.getKm());
+			cs.setLong(3, c.getId());
 			int affectedRows = cs.executeUpdate();
 			if (affectedRows == 1) {
-				// conseguir id generado
-				c.setId( cs.getLong(5) );	
 				resul = true;
-				LOG.debug("coche insertado");
 			}
-			
 		}
 		return resul;
+
 }
-	
-	
-	
-	
 	
 	
 }
