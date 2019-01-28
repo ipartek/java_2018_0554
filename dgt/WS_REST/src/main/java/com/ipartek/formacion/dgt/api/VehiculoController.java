@@ -19,6 +19,10 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 
 @CrossOrigin //aceptamos peticiones de javascript de otros origenes
 @RestController
+/*@RequestMapping("/api/vehiculo/") 
+ * Se puede marcar la ruta para todo el controlador  y en cada metodo se pondra el extra,es decir,
+ * esto sirve para poner algo en comun.
+ */
 public class VehiculoController {
 	
 	private final static Logger LOG = Logger.getLogger(VehiculoController.class);
@@ -116,7 +120,7 @@ public class VehiculoController {
 	 * Este metodo sirve para actualizar todo el coche
 	 * @param id Se le envia el id del coche.
 	 * @param coche Se envia el coche modificado
-	 * @return
+	 * @return 
 	 * 200 -->se ha realizado la consulta correctamente
 	 * 404 --> El recurso no se ha encontrado.
 	 * 409--> Hay un coche ya registrado con esa matricula por eso devuelve un conflicto
