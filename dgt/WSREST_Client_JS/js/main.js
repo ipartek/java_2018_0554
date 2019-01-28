@@ -37,7 +37,7 @@ function refrescarLista(){
                         <span class="matricula">${el.matricula}</span> 
                         <span class="modelo">${el.modelo}</span>
                         <span class="km">${el.km} KM</span>
-                        <a href="#" onclick="eliminar(${pos})">Eliminar</a>
+                        <a href="#" onclick="eliminar(${el.id})">Eliminar</a>
                     </li>`;
         });
         ulVehiculos.innerHTML = lis;
@@ -48,13 +48,12 @@ function refrescarLista(){
 } // refrescarLista
 
 
-function eliminar( posicion ){
+function eliminar( idVehiculo ){
 
-    let vehiculo = vehiculos[posicion];
-    console.log('click Eliminar %o', vehiculo );
+    console.log('click Eliminar %o', idVehiculo );
 
     if ( confirm('¿Estas Seguro?') ){
-        let promesa = ajax('DELETE',`http://localhost:8080/wsrest/api/vehiculo/${vehiculo.id}`);
+        let promesa = ajax('DELETE','http://localhost:8080/wsrest/api/vehiculo/' + idVehiculo);
         promesa.then( data =>{
             console.debug('Vehiculo eliminado');
             refrescarLista();
