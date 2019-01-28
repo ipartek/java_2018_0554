@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `dgt` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `dgt`;
--- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
 --
--- Host: localhost    Database: dgt
+-- Host: 127.0.0.1    Database: dgt
 -- ------------------------------------------------------
--- Server version	8.0.13
+-- Server version	8.0.12
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -43,24 +41,6 @@ LOCK TABLES `agente` WRITE;
 INSERT INTO `agente` VALUES (1,'Majonei',123456,'123456'),(2,'Johnny Walker',987654,'t45gt4w5t'),(3,'Monk',987321,'123456789'),(4,'Takelberry',987987,'987987'),(5,'Tontimmy',998776,'7miti76');
 /*!40000 ALTER TABLE `agente` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tbi_agente_comprobacion` BEFORE INSERT ON `agente` FOR EACH ROW BEGIN
-	set new.nombre=trim(new.nombre);
-    set new.password=trim(new.password);
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `coche`
@@ -76,7 +56,7 @@ CREATE TABLE `coche` (
   `km` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `matricula_UNIQUE` (`matricula`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,27 +65,9 @@ CREATE TABLE `coche` (
 
 LOCK TABLES `coche` WRITE;
 /*!40000 ALTER TABLE `coche` DISABLE KEYS */;
-INSERT INTO `coche` VALUES (1,'3548MKZ','Toyota Yaris',500),(2,'9605EFH','Fiat multipla',800),(3,'5674MBD','GRT',1800),(4,'BI0020AZ','flagoneta',47500);
+INSERT INTO `coche` VALUES (1,'3548MKZ','Toyota Yaris',500),(2,'9605EFH','Fiat multipla',800),(3,'5674MBD','GRT',1800),(4,'BI0020AZ','cagarruta',3),(6,'BA2047Z','Bazofia sobre ruedas',456),(8,'0666HMR','El Homer',500000),(12,'BI6666STN','harcodeado',1000000);
 /*!40000 ALTER TABLE `coche` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tbi_coche_comprobaciones` BEFORE INSERT ON `coche` FOR EACH ROW BEGIN
-	set new.matricula=trim(new.matricula);
-    set new.modelo=trim(new.modelo);
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `multa`
@@ -137,26 +99,9 @@ CREATE TABLE `multa` (
 
 LOCK TABLES `multa` WRITE;
 /*!40000 ALTER TABLE `multa` DISABLE KEYS */;
-INSERT INTO `multa` VALUES (12,21.53,'234567876532weerewtrwywete','2018-09-14 10:25:30',1,4,NULL,NULL),(13,0,'por muy feo','2018-09-14 11:06:39',1,4,NULL,NULL),(14,500,'por muy feo','2018-08-14 13:02:47',1,4,NULL,NULL),(15,500.7,'vas mas borracho que el tato','2018-06-15 12:25:10',2,4,NULL,NULL),(16,500.7,'borrachuzo de mierda','2018-05-15 12:31:15',2,4,NULL,NULL),(17,500.7,'borrachuzo de mierda','2018-02-15 12:33:21',2,4,NULL,NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',2,4,NULL,NULL),(19,500.7,'borrachuzo de mierda','2018-08-15 12:37:48',2,4,NULL,NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,4,NULL,NULL),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',2,4,NULL,NULL),(22,500.7,'borrachuzo de mierda','2018-04-15 12:42:02',2,4,NULL,NULL),(23,500.7,'borrachuzo de mierda','2018-07-15 12:45:28',2,4,NULL,NULL),(24,500.7,'borrachuzo de mierda','2018-11-15 12:45:32',2,4,NULL,NULL),(25,500.7,'borrachuzo de mierda','2018-01-15 12:46:07',2,4,NULL,NULL),(26,500.7,'borrachuzo de mierda','2018-10-15 12:48:21',2,4,NULL,NULL),(27,500.7,'borrachuzo de mierda','2018-11-15 12:49:41',2,4,NULL,NULL),(28,456.6,'fdgrd','2018-12-16 09:21:46',2,4,NULL,NULL),(29,540.59,'aefwefwefwfewefwe','2018-12-17 12:08:48',1,1,NULL,NULL),(30,1445,'pruebaaaaaaa','2018-03-20 21:21:10',2,4,NULL,NULL),(31,0,'khfkesjh','2018-03-21 10:02:01',3,4,NULL,NULL);
+INSERT INTO `multa` VALUES (12,21.53,'234567876532weerewtrwywete','2018-09-14 10:25:30',1,4,NULL,NULL),(13,0,'por muy feo','2018-09-14 11:06:39',1,4,NULL,NULL),(14,500,'por muy feo','2018-08-14 13:02:47',1,4,NULL,NULL),(15,500.7,'vas mas borracho que el tato','2018-06-15 12:25:10',2,4,NULL,NULL),(16,500.7,'borrachuzo de mierda','2018-05-15 12:31:15',2,4,NULL,NULL),(17,500.7,'borrachuzo de mierda','2018-02-15 12:33:21',2,4,NULL,NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',2,4,NULL,NULL),(19,500.7,'borrachuzo de mierda','2018-08-15 12:37:48',2,4,NULL,NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,4,NULL,NULL),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',2,4,NULL,NULL),(22,500.7,'borrachuzo de mierda','2018-04-15 12:42:02',2,4,'2019-01-23 12:45:28',NULL),(23,500.7,'borrachuzo de mierda','2018-07-15 12:45:28',2,4,NULL,NULL),(24,500.7,'borrachuzo de mierda','2018-11-15 12:45:32',2,4,NULL,NULL),(25,500.7,'borrachuzo de mierda','2018-01-15 12:46:07',2,4,NULL,NULL),(26,500.7,'borrachuzo de mierda','2018-10-15 12:48:21',2,4,NULL,NULL),(27,500.7,'borrachuzo de mierda','2018-11-15 12:49:41',2,4,NULL,NULL),(28,456.6,'fdgrd','2018-12-16 09:21:46',2,4,NULL,NULL),(29,540.59,'aefwefwefwfewefwe','2018-12-17 12:08:48',1,1,NULL,NULL),(30,1445,'pruebaaaaaaa','2018-03-20 21:21:10',2,4,NULL,NULL),(31,0,'khfkesjh','2018-03-21 10:02:01',3,4,NULL,NULL);
 /*!40000 ALTER TABLE `multa` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tbi_multa_correcciones` BEFORE INSERT ON `multa` FOR EACH ROW BEGIN
-	set new.concepto=trim(new.concepto);
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `objetivo`
@@ -217,7 +162,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -230,13 +175,60 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `pa_coche_insert` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_coche_insert`(IN p_matricula VARCHAR(15), IN p_modelo VARCHAR(255), IN p_km int, OUT o_id LONG)
+BEGIN
+INSERT INTO coche (`matricula`, `km`, `modelo`) VALUES (p_matricula, p_km, p_modelo);
+SET o_id=last_insert_id();
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `pa_coche_update` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_coche_update`(IN p_modelo VARCHAR(255),IN p_km int,IN p_id LONG)
+BEGIN
+	UPDATE 
+		coche
+    SET 
+		modelo = p_modelo,
+        km=p_km 
+	WHERE 
+		id = p_id;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `pa_login` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -264,7 +256,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -303,7 +295,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -354,7 +346,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -411,7 +403,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -449,4 +441,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-21 19:02:25
+-- Dump completed on 2019-01-28 14:21:57
