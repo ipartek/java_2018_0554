@@ -3,6 +3,8 @@ package com.ipartek.formacion.dgt.api;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.validation.Valid;
+
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -75,9 +77,9 @@ public class VehiculoController {
 	 * 409--> Hay un coche ya registrado con esa matricula por eso devuelve un conflicto
 	 */
 	@RequestMapping(value=("/api/vehiculo"), method=RequestMethod.POST)
-	public ResponseEntity<Coche> crear(@RequestBody Coche coche){
+	public ResponseEntity<Coche> crear(@Valid @RequestBody Coche coche){
 		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);//404
-	
+		// EL @Valid sirve para hacer las comprobaciones de Javaxx Validation
 		try {
 			if(cocheDAO.insert(coche)) {
 				response = new ResponseEntity<Coche>(HttpStatus.CREATED);//201
