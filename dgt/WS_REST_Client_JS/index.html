@@ -20,19 +20,19 @@
                         <span class="matricula"> Matricula</span> 
                         <span class="modelo"> Modelo </span>
                         <span class="km">KM</span>
-                        <a href="#">Eliminar</a>
+                        <button type="button" class="btn btn-primary">Eliminar</button>
                     </li>
                     <li class="list-group-item">
                         <span class="matricula"> Matricula</span> 
                         <span class="modelo"> Modelo </span>
                         <span class="km">KM</span>
-                        <a href="#">Eliminar</a>
+                        <button type="button" class="btn btn-primary">Eliminar</button>
                     </li>
                     <li class="list-group-item">
                         <span class="matricula"> Matricula</span> 
                         <span class="modelo"> Modelo </span>
                         <span class="km">KM</span>
-                        <a href="#">Eliminar</a>
+                        <button type="button" class="btn btn-primary">Eliminar</button>
                     </li>
                 </ul>
             </div>
@@ -40,10 +40,22 @@
 
             <div class="col-6">
                 <h2>Formulario</h2>
-                <form>
+                <form class="form-group">
 
-                    <input id="matricula" type="text" placeholder="BI000KM">
-                    <a href="" onclick="crear()">Crear</a>
+                    <div class="form-group">
+                        <label for="matricula">Matricula</label>
+                        <input type="text" class="form-control" id="matricula"  name="matricula"placeholder="7895JKL">
+                    </div>
+                    <div class="form-group">
+                        <label for="modelo">Modelo</label>
+                        <input type="text" class="form-control" id="modelo"  name="modelo" placeholder="toyota manolo">
+                    </div>
+                    <div class="form-group">
+                        <label for="km">Km</label>
+                        <input type="text" class="form-control" id="km"  name="km" placeholder="0">
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="crear()">Crear</button>
                 </form>
             </div>
         </div>

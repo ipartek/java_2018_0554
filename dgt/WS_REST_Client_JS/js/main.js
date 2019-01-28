@@ -3,6 +3,8 @@ var ulVehiculos;
 var vehiculos = [];
 var vehiculoSeleccionado;
 
+const ENDPOINT = 'http://localhost:8080/wsrest/api/vehiculo/';
+
 window.addEventListener('load',function(){
     console.info('documento cargado y listo');
     // resto de llamadas a metodos
@@ -15,58 +17,68 @@ window.addEventListener('load',function(){
 function  refrescarLista(){
     console.trace('refrescarLista');
     ulVehiculos.innerHTML ='<li class="list-group-item">Cargando vehículos ....</li>';
-
-    let promesa = ajax('GET','http://localhost:8080/wsrest/api/vehiculo/');
-    promesa.then(data =>{
-        console.log('tenemos los datos %o', data);
-        vehiculos = data;
-        let lis = '';
-        vehiculos.forEach((el,i) => {
-           console.debug(el); 
-           lis +=`
-           <li class="list-group-item">
-            <span class="matricula"> ${el.matricula}</span> 
-            <span class="modelo"> ${el.modelo} </span>
-            <span class="km">${el.km}</span>
-            <a href="#" onclick="eliminar(${i})">Eliminar</a>
-            </li>`;
-        });
-        ulVehiculos.innerHTML=lis;
-    }).catch(e =>{
-        console.error('Tenemos un error '+ e);
-    });
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange= function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            let lis='';
+            vehiculos = JSON.parse(xhr.responseText);
+            vehiculos.forEach((el,i) =>{
+                lis+=`<li class="list-group-item">
+                        <span class="matricula">${el.matricula}</span> 
+                        <span class="modelo">${el.modelo}</span>
+                        <span class="km">${el.km} KM</span>
+                        <button type="button" class="btn btn-primary" onclick="eliminar(${el.id})">Eliminar</button>
+                    </li>`
+            });
+            ulVehiculos.innerHTML =lis;
+        }
+    };
+    xhr.open('GET', ENDPOINT);
+    xhr.send();
 }
 
-function eliminar(i){
-    let vehiculo = vehiculos[i];
-    console.log('click Eliminar %o',vehiculo.id);
-    if(confirm('¿Estás seguro?')){
-        let promesa = ajax('DELETE',`http://localhost:8080/wsrest/api/vehiculo/${vehiculo.id}`);
-        promesa.then(data=>{
-            console.log('Vehiculo eliminado');
-            refrescarLista();
-        }).catch(e=>{
-            console.error('Tenemos un error '+ e);
-        });
-    }
+function eliminar( idVehiculo ){
+
+   
+    console.log('click Eliminar %o', idVehiculo );
+
+    if ( confirm('¿Estas Seguro?') ){
+        let xhr = new XMLHttpRequest();    
+        xhr.onreadystatechange = function(){ 
+             if (xhr.readyState == 4) {
+                 if ( xhr.status == 200 ){               
+                    refrescarLista();
+                 }else if ( xhr.status == 409 ){
+                    showAlert('CONFLICTO existen multas asociadas');
+                 }   
+             }    
+        };
+        xhr.open('DELETE', ENDPOINT + idVehiculo );    
+        xhr.send();
+    }    
+    
+} // eliminar
 
     function crear(){
         console.log('click crear')
 
-        let matricula = documente.getElementById('matricula').value;
+        let matricula = document.getElementById('matricula').value;
+        let modelo = document.getElementById('modelo').value;
+        let km = document.getElementById('km').value;
 
-        let json = {
+        let jsonCoche = {
             "matricula" : matricula,
-            "modelo" : "harcodeado",
-            "km" : 10000
+            "modelo" : modelo,
+            "km" : km
         };
         let xhr = new XMLHttpRequest();
         xhr.onreadystatechange= function(){
-            if(request.readyState == 4){
+            if(xhr.readyState == 4){
                 console.debug('STATUS' + xhr.status);
+                refrescarLista();
             }
         };
-        xhr.open('POST', 'http://localhost:8080/wsrest/api/vehiculo/', true);
-        request.send( JSON.stringify(data) );
+        xhr.open('POST', ENDPOINT);
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.send( JSON.stringify(jsonCoche) );
     }
-}
