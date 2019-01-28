@@ -2,11 +2,11 @@
 
 Servicio Rest con Spring 4.3.0.RELEASE
 
-## endpoint
+## Endpoint
 
-http://localhost:8080/wsrest/api
+http://localhost:8080/wsrest/api/vehiculo
 
-## recursos
+## Recursos
 
 * agente
 * vehiculo
