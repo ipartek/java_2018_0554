@@ -111,7 +111,8 @@ public class VehiculoController {
 			response = new ResponseEntity<Coche>(HttpStatus.CONFLICT);//409
 			e.printStackTrace();
 		}catch (SQLException e) {
-			e.printStackTrace();
+			LOG.error(e);
+			response= new ResponseEntity<Coche>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return response;
 	}
