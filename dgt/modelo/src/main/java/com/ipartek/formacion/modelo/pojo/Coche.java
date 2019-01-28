@@ -1,9 +1,22 @@
 package com.ipartek.formacion.modelo.pojo;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Coche {
 	private Long id;
+	
+	@NotBlank
+	@Size(min = 6, max = 10)
 	private String matricula;
+	
+	@NotBlank
+	@Size(min = 2, max = 90)
 	private String modelo;
+	
+	@Min(0)
 	private Integer km;
 	
 	public Coche(Long id, String matricula, String modelo, Integer km) {
