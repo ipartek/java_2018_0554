@@ -60,7 +60,7 @@ function eliminar( idVehiculo ){
                  if ( xhr.status == 200 ){               
                     refrescarLista();
                  }else if ( xhr.status == 409 ){
-                    showAlert('CONFLICTO existen multas asociadas');
+                    showAlert('CONFLICTO existen multas asociadas', 'warning');
                  }   
              }    
         };
@@ -96,9 +96,17 @@ function crear(){
 };
 
 
-function showAlert( texto ){
+function showAlert( texto, tipo = 'info' ){
 
-    let pText = document.getElementById('alertText');
-    pText.textContent = texto;
+    
+   let alertHTML = `<div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
+        <p>${texto}</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>`;
 
-}
+    document.getElementById('alert').innerHTML = alertHTML;
+
+
+}// showAlert
