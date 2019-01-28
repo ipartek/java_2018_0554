@@ -3,6 +3,8 @@ var ulVehiculos;
 var vehiculos = [];
 var vehiculoSeleccionado;
 
+const ENDPOINT = 'http://localhost:8080/wsrest/api/vehiculo/';
+
 
 window.addEventListener('load', function(){
 
@@ -24,42 +26,45 @@ function refrescarLista(){
     console.trace('refrescarLista');
     ulVehiculos.innerHTML = '<li class="list-group-item">Cargando vehiculos....</li>';
 
-    let promesa = ajax('GET','http://localhost:8080/wsrest/api/vehiculo/');
-
-    promesa.then( data => {
-        console.debug('tenemos los datos %o', data);
-        vehiculos = data;
-        let lis = '';
-        vehiculos.forEach( (el,pos) => {
-            console.debug(el);
-            lis += `<li class="list-group-item">
-                        <span class="matricula">${el.matricula}</span> 
-                        <span class="modelo">${el.modelo}</span>
-                        <span class="km">${el.km} KM</span>
-                        <a href="#" onclick="eliminar(${pos})">Eliminar</a>
-                    </li>`;
-        });
-        ulVehiculos.innerHTML = lis;
-
-    }).catch(e => {
-        console.error(' tenemos un error ' + e);
-    });
+    let xhr = new XMLHttpRequest();    
+    xhr.onreadystatechange = function(){ 
+         if (xhr.readyState == 4 && xhr.status == 200 ){               
+            let lis = '';
+            vehiculos = JSON.parse(xhr.responseText);
+            vehiculos.forEach( (vehiculo, index) => {
+                lis += ` <li class="list-group-item">
+                            <span class="matricula">${vehiculo.matricula}</span> 
+                            <span class="modelo">${vehiculo.modelo}</span>
+                            <span class="km"> ${vehiculo.km} KM</span>
+                            <a href="#" onclick="eliminar(${vehiculo.id})">Eliminar</a>
+                        </li>`;
+            });
+            ulVehiculos.innerHTML = lis;
+         }    
+    };
+    xhr.open('GET', ENDPOINT );    
+    xhr.send();
 } // refrescarLista
 
 
-function eliminar( posicion ){
+function eliminar( idVehiculo ){
 
-    let vehiculo = vehiculos[posicion];
-    console.log('click Eliminar %o', vehiculo );
+   
+    console.log('click Eliminar %o', idVehiculo );
 
     if ( confirm('¿Estas Seguro?') ){
-        let promesa = ajax('DELETE',`http://localhost:8080/wsrest/api/vehiculo/${vehiculo.id}`);
-        promesa.then( data =>{
-            console.debug('Vehiculo eliminado');
-            refrescarLista();
-        }).catch( e => {
-            console.warn('Vehiculo NO eliminado %o', e);
-        });
+        let xhr = new XMLHttpRequest();    
+        xhr.onreadystatechange = function(){ 
+             if (xhr.readyState == 4) {
+                 if ( xhr.status == 200 ){               
+                    refrescarLista();
+                 }else if ( xhr.status == 409 ){
+                    showAlert('CONFLICTO existen multas asociadas');
+                 }   
+             }    
+        };
+        xhr.open('DELETE', ENDPOINT + idVehiculo );    
+        xhr.send();
     }    
     
 } // eliminar
@@ -83,8 +88,16 @@ function crear(){
             refrescarLista();
         }    
    };
-   xhr.open('POST', 'http://localhost:8080/wsrest/api/vehiculo/');
+   xhr.open('POST', ENDPOINT );
    xhr.setRequestHeader("Content-type", "application/json");
    xhr.send( JSON.stringify(jsonCoche) );
+
+};
+
+
+function showAlert( texto ){
+
+    let pText = document.getElementById('alertText');
+    pText.textContent = texto;
 
 };
