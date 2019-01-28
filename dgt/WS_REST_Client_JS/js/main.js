@@ -1,39 +1,50 @@
 
+//variables globales
+var ulVehiculos;
+var vehiculos = [];
+var vehiculoSeleccionado;
 
-console.info('ready');
+
+window.addEventListener('load', function(){
+
+    console.info('documento cargado y listo');    
+    // console.trace('esto es un trace');
+    // console.debug('esto es un debug');
+    // console.warn('esto es un waring');
+    // console.error('esto es un ERROR');
+    
+    ulVehiculos = document.getElementById('ulVehiculo');
+
+    refrescarLista();
+
+});
 
 
-var request = new XMLHttpRequest(); //ajax
+function refrescarLista(){
 
-request.onreadystatechange = function() {
-  if(request.readyState === 4) {
-          
-    if(request.status === 200) { 
-        console.log("200");
-        console.log( request.responseText );
-        
-        //parsear a json el texto
-        let vehiculos = JSON.parse(request.responseText);
-        console.log( vehiculos );
-        
-        //vaciar lista        
-        let ul = document.getElementById('ulVehiculos');
-        ul.innerHTML = '';
-        
-        //recorrer vehiculos
-        let lis = '';        
-        vehiculos.forEach( function(el) {
+    console.trace('refrescarLista');
+    ulVehiculos.innerHTML = '<li class="list-group-item">Cargando vehiculos....</li>';
+
+    let promesa = ajax('GET','http://localhost:8080/wsrest/api/vehiculo/');
+
+    promesa.then( data => {
+        console.debug('tenemos los datos %o', data);
+        vehiculos = data;
+        let lis = '';
+        vehiculos.forEach( el => {
+            console.debug(el);
             lis += `<li class="list-group-item">
-                            ${el.id} 
-                            <b>${el.modelo}</b>
-                            ${el.km} km
+                        <span class="matricula">${el.matricula}</span> 
+                        <span class="modelo">${el.modelo}</span>
+                        <span class="km">${el.km} KM</span>
+                        <a href="#">Eliminar</a>
                     </li>`;
-        });        
-        ul.innerHTML = lis;        
-    } // 200 
-      
-  } // readyState === 4
-}// onreadystatechange
- 
-request.open('GET', 'http://localhost:8080/wsrest/api/vehiculo');
-request.send();
+        });
+        ulVehiculos.innerHTML = lis;
+
+    }).catch(e => {
+        console.error(' tenemos un error ' + e);
+    });
+  
+
+}
