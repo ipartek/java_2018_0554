@@ -30,8 +30,8 @@ public class VehiculoController {
 	}
 	
 	/**
-	 * GETALL
-	 * @return
+	 * Metodo que devuelve todos lo vehiculos que se encuentran en la base de datos
+	 * @return Devuelve un arraylist de coches
 	 */
 	@RequestMapping(value=("/api/vehiculo"), method=RequestMethod.GET)
 	public ArrayList<Coche> listar(){
@@ -43,9 +43,11 @@ public class VehiculoController {
 	 * PathVariable para uris. ej: @PathVariable long id
 	 */
 	/**
-	 * GET BY ID
-	 * @param id
-	 * @return
+	 * Obtiene un coche a traves del id del coche
+	 * @param id enviado para buscar el coche en concreto.
+	 * @return Devuelve un ResponseEntity, el cual devuelve el coche y el código de estado 404 o 200
+	 * 200 -->	Lo ha encontrado satisfactoriamente
+	 * 404 -->	El recuros no se ha encontrado
 	 */
 	@RequestMapping(value=("/api/vehiculo/{id}"),method=RequestMethod.GET)
 	public ResponseEntity<Coche> detalle(@PathVariable long id){
@@ -61,9 +63,12 @@ public class VehiculoController {
 	}
 	
 	/**
-	 * INSERT
-	 * @param coche
-	 * @return
+	 * Este método inserta un nuevo vehículo/coche.
+	 * @param coche Es el coche que se va a intentar introducir en la base de datos
+	 * @return Devuelve un código de estado:
+	 * 201 --> se ha creado el coche correctamente.
+	 * 404 --> El recurso no se ha encontrado.
+	 * 409--> Hay un coche ya registrado con esa matricula por eso devuelve un conflicto
 	 */
 	@RequestMapping(value=("/api/vehiculo"), method=RequestMethod.POST)
 	public ResponseEntity<Coche> crear(@RequestBody Coche coche){
@@ -83,9 +88,12 @@ public class VehiculoController {
 	}
 	
 	/**
-	 * DELETE
-	 * @param id
-	 * @return
+	 * Elimina un coche,permanentemente, de la base de datos
+	 * @param id Se le manda el id del coche que se quiere eliminar
+	 * @return Devuelve un estado.
+	 * 200 --> se ha realizado la consulta correctamente
+	 * 404 --> El recurso no se ha encontrado.
+	 * 409--> Ese coche tiene alguna multa asociada, devuelve conflicto
 	 */
 	@RequestMapping(value=("/api/vehiculo/{id}"),method=RequestMethod.DELETE)
 	public ResponseEntity<Coche> eliminar(@PathVariable long id){
@@ -105,10 +113,13 @@ public class VehiculoController {
 	}
 	
 	/**
-	 * UPDATE
-	 * @param id
-	 * @param coche
+	 * Este metodo sirve para actualizar todo el coche
+	 * @param id Se le envia el id del coche.
+	 * @param coche Se envia el coche modificado
 	 * @return
+	 * 200 -->se ha realizado la consulta correctamente
+	 * 404 --> El recurso no se ha encontrado.
+	 * 409--> Hay un coche ya registrado con esa matricula por eso devuelve un conflicto
 	 */
 	@RequestMapping(value=("/api/vehiculo/{id}"), method=RequestMethod.PUT)
 	public ResponseEntity<Coche> modificar(
@@ -131,10 +142,13 @@ public class VehiculoController {
 	
 
 	/**
-	 * UPDATE PARCIAL, fecha baja
-	 * @param id
-	 * @param coche
-	 * @return
+	 * Este update es "parcial", ya que actualiza solamente un campo--> "fecha_baja", de esta manera
+	 * se realiza un borrado lógico.
+	 * @param id Se le envia el id del coche para identificarlo
+	 * @return  Devuelve un código de estado:
+	 * 200 -->se ha realizado la consulta correctamente
+	 * 404 --> El recurso no se ha encontrado.
+	 * 
 	 */
 	@RequestMapping(value=("/api/vehiculo/{id}"),method=RequestMethod.PATCH)
 	public ResponseEntity<Coche> darDeBaja(@PathVariable long id){
