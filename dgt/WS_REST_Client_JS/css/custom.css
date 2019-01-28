@@ -1,0 +1,15 @@
+#ulVehiculo .matricula{
+    font-weight: 600;
+    text-transform: uppercase;
+}
+#ulVehiculo .modelo{
+    font-weight: 300;
+    text-transform: capitalize;
+}
+#ulVehiculo .km{
+    color:gray;
+}
+#ulVehiculo a{
+    float: right;
+}
+
