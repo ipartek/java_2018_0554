@@ -1,9 +1,22 @@
 package com.ipartek.appMultas.modelo.pojo;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Coche {
 	private Long id;
+	
+	@NotBlank
+	@Size(min=6, max=10)
 	private String matricula;
+	
+	@NotBlank
+	@Size(min=2, max=45)
 	private String modelo;
+	
+	@Min(0)
 	private Long km;
 
 	public Coche() {
