@@ -1,6 +1,14 @@
 package com.ipartek.formacion.dgt.api;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Valid;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -21,36 +29,42 @@ public class VehiculoController {
 
 	private final static Logger LOG = Logger.getLogger(VehiculoController.class);
 	private static CocheDAO cocheDAO;
+	private ValidatorFactory factory;
+	private Validator validator;
 	
 	public VehiculoController() {
 		super();
 		cocheDAO = CocheDAO.getInstance();
+		factory  = Validation.buildDefaultValidatorFactory();
+    	validator  = factory.getValidator();
 	}
 	
 	
 	@RequestMapping( value= {"/api/vehiculo"}, method = RequestMethod.GET)
 	public ArrayList<Coche> listar(){		
 		
-		ArrayList<Coche> coches = new ArrayList<Coche>();
-		coches.add( new Coche( 1L, "BI000CM", "Fiat", 34555 ) );
-		coches.add( new Coche( 2L, "ZA000HK", "Flagoneta", 34555 ) );
-		
-		return coches;
+		return cocheDAO.getAll();
 	}
 	
 	
 	@RequestMapping( value= {"/api/vehiculo/{id}"}, method = RequestMethod.GET)
-	public ResponseEntity<Coche> detalle( @PathVariable long id ){		
+	public ResponseEntity<Coche> detalle( @PathVariable String id ){		
 		
 		ResponseEntity<Coche> response = new ResponseEntity<Coche>( HttpStatus.NOT_FOUND );
-		
-		if ( id > 0 ) {
+		try {
 			
-			Coche c = new Coche( 2L, "ZA000HK", "Flagoneta", 34555 );
-			c.setId(id);
-			response = new ResponseEntity<Coche>( c, HttpStatus.OK );			
-		}
-			 	
+			long identificador = Long.parseLong(id);
+			Coche coche = cocheDAO.getById(identificador);
+			if ( coche != null ) {
+				response = new ResponseEntity<Coche>( coche,  HttpStatus.OK );
+			}
+			
+		}catch ( NumberFormatException e) {	
+			response = new ResponseEntity<Coche>( HttpStatus.BAD_REQUEST );
+		}catch (Exception e) {
+			LOG.error(e);
+			response = new ResponseEntity<Coche>( HttpStatus.INTERNAL_SERVER_ERROR );
+		}	 	
 		return response;
 	}
 	
@@ -59,15 +73,20 @@ public class VehiculoController {
 	public ResponseEntity<Coche> eliminar( @PathVariable long id ){		
 		
 		ResponseEntity<Coche> response = new ResponseEntity<Coche>( HttpStatus.NOT_FOUND );
-		
-		if ( id > 0 ) {
+		try {
 			
-			response = new ResponseEntity<Coche>(HttpStatus.OK );	
+			if ( cocheDAO.delete(id) ) {
+				response = new ResponseEntity<Coche>( HttpStatus.OK );
+			}
+		}catch (SQLException e) {
 			
-			//TODO 409 cuando no se pueda eliminar Coche porque tiene multas asociadas
+			LOG.debug("No se puede eliminar coche con multas identificador= " + id);
+			response = new ResponseEntity<Coche>( HttpStatus.CONFLICT );
+		}catch (Exception e) {
 			
-		}
-			 	
+			LOG.error(e);
+			response = new ResponseEntity<Coche>( HttpStatus.INTERNAL_SERVER_ERROR );
+		}		
 		return response;
 	}
 	
@@ -75,11 +94,28 @@ public class VehiculoController {
 	@RequestMapping( value= {"/api/vehiculo/"}, method = RequestMethod.POST)
 	public ResponseEntity<Coche> crear( @RequestBody Coche coche ){
 		
-		//TODO terminar		
-		// 201 creado y retornar coche con id actulizado		
-		// 400 datos del coche no son correctos, por ejemplo sin matricula o vacia		
-		// 409 ya exsite la matricula Unique Key 		
-		return new ResponseEntity<Coche>( HttpStatus.NOT_IMPLEMENTED );		
+		ResponseEntity<Coche> response = new ResponseEntity<Coche>( HttpStatus.INTERNAL_SERVER_ERROR );
+		try {
+			
+			Set<ConstraintViolation<Coche>> violations = validator.validate(coche);
+			if ( violations.size() > 0) {		
+				LOG.debug("Coche no valido " + violations);
+				response = new ResponseEntity<Coche>( HttpStatus.BAD_REQUEST );				
+				
+			}else {				
+				Coche c  = cocheDAO.insert(coche);
+				response = new ResponseEntity<Coche>( c, HttpStatus.CREATED );		
+				LOG.info("Nuevo Coche creado " + c );
+			}
+		}catch (SQLException e) {	
+			LOG.debug("Ya existe matricula " + coche.getMatricula());
+			response = new ResponseEntity<Coche>( HttpStatus.CONFLICT );
+			
+		}catch (Exception e) {
+			LOG.error(e);
+			response = new ResponseEntity<Coche>( HttpStatus.INTERNAL_SERVER_ERROR );
+		}		
+		return response;		
 	}
 	
 	@RequestMapping( value= {"/api/vehiculo/{id}"}, method = RequestMethod.PUT)
