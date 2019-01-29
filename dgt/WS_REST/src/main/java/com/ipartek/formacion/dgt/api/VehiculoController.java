@@ -27,25 +27,24 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@CrossOrigin //restriccion de js
+@CrossOrigin // restriccion de js
 @RestController
-@Api(tags = { "VEHICULO" }, produces = "application/json", description="Gestión de Vehiculos")
+@Api(tags = { "VEHICULO" }, produces = "application/json", description = "Gestión de Vehiculos")
 public class VehiculoController {
 	private final static Logger LOG = Logger.getLogger(VehiculoController.class);
 	private static CocheDAO cocheDAO;
-	
+
 	private ValidatorFactory factory;
 	private Validator validator;
-
 
 	public VehiculoController() {
 		super();
 		cocheDAO = CocheDAO.getInstance();
-		factory  = Validation.buildDefaultValidatorFactory();
-    	validator  = factory.getValidator();
+		factory = Validation.buildDefaultValidatorFactory();
+		validator = factory.getValidator();
 	}
-	
-	//LISTAR
+
+	// LISTAR
 	@RequestMapping(value = { "/api/vehiculo" }, method = RequestMethod.GET)
 	public ArrayList<Coche> listar() {
 
@@ -68,11 +67,11 @@ public class VehiculoController {
 	 * 
 	 * }
 	 */
-	
-	//VEHICULO por id
+
+	// VEHICULO por id
 
 	@RequestMapping(value = { "/api/vehiculo/{id}" }, method = RequestMethod.GET)
-	public ResponseEntity<Coche> detalleId(@PathVariable String id){
+	public ResponseEntity<Coche> detalleId(@PathVariable String id) {
 		/*
 		 * ResponseEntity<Coche> response = null;
 		 * 
@@ -87,46 +86,40 @@ public class VehiculoController {
 		try {
 			long identificador = Long.parseLong(id);
 			Coche coche = cocheDAO.getById(identificador);
-			if(coche == null) {
+			if (coche == null) {
 				response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
-			}else {
+			} else {
 				response = new ResponseEntity<Coche>(HttpStatus.OK);
 			}
-		}catch(NumberFormatException e) {
-		response = new ResponseEntity<Coche>(HttpStatus.BAD_REQUEST);
-			
-		}catch(Exception e) {
+		} catch (NumberFormatException e) {
+			response = new ResponseEntity<Coche>(HttpStatus.BAD_REQUEST);
+
+		} catch (Exception e) {
 			LOG.error(e);
 			response = new ResponseEntity<Coche>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		return response;
-		//TODO con dao
+		// TODO con dao
 	}
-	
-	
-	
-	
-	
-	//ELIMINAR
+
+	// ELIMINAR
 	@RequestMapping(value = { "/api/vehiculo/{id}" }, method = RequestMethod.DELETE)
 	public ResponseEntity<Coche> eliminar(@PathVariable long id) throws SQLException {
 
-		
 		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
-	
 
 		try {
-			
-			if (cocheDAO.eliminar(id)) {				
 
-				response = new ResponseEntity<Coche>(HttpStatus.OK);				
+			if (cocheDAO.eliminar(id)) {
+
+				response = new ResponseEntity<Coche>(HttpStatus.OK);
 			}
 		} catch (SQLException e) {
-			//TODO 409 cuando no se pueda eliminar Coche porque tiene multas asociadas
+			// TODO 409 cuando no se pueda eliminar Coche porque tiene multas asociadas
 			LOG.debug("No se puede eliminar coche con multas identificador = " + id);
 			response = new ResponseEntity<Coche>(HttpStatus.CONFLICT);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			LOG.error(e);
 			response = new ResponseEntity<Coche>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -134,74 +127,72 @@ public class VehiculoController {
 		return response;
 
 	}
-	
-	//CREAR
-	@RequestMapping(value=("/api/vehiculo"), method=RequestMethod.POST)
-	@ApiResponses({
-			@ApiResponse(code = 201, message = "Vehiculo creado"),
-			@ApiResponse(code = 409, message = "Existe Matricula")
-	})
-	public ResponseEntity<Coche> crear(@Valid @RequestBody Coche coche){
-		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);//404
-		
+
+	// CREAR
+	@RequestMapping(value = ("/api/vehiculo"), method = RequestMethod.POST)
+	@ApiResponses({ @ApiResponse(code = 201, message = "Vehiculo creado"),
+			@ApiResponse(code = 409, message = "Existe Matricula") })
+	public ResponseEntity<Coche> crear(@Valid @RequestBody Coche coche) {
+		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);// 404
+
 		try {
 			Set<ConstraintViolation<Coche>> violations = validator.validate(coche);
-			if(violations.size() > 0) {
+			if (violations.size() > 0) {
 				response = new ResponseEntity<Coche>(HttpStatus.BAD_REQUEST);
-			}else {
+			} else {
 				Coche c = cocheDAO.insert(coche);
 				response = new ResponseEntity<Coche>(HttpStatus.CREATED);
 				LOG.info("Nuevo Coche creado " + c);
-			}}
-		catch(SQLException e){
-			LOG.debug("Ya existe matricula " + coche.getMatricula());
-			response = new ResponseEntity<Coche>(HttpStatus.CONFLICT);
-			
-			
-			
-		}catch(Exception e){
-			LOG.error(e);
-			response = new ResponseEntity<Coche>( HttpStatus.INTERNAL_SERVER_ERROR );
-		}
-		
-		
-		return response;
-	
-		
-	}
-		
-		
-		
-		//TODO terminar
-		//201 creado y retornar coche con id actualizado
-		//400 datos del coche no son correctos, por ejemplo sin matricula o vacia
-		//409 ya existe la matricula UK 
-	
-		
-	
-	//MODIFICAR
-	@RequestMapping(value = { "/api/vehiculo/{id}" }, method = RequestMethod.PUT)
-	public ResponseEntity<Coche> modificar(@Valid @PathVariable long id, @RequestBody Coche coche ) {
-		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
-		
-		try {
-			if (cocheDAO.update(coche)) {
-				response = new ResponseEntity<Coche>(coche, HttpStatus.OK);
 			}
 		} catch (SQLException e) {
-			LOG.debug("No se ha podido actualizar los datos");
-			response = new ResponseEntity<Coche>(HttpStatus.BAD_REQUEST);
+			LOG.debug("Ya existe matricula " + coche.getMatricula());
+			response = new ResponseEntity<Coche>(HttpStatus.CONFLICT);
+
+		} catch (Exception e) {
+			LOG.error(e);
+			response = new ResponseEntity<Coche>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		return response;
+
+	}
+
+	// TODO terminar
+	// 201 creado y retornar coche con id actualizado
+	// 400 datos del coche no son correctos, por ejemplo sin matricula o vacia
+	// 409 ya existe la matricula UK
+
+	// MODIFICAR
+	@RequestMapping(value = { "/api/vehiculo/{id}" }, method = RequestMethod.PUT)
+	public ResponseEntity<Coche> modificar(@Valid @PathVariable long id, @RequestBody Coche coche) {
+		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
+
+		try {
+			Set<ConstraintViolation<Coche>> violations = validator.validate(coche);
+			if (violations.size() > 0) {
+				LOG.debug("Coche no valido " + violations);
+				response = new ResponseEntity<Coche>(HttpStatus.BAD_REQUEST);
+
+			} else {
+				coche.setId(id);
+				if (cocheDAO.update(coche)) {
+					response = new ResponseEntity<Coche>(coche, HttpStatus.OK);
+				}
+
+			}
+		} catch (SQLException e) {
+			LOG.debug("Ya existe matricula " + coche.getMatricula());
+			response = new ResponseEntity<Coche>(HttpStatus.CONFLICT);
+
 		} catch (Exception e) {
 			LOG.error(e);
 			response = new ResponseEntity<Coche>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return response;
 
-		
 	}
-	
-	
-	//DAR DE BAJA	
+
+	// DAR DE BAJA
 	@RequestMapping(value = { "/api/vehiculo/{id}" }, method = RequestMethod.PATCH)
 	public ResponseEntity<Coche> darDeBaja(@PathVariable String id, @RequestBody Coche coche) throws SQLException {
 		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
@@ -224,6 +215,5 @@ public class VehiculoController {
 		}
 		return response;
 	}
-	
-	
+
 }
