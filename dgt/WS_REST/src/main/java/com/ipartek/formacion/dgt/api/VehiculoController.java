@@ -108,6 +108,7 @@ public class VehiculoController {
 	})
 	@RequestMapping( value= {"/api/vehiculo/{id}"}, method = RequestMethod.DELETE)
 	public ResponseEntity<Coche> eliminar(@PathVariable Long id) {
+		//TODO VALIDAR con violations
 		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
 		try {
 			if (cocheDao.delete(id)) {
@@ -142,6 +143,7 @@ public class VehiculoController {
 	})
 	@RequestMapping( value= {"/api/vehiculo/{id}"}, method = RequestMethod.PATCH)
 	public ResponseEntity<Coche> darDeBaja(@PathVariable Long id, @RequestBody Coche coche) {
+		//TODO VALIDAR con violations
 		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
 		try {
 			if (cocheDao.darDeBaja(id)) {
@@ -171,6 +173,7 @@ public class VehiculoController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping( value= {"/api/vehiculo/"}, method = RequestMethod.POST)
 	public ResponseEntity<Coche> crear(@RequestBody Coche coche) {
+		//TODO VALIDAR con violations
 		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.INTERNAL_SERVER_ERROR);
 			//TODO Crear coche
 			try {
@@ -211,6 +214,7 @@ public class VehiculoController {
 	})
 	@RequestMapping( value= {"/api/vehiculo/{id}"}, method = RequestMethod.PUT)
 	public ResponseEntity<Coche> modificar(@PathVariable Long id, @RequestBody Coche coche) {
+		//TODO VALIDAR con violations
 		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
 		coche.setId(id);
 		try {
