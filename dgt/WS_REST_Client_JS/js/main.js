@@ -59,8 +59,18 @@ function cargarForm( index ){
       });
 }
 function modificar( idVehiculo ){
-    console.log('click Eliminar %o', idVehiculo );
-    if ( confirm('¿Estas Seguro?') ){
+    console.log('click modificar %o', idVehiculo );
+    
+
+    let matricula = document.getElementById('matricula').value;
+    let modelo = document.getElementById('modelo').value;
+    let km = document.getElementById('km').value;
+    let jsonCoche = {
+        "matricula" : matricula,
+        "modelo": modelo,
+        "km": km
+    };
+
         let xhr = new XMLHttpRequest();    
         xhr.onreadystatechange = function(){ 
              if (xhr.readyState == 4) {
@@ -79,8 +89,9 @@ function modificar( idVehiculo ){
              }    
         };
         xhr.open('PUT', ENDPOINT + idVehiculo );    
-        xhr.send();
-    } 
+        xhr.setRequestHeader("Content-type", "application/json");
+   xhr.send( JSON.stringify(jsonCoche) );
+     
 }
 
 
