@@ -86,7 +86,7 @@ CREATE TABLE `coche` (
 
 LOCK TABLES `coche` WRITE;
 /*!40000 ALTER TABLE `coche` DISABLE KEYS */;
-INSERT INTO `coche` VALUES (1,'3548MKZ','Flagonetar',1565856,NULL),(2,'9605EFH','Flagonetar',1565856,NULL),(3,'5674MBD','Flagonetar',1565856,NULL),(4,'BI000KM','Flagonetar',1565856,NULL),(5,'VI000KM','Flagonetar',1565856,'2019-01-29'),(107,'BI000KMj','Panda',150000,'2019-01-29');
+INSERT INTO `coche` VALUES (1,'3548MKZ','Modelo1',1565856,NULL),(2,'9605EFH','Modelo2',1565856,NULL),(3,'5674MBD','Modelo3',1565856,NULL),(4,'BI000KM','Modelo4',1565856,NULL),(5,'VI000KM','Modelo5',1565856,'2019-01-29'),(107,'BI000KMj','Modelo6',150000,'2019-01-29');
 /*!40000 ALTER TABLE `coche` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -286,9 +286,10 @@ SELECT
 id,
 matricula,
 modelo,
-km
+km,
+fecha_baja
 FROM coche
-WHERE fecha_baja is null
+
 ORDER BY id DESC LIMIT 100;
 END ;;
 DELIMITER ;
@@ -312,7 +313,8 @@ SELECT
 id,
 matricula,
 modelo,
-km
+km,
+fecha_baja
 FROM coche WHERE id = p_id;
 
 END ;;
@@ -333,7 +335,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_coche_getByMatricula`(IN p_matricula VARCHAR(50))
 BEGIN
-SELECT id,matricula,modelo,km FROM coche WHERE matricula= p_matricula;
+SELECT id,matricula,modelo,km,fecha_baja FROM coche WHERE matricula= p_matricula;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -605,4 +607,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-29 13:42:20
+-- Dump completed on 2019-01-29 13:58:01
