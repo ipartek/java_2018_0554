@@ -76,7 +76,7 @@ CREATE TABLE `coche` (
   `km` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `matricula_UNIQUE` (`matricula`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,7 +85,7 @@ CREATE TABLE `coche` (
 
 LOCK TABLES `coche` WRITE;
 /*!40000 ALTER TABLE `coche` DISABLE KEYS */;
-INSERT INTO `coche` VALUES (1,'3548MKZ','Toyota Yaris',500),(2,'9605EFH','Fiat multipla',800),(3,'5674MBD','GRT',1800),(4,'0000AAA','Flagoneta',150000),(5,'1111AA','mierder',65646);
+INSERT INTO `coche` VALUES (1,'3548MKZ','Murcielago',1),(2,'9605EFH','bbb',1),(3,'5674MBD','GRT',1800),(4,'0000AAA','Flagoneta',150000),(5,'1111AA','mierder',65646),(60,'BI000KM','Panda',150000),(62,'BI000KMd','Panda',150000),(66,'BI000KMkk','Panda',150000),(68,'BI000KMsss','Panda',150000),(70,'BI000KMs44','Panda',150000),(73,'BI000KMñ','Panda',150000),(76,'BI000KMpp','Panda',150000),(78,'dfsdfa','Panda',150000),(79,'222222','Panda',150000),(80,'676545645','Panda',150000),(84,'BI000KMss','Panda',150000),(88,'BI111AAa','Panda',150000),(91,'BI000MK','Panda',150000),(92,'BI001MK','Panda',150000),(93,'VI0111AAA','Panda',150000),(94,'BI002MK','Panda',150000),(95,'VI0000AAA','murcielago',1500),(96,'BI111JL','anda',1500);
 /*!40000 ALTER TABLE `coche` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -252,7 +252,8 @@ id,
 matricula,
 modelo,
 km
-FROM coche;
+FROM coche
+ORDER BY id DESC LIMIT 100;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -317,6 +318,32 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_coche_insertar`(IN p_matricula V
 BEGIN
 INSERT INTO coche (`matricula`, `modelo`, `km`) VALUES (p_matricula, p_modelo,p_km);
 SET o_id=last_insert_id();
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `pa_coche_update` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_coche_update`(IN p_modelo VARCHAR(255),IN p_km int,IN p_id LONG)
+BEGIN
+	UPDATE 
+		coche
+    SET 
+		modelo = p_modelo,
+        km=p_km 
+	WHERE 
+		id = p_id;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -542,4 +569,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-25 13:33:15
+-- Dump completed on 2019-01-29 11:03:43
