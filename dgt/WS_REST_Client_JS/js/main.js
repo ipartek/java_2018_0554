@@ -33,12 +33,16 @@ function  refrescarLista(){
             vehiculos = JSON.parse(xhr.responseText);
             vehiculos.forEach((el,i) =>{
                 lis+=`<li class="list-group-item">
-                        <span class="matricula">${el.matricula}</span> 
-                        <span class="modelo">${el.modelo}</span>
-                        <span class="km">${el.km} KM</span>
-                        <button type="button" class="btn btn-primary" onclick="editar(${i})">Editar</button>
-                        <button type="button" class="btn btn-primary" onclick="eliminar(${el.id})">Eliminar</button>
-                        <button type="button" class="btn btn-primary" onclick="darBaja(${el.id})">Dar de Baja</button>
+                        <div class="row">
+                            <span class="matricula mr-1">${el.matricula}</span> 
+                            <span class="modelo mr-1">${el.modelo}</span>
+                            <span class="km mr-1">${el.km}KM</span>
+                        </div>   
+                        <div class="row">    
+                            <button type="button" class="btn btn-secondary  m-1" onclick="editar(${i})">Editar</button>
+                            <button type="button" class="btn btn-danger  m-1 " onclick="eliminar(${el.id})">Eliminar</button>
+                            <button type="button" class="btn btn-warning m-1 " onclick="darBaja(${el.id})">Dar de Baja</button>
+                        </div>
                     </li>`
             });
             ulVehiculos.innerHTML =lis;
@@ -51,7 +55,8 @@ function  refrescarLista(){
 function darBaja(idVehiculo){
     console.debug('click Dar de Baja %o', idVehiculo);
     if(confirm('¿Quiere dar de baja el vehículo?')){
-        let xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest(); 
+
         xhr.onreadystatechange = function(){
             switch(xhr.status){
                 case 200:
@@ -64,11 +69,13 @@ function darBaja(idVehiculo){
                 default:
                     showAlert('Hay problemas técnicos', 'danger');
             }
-        }
-        };
-        xhr.open('PATCH',ENDPOINT + idVehiculo);
+        };//onreadystatechange
+       
+   
+        xhr.open('PATCH', ENDPOINT + idVehiculo );    
         xhr.send();
-    }// darBaja
+    }//confirm
+}// darBaja
 
 function eliminar( idVehiculo ){
     console.log('click Eliminar %o', idVehiculo );
@@ -97,8 +104,7 @@ function eliminar( idVehiculo ){
 
 // metodo que rellena el formulario con el coche seleccionado.
 function editar(index){
-    let vehiculoSeleccionado = vehiculos[index];
-    //console.debug(vehiculoSeleccionado.matricula);
+    vehiculoSeleccionado = vehiculos[index];
     document.getElementById('id').value = vehiculoSeleccionado.id;
     document.getElementById('matricula').value = vehiculoSeleccionado.matricula;
     document.getElementById('modelo').value = vehiculoSeleccionado.modelo;
@@ -114,6 +120,16 @@ function editarCocheSeleccionado(){
     let matricula = document.getElementById('matricula').value;
     let modelo = document.getElementById('modelo').value;
     let km = document.getElementById('km').value;
+
+    if(!matricula.localeCompare("")){
+        matricula = vehiculoSeleccionado.matricula;
+    }
+    if(!modelo.localeCompare("")){
+        modelo = vehiculoSeleccionado.modelo;
+    }
+    if(km<0){
+        km = 0;
+    }
 
         let jsonCocheE = {
             "matricula" : matricula,
