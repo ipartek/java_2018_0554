@@ -36,7 +36,7 @@ function refrescarLista() {
                             <span class="km"> ${vehiculo.km} KM</span>
                             <a href="#" onclick="eliminar(${
                               vehiculo.id
-                            })">Eliminar</a>
+                            })">Eliminar</a><a href="#" onclick="ponerDatos(${index})">Editar</a>
                         </li>`;
       });
       ulVehiculos.innerHTML = lis;
@@ -53,10 +53,16 @@ function eliminar(idVehiculo) {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4) {
-        if (xhr.status == 200) {
-          refrescarLista();
-        } else if (xhr.status == 409) {
-          showAlert("CONFLICTO: Existen multas asociadas", "warning");
+        switch (xhr.status) {
+          case 200:
+            refrescarLista();
+            break;
+          case 409:
+            showAlert("CONFLICTO: Existen multas asociadas", "warning");
+            break;
+
+          default:
+            break;
         }
       }
     };
@@ -81,21 +87,81 @@ function crear() {
   let xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
     if (xhr.readyState == 4) {
-      if (xhr.readyState == 4) {
-        if (xhr.status == 200) {
-          showAlert("Vehículo creado.", "success");
+      switch (xhr.status) {
+        case 201:
+          showAlert("CORRECTO: Vehículo creado.", "success");
           refrescarLista();
-        } else if (xhr.status == 409) {
+          break;
+        case 409:
           showAlert("CONFLICTO: Esa matrícula ya existe en la DB.", "warning");
-        } else if (xhr.status == 400) {
-          showAlert("ERROR: El formato de los campos introducidos no es correcto.", "danger");
-        }
+          break;
+        case 400:
+          showAlert(
+            "ERROR: El formato de los campos introducidos no es correcto.",
+            "danger"
+          );
+          break;
+
+        default:
+          break;
       }
-      console.debug(" STATUS " + xhr.status);
-      refrescarLista();
     }
+    console.debug(" STATUS " + xhr.status);
+    refrescarLista();
   };
   xhr.open("POST", ENDPOINT);
+  xhr.setRequestHeader("Content-type", "application/json");
+  xhr.send(JSON.stringify(jsonCoche));
+}
+
+function ponerDatos(index) {
+  console.log("click editar [i: " + index + "]");
+
+  document.getElementById("matricula").value = vehiculos[index].matricula;
+  document.getElementById("modelo").value = vehiculos[index].modelo;
+  document.getElementById("km").value = vehiculos[index].km;
+
+  vehiculoSeleccionado = vehiculos[index];
+}
+
+function editar() {
+  console.log("click editar");
+
+  let matricula = document.getElementById("matricula").value;
+  let modelo = document.getElementById("modelo").value;
+  let km = document.getElementById("km").value;
+
+  let jsonCoche = {
+    matricula: matricula,
+    modelo: modelo,
+    km: km
+  };
+
+  let xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4) {
+      switch (xhr.status) {
+        case 200:
+          showAlert("ACTUALIZACIÓN: Vehículo modificado.", "success");
+          refrescarLista();
+          break;
+        case 409:
+          showAlert("CONFLICTO: Esa matrícula ya existe en la DB.", "warning");
+          break;
+        case 400:
+          showAlert(
+            "ERROR: El formato de los campos introducidos no es correcto.",
+            "danger"
+          );
+          break;
+        default:
+          break;
+      }
+    }
+    console.debug(" STATUS " + xhr.status);
+    refrescarLista();
+  };
+  xhr.open("PUT", ENDPOINT + vehiculoSeleccionado.id);
   xhr.setRequestHeader("Content-type", "application/json");
   xhr.send(JSON.stringify(jsonCoche));
 }

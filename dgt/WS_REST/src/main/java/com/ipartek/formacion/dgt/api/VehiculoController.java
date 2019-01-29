@@ -177,7 +177,7 @@ public class VehiculoController {
 	@RequestMapping( value= {"/api/vehiculo/{id}"}, method = RequestMethod.PUT)
 	public ResponseEntity<Coche> modificar(@PathVariable Long id, @RequestBody Coche coche) {
 		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
-		
+		coche.setId(id);
 		try {
 			cocheDao.update(coche);
 			response = new ResponseEntity<Coche>(HttpStatus.OK);

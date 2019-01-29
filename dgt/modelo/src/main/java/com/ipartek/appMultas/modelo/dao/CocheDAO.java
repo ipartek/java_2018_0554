@@ -19,7 +19,7 @@ public class CocheDAO {
 	private final static String SQL_DELETE = "{call coche_delete(?)}";
 	private static final String SQL_DAR_DE_BAJA = "{call coche_dar_de_baja(?)}";
 	private static final String SQL_INSERT = "{call coche_insert(?,?,?,?)}";
-	private static final String SQL_UPDATE = "{call coche_insert(?,?,?)}";
+	private static final String SQL_UPDATE = "{call coche_update(?,?,?,?)}";
 
 	private final static Logger LOG = Logger.getLogger(CocheDAO.class);
 	private static CocheDAO INSTANCE = null;
@@ -136,8 +136,8 @@ public class CocheDAO {
 	/**
 	 * Método para actualizar los datos de un coche específico en la BD. 
 	 * @param c Datos nuevos para actualizar el coche existente. 
-	 * @return True si la inserción ha sido correcta.
-	 * @return False si no se ha podido insertar el coche. 
+	 * @return True si la modificación ha sido correcta.
+	 * @return False si no se ha podido modificar el coche. 
 	 * @throws SQLException P.E: Si algún dato no llega en el formato esperado.
 	 */
 	public boolean update(Coche c) throws SQLException {
@@ -145,9 +145,10 @@ public class CocheDAO {
 		String sql = SQL_UPDATE;
 
 		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(sql);) {
-			cs.setString(1, c.getMatricula());
-			cs.setString(2, c.getModelo());
-			cs.setLong(3, c.getKm());
+			cs.setLong(1, c.getId());
+			cs.setString(2, c.getMatricula());
+			cs.setString(3, c.getModelo());
+			cs.setLong(4, c.getKm());
 
 			int affectedRows = cs.executeUpdate();
 			if (affectedRows == 1) {
