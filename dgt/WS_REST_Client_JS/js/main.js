@@ -70,7 +70,7 @@ function eliminar( idVehiculo ){
                       showAlert('No se puede eliminar un Coche si tiene MULTAS', 'warning');
                       break;
                     default:
-                        showAlert('Lo sentimos pero tenemos problemas tecnicos', 'error');
+                        showAlert('Lo sentimos pero tenemos problemas tecnicos', 'danger');
                   }  
              }    
         };
@@ -109,7 +109,7 @@ function crear(){
                   showAlert('Lo sentimos pero la MATRICULA ya existe', 'warning');
                   break;
                 default:
-                    showAlert('Lo sentimos pero tenemos problemas tecnicos', 'error');
+                    showAlert('Lo sentimos pero tenemos problemas tecnicos', 'danger');
               }
         }    
    };
@@ -124,10 +124,50 @@ function rellenarFormulario(index){
     let vehiculo = vehiculos[index];
     console.trace('rellenarFormulario %o', vehiculo);
 
+    document.getElementById('id').value = vehiculo.id;
     document.getElementById('matricula').value = vehiculo.matricula;
     document.getElementById('modelo').value = vehiculo.modelo;
     document.getElementById('km').value = vehiculo.km;
 
+}
+
+
+function modificar(){
+    console.log('click modificar' );
+
+    let id = document.getElementById('id').value;
+    let matricula = document.getElementById('matricula').value;
+    let modelo = document.getElementById('modelo').value;
+    let km = document.getElementById('km').value;
+
+    let jsonCoche = {
+        "matricula" : matricula,
+        "modelo": modelo,
+        "km": km
+    };
+
+   let xhr = new XMLHttpRequest();    
+   xhr.onreadystatechange = function(){ 
+        if (xhr.readyState == 4 ){   
+            switch(xhr.status) {
+                case 200:
+                  showAlert('Coche Modificado *recuerda que la matricula no se puede cambiar', 'success');
+                  refrescarLista();
+                  break;
+                  case 404:
+                    showAlert('No existe el Vehiculo', 'danger');
+                    break;   
+                case 400:
+                  showAlert('Por favor introduce valores correctos', 'warning');
+                  break;                
+                default:
+                    showAlert('Lo sentimos pero tenemos problemas tecnicos', 'danger');
+              }
+        }    
+   };
+   xhr.open('PUT', ENDPOINT + id );
+   xhr.setRequestHeader("Content-type", "application/json");
+   xhr.send( JSON.stringify(jsonCoche) );
 }
 
 
