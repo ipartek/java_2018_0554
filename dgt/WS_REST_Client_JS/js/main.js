@@ -31,8 +31,13 @@ function refrescarLista(){
     xhr.onreadystatechange = function(){ 
          if (xhr.readyState == 4 && xhr.status == 200 ){               
             let lis = '';
+            let estado ;
+           
             vehiculos = JSON.parse(xhr.responseText);
             vehiculos.forEach( (vehiculo, index) => {
+                if(vehiculo.fecha_baja==null){
+                    estado='Baja';
+                }else{ estado='Alta';}
                 lis += ` <li class="list-group-item">
                             <span class="matricula">${vehiculo.matricula}</span> 
                             <span class="modelo">${vehiculo.modelo}</span>
@@ -40,7 +45,7 @@ function refrescarLista(){
                             <span class="fecha"> ${vehiculo.fecha_baja} </span>
                             <a href="#" onclick="eliminar(${vehiculo.id})"> Eliminar </a>
                             <a href="#" onclick="cargarForm(${index})"> Editar </a>
-                            <a href="#" onclick="baja(${vehiculo.id})">Baja</a>
+                            <a href="#" onclick="baja(${vehiculo.id})">${estado}</a>
                         </li>`;
             });
             ulVehiculos.innerHTML = lis;
