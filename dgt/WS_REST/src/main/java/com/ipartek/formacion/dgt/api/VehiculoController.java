@@ -169,16 +169,24 @@ public class VehiculoController {
 	@RequestMapping(value = ("/api/vehiculo/{id}"), method = RequestMethod.PUT)
 	public ResponseEntity<Coche> modificar(@PathVariable long id, @RequestBody Coche coche) {
 		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);// 404
-
 		try {
-			if (cocheDAO.updateCoche(coche)) {
-				response = new ResponseEntity<Coche>(HttpStatus.OK);// 200
+			
+			Set<ConstraintViolation<Coche>> violations = validator.validate(coche);
+			if (violations.size() > 0) {
+				LOG.debug("Coche no valido " + violations);
+				response = new ResponseEntity<Coche>(HttpStatus.BAD_REQUEST);
+
+			} else {
+				if (cocheDAO.updateCoche(coche)) {
+					response = new ResponseEntity<Coche>(HttpStatus.OK);// 200
+				}
 			}
 		} catch (MySQLIntegrityConstraintViolationException e) {
 			response = new ResponseEntity<Coche>(HttpStatus.CONFLICT);// 409
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			response = new ResponseEntity<Coche>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return response;
 	}

@@ -120,17 +120,21 @@ function editarCocheSeleccionado(){
     let matricula = document.getElementById('matricula').value;
     let modelo = document.getElementById('modelo').value;
     let km = document.getElementById('km').value;
+    //modificar el mensaje
+    let aviso="";
 
     if(!matricula.localeCompare("")){
         matricula = vehiculoSeleccionado.matricula;
+        aviso="Se le ha puesto la matricula anterior ya que no la ha definido.";
     }
     if(!modelo.localeCompare("")){
         modelo = vehiculoSeleccionado.modelo;
+        aviso="Se le ha puesto el modelo anterior ya que no lo ha definido.";
     }
     if(km<0){
         km = 0;
+        aviso="No se aceptan valores negativos, se le ha puesto un 0 por defecto.";
     }
-
         let jsonCocheE = {
             "matricula" : matricula,
             "modelo" : modelo,
@@ -142,7 +146,7 @@ function editarCocheSeleccionado(){
         if(xhr.readyState == 4){
             switch(xhr.status){
                 case 200:
-                        showAlert('El coche se ha editado correctamente', 'info');          
+                        showAlert('El coche se ha editado correctamente. '+ aviso , 'info');          
                         refrescarLista();
                         document.getElementById('id').value ="";
                         document.getElementById('matricula').value="";
