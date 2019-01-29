@@ -1,5 +1,7 @@
 package com.ipartek.formacion.modelo.pojo;
 
+import java.sql.Date;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
@@ -18,21 +20,34 @@ public class Coche {
 	@Min(0)
 	private Integer km;
 	
-	public Coche(Long id, String matricula, String modelo, Integer km) {
-		this();
-		setId(id);
-		setMatricula(matricula);
-		setModelo(modelo);
-		setKm(km);
-	}
-
+	private Date fecha_baja;
 	public Coche() {
 		super();
 		this.id=-1l;
 		this.matricula="";
 		this.modelo="";
 		this.km=0;
+		this.fecha_baja=null;
 	}
+	
+	public Coche(Long id, String matricula, String modelo, Integer km, Date fecha) {
+		this();
+		setId(id);
+		setMatricula(matricula);
+		setModelo(modelo);
+		setKm(km);
+		setFecha_baja(fecha);
+	}
+
+	public Date getFecha_baja() {
+		return fecha_baja;
+	}
+
+	public void setFecha_baja(Date fecha_baja) {
+		this.fecha_baja = fecha_baja;
+	}
+
+	
 
 	public Long getId() {
 		return id;
@@ -68,7 +83,8 @@ public class Coche {
 
 	@Override
 	public String toString() {
-		return "Coche [id=" + id + ", matricula=" + matricula + ", modelo=" + modelo + ", km=" + km + "]";
+		return "Coche [id=" + id + ", matricula=" + matricula + ", modelo=" + modelo + ", km=" + km + ", fecha_baja="
+				+ fecha_baja + "]";
 	}
 	
 	

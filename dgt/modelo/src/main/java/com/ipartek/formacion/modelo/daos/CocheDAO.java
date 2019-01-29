@@ -45,6 +45,7 @@ public class CocheDAO {
 		c.setMatricula(rs.getString("matricula"));
 		c.setModelo(rs.getString("modelo"));
 		c.setKm(rs.getInt("km"));
+		c.setFecha_baja(rs.getDate("fecha_baja"));
 		return c;
 	}
 
