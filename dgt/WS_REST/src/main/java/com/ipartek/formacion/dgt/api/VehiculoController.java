@@ -142,7 +142,7 @@ ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.INTERNAL_S
 		
 		try {
 			Long identificador=Long.parseLong(id);
-			boolean b = cocheDAO.baja(identificador);
+			boolean b = cocheDAO.baja(identificador,true);
 			if (b==true) {
 				 response = new ResponseEntity<Coche>(HttpStatus.OK);
 			}else if(b==false) {

@@ -39,6 +39,7 @@ function refrescarLista(){
                             <span class="km"> ${vehiculo.km} KM</span>
                             <a href="#" onclick="eliminar(${vehiculo.id})"> Eliminar </a>
                             <a href="#" onclick="cargarForm(${index})"> Editar </a>
+                            <a href="#" onclick="baja(${vehiculo.id})">Baja</a>
                         </li>`;
             });
             ulVehiculos.innerHTML = lis;
@@ -76,11 +77,9 @@ function modificar( idVehiculo ){
              if (xhr.readyState == 4) {
                  if ( xhr.status == 200 ){               
                     refrescarLista();
-                    showAlert('Vehiculo modificado correctamente', 'info');
-                 }else if ( xhr.status == 409 ){
-                    showAlert('CONFLICTO existen multas asociadas', 'warning');
-                 } else if ( xhr.status == 400 ){
-                    showAlert('CONFLICTO Error 400 peticion no valida', 'warning');
+                    showAlert('Vehiculo dado de baja', 'info');
+                 }else if ( xhr.status == 400 ){
+                    showAlert(' Error 400 peticion no valida', 'warning');
                  } else if ( xhr.status == 500 ){
                     showAlert('ERROR FATAL', 'warning');
                  }  else if ( xhr.status == 404 ){
@@ -95,10 +94,40 @@ function modificar( idVehiculo ){
 }
 
 
-function eliminar( idVehiculo ){
 
-   
+function baja( idVehiculo ){
     console.log('click Eliminar %o', idVehiculo );
+    
+        if ( confirm('¿Baja?') ){
+            let xhr = new XMLHttpRequest();    
+            xhr.onreadystatechange = function(){ 
+                 if (xhr.readyState == 4) {
+                     if ( xhr.status == 200 ){               
+                        refrescarLista();
+                        showAlert('Vehiculo eliminado correctamente', 'info');
+                     }else if ( xhr.status == 409 ){
+                        showAlert('CONFLICTO existen multas asociadas no se puede eliminar', 'warning');
+                     } else if ( xhr.status == 400 ){
+                        showAlert('CONFLICTO Error 400 peticion no valida', 'warning');
+                     } else if ( xhr.status == 500 ){
+                        showAlert('ERROR FATAL', 'warning');
+                     }  else if ( xhr.status == 404 ){
+                        showAlert('Recurso no disponible', 'warning');
+                     }     
+                 }    
+            };
+            xhr.open('PATCH', ENDPOINT + idVehiculo );    
+            xhr.send();
+        }    
+        
+    } // Baja
+
+
+
+
+
+function eliminar( idVehiculo ){
+console.log('click Eliminar %o', idVehiculo );
 
     if ( confirm('¿Estas Seguro?') ){
         let xhr = new XMLHttpRequest();    
@@ -108,7 +137,7 @@ function eliminar( idVehiculo ){
                     refrescarLista();
                     showAlert('Vehiculo eliminado correctamente', 'info');
                  }else if ( xhr.status == 409 ){
-                    showAlert('CONFLICTO existen multas asociadas', 'warning');
+                    showAlert('CONFLICTO existen multas asociadas no se puede eliminar', 'warning');
                  } else if ( xhr.status == 400 ){
                     showAlert('CONFLICTO Error 400 peticion no valida', 'warning');
                  } else if ( xhr.status == 500 ){
@@ -124,6 +153,10 @@ function eliminar( idVehiculo ){
     
 } // eliminar
 
+
+$( "#botoncrear" ).click(function() {
+   crear();
+  });
 
 function crear(){
     console.log('click crear' );
@@ -142,12 +175,12 @@ function crear(){
         if (xhr.readyState == 4 ){   
             console.debug(' STATUS ' + xhr.status );
             if ( xhr.status == 201 ){               
-                showAlert('Vehiculo nuevo creado', 'info');
+                showAlert('Vehiculo nuevo creado con exito', 'info');
                 refrescarLista();
              }else if ( xhr.status == 409 ){
                 showAlert('CONFLICTO Ya existe la matricula', 'warning');
              }else if ( xhr.status == 400 ){
-                showAlert('CONFLICTO coche no valido', 'warning');
+                showAlert('Los campos introducidos no cumplen las validaciones', 'warning');
              }else if ( xhr.status == 500 ){
                 showAlert('ERROR FATAL', 'warning');
              }        
