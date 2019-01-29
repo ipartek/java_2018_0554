@@ -25,7 +25,7 @@ public class CocheDAO {
 	private static final String SQL_DELETE = "{call pa_coche_borrar(?,?)}";
 	private static final String SQL_INSERT = "{call pa_coche_insertar(?,?,?,?)}";
 	private static final String SQL_UPDATE = "{call pa_coche_update(?,?,?)}";
-	private static final String SQL_BAJA = "{call pa_coche_baja(?)}";
+	private static final String SQL_BAJA = "{call pa_coche_baja(?,?)}";
 	// constructor privado, solo acceso por getInstance()
 	private CocheDAO() {
 		super();
@@ -200,7 +200,7 @@ public class CocheDAO {
 
 }
 	
-	public boolean baja(Long id) throws SQLException {
+	public boolean baja(Long id, boolean op) throws SQLException {
 
 		boolean resul = false;
 		try (Connection conn = ConnectionManager.getConnection();
@@ -208,6 +208,7 @@ public class CocheDAO {
 
 			
 			cs.setLong(1, id);
+			cs.setBoolean(2, op);
 			int affectedRows = cs.executeUpdate();
 			if (affectedRows == 1) {
 				resul = true;

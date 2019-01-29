@@ -77,7 +77,7 @@ CREATE TABLE `coche` (
   `fecha_baja` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `matricula_UNIQUE` (`matricula`)
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,7 +86,7 @@ CREATE TABLE `coche` (
 
 LOCK TABLES `coche` WRITE;
 /*!40000 ALTER TABLE `coche` DISABLE KEYS */;
-INSERT INTO `coche` VALUES (1,'3548MKZ','Flagonetar',150000,NULL),(2,'9605EFH','Ford Focus ST',18000,NULL),(3,'5674MBD','Nissan GTR',18000,'2019-01-29'),(105,'BI000KM','Panda',150000,NULL);
+INSERT INTO `coche` VALUES (1,'3548MKZ','Flagonetar',1565856,NULL),(2,'9605EFH','Flagonetar',1565856,NULL),(3,'5674MBD','Flagonetar',1565856,NULL),(4,'BI000KM','Flagonetar',1565856,NULL),(5,'VI000KM','Flagonetar',1565856,'2019-01-29'),(107,'BI000KMj','Panda',150000,'2019-01-29');
 /*!40000 ALTER TABLE `coche` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -226,15 +226,24 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_coche_baja`(IN p_id LONG)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_coche_baja`(IN p_id LONG, IN p_oper boolean)
 BEGIN
-
+IF p_oper = true then
 	UPDATE 
 		coche 
     SET 
 		fecha_baja = CURRENT_TIMESTAMP 
 	WHERE 
 		id = p_id;
+else
+	UPDATE 
+		coche 
+    SET 
+		fecha_baja = null
+	WHERE 
+		id = p_id;
+
+end if;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -279,6 +288,7 @@ matricula,
 modelo,
 km
 FROM coche
+WHERE fecha_baja is null
 ORDER BY id DESC LIMIT 100;
 END ;;
 DELIMITER ;
@@ -595,4 +605,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-29 12:43:38
+-- Dump completed on 2019-01-29 13:42:20
