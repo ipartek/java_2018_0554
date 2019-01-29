@@ -137,10 +137,29 @@ public class VehiculoController {
 	
 	
 	@RequestMapping( value= {"/api/vehiculo/{id}"},method = RequestMethod.PATCH)
-	public ResponseEntity<Coche> baja(@PathVariable String id, @RequestBody Coche c){
+	public ResponseEntity<Coche> baja(@PathVariable String id){
+ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.INTERNAL_SERVER_ERROR);
 		
-//TODO 409 cuando no se pueda eliminar coche pork tien multas asociadas
-		return new ResponseEntity<Coche>(HttpStatus.NOT_IMPLEMENTED);
+		try {
+			Long identificador=Long.parseLong(id);
+			boolean b = cocheDAO.baja(identificador);
+			if (b==true) {
+				 response = new ResponseEntity<Coche>(HttpStatus.OK);
+			}else if(b==false) {
+				response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
+			}
+			
+		}catch(SQLException e) {//coche con conflicto 409 multa asociadas
+			response = new ResponseEntity<Coche>(HttpStatus.CONFLICT);
+			LOG.debug(HttpStatus.CONFLICT+" "+ e);
+		}catch (NumberFormatException e) {
+			response = new ResponseEntity<Coche>(HttpStatus.BAD_REQUEST);
+			LOG.debug(HttpStatus.BAD_REQUEST+" "+ e);
+		}catch(Exception e) {
+			LOG.error(e);
+		}
+		
+		return response;
 	}
 	
 
