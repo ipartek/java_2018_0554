@@ -37,6 +37,7 @@ function refrescarLista(){
                             <span class="matricula">${vehiculo.matricula}</span> 
                             <span class="modelo">${vehiculo.modelo}</span>
                             <span class="km"> ${vehiculo.km} KM</span>
+                            <span class="fecha"> ${vehiculo.fecha_baja} </span>
                             <a href="#" onclick="eliminar(${vehiculo.id})"> Eliminar </a>
                             <a href="#" onclick="cargarForm(${index})"> Editar </a>
                             <a href="#" onclick="baja(${vehiculo.id})">Baja</a>
@@ -59,6 +60,7 @@ function cargarForm( index ){
         modificar(vehiculos[index].id);
       });
 }
+
 function modificar( idVehiculo ){
     console.log('click modificar %o', idVehiculo );
     
