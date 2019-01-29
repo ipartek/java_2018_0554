@@ -22,10 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ipartek.formacion.modelo.daos.CocheDAO;
 import com.ipartek.formacion.modelo.pojo.Coche;
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @CrossOrigin //restriccion de js
 @RestController
+@Api(tags = { "VEHICULO" }, produces = "application/json", description="Gestión de Vehiculos")
 public class VehiculoController {
 	private final static Logger LOG = Logger.getLogger(VehiculoController.class);
 	private static CocheDAO cocheDAO;
@@ -133,6 +137,10 @@ public class VehiculoController {
 	
 	//CREAR
 	@RequestMapping(value=("/api/vehiculo"), method=RequestMethod.POST)
+	@ApiResponses({
+			@ApiResponse(code = 201, message = "Vehiculo creado"),
+			@ApiResponse(code = 409, message = "Existe Matricula")
+	})
 	public ResponseEntity<Coche> crear(@Valid @RequestBody Coche coche){
 		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);//404
 		
@@ -171,7 +179,7 @@ public class VehiculoController {
 	
 		
 	
-	//ACTUALIZAR
+	//MODIFICAR
 	@RequestMapping(value = { "/api/vehiculo/{id}" }, method = RequestMethod.PUT)
 	public ResponseEntity<Coche> modificar(@Valid @PathVariable long id, @RequestBody Coche coche ) {
 		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
@@ -192,13 +200,29 @@ public class VehiculoController {
 		
 	}
 	
-	//ACTUALIZAR PARCIAL
+	
+	//DAR DE BAJA	
 	@RequestMapping(value = { "/api/vehiculo/{id}" }, method = RequestMethod.PATCH)
-	public ResponseEntity<Coche> darDeBaja(@PathVariable long id, @RequestBody Coche coche) {
-		
-		//TODO terminar
-		return new ResponseEntity<Coche>(HttpStatus.NOT_IMPLEMENTED);
-		
+	public ResponseEntity<Coche> darDeBaja(@PathVariable String id, @RequestBody Coche coche) throws SQLException {
+		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
+		try {
+			int identificador = Integer.parseInt(id);
+			Coche c = cocheDAO.getById(identificador);
+			if (c != null) {
+				c.setModelo(coche.getModelo());
+				c.setKm(coche.getKm());
+				if (cocheDAO.update(c)) {
+					response = new ResponseEntity<Coche>(c, HttpStatus.OK);
+				}
+			}
+		} catch (SQLException e) {
+			LOG.debug(e);
+			response = new ResponseEntity<Coche>(HttpStatus.CONFLICT);
+		} catch (Exception e) {
+			LOG.error(e);
+			response = new ResponseEntity<Coche>(HttpStatus.BAD_REQUEST);
+		}
+		return response;
 	}
 	
 	
