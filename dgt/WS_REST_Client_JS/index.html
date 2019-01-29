@@ -37,9 +37,18 @@
 
         <div class="col-6">
           <h2>Formulario</h2>
-          <div>
-            <input id="matricula" type="text" placeholder="BI000KM">
-            <button onclick="crear()">Crear</button>
+          <div class="form-group">
+            <input id="matricula" type="text" placeholder="BI000KM" class="form-control">
+            <small class="form-text text-muted mb-3">*minimo 6 maximo 10</small>
+
+            <input id="modelo" type="text" placeholder="modelo coche" class="form-control">
+            <small class="form-text text-muted  mb-3">*obligatorio</small>
+
+            <input id="km" type="number" placeholder="Numero Kilometros" class="form-control">
+            <small class="form-text text-muted mb-3">*obligatorio</small>
+
+            <button onclick="crear()" class="btn btn-outline-primary btn-block mt-4">Crear</button>
+            <button onclick="modificar()" class="btn btn-outline-success btn-block mt-4">Modificar</button>
           </div>
         </div> 
       </div>
