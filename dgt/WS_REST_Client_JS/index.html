@@ -15,25 +15,31 @@
     <div id="alert"></div> 
         <div class="row">
             <div class="col-6">
-                <h2>Listado de vehículos</h2>
+                <h2 id="h2Listado">Listado de vehículos</h2>
                 <ul class="list-group" id="ulVehiculo">
                     <li class="list-group-item">
                         <span class="matricula"> Matricula</span> 
                         <span class="modelo"> Modelo </span>
                         <span class="km">KM</span>
+                        <button type="button" class="btn btn-primary">Editar</button>
                         <button type="button" class="btn btn-primary">Eliminar</button>
+                        <button type="button" class="btn btn-primary">Dar de baja</button>
                     </li>
                     <li class="list-group-item">
                         <span class="matricula"> Matricula</span> 
                         <span class="modelo"> Modelo </span>
                         <span class="km">KM</span>
+                        <button type="button" class="btn btn-primary">Editar</button>
                         <button type="button" class="btn btn-primary">Eliminar</button>
+                        <button type="button" class="btn btn-primary">Dar de baja</button>
                     </li>
                     <li class="list-group-item">
                         <span class="matricula"> Matricula</span> 
                         <span class="modelo"> Modelo </span>
                         <span class="km">KM</span>
+                        <button type="button" class="btn btn-primary">Editar</button>
                         <button type="button" class="btn btn-primary">Eliminar</button>
+                        <button type="button" class="btn btn-primary">Dar de baja</button>
                     </li>
                 </ul>
             </div>
@@ -42,10 +48,12 @@
             <div class="col-6">
                 <h2>Formulario</h2>
                 <form class="form-group">
-
+                    
+                    <input type="hidden" class="form-control " id="id"  name="id "value="-1">
+                    
                     <div class="form-group">
                         <label for="matricula">Matricula</label>
-                        <input type="text" class="form-control" id="matricula"  name="matricula"placeholder="7895JKL">
+                        <input type="text" class="form-control" id="matricula"  name="matricula" placeholder="7895JKL">
                     </div>
                     <div class="form-group">
                         <label for="modelo">Modelo</label>
@@ -53,12 +61,16 @@
                     </div>
                     <div class="form-group">
                         <label for="km">Km</label>
-                        <input type="text" class="form-control" id="km"  name="km" placeholder="0">
+                        <input type="number" class="form-control" id="km"  name="km" placeholder="0">
                     </div>
 
-                    <button type="button" class="btn btn-primary" onclick="crear()">Crear</button>
+                    <button type="button" class="btn btn-primary" onclick="crear()" id="idCrear">Crear</button>
+                    <button type="button" class="btn btn-primary" onclick="editarCocheSeleccionado()">Editar</button>
                 </form>
             </div>
+
+
+
         </div>
     </main>
     <!-- Optional JavaScript -->
