@@ -4,7 +4,8 @@
 
 }
 #ulVehiculo .modelo{
-    
+    font-weight: 400;
+    text-transform: capitalize;
 }
 #ulVehiculo .km{
     color: grey;
