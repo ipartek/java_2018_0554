@@ -53,19 +53,22 @@ function darBaja(idVehiculo){
     if(confirm('¿Quiere dar de baja el vehículo?')){
         let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function(){
-            if(xhr.readyState == 4){
-                if(xhr.status ==200){
-                    showAlert('El coche se ha dado de baja correctamente', 'info');   
-                    refrescarLista();
-                }else if(xhr.status==404){
-                    showAlert('El coche que se quiere dar de baja no existe, seleccione uno del listado','warning');
-                }
+            switch(xhr.status){
+                case 200:
+                        showAlert('El coche se ha dado de baja correctamente', 'info');   
+                        refrescarLista();
+                    break;
+                case 404:
+                        showAlert('El coche que se quiere dar de baja no existe, seleccione uno del listado','warning');
+                    break;
+                default:
+                    showAlert('Hay problemas técnicos', 'danger');
             }
+        }
         };
         xhr.open('PATCH',ENDPOINT + idVehiculo);
         xhr.send();
-    }
-}// darBaja
+    }// darBaja
 
 function eliminar( idVehiculo ){
     console.log('click Eliminar %o', idVehiculo );
@@ -74,12 +77,17 @@ function eliminar( idVehiculo ){
         xhr.onreadystatechange = function(){ 
             //la lógica de negonio va dentro de la function
              if (xhr.readyState == 4) {
-                 if ( xhr.status == 200 ){    
-                    showAlert('El coche se ha eliminado correctamente', 'info');              
-                    refrescarLista();
-                 }else if ( xhr.status == 409 ){
-                    showAlert('CONFLICTO existen multas asociadas', 'warning');
-                 }   
+                switch(xhr.status){
+                    case 200:
+                            showAlert('El coche se ha eliminado correctamente', 'info');              
+                            refrescarLista();
+                        break;
+                    case 409:
+                            showAlert('CONFLICTO existen multas asociadas', 'warning');
+                        break;
+                    default:
+                        showAlert('Hay problemas técnicos', 'danger');
+                }
              }    
         };
         xhr.open('DELETE', ENDPOINT + idVehiculo );    
@@ -116,13 +124,23 @@ function editarCocheSeleccionado(){
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange= function(){
         if(xhr.readyState == 4){
-            if(xhr.status == 200){
-                showAlert('El coche se ha editado correctamente', 'info');          
-                refrescarLista();
-            }else if(xhr.status == 404){
-                showAlert('El coche que se ha intentado editar no existe', 'warning');
-            }else if(xhr.status == 409){
-                showAlert('La matrícula nueva que ha introducido ya la tiene otro coche, introduzca una difernete', 'warning');
+            switch(xhr.status){
+                case 200:
+                        showAlert('El coche se ha editado correctamente', 'info');          
+                        refrescarLista();
+                        document.getElementById('id').value ="";
+                        document.getElementById('matricula').value="";
+                        document.getElementById('modelo').value="";
+                        document.getElementById('km').value="";
+                    break;
+                case 404:
+                        showAlert('El coche que se ha intentado editar no existe', 'warning');
+                    break;
+                case 409:
+                        showAlert('La matrícula nueva que ha introducido ya la tiene otro coche, introduzca una difernete', 'warning');
+                    break;
+                default:
+                    showAlert('Hay problemas técnicos', 'danger');
             }
         }
     }
@@ -148,17 +166,21 @@ function crear(){
     xhr.onreadystatechange= function(){
         //la lógica de negonio va dentro de la function
         if(xhr.readyState == 4){
-            if ( xhr.status == 201 ){
-                console.debug('STATUS' + xhr.status);
-                showAlert('El coche se ha creado correctamente, listo para recibir multas', 'info');          
-                refrescarLista();
-             }else if ( xhr.status == 409 ){
-                showAlert('CONFLICTO esa matricula ya existe', 'warning');
-             }else if ( xhr.status == 400 ){
-                 //TODO hacer comprobaciones una a una
-                showAlert('CONFLICTO Los datos no estan bien introducidos', 'danger');
-
-             }
+            switch(xhr.status){
+                case 201:
+                        showAlert('El coche se ha creado correctamente, listo para recibir multas', 'info');          
+                        refrescarLista();
+                    break;
+                case 400:
+                        //TODO hacer comprobaciones una a una
+                        showAlert('CONFLICTO Los datos no estan bien introducidos', 'danger');
+                    break;
+                case 409:
+                        showAlert('CONFLICTO esa matricula ya existe', 'warning');
+                    break;
+                default:
+                    showAlert('Hay problemas técnicos', 'danger');
+            }
         }
     };
     xhr.open('POST', ENDPOINT);
@@ -169,6 +191,7 @@ function crear(){
     // y a la hora de recibir datos hay que transformar de texto a json
     xhr.send( JSON.stringify(jsonCoche) );
 }// crear
+
 function showAlert(texto,tipo='info'){
     let alertHTML = `<div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
         <p>${texto}</p>
