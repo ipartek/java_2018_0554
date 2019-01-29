@@ -157,10 +157,7 @@ public class VehiculoController {
 
 	}
 
-	// TODO terminar
-	// 201 creado y retornar coche con id actualizado
-	// 400 datos del coche no son correctos, por ejemplo sin matricula o vacia
-	// 409 ya existe la matricula UK
+	
 
 	// MODIFICAR
 	@RequestMapping(value = { "/api/vehiculo/{id}" }, method = RequestMethod.PUT)
