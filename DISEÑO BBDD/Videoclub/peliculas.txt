@@ -1,0 +1,44 @@
+
+-- peliculas alquiladas
+
+id_stock  nombre_pelicula fecha_alquiler cliente(nombre apeledidos) 
+
+  1      sombras de grey     29/01/2019     Mari Mari
+  2      sombras de grey     28/01/2019     Pepe 
+  5      Rambo               17/01/2018     Pepe
+
+--  clientes que no hayn alquila pelicula en el año actual
+
+3  JoseLito Gorrones 944906565  1111111H
+  
+-- peliculas en Stock  detalle
+
+id_stock  id_pelicula     nombre
+1           1           sombras de grey 
+2           1           sombras de grey 
+3           1           sombras de grey 
+4           2           Jurasic Park
+5           3           Rambo 
+6           2           Jurasic Park
+
+-- Resumen Peliculas en Stock
+
+id_pelicula  total   nombre
+1             3       sombras de grey 
+2             2       Jurasic Park
+3             1       Rambo  
+
+-- Peliculas mas alquiladas 
+
+-- Peliculas nunca alquiladas
+
+
+-- detalle pelicula con Director y Actores
+
+Jango  Tarantino  "Jimi fox, jensel guasinton, riki martin"
+
+Jango  Tarantino  Jimi fox
+Jango  Tarantino  jensel guasinton
+Jango  Tarantino  riki martin
+
+
