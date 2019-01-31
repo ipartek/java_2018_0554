@@ -1,4 +1,7 @@
 
+
+-- https://stackoverflow.com/questions/23921117/disable-only-full-group-by
+
 -- peliculas alquiladas
 --  1      sombras de grey     29/01/2019     Mari Mari
 --  2      sombras de grey     28/01/2019     Pepe 
@@ -8,7 +11,8 @@ SELECT
 	ca.id AS 'id_stock',
 	p.nombre AS 'nombre_pelicula',
     DATE_FORMAT(ca.fecha_alquiler,'%d/%m/%Y')AS ' fecha_alquiler',
-	CONCAT(c.nombre," ",c.apellidos) AS 'nombre_apellido'
+	DATEDIFF(curdate(), DATE(ca.fecha_alquiler)) as 'dias_alquilada',
+	CONCAT(c.nombre," ",c.apellidos) AS 'cliente'
     
 FROM
 	pelicula AS p,
@@ -16,25 +20,14 @@ FROM
 	cliente_alquila_stock AS ca
 WHERE p.id = ca.pelicula_id
 AND c.id = ca.cliente_id
+AND fecha_devolucion is null
 ORDER BY ca.fecha_alquiler DESC
 LIMIT 500;
 
-
-
---  clientes que no hayn alquila pelicula en el año actual CASI
-SELECT 
-	 *
-FROM
-	cliente AS c LEFT JOIN cliente_alquila_stock AS ca ON c.id = ca.cliente_id
-group by c.nombre
-HAVING
-	MAX(YEAR(ca.fecha_alquiler) )< YEAR(now())
-OR ca.cliente_id is null
-;
-    
---  clientes que no hayn alquila pelicula en el año actual OK
-
+ 
+--  clientes que no hayn alquila pelicula en el año actual 
 SELECT  
+	c.id AS 'id_cliente',
 	  c.nombre AS 'nombre',
       c.apellidos AS 'apellidos',
       c.dni AS 'DNI',
@@ -46,12 +39,12 @@ WHERE c.id IN (
 				SELECT c.id 
 				FROM
 					cliente AS c LEFT JOIN cliente_alquila_stock AS ca ON c.id = ca.cliente_id
-				group by c.nombre
+				group by c.nombre, c.id
 				HAVING
 					MAX(YEAR(ca.fecha_alquiler) )< YEAR(now())
-				OR ca.cliente_id is null
 				)
-GROUP BY c.nombre
+OR ca.cliente_id is null
+GROUP BY c.nombre, c.id
 ORDER BY c.nombre ASC
 LIMIT 100;
 
@@ -73,7 +66,7 @@ FROM
 	pelicula AS p,
 	stock AS s
 WHERE p.id = s.pelicula_id
-ORDER BY s.id LIMIT 500;
+ORDER BY s.id ASC LIMIT 500;
 
 
 -- Resumen Peliculas en Stock
@@ -91,23 +84,38 @@ FROM
 	stock AS s
 WHERE p.id = s.pelicula_id
 GROUP BY p.id
-ORDER BY s.id LIMIT 500;
+ LIMIT 500;
 
 
--- Peliculas mas alquiladas 
+-- Peliculas mas alquiladas  por año
 SELECT 
-	COUNT(s.pelicula_id) AS 'total',
-	p.nombre AS 'nombre_pelicula'
-	
+	COUNT(p.id) AS 'alquileres',
+    YEAR(ca.fecha_alquiler) AS 'anio',
+	p.id AS 'pelicula',
+    p.nombre
 FROM 
-	stock AS s,
+	cliente_alquila_stock AS ca,
     pelicula AS p
 WHERE
-	p.id = s.pelicula_id
-GROUP BY
-	s.pelicula_id
-ORDER BY total DESC
+	p.id = ca.cliente_id
+GROUP BY p.id, YEAR(ca.fecha_alquiler)
+ORDER BY anio, alquileres ASC
 LIMIT 100;
+
+-- Peliculas mas alquiladas  
+SELECT 
+	COUNT(p.id) AS 'alquileres',
+	p.id AS 'pelicula',
+    p.nombre
+FROM 
+	cliente_alquila_stock AS ca,
+    pelicula AS p
+WHERE
+	p.id = ca.cliente_id
+GROUP BY p.id
+
+LIMIT 100;
+
 
 -- Peliculas nunca alquiladas
 
@@ -153,6 +161,7 @@ LIMIT 500;
 -- detalle pelicula con Director y Actores
 -- Jango  Tarantino  "Jimi fox, jensel guasinton, riki martin"
 SELECT
+	
 	p.nombre AS 'nombre_pelicula',
     d.nombre AS 'director',
     GROUP_CONCAT(a.nombre) AS 'nombre_actor'
@@ -167,7 +176,7 @@ AND
     p.id = pa.pelicula_id
 AND
     pa.actor_id = a.id
-GROUP BY p.nombre
+GROUP BY p.nombre, d.nombre
 LIMIT 500;
 
 
