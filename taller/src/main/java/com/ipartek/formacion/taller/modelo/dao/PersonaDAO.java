@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 import org.springframework.stereotype.Repository;
 
-import com.ipartek.formacion.modelo.cm.ConnectionManager;
+import com.ipartek.formacion.taller.modelo.config.ConnectionManager;
 import com.ipartek.formacion.taller.modelo.pojo.Persona;
 import com.ipartek.formacion.taller.modelo.pojo.Rol;
 
