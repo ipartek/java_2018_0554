@@ -12,13 +12,16 @@ import com.ipartek.formacion.taller.service.PersonaService;
 @Service
 public class PersonaServiceImpl implements PersonaService {
 
-	
-	@Autowired 
+	@Autowired
 	PersonaDAO personaDAO;
-	
+
 	@Override
-	public ArrayList<Persona> listar() {		
-		return  personaDAO.getAll().values() ;
+	public ArrayList<Persona> listar() {
+
+		ArrayList<Persona> personas = new ArrayList<Persona>();
+		personas.addAll(personaDAO.getAll().values());
+
+		return personas;
 	}
 
 	@Override
@@ -26,6 +29,5 @@ public class PersonaServiceImpl implements PersonaService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
 }
