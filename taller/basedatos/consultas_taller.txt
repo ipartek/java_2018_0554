@@ -1,0 +1,74 @@
+-- Listado Vehiculos de un Cliente
+
+SELECT 
+	CONCAT(p.nombre, ' ', p.apellidos) as 'cliente',
+    v.matricula,
+    m.nombre as 'modelo'
+FROM 
+	persona as p,
+    vehiculo as v,
+    modelo as m
+WHERE 
+    p.id = v.id_propietario AND 
+    v.id_modelo = m.id AND
+	p.id = 2;
+    
+-- Listado Vehiculos y sus Reparaciones para un Cliente
+
+SELECT 
+	CONCAT(p.nombre, ' ', p.apellidos) as 'cliente',
+    v.matricula,
+    m.nombre as 'modelo',
+    r.precio,
+    r.fecha,
+    r.descripcion
+FROM 
+	persona as p,
+    vehiculo as v,
+    modelo as m,
+    reparaciones as r
+WHERE 
+    p.id = v.id_propietario AND 
+    v.id_modelo = m.id AND
+    v.id = r.id_vehiculo AND
+	p.id = 2;  
+	
+	
+	
+
+-- datos estadisticos ganancias ganacias por anio
+
+SELECT 
+	YEAR(fecha) as 'anio',
+    ROUND( SUM(precio), 2 ) as 'ganacias'
+FROM    
+	reparaciones
+group by YEAR(fecha)   
+ORDER BY  YEAR(fecha)  DESC;	
+
+
+-- datos estadisticos ganancias ganacias por cliente
+
+SELECT 
+  p.nombre,
+  ROUND( SUM( r.precio ), 2) as 'gasto'
+FROM
+	persona as p,
+    vehiculo as v,
+    reparaciones as r
+WHERE
+	p.id = v.id_propietario AND
+	v.id = r.id_vehiculo
+GROUP BY (p.id)    
+ORDER BY gasto DESC;
+
+-- datos estadisticos ganancias ganacias por cliente, AUNQUE no tengan vehiculo ni reparaciones
+SELECT 
+  CONCAT( p.nombre , ' ', p.apellidos) as 'cliente',
+  ROUND( SUM( r.precio ), 2) as 'gasto'
+FROM
+	( persona as p LEFT JOIN vehiculo as v ON p.id = v.id_propietario	 ) 
+            LEFT JOIN reparaciones as r ON  v.id = r.id_vehiculo
+	
+GROUP BY (p.id)    
+ORDER BY gasto DESC;
