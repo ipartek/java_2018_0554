@@ -1,9 +1,13 @@
 package com.ipartek.formacion.taller.modelo.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Repository;
 
+import com.ipartek.appMultas.modelo.dao.ConnectionManager;
 import com.ipartek.formacion.taller.modelo.pojo.Vehiculo;
 
 @Repository
@@ -14,14 +18,23 @@ public class VehiculoDAO {
 	public ArrayList<Vehiculo> getAllByPersonaId(int idPersona){
 		
 		ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
-		Vehiculo v = new Vehiculo();
-		v.setMatricula("1234AAA");
-		vehiculos.add(v);
-		
-		Vehiculo v2 = new Vehiculo();
-		v2.setMatricula("5678BBB");
-		vehiculos.add(v2);
-		
+
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(SQL_GET_ALL_BY_PERSONA_ID);
+				) {
+			pst.setInt(1, idPersona);
+			try(ResultSet rs = pst.executeQuery();){
+			while (rs.next()) {
+				
+				//TODO Obtener todos los vehiculos y almacenarlos en el arraylist
+
+			}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return vehiculos;
 	}
 	
