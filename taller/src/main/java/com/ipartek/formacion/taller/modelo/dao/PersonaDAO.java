@@ -19,7 +19,9 @@ public class PersonaDAO {
 
 	public HashMap<Integer, Persona> getAll() {
 
-		HashMap<Integer, Persona> hmPersonas = new HashMap<Integer, Persona>();
+		
+		// HASH MAP PARA INCLUIR PERSONAS , Y ROL
+		HashMap<Integer, Persona> hmPersonas = new HashMap<Integer, Persona>(); 
 
 		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pst = con.prepareStatement(SQL_GET_ALL);
@@ -27,8 +29,10 @@ public class PersonaDAO {
 
 			while (rs.next()) {
 				
-				int idPersona = rs.getInt("id_persona");
-				Persona persona = hmPersonas.get(idPersona);
+				int idPersona = rs.getInt("id_persona");  // SI LA ID DE LA PERSONA ES IGUAL A LA ID DE LA BASE DE DATOS
+				
+				
+				Persona persona = hmPersonas.get(idPersona);  // CREO OBJETO PERSONA 
 				
 				if ( persona == null ) {         // si no encentro crear
 					
