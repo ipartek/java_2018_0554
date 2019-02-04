@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import springfox.documentation.annotations.ApiIgnore;
 
-
 @ApiIgnore
 @Controller
 public class HomeController {
@@ -15,5 +14,7 @@ public class HomeController {
 	public String home() {		
 		return "index";
 	}
+	
+
 
 }

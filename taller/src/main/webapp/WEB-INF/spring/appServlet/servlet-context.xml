@@ -19,6 +19,7 @@
 	<resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
     <resources mapping="/swagger-ui.html" location="classpath:/META-INF/resources/swagger-ui.html"/>
 
+
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -38,7 +39,7 @@
 	<beans:bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 	</beans:bean>	
 	
-	<!-- Spring escanea ese paquete para buscar sus anotnaciones y generar beans y inyectar(instacia los objetos automaticamente -->
+	<!-- spring scanea ese paquete para buscar sus anotaciones, generar beans y poder inyectarlos -->
 	<context:component-scan base-package="com.ipartek.formacion" />
 	
 </beans:beans>

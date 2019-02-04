@@ -1,0 +1,1 @@
+SELECT 	p.id AS 'id_persona',  p.nombre AS 'nombre_persona', r.id AS 'id_rol', r.nombre AS 'nombre_rol' FROM persona AS p INNER JOIN persona_has_rol AS pr ON p.id = pr.id_persona INNER JOIN rol AS r ON r.id = pr.id_rol ORDER BY p.id DESC LIMIT 1000;

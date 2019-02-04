@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Taller</title>
+    <title>WSRest</title>
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
@@ -22,10 +22,10 @@
 
 	<main class="container">
 		<div class="jumbotron">
-		  <h1 class="display-4">Web Service API Rest Taller</h1>
+		  <h1 class="display-4">Web Service API Rest TALLER</h1>
 		  <p class="lead">Servicio Rest con Spring 4.3.0.RELEASE</p>
-		  <p><b>Endpoint</b> http://localhost:8080/taller/api<p>	
-		   <p> <a href="<%=request.getContextPath() + "/swagger-ui.html#/" %>">Documentación API</a><p>		  
+		  <p><b>Endpoint</b> http://localhost:8080/taller/api<p>		  
+		  <p><a href="<%=request.getContextPath() + "/swagger-ui.html#/" %>">API Documentacion</a> <p>
 		</div>
 	</main>	
 		

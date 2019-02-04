@@ -23,8 +23,13 @@
 	</properties>
 
 	<dependencies>
-	<!-- Dependencia modelo -->
-		
+	
+		<!-- dependencia modelo -->
+		<dependency>			
+			<groupId>com.ipartek.formacion.dgt</groupId>
+			<artifactId>modelo</artifactId>
+			<version>1.0</version>
+		</dependency>
 		
 		
 		<!-- Web Project 3.0 -->

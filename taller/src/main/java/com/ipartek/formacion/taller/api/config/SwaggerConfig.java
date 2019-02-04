@@ -29,11 +29,11 @@ public class SwaggerConfig {
     }
      
     private ApiInfo apiInfo() {
-        ApiInfo apiInfo = new ApiInfo("Taller",
+        ApiInfo apiInfo = new ApiInfo("Direccion General de Trafico API",
                                         "",
                                         "1.0",
                                         "",
-                                        new Contact("Imanol Hernando", "https://github.com/ipartek/java_2018_0554/tree/imanolhernando/", "mail"),
+                                        new Contact("Ander Uraga Real", "https://github.com/ipartek/java_2018_0508/tree/master/youtube", "auraga@ipartek.com"),
                                         "Apache License",
                                         "");
         return apiInfo;
