@@ -3,20 +3,31 @@ package com.ipartek.formacion.taller.modelo.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.ipartek.formacion.taller.modelo.config.ConnectionManager;
 import com.ipartek.formacion.taller.modelo.pojo.Persona;
 import com.ipartek.formacion.taller.modelo.pojo.Rol;
+import com.ipartek.formacion.taller.modelo.pojo.Vehiculo;
 
 @Repository
 public class PersonaDAO {
+	// LOG
+	private final static Logger LOG = Logger.getLogger(PersonaDAO.class);
 
 	private static final String SQL_GET_ALL = "SELECT p.id as 'id_persona', p.nombre as 'nombre_persona', r.id as 'id_rol', r.nombre as 'nombre_rol', p.dni AS 'dni_persona', p.telefono AS 'telefono_persona', p.apellidos AS 'apellido_persona' FROM persona as p, persona_has_rol as pr, rol as r WHERE p.id = pr.id_persona AND pr.id_rol = r.id ORDER BY p.id DESC LIMIT 1000;";
-
+	private static final String SQL_GET_ALL_BY_ID=
+"SELECT id, matricula FROM vehicul WHERE vehiculo.id_propietario =  ?;";
+	
+	/**
+	 * Obtener todas las de Personas
+	 * @return HashMap de Persona
+	 */
 	public HashMap<Integer, Persona> getAll() {
 
 		HashMap<Integer, Persona> hmPersonas = new HashMap<Integer, Persona>();
@@ -54,10 +65,13 @@ public class PersonaDAO {
 			}// end while
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.debug(e);
 		}
 
 		return hmPersonas;
 	}
+
+
+	
 
 }

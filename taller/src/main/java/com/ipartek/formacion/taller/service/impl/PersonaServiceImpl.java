@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ipartek.formacion.taller.modelo.dao.PersonaDAO;
+import com.ipartek.formacion.taller.modelo.dao.VehiculoDAO;
 import com.ipartek.formacion.taller.modelo.pojo.Persona;
+import com.ipartek.formacion.taller.modelo.pojo.Vehiculo;
 import com.ipartek.formacion.taller.service.PersonaService;
 
 @Service
@@ -14,6 +16,9 @@ public class PersonaServiceImpl implements PersonaService {
 
 	@Autowired
 	PersonaDAO personaDAO;
+	
+	@Autowired
+	VehiculoDAO vehiculoDAO;
 
 	@Override
 	public ArrayList<Persona> listar() {
@@ -25,9 +30,11 @@ public class PersonaServiceImpl implements PersonaService {
 	}
 
 	@Override
-	public ArrayList<Object> vehiculos(int idPersona) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Vehiculo> vehiculos(int idPersona) {
+		ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
+		vehiculos.addAll(vehiculoDAO.getAllByIdPropietario(idPersona));
+
+		return vehiculos;
 	}
 
 }

@@ -3,6 +3,7 @@ package com.ipartek.formacion.taller.service;
 import java.util.ArrayList;
 
 import com.ipartek.formacion.taller.modelo.pojo.Persona;
+import com.ipartek.formacion.taller.modelo.pojo.Vehiculo;
 
 
 
@@ -15,11 +16,11 @@ public interface PersonaService {
 	ArrayList<Persona> listar();
 	
 	/**
-	 * Lsitado Vehiculos de una Persona
+	 * Listado Vehiculos de una Persona
 	 * @param idPersona identificador de la Persona
 	 * @return ArrayList<Vehiculo>
 	 */
-	ArrayList<Object> vehiculos( int idPersona );
+	ArrayList<Vehiculo> vehiculos( int idPersona );
 	
 	
 }
