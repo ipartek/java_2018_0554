@@ -8,14 +8,14 @@ import java.util.HashMap;
 
 import org.springframework.stereotype.Repository;
 
-import com.ipartek.formacion.modelo.cm.ConnectionManager;
+import com.ipartek.formacion.taller.modelo.config.ConnectionManager;
 import com.ipartek.formacion.taller.modelo.pojo.Persona;
 import com.ipartek.formacion.taller.modelo.pojo.Rol;
 
 @Repository
 public class PersonaDAO {
 
-	private static final String SQL_GET_ALL = "SELECT p.id as 'id_persona', p.nombre as 'nombre_persona', r.id as 'id_rol', r.nombre as 'nombre_rol' FROM persona as p, persona_has_rol as pr, rol as r WHERE p.id = pr.id_persona AND pr.id_rol = r.id ORDER BY p.id DESC LIMIT 1000;";
+	private static final String SQL_GET_ALL = "SELECT p.id as 'id_persona', p.nombre as 'nombre_persona', r.id as 'id_rol', r.nombre as 'nombre_rol', p.dni AS 'dni_persona', p.telefono AS 'telefono_persona', p.apellidos AS 'apellido_persona' FROM persona as p, persona_has_rol as pr, rol as r WHERE p.id = pr.id_persona AND pr.id_rol = r.id ORDER BY p.id DESC LIMIT 1000;";
 
 	public HashMap<Integer, Persona> getAll() {
 
@@ -35,7 +35,9 @@ public class PersonaDAO {
 					persona = new Persona();
 					persona.setId(idPersona);
 					persona.setNombre( rs.getString("nombre_persona"));
-										
+					persona.setDni( rs.getString("dni_persona"));
+					persona.setTelefono( rs.getString("telefono_persona"));
+					persona.setApellidos( rs.getString("apellido_persona"));					
 				}
 				
 				Rol rol = new Rol();
