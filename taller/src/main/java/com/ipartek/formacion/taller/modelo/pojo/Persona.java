@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 public class Persona {
 
-
 	private int id;
+
 	private String nombre;
+
 	private String apellidos;
+
 	private String dni;
+
 	private String telefono;
 	
 	private ArrayList<Rol> roles;
@@ -17,6 +20,7 @@ public class Persona {
 		super();
 		this.id = -1;
 		this.nombre = "";
+		this.apellidos = "";
 		this.dni = "";
 		this.telefono = "";
 		this.roles = new ArrayList<Rol>();
@@ -75,8 +79,5 @@ public class Persona {
 		return "Persona [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", dni=" + dni + ", telefono="
 				+ telefono + ", roles=" + roles + "]";
 	}
-	
-	
-	
 	
 }
