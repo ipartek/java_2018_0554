@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ipartek.formacion.taller.modelo.pojo.Combustible;
+import com.ipartek.formacion.taller.modelo.pojo.Mensaje;
 import com.ipartek.formacion.taller.modelo.pojo.Rol;
 import com.ipartek.formacion.taller.service.RolService;
+import com.ipartek.formacion.taller.service.exception.CombustibleException;
+import com.ipartek.formacion.taller.service.exception.RolException;
 
 
 @RestController
@@ -71,6 +74,29 @@ public class RolController {
 				}
 
 
+				// METODO ELIMINAR (DELETE)
+				@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+				public ResponseEntity<Mensaje> eliminar( @PathVariable int id) {
+
+					ResponseEntity<Mensaje> response = new ResponseEntity<Mensaje>(HttpStatus.NOT_FOUND);   // POR DEFECTO
+					
+					try {
+
+						if ( rolService.eliminar(id) ) {
+							response = new ResponseEntity<Mensaje>(HttpStatus.OK);
+						}
+					} catch (RolException e) {	                                             // si falla la consulta
+						
+						Mensaje mensaje = new Mensaje( e.getMessage() );
+						response = new ResponseEntity<Mensaje>(mensaje, HttpStatus.CONFLICT);
+						
+					} catch (Exception e) {															// 	PORQUE HAY DOS CATCH PARA LO MISMO? PREGUNTA
+						e.printStackTrace();
+						response = new ResponseEntity<Mensaje>(HttpStatus.INTERNAL_SERVER_ERROR);
+					}
+
+					return response;
+				}
 
 
 

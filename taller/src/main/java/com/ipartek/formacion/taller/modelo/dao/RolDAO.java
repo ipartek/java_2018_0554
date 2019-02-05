@@ -64,6 +64,28 @@ public class RolDAO {
 		}
 		return r;														 	// devuelve un objeto con los datos del Rol que ha encontrado en bbdd
 	}
+	
+	
+	
+
+	// PARA  METODO ELIMINAR (DELETE)
+	public boolean delete( int id ) throws SQLException  { 					 // SI RECIBE PARAMETRO, ID  que indica que combustible borrar
+		boolean isDelete = false;
+		
+		try ( Connection conn = ConnectionManager.getConnection();
+			  PreparedStatement pst = conn.prepareStatement(SQL_DELETE);
+			){
+		
+			pst.setInt(1, id);			
+			if ( pst.executeUpdate() == 1 ) {
+				isDelete = true;
+			}			
+		}	
+		return isDelete;  													//  devuelve un boleano. Si se ha eliminado devuelve true.
+	}
+	
+	
+	
 	// METODO PARA MAPEO PARAMETROS, PARECIDO A ROWMAPPER
 	private Rol mapeo(ResultSet rs) throws SQLException {
 		Rol r = new Rol();
