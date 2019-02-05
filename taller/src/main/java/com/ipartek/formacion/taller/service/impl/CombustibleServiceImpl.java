@@ -40,13 +40,24 @@ public class CombustibleServiceImpl implements CombustibleService {
 
 	@Override
 	public boolean crear(Combustible combustible) throws CombustibleException {
-		return combustibleDAO.insert(combustible);
+		boolean isInserted = false;
+		try {
+			isInserted = combustibleDAO.insert(combustible);
+		} catch (SQLException e) {
+			throw new CombustibleException(CombustibleException.EXCEPTION_EXIST);
+		}
+		return isInserted;
 	}
 
 	@Override
 	public boolean modificar(Combustible combustible) throws CombustibleException {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isUpdated = false;
+		try {
+			isUpdated = combustibleDAO.update(combustible);
+		} catch (SQLException e) {
+			throw new CombustibleException(CombustibleException.EXCEPTION_CONSTRAINT);
+		}
+		return isUpdated;
 	}
 
 }

@@ -79,19 +79,40 @@ public class CombustibleController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public ResponseEntity<HttpStatus> crear(@RequestBody Combustible combustible) {
+	public ResponseEntity<Mensaje> crear(@RequestBody Combustible combustible) {
 
-		ResponseEntity<HttpStatus> response = new ResponseEntity<HttpStatus>(HttpStatus.INTERNAL_SERVER_ERROR);
+		ResponseEntity<Mensaje> response = new ResponseEntity<Mensaje>(HttpStatus.INTERNAL_SERVER_ERROR);
 		try {
 			if (combustibleService.crear(combustible)) {
-				response = new ResponseEntity<HttpStatus>(HttpStatus.CREATED);
+				response = new ResponseEntity<Mensaje>(HttpStatus.CREATED);
 			}
 
 		} catch (CombustibleException e) {
 			e.printStackTrace(); // Meter LOG
-			response = new ResponseEntity<HttpStatus>(HttpStatus.CONFLICT);
+			response = new ResponseEntity<Mensaje>(new Mensaje(e.getMessage()), HttpStatus.CONFLICT);
 		} catch (Exception e) {
 			e.printStackTrace(); // Meter LOG
+		}
+
+		return response;
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Mensaje> modificar(@PathVariable int id, @RequestBody Combustible combustible) {
+
+		ResponseEntity<Mensaje> response = new ResponseEntity<Mensaje>(HttpStatus.NOT_FOUND);
+		combustible.setId(id);
+		try {
+			if (combustibleService.modificar(combustible)) {
+				response = new ResponseEntity<Mensaje>(HttpStatus.OK);
+			}
+
+		} catch (CombustibleException e) {
+			e.printStackTrace(); // Meter LOG
+			response = new ResponseEntity<Mensaje>(new Mensaje(e.getMessage()), HttpStatus.CONFLICT);
+		} catch (Exception e) {
+			e.printStackTrace(); // Meter LOG
+			response = new ResponseEntity<Mensaje>(new Mensaje(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		return response;
