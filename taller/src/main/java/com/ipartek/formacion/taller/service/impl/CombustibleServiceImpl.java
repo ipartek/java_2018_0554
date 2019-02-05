@@ -21,23 +21,14 @@ import com.ipartek.formacion.taller.service.exception.CombustibleException;
 
 @Service
 public class CombustibleServiceImpl implements CombustibleService {
-	// LOG
-		private final static Logger LOG = Logger.getLogger(CombustibleServiceImpl.class);
+
+	private final static Logger LOG = Logger.getLogger(CombustibleServiceImpl.class);
 	@Autowired
 	CombustibleDAO combustibleDAO;
-	
-	// validator
-	private ValidatorFactory factory;
+
+	@Autowired
 	private Validator validator;
 
- 
-	public CombustibleServiceImpl() {
-		// Crear Factoria y Validador
-		factory = Validation.buildDefaultValidatorFactory();
-		validator = factory.getValidator();
-	}
-	
-	
 	@Override
 	public List<Combustible> listarCombustible() {
 		return combustibleDAO.getAll();
@@ -50,56 +41,58 @@ public class CombustibleServiceImpl implements CombustibleService {
 
 	@Override
 	public Boolean eliminar(int idCombustible) throws CombustibleException {
-		boolean resul= false;
+		boolean resul = false;
 		try {
 			resul = combustibleDAO.delete(idCombustible);
 		} catch (SQLException e) {
 			LOG.debug(e);
 			LOG.debug(CombustibleException.EXCEPTION_CONSTRAINT);
-			throw new CombustibleException(CombustibleException.EXCEPTION_CONSTRAINT);	
+			throw new CombustibleException(CombustibleException.EXCEPTION_CONSTRAINT);
 		}
 		return resul;
 	}
 
 	@Override
 	public Boolean crear(Combustible combustible) throws CombustibleException {
-		boolean resul= false;
+		boolean resul = false;
 		Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
-		if (violations.size() > 0) { 		
+		if (violations.size() > 0) {
 			for (ConstraintViolation<Combustible> violation : violations) {
-				throw new CombustibleException(violation.getPropertyPath()+": "+violation.getMessage());
+				// Mensaje general, se podria sacar cada mensaje de error de los atributos de
+				// Combustible validados
+				throw new CombustibleException("Validaciones incorrectas");
 			}
-		}else {
+		} else {
 			try {
 				resul = combustibleDAO.insert(combustible);
 			} catch (SQLException e) {
 				LOG.debug(e);
 				LOG.debug(CombustibleException.EXCEPTION_EXIST);
-				throw new CombustibleException(CombustibleException.EXCEPTION_EXIST);	
+				throw new CombustibleException(CombustibleException.EXCEPTION_EXIST);
 			}
 		}
-		return resul;			
+		return resul;
 	}
 
-
-	
 	@Override
 	public Boolean modificar(Combustible combustible) throws CombustibleException {
-		boolean resul= false;
+		boolean resul = false;
 		Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
-		if (violations.size() > 0) { 		
+		if (violations.size() > 0) {
 			for (ConstraintViolation<Combustible> violation : violations) {
-				throw new CombustibleException(violation.getPropertyPath()+": "+violation.getMessage());
+				// Mensaje general, se podria sacar cada mensaje de error de los atributos de
+				// Combustible validados
+				throw new CombustibleException("Validaciones incorrectas");
 			}
-		}else {
+		} else {
 			try {
 				resul = combustibleDAO.update(combustible);
 			} catch (SQLException e) {
 				LOG.debug(e);
 				LOG.debug(CombustibleException.EXCEPTION_EXIST);
-				throw new CombustibleException(CombustibleException.EXCEPTION_EXIST);	
+				throw new CombustibleException(CombustibleException.EXCEPTION_EXIST);
 			}
 		}
-		return resul;			
+		return resul;
 	}
 }

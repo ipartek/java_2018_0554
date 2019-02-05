@@ -24,7 +24,7 @@ public class CombustibleDAO {
 	private static final String SQL_CREAR = "INSERT INTO combustible (`nombre`) VALUES (?);";
 	private static final String SQL_DELETE = "DELETE FROM `taller`.`combustible` WHERE (`id` = ? ); ;";
 	private static final String SQL_UPDATE = "UPDATE `taller`.`combustible` SET `nombre` = ? WHERE (`id` = ?);";
-	
+
 	/**
 	 * 
 	 * @return
@@ -35,9 +35,7 @@ public class CombustibleDAO {
 				PreparedStatement pst = con.prepareStatement(SQL_GET_ALL);
 				ResultSet rs = pst.executeQuery();) {
 			while (rs.next()) {
-				Combustible combustible = new Combustible();
-				combustible.setId(rs.getInt("id"));
-				combustible.setNombre(rs.getString("nombre"));
+				Combustible combustible = rowMapper(rs);
 				combustibles.add(combustible);
 			} // end while
 		} catch (Exception e) {
@@ -45,8 +43,7 @@ public class CombustibleDAO {
 		}
 		return combustibles;
 	}
-	
-	
+
 	/**
 	 * 
 	 * @param id
@@ -60,9 +57,7 @@ public class CombustibleDAO {
 			pst.setInt(1, id);
 			try (ResultSet rs = pst.executeQuery();) {
 				while (rs.next()) {
-					combustible = new Combustible();
-					combustible.setId(rs.getInt("id"));
-					combustible.setNombre(rs.getString("nombre"));
+					combustible = rowMapper(rs);
 				} // end while
 			} catch (SQLException e) {
 				LOG.debug(e);
@@ -74,58 +69,58 @@ public class CombustibleDAO {
 
 		return combustible;
 	}
-	
-	
+
 	public Boolean insert(Combustible combustible) throws SQLException {
-		boolean resul= false;
+		boolean resul = false;
 		try (Connection conn = ConnectionManager.getConnection();
-			PreparedStatement pst = conn.prepareStatement(SQL_CREAR, Statement.RETURN_GENERATED_KEYS );) {
+				PreparedStatement pst = conn.prepareStatement(SQL_CREAR, Statement.RETURN_GENERATED_KEYS);) {
 			pst.setString(1, combustible.getNombre());
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
 				ResultSet rs = pst.getGeneratedKeys();
 				if (rs.next()) {
-				    combustible.setId(rs.getInt(1));				    
-					} 
-				
-				 resul = true;			
-			}		
+					combustible.setId(rs.getInt(1));
+				}
+				resul = true;
+			}
 		}
 		return resul;
 	}
-	
-	
-	public Boolean delete(Integer id) throws SQLException {//lanza la excepcion hacia el service
-		boolean resul= false;
+
+	public Boolean delete(Integer id) throws SQLException {// lanza la excepcion hacia el service
+		boolean resul = false;
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_DELETE);) {
-				pst.setInt(1, id);
-				int affectedRows = pst.executeUpdate();
-				if (affectedRows == 1) {
-					resul = true;			
-				}		
+			pst.setInt(1, id);
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				resul = true;
 			}
+		}
 		return resul;
 	}
-	
-	public Boolean update(Combustible combustible) throws SQLException {//lanza la excepcion hacia el service
-		boolean resul= false;
+
+	public Boolean update(Combustible combustible) throws SQLException {// lanza la excepcion hacia el service
+		boolean resul = false;
 		try (Connection conn = ConnectionManager.getConnection();
-				PreparedStatement pst = conn.prepareStatement(SQL_UPDATE, Statement.RETURN_GENERATED_KEYS );) {
-				
-				pst.setString(1, combustible.getNombre());
-				pst.setInt(2, combustible.getId());
-				
-				int affectedRows = pst.executeUpdate();
-				if (affectedRows == 1) {
-					resul = true;			
-				}		
+				PreparedStatement pst = conn.prepareStatement(SQL_UPDATE);) {
+
+			pst.setString(1, combustible.getNombre());
+			pst.setInt(2, combustible.getId());
+
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				resul = true;
 			}
+		}
 		return resul;
 	}
-	
-	
+
+	private Combustible rowMapper(ResultSet rs) throws SQLException {
+		Combustible c = new Combustible();
+		c.setId(rs.getInt("id"));
+		c.setNombre(rs.getString("nombre"));
+		return c;
+	}
 
 }
-	
-

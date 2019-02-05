@@ -3,21 +3,15 @@ package com.ipartek.formacion.taller.api.pojo;
 public class Mensaje {
 
 	private String mensaje;
-	
+
 	public Mensaje() {
 		super();
-		this.mensaje = mensaje;
+		this.mensaje = "";
 	}
-	
+
 	public Mensaje(String mensaje) {
 		this();
 		setMensaje(mensaje);
-	}
-
-
-	@Override
-	public String toString() {
-		return "Mensaje [mensaje=" + mensaje + "]";
 	}
 
 	public String getMensaje() {
@@ -28,7 +22,9 @@ public class Mensaje {
 		this.mensaje = mensaje;
 	}
 
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Mensaje [mensaje=" + mensaje + "]";
+	}
+
 }
