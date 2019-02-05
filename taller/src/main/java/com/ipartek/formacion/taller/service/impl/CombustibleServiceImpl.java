@@ -1,5 +1,6 @@
 package com.ipartek.formacion.taller.service.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,14 @@ public class CombustibleServiceImpl implements CombustibleService {
 	}
 
 	@Override
-	public boolean eliminar(int idCombustible) throws CombustibleException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean eliminar(int idCombustible) throws CombustibleException {		
+		boolean isDelete = false;
+		try {
+			isDelete = combustibleDAO.delete(idCombustible);
+		}catch ( SQLException e) {			
+			throw new CombustibleException( CombustibleException.EXCEPTION_CONSTRAINT );
+		}			
+		return isDelete;
 	}
 
 	@Override
