@@ -1,5 +1,6 @@
 package com.ipartek.formacion.taller.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.ipartek.formacion.taller.modelo.pojo.Combustible;
@@ -39,6 +40,7 @@ public interface CombustibleService {
 	 * @param combustible Combustible a crear
 	 * @return true si crea , false si no puede crear, minimo 1 maximo 45
 	 * @throws CombustibleException si el nombre del combustible ya existe
+	 * @throws SQLException 
 	 * @see CombustibleException.EXCEPTION_EXIST
 	 */
 	Boolean crear(Combustible combustible) throws CombustibleException;
