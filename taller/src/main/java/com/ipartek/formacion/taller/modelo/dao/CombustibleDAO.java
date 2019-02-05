@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
@@ -78,12 +79,15 @@ public class CombustibleDAO {
 	public Boolean insert(Combustible combustible) throws SQLException {
 		boolean resul= false;
 		try (Connection conn = ConnectionManager.getConnection();
-			PreparedStatement pst = conn.prepareStatement(SQL_CREAR);) {
+			PreparedStatement pst = conn.prepareStatement(SQL_CREAR, Statement.RETURN_GENERATED_KEYS );) {
 			pst.setString(1, combustible.getNombre());
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
-				// TODO conseguir id generado
-				//combustible.setId( pst.geInt(2) );	
+				ResultSet rs = pst.getGeneratedKeys();
+				if (rs.next()) {
+				    combustible.setId(rs.getInt(1));				    
+					} 
+				
 				 resul = true;			
 			}		
 		}
@@ -94,7 +98,7 @@ public class CombustibleDAO {
 	public Boolean delete(Integer id) throws SQLException {//lanza la excepcion hacia el service
 		boolean resul= false;
 		try (Connection conn = ConnectionManager.getConnection();
-				PreparedStatement pst = conn.prepareCall(SQL_DELETE);) {
+				PreparedStatement pst = conn.prepareStatement(SQL_DELETE);) {
 				pst.setInt(1, id);
 				int affectedRows = pst.executeUpdate();
 				if (affectedRows == 1) {
@@ -107,7 +111,7 @@ public class CombustibleDAO {
 	public Boolean update(Combustible combustible) throws SQLException {//lanza la excepcion hacia el service
 		boolean resul= false;
 		try (Connection conn = ConnectionManager.getConnection();
-				PreparedStatement pst = conn.prepareCall(SQL_UPDATE);) {
+				PreparedStatement pst = conn.prepareStatement(SQL_UPDATE, Statement.RETURN_GENERATED_KEYS );) {
 				
 				pst.setString(1, combustible.getNombre());
 				pst.setInt(2, combustible.getId());

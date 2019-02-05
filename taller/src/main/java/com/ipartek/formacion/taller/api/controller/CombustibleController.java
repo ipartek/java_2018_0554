@@ -114,28 +114,29 @@ public class CombustibleController {
 	
 	
 
+	
 	@ApiResponses({ @ApiResponse(code = 201, message = "Combustible creado"),
 			@ApiResponse(code = 500, message = "Error interno"), 
 			@ApiResponse(code = 409, message = "Conflicto"),
 			@ApiResponse(code = 400, message = "Dato no encontrado") })
 	@RequestMapping(value = { "" }, method = RequestMethod.POST)
-	public ResponseEntity<Mensaje> crear(@RequestBody Combustible combustible) {
+	public ResponseEntity crear(@RequestBody Combustible combustible) {
 
-		ResponseEntity<Mensaje> response = new ResponseEntity<Mensaje>(HttpStatus.BAD_REQUEST);
+		ResponseEntity response = new ResponseEntity(HttpStatus.BAD_REQUEST);
 		boolean resul = false;
 		try {
 			resul = combustibleService.crear(combustible);
 			if (resul == true) {
-				response = new ResponseEntity<Mensaje>(HttpStatus.CREATED);
+				response = new ResponseEntity(combustible, HttpStatus.CREATED);
 			}
 
 		} catch (CombustibleException e) {
 			Mensaje mensaje = new Mensaje(e.getMessage());
-			response = new ResponseEntity<Mensaje>(mensaje, HttpStatus.CONFLICT);
+			response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
 
 		} catch (Exception e) {
 			LOG.debug(e);
-			response = new ResponseEntity<Mensaje>(HttpStatus.INTERNAL_SERVER_ERROR);
+			response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return response;
 	}
@@ -148,24 +149,24 @@ public class CombustibleController {
 		@ApiResponse(code = 409, message = "Conflicto"),
 		@ApiResponse(code = 400, message = "Dato no encontrado") })
 		@RequestMapping(value = { "{id}" }, method = RequestMethod.PUT)
-		public ResponseEntity<Mensaje> modificar(@RequestBody Combustible combustible, @PathVariable int id) {
+		public ResponseEntity modificar(@RequestBody Combustible combustible, @PathVariable int id) {
 		
-			ResponseEntity<Mensaje> response = new ResponseEntity<Mensaje>(HttpStatus.BAD_REQUEST);
+			ResponseEntity response = new ResponseEntity(HttpStatus.BAD_REQUEST);
 			boolean resul = false;
 			try {
 				combustible.setId(id);
 				resul = combustibleService.modificar(combustible);
 				if (resul == true) {
-					response = new ResponseEntity<Mensaje>(HttpStatus.OK);
+					response = new ResponseEntity(combustible,HttpStatus.OK);
 				}
 		
 			} catch (CombustibleException e) {
 				Mensaje mensaje = new Mensaje(e.getMessage());
-				response = new ResponseEntity<Mensaje>(mensaje, HttpStatus.CONFLICT);
+				response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
 		
 			} catch (Exception e) {
 				LOG.debug(e);
-				response = new ResponseEntity<Mensaje>(HttpStatus.INTERNAL_SERVER_ERROR);
+				response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			return response;
 }
