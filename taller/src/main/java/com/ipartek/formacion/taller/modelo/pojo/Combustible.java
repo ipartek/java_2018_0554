@@ -35,6 +35,11 @@ public class Combustible {
 	public void setNombreC(String nombreC) {
 		this.nombreC = nombreC;
 	}
+
+	@Override
+	public String toString() {
+		return "Combustible [id=" + id + ", nombreC=" + nombreC + "]";
+	}
 	
 	
 }
