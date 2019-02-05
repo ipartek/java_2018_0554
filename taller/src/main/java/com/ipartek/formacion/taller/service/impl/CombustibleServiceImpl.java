@@ -53,8 +53,13 @@ public class CombustibleServiceImpl implements CombustibleService {
 
 	@Override
 	public boolean modificar(Combustible combustible) throws CombustibleException {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isModificado = false;
+		try {
+			isModificado = combustibleDAO.update(combustible);
+		}catch ( SQLException e) {			
+			throw new CombustibleException( CombustibleException.EXCEPTION_CONSTRAINT );
+		}			
+		return isModificado;
 	}
 
 }

@@ -27,6 +27,9 @@ import com.ipartek.formacion.taller.modelo.pojo.Combustible;
 import com.ipartek.formacion.taller.service.CombustibleService;
 import com.ipartek.formacion.taller.service.exception.CombustibleException;
 
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/api/combustible/")
 public class CombustibleController {
@@ -114,21 +117,23 @@ public class CombustibleController {
 	
 	//INSERTAR
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ResponseEntity<Combustible> crear(@Valid @RequestBody Combustible combustible) {
-		
+	@ApiResponses({ @ApiResponse(code = 201, message = "Combustible creado"),
+		@ApiResponse(code = 409, message = "Existe combustible") })
+	public ResponseEntity<Combustible> crear(@Valid @RequestBody Combustible combustible) {		
 		
 		ResponseEntity<Combustible> response = new ResponseEntity<Combustible>(HttpStatus.NOT_FOUND);// 404
+		
 		try {
 			Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
 			if (violations.size() > 0) {
 				response = new ResponseEntity<Combustible>(HttpStatus.BAD_REQUEST);
 			} else {
-				boolean c = combustibleDAO.insert(combustible);
+				combustibleDAO.insert(combustible);
 				response = new ResponseEntity<Combustible>(HttpStatus.CREATED); //201
-				LOG.info("Nuevo Coche creado " + c);
+				LOG.info("Nuevo Combustible creado ");
 			}
 		} catch (SQLException e) {
-			LOG.debug("Ya existe este combustible " + combustible.getNombre());
+			LOG.debug("Ya existe este Combustible " + combustible.getNombre());
 			response = new ResponseEntity<Combustible>(HttpStatus.CONFLICT); // 409
 
 		} catch (Exception e) {
@@ -140,5 +145,26 @@ public class CombustibleController {
 
 	}
 	
+	//MODIFICAR
+	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Combustible> modificar(@PathVariable int id, 
+			@RequestBody Combustible combustible){
+		
+		ResponseEntit response = new ResponseEntity(HttpStatus.NOT_FOUND);
+		try {
+			combustible.setId(id);
+			
+			if(combustibleService.modificar(combustible)) {
+				response = new ResponseEntity(HttpStatus.OK);
+			}else {
+				Mensaje mensaje = new Mensaje ("Validacion incorrecta");
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		return null;
+	}
 
 }

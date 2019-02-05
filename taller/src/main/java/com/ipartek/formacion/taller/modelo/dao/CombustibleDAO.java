@@ -75,18 +75,14 @@ public Combustible getById (int id) {
 		boolean isCreate = false;
 		
 		try ( Connection conn = ConnectionManager.getConnection();
-			  PreparedStatement pst = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
+			  PreparedStatement pst = conn.prepareStatement(SQL_INSERT);
 			){
 				pst.setString(1, combustible.getNombre());
 						
-			if ( pst.executeUpdate() == 1 ) {
-				ResultSet rs = pst.getGeneratedKeys();
-				if (rs.next()) {
-				    int id  = rs.getInt(1);
-				    combustible.setId(id);;				    
-				}		
-				isCreate = true;
-			}			
+				if ( pst.executeUpdate() == 1 ) {
+					isCreate = true;
+				}			
+				
 		}	
 		return isCreate;
 	}
@@ -96,6 +92,12 @@ public Combustible getById (int id) {
 		c.setId(rs.getInt("id"));
 		c.setNombre(rs.getString("nombre"));
 		return c;
+	}
+
+
+	public boolean update(Combustible combustible) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
