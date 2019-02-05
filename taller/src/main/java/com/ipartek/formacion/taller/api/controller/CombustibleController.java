@@ -103,7 +103,7 @@ public class CombustibleController {
 			try {
 
 				if ( combustibleService.crear(combustible) ) {
-					response = new ResponseEntity<Mensaje>(HttpStatus.OK);
+					response = new ResponseEntity(combustible,HttpStatus.OK);   // he quitado <Mensaje> para poder meter combustible
 				}
 			} catch (CombustibleException e) {	
 				
