@@ -86,6 +86,48 @@ public class RolDAO {
 	
 	
 	
+	// PARA  METODO CREAR (INSERT)
+		public boolean create(Rol rol) throws SQLException { 	// SI recibe parametro  ( UNA ID para identificar el combustible que queremos CREAR)
+			boolean isCreate = false;
+
+			try ( Connection conn = ConnectionManager.getConnection();
+				  PreparedStatement pst = conn.prepareStatement(SQL_CREATE);){
+				
+			
+				pst.setString(1, rol.getNombre());
+			
+				
+					if ( pst.executeUpdate() == 1 ) { 							// UPDATE porque es INSERT
+						isCreate = true;
+						}		
+			}catch (Exception e) {
+				e.printStackTrace();
+			 	}
+			
+			
+				return isCreate; 												//  devuelve un boleano. Si se ha creado devuelve true.
+			}
+		
+		
+		// PARA METODO MODIFICAR (INSERT)
+		public boolean update(Rol rol) throws SQLException  { 	// SI recibe parametro  ( UNA ID para identificar el Rol que queremos MODIFICAR)
+			boolean resul  = false;
+			try ( Connection conn = ConnectionManager.getConnection();
+				  PreparedStatement pst = conn.prepareStatement(SQL_UPDATE);
+				){
+			
+				pst.setString(1, rol.getNombre());
+				pst.setInt(2, rol.getId());
+				
+				if(  pst.executeUpdate() == 1 ){								// UPDATE porque es UPDATE
+					resul = true;
+				}					
+			}	
+			return resul; 														//  devuelve un boleano. Si se ha modificado devuelve true.
+		}
+		
+	
+	
 	// METODO PARA MAPEO PARAMETROS, PARECIDO A ROWMAPPER
 	private Rol mapeo(ResultSet rs) throws SQLException {
 		Rol r = new Rol();
