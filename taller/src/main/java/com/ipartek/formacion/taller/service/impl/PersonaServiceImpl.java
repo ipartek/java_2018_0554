@@ -16,7 +16,7 @@ public class PersonaServiceImpl implements PersonaService {
 
 	@Autowired
 	PersonaDAO personaDAO;
-	
+
 	@Autowired
 	VehiculoDAO vehiculoDAO;
 
@@ -31,10 +31,19 @@ public class PersonaServiceImpl implements PersonaService {
 
 	@Override
 	public ArrayList<Vehiculo> vehiculos(int idPersona) {
+
 		ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
 		vehiculos.addAll(vehiculoDAO.getAllByIdPropietario(idPersona));
 
 		return vehiculos;
+	}
+
+	@Override
+	public ArrayList<Persona> persona(int idPersona) {
+		ArrayList<Persona> personas = new ArrayList<Persona>();
+		personas.addAll(personaDAO.getById(idPersona).values());
+
+		return personas;
 	}
 
 }

@@ -26,53 +26,73 @@ import io.swagger.annotations.ApiResponses;
 @Api(tags = { "PERSONA" }, produces = "application/json", description = "Gestión de taller")
 public class PersonaController {
 	// LOG
-		private final static Logger LOG = Logger.getLogger(PersonaController.class);
-	
-	/* instancia e implementa patron singleton - inyeccion de dependencias */	
+	private final static Logger LOG = Logger.getLogger(PersonaController.class);
+
+	/* instancia e implementa patron singleton - inyeccion de dependencias */
 	@Autowired
 	PersonaService personaService;
-	
 
-	@ApiResponses({
-		@ApiResponse(code = 200 , message = "Listar ok"),
-		@ApiResponse(code = 500 , message = "Error interno"),
-		@ApiResponse(code = 404 , message = "Datos no encontrados")
-	})
-	@RequestMapping( value= {"/api/persona"}, method = RequestMethod.GET)
-	public ResponseEntity<ArrayList<Persona>> listar(){		
-		ResponseEntity<ArrayList<Persona>> response = new ResponseEntity<ArrayList<Persona>>( HttpStatus.NOT_FOUND );
+	@ApiResponses({ @ApiResponse(code = 200, message = "Listar ok"),
+			@ApiResponse(code = 500, message = "Error interno"),
+			@ApiResponse(code = 404, message = "Dato no encontrado") })
+	@RequestMapping(value = { "/api/persona/{id}" }, method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<Persona>> personaId(@PathVariable int id) {
+		ResponseEntity<ArrayList<Persona>> response = new ResponseEntity<ArrayList<Persona>>(
+				HttpStatus.INTERNAL_SERVER_ERROR);
+		ArrayList<Persona> personas = new ArrayList<Persona>();
+		try {
+			personas = personaService.persona(id);
+			if (personas.size() != 0) {
+				response = new ResponseEntity<ArrayList<Persona>>(personas, HttpStatus.OK);
+			} else {
+				response = new ResponseEntity<ArrayList<Persona>>(HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			LOG.debug(e);
+		}
+		return response;
+	}
+
+	@ApiResponses({ @ApiResponse(code = 200, message = "Listar ok"),
+			@ApiResponse(code = 500, message = "Error interno"),
+			@ApiResponse(code = 404, message = "Datos no encontrados") })
+	@RequestMapping(value = { "/api/persona" }, method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<Persona>> listar() {
+		ResponseEntity<ArrayList<Persona>> response = new ResponseEntity<ArrayList<Persona>>(
+				HttpStatus.INTERNAL_SERVER_ERROR);
 		ArrayList<Persona> personas = new ArrayList<Persona>();
 		try {
 			personas = personaService.listar();
-			response = new ResponseEntity<ArrayList<Persona>>(personas, HttpStatus.OK);
-					
-		}catch (Exception e) {
-					e.printStackTrace();
-					response = new ResponseEntity<ArrayList<Persona>>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}	
-		
+			if (personas.size() != 0) {
+				response = new ResponseEntity<ArrayList<Persona>>(personas, HttpStatus.OK);
+			} else {
+				response = new ResponseEntity<ArrayList<Persona>>(HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			LOG.debug(e);
+		}
 		return response;
-}
+	}
 
-	
-	@ApiResponses({
-		@ApiResponse(code = 200 , message = "Listar ok"),
-		@ApiResponse(code = 500 , message = "Error interno"),
-		@ApiResponse(code = 404 , message = "Datos no encontrados")
-	})
-	@RequestMapping( value= {"/api/persona/{id}/vehiculo"}, method = RequestMethod.GET)
-	public ResponseEntity<ArrayList<Vehiculo>> listarVehiculos( @PathVariable int id ){		
-		
-		ResponseEntity<ArrayList<Vehiculo>> response = new ResponseEntity<ArrayList<Vehiculo>>( HttpStatus.NOT_FOUND );
+	@ApiResponses({ @ApiResponse(code = 200, message = "Listar ok"),
+			@ApiResponse(code = 500, message = "Error interno"),
+			@ApiResponse(code = 404, message = "Datos no encontrados") })
+	@RequestMapping(value = { "/api/persona/{id}/vehiculo" }, method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<Vehiculo>> listarVehiculos(@PathVariable int id) {
+
+		ResponseEntity<ArrayList<Vehiculo>> response = new ResponseEntity<ArrayList<Vehiculo>>(
+				HttpStatus.INTERNAL_SERVER_ERROR);
 		ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
 		try {
 			vehiculos = personaService.vehiculos(id);
-			response = new ResponseEntity<ArrayList<Vehiculo>>(vehiculos, HttpStatus.OK);
-		}catch (Exception e) {
+			if (vehiculos.size() != 0) {
+				response = new ResponseEntity<ArrayList<Vehiculo>>(vehiculos, HttpStatus.OK);
+			} else {
+				response = new ResponseEntity<ArrayList<Vehiculo>>(HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
 			LOG.debug(e);
-			response = new ResponseEntity<ArrayList<Vehiculo>>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}	
-		
+		}
 		return response;
 	}
 
