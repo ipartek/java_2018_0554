@@ -92,8 +92,9 @@ public class CombustibleController {
 	@RequestMapping(value=("/{id}"), method = RequestMethod.PUT)
 	public ResponseEntity<Mensaje> update(@PathVariable int id, @RequestBody Combustible combustible){
 		ResponseEntity<Mensaje> response = new ResponseEntity<Mensaje>(HttpStatus.NOT_FOUND);
-		combustible.setId(id);
+		
 		try {
+			combustible.setId(id);
 			if(combustibleService.modificar(combustible)) {
 				response = new ResponseEntity<Mensaje>(HttpStatus.OK);
 			}
