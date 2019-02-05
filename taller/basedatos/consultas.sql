@@ -7,3 +7,33 @@ SELECT v.id AS 'id_vehiculo', v.numero_bastidor AS 'bastidor', v.matricula AS 'm
 SELECT id, nombre FROM combustible ORDER BY id DESC;
 
 DELETE FROM combustile WHERE id = 6 ;
+
+SELECT 
+	p.id  as 'id_cliente',
+    pe.id as 'id_mecanico',
+    r.id as 'id_reparacion',
+    m.id as 'id_modelo',
+    c.id as 'id_combustible',
+	p.nombre as 'cliente',
+    p.apellidos,
+    v.matricula,
+    m.nombre as 'modelo',
+    c.nombre as 'combustible',
+    r.precio,
+    r.fecha,
+    r.descripcion, 
+    pe.nombre as'mecanico'
+    FROM 
+	persona as p,
+    vehiculo as v,
+    modelo as m,
+    combustible as c,
+    reparaciones as r, 
+    persona as pe
+    WHERE 
+    p.id = v.id_propietario AND 
+    v.id_modelo = m.id AND
+    v.id = r.id_vehiculo AND
+    pe.id = r.id_mecanico AND
+    v.id_combustible = c.id AND
+	p.id = 7;  
