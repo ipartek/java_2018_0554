@@ -1,16 +1,9 @@
 package com.ipartek.formacion.taller.api.controller;
 
-import java.sql.SQLException;
+
 import java.util.ArrayList;
-import java.util.Set;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Valid;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,29 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.ipartek.formacion.taller.api.pojo.Mensaje;
-import com.ipartek.formacion.taller.modelo.dao.CombustibleDAO;
 import com.ipartek.formacion.taller.modelo.pojo.Combustible;
 import com.ipartek.formacion.taller.service.CombustibleService;
 import com.ipartek.formacion.taller.service.exception.CombustibleException;
 
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/api/combustible/")
 public class CombustibleController {
-	private final static Logger LOG = Logger.getLogger(CombustibleController.class);
-	private static CombustibleDAO combustibleDAO;
-
-	private ValidatorFactory factory;
-	private Validator validator;
 	
-	public CombustibleController() {
-		super();
-		
-		factory = Validation.buildDefaultValidatorFactory();
-		validator = factory.getValidator();
-	}
 
 	@Autowired
 	CombustibleService combustibleService;
@@ -117,27 +96,19 @@ public class CombustibleController {
 	
 	//INSERTAR
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	@ApiResponses({ @ApiResponse(code = 201, message = "Combustible creado"),
-		@ApiResponse(code = 409, message = "Existe combustible") })
-	public ResponseEntity<Combustible> crear(@Valid @RequestBody Combustible combustible) {		
+	public ResponseEntity<Combustible> insert(@RequestBody Combustible combustible) {		
 		
 		ResponseEntity<Combustible> response = new ResponseEntity<Combustible>(HttpStatus.NOT_FOUND);// 404
 		
 		try {
-			Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
-			if (violations.size() > 0) {
-				response = new ResponseEntity<Combustible>(HttpStatus.BAD_REQUEST);
-			} else {
-				combustibleDAO.insert(combustible);
-				response = new ResponseEntity<Combustible>(HttpStatus.CREATED); //201
-				LOG.info("Nuevo Combustible creado ");
-			}
-		} catch (SQLException e) {
-			LOG.debug("Ya existe este Combustible " + combustible.getNombre());
+			if (combustibleService.crear(combustible)) {
+				response = new ResponseEntity<Combustible>(combustible, HttpStatus.CREATED);//201
+			} 
+		} catch (CombustibleException e) {
+			
 			response = new ResponseEntity<Combustible>(HttpStatus.CONFLICT); // 409
 
 		} catch (Exception e) {
-			LOG.error(e);
 			response = new ResponseEntity<Combustible>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
@@ -147,24 +118,29 @@ public class CombustibleController {
 	
 	//MODIFICAR
 	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Combustible> modificar(@PathVariable int id, 
-			@RequestBody Combustible combustible){
+	public ResponseEntity modificar( @PathVariable int id , 
+			                         @RequestBody Combustible combustible) {
 		
-		ResponseEntit response = new ResponseEntity(HttpStatus.NOT_FOUND);
+		ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
 		try {
-			combustible.setId(id);
 			
-			if(combustibleService.modificar(combustible)) {
-				response = new ResponseEntity(HttpStatus.OK);
+			combustible.setId(id);		
+			
+			if ( combustibleService.modificar(combustible)) {
+				response = new ResponseEntity(combustible, HttpStatus.OK);
 			}else {
-				Mensaje mensaje = new Mensaje ("Validacion incorrecta");
+				Mensaje mensaje = new Mensaje( "Validacion Incorrecta" );
+				response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
 			}
-		}catch (Exception e) {
-			// TODO: handle exception
+			
+		} catch (CombustibleException e) {				
+			Mensaje mensaje = new Mensaje( e.getMessage() );
+			response = new ResponseEntity( mensaje, HttpStatus.CONFLICT);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
-		
-		return null;
+		return response;
 	}
 
 }

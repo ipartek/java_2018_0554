@@ -18,7 +18,8 @@ public class CombustibleDAO {
 	private static final String SQL_GET_ALL = "SELECT id, nombre FROM combustible ORDER BY id DESC;";
 	private static final String SQL_GET_BY_ID = "SELECT id, nombre FROM combustible WHERE id = ?;";
 	private static final String SQL_DELETE = "DELETE FROM combustible WHERE id = ?;";
-	private static final String SQL_INSERT = "INSERT INTO `taller`.`combustible` (`nombre`) VALUES ('?');";
+	private static final String SQL_INSERT = "INSERT INTO combustible (nombre) VALUES (?);";
+	private static final String SQL_UPDATE = "UPDATE combustible SET nombre=? WHERE id = ?;";
 
 	public ArrayList<Combustible> getAll() {
 		ArrayList<Combustible> lista = new ArrayList<Combustible>();
@@ -70,34 +71,47 @@ public Combustible getById (int id) {
 	}
 	
 	
-	public boolean insert( Combustible combustible ) throws SQLException  {
-		
-		boolean isCreate = false;
-		
-		try ( Connection conn = ConnectionManager.getConnection();
-			  PreparedStatement pst = conn.prepareStatement(SQL_INSERT);
-			){
-				pst.setString(1, combustible.getNombre());
-						
-				if ( pst.executeUpdate() == 1 ) {
-					isCreate = true;
-				}			
-				
-		}	
-		return isCreate;
+	public boolean insert(Combustible combustible) throws SQLException {
+
+		boolean creado = false;
+		try (Connection con = (Connection) ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);) {
+
+			pst.setString(1, combustible.getNombre());
+
+			if (pst.executeUpdate() == 1) {
+				ResultSet idGenerado = pst.getGeneratedKeys();
+				idGenerado.next();
+				combustible.setId((int) idGenerado.getLong(1));
+				creado = true;
+			}
+
+		}
+		return creado;
 	}
 
+	public boolean update(Combustible combustible) throws SQLException  {
+		boolean resul  = false;
+		try ( Connection conn = ConnectionManager.getConnection();
+			  PreparedStatement pst = conn.prepareStatement(SQL_UPDATE);
+			){
+		
+			pst.setString(1, combustible.getNombre());
+			pst.setInt(2, combustible.getId());
+			
+			if( 1 == pst.executeUpdate() ){
+				resul = true;
+			}
+						
+		}	
+		return resul;
+	}
+	
 	private Combustible mapeo(ResultSet rs) throws SQLException {
 		Combustible c = new Combustible();
 		c.setId(rs.getInt("id"));
 		c.setNombre(rs.getString("nombre"));
 		return c;
-	}
-
-
-	public boolean update(Combustible combustible) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }

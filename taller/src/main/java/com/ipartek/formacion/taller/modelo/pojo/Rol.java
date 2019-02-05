@@ -1,9 +1,15 @@
 package com.ipartek.formacion.taller.modelo.pojo;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Rol {
 
 	private int id;
 	
+	@NotEmpty
+	@Size(min = 1, max = 45)
 	private String nombre;
 
 	public Rol() {

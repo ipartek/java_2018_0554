@@ -1,8 +1,15 @@
 package com.ipartek.formacion.taller.modelo.pojo;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Modelo {
 	
 	private int id;
+	
+	@NotEmpty
+	@Size(min = 1, max = 100)
 	private String nombre;
 	 
 	 

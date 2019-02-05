@@ -2,6 +2,10 @@ package com.ipartek.formacion.taller.service.impl;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +19,10 @@ import com.ipartek.formacion.taller.service.exception.CombustibleException;
 public class CombustibleServiceImpl implements CombustibleService {
 
 	@Autowired
-	CombustibleDAO combustibleDAO;
+	private CombustibleDAO combustibleDAO;
+	
+	@Autowired
+	private Validator validator;
 	
 	@Override
 	public List<Combustible> listar() {		
@@ -42,11 +49,14 @@ public class CombustibleServiceImpl implements CombustibleService {
 	@Override
 	public boolean crear(Combustible combustible) throws CombustibleException {
 		boolean isCreate = false;
-		
 		try {
+
 			isCreate = combustibleDAO.insert(combustible);
-		}catch ( SQLException e) {			
-			throw new CombustibleException( CombustibleException.EXCEPTION_CONSTRAINT );
+
+		} catch (SQLException e) {
+			throw new CombustibleException(CombustibleException.EXCEPTION_EXIST);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return isCreate;
 	}
@@ -55,7 +65,15 @@ public class CombustibleServiceImpl implements CombustibleService {
 	public boolean modificar(Combustible combustible) throws CombustibleException {
 		boolean isModificado = false;
 		try {
-			isModificado = combustibleDAO.update(combustible);
+			
+			Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
+			if ( violations.isEmpty() ) {			
+				isModificado = combustibleDAO.update(combustible);
+				
+			}else {
+				throw new CombustibleException( "" );
+			}	
+
 		}catch ( SQLException e) {			
 			throw new CombustibleException( CombustibleException.EXCEPTION_CONSTRAINT );
 		}			
