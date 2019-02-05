@@ -18,13 +18,12 @@ public class CombustibleServiceImpl implements CombustibleService {
 
 	@Override
 	public List<Combustible> listarCombustible() {
-		return  combustibleDAO.getAll();
+		return combustibleDAO.getAll();
 	}
 
 	@Override
 	public Combustible detalle(int idCombustible) {
-		// TODO Auto-generated method stub
-		return null;
+		return combustibleDAO.getById(idCombustible);
 	}
 
 	@Override
