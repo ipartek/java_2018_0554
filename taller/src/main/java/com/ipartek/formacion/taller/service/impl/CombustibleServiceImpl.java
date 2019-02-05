@@ -47,16 +47,21 @@ public class CombustibleServiceImpl implements CombustibleService {
 	
 	@Override
 	public boolean crear(Combustible combustible) throws CombustibleException {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isCreado = false;
+		try {
+			isCreado = combustibleDAO.create(combustible);
+		}catch ( SQLException e) {			
+			throw new CombustibleException( CombustibleException.EXCEPTION_CONSTRAINT );
+		}			
+		return isCreado;
 	}
+
 
 	@Override
 	public boolean modificar(Combustible combustible) throws CombustibleException {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 
 }
 

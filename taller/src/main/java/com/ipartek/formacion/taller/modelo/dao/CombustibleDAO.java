@@ -17,7 +17,7 @@ public class CombustibleDAO {
 	private static final String SQL_GET_ALL = "SELECT id, nombre FROM combustible ORDER BY id DESC;";
 	private static final String SQL_GET_BY_ID = "SELECT id, nombre FROM combustible WHERE id = ?;";
 	private static final String SQL_DELETE = "DELETE FROM taller.combustible WHERE id = ?;";
-
+	private static final String SQL_CREATE = "INSERT INTO taller.combustible (nombre) VALUES (?);";
 
 	// METODO LISTAR (GETALL)
 	public ArrayList<Combustible> getAll() {
@@ -63,6 +63,7 @@ public class CombustibleDAO {
 	
 	public boolean delete( int id ) throws SQLException  {
 		boolean isDelete = false;
+		
 		try ( Connection conn = ConnectionManager.getConnection();
 			  PreparedStatement pst = conn.prepareStatement(SQL_DELETE);
 			){
@@ -76,8 +77,32 @@ public class CombustibleDAO {
 	}
 	
 
+	// metodo crear (insert)
+	public boolean create(Combustible combustible) throws SQLException {
+		boolean isCreate = false;
 
-	// metodo para mapeo parametros
+		try ( Connection conn = ConnectionManager.getConnection();
+			  PreparedStatement pst = conn.prepareStatement(SQL_CREATE);){
+			
+		
+			pst.setString(1, combustible.getNombre());
+		
+			
+				if ( pst.executeUpdate() == 1 ) {
+					isCreate = true;
+					}		
+		}catch (Exception e) {
+			e.printStackTrace();
+		 	}
+		
+		
+			return isCreate; // devuelve un objeto con los datos del bolo que ha encontrado en bbdd
+		}
+	
+	
+	
+
+	// metodo para mapeo parametros  en metodo listar y detalle
 	private Combustible mapeo(ResultSet rs) throws SQLException {
 		Combustible c = new Combustible();
 		c.setId(rs.getInt("id"));
