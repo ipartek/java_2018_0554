@@ -17,6 +17,7 @@ public class CombustibleDAO {
 	private static final String SQL_GET_ALL = "SELECT id, nombre FROM combustible ORDER BY id DESC;";
 	private static final String SQL_GET_BY_ID = "SELECT id, nombre FROM combustible WHERE id = ?;";
 	private static final String SQL_DELETE = "DELETE FROM combustible WHERE id = ?;";
+	private static final String SQL_UPDATE = "UPDATE combustible SET nombre=? WHERE id = ?;";
 	
 
 	public ArrayList<Combustible> getAll() {
@@ -31,6 +32,25 @@ public class CombustibleDAO {
 			e.printStackTrace();
 		}
 		return lista;
+	}
+	
+	public Combustible getById( int id )  {
+		Combustible c = null;
+		try ( Connection conn = ConnectionManager.getConnection();
+			  PreparedStatement pst = conn.prepareStatement(SQL_GET_BY_ID);
+			){
+		
+			pst.setInt(1, id);	
+			try(ResultSet rs = pst.executeQuery()){
+				while (rs.next()) {
+					c = mapeo(rs);
+				}
+			}
+						
+		}catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return c;
 	}
 	
 	
@@ -54,6 +74,23 @@ public class CombustibleDAO {
 		c.setId(rs.getInt("id"));
 		c.setNombre(rs.getString("nombre"));
 		return c;
+	}
+
+	public boolean update(Combustible combustible) throws SQLException  {
+		boolean resul  = false;
+		try ( Connection conn = ConnectionManager.getConnection();
+			  PreparedStatement pst = conn.prepareStatement(SQL_UPDATE);
+			){
+		
+			pst.setString(1, combustible.getNombre());
+			pst.setInt(2, combustible.getId());
+			
+			if( 1 == pst.executeUpdate() ){
+				resul = true;
+			}
+						
+		}	
+		return resul;
 	}
 
 }
