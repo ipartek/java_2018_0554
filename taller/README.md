@@ -9,8 +9,10 @@ http://localhost:8080/taller/api
 ## Recursos
 
 	Persona
-	Vehiculo
-	Reparacion
+	Combustible
+	Vehiculo 
+	Reparacion//TODO
+	
 
 
 ## Base de datos
