@@ -36,7 +36,7 @@ public class PersonaController {
 			@ApiResponse(code = 500, message = "Error interno"),
 			@ApiResponse(code = 404, message = "Dato no encontrado") })
 	@RequestMapping(value = { "/api/persona/{id}" }, method = RequestMethod.GET)
-	public ResponseEntity<ArrayList<Persona>> personaId(@PathVariable int id) {
+	public ResponseEntity<ArrayList<Persona>> personaById(@PathVariable int id) {
 		ResponseEntity<ArrayList<Persona>> response = new ResponseEntity<ArrayList<Persona>>(
 				HttpStatus.INTERNAL_SERVER_ERROR);
 		ArrayList<Persona> personas = new ArrayList<Persona>();
@@ -57,7 +57,7 @@ public class PersonaController {
 			@ApiResponse(code = 500, message = "Error interno"),
 			@ApiResponse(code = 404, message = "Datos no encontrados") })
 	@RequestMapping(value = { "/api/persona" }, method = RequestMethod.GET)
-	public ResponseEntity<ArrayList<Persona>> listar() {
+	public ResponseEntity<ArrayList<Persona>> listarPersona() {
 		ResponseEntity<ArrayList<Persona>> response = new ResponseEntity<ArrayList<Persona>>(
 				HttpStatus.INTERNAL_SERVER_ERROR);
 		ArrayList<Persona> personas = new ArrayList<Persona>();
@@ -78,7 +78,7 @@ public class PersonaController {
 			@ApiResponse(code = 500, message = "Error interno"),
 			@ApiResponse(code = 404, message = "Datos no encontrados") })
 	@RequestMapping(value = { "/api/persona/{id}/vehiculo" }, method = RequestMethod.GET)
-	public ResponseEntity<ArrayList<Vehiculo>> listarVehiculos(@PathVariable int id) {
+	public ResponseEntity<ArrayList<Vehiculo>> listarVehiculosByPersonaId(@PathVariable int id) {
 
 		ResponseEntity<ArrayList<Vehiculo>> response = new ResponseEntity<ArrayList<Vehiculo>>(
 				HttpStatus.INTERNAL_SERVER_ERROR);
