@@ -86,7 +86,8 @@ public class CombustibleController {
 	
 
 	@ApiResponses({ @ApiResponse(code = 200, message = "Eliminado correctamente"),
-			@ApiResponse(code = 500, message = "Error interno"), @ApiResponse(code = 409, message = "Conflicto"),
+			@ApiResponse(code = 500, message = "Error interno"), 
+			@ApiResponse(code = 409, message = "Conflicto"),
 			@ApiResponse(code = 404, message = "Dato no encontrado") })
 	@RequestMapping(value = { "{id}" }, method = RequestMethod.DELETE)
 	public ResponseEntity<Mensaje> eliminar(@PathVariable int id) {
@@ -147,7 +148,8 @@ public class CombustibleController {
 	@ApiResponses({ @ApiResponse(code = 200, message = "Combustible moficado"),
 		@ApiResponse(code = 500, message = "Error interno"), 
 		@ApiResponse(code = 409, message = "Conflicto"),
-		@ApiResponse(code = 400, message = "Dato no encontrado") })
+		@ApiResponse(code = 404, message = "No encontrado"),
+		@ApiResponse(code = 400, message = "Bad request") })
 		@RequestMapping(value = { "{id}" }, method = RequestMethod.PUT)
 		public ResponseEntity modificar(@RequestBody Combustible combustible, @PathVariable int id) {
 		
@@ -158,6 +160,8 @@ public class CombustibleController {
 				resul = combustibleService.modificar(combustible);
 				if (resul == true) {
 					response = new ResponseEntity(combustible,HttpStatus.OK);
+				}else {
+					response = new ResponseEntity(combustible,HttpStatus.NOT_FOUND);
 				}
 		
 			} catch (CombustibleException e) {
