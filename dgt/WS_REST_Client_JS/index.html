@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="js/custom.css">
+
+
+    <title>DGT JA Client</title>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <div class="row">
+            <div class="col-6">
+                <h2>Listado</h2>
+                <ul id="ulVehiculo" class="list-group">
+                    <li class="list-group-item">
+                        <span class="matricula">MATRICULA</span>
+                        <span class="modelo">Cras justo odio</span>
+                        <span class="km"> 10.000 KM</span>
+                        <a href="#">Eliminar</a>
+                    </li>
+
+                </ul>
+            </div>
+
+
+            <div class="col-6">
+                <h2>Formulario</h2>
+                <div class="form-group">
+                    <input id="matricula" type="text" placeholder="BI000KM" class="form-control">
+                    <small class="form-text text-muted mb-3">*minimo 6 maximo 10</small>
+        
+                    <input id="modelo" type="text" placeholder="modelo coche" class="form-control">
+                    <small class="form-text text-muted  mb-3">*obligatorio</small>
+        
+                    <input id="km" type="number" placeholder="Numero Kilometros" class="form-control">
+                    <small class="form-text text-muted mb-3">*obligatorio</small>
+        
+                    <button onclick="crear()" class="btn btn-outline-primary btn-block mt-4">Crear</button>
+                    <button onclick="modificar()" class="btn btn-outline-success btn-block mt-4">Modificar</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <script src="js/ajax.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
