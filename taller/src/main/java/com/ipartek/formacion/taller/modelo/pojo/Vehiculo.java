@@ -1,4 +1,4 @@
-package com.ipartek.formacion.taller.modelo.pojo;
+package com.ipartek.formacion.taller.modelo.pojo; //
 
 public class Vehiculo {
 
