@@ -27,7 +27,9 @@ public class CombustibleDAO {
 		ArrayList<Combustible> lista = new ArrayList<Combustible>();
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_GET_ALL);
-				ResultSet rs = pst.executeQuery()) {
+				
+				
+				ResultSet rs = pst.executeQuery()) {   						// QUERY porque es SELECT
 			
 			while (rs.next()) {
 				lista.add(mapeo(rs));
@@ -76,7 +78,7 @@ public class CombustibleDAO {
 			){
 		
 			pst.setInt(1, id);			
-			if ( pst.executeUpdate() == 1 ) {
+			if ( pst.executeUpdate() == 1 ) {   							// UPDATE porque es DELETE
 				isDelete = true;
 			}			
 		}	
@@ -96,7 +98,7 @@ public class CombustibleDAO {
 			pst.setString(1, combustible.getNombre());
 		
 			
-				if ( pst.executeUpdate() == 1 ) {
+				if ( pst.executeUpdate() == 1 ) { 							// UPDATE porque es INSERT
 					isCreate = true;
 					}		
 		}catch (Exception e) {
@@ -119,7 +121,7 @@ public class CombustibleDAO {
 			pst.setString(1, combustible.getNombre());
 			pst.setInt(2, combustible.getId());
 			
-			if( 1 == pst.executeUpdate() ){
+			if(  pst.executeUpdate() == 1 ){								// UPDATE porque es UPDATE
 				resul = true;
 			}					
 		}	
