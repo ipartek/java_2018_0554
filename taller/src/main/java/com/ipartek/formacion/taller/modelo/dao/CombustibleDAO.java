@@ -18,36 +18,41 @@ public class CombustibleDAO {
 	private static final String SQL_GET_BY_ID = "SELECT id, nombre FROM combustible WHERE id = ?;";
 	private static final String SQL_DELETE = "DELETE FROM taller.combustible WHERE id = ?;";
 	private static final String SQL_CREATE = "INSERT INTO taller.combustible (nombre) VALUES (?);";
+	private static final String SQL_UPDATE = "UPDATE combustible SET nombre=? WHERE id = ?;";
 
-	// METODO LISTAR (GETALL)
-	public ArrayList<Combustible> getAll() {
+	
+	
+	// PARA METODO LISTAR (GETALL)
+	public ArrayList<Combustible> getAll() {								// NO recibe parametro
 		ArrayList<Combustible> lista = new ArrayList<Combustible>();
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_GET_ALL);
 				ResultSet rs = pst.executeQuery()) {
+			
 			while (rs.next()) {
 				lista.add(mapeo(rs));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return lista;
+		return lista; 														// envia listado ArrayList
 	}
 
 	
-	// METODO DETALLE (GETBYID)
-	public Combustible getById(int id) {
+	
+	//  PARA METODO DETALLE (GETBYID)
+	public Combustible getById(int id) {   									// SI recibe parametro  ( UNA ID para identificar el combustible que queremos listar)
 
 		Combustible c = null;
 		String sql = SQL_GET_BY_ID;
 
-		try (Connection conn = ConnectionManager.getConnection(); // Establezco conexion
-				PreparedStatement pst = conn.prepareStatement(sql);) { // creo objeto statement con la consulta
+		try (Connection conn = ConnectionManager.getConnection(); 			// Establezco conexion
+				PreparedStatement pst = conn.prepareStatement(sql);) { 		// creo objeto statement con la consulta
 
 			// parametros de entrada en la consulta
-			pst.setLong(1, id); // incluyo la id que recibe en la consulta
+			pst.setLong(1, id); 											// incluyo la id que recibe en la consulta
 
-			try (ResultSet rs = pst.executeQuery()) { // ejecuto contulta mediante EXECUTECUERY PORQUE es una SELECT
+			try (ResultSet rs = pst.executeQuery()) {						// ejecuto contulta mediante EXECUTECUERY PORQUE es una SELECT
 
 				while (rs.next()) {
 					 c = mapeo(rs);
@@ -57,11 +62,13 @@ public class CombustibleDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return c; // devuelve un objeto con los datos del bolo que ha encontrado en bbdd
+		return c;														 	// devuelve un objeto con los datos del combustible que ha encontrado en bbdd
 	}
 	
 	
-	public boolean delete( int id ) throws SQLException  {
+	
+	// PARA  METODO ELIMINAR (DELETE)
+	public boolean delete( int id ) throws SQLException  { 					 // SI RECIBE PARAMETRO, ID  que indica que combustible borrar
 		boolean isDelete = false;
 		
 		try ( Connection conn = ConnectionManager.getConnection();
@@ -73,12 +80,13 @@ public class CombustibleDAO {
 				isDelete = true;
 			}			
 		}	
-		return isDelete;
+		return isDelete;  													//  devuelve un boleano. Si se ha eliminado devuelve true.
 	}
 	
 
-	// metodo crear (insert)
-	public boolean create(Combustible combustible) throws SQLException {
+	
+	// PARA  METODO CREAR (INSERT)
+	public boolean create(Combustible combustible) throws SQLException { 	// SI recibe parametro  ( UNA ID para identificar el combustible que queremos CREAR)
 		boolean isCreate = false;
 
 		try ( Connection conn = ConnectionManager.getConnection();
@@ -96,13 +104,31 @@ public class CombustibleDAO {
 		 	}
 		
 		
-			return isCreate; // devuelve un objeto con los datos del bolo que ha encontrado en bbdd
+			return isCreate; 												//  devuelve un boleano. Si se ha creado devuelve true.
 		}
 	
 	
 	
+	// PARA METODO MODIFICAR (INSERT)
+	public boolean update(Combustible combustible) throws SQLException  { 	// SI recibe parametro  ( UNA ID para identificar el combustible que queremos MODIFICAR)
+		boolean resul  = false;
+		try ( Connection conn = ConnectionManager.getConnection();
+			  PreparedStatement pst = conn.prepareStatement(SQL_UPDATE);
+			){
+		
+			pst.setString(1, combustible.getNombre());
+			pst.setInt(2, combustible.getId());
+			
+			if( 1 == pst.executeUpdate() ){
+				resul = true;
+			}					
+		}	
+		return resul; 														//  devuelve un boleano. Si se ha modificado devuelve true.
+	}
+	
 
-	// metodo para mapeo parametros  en metodo listar y detalle
+	
+	// METODO PARA MAPEO PARAMETROS, PARECIDO A ROWMAPPER 
 	private Combustible mapeo(ResultSet rs) throws SQLException {
 		Combustible c = new Combustible();
 		c.setId(rs.getInt("id"));
