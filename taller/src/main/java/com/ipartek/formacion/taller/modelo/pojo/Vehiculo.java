@@ -5,20 +5,20 @@ public class Vehiculo {
 	private int id;
 
 	private String matricula;
-	
+
 	private String bastidor;
-	
+
 	private String combustible;
-	
+
 	private String modelo;
 
 	public Vehiculo() {
 		super();
 		this.id = -1;
 		this.matricula = "";
-		this.combustible="";
-		this.modelo="";
-		this.bastidor="";
+		this.combustible = "";
+		this.modelo = "";
+		this.bastidor = "";
 	}
 
 	public String getBastidor() {
