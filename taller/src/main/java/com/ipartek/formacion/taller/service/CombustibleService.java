@@ -24,7 +24,7 @@ public interface CombustibleService {
 	 * Elimina combustible por su identificador
 	 * @param idCombustible int identificador combustible
 	 * @return true si elimina, false si no lo encuentra
-	 * @throws CombustibleException No se puede eliminar si existe un vehiculo con este combustible asociado
+	 * @throws CombustibleException No se puede eliminar si existe un vehiculo con este combustible asociado 
 	 * @see CombustibleException.EXCEPTION_CONSTRAINT
 	 */
 	boolean eliminar(int idCombustible) throws CombustibleException;
@@ -33,8 +33,8 @@ public interface CombustibleService {
 	 *  Crea un nuevo Combustible, al crear con exito actualza el <b>id</b>
 	 * @param combustible Combustible a crear
 	 * @return true si lo crea, false si no puede crear, <b>nombre</b> mínimo una letra y maximo 45
-	 * @throws CombustibleException si el nombre del combustible existe
-	 * @see CombustibleException.EXCEPTION_EXIST
+	 * @throws CombustibleException si el nombre del combustible existe o  errrores de Validacion
+	 * 
 	 */
 	boolean crear(Combustible combustible) throws CombustibleException ;
 	
@@ -42,7 +42,7 @@ public interface CombustibleService {
 	 * Modifica el <b>nombre</b> de un combustible, identificado por su <b>id</b>
 	 * @param combustible combustible a modificar
 	 * @return True si lo modifica, false si no lo encuentra o <b>nombre</b> minimo de una 1 letra y maximo 45
-	 * @throws CombustibleException  EXCEPTION_EXIST: el nombre ya existe
+	 * @throws CombustibleException   o  errrores de Validacion
 	 */
 	boolean modificar(Combustible combustible) throws CombustibleException;
 
