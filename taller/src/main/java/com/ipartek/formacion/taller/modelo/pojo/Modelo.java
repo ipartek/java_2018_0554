@@ -12,13 +12,12 @@ public class Modelo {
 	@Size(min = 1, max = 45)
 	private String nombre;
 	
-	private Combustible combustible;
+
 
 	public Modelo() {
 		super();
 		this.id = -1;
 		this.nombre = "";
-		this.combustible=new Combustible();
 
 	}
 
@@ -26,16 +25,9 @@ public class Modelo {
 		this();
 		setId(id);
 		setNombre(nombre);
-		setCombustible(combustible);
 	}
 
-	public Combustible getCombustible() {
-		return combustible;
-	}
 
-	public void setCombustible(Combustible combustible) {
-		this.combustible = combustible;
-	}
 
 	public Integer getId() {
 		return id;

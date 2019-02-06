@@ -19,11 +19,11 @@ public class ModeloDAO {
 	// LOG
 	private final static Logger LOG = Logger.getLogger(ModeloDAO.class);
 
-	private static final String SQL_GET_ALL = "SELECT id, nombre FROM combustible ORDER BY id DESC;";
-	private static final String SQL_GET_BY_ID = "SELECT id, nombre FROM combustible WHERE id = ? ;";
-	private static final String SQL_CREAR = "INSERT INTO combustible (`nombre`) VALUES (?);";
-	private static final String SQL_DELETE = "DELETE FROM `taller`.`combustible` WHERE (`id` = ? ); ;";
-	private static final String SQL_UPDATE = "UPDATE `taller`.`combustible` SET `nombre` = ? WHERE (`id` = ?);";
+	private static final String SQL_GET_ALL = "SELECT id, nombre FROM modelo ORDER BY id DESC;";
+	private static final String SQL_GET_BY_ID = "SELECT id, nombre FROM modelo WHERE id = ? ;";
+	private static final String SQL_CREAR = "INSERT INTO modelo (`nombre`) VALUES (?);";
+	private static final String SQL_DELETE = "DELETE FROM `taller`.`modelo` WHERE (`id` = ? ); ;";
+	private static final String SQL_UPDATE = "UPDATE `taller`.`modelo` SET `nombre` = ? WHERE (`id` = ?);";
 
 	/**
 	 * 
