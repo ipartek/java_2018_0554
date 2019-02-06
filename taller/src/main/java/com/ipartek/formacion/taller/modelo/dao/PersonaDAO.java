@@ -1,4 +1,4 @@
-package com.ipartek.formacion.taller.modelo.dao;
+package com.ipartek.formacion.taller.modelo.daos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 import org.springframework.stereotype.Repository;
 
-import com.ipartek.formacion.taller.modelo.config.ConnectionManager;
+import com.ipartek.formacion.modelo.cm.ConnectionManager;
 import com.ipartek.formacion.taller.modelo.pojo.Persona;
 import com.ipartek.formacion.taller.modelo.pojo.Rol;
 
