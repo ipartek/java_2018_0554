@@ -13,7 +13,7 @@ import com.ipartek.formacion.taller.modelo.config.ConnectionManager;
 import com.ipartek.formacion.taller.modelo.pojo.Rol;
 
 @Repository
-public class RolDAO {
+public class RolDAO implements IDAO<Rol> {
 
 	private static final String SQL_GET_ALL = "SELECT id, nombre FROM rol ORDER BY id DESC;";
 	private static final String SQL_GET_BY_ID = "SELECT id, nombre FROM rol WHERE id = ?;";
@@ -21,13 +21,14 @@ public class RolDAO {
 	private static final String SQL_INSERT = "INSERT INTO rol (nombre) VALUES (?);";
 	private static final String SQL_UPDATE = "UPDATE rol SET nombre=? WHERE id = ?;";
 
+	@Override
 	public ArrayList<Rol> getAll() {
 		ArrayList<Rol> lista = new ArrayList<Rol>();
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_GET_ALL);
 				ResultSet rs = pst.executeQuery()) {
 			while (rs.next()) {
-				lista.add(mapeo(rs));
+				lista.add(rowMapper(rs));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -35,6 +36,7 @@ public class RolDAO {
 		return lista;
 	}
 
+	@Override
 	public Rol getById(int id) {
 
 		Rol r = null;
@@ -45,7 +47,7 @@ public class RolDAO {
 
 			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
-					r = mapeo(rs);
+					r = rowMapper(rs);
 				}
 			}
 		} catch (Exception e) {
@@ -55,7 +57,7 @@ public class RolDAO {
 		return r;
 	}
 	
-	
+	@Override
 	public boolean delete( int id ) throws SQLException  {
 		boolean isDelete = false;
 		try ( Connection conn = ConnectionManager.getConnection();
@@ -70,6 +72,7 @@ public class RolDAO {
 		return isDelete;
 	}
 	
+	@Override
 	public boolean insert(Rol rol) throws SQLException {
 
 		boolean creado = false;
@@ -89,6 +92,7 @@ public class RolDAO {
 		return creado;
 	}
 	
+	@Override
 	public boolean update(Rol rol) throws SQLException  {
 		boolean resul  = false;
 		try ( Connection conn = ConnectionManager.getConnection();
@@ -106,7 +110,7 @@ public class RolDAO {
 		return resul;
 	}
 
-	private Rol mapeo(ResultSet rs) throws SQLException {
+	private Rol rowMapper(ResultSet rs) throws SQLException {
 
 		Rol r = new Rol();
 		r.setId(rs.getInt("id"));

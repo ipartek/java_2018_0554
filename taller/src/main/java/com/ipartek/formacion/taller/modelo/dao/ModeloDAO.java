@@ -14,7 +14,7 @@ import com.ipartek.formacion.taller.modelo.pojo.Modelo;
 
 
 @Repository
-public class ModeloDAO {
+public class ModeloDAO implements IDAO<Modelo>{
 	
 	private static final String SQL_GET_ALL = "SELECT id, nombre FROM modelo ORDER BY id DESC;";
 	private static final String SQL_GET_BY_ID = "SELECT id, nombre FROM modelo WHERE id = ?;";
@@ -22,13 +22,14 @@ public class ModeloDAO {
 	private static final String SQL_INSERT = "INSERT INTO modelo (nombre) VALUES (?);";
 	private static final String SQL_UPDATE = "UPDATE modelo SET nombre=? WHERE id = ?;";
 	
+	@Override
 	public ArrayList<Modelo> getAll() {
 		ArrayList<Modelo> lista = new ArrayList<Modelo>();
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_GET_ALL);
 				ResultSet rs = pst.executeQuery()) {
 			while (rs.next()) {
-				lista.add(mapeo(rs));
+				lista.add(rowMapper(rs));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,6 +37,7 @@ public class ModeloDAO {
 		return lista;
 	}
 
+	@Override
 	public Modelo getById(int id) {
 
 		Modelo m = null;
@@ -46,7 +48,7 @@ public class ModeloDAO {
 
 			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
-					m = mapeo(rs);
+					m = rowMapper(rs);
 				}
 			}
 		} catch (Exception e) {
@@ -56,7 +58,7 @@ public class ModeloDAO {
 		return m;
 	}
 	
-	
+	@Override
 	public boolean delete( int id ) throws SQLException  {
 		boolean isDelete = false;
 		try ( Connection conn = ConnectionManager.getConnection();
@@ -71,6 +73,7 @@ public class ModeloDAO {
 		return isDelete;
 	}
 	
+	@Override
 	public boolean insert(Modelo modelo) throws SQLException {
 
 		boolean creado = false;
@@ -90,6 +93,7 @@ public class ModeloDAO {
 		return creado;
 	}
 	
+	@Override
 	public boolean update(Modelo modelo) throws SQLException  {
 		boolean resul  = false;
 		try ( Connection conn = ConnectionManager.getConnection();
@@ -107,7 +111,7 @@ public class ModeloDAO {
 		return resul;
 	}
 
-	private Modelo mapeo(ResultSet rs) throws SQLException {
+	private Modelo rowMapper(ResultSet rs) throws SQLException {
 
 		Modelo m = new Modelo();
 		m.setId(rs.getInt("id"));

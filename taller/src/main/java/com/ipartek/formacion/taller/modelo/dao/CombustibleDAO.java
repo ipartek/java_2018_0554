@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 @Repository
-public class CombustibleDAO {
+public class CombustibleDAO implements IDAO<Combustible> {
 
 	private static final String SQL_GET_ALL = "SELECT id, nombre FROM combustible ORDER BY id DESC;";
 	private static final String SQL_GET_BY_ID = "SELECT id, nombre FROM combustible WHERE id = ?;";
@@ -21,56 +21,57 @@ public class CombustibleDAO {
 	private static final String SQL_INSERT = "INSERT INTO combustible (nombre) VALUES (?);";
 	private static final String SQL_UPDATE = "UPDATE combustible SET nombre=? WHERE id = ?;";
 
+	@Override
 	public ArrayList<Combustible> getAll() {
 		ArrayList<Combustible> lista = new ArrayList<Combustible>();
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_GET_ALL);
 				ResultSet rs = pst.executeQuery()) {
 			while (rs.next()) {
-				lista.add(mapeo(rs));
+				lista.add(rowMapper(rs));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return lista;
 	}
-	
-	
-public Combustible getById (int id) {
-		
+
+	@Override
+	public Combustible getById(int id) {
+
 		Combustible c = null;
-		
+
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_GET_BY_ID);) {
 			pst.setLong(1, id);
 
 			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
-					c = mapeo(rs);
+					c = rowMapper(rs);
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return c;
 	}
 	
-	public boolean delete( int id ) throws SQLException  {
+	@Override
+	public boolean delete(int id) throws SQLException {
 		boolean isDelete = false;
-		try ( Connection conn = ConnectionManager.getConnection();
-			  PreparedStatement pst = conn.prepareStatement(SQL_DELETE);
-			){
-		
-			pst.setInt(1, id);			
-			if ( pst.executeUpdate() == 1 ) {
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_DELETE);) {
+
+			pst.setInt(1, id);
+			if (pst.executeUpdate() == 1) {
 				isDelete = true;
-			}			
-		}	
+			}
+		}
 		return isDelete;
 	}
-	
-	
+
+	@Override
 	public boolean insert(Combustible combustible) throws SQLException {
 
 		boolean creado = false;
@@ -90,24 +91,24 @@ public Combustible getById (int id) {
 		return creado;
 	}
 
-	public boolean update(Combustible combustible) throws SQLException  {
-		boolean resul  = false;
-		try ( Connection conn = ConnectionManager.getConnection();
-			  PreparedStatement pst = conn.prepareStatement(SQL_UPDATE);
-			){
-		
+	@Override
+	public boolean update(Combustible combustible) throws SQLException {
+		boolean resul = false;
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_UPDATE);) {
+
 			pst.setString(1, combustible.getNombre());
 			pst.setInt(2, combustible.getId());
-			
-			if( 1 == pst.executeUpdate() ){
+
+			if (1 == pst.executeUpdate()) {
 				resul = true;
 			}
-						
-		}	
+
+		}
 		return resul;
 	}
-	
-	private Combustible mapeo(ResultSet rs) throws SQLException {
+
+	private Combustible rowMapper(ResultSet rs) throws SQLException {
 		Combustible c = new Combustible();
 		c.setId(rs.getInt("id"));
 		c.setNombre(rs.getString("nombre"));

@@ -2,7 +2,9 @@ package com.ipartek.formacion.taller.api.controller;
 
 
 import java.util.ArrayList;
+import java.util.Set;
 
+import javax.validation.ConstraintViolation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -128,14 +130,20 @@ public class CombustibleController {
 			
 			if ( combustibleService.modificar(combustible)) {
 				response = new ResponseEntity(combustible, HttpStatus.OK);
-			}else {
-				Mensaje mensaje = new Mensaje( "Validacion Incorrecta" );
-				response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
 			}
 			
-		} catch (CombustibleException e) {				
+		} catch (CombustibleException e) {		
+			
 			Mensaje mensaje = new Mensaje( e.getMessage() );
-			response = new ResponseEntity( mensaje, HttpStatus.CONFLICT);
+			Set<ConstraintViolation<Combustible>> violations = e.getViolations();
+			
+			if ( violations != null ) {
+				mensaje.addViolations(violations);
+				response = new ResponseEntity( mensaje, HttpStatus.BAD_REQUEST);
+			}else {
+				response = new ResponseEntity( mensaje, HttpStatus.CONFLICT);
+			}	
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
