@@ -58,10 +58,9 @@ public class CombustibleServiceImpl implements CombustibleService {
 			
 			Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
 			if ( violations.isEmpty() ) {			
-				isModificado = combustibleDAO.update(combustible);
-				
+				isModificado = combustibleDAO.update(combustible);				
 			}else {
-				throw new CombustibleException( "" );
+				throw new CombustibleException( CombustibleException.EXCEPTION_VIOLATIONS, violations );
 			}	
 
 		}catch ( SQLException e) {			
