@@ -8,17 +8,17 @@ public class Vehiculo {
 
 	private String matricula;
 
-	private String combustible;
+	//private String combustible;
 
-	private String modelo;
+	//private String modelo;
 
 	public Vehiculo() {
 		super();
 		this.id = -1;
 		this.numero_bastidor = "";
 		this.matricula = "";
-		this.combustible = "";
-		this.modelo = "";
+		//this.combustible = "";
+		//this.modelo = "";
 	}
 
 	public Vehiculo(int id, String numero_bastidor, String matricula, String combustible, String modelo) {
@@ -26,8 +26,8 @@ public class Vehiculo {
 		setId(id);
 		setNumero_bastidor(numero_bastidor);
 		setMatricula(matricula);
-		setCombustible(combustible);
-		setModelo(modelo);
+		//setCombustible(combustible);
+		//setModelo(modelo);
 	}
 
 	public int getId() {
@@ -54,20 +54,20 @@ public class Vehiculo {
 		this.matricula = matricula;
 	}
 
-	public String getCombustible() {
-		return combustible;
-	}
-
-	public void setCombustible(String combustible) {
-		this.combustible = combustible;
-	}
-
-	public String getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
+//	public String getCombustible() {
+//		return combustible;
+//	}
+//
+//	public void setCombustible(String combustible) {
+//		this.combustible = combustible;
+//	}
+//
+//	public String getModelo() {
+//		return modelo;
+//	}
+//
+//	public void setModelo(String modelo) {
+//		this.modelo = modelo;
+//	}
 
 }

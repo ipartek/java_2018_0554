@@ -16,6 +16,8 @@ public class Persona {
 
 	private ArrayList<Rol> roles;
 	
+	private ArrayList<Vehiculo> vehiculos;
+	
 	
 	public Persona() {
 		super();
@@ -25,10 +27,11 @@ public class Persona {
 			this.dni="";
 			this.telefono="";
 			this.roles = new ArrayList<Rol>();
+			this.vehiculos = new ArrayList<Vehiculo>();
 	}
 	
 
-	public Persona(int id, String nombre, String apellidos, String dni, String telefono, ArrayList<Rol> roles) {
+	public Persona(int id, String nombre, String apellidos, String dni, String telefono, ArrayList<Rol> roles, ArrayList<Vehiculo> vehiculos) {
 		this();
 			setId(id);
 			setNombre(nombre);
@@ -36,6 +39,7 @@ public class Persona {
 			setDni(dni);
 			setTelefono(telefono);
 			setRoles(roles);
+			setVehiculos(vehiculos);
 	}
 
 	public int getId() {
@@ -84,6 +88,16 @@ public class Persona {
 
 	public void setRoles(ArrayList<Rol> roles) {
 		this.roles = roles;
+	}
+
+
+	public ArrayList<Vehiculo> getVehiculos() {
+		return vehiculos;
+	}
+
+
+	public void setVehiculos(ArrayList<Vehiculo> vehiculos) {
+		this.vehiculos = vehiculos;
 	}
 
 }
