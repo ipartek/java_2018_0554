@@ -81,10 +81,11 @@ public class CombustibleDAO implements IDAO<Combustible> {
 			pst.setString(1, combustible.getNombre());
 
 			if (pst.executeUpdate() == 1) {
-				ResultSet idGenerado = pst.getGeneratedKeys();
-				idGenerado.next();
-				combustible.setId((int) idGenerado.getLong(1));
+				try(ResultSet rs = pst.getGeneratedKeys()){
+				rs.next();
+				combustible.setId(rs.getInt(1));
 				creado = true;
+				}
 			}
 
 		}

@@ -20,63 +20,66 @@ public class CombustibleServiceImpl implements CombustibleService {
 
 	@Autowired
 	private CombustibleDAO combustibleDAO;
-	
+
 	@Autowired
 	private Validator validator;
-	
+
 	@Override
-	public List<Combustible> listar() {		
+	public List<Combustible> listar() {
 		return combustibleDAO.getAll();
 	}
 
 	@Override
 	public Combustible detalle(int id) {
-		
+
 		return combustibleDAO.getById(id);
 	}
 
 	@Override
-	public boolean eliminar(int idCombustible) throws CombustibleException {		
+	public boolean eliminar(int idCombustible) throws CombustibleException {
 		boolean isDelete = false;
 		try {
 			isDelete = combustibleDAO.delete(idCombustible);
-		}catch ( SQLException e) {			
-			throw new CombustibleException( CombustibleException.EXCEPTION_CONSTRAINT );
-		}			
+		} catch (SQLException e) {
+			throw new CombustibleException(CombustibleException.EXCEPTION_CONSTRAINT);
+		}
 		return isDelete;
 	}
 
 	@Override
 	public boolean crear(Combustible combustible) throws CombustibleException {
-		boolean isCreate = false;
+		boolean isCreado = false;
 		try {
 
-			isCreate = combustibleDAO.insert(combustible);
+			Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
+			if (violations.isEmpty()) {
+				isCreado = combustibleDAO.insert(combustible);
+			} else {
+				throw new CombustibleException(CombustibleException.EXCEPTION_VIOLATIONS, violations);
+			}
 
 		} catch (SQLException e) {
-			throw new CombustibleException(CombustibleException.EXCEPTION_EXIST);
-		} catch (Exception e) {
-			e.printStackTrace();
+			throw new CombustibleException(CombustibleException.EXCEPTION_CONSTRAINT);
 		}
-		return isCreate;
+		return isCreado;
 	}
 
 	@Override
 	public boolean modificar(Combustible combustible) throws CombustibleException {
 		boolean isModificado = false;
 		try {
-			
-			Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
-			if ( violations.isEmpty() ) {			
-				isModificado = combustibleDAO.update(combustible);
-				
-			}else {
-				throw new CombustibleException( CombustibleException.EXCEPTION_VIOLATIONS, violations );
-			}	
 
-		}catch ( SQLException e) {			
-			throw new CombustibleException( CombustibleException.EXCEPTION_CONSTRAINT );
-		}			
+			Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
+			if (violations.isEmpty()) {
+				isModificado = combustibleDAO.update(combustible);
+
+			} else {
+				throw new CombustibleException(CombustibleException.EXCEPTION_VIOLATIONS, violations);
+			}
+
+		} catch (SQLException e) {
+			throw new CombustibleException(CombustibleException.EXCEPTION_CONSTRAINT);
+		}
 		return isModificado;
 	}
 

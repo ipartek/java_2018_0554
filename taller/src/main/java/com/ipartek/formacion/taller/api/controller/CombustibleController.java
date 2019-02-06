@@ -100,15 +100,25 @@ public class CombustibleController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<Combustible> insert(@RequestBody Combustible combustible) {		
 		
-		ResponseEntity<Combustible> response = new ResponseEntity<Combustible>(HttpStatus.NOT_FOUND);// 404
+		ResponseEntity<Combustible> response = new ResponseEntity<Combustible>(HttpStatus.INTERNAL_SERVER_ERROR);// 500
 		
 		try {
 			if (combustibleService.crear(combustible)) {
 				response = new ResponseEntity<Combustible>(combustible, HttpStatus.CREATED);//201
-			} 
+			}else {
+				response = new ResponseEntity<Combustible>(HttpStatus.CONFLICT); // 409
+			}
 		} catch (CombustibleException e) {
 			
-			response = new ResponseEntity<Combustible>(HttpStatus.CONFLICT); // 409
+			Mensaje mensaje = new Mensaje( e.getMessage() );
+			Set<ConstraintViolation<Combustible>> violations = e.getViolations();
+			
+			if ( violations != null ) {
+				mensaje.addViolations(violations);
+				response = new ResponseEntity( mensaje, HttpStatus.BAD_REQUEST);
+			}else {
+				response = new ResponseEntity( mensaje, HttpStatus.CONFLICT);
+			}	
 
 		} catch (Exception e) {
 			response = new ResponseEntity<Combustible>(HttpStatus.INTERNAL_SERVER_ERROR);

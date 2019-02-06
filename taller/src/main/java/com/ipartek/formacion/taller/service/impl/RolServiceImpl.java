@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ipartek.formacion.taller.modelo.dao.RolDAO;
+import com.ipartek.formacion.taller.modelo.pojo.Combustible;
 import com.ipartek.formacion.taller.modelo.pojo.Rol;
 import com.ipartek.formacion.taller.service.RolService;
+import com.ipartek.formacion.taller.service.exception.CombustibleException;
 import com.ipartek.formacion.taller.service.exception.RolException;
 
 
@@ -49,17 +51,20 @@ public class RolServiceImpl implements RolService{
 
 	@Override
 	public boolean crear(Rol rol) throws RolException {
-		boolean isCreate = false;
+		boolean isCreado = false;
 		try {
 
-			isCreate = rolDAO.insert(rol);
+			Set<ConstraintViolation<Rol>> violations = validator.validate(rol);
+			if (violations.isEmpty()) {
+				isCreado = rolDAO.insert(rol);
+			} else {
+				throw new RolException(RolException.EXCEPTION_VIOLATIONS, violations);
+			}
 
 		} catch (SQLException e) {
-			throw new RolException(RolException.EXCEPTION_EXIST);
-		} catch (Exception e) {
-			e.printStackTrace();
+			throw new RolException(RolException.EXCEPTION_CONSTRAINT);
 		}
-		return isCreate;
+		return isCreado;
 	}
 
 	@Override
@@ -72,7 +77,7 @@ public class RolServiceImpl implements RolService{
 				isModificado = rolDAO.update(rol);
 				
 			}else {
-				throw new RolException( "" );
+				throw new RolException(CombustibleException.EXCEPTION_VIOLATIONS, violations );
 			}	
 
 		}catch ( SQLException e) {			

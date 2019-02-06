@@ -1,6 +1,9 @@
 package com.ipartek.formacion.taller.api.controller;
 
 import java.util.ArrayList;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -92,15 +95,25 @@ public class RolController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<Rol> insert(@RequestBody Rol rol) {
 
-		ResponseEntity<Rol> response = new ResponseEntity<Rol>(HttpStatus.NOT_FOUND);// 404
+		ResponseEntity<Rol> response = new ResponseEntity<Rol>(HttpStatus.INTERNAL_SERVER_ERROR);// 500
 
 		try {
 			if (rolService.crear(rol)) {
-				response = new ResponseEntity<Rol>(rol, HttpStatus.CREATED);// 201
+				response = new ResponseEntity<Rol>(rol, HttpStatus.CREATED);//201
+			}else {
+				response = new ResponseEntity<Rol>(HttpStatus.CONFLICT); // 409
 			}
 		} catch (RolException e) {
-
-			response = new ResponseEntity<Rol>(HttpStatus.CONFLICT); // 409
+			
+			Mensaje mensaje = new Mensaje( e.getMessage() );
+			Set<ConstraintViolation<Rol>> violations = e.getViolations();
+			
+			if ( violations != null ) {
+				mensaje.addViolationsRol(violations);
+				response = new ResponseEntity( mensaje, HttpStatus.BAD_REQUEST); //400
+			}else {
+				response = new ResponseEntity( mensaje, HttpStatus.CONFLICT);
+			}	
 
 		} catch (Exception e) {
 			response = new ResponseEntity<Rol>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -115,20 +128,26 @@ public class RolController {
 	public ResponseEntity modificar(@PathVariable int id, @RequestBody Rol rol) {
 
 		ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
-		try {
-
-			rol.setId(id);
-
-			if (rolService.modificar(rol)) {
+try {
+			
+			rol.setId(id);		
+			
+			if ( rolService.modificar(rol)) {
 				response = new ResponseEntity(rol, HttpStatus.OK);
-			} else {
-				Mensaje mensaje = new Mensaje("Validacion Incorrecta");
-				response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
 			}
-
-		} catch (RolException e) {
-			Mensaje mensaje = new Mensaje(e.getMessage());
-			response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
+			
+		} catch (RolException e) {		
+			
+			Mensaje mensaje = new Mensaje( e.getMessage() );
+			Set<ConstraintViolation<Rol>> violations = e.getViolations();
+			
+			if ( violations != null ) {
+				mensaje.addViolationsRol(violations);
+				response = new ResponseEntity( mensaje, HttpStatus.BAD_REQUEST);
+			}else {
+				response = new ResponseEntity( mensaje, HttpStatus.CONFLICT);
+			}	
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);

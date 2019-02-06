@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 
 import com.ipartek.formacion.taller.modelo.pojo.Combustible;
+import com.ipartek.formacion.taller.modelo.pojo.Rol;
 
 public class Mensaje {
 
@@ -31,7 +32,6 @@ public class Mensaje {
 		this.mensaje = mensaje;
 	}
 
-	
 	public ArrayList<ErrorMensaje> getErrores() {
 		return errores;
 	}
@@ -39,16 +39,14 @@ public class Mensaje {
 	public void setErrores(ArrayList<ErrorMensaje> errores) {
 		this.errores = errores;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Mensaje [mensaje=" + mensaje + ", errores=" + errores + "]";
 	}
 
-	
 	/* clase Interna */
 
-	
 	class ErrorMensaje {
 
 		private String campo;
@@ -85,15 +83,25 @@ public class Mensaje {
 	}
 
 	public void addViolations(Set<ConstraintViolation<Combustible>> violations) {
-		
-		if ( violations != null ) {
-			this.errores = new ArrayList<ErrorMensaje>();			
-			for( ConstraintViolation<Combustible> v : violations ) {			
-				ErrorMensaje errorMensaje = new ErrorMensaje( v.getPropertyPath().toString() , v.getMessage() );
-				this.errores.add(errorMensaje);				
-			}				
-		}		
+
+		if (violations != null) {
+			this.errores = new ArrayList<ErrorMensaje>();
+			for (ConstraintViolation<Combustible> v : violations) {
+				ErrorMensaje errorMensaje = new ErrorMensaje(v.getPropertyPath().toString(), v.getMessage());
+				this.errores.add(errorMensaje);
+			}
+		}
 	}
 
+	public void addViolationsRol(Set<ConstraintViolation<Rol>> violations) {
+
+		if (violations != null) {
+			this.errores = new ArrayList<ErrorMensaje>();
+			for (ConstraintViolation<Rol> v : violations) {
+				ErrorMensaje errorMensaje = new ErrorMensaje(v.getPropertyPath().toString(), v.getMessage());
+				this.errores.add(errorMensaje);
+			}
+		}
+	}
 
 }
