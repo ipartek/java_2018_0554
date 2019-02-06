@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ipartek.formacion.taller.api.pojo.Mensaje;
 import com.ipartek.formacion.taller.modelo.pojo.Combustible;
 import com.ipartek.formacion.taller.service.CombustibleService;
-import com.ipartek.formacion.taller.service.exception.CombustibleException;
+import com.ipartek.formacion.taller.service.exception.PojoException;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
@@ -88,7 +88,7 @@ public class CombustibleController {
 				response = new ResponseEntity<Mensaje>(HttpStatus.OK);
 			}
 
-		} catch (CombustibleException e) {
+		} catch (PojoException e) {
 			Mensaje mensaje = new Mensaje(e.getMessage());
 			response = new ResponseEntity<Mensaje>(mensaje, HttpStatus.CONFLICT);
 
@@ -113,7 +113,7 @@ public class CombustibleController {
 				response = new ResponseEntity(combustible, HttpStatus.CREATED);
 			}
 
-		} catch (CombustibleException e) {
+		} catch (PojoException e) {
 			Mensaje mensaje = new Mensaje(e.getMessage());
 			response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
 
@@ -139,7 +139,7 @@ public class CombustibleController {
 				response = new ResponseEntity(combustible, HttpStatus.OK);
 			}
 
-		} catch (CombustibleException e) {
+		} catch (PojoException e) {
 			Mensaje mensaje = new Mensaje(e.getMessage());
 			response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
 

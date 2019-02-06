@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ipartek.formacion.taller.modelo.config.ConnectionManager;
 import com.ipartek.formacion.taller.modelo.pojo.Combustible;
-import com.ipartek.formacion.taller.service.exception.CombustibleException;
+import com.ipartek.formacion.taller.service.exception.PojoException;
 
 @Repository
 public class CombustibleDAO {

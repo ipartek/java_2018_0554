@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.ipartek.formacion.taller.modelo.pojo.Modelo;
-import com.ipartek.formacion.taller.service.exception.CombustibleException;
+import com.ipartek.formacion.taller.service.exception.PojoException;
 
 public interface ModeloService {
 
@@ -32,7 +32,7 @@ public interface ModeloService {
 	 *                              este Modelo asociado
 	 * @see ModeloException.EXCEPTION_CONSTRAINT
 	 */
-	Boolean eliminar(int idModelo) throws CombustibleException;
+	Boolean eliminar(int idModelo) throws PojoException;
 
 	/**
 	 * Crear un Modelo
@@ -43,7 +43,7 @@ public interface ModeloService {
 	 * @throws SQLException
 	 * @see ModeloException.EXCEPTION_EXIST
 	 */
-	Boolean crear(Modelo modelo) throws CombustibleException;
+	Boolean crear(Modelo modelo) throws PojoException;
 
 	/**
 	 * Modifica el nombre de un Modelo identificado por su id
@@ -54,6 +54,6 @@ public interface ModeloService {
 	 * @throws ModeloException si el nombre del Modelo ya existe
 	 * @see ModeloException.EXCEPTION_EXIST
 	 */
-	Boolean modificar(Modelo modelo) throws CombustibleException;
+	Boolean modificar(Modelo modelo) throws PojoException;
 
 }

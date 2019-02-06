@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.ipartek.formacion.taller.modelo.pojo.Combustible;
-import com.ipartek.formacion.taller.service.exception.CombustibleException;
+import com.ipartek.formacion.taller.service.exception.PojoException;
 
 public interface CombustibleService {
 
@@ -28,22 +28,22 @@ public interface CombustibleService {
 	 * 
 	 * @param idCombustible identifacodr del combustible
 	 * @return true si elimina , false si no lo encuentra
-	 * @throws CombustibleException No se puede eliminar si existe un vehiculo con
+	 * @throws PojoException No se puede eliminar si existe un vehiculo con
 	 *                              este combustible asociado
-	 * @see CombustibleException.EXCEPTION_CONSTRAINT
+	 * @see PojoException.EXCEPTION_CONSTRAINT
 	 */
-	Boolean eliminar(int idCombustible) throws CombustibleException;
+	Boolean eliminar(int idCombustible) throws PojoException;
 
 	/**
 	 * Crear un combustible
 	 * 
 	 * @param combustible Combustible a crear
 	 * @return true si crea , false si no puede crear, minimo 1 maximo 45
-	 * @throws CombustibleException si el nombre del combustible ya existe
+	 * @throws PojoException si el nombre del combustible ya existe
 	 * @throws SQLException 
-	 * @see CombustibleException.EXCEPTION_EXIST
+	 * @see PojoException.EXCEPTION_EXIST
 	 */
-	Boolean crear(Combustible combustible) throws CombustibleException;
+	Boolean crear(Combustible combustible) throws PojoException;
 
 	/**
 	 * Modifica el nombre de un combustible identificado por su id
@@ -51,9 +51,9 @@ public interface CombustibleService {
 	 * @param combustible Combustible a modificar
 	 * @return true si modifica, false si no puede modificar, minimo 1 maximo 45
 	 *         caracteres
-	 * @throws CombustibleException si el nombre del combustible ya existe
-	 * @see CombustibleException.EXCEPTION_EXIST
+	 * @throws PojoException si el nombre del combustible ya existe
+	 * @see PojoException.EXCEPTION_EXIST
 	 */
-	Boolean modificar(Combustible combustible) throws CombustibleException;
+	Boolean modificar(Combustible combustible) throws PojoException;
 
 }

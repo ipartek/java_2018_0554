@@ -17,7 +17,7 @@ import com.ipartek.formacion.taller.api.pojo.Mensaje;
 import com.ipartek.formacion.taller.modelo.pojo.Combustible;
 import com.ipartek.formacion.taller.modelo.pojo.Modelo;
 import com.ipartek.formacion.taller.service.ModeloService;
-import com.ipartek.formacion.taller.service.exception.CombustibleException;
+import com.ipartek.formacion.taller.service.exception.PojoException;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
@@ -89,7 +89,7 @@ public class ModeloController {
 				response = new ResponseEntity<Mensaje>(HttpStatus.OK);
 			}
 
-		} catch (CombustibleException e) {
+		} catch (PojoException e) {
 			Mensaje mensaje = new Mensaje(e.getMessage());
 			response = new ResponseEntity<Mensaje>(mensaje, HttpStatus.CONFLICT);
 
@@ -114,7 +114,7 @@ public class ModeloController {
 				response = new ResponseEntity(modelo, HttpStatus.CREATED);
 			}
 
-		} catch (CombustibleException e) {
+		} catch (PojoException e) {
 			Mensaje mensaje = new Mensaje(e.getMessage());
 			response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
 
@@ -140,7 +140,7 @@ public class ModeloController {
 				response = new ResponseEntity(modelo, HttpStatus.OK);
 			}
 
-		} catch (CombustibleException e) {
+		} catch (PojoException e) {
 			Mensaje mensaje = new Mensaje(e.getMessage());
 			response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
 

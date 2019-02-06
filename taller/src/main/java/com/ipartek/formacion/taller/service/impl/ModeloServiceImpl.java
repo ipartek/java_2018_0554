@@ -15,7 +15,7 @@ import com.ipartek.formacion.taller.modelo.dao.ModeloDAO;
 import com.ipartek.formacion.taller.modelo.pojo.Combustible;
 import com.ipartek.formacion.taller.modelo.pojo.Modelo;
 import com.ipartek.formacion.taller.service.ModeloService;
-import com.ipartek.formacion.taller.service.exception.CombustibleException;
+import com.ipartek.formacion.taller.service.exception.PojoException;
 
 @Service
 public class ModeloServiceImpl implements ModeloService {
@@ -38,57 +38,57 @@ public class ModeloServiceImpl implements ModeloService {
 	}
 
 	@Override
-	public Boolean eliminar(int idModelo) throws CombustibleException {
+	public Boolean eliminar(int idModelo) throws PojoException {
 		boolean resul = false;
 		try {
 			resul = modeloDAO.delete(idModelo);
 		} catch (SQLException e) {
 			LOG.debug(e);
-			LOG.debug(CombustibleException.EXCEPTION_CONSTRAINT);
-			throw new CombustibleException(CombustibleException.EXCEPTION_CONSTRAINT);
+			LOG.debug(PojoException.EXCEPTION_CONSTRAINT);
+			throw new PojoException(PojoException.EXCEPTION_CONSTRAINT);
 		}
 		return resul;
 	}
 
 	@Override
-	public Boolean crear(Modelo modelo) throws CombustibleException {
+	public Boolean crear(Modelo modelo) throws PojoException {
 		boolean resul = false;
 		Set<ConstraintViolation<Modelo>> violations = validator.validate(modelo);
 		if (violations.size() > 0) {
 			for (ConstraintViolation<Modelo> violation : violations) {
 				// Mensaje general, se podria sacar cada mensaje de error de los atributos de
 				// Combustible validados
-				throw new CombustibleException("Validaciones incorrectas");
+				throw new PojoException("Validaciones incorrectas");
 			}
 		} else {
 			try {
 				resul = modeloDAO.insert(modelo);
 			} catch (SQLException e) {
 				LOG.debug(e);
-				LOG.debug(CombustibleException.EXCEPTION_EXIST);
-				throw new CombustibleException(CombustibleException.EXCEPTION_EXIST);
+				LOG.debug(PojoException.EXCEPTION_EXIST);
+				throw new PojoException(PojoException.EXCEPTION_EXIST);
 			}
 		}
 		return resul;
 	}
 
 	@Override
-	public Boolean modificar(Modelo modelo) throws CombustibleException {
+	public Boolean modificar(Modelo modelo) throws PojoException {
 		boolean resul = false;
 		Set<ConstraintViolation<Modelo>> violations = validator.validate(modelo);
 		if (violations.size() > 0) {
 			for (ConstraintViolation<Modelo> violation : violations) {
 				// Mensaje general, se podria sacar cada mensaje de error de los atributos de
 				// Combustible validados
-				throw new CombustibleException("Validaciones incorrectas");
+				throw new PojoException("Validaciones incorrectas");
 			}
 		} else {
 			try {
 				resul = modeloDAO.update(modelo);
 			} catch (SQLException e) {
 				LOG.debug(e);
-				LOG.debug(CombustibleException.EXCEPTION_EXIST);
-				throw new CombustibleException(CombustibleException.EXCEPTION_EXIST);
+				LOG.debug(PojoException.EXCEPTION_EXIST);
+				throw new PojoException(PojoException.EXCEPTION_EXIST);
 			}
 		}
 		return resul;
