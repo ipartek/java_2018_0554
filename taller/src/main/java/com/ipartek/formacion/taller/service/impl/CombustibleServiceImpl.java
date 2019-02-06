@@ -50,10 +50,24 @@ public class CombustibleServiceImpl implements CombustibleService {
 	}
 
 	@Override
-	public boolean crear(int id) throws CombustibleException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean crear(Combustible combustible) throws CombustibleException {
+		boolean isCreado = false;
+		try {
+
+			Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
+			if (violations.isEmpty()) {
+				isCreado = combustibleDAO.insert(combustible);
+
+			} else {
+				throw new CombustibleException("");
+			}
+
+		} catch (SQLException e) {
+			throw new CombustibleException(CombustibleException.EXCEPTION_CONSTRAINT);
+		}
+		return isCreado;
 	}
+	
 
 	@Override
 	public boolean modificar(Combustible combustible) throws CombustibleException {

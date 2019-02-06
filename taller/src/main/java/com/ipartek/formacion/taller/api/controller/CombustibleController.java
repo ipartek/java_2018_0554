@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ipartek.formacion.taller.api.pojos.Mensaje;
@@ -145,7 +146,44 @@ public class CombustibleController {
 		}
 		return response;
 	}
+	
+	
+	
+	@RequestMapping(value = "{id}", method = RequestMethod.POST)
+	public ResponseEntity crear(@RequestBody Combustible combustible) {
+
+		ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
+		try {
+
+		
+
+			if (combustibleService.crear(combustible)) {
+				response = new ResponseEntity(combustible, HttpStatus.CREATED);
+			}else {
+				response = new ResponseEntity(HttpStatus.CONFLICT);
+			}
+
+		} catch (CombustibleException e) {
+
+			Mensaje mensaje = new Mensaje(e.getMessage());
+			Set<ConstraintViolation<Combustible>> violations = e.getViolations();
+
+			if (violations != null) {
+				mensaje.addViolations(violations);
+				response = new ResponseEntity(mensaje, HttpStatus.BAD_REQUEST);
+			} else {
+				response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
+			}
+//---------------------------
+		} catch (Exception e) {
+			e.printStackTrace();
+			response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return response;
+	}
+	
 }
+
 
 //} else {
 //	Mensaje mensaje = new Mensaje("Validacion Incorrecta");

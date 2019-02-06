@@ -12,30 +12,28 @@ public class CombustibleException extends Exception {
 
 	public static final String EXCEPTION_CONSTRAINT = "No se puede eliminar si existe un vehiculo que tenga esas propiedades";
 
-	//NUEVO!
+	// NUEVO!
 	public static final String EXCEPTION_VIOLATIONS = "No cumple las condiciones de Validación";
-	
+
 	private Set<ConstraintViolation<Combustible>> violations;
-	
-	
+
 	public CombustibleException(String message) {
 		super(); // con herencias no hace falta escribir lo de abajo
-		
+
 		// new Exception(message);
-		
+
 		this.violations = null;
 	}
-
 
 	public CombustibleException(String message, Set<ConstraintViolation<Combustible>> violations) {
 		this(message);
 		this.setViolations(violations);
-		
+
 	}
+
 	public Set<ConstraintViolation<Combustible>> getViolations() {
 		return violations;
 	}
-
 
 	public void setViolations(Set<ConstraintViolation<Combustible>> violations) {
 		this.violations = violations;

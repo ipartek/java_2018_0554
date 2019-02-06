@@ -44,7 +44,7 @@ public class Mensaje {
 		return "Mensaje [mensaje=" + mensaje + ", errores=" + errores + "]";
 	}
 
-	// clase Interna 
+	// clase Interna
 
 	class ErrorMensaje {
 

@@ -46,12 +46,13 @@ public interface CombustibleService {
 	 * 
 	 * @return true si lo crea, false si no lo puede crear, <b>nombre</b> minimo y
 	 *         letra maximo 45
-	 * @throws CombustibleException - si ya existe
+	 * @throws CombustibleException - si ya existe o hay errores de validacion
 	 * @see CombustibleException.EXCEPTION_EXIST
 	 */
 
-	boolean crear(int idCombustible) throws CombustibleException; // En caso de fallar, habilitar el de abajo
-//	boolean crear(Combustible combustible) throws CombustibleException; 
+
+	boolean modificar(Combustible combustible) throws CombustibleException; // En caso de fallar, habilitar el de abajo
+
 
 	/**
 	 * Modifica el nombre de un combustible identificado por su id
@@ -70,6 +71,7 @@ public interface CombustibleService {
 	 * @see CombustibleException.EXCEPTION_EXIST
 	 */
 
-	boolean modificar(Combustible combustible) throws CombustibleException;
+
+	boolean crear(Combustible combustible) throws CombustibleException;
 
 }
