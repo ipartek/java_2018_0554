@@ -20,13 +20,14 @@ public class CombustibleDAO implements IDAO<Combustible> {
 	private static final String SQL_UPDATE = "UPDATE combustible SET nombre=? WHERE id = ?;";
 	
 
+	@Override
 	public ArrayList<Combustible> getAll() {
 		ArrayList<Combustible> lista = new ArrayList<Combustible>();
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_GET_ALL);
 				ResultSet rs = pst.executeQuery()) {
 			while (rs.next()) {
-				lista.add(mapeo(rs));
+				lista.add(rowMapper(rs));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,7 +45,7 @@ public class CombustibleDAO implements IDAO<Combustible> {
 			pst.setInt(1, id);	
 			try(ResultSet rs = pst.executeQuery()){
 				while (rs.next()) {
-					c = mapeo(rs);
+					c = rowMapper(rs);
 				}
 			}
 						
@@ -54,7 +55,7 @@ public class CombustibleDAO implements IDAO<Combustible> {
 		return c;
 	}
 	
-	
+	@Override
 	public boolean delete( int id ) throws SQLException  {
 		boolean isDelete = false;
 		try ( Connection conn = ConnectionManager.getConnection();
@@ -70,13 +71,9 @@ public class CombustibleDAO implements IDAO<Combustible> {
 	}
 	
 
-	private Combustible mapeo(ResultSet rs) throws SQLException {
-		Combustible c = new Combustible();
-		c.setId(rs.getInt("id"));
-		c.setNombre(rs.getString("nombre"));
-		return c;
-	}
+	
 
+	@Override
 	public boolean update(Combustible combustible) throws SQLException  {
 		boolean resul  = false;
 		try ( Connection conn = ConnectionManager.getConnection();
@@ -92,6 +89,19 @@ public class CombustibleDAO implements IDAO<Combustible> {
 						
 		}	
 		return resul;
+	}
+
+	@Override
+	public boolean insert(Combustible pojo) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	private Combustible rowMapper (ResultSet rs) throws SQLException {
+		Combustible c = new Combustible();
+		c.setId(rs.getInt("id"));
+		c.setNombre(rs.getString("nombre"));
+		return c;
 	}
 
 
