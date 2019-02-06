@@ -14,41 +14,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ipartek.formacion.taller.modelo.pojo.Combustible;
 import com.ipartek.formacion.taller.modelo.pojo.Mensaje;
-import com.ipartek.formacion.taller.service.CombustibleService;
-import com.ipartek.formacion.taller.service.exception.CombustibleException;
+import com.ipartek.formacion.taller.modelo.pojo.Modelo;
+import com.ipartek.formacion.taller.service.ModeloService;
+import com.ipartek.formacion.taller.service.exception.ModeloException;
 
 @RestController
-@RequestMapping("/api/combustible/")
-public class CombustibleController {
+@RequestMapping("/api/modelo/")
+public class ModeloController {
 
-	@Autowired
-	CombustibleService combustibleService;
+	@Autowired		
+	ModeloService modeloService;
 
 	// LISTAR (GET BY ALL)
 	@RequestMapping(value = "", method = RequestMethod.GET) // sin parametro , metodo get
-	public ResponseEntity<ArrayList<Combustible>> listar() { // metodo listar
+	public ResponseEntity<ArrayList<Modelo>> listar() { // metodo listar
 
-		ResponseEntity<ArrayList<Combustible>> response = new ResponseEntity<ArrayList<Combustible>>(
-				HttpStatus.NOT_FOUND); // 404 por defecto devuelve not_Found
+		ResponseEntity<ArrayList<Modelo>> response = new ResponseEntity<ArrayList<Modelo>>(HttpStatus.NOT_FOUND); // 404
+																													// por
+																													// defecto
+																													// devuelve
+																													// not_Found
 		try {
-			ArrayList<Combustible> combustibles = (ArrayList<Combustible>) combustibleService.listar(); // llamada al
-																										// servicio
-																										// listar para
-																										// que llame al
-																										// DAO
+			ArrayList<Modelo> modelos = (ArrayList<Modelo>) modeloService.listar(); // llamada al
+																					// servicio
+																					// listar para
+																					// que llame al
+																					// DAO
 
-			if (!combustibles.isEmpty()) { // si el array no esta vacio
-				response = new ResponseEntity<ArrayList<Combustible>>(combustibles, HttpStatus.OK); // envio array y
-																									// codigo estado 200
+			if (!modelos.isEmpty()) { // si el array no esta vacio
+				response = new ResponseEntity<ArrayList<Modelo>>(modelos, HttpStatus.OK); // envio array y
+																							// codigo estado 200
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace(); // TODO meter en LOG
-			response = new ResponseEntity<ArrayList<Combustible>>(HttpStatus.INTERNAL_SERVER_ERROR); // si el array esta
-																										// vacio, codigo
-																										// 500
+			response = new ResponseEntity<ArrayList<Modelo>>(HttpStatus.INTERNAL_SERVER_ERROR); // si el array esta
+																								// vacio, codigo
+																								// 500
 		}
 
 		return response;
@@ -56,24 +59,24 @@ public class CombustibleController {
 
 	// LISTAR POR DETALLE POR ID (GETBYID)
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	public ResponseEntity<Combustible> detalle(@PathVariable int id) { // @PathVariable para enviar parametro
+	public ResponseEntity<Modelo> detalle(@PathVariable int id) { // @PathVariable para enviar parametro
 
-		ResponseEntity<Combustible> response = new ResponseEntity<Combustible>(HttpStatus.NOT_FOUND); // por defecto
-																										// devuelve
-																										// not_Found
+		ResponseEntity<Modelo> response = new ResponseEntity<Modelo>(HttpStatus.NOT_FOUND); // por defecto
+																							// devuelve
+																							// not_Found
 
 		try {
-			Combustible combustible = (Combustible) combustibleService.detalle(id); // lamada a servicio para que llame
-																					// al DAO
-			if (combustible == null) {
-				response = new ResponseEntity<Combustible>(combustible, HttpStatus.NOT_FOUND);
+			Modelo modelo = (Modelo) modeloService.detalle(id); // lamada a servicio para que llame
+																// al DAO
+			if (modelo == null) {
+				response = new ResponseEntity<Modelo>(modelo, HttpStatus.NOT_FOUND);
 			} else {
-				response = new ResponseEntity<Combustible>(combustible, HttpStatus.OK);
+				response = new ResponseEntity<Modelo>(modelo, HttpStatus.OK);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace(); // TODO meter en LOG
-			response = new ResponseEntity<Combustible>(HttpStatus.INTERNAL_SERVER_ERROR);
+			response = new ResponseEntity<Modelo>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		return response;
@@ -87,10 +90,10 @@ public class CombustibleController {
 
 		try {
 
-			if (combustibleService.eliminar(id)) {
+			if (modeloService.eliminar(id)) {
 				response = new ResponseEntity<Mensaje>(HttpStatus.OK);
 			}
-		} catch (CombustibleException e) { // si falla la consulta
+		} catch (ModeloException e) { // si falla la consulta
 
 			Mensaje mensaje = new Mensaje(e.getMessage());
 			response = new ResponseEntity<Mensaje>(mensaje, HttpStatus.CONFLICT);
@@ -105,25 +108,25 @@ public class CombustibleController {
 
 	// METODO CREAR (INSERT)
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ResponseEntity<Mensaje> crear(@RequestBody Combustible combustible) {
+	public ResponseEntity<Mensaje> crear(@RequestBody Modelo modelo) {
 
 		ResponseEntity<Mensaje> response = new ResponseEntity<Mensaje>(HttpStatus.INTERNAL_SERVER_ERROR);
 
 		try {
 
-			if (combustibleService.crear(combustible)) {
-				response = new ResponseEntity(combustible, HttpStatus.CREATED); // he quitado <Mensaje> para poder meter
-																			// combustible
+			if (modeloService.crear(modelo)) {
+				response = new ResponseEntity(modelo, HttpStatus.CREATED); // he quitado <Mensaje> para poder meter
+																			// Modelo
 			} else {
 				response = new ResponseEntity(HttpStatus.CONFLICT);
 			}
-		} catch (CombustibleException e) {
+		} catch (ModeloException e) {
 
 			Mensaje mensaje = new Mensaje(e.getMessage());
-			Set<ConstraintViolation<Combustible>> violations = e.getViolations();
+			Set<ConstraintViolation<Modelo>> violations = e.getViolations();
 
 			if (violations != null) {
-				mensaje.addViolationsC(e.getViolations());
+				mensaje.addViolationsM(e.getViolations());
 				response = new ResponseEntity(mensaje, HttpStatus.BAD_REQUEST);
 			} else {
 				response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
@@ -136,37 +139,35 @@ public class CombustibleController {
 		return response;
 
 	}
-	
-	
-	
+
 	// METODO MODIFICAR (UPDATE) // QUE LANZA SUS PROPIAS EXCEPCIONES
 	// PERSONALIZADAS. CODIGO MAS FINO Y ELEGANTE
 	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
 	public ResponseEntity modificar(@PathVariable int id, // PIDO LA ID POR PARMETRO // LOS WARNINS SON POR QUITAR
 															// MENSAJE (public ResponseEntity<Mensaje>)
-			@RequestBody Combustible combustible) { // PIDO COMBUSTIBLE POR BODY // QUITO <Mensaje> PARA PODER INCLUIR
-													// @PathVariable Y @RequestBody A LA VEZ
+			@RequestBody Modelo modelo) { // PIDO Modelo POR BODY // QUITO <Mensaje> PARA PODER INCLUIR
+											// @PathVariable Y @RequestBody A LA VEZ
 
 		ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
 
 		try {
 
-			combustible.setId(id); // A COMUBUSTIBLE LE PONGO LA ID QUE RECIBO POR PARAMETRO CON @PachVariable in
-									// id
+			modelo.setId(id); // A COMUBUSTIBLE LE PONGO LA ID QUE RECIBO POR PARAMETRO CON @PachVariable in
+								// id
 
-			if (combustibleService.modificar(combustible)) { // llamo al servicio para llamar al dao
-				response = new ResponseEntity(combustible, HttpStatus.OK); // guardo en response el objeto con los datos
-																			// y el codigo de estado 200
+			if (modeloService.modificar(modelo)) { // llamo al servicio para llamar al dao
+				response = new ResponseEntity(modelo, HttpStatus.OK); // guardo en response el objeto con los datos
+																		// y el codigo de estado 200
 			}
 
-		} catch (CombustibleException e) {
+		} catch (ModeloException e) {
 
 			Mensaje mensaje = new Mensaje(e.getMessage()); // inizializo mensaje y le incluyo las esxepciones de
-															// combustible Exception
-			Set<ConstraintViolation<Combustible>> violations = e.getViolations();
+															// Modelo Exception
+			Set<ConstraintViolation<Modelo>> violations = e.getViolations();
 
 			if (violations != null) {
-				mensaje.addViolationsC(violations);
+				mensaje.addViolationsM(violations);
 				response = new ResponseEntity(mensaje, HttpStatus.BAD_REQUEST);
 			} else {
 				response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
@@ -179,4 +180,4 @@ public class CombustibleController {
 		return response;
 	}
 
-}// FIN COMBUSTIBLE CONTROLLER
+}// FIN Modelo CONTROLLER

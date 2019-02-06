@@ -81,7 +81,18 @@ public class Mensaje {
 
 	}
 
-	public void addViolations(Set<ConstraintViolation<Combustible>> violations) {
+	public void addViolationsM(Set<ConstraintViolation<Modelo>> violations) {
+		
+		if ( violations != null ) {
+			this.errores = new ArrayList<ErrorMensaje>();			
+			for( ConstraintViolation<Modelo> v : violations ) {			
+				ErrorMensaje errorMensaje = new ErrorMensaje( v.getPropertyPath().toString() , v.getMessage() );
+				this.errores.add(errorMensaje);				
+			}				
+		}		
+	}
+
+	public void addViolationsC(Set<ConstraintViolation<Combustible>> violations) {
 		
 		if ( violations != null ) {
 			this.errores = new ArrayList<ErrorMensaje>();			
@@ -91,5 +102,4 @@ public class Mensaje {
 			}				
 		}		
 	}
-
 }
