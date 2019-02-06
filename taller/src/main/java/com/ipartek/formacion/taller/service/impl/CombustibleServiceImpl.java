@@ -27,14 +27,6 @@ public class CombustibleServiceImpl implements CombustibleService {
 	@Autowired
 	private Validator validator;
 
-//	private ValidatorFactory factory;
-//	private Validator validator;
-//	public CombustibleServiceImpl() {
-//		super();
-//		
-//		factory = Validation.buildDefaultValidatorFactory();
-//		validator = factory.getValidator();
-//	}
 
 	@Override
 	public List<Combustible> listar() {
@@ -51,10 +43,10 @@ public class CombustibleServiceImpl implements CombustibleService {
 		boolean isCreate = false;
 		try {
 			Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
-			if (violations.size() > 0) {
-				throw new CombustibleException(violations.toString());
+			if (violations.isEmpty()) {
+				isCreate = combustibleDao.insert(combustible);
 			} else {
-				isCreate = combustibleDao.crear(combustible);
+				throw new CombustibleException(CombustibleException.EXCEPTION_VIOLATIONS, violations);
 			}
 		} catch (SQLException e) {
 			throw new CombustibleException(CombustibleException.EXCEPTION_EXIST);
@@ -67,13 +59,13 @@ public class CombustibleServiceImpl implements CombustibleService {
 		boolean isUpdate = false;
 		try {
 			Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
-			if (violations.size() > 0) {
-				throw new CombustibleException(violations.toString());
-			} else {
+			if (violations.isEmpty()) {
 				isUpdate = combustibleDao.update(combustible);
+			} else {
+				throw new CombustibleException(CombustibleException.EXCEPTION_VIOLATIONS, violations);
 			}
 		} catch (SQLException e) {
-			throw new CombustibleException(CombustibleException.EXCEPTION_EXIST);
+			throw new CombustibleException(CombustibleException.EXCEPTION_CONSTRAINT);
 		}
 		return isUpdate;
 	}

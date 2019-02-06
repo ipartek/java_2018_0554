@@ -13,7 +13,7 @@ import com.ipartek.formacion.taller.modelo.config.ConnectionManager;
 import com.ipartek.formacion.taller.modelo.pojo.Combustible;
 
 @Repository
-public class CombustibleDAO {
+public class CombustibleDAO implements IDAO<Combustible> {
 
 	private static final String SQL_GET_ALL = "SELECT id, nombre FROM combustible ORDER BY id DESC;";
 	private static final String SQL_GET_BY_ID = "SELECT id, nombre FROM combustible WHERE id=?;";
@@ -21,6 +21,7 @@ public class CombustibleDAO {
 	private static final String SQL_CREATE = "INSERT INTO combustible (nombre) VALUES(?)";
 	private static final String SQL_UPDATE = "UPDATE combustible SET  nombre=? WHERE id=?;";
 
+	@Override
 	public ArrayList<Combustible> getAll() {
 		ArrayList<Combustible> combustibles = new ArrayList<Combustible>();
 		try (Connection conn = ConnectionManager.getConnection();
@@ -34,7 +35,8 @@ public class CombustibleDAO {
 		}
 		return combustibles;
 	}
-
+	
+	@Override
 	public Combustible getById(int idCombustible) {
 		Combustible c = null;
 		try (Connection conn = ConnectionManager.getConnection();
@@ -51,6 +53,7 @@ public class CombustibleDAO {
 		return c;
 	}
 
+	@Override
 	public boolean delete(int idCombustible) throws SQLException {
 		boolean isDelete = false;
 		try (Connection conn = ConnectionManager.getConnection();
@@ -64,7 +67,8 @@ public class CombustibleDAO {
 		return isDelete;
 	}
 
-	public boolean crear(Combustible combustible) throws SQLException {
+	@Override
+	public boolean insert(Combustible combustible) throws SQLException {
 		boolean isCreate = false;
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_CREATE, Statement.RETURN_GENERATED_KEYS);) {
@@ -83,6 +87,7 @@ public class CombustibleDAO {
 		return isCreate;
 	}
 
+	@Override
 	public boolean update(Combustible combustible) throws SQLException {
 		boolean isUpdate = false;
 		try (Connection conn = ConnectionManager.getConnection();

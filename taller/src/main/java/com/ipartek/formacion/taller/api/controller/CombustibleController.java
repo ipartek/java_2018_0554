@@ -1,6 +1,9 @@
 package com.ipartek.formacion.taller.api.controller;
 
 import java.util.ArrayList;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -74,35 +77,48 @@ public class CombustibleController {
 	}
 	
 	@RequestMapping(value=(""), method = RequestMethod.POST)
-	public ResponseEntity<Mensaje> crear(@RequestBody Combustible combustible){
-		ResponseEntity<Mensaje> response = new ResponseEntity<Mensaje>(HttpStatus.NOT_FOUND);
+	public ResponseEntity crear(@RequestBody Combustible combustible){
+		ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
 		try {
 			if(combustibleService.crear(combustible)) {
-				response = new ResponseEntity<Mensaje>(HttpStatus.CREATED);
+				response = new ResponseEntity(HttpStatus.CREATED);
 			}
 		}catch (CombustibleException e) {
 			Mensaje mensaje = new Mensaje(e.getMessage());
-			 response = new ResponseEntity<Mensaje>(mensaje,HttpStatus.CONFLICT);
+			Set<ConstraintViolation<Combustible>> violations = e.getViolations();
+			if ( violations != null ) {
+				mensaje.addViolations(violations);
+				response = new ResponseEntity( mensaje, HttpStatus.BAD_REQUEST);
+			}else {
+				response = new ResponseEntity( mensaje, HttpStatus.CONFLICT);
+			}	
 		}catch (Exception e) {
-			 response = new ResponseEntity<Mensaje>(HttpStatus.INTERNAL_SERVER_ERROR);
+			 response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		return response;
 	}
 	@RequestMapping(value=("/{id}"), method = RequestMethod.PUT)
-	public ResponseEntity<Mensaje> update(@PathVariable int id, @RequestBody Combustible combustible){
-		ResponseEntity<Mensaje> response = new ResponseEntity<Mensaje>(HttpStatus.NOT_FOUND);
+	public ResponseEntity update(@PathVariable int id, @RequestBody Combustible combustible){
+		ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
 		
 		try {
 			combustible.setId(id);
 			if(combustibleService.modificar(combustible)) {
-				response = new ResponseEntity<Mensaje>(HttpStatus.OK);
+				response = new ResponseEntity(combustible, HttpStatus.OK);
 			}
 		}catch (CombustibleException e) {
 			Mensaje mensaje = new Mensaje(e.getMessage());
-			 response = new ResponseEntity<Mensaje>(mensaje,HttpStatus.CONFLICT);
+			Set<ConstraintViolation<Combustible>> violations = e.getViolations();
+			if ( violations != null ) {
+				mensaje.addViolations(violations);
+				response = new ResponseEntity( mensaje, HttpStatus.BAD_REQUEST);
+			}else {
+				response = new ResponseEntity( mensaje, HttpStatus.CONFLICT);
+			}	
 		}catch (Exception e) {
-			 response = new ResponseEntity<Mensaje>(HttpStatus.INTERNAL_SERVER_ERROR);
+			e.printStackTrace();
+			 response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		return response;
