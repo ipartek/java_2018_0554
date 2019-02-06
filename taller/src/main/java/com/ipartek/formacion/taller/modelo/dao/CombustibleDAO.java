@@ -9,17 +9,18 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Repository;
 
-import com.ipartek.appMultas.modelo.dao.ConnectionManager;
+import com.ipartek.formacion.taller.modelo.config.ConnectionManager;
 import com.ipartek.formacion.taller.modelo.pojo.Combustible;
 
 @Repository
-public class CombustibleDAO {
+public class CombustibleDAO implements IDAO<Combustible> {
 	private static final String SQL_GET_ALL = "SELECT id, nombre FROM combustible ORDER BY id DESC;";
 	private static final String SQL_GET_BY_ID = "SELECT id, nombre FROM combustible WHERE id = ?;";
 	private static final String SQL_DELETE = "DELETE FROM combustible WHERE id = ?;";
 	private static final String SQL_INSERT = "INSERT INTO combustible (nombre) VALUES (?);";
-	private static final String SQL_UPDATE = "UPDATE combustible SET nombre = ? WHERE id = ? ";
+	private static final String SQL_UPDATE = "UPDATE combustible SET nombre=? WHERE id = ?;";
 
+	@Override
 	public ArrayList<Combustible> getAll() {
 
 		ArrayList<Combustible> lista = new ArrayList<Combustible>();
@@ -37,6 +38,7 @@ public class CombustibleDAO {
 		return lista;
 	}
 
+	@Override
 	public Combustible getById(int idCombustible) {
 		Combustible c = new Combustible();
 
@@ -56,6 +58,7 @@ public class CombustibleDAO {
 		return c;
 	}
 
+	@Override
 	public boolean delete(int idCombustible) throws SQLException {
 		boolean d = false;
 
@@ -71,6 +74,7 @@ public class CombustibleDAO {
 		return d;
 	}
 
+	@Override
 	public boolean insert(Combustible combustible) throws SQLException {
 		boolean i = false;
 		try (Connection conn = ConnectionManager.getConnection();
@@ -79,7 +83,7 @@ public class CombustibleDAO {
 			int result = pst.executeUpdate();
 
 			if (result >= 1) {
-				try(ResultSet generatedKeys = pst.getGeneratedKeys()) {
+				try (ResultSet generatedKeys = pst.getGeneratedKeys()) {
 					if (generatedKeys.next()) {
 						combustible.setId(generatedKeys.getInt(1));
 					}
@@ -89,20 +93,22 @@ public class CombustibleDAO {
 		}
 		return i;
 	}
-	
-	public boolean update(Combustible combustible) throws SQLException {
-		boolean d = false;
 
+	@Override
+	public boolean update(Combustible combustible) throws SQLException {
+		boolean resul = false;
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_UPDATE);) {
+
 			pst.setString(1, combustible.getNombre());
 			pst.setInt(2, combustible.getId());
 
-			if (pst.executeUpdate() == 1) {
-				d = true;
+			if (1 == pst.executeUpdate()) {
+				resul = true;
 			}
+
 		}
-		return d;
+		return resul;
 	}
 
 	private Combustible mapeo(ResultSet rs) throws SQLException {
@@ -112,4 +118,9 @@ public class CombustibleDAO {
 		return c;
 	}
 
+	/*
+	 * @Override public Combustible rowMapper(ResultSet rs) throws SQLException {
+	 * Combustible c = new Combustible(); c.setId(rs.getInt("id"));
+	 * c.setNombre(rs.getString("nombre")); return c; }
+	 */
 }

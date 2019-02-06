@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Repository;
 
-import com.ipartek.appMultas.modelo.dao.ConnectionManager;
+import com.ipartek.formacion.taller.modelo.config.ConnectionManager;
 import com.ipartek.formacion.taller.modelo.pojo.Vehiculo;
 
 @Repository

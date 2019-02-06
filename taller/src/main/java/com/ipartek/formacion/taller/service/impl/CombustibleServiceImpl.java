@@ -55,34 +55,38 @@ public class CombustibleServiceImpl implements CombustibleService {
 
 	@Override
 	public boolean crear(Combustible combustible) throws CombustibleException {
-		boolean isInserted = false;
+		boolean isCreado = false;
 		try {
+
 			Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
-			if (violations.size() > 0) {
-				throw new CombustibleException(violations.toString());
+			if (violations.isEmpty()) {
+				isCreado = combustibleDAO.insert(combustible);
 			} else {
-				isInserted = combustibleDAO.insert(combustible);
+				throw new CombustibleException(CombustibleException.EXCEPTION_VIOLATIONS, violations);
 			}
+
 		} catch (SQLException e) {
-			throw new CombustibleException(CombustibleException.EXCEPTION_EXIST);
+			throw new CombustibleException(CombustibleException.EXCEPTION_CONSTRAINT);
 		}
-		return isInserted;
+		return isCreado;
 	}
 
 	@Override
 	public boolean modificar(Combustible combustible) throws CombustibleException {
-		boolean isUpdated = false;
+		boolean isModificado = false;
 		try {
+
 			Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
-			if (violations.size() > 0) {
-				throw new CombustibleException(violations.toString());
+			if (violations.isEmpty()) {
+				isModificado = combustibleDAO.update(combustible);
 			} else {
-				isUpdated = combustibleDAO.update(combustible);
+				throw new CombustibleException(CombustibleException.EXCEPTION_VIOLATIONS, violations);
 			}
+
 		} catch (SQLException e) {
 			throw new CombustibleException(CombustibleException.EXCEPTION_CONSTRAINT);
 		}
-		return isUpdated;
+		return isModificado;
 	}
 
 }
