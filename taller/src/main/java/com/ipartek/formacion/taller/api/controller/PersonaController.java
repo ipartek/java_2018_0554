@@ -18,49 +18,46 @@ import com.ipartek.formacion.taller.service.PersonaService;
 @CrossOrigin
 @RestController
 public class PersonaController {
-	
-	/* instancia e implementa patron singleton - inyeccion de dependencias */	
+
+	/* instancia e implementa patron singleton - inyeccion de dependencias */
 	@Autowired
 	PersonaService personaService;
-	
-	
+
 	// METODO PARA LISTAR PERSONAS
-	@RequestMapping( value= {"/api/persona"}, method = RequestMethod.GET)
-	public ArrayList<Persona> listar(){		
-		
-		//llamamos al servicio, NO al DAO		
+	@RequestMapping(value = { "/api/persona" }, method = RequestMethod.GET)
+	public ArrayList<Persona> listar() {
+
+		// llamamos al servicio, NO al DAO
 		return personaService.listar();
 	}
-	
-	
+
 	// METODO PARSA LISTAR VEHICULOS POR IDPERSONA
-	@RequestMapping( value= {"/api/persona/{id}/vehiculo"}, method = RequestMethod.GET)
-	public ResponseEntity<ArrayList<Vehiculo>> listarVehiculos( @PathVariable int id ){		
-		
-		ResponseEntity<ArrayList<Vehiculo>> response = new ResponseEntity<ArrayList<Vehiculo>>( HttpStatus.NOT_FOUND );
-		
-		
-		
-		ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();  //arrylist para meter los vehiculos
+	@RequestMapping(value = { "/api/persona/{id}/vehiculo" }, method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<Vehiculo>> listarVehiculos(@PathVariable int id) {
+
+		ResponseEntity<ArrayList<Vehiculo>> response = new ResponseEntity<ArrayList<Vehiculo>>(HttpStatus.NOT_FOUND);
+
+		ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>(); // arrylist para meter los vehiculos
 		try {
-			
-			Vehiculo v = new Vehiculo();  // vehiculo 1
+
+			Vehiculo v = new Vehiculo(); // vehiculo 1
 			v.setId(2);
 			v.setMatricula("BI-000-JM");
 			vehiculos.add(v);
-			
-			v = new Vehiculo(); //vehiculo 2
+
+			v = new Vehiculo(); // vehiculo 2
 			v.setId(45);
-			v.setMatricula("45-0123-KM");		
+			v.setMatricula("45-0123-KM");
 			vehiculos.add(v);
-			
-			response = new ResponseEntity<ArrayList<Vehiculo>>(vehiculos, HttpStatus.OK);  //envio respuesta  DONDE????????      PREGUNTA
-			
-		}catch (Exception e) {
+
+			response = new ResponseEntity<ArrayList<Vehiculo>>(vehiculos, HttpStatus.OK); // envio respuesta
+																							// DONDE???????? PREGUNTA
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			response = new ResponseEntity<ArrayList<Vehiculo>>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}	
-		
+		}
+
 		return response;
 	}
 

@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ipartek.formacion.taller.modelo.dao.RolDAO;
-import com.ipartek.formacion.taller.modelo.pojo.Combustible;
 import com.ipartek.formacion.taller.modelo.pojo.Rol;
 import com.ipartek.formacion.taller.service.RolService;
-import com.ipartek.formacion.taller.service.exception.CombustibleException;
 import com.ipartek.formacion.taller.service.exception.RolException;
 
 @Service

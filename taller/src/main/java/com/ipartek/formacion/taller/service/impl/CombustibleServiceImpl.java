@@ -73,6 +73,7 @@ public class CombustibleServiceImpl implements CombustibleService {   // AQUI EN
 
 	
 	// LLAMAR A DAO PARA MODIFICAR (UPDATE)
+	
 	@Override
 	public boolean modificar(Combustible combustible) throws CombustibleException {
 		boolean isModificado = false;
@@ -80,10 +81,9 @@ public class CombustibleServiceImpl implements CombustibleService {   // AQUI EN
 			
 			Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
 			if ( violations.isEmpty() ) {			
-				isModificado = combustibleDAO.update(combustible);
-				
+				isModificado = combustibleDAO.update(combustible);				
 			}else {
-				throw new CombustibleException( "no se permiten campos vacios" );
+				throw new CombustibleException( CombustibleException.EXCEPTION_VIOLATIONS, violations );
 			}	
 
 		}catch ( SQLException e) {			
@@ -91,7 +91,7 @@ public class CombustibleServiceImpl implements CombustibleService {   // AQUI EN
 		}			
 		return isModificado;
 	}
-
+	
 }
 
 	

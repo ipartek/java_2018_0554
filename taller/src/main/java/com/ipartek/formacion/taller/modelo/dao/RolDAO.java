@@ -10,7 +10,6 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.ipartek.formacion.taller.modelo.config.ConnectionManager;
-import com.ipartek.formacion.taller.modelo.pojo.Combustible;
 import com.ipartek.formacion.taller.modelo.pojo.Rol;
 
 @Repository
