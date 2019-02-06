@@ -45,14 +45,14 @@ public class CombustibleController {
 
 		return response;
 	}
-	
+
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	public ResponseEntity<Combustible> detalle(@PathVariable int id) {
 		ResponseEntity<Combustible> response = new ResponseEntity<Combustible>(HttpStatus.NOT_FOUND);
 		try {
 
 			Combustible c = combustibleService.detalle(id);
-			if ( c != null) {
+			if (c != null) {
 				response = new ResponseEntity<Combustible>(c, HttpStatus.OK);
 			}
 		} catch (Exception e) {
@@ -61,21 +61,21 @@ public class CombustibleController {
 		}
 		return response;
 	}
-	
+
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-	public ResponseEntity eliminar( @PathVariable int id) {
+	public ResponseEntity eliminar(@PathVariable int id) {
 
 		ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
 		try {
 
-			if ( combustibleService.eliminar(id) ) {
+			if (combustibleService.eliminar(id)) {
 				response = new ResponseEntity(HttpStatus.OK);
 			}
-		} catch (CombustibleException e) {	
-			
-			Mensaje mensaje = new Mensaje( e.getMessage() );
-			response = new ResponseEntity( mensaje, HttpStatus.CONFLICT);
-			
+		} catch (CombustibleException e) {
+
+			Mensaje mensaje = new Mensaje(e.getMessage());
+			response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -83,41 +83,68 @@ public class CombustibleController {
 
 		return response;
 	}
-	
-	
-	
+
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public ResponseEntity crear(@RequestBody Combustible combustible) {
+
+		ResponseEntity response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+		try {
+
+			if (combustibleService.crear(combustible)) {
+				response = new ResponseEntity(combustible, HttpStatus.CREATED);
+			} else {
+				response = new ResponseEntity(HttpStatus.CONFLICT);
+			}
+
+		} catch (CombustibleException e) {
+
+			Mensaje mensaje = new Mensaje(e.getMessage());
+			Set<ConstraintViolation<Combustible>> violations = e.getViolations();
+
+			if (violations != null) {
+				mensaje.addViolations(e.getViolations());
+				response = new ResponseEntity(mensaje, HttpStatus.BAD_REQUEST);
+			} else {
+				response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return response;
+
+	}
+
 	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
-	public ResponseEntity modificar( @PathVariable int id , 
-			                         @RequestBody Combustible combustible) {
-		
+	public ResponseEntity modificar(@PathVariable int id, @RequestBody Combustible combustible) {
+
 		ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
 		try {
-			
-			combustible.setId(id);		
-			
-			if ( combustibleService.modificar(combustible)) {
+
+			combustible.setId(id);
+
+			if (combustibleService.modificar(combustible)) {
 				response = new ResponseEntity(combustible, HttpStatus.OK);
 			}
-			
-		} catch (CombustibleException e) {		
-			
-			Mensaje mensaje = new Mensaje( e.getMessage() );
+
+		} catch (CombustibleException e) {
+
+			Mensaje mensaje = new Mensaje(e.getMessage());
 			Set<ConstraintViolation<Combustible>> violations = e.getViolations();
-			
-			if ( violations != null ) {
+
+			if (violations != null) {
 				mensaje.addViolations(violations);
-				response = new ResponseEntity( mensaje, HttpStatus.BAD_REQUEST);
-			}else {
-				response = new ResponseEntity( mensaje, HttpStatus.CONFLICT);
-			}	
-			
+				response = new ResponseEntity(mensaje, HttpStatus.BAD_REQUEST);
+			} else {
+				response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return response;
 	}
-	
-	
 
 }
