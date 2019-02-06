@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 
 import com.ipartek.formacion.taller.modelo.pojo.Combustible;
+import com.ipartek.formacion.taller.modelo.pojo.Rol;
 
 public class Mensaje {
 
@@ -95,4 +96,16 @@ public class Mensaje {
 		}
 	}
 
+	public void addViolationsRol(Set<ConstraintViolation<Rol>> violations) {
+
+		if (violations != null) {
+			this.errores = new ArrayList<ErrorMensaje>();
+			for (ConstraintViolation<Rol> v : violations) {
+				ErrorMensaje errorMensaje = new ErrorMensaje(v.getPropertyPath().toString(), v.getMessage());
+				this.errores.add(errorMensaje);
+			}
+		}
+	}
+	
+	
 }

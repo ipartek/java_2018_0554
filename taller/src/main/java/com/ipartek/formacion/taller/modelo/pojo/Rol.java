@@ -1,9 +1,17 @@
 package com.ipartek.formacion.taller.modelo.pojo;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Rol {
 	private int id;
+	
+	@NotEmpty
+	@Size(min = 1, max = 45)
 	private String nombre;
-
+	
+	
 	public Rol() {
 		super();
 		this.id = -1;
@@ -31,6 +39,11 @@ public class Rol {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	@Override
+	public String toString() {
+		return "Rol [id=" + id + ", nombre=" + nombre + "]";
 	}
 
 }
