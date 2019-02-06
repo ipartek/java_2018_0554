@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Repository
-public class CombustibleDAO {
+public class CombustibleDAO implements IDAO<Combustible> {
 
 	private static final String SQL_GET_ALL = "SELECT id, nombre FROM combustible ORDER BY id DESC;";
 	private static final String SQL_GET_BY_ID = "SELECT id, nombre FROM combustible WHERE id = ?;";
@@ -34,6 +34,7 @@ public class CombustibleDAO {
 		return lista;
 	}
 	
+	@Override
 	public Combustible getById( int id )  {
 		Combustible c = null;
 		try ( Connection conn = ConnectionManager.getConnection();
@@ -92,5 +93,7 @@ public class CombustibleDAO {
 		}	
 		return resul;
 	}
+
+
 
 }

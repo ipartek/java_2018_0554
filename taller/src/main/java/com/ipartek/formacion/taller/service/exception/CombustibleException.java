@@ -8,8 +8,6 @@ import com.ipartek.formacion.taller.modelo.pojo.Combustible;
 
 public class CombustibleException extends Exception {
 
-
-
 	private static final long serialVersionUID = 1L;
 
 	public static final String EXCEPTION_EXIST = "El nombre del combustible ya existe";
