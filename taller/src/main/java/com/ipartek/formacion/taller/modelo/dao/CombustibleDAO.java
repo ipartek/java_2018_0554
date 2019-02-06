@@ -10,19 +10,21 @@ import org.springframework.stereotype.Repository;
 
 import com.ipartek.formacion.taller.modelo.config.ConnectionManager;
 import com.ipartek.formacion.taller.modelo.pojo.Combustible;
+import com.mysql.jdbc.Statement;
 
 @Repository
-public class CombustibleDAO {
+public class CombustibleDAO implements IDAO<Combustible> {
 
 	private static final String SQL_GET_ALL = "SELECT id, nombre FROM combustible ORDER BY id DESC;";
 	private static final String SQL_GET_BY_ID = "SELECT id, nombre FROM combustible WHERE id = ?;";
 	private static final String SQL_DELETE = "DELETE FROM taller.combustible WHERE id = ?;";
-	private static final String SQL_CREATE = "INSERT INTO taller.combustible (nombre) VALUES (?);";
+	private static final String SQL_INSERT = "INSERT INTO taller.combustible (nombre) VALUES (?);";
 	private static final String SQL_UPDATE = "UPDATE combustible SET nombre=? WHERE id = ?;";
 
 	
 	
 	// PARA METODO LISTAR (GETALL)
+	@Override
 	public ArrayList<Combustible> getAll() {								// NO recibe parametro
 		ArrayList<Combustible> lista = new ArrayList<Combustible>();
 		try (Connection conn = ConnectionManager.getConnection();
@@ -43,6 +45,7 @@ public class CombustibleDAO {
 	
 	
 	//  PARA METODO DETALLE (GETBYID)
+	@Override
 	public Combustible getById(int id) {   									// SI recibe parametro  ( UNA ID para identificar el combustible que queremos listar)
 
 		Combustible c = null;
@@ -70,6 +73,7 @@ public class CombustibleDAO {
 	
 	
 	// PARA  METODO ELIMINAR (DELETE)
+	@Override
 	public boolean delete( int id ) throws SQLException  { 					 // SI RECIBE PARAMETRO, ID  que indica que combustible borrar
 		boolean isDelete = false;
 		
@@ -88,30 +92,32 @@ public class CombustibleDAO {
 
 	
 	// PARA  METODO CREAR (INSERT)
-	public boolean create(Combustible combustible) throws SQLException { 	// SI recibe parametro  ( UNA ID para identificar el combustible que queremos CREAR)
+	@Override
+	public boolean insert(Combustible combustible) throws SQLException { 	// SI recibe parametro  ( UNA ID para identificar el combustible que queremos CREAR)
 		boolean isCreate = false;
 
 		try ( Connection conn = ConnectionManager.getConnection();
-			  PreparedStatement pst = conn.prepareStatement(SQL_CREATE);){
+			  PreparedStatement pst = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);) {
 			
 		
-			pst.setString(1, combustible.getNombre());
-		
-			
+			pst.setString(1, combustible.getNombre());		
 				if ( pst.executeUpdate() == 1 ) { 							// UPDATE porque es INSERT
-					isCreate = true;
-					}		
-		}catch (Exception e) {
-			e.printStackTrace();
-		 	}
-		
-		
-			return isCreate; 												//  devuelve un boleano. Si se ha creado devuelve true.
+					
+					// recuperar id
+					try (ResultSet rs = pst.getGeneratedKeys()) {
+						rs.next();
+						combustible.setId(rs.getInt(1));
+						isCreate = true;
+						}								
+				}		
 		}
+		return isCreate;
+	}
 	
-	
+
 	
 	// PARA METODO MODIFICAR (INSERT)
+	@Override
 	public boolean update(Combustible combustible) throws SQLException  { 	// SI recibe parametro  ( UNA ID para identificar el combustible que queremos MODIFICAR)
 		boolean resul  = false;
 		try ( Connection conn = ConnectionManager.getConnection();
@@ -128,7 +134,6 @@ public class CombustibleDAO {
 		return resul; 														//  devuelve un boleano. Si se ha modificado devuelve true.
 	}
 	
-
 	
 	// METODO PARA MAPEO PARAMETROS, PARECIDO A ROWMAPPER 
 	private Combustible mapeo(ResultSet rs) throws SQLException {

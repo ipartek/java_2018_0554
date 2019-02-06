@@ -107,27 +107,38 @@ public class CombustibleController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<Mensaje> crear(@RequestBody Combustible combustible) {
 
-		ResponseEntity<Mensaje> response = new ResponseEntity<Mensaje>(HttpStatus.NOT_FOUND);
+		ResponseEntity<Mensaje> response = new ResponseEntity<Mensaje>(HttpStatus.INTERNAL_SERVER_ERROR);
 
 		try {
 
 			if (combustibleService.crear(combustible)) {
-				response = new ResponseEntity(combustible, HttpStatus.OK); // he quitado <Mensaje> para poder meter
+				response = new ResponseEntity(combustible, HttpStatus.CREATED); // he quitado <Mensaje> para poder meter
 																			// combustible
+			} else {
+				response = new ResponseEntity(HttpStatus.CONFLICT);
 			}
 		} catch (CombustibleException e) {
 
 			Mensaje mensaje = new Mensaje(e.getMessage());
-			response = new ResponseEntity<Mensaje>(mensaje, HttpStatus.CONFLICT);
+			Set<ConstraintViolation<Combustible>> violations = e.getViolations();
+
+			if (violations != null) {
+				mensaje.addViolations(e.getViolations());
+				response = new ResponseEntity(mensaje, HttpStatus.BAD_REQUEST);
+			} else {
+				response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			response = new ResponseEntity<Mensaje>(HttpStatus.INTERNAL_SERVER_ERROR);
+			response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
 		return response;
-	}
 
+	}
+	
+	
+	
 	// METODO MODIFICAR (UPDATE) // QUE LANZA SUS PROPIAS EXCEPCIONES
 	// PERSONALIZADAS. CODIGO MAS FINO Y ELEGANTE
 	@RequestMapping(value = "{id}", method = RequestMethod.PUT)

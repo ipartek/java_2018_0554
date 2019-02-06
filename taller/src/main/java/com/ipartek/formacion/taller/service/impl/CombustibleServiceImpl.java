@@ -58,18 +58,22 @@ public class CombustibleServiceImpl implements CombustibleService {   // AQUI EN
 	@Override
 	public boolean crear(Combustible combustible) throws CombustibleException {   
 		boolean isCreado = false;
-		Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
-		if ( violations.isEmpty() ) {	
-		try {
-			isCreado = combustibleDAO.create(combustible);
+	try {
+			
+			Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
+			if ( violations.isEmpty() ) {			
+				isCreado = combustibleDAO.insert(combustible);				
+			}else {
+				throw new CombustibleException( CombustibleException.EXCEPTION_VIOLATIONS, violations );
+			}	
+
 		}catch ( SQLException e) {			
 			throw new CombustibleException( CombustibleException.EXCEPTION_CONSTRAINT );
-		}
-		}else {
-			throw new CombustibleException( " necesitamos el nombre para crear un nuevo combustible" );
-		}
+		}			
 		return isCreado;
 	}
+
+	
 
 	
 	// LLAMAR A DAO PARA MODIFICAR (UPDATE)
