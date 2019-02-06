@@ -5,22 +5,19 @@ import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ipartek.formacion.taller.api.pojo.Mensaje;
 import com.ipartek.formacion.taller.modelo.dao.CombustibleDAO;
 import com.ipartek.formacion.taller.modelo.pojo.Combustible;
-import com.ipartek.formacion.taller.service.CombustibleService;
+import com.ipartek.formacion.taller.service.GeneralService;
 import com.ipartek.formacion.taller.service.exception.PojoException;
 
 @Service
-public class CombustibleServiceImpl implements CombustibleService {
+public class CombustibleServiceImpl implements GeneralService<Combustible> {
 
 	private final static Logger LOG = Logger.getLogger(CombustibleServiceImpl.class);
 	@Autowired

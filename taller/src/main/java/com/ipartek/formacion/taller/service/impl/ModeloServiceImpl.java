@@ -12,13 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ipartek.formacion.taller.modelo.dao.ModeloDAO;
-import com.ipartek.formacion.taller.modelo.pojo.Combustible;
 import com.ipartek.formacion.taller.modelo.pojo.Modelo;
-import com.ipartek.formacion.taller.service.ModeloService;
+import com.ipartek.formacion.taller.service.GeneralService;
 import com.ipartek.formacion.taller.service.exception.PojoException;
 
 @Service
-public class ModeloServiceImpl implements ModeloService {
+public class ModeloServiceImpl implements GeneralService<Modelo> {
 
 	private final static Logger LOG = Logger.getLogger(ModeloServiceImpl.class);
 	@Autowired

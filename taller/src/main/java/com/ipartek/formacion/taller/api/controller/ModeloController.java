@@ -62,7 +62,7 @@ public class ModeloController {
 		ResponseEntity<Modelo> response = new ResponseEntity<Modelo>(HttpStatus.INTERNAL_SERVER_ERROR);
 		Modelo modelo = new Modelo();
 		try {
-			modelo = modeloService.detalle(id);
+			modelo = (Modelo) modeloService.detalle(id);
 			if (modelo != null) {
 				response = new ResponseEntity<Modelo>(modelo, HttpStatus.OK);
 			} else {

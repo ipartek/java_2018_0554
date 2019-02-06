@@ -6,7 +6,7 @@ import java.util.List;
 import com.ipartek.formacion.taller.modelo.pojo.Modelo;
 import com.ipartek.formacion.taller.service.exception.PojoException;
 
-public interface ModeloService<P> {
+public interface GeneralService<P> {
 
 	/**
 	 * Obtener todos los combustibles disponibles ordenado por id descendente
