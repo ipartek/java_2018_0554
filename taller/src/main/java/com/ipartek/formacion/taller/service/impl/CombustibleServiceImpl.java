@@ -7,7 +7,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ipartek.formacion.taller.modelo.daos.CombustibleDAO;
+import com.ipartek.formacion.taller.modelo.dao.CombustibleDAO;
 import com.ipartek.formacion.taller.modelo.pojo.Combustible;
 import com.ipartek.formacion.taller.service.CombustibleService;
 import com.ipartek.formacion.taller.service.exception.CombustibleException;

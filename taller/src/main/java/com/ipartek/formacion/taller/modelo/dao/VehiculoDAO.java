@@ -1,4 +1,4 @@
-package com.ipartek.formacion.taller.modelo.daos;
+package com.ipartek.formacion.taller.modelo.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
