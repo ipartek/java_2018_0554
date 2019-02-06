@@ -1,4 +1,5 @@
 package com.ipartek.formacion.taller.modelo.daos;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,30 +26,30 @@ public class PersonaDAO {
 				ResultSet rs = pst.executeQuery();) {
 
 			while (rs.next()) {
-				
+
 				int idPersona = rs.getInt("id_persona");
 				Persona persona = hmPersonas.get(idPersona);
-				
-				if ( persona == null ) {         // si no encentro crear
-					
+
+				if (persona == null) { // si no encentro crear
+
 					persona = new Persona();
 					persona.setId(idPersona);
-					persona.setNombre( rs.getString("nombre_persona"));
-										
+					persona.setNombre(rs.getString("nombre_persona"));
+
 				}
-				
+
 				Rol rol = new Rol();
 				rol.setId(rs.getInt("id_rol"));
 				rol.setNombre(rs.getString("nombre_rol"));
-				
+
 				ArrayList<Rol> roles = persona.getRoles();
 				roles.add(rol);
 				persona.setRoles(roles);
-								
-				//guardar en hasMap
+
+				// guardar en hasMap
 				hmPersonas.put(idPersona, persona);
-				
-			}// end while
+
+			} // end while
 
 		} catch (Exception e) {
 			e.printStackTrace();

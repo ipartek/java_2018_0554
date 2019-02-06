@@ -15,7 +15,6 @@ import com.ipartek.formacion.taller.modelo.pojo.Persona;
 import com.ipartek.formacion.taller.modelo.pojo.Vehiculo;
 import com.ipartek.formacion.taller.service.PersonaService;
 
-
 @CrossOrigin
 @RestController
 public class PersonaController {
@@ -24,18 +23,17 @@ public class PersonaController {
 	@Autowired
 	PersonaService personaService;
 
-	
-	//PEDIMOS LAS PERSONAS
-	
+	// PEDIMOS LAS PERSONAS
+
 	@RequestMapping(value = { "/api/persona" }, method = RequestMethod.GET)
 	public ArrayList<Persona> listar() {
 
 		// llamamos al servicio, NO al DAO
 		return personaService.listar();
 	}
-	
-	//PEDIMOS LOS VEHICULOS DE ESAS PERSONAS (AQUI, NO EN VehiculoController)
-	
+
+	// PEDIMOS LOS VEHICULOS DE ESAS PERSONAS (AQUI, NO EN VehiculoController)
+
 	@RequestMapping(value = { "/api/persona/{id}/vehiculo" }, method = RequestMethod.GET)
 	public ArrayList<Vehiculo> listarVehiculos(@PathVariable int id) {
 		ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
@@ -46,16 +44,16 @@ public class PersonaController {
 			v.setId(2);
 			v.setMatricula("BI-000-JM");
 			vehiculos.add(v);
-			
+
 			v.setId(3);
 			v.setMatricula("45-0123-KM");
 			vehiculos.add(v);
-			
+
 			response = new ResponseEntity<ArrayList<Vehiculo>>(vehiculos, HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			response=new ResponseEntity<ArrayList<Vehiculo>>(vehiculos, HttpStatus.INTERNAL_SERVER_ERROR);
+			response = new ResponseEntity<ArrayList<Vehiculo>>(vehiculos, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		return vehiculos;
@@ -63,5 +61,5 @@ public class PersonaController {
 	}
 
 //	@RequestMapping(value = { "/api/persona/{id}/vehiculo" }, method = RequestMethod.POST)
-	
+
 }

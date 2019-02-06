@@ -9,15 +9,14 @@ import springfox.documentation.annotations.ApiIgnore;
 @ApiIgnore
 @Controller
 public class HomeController {
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {		
+	public String home() {
 		return "index";
 	}
-	
-	
+
 	@RequestMapping(value = "/saludar", method = RequestMethod.GET)
-	public String saludar() {		
+	public String saludar() {
 		return "index";
 	}
 

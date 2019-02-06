@@ -23,7 +23,7 @@ public class CombustibleServiceImpl implements CombustibleService {
 
 	@Autowired
 	private Validator validator;
-	
+
 	@Override
 	public List<Combustible> listar() {
 		// TODO Auto-generated method stub
@@ -54,13 +54,12 @@ public class CombustibleServiceImpl implements CombustibleService {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	@Override
 	public boolean modificar(Combustible combustible) throws CombustibleException {
 		boolean isModificado = false;
 		try {
 
-		
 			Set<ConstraintViolation<Combustible>> violations = validator.validate(combustible);
 			if (violations.isEmpty()) {
 				isModificado = combustibleDAO.update(combustible);

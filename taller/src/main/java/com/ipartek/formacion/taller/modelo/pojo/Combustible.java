@@ -7,25 +7,24 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Combustible {
 
 	private int id;
-	
+
 	@NotEmpty
-	@Size(min=1, max=45)
-	
+	@Size(min = 1, max = 45)
+
 	private String nombre;
-	
-	
+
 	public Combustible() {
-	super();
-		this.id=-1;	
-		this.nombre="";
+		super();
+		this.id = -1;
+		this.nombre = "";
 	}
-	
+
 	public Combustible(int id, String nombre) {
-		
+
 		this();
 		this.setId(id);
 		this.setNombre(nombre);
-		
+
 	}
 
 	public int getId() {

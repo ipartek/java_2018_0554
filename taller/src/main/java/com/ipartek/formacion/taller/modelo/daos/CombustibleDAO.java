@@ -20,8 +20,6 @@ public class CombustibleDAO {
 	private static final String SQL_DELETE = "DELETE FROM combustible WHERE id = ?;";
 	private static final String SQL_UPDATE = "UPDATE combustible SET nombre=? WHERE id = ?;";
 
-	
-
 	public ArrayList<Combustible> getAll() {
 		ArrayList<Combustible> lista = new ArrayList<Combustible>();
 		try (Connection conn = ConnectionManager.getConnection();
@@ -74,12 +72,12 @@ public class CombustibleDAO {
 
 		return isDelete;
 	}
-	
+
 	public boolean update(Combustible combustible) throws SQLException {
-		
-		//funcion a la que se le pasa el objeto combustible de tipoCombustible
-		//ejecuta el UPDATE para el contenido de ese objeto 
-		
+
+		// funcion a la que se le pasa el objeto combustible de tipoCombustible
+		// ejecuta el UPDATE para el contenido de ese objeto
+
 		// por defecto lo ponemos como no modificado (resul=false;)
 
 		boolean resul = false;
@@ -89,7 +87,7 @@ public class CombustibleDAO {
 
 			pst.setString(1, combustible.getNombre());
 			pst.setInt(2, combustible.getId());
-			
+
 			if (pst.executeUpdate() == 1) {
 
 				resul = true;
@@ -98,7 +96,6 @@ public class CombustibleDAO {
 
 		return resul;
 	}
-	
 
 	private Combustible mapeo(ResultSet rs) throws SQLException {
 		Combustible c = new Combustible();

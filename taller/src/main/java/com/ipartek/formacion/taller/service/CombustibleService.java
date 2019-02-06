@@ -22,7 +22,7 @@ public interface CombustibleService {
 	 * @param idCombustible int identificador del combustible
 	 * @return si encuentra combustible, si no <b>null</b>
 	 */
-	Combustible detalle(int id);	//id o idCombustible pero como está funciona
+	Combustible detalle(int id); // id o idCombustible pero como está funciona
 
 	/**
 	 * Elimina combustible por su identificador
@@ -34,42 +34,42 @@ public interface CombustibleService {
 	 * @see CombustibleException.EXCEPTION_CONSTRAINT
 	 */
 
-	boolean eliminar(int id) throws CombustibleException; //id o idCombustible pero como está funciona
+	boolean eliminar(int id) throws CombustibleException; // id o idCombustible pero como está funciona
 
 	/**
 	 * 
 	 * Creamos un nuevo combustible
 	 * 
 	 * 
-	 * @param combustible Combustible a crear, al crear con exito actualiza el  <b>id</b>
-	 *                   
+	 * @param combustible Combustible a crear, al crear con exito actualiza el
+	 *                    <b>id</b>
+	 * 
 	 * @return true si lo crea, false si no lo puede crear, <b>nombre</b> minimo y
 	 *         letra maximo 45
 	 * @throws CombustibleException - si ya existe
 	 * @see CombustibleException.EXCEPTION_EXIST
 	 */
 
-	boolean crear(int idCombustible) throws CombustibleException; //En caso de fallar, habilitar el de abajo
+	boolean crear(int idCombustible) throws CombustibleException; // En caso de fallar, habilitar el de abajo
 //	boolean crear(Combustible combustible) throws CombustibleException; 
+
 	/**
-	 *  Modifica el nombre de un combustible identificado por su id
+	 * Modifica el nombre de un combustible identificado por su id
 	 * 
 	 * 
 	 * @param idCombustible a modificar
 	 * @return true si lo ha modificado, false si no encuentra la id
 	 * @throws CombustibleException
 	 * 
-	 * 	<ol>
-	 * 		<li>EXCEPTION_EXIST: el nombre ya existe</li>
-	 * 		<li>Validacion; <b>nombre</b> minimo 1 letra y maximo 45</li>
-	 * </ol>
+	 *                              <ol>
+	 *                              <li>EXCEPTION_EXIST: el nombre ya existe</li>
+	 *                              <li>Validacion; <b>nombre</b> minimo 1 letra y
+	 *                              maximo 45</li>
+	 *                              </ol>
 	 * 
 	 * @see CombustibleException.EXCEPTION_EXIST
 	 */
 
-
 	boolean modificar(Combustible combustible) throws CombustibleException;
 
-	
-	
 }

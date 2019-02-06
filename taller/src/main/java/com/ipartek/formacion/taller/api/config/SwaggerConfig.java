@@ -17,26 +17,19 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @EnableWebMvc
 public class SwaggerConfig {
-	
+
 	@Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
-                .build().apiInfo(apiInfo())
-                .useDefaultResponseMessages(false);
-    }
-     
-    private ApiInfo apiInfo() {
-        ApiInfo apiInfo = new ApiInfo("Direccion General de Trafico API",
-                                        "",
-                                        "1.0",
-                                        "",
-                                        new Contact("Ander Uraga Real", "https://github.com/ipartek/java_2018_0508/tree/master/youtube", "auraga@ipartek.com"),
-                                        "Apache License",
-                                        "");
-        return apiInfo;
-    }
+	public Docket api() {
+		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
+				.paths(PathSelectors.any()).build().apiInfo(apiInfo()).useDefaultResponseMessages(false);
+	}
+
+	private ApiInfo apiInfo() {
+		ApiInfo apiInfo = new ApiInfo(
+				"Direccion General de Trafico API", "", "1.0", "", new Contact("Ander Uraga Real",
+						"https://github.com/ipartek/java_2018_0508/tree/master/youtube", "auraga@ipartek.com"),
+				"Apache License", "");
+		return apiInfo;
+	}
 
 }

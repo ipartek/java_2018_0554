@@ -11,63 +11,61 @@ public class Persona {
 	private String dni;
 	private ArrayList<Rol> roles;
 
-public Persona() {
-	this.id= -1;
-	 this.nombre="";
-	this.apellidos="";
-	this.telefono=0;
-	this.dni="";
-	
-	
-	
-}
+	public Persona() {
+		this.id = -1;
+		this.nombre = "";
+		this.apellidos = "";
+		this.telefono = 0;
+		this.dni = "";
 
-public int getId() {
-	return id;
-}
+	}
 
-public void setId(int id) {
-	this.id = id;
-}
+	public int getId() {
+		return id;
+	}
 
-public String getNombre() {
-	return nombre;
-}
+	public void setId(int id) {
+		this.id = id;
+	}
 
-public void setNombre(String nombre) {
-	this.nombre = nombre;
-}
+	public String getNombre() {
+		return nombre;
+	}
 
-public String getApellidos() {
-	return apellidos;
-}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-public void setApellidos(String apellidos) {
-	this.apellidos = apellidos;
-}
+	public String getApellidos() {
+		return apellidos;
+	}
 
-public int getTelefono() {
-	return telefono;
-}
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
 
-public void setTelefono(int telefono) {
-	this.telefono = telefono;
-}
+	public int getTelefono() {
+		return telefono;
+	}
 
-public String getDni() {
-	return dni;
-}
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
 
-public void setDni(String dni) {
-	this.dni = dni;
-}
+	public String getDni() {
+		return dni;
+	}
 
-public ArrayList<Rol> getRoles() {
-	return roles;
-}
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
 
-public void setRoles(ArrayList<Rol> roles) {
-	this.roles = roles;
-}
+	public ArrayList<Rol> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(ArrayList<Rol> roles) {
+		this.roles = roles;
+	}
 
 }
