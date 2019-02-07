@@ -1,20 +1,24 @@
 package com.ipartek.formacion.taller.modelo.pojo;
 
-import java.util.ArrayList;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class Persona {
-
 	private int id;
-
+	@NotEmpty
+	@Size(min=1,max=45)
 	private String nombre;
-
+	@NotEmpty
+	@Size(min=1,max=45)
 	private String apellidos;
-
+	@NotEmpty
+	@Size(min=9,max=10)
 	private String dni;
-
+	@NotEmpty
+	@Size(min=10,max=15)
 	private String telefono;
-	
-	private ArrayList<Rol> roles;
+	//private ArrayList<Rol> roles;
 
 	public Persona() {
 		super();
@@ -23,7 +27,7 @@ public class Persona {
 		this.apellidos = "";
 		this.dni = "";
 		this.telefono = "";
-		this.roles = new ArrayList<Rol>();
+		//this.roles = new ArrayList<Rol>();
 	}
 
 	public int getId() {
@@ -66,18 +70,28 @@ public class Persona {
 		this.telefono = telefono;
 	}
 
-	public ArrayList<Rol> getRoles() {
-		return roles;
-	}
+//	public ArrayList<Rol> getRoles() {
+//		return roles;
+//	}
+//
+//	public void setRoles(ArrayList<Rol> roles) {
+//		this.roles = roles;
+//	}
 
-	public void setRoles(ArrayList<Rol> roles) {
-		this.roles = roles;
+	public Persona(int id, String nombre, String apellidos, String dni, String telefono) {
+		this();
+		this.setId(id);
+		this.setNombre(nombre);
+		this.setApellidos(apellidos);
+		this.setDni(dni);
+		this.setTelefono(telefono);
+		//this.setRoles(roles);
 	}
 
 	@Override
 	public String toString() {
 		return "Persona [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", dni=" + dni + ", telefono="
-				+ telefono + ", roles=" + roles + "]";
+				+ telefono + "]";
 	}
-	
+
 }

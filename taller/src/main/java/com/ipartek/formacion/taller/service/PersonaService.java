@@ -3,32 +3,50 @@ package com.ipartek.formacion.taller.service;
 import java.util.ArrayList;
 
 import com.ipartek.formacion.taller.modelo.pojo.Persona;
-import com.ipartek.formacion.taller.modelo.pojo.Vehiculo;
-
-
+import com.ipartek.formacion.taller.service.exception.PersonaException;
 
 public interface PersonaService {
-
+	
 	/**
-	 * Listado Personas 
-	 * @return ArrayList<Persona>
+	 * listado persona ordenado por id descendente
+	 * @return ArrayList<Persona>, vacio si no hay datos
 	 */
 	ArrayList<Persona> listar();
 	
 	/**
-	 * Listado Vehiculos de una Persona
-	 * @param idPersona identificador de la Persona
-	 * @return ArrayList<Vehiculo>
+	 * obtener detalle persona
+	 * @param idpersona identificador de persona
+	 * @return persona si encuentra, sino <b>null</b>
 	 */
-	ArrayList<Vehiculo> vehiculos( int idPersona );
 	
-	
+	Persona detalle(int idPersona);
 	/**
-	 * Detalle de un Vehiculo de una Persona
-	 * @param idPersona int identificador Persona
-	 * @param idVehiculo int identificador Vehiculo
-	 * @return vehiculo si lo encuentra, null si no existe
+	 * elimina registro de conbustibles por identificador
+	 * @param idpersona identificador persona
+	 * @return true si elimina, false si no lo encuentra
+	 * @throws personaException  si tiene roles asociados o no existe identificador
+	 * @see personaException
 	 */
-	Vehiculo vehiculo( int idPersona, int idVehiculo );
+	boolean eliminar (int idPersona) throws PersonaException;
+	/**
+	 * crear registro de persona
+	 * @param persona datos de persona
+	 * @return true si lo crea, false si no lo hace (no vacio, min 1 max 45)
+	 * @throws personaException si ya existe
+	 */
 	
+	boolean crear (Persona persona) throws PersonaException;
+	/**
+	 * modifica datos de persona
+	 * @param idpersona identificador de persona
+	 * @return true si se hizo la modificacion, false si no se hizo (no vacio, min 1 max 45)
+	 * @throws personaException si no existe
+	 */
+	
+	boolean modificar (Persona perosna) throws PersonaException;
+	
+
+	
+	
+
 }

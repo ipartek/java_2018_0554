@@ -15,13 +15,13 @@ import com.mysql.jdbc.Statement;
 @Repository
 public class CombustibleDAO implements IDAO<Combustible> {
 
-	private static final String SQL_GET_ALL = "SELECT id, nombre FROM combustible ORDER BY id DESC;";
-	private static final String SQL_GET_BY_ID = "SELECT id, nombre FROM combustible WHERE id = ?;";
+	private static final String SQL_GET_ALL = "SELECT id, nombre FROM taller.combustible ORDER BY id DESC;";
+	private static final String SQL_GET_BY_ID = "SELECT id, nombre FROM taller.combustible WHERE id = ?;";
 	private static final String SQL_DELETE = "DELETE FROM taller.combustible WHERE id = ?;";
+	private static final String SQL_UPDATE = "UPDATE taller.combustible SET nombre=? WHERE id = ?;";
 	private static final String SQL_INSERT = "INSERT INTO taller.combustible (nombre) VALUES (?);";
-	private static final String SQL_UPDATE = "UPDATE combustible SET nombre=? WHERE id = ?;";
+	private static final String SQL_GET_VEHICULO_BY_ID = "select c.id, c.nombre from taller.vehiculo as v,  taller.combustible as c where  v.id_combustible= c.id and v.id = ?;";
 
-	
 	
 	// PARA METODO LISTAR (GETALL)
 	@Override
@@ -70,6 +70,26 @@ public class CombustibleDAO implements IDAO<Combustible> {
 		return c;														 	// devuelve un objeto con los datos del combustible que ha encontrado en bbdd
 	}
 	
+	// sin @override
+	public Combustible getByIdVehiculo(int id) {  // combustible que busco por id de vehiculo
+	
+		Combustible c = null;
+		
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_GET_VEHICULO_BY_ID);) {
+
+			pst.setInt(1, id);
+			try (ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) {
+					c = rowMapper(rs);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return c;
+	}
 	
 	
 	// PARA  METODO ELIMINAR (DELETE)
@@ -135,7 +155,7 @@ public class CombustibleDAO implements IDAO<Combustible> {
 	}
 	
 	
-	// METODO PARA MAPEO PARAMETROS, PARECIDO A ROWMAPPER 
+	// METODO PARA MAPEO PARAMETROS, iguAL A ROWMAPPER 
 	private Combustible mapeo(ResultSet rs) throws SQLException {
 		Combustible c = new Combustible();
 		c.setId(rs.getInt("id"));
@@ -143,4 +163,11 @@ public class CombustibleDAO implements IDAO<Combustible> {
 		return c;
 	}
 
+	
+	private Combustible rowMapper(ResultSet rs) throws SQLException {
+		Combustible c = new Combustible();
+		c.setId(rs.getInt("id"));
+		c.setNombre(rs.getString("nombre"));
+		return c;
+	}
 }

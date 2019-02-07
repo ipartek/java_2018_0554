@@ -1,65 +1,59 @@
-package com.ipartek.formacion.taller.modelo.pojo; //
+package com.ipartek.formacion.taller.modelo.pojo;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class Vehiculo {
 
 	private int id;
-	private String bastidor;
+
+	@NotEmpty
+	@Size (min = 17, max = 17)
+	private String numeroBastidor;
+
+	@NotEmpty
+	@Size (min = 8, max = 10)
 	private String matricula;
-	private int idPropietario;
-	private int idCombustible;
-	private int idModelo;
+
+	// @Valid     // valid porque es un objeto .   Pero de momento la quito
+	private Combustible combustible;
+
+	// @Valid 
+	private Modelo modelo;
+	
+	// @Valid 
+	private Persona persona;
 
 	public Vehiculo() {
 		super();
 		this.id = -1;
-		this.bastidor = "";
+		this.numeroBastidor = "";
 		this.matricula = "";
-		this.idPropietario = -1;
-		this.idCombustible = -1;
-		this.idModelo = -1;
+		this.combustible = new Combustible();
+		this.modelo = new Modelo();
+		this.persona = new Persona();
 	}
 
-	public Vehiculo(int id, String bastidor, String matricula, int idPropietario, int idCombustible, int idModelo) {
+	public Vehiculo(int id, String numeroBastidor, String matricula, Combustible combustible, Modelo modelo,Persona persona) {
 		this();
-		this.setId(id);
-		this.setBastidor(bastidor);
-		this.setMatricula(matricula);
-		this.setIdPropietario(idPropietario);
-		this.setIdCombustible(idCombustible);
-		this.setIdModelo(idModelo);
-
+		setId(id);
+		setNumeroBastidor(numeroBastidor);
+		setMatricula(matricula);
+		setCombustible(combustible);
+		setModelo(modelo);
+		setPersona(persona);
 	}
 
-	public String getBastidor() {
-		return bastidor;
+	
+	
+	public Persona getPersona() {
+		return persona;
 	}
 
-	public void setBastidor(String bastidor) {
-		this.bastidor = bastidor;
-	}
-
-	public int getIdPropietario() {
-		return idPropietario;
-	}
-
-	public void setIdPropietario(int idPropietario) {
-		this.idPropietario = idPropietario;
-	}
-
-	public int getIdCombustible() {
-		return idCombustible;
-	}
-
-	public void setIdCombustible(int idCombustible) {
-		this.idCombustible = idCombustible;
-	}
-
-	public int getIdModelo() {
-		return idModelo;
-	}
-
-	public void setIdModelo(int idModelo) {
-		this.idModelo = idModelo;
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 
 	public int getId() {
@@ -70,6 +64,14 @@ public class Vehiculo {
 		this.id = id;
 	}
 
+	public String getNumeroBastidor() {
+		return numeroBastidor;
+	}
+
+	public void setNumeroBastidor(String numeroBastidor) {
+		this.numeroBastidor = numeroBastidor;
+	}
+
 	public String getMatricula() {
 		return matricula;
 	}
@@ -78,10 +80,30 @@ public class Vehiculo {
 		this.matricula = matricula;
 	}
 
+	public Combustible getCombustible() {
+		return combustible;
+	}
+
+	public void setCombustible(Combustible combustible) {
+		this.combustible = combustible;
+	}
+
+	public Modelo getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(Modelo modelo) {
+		this.modelo = modelo;
+	}
+
 	@Override
 	public String toString() {
-		return "Vehiculo [id=" + id + ", bastidor=" + bastidor + ", matricula=" + matricula + ", idPropietario="
-				+ idPropietario + ", idCombustible=" + idCombustible + ", idModelo=" + idModelo + "]";
+		return "Vehiculo [id=" + id + ", numeroBastidor=" + numeroBastidor + ", matricula=" + matricula
+				+ ", combustible=" + combustible + ", modelo=" + modelo + ", persona=" + persona + "]";
 	}
+
+
+
+	
 
 }

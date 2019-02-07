@@ -14,11 +14,11 @@ import com.ipartek.formacion.taller.modelo.pojo.Vehiculo;
 @Repository
 public class VehiculoDAO {
 
-	private static final String SQL_GET_ALL = "SELECT id, matricula FROM taller.vehiculo ORDER BY id DESC;";
-	private static final String SQL_GET_BY_ID = "SELECT id, matricula FROM taller.vehiculo WHERE id = ?;";
-	private static final String SQL_DELETE = "DELETE FROM taller.vehiculo WHERE id = ?;";
-	private static final String SQL_CREATE = "INSERT INTO taller.vehiculo (nombre) VALUES (?,?,?,?,?);";
-	private static final String SQL_UPDATE = "UPDATE taller.vehiculo SET numero_bastidor = ?, matricula = ?, id_propietario = ?, id_combustible = ?, id_modelo = ? WHERE (id=?);";
+	private static final String SQL_GET_ALL = "SELECT id, numero_bastidor,matricula FROM vehiculo ORDER BY id DESC;";
+	private static final String SQL_GET_BY_ID = "SELECT id, numero_bastidor,matricula FROM vehiculo WHERE id=?;";
+	private static final String SQL_DELETE = "DELETE FROM vehiculo WHERE id=?;";
+	private static final String SQL_INSERT = "INSERT INTO taller.vehiculo (numero_bastidor, matricula, id_propietario, id_combustible, id_modelo) VALUES (?, ?, ?, ?, ?);";
+	private static final String SQL_UPDATE = "UPDATE combustible SET  numero_bastidor=?, matricula=? WHERE id=?;";
 
 	
 	
@@ -43,7 +43,7 @@ public class VehiculoDAO {
 //  PARA METODO DETALLE (GETBYID)
 	public Vehiculo getById(int id) {   									// SI recibe parametro  ( UNA ID para identificar el Vehiculo que queremos listar)
 
-		Vehiculo c = null;
+		Vehiculo v = null;
 		String sql = SQL_GET_BY_ID;
 
 		try (Connection conn = ConnectionManager.getConnection(); 			// Establezco conexion
@@ -55,13 +55,13 @@ public class VehiculoDAO {
 			try (ResultSet rs = pst.executeQuery()) {						// ejecuto contulta mediante EXECUTECUERY PORQUE es una SELECT
 
 				while (rs.next()) {
-					 c = mapeo(rs);			
+					 v = mapeo(rs);			
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return c;														 	// devuelve un objeto con los datos del Vehiculo que ha encontrado en bbdd
+		return v;														 	// devuelve un objeto con los datos del Vehiculo que ha encontrado en bbdd
 	}
 		
 	
@@ -87,13 +87,13 @@ public class VehiculoDAO {
 		boolean isCreate = false;
 
 		try ( Connection conn = ConnectionManager.getConnection();
-			  PreparedStatement pst = conn.prepareStatement(SQL_CREATE);){		
-		
-			pst.setString(1, vehiculo.getBastidor());
+			  PreparedStatement pst = conn.prepareStatement(SQL_INSERT);){		
+			
+			pst.setString(1, vehiculo.getNumeroBastidor());
 			pst.setString(2, vehiculo.getMatricula());
-			pst.setInt(3, vehiculo.getIdPropietario());
-			pst.setInt(4, vehiculo.getIdCombustible());
-			pst.setInt(5, vehiculo.getIdModelo());
+			pst.setInt(3, vehiculo.getPersona().getId());
+			pst.setInt(4, vehiculo.getCombustible().getId());
+			pst.setInt(5, vehiculo.getModelo().getId());
 		
 				if ( pst.executeUpdate() == 1 ) { 							// UPDATE porque es INSERT
 					isCreate = true;
@@ -106,18 +106,18 @@ public class VehiculoDAO {
 		}
 	
 		
-// PARA METODO MODIFICAR (INSERT)
+// PARA METODO MODIFICAR (update)
 	public boolean update(Vehiculo vehiculo) throws SQLException  { 	// SI recibe parametro  ( UNA ID para identificar el Vehiculo que queremos MODIFICAR)
 		boolean resul  = false;
 		try ( Connection conn = ConnectionManager.getConnection();
 			  PreparedStatement pst = conn.prepareStatement(SQL_UPDATE);
 			){
 		
-			pst.setString(1, vehiculo.getBastidor());
+			pst.setString(1, vehiculo.getNumeroBastidor());
 			pst.setString(2, vehiculo.getMatricula());
-			pst.setInt(3, vehiculo.getIdPropietario());
-			pst.setInt(4, vehiculo.getIdCombustible());
-			pst.setInt(5, vehiculo.getIdModelo());
+			pst.setInt(3, vehiculo.getPersona().getId());
+			pst.setInt(4, vehiculo.getCombustible().getId());
+			pst.setInt(5, vehiculo.getModelo().getId());
 			pst.setInt(6, vehiculo.getId());
 			
 			if(  pst.executeUpdate() == 1 ){								// UPDATE porque es UPDATE
@@ -130,13 +130,13 @@ public class VehiculoDAO {
 	
 // METODO PARA MAPEO PARAMETROS, PARECIDO A ROWMAPPER 
 	private Vehiculo mapeo(ResultSet rs) throws SQLException {
+		
 		Vehiculo v = new Vehiculo();
 		v.setId(rs.getInt("id"));
-		v.setBastidor(rs.getString("bastidor"));
+		v.setNumeroBastidor(rs.getString("numero_bastidor"));
 		v.setMatricula(rs.getString("matricula"));
-		v.setIdPropietario(rs.getInt("idPropietario"));
-		v.setIdCombustible(rs.getInt("idCombustible"));
-		v.setIdModelo(rs.getInt("idModelo"));
+// no recogo id-propietario , id_combustible, id_modelo porque muestro los datos del cliente, del combustible y del modelo al llamar al metodo GET en swagger.
+// VER SERCICIO . en el servicio incluyo estos datos en el arraylist de vehiculos
 		return v;
 	}
 
