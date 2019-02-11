@@ -46,7 +46,7 @@ public class StockDaoImpl implements StockDao {
 
 	private Stock rowMapper(ResultSet rs) throws SQLException {
 		Stock s = null;
-		s.setId(rs.getInt("id_stock"));
+		s.setId(rs.getInt("s.id"));
 		s.setPreparado(rs.getBoolean("preparacion"));
 		s.setVendido(rs.getString("vendido"));
 
