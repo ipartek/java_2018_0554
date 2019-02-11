@@ -25,30 +25,17 @@ public class PedidoController {
 	public ResponseEntity crear(@RequestBody Pedido pedido) {
 
 		ResponseEntity response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-//		try {
-//
-//			if (combustibleService.crear(pedido)) {
-//				response = new ResponseEntity(pedido, HttpStatus.CREATED);
-//			} else {
-//				response = new ResponseEntity(HttpStatus.CONFLICT);
-//			}
-//
-//		} catch (CombustibleException e) {
-//
-//			Mensaje mensaje = new Mensaje(e.getMessage());
-//			Set<ConstraintViolation<Combustible>> violations = e.getViolations();
-//
-//			if (violations != null) {
-//				mensaje.addViolations(e.getViolations());
-//				response = new ResponseEntity(mensaje, HttpStatus.BAD_REQUEST);
-//			} else {
-//				response = new ResponseEntity(mensaje, HttpStatus.CONFLICT);
-//			}
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-//		}
+		
+		try {
+			if (pedidoService.insert(pedido)) {
+				response = new ResponseEntity(pedido, HttpStatus.CREATED);
+			} else {
+				response = new ResponseEntity(HttpStatus.CONFLICT);
+			}
+		}catch (Exception e) {
+			response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
 		return response;
 
 	}

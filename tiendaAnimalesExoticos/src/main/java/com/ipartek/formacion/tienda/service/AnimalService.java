@@ -18,5 +18,5 @@ public interface AnimalService {
 	 */
 	Animal detalle(int idAnimal);
 
-
+	
 }

@@ -26,6 +26,6 @@ public class AnimalServiceImpl implements AnimalService{
 
 	@Override
 	public Animal detalle(int idAnimal) {
-		return null;
+		return animalDao.detalle(idAnimal);
 	}
 }
