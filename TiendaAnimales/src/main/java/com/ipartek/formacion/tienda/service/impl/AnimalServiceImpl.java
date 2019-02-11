@@ -16,11 +16,15 @@ public class AnimalServiceImpl implements AnimalService {
 	AnimalDAO animalDAO;
 
 	@Override
+	/**
+	 * Método para listar todos los animales de la BD.
+	 * @return ArrayList<Animal>
+	 */
 	public ArrayList<Animal> listar() {
 
-		ArrayList<Animal> personas = animalDAO.getAll();
+		ArrayList<Animal> animales = animalDAO.getAll();
 
-		return personas;
+		return animales;
 
 	}
 

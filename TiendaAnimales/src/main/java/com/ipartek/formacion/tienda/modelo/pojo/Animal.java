@@ -1,17 +1,25 @@
 package com.ipartek.formacion.tienda.modelo.pojo;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Animal {
 
 	private int id;
 
+	@NotEmpty
+	@Size(min = 1, max = 100)
 	private String nombre;
-
+	@NotEmpty
+	@Size(min = 1, max = 100)
 	private String tipo;
-
+	@NotEmpty
+	@Size(min = 1, max = 100)
 	private String dieta;
-
+	@NotEmpty
 	private float peso;
-
+	@NotEmpty
 	private float precio;
 
 	public Animal() {

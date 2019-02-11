@@ -29,11 +29,11 @@ public class SwaggerConfig {
     }
      
     private ApiInfo apiInfo() {
-        ApiInfo apiInfo = new ApiInfo("Taller API",
+        ApiInfo apiInfo = new ApiInfo("Tienda Animales API",
                                         "",
                                         "1.0",
                                         "",
-                                        new Contact("Ander Solana", "https://github.com/ipartek/java_2018_0508/tree/master/youtube", "auraga@ipartek.com"),
+                                        new Contact("Ander Solana", "https://github.com/ipartek/java_2018_0554/tree/ander/TiendaAnimales", "andersolanad@gmail.com"),
                                         "Apache License",
                                         "");
         return apiInfo;

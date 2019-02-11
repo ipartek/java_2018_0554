@@ -17,21 +17,23 @@ import com.ipartek.formacion.tienda.service.AnimalService;
 @RestController
 @RequestMapping("api/animal")
 public class AnimalController {
-	
+
 	@Autowired
 	AnimalService animalService;
-	
+
 	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
 	/**
 	 * Método para listar todos los tipos de animales existentes en la Base de Datos
+	 * 
 	 * @return ArrayList<Animal>
 	 * @return 200 <b>Si se devuelve un array con animales</b>
-	 * @return 404 Si <b>no existen animales en la Base de Datos</b> (P.E: Si la BD está vacia)
-	 * @return 500 Si ocurre un <b>error inesperado</b> (P.E: Si se introducen mal los datos)
+	 * @return 404 Si <b>no existen animales en la Base de Datos</b> (P.E: Si la BD
+	 *         está vacia)
+	 * @return 500 Si ocurre un <b>error inesperado</b> (P.E: Si se introducen mal
+	 *         los datos)
 	 */
 	public ResponseEntity<ArrayList<Animal>> listar() {
-		ResponseEntity<ArrayList<Animal>> response = new ResponseEntity<ArrayList<Animal>>(
-				HttpStatus.NOT_FOUND);
+		ResponseEntity<ArrayList<Animal>> response = new ResponseEntity<ArrayList<Animal>>(HttpStatus.NOT_FOUND);
 		try {
 			ArrayList<Animal> animales = animalService.listar();
 			if (!animales.isEmpty()) {

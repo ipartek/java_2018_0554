@@ -18,7 +18,8 @@ public class Persona {
 	@NotEmpty
 	@Size(min = 10, max = 15)
 	private String telefono;
-
+	@NotEmpty
+	@Size(min = 1, max = 100)
 	private String email;
 
 	public Persona() {

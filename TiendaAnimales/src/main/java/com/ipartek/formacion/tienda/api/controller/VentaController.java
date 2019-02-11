@@ -29,8 +29,10 @@ public class VentaController {
 	 *              <b>Animal</b> del Stock.
 	 * @return 201 Si se <b>genera la venta</b>
 	 * @return 404 Si no es posible crear la venta
-	 * @return 409 Si ocurre una <b>VentaException</b> (P.E: si no hay stock de ese animal) 
-	 * @return 500 Si ocurre un <b>fallo no esperado</b> (P.E: Los datos o su formato no son correctos)
+	 * @return 409 Si ocurre una <b>VentaException</b> (P.E: si no hay stock de ese
+	 *         animal)
+	 * @return 500 Si ocurre un <b>fallo no esperado</b> (P.E: Los datos o su
+	 *         formato no son correctos)
 	 * @throws <b>VentaException:</b> Si no existe Stock para el animal a comprar
 	 */
 	@RequestMapping(value = { "/" }, method = RequestMethod.POST)
@@ -39,7 +41,7 @@ public class VentaController {
 		try {
 			if (ventaService.crear(venta)) {
 				response = new ResponseEntity<Mensaje>(new Mensaje("Venta creada con éxito."), HttpStatus.CREATED);
-			}else {
+			} else {
 				throw new VentaException(VentaException.EXCEPTION_NO_STOCK);
 			}
 		} catch (VentaException e) {
