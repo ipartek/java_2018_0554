@@ -1,0 +1,79 @@
+package com.ipartek.formacion.taller.modelo.pojo;
+
+public class Vehiculo {
+
+	private int id;
+
+	private String numeroBastidor;
+
+	private String matricula;
+
+	private Combustible combustible;
+
+	private Modelo modelo;
+
+	public Vehiculo() {
+		super();
+		this.id = -1;
+		this.numeroBastidor = "";
+		this.matricula = "";
+		this.combustible = new Combustible();
+		this.modelo = new Modelo();
+	}
+
+	public Vehiculo(int id, String numeroBastidor, String matricula, Combustible combustible, Modelo modelo) {
+		this();
+		setId(id);
+		setNumeroBastidor(numeroBastidor);
+		setMatricula(matricula);
+		setCombustible(combustible);
+		setModelo(modelo);
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNumeroBastidor() {
+		return numeroBastidor;
+	}
+
+	public void setNumeroBastidor(String numeroBastidor) {
+		this.numeroBastidor = numeroBastidor;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public Combustible getCombustible() {
+		return combustible;
+	}
+
+	public void setCombustible(Combustible combustible) {
+		this.combustible = combustible;
+	}
+
+	public Modelo getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(Modelo modelo) {
+		this.modelo = modelo;
+	}
+
+	@Override
+	public String toString() {
+		return "Vehiculo [id=" + id + ", numeroBastidor=" + numeroBastidor + ", matricula=" + matricula
+				+ ", combustible=" + combustible + ", modelo=" + modelo + "]";
+	}
+
+}

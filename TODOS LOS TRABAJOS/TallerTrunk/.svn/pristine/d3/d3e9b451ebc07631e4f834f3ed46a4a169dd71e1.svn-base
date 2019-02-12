@@ -1,0 +1,67 @@
+package com.ipartek.formacion.taller.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ipartek.formacion.taller.modelo.dao.CombustibleDAO;
+import com.ipartek.formacion.taller.modelo.dao.ModeloDAO;
+import com.ipartek.formacion.taller.modelo.dao.VehiculoDAO;
+import com.ipartek.formacion.taller.modelo.pojo.Vehiculo;
+import com.ipartek.formacion.taller.service.VehiculoService;
+
+@Service
+public class VehiculoServiceImpl implements VehiculoService{
+
+	@Autowired
+	VehiculoDAO vehiculoDAO;
+	
+	@Autowired
+	CombustibleDAO combustibleDAO;
+	
+	@Autowired
+	ModeloDAO modeloDAO;
+	
+	
+	@Override
+	public List<Vehiculo> listar() {
+		
+		ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();		
+		vehiculos = (ArrayList<Vehiculo>) vehiculoDAO.getAll();
+		
+		for ( Vehiculo v : vehiculos ) {
+			
+			v.setCombustible( combustibleDAO.getByVehiculoId( v.getId() ) );
+			
+		}
+		
+		return vehiculos;
+	}
+
+	@Override
+	public Vehiculo detalle(int idVehiculo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean eliminar(int idVehiculo) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean crear(Vehiculo vehiculo) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean modificar(Vehiculo vehiculo) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

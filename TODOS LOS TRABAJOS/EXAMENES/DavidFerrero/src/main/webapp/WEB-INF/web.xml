@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <servlet-name>MantenimientoServlet</servlet-name>
+    <servlet-class>com.ipartek.formacion.controladores.MantenimientoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MantenimientoServlet</servlet-name>
+    <url-pattern>/MantenimientoServlet</url-pattern>
+  </servlet-mapping>
+</web-app>

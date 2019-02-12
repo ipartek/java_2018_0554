@@ -36,7 +36,8 @@ public class VehiculoServiceImpl implements VehiculoService {   // AQUI EN SERVI
 	
 	@Autowired
 	ModeloDAO modeloDAO;
- 	@Autowired
+ 	
+	@Autowired
 	private Validator validator;        // Para validar
 	
 	
@@ -46,11 +47,12 @@ public class VehiculoServiceImpl implements VehiculoService {   // AQUI EN SERVI
 		ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();				// Creo un arraylista para guardar los datos del DAO  
 		vehiculos = (ArrayList<Vehiculo>) vehiculoDAO.getAll();					// Guardo en el arrylist los datos del metodo GET_ALL del DAO
 		
-		
+
 		for ( Vehiculo v : vehiculos ) {  										//recorro el array que he creado con los datos del dao para introducirle los datos de la persona y del combustible
 			v.setCombustible( combustibleDAO.getByIdVehiculo( v.getId() ) );  	// IMPORTANTE: obtengo la id del vehiculo del que quiero coger los datos Y le introduzco a ese vehiculo los datos del combustible. PARA ESTO  UTILIZO OTRO METODO DAO. GET_BY_ID_VEHICULO.    
 			v.setPersona( personaDAO.getByIdVehiculo( v.getId() ) );  																				 
 		}
+		
 		return vehiculos;
 	}
 	
