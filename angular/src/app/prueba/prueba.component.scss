@@ -1,0 +1,13 @@
+$bg-color: grey;
+
+div{
+    background-color:$bg-color;
+    p{
+        color:white;
+    }
+    span{
+        display: block;
+        font-size: 2em;
+        background-color:coral;
+    }
+}
