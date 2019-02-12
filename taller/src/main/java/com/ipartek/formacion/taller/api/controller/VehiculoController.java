@@ -36,11 +36,11 @@ public class VehiculoController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public ResponseEntity<ArrayList<Vehiculo>> listar() {
 
-		ResponseEntity<ArrayList<Vehiculo>> response = new ResponseEntity<ArrayList<Vehiculo>>(HttpStatus.NOT_FOUND); //RESPUESTA DE TIPO ARRAY LIST DE OBJETOS DE TIPO VEHICULO CON CODIGO DE ESTADO POR DEFECTO 404
+		ResponseEntity<ArrayList<Vehiculo>> response = new ResponseEntity<ArrayList<Vehiculo>>(HttpStatus.NOT_FOUND); 	//RESPUESTA DE TIPO ARRAY LIST DE OBJETOS DE TIPO VEHICULO CON CODIGO DE ESTADO POR DEFECTO 404
 		try {
-			ArrayList<Vehiculo> vehiculos = (ArrayList<Vehiculo>) vehiculoService.listar(); 			// llenar el array list de vehiculos con LOS DATOS QUE obtiene el DAO. Al dao se le llama a traves del service
-			if (!vehiculos.isEmpty()) {   																// si el array que devuelve el SERVICIO esta lleno. (distinto a empty . OJO AL ! PARA DISTINTO)
-				response = new ResponseEntity<ArrayList<Vehiculo>>(vehiculos, HttpStatus.OK);			// CREO LA RESPUESTA con los vehiculos y el codigo de estado 200
+			ArrayList<Vehiculo> vehiculos = (ArrayList<Vehiculo>) vehiculoService.listar(); 							// llenar el array list de vehiculos con LOS DATOS QUE obtiene el DAO. Al dao se le llama a traves del service
+			if (!vehiculos.isEmpty()) {   																				// si el array que devuelve el SERVICIO esta lleno. (distinto a empty . OJO AL ! PARA DISTINTO)
+				response = new ResponseEntity<ArrayList<Vehiculo>>(vehiculos, HttpStatus.OK);							// CREO LA RESPUESTA con los vehiculos y el codigo de estado 200
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,9 +91,9 @@ public class VehiculoController {
 	
 	// crear
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public ResponseEntity crear(@RequestBody VehiculoPost vehiculoPost) {  // nuevo  POJO VEHICULOPOST EN API.POJO
+	public ResponseEntity crear(@RequestBody VehiculoPost vehiculoPost) { 					// nuevo  POJO VEHICULOPOST EN API.POJO
 
-		ResponseEntity response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);  //inicializo respuesta con codigo 404 por defecto
+		ResponseEntity response = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);  	//inicializo respuesta con codigo 404 por defecto
 		try {
 
 			//TODO validar
@@ -101,21 +101,21 @@ public class VehiculoController {
 			
 			//mapear veiculoPost a un vehiculo
 			
-			Vehiculo v = new Vehiculo();   // creo un vehiculo donde introduzco los datos que me llegan por parametros
+			Vehiculo v = new Vehiculo();   													// creo un vehiculo donde introduzco los datos que me llegan por parametros
 			v.setMatricula(vehiculoPost.getMatricula());
 			v.setNumeroBastidor(vehiculoPost.getNumeroBastidor());
-			v.setCombustible(new Combustible(vehiculoPost.getIdCombustible(), ""));  // combustible modelo y persona son objetos
+			v.setCombustible(new Combustible(vehiculoPost.getIdCombustible(), ""));  		// combustible modelo y persona son objetos
 			v.setModelo(new Modelo (vehiculoPost.getIdModelo(), ""));
-			v.setPersona(new Persona (vehiculoPost.getIdPropietario(), "", "", "",""));  // el pojo vehiucloPost tieene 5 parametros. uno es la id del propietario. los demas en blanco 
+			v.setPersona(new Persona (vehiculoPost.getIdPropietario(), "", "", "","")); 	// el pojo vehiucloPost tieene 5 parametros. uno es la id del propietario. los demas en blanco 
 		
 			
 			// TODO SERVICE IMPLEMENTAR propietario dentro de pojo vehiculo
 			
-			if (vehiculoService.crear(v)) {  							// SI EL SERVICIO DEVUELVE TRUE. (NO HACE FALTA PONER == true CUANDO ES TRUE
+			if (vehiculoService.crear(v)) {  												// SI EL SERVICIO DEVUELVE TRUE. (NO HACE FALTA PONER == true CUANDO ES TRUE
 				
-				response = new ResponseEntity(v, HttpStatus.CREATED);  	// CREO LA RESPUESTA. envio el vehiculo que he creado
+				response = new ResponseEntity(v, HttpStatus.CREATED);  						// CREO LA RESPUESTA. envio el vehiculo que he creado
 			} else {
-				response = new ResponseEntity(HttpStatus.CONFLICT);    	// si hay conflicto con los datos y por ejemplo estan repetidos 
+				response = new ResponseEntity(HttpStatus.CONFLICT);    						// si hay conflicto con los datos y por ejemplo estan repetidos 
 			}
 
 		} catch (Exception e) {
