@@ -4,9 +4,9 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
-import com.ipartek.formacion.taller.modelo.pojo.Modelo;
+public class ModeloException extends ServiceException  {
 
-public class ModeloException extends Exception {
+	
 
 	private static final long serialVersionUID = 1L;
 
@@ -16,24 +16,9 @@ public class ModeloException extends Exception {
 
 	public static final String EXCEPTION_VIOLATIONS = "No cumple las condiciones de Validación";
 
-	private Set<ConstraintViolation<Modelo>> violations;
-
-	public ModeloException(String message) {
-		super(message);
-		this.violations = null;
-	}
-
-	public ModeloException(String message, Set<ConstraintViolation<Modelo>> violations) {
-		this(message);
-		this.setViolations(violations);
-	}
-
-	public Set<ConstraintViolation<Modelo>> getViolations() {
-		return violations;
-	}
-
-	public void setViolations(Set<ConstraintViolation<Modelo>> violations) {
-		this.violations = violations;
+	
+	public ModeloException(String message, Set<ConstraintViolation> violations) {
+		super(message, violations);
 	}
 
 }

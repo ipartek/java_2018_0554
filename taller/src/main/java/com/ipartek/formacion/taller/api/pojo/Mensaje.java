@@ -5,10 +5,9 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
-import com.ipartek.formacion.taller.modelo.pojo.Combustible;
 import com.ipartek.formacion.taller.modelo.pojo.Rol;
 
-public class Mensaje {
+public class Mensaje<T> {
 
 	private String mensaje;
 	private ArrayList<ErrorMensaje> errores;
@@ -82,11 +81,11 @@ public class Mensaje {
 
 	}
 
-	public void addViolations(Set<ConstraintViolation<Combustible>> violations) {
+	public void addViolations(Set<ConstraintViolation<T>> violations) {
 		
 		if ( violations != null ) {
 			this.errores = new ArrayList<ErrorMensaje>();			
-			for( ConstraintViolation<Combustible> v : violations ) {			
+			for( ConstraintViolation<T> v : violations ) {			
 				ErrorMensaje errorMensaje = new ErrorMensaje( v.getPropertyPath().toString() , v.getMessage() );
 				this.errores.add(errorMensaje);				
 			}				

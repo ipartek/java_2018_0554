@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ipartek.formacion.taller.api.controller.pojo.VehiculoPost;
-import com.ipartek.formacion.taller.modelo.pojo.Combustible;
-import com.ipartek.formacion.taller.modelo.pojo.Modelo;
-import com.ipartek.formacion.taller.modelo.pojo.Persona;
 import com.ipartek.formacion.taller.modelo.pojo.Vehiculo;
 import com.ipartek.formacion.taller.service.PersonaService;
 import com.ipartek.formacion.taller.service.VehiculoService;
