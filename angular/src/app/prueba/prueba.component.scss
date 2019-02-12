@@ -1,0 +1,25 @@
+/* Estilos propios del Componente */
+
+// Tambien permitido comentario de liena en SASS, NO se en el codigo CSS
+
+div{
+    background: grey;
+    padding: 1em;
+
+    span{
+        font-size: 50px;
+        display: block;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        color: pink;
+    }
+
+    p{
+        color: white;
+    }
+
+    button{
+        color: teal;
+        font-size: 24px;
+    }
+}    

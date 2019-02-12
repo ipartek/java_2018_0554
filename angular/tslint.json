@@ -1,3 +1,4 @@
+/*
 {
   "rulesDirectory": [
     "node_modules/codelyzer"
@@ -129,3 +130,4 @@
     "directive-class-suffix": true
   }
 }
+*/
