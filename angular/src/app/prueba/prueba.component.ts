@@ -7,9 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PruebaComponent implements OnInit {
 
-  constructor() { }
+  // Variable tipo numérica
+  contador : number; //Nombre y tipo
+
+  constructor() {
+    console.trace('Prueba component constructor');
+    
+    //Inicializar las variables
+    this.contador = 0;
+
+
+   }
 
   ngOnInit() {
+    console.trace('Prueba component ngOnInit');
+  }
+
+  sumar(){
+    console.trace('Click boton sumar');
+    this.contador++;
   }
 
 }
