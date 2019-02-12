@@ -1,51 +1,46 @@
 package com.ipartek.formacion.modelo.pojo;
 
 public class Venta {
-	private long id;
-	private Usuario usuario;
-	private Stock stock;
+	
+	private int id;
+	private int idUsuario;
+	private int idAnimal;
 	
 	public Venta() {
 		super();
 		this.id = -1;
-		this.usuario = new Usuario();
-		this.stock = new Stock();
-	}
-	
-	public Venta(long id, Usuario usuario, Stock stock) {
-		super();
-		setId(id);
-		setUsuario(usuario);
-		setStock(stock);
+		this.idAnimal = -1;
+		this.idUsuario = -1;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public int getIdUsuario() {
+		return idUsuario;
 	}
 
-	public void setUsuario(Usuario usario) {
-		this.usuario = usario;
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
-	public Stock getStock() {
-		return stock;
+	public int getIdAnimal() {
+		return idAnimal;
 	}
 
-	public void setStock(Stock stock) {
-		this.stock = stock;
+	public void setIdAnimal(int idAnimal) {
+		this.idAnimal = idAnimal;
 	}
 
 	@Override
 	public String toString() {
-		return "Venta [id=" + id + ", usuario=" + usuario + ", stock=" + stock + "]";
+		return "Venta [id=" + id + ", idUsuario=" + idUsuario + ", idAnimal=" + idAnimal + "]";
 	}
+	
 	
 }

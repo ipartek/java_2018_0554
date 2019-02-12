@@ -1,12 +1,13 @@
 package com.ipartek.formacion.modelo.pojo;
 
 public class Animal {
+	
 	private long id;
 	private Especie especie;
 	private Dieta dieta;
 	private String nombre;
 	private float precio;
-	
+
 	public Animal() {
 		super();
 		this.id = -1;
@@ -15,7 +16,7 @@ public class Animal {
 		this.nombre = "";
 		this.precio = 0;
 	}
-	
+
 	public Animal(long id, Especie especie, Dieta dieta, String nombre, float precio) {
 		super();
 		setId(id);
