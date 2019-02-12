@@ -4,7 +4,9 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
-public class CombustibleException extends ServiceException {
+import com.ipartek.formacion.taller.modelo.pojo.Combustible;
+
+public class CombustibleException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
@@ -14,10 +16,29 @@ public class CombustibleException extends ServiceException {
 	
 	public static final String EXCEPTION_VIOLATIONS = "No cumple las condiciones de Validación";
 
-	public CombustibleException(String message, Set<ConstraintViolation> violations) {
-		super(message, violations);		
+	
+	private Set<ConstraintViolation<Combustible>> violations;
+	
+	public CombustibleException(String message) {
+		super(message);				
+		this.violations = null;
 	}
 
+
+	public CombustibleException(String message, Set<ConstraintViolation<Combustible>> violations) {
+		this(message);
+		this.setViolations(violations);
+	}
+
+
+	public Set<ConstraintViolation<Combustible>> getViolations() {
+		return violations;
+	}
+
+
+	public void setViolations(Set<ConstraintViolation<Combustible>> violations) {
+		this.violations = violations;
+	}
 	
 	
 }

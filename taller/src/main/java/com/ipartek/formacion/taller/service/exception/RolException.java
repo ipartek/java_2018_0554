@@ -6,10 +6,8 @@ import javax.validation.ConstraintViolation;
 
 import com.ipartek.formacion.taller.modelo.pojo.Rol;
 
-public class RolException extends ServiceException {
+public class RolException extends Exception{
 	
-
-
 	private static final long serialVersionUID = 1L;
 
 	public static final String EXCEPTION_EXIST = "El nombre del rol ya existe";
@@ -18,9 +16,25 @@ public class RolException extends ServiceException {
 
 	public static final String EXCEPTION_VIOLATIONS = "No cumple las condiciones de Validación";
 	
+	private Set<ConstraintViolation<Rol>> violations;
 	
-	public RolException(String message, Set<ConstraintViolation> violations) {
-		super(message, violations);	
+	public RolException(String message) {
+		super(message);				
+		this.violations = null;				
 	}
 	
+	public RolException(String message, Set<ConstraintViolation<Rol>> violations) {
+		this(message);
+		this.setViolations(violations);
+	}
+	
+	public Set<ConstraintViolation<Rol>> getViolations() {
+		return violations;
+	}
+
+
+	public void setViolations(Set<ConstraintViolation<Rol>> violations) {
+		this.violations = violations;
+	}
+
 }

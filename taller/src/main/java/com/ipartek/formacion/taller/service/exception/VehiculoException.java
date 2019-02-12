@@ -4,16 +4,37 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
-public class VehiculoException extends ServiceException {
+import com.ipartek.formacion.taller.modelo.pojo.Combustible;
 
-	
+public class VehiculoException extends Exception {
+
 	private static final long serialVersionUID = 1L;
 
-	public static final String EXCEPTION_INTEGRITY = "El propietario, modelo o combustible no es correcto";
-
-	public VehiculoException(String message, Set<ConstraintViolation> violations) {
-		super(message, violations);		
+	// TODO poner algo mas correcto
+	public static final String EXCEPTION_INTEGRITY = "Soy una Tetera en MySQL";
+	
+	private Set<ConstraintViolation<Combustible>> violations;
+	
+	public VehiculoException(String message) {
+		super(message);				
+		this.violations = null;
 	}
 
+
+	public VehiculoException(String message, Set<ConstraintViolation<Combustible>> violations) {
+		this(message);
+		this.setViolations(violations);
+	}
+
+
+	public Set<ConstraintViolation<Combustible>> getViolations() {
+		return violations;
+	}
+
+
+	public void setViolations(Set<ConstraintViolation<Combustible>> violations) {
+		this.violations = violations;
+	}
+	
 	
 }
