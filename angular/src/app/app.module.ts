@@ -9,6 +9,8 @@ import { PruebaComponent } from './components/prueba/prueba.component';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { Error404Component } from './components/error404/error404.component';
+import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
+import { Directiva1Directive } from './directives/directiva1.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { Error404Component } from './components/error404/error404.component';
     PruebaComponent,
     HomeComponent,
     AboutComponent,
-    Error404Component
+    Error404Component,
+    PaginaDirectivaComponent,
+    Directiva1Directive
   ],
   imports: [
     BrowserModule,
