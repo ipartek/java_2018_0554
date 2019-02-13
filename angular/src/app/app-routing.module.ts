@@ -6,6 +6,8 @@ import { JuegoClickComponent } from './juego-click/juego-click.component';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { Error404Component } from './components/error404/error404.component';
+import { NombreComponent } from './components/nombre/nombre.component';
+import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
 
 const routes: Routes = [
   {
@@ -20,6 +22,14 @@ const routes: Routes = [
   { path: 'juego',
   component: JuegoClickComponent,
   data: { title: 'juego' }
+  },
+  { path: 'nombre/:nombre/:apellido',
+  component: NombreComponent,
+  data: { title: 'nombre' }
+  },
+  { path: 'directiva',
+  component: PaginaDirectivaComponent,
+  data: { title: 'directiva' }
   },
   { path: '404',
   component: Error404Component,

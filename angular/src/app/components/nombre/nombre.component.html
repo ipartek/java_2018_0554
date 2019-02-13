@@ -1,0 +1,25 @@
+<div class="jumbotron">
+  <p> 
+    <span *ngIf="nombre=='noEspecificado' && apellido=='noEspecificado'" class="text-danger">
+      Debes proporcionar un nombre y un apellido por parámetros
+    </span>
+    <span *ngIf="nombre!='noEspecificado' && apellido!='noEspecificado'" class="text-success">
+      Hola <b>{{nombre}} {{apellido}}</b>
+    </span>
+  </p>
+  <ul>
+    <li>
+        <a [routerLink]="['/nombre/Ander/Solana']">Ejemplo llamada correcta, porque le pasamos un <b>Nombre</b> y un <b>Apellido</b></a>
+    </li>
+    <li>
+        <a [routerLink]="['/nombre']">Llamada incorrecta porque <span class="text-danger"><b>no enviamos parámetros</b></span></a>
+    </li>
+    <li>
+        <a [routerLink]="['/nombre/noEspecificado/noEspecificado']">Ejemplo llamada correcta, pero no considerada como tal porque se están enviando <span class="text-warning"><b>los parámetros por defecto</b></span></a>
+    </li>
+  </ul>
+  
+  
+  
+</div>
+
