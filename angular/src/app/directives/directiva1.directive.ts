@@ -23,4 +23,9 @@ export class Directiva1Directive {
       this.element.nativeElement.style.backgroundColor = "white";
     }
 
+    publicCountdown(){
+      //if()
+      this.element.nativeElement.style.color="green";
+    }
+
 }
