@@ -1,12 +1,12 @@
 <div>
   <p>Cuidado este juego puede crear adicción y lesiones!!!</p>
-  <button (click)="start()" disabled="{{ (tiempo == 10)?'':'disabled' }}"> 
+  <button class="btn btn-primary" (click)="start()" disabled="{{ (tiempo == 10)?'':'disabled' }}"> 
       {{ (tiempo == 10)?'Comenzar':'Jugando' }}
   </button>
 
-  <button *ngIf="tiempo==0" (click)="restart()">Nueva Partida</button>
+  <button *ngIf="tiempo==0" (click)="restart()" class="btn btn-danger">Nueva Partida</button>
 
   <span>{{tiempo}}</span>
   <span>{{contador}}</span>
-  <button (click)="sumar()" >DALE RAPIDO</button>
+  <button (click)="sumar()" class="btn btn-success" >DALE RAPIDO</button>
 </div>
