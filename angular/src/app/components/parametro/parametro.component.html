@@ -1,0 +1,10 @@
+<p>Esperamos recibir un parámetro llamado <b>repeticiones</b></p>
+<p>Mirar <b>app-routing.module.ts</b> => path: 'about/:repeticiones', component: AboutComponent</p>
+<p>ejemplo de llamada correcta (es un número): /about/5</p>
+<p>ejemplo de llamada incorrecta (no es un número): /about/5hgf</p>
+<p>* Acordarse de inyectar en el constructor: <b>private route: ActivatedRoute</b> para poder acceder al parámetro</p>
+<p>realizar en el evento <b class="text-success">ngOnInit</b> no en el <b class="text-danger">constructor</b></p>
+<p><a href="https://angular.io/guide/router#configuration" target="_blank">Documentación oficial</a></p>
+<p>
+  repeticiones: {{repeticiones}}
+</p>

@@ -1,0 +1,27 @@
+div#juego{
+    background: #666;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+
+    div{
+        display: flex;
+        flex-direction: column;
+        margin: 5px 20px;
+
+        span{
+            font-size: 2.5em;
+            color: orange;
+            margin: 20px;
+        }
+
+        button{
+            color: orange;
+            font-size: 1.5em;
+            padding: 5px 20px;
+            margin: 20px;
+        }
+    }
+}
