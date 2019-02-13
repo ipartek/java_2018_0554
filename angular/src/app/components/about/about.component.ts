@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AboutComponent implements OnInit {
 
-  repeticiones;
+  repeticiones: number;
 
   constructor(
     private route: ActivatedRoute
