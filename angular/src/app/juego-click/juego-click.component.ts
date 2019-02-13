@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+const TIEMPO_JUEGO: number = 10;
+const RESET_CONTADOR: number = 0;
+
 @Component({
   selector: 'app-juego-click',
   templateUrl: './juego-click.component.html',
@@ -14,8 +17,8 @@ export class JuegoClickComponent implements OnInit {
   constructor() { 
     console.trace('Prueba component constructor');
 
-    this.contador = 0;
-    this.tiempo = 10;
+    this.contador = RESET_CONTADOR;
+    this.tiempo = TIEMPO_JUEGO;
   }
 
   ngOnInit() {
@@ -28,7 +31,7 @@ export class JuegoClickComponent implements OnInit {
       that.tiempo--;
 
       if(that.tiempo === 0){
-        document.getElementById("click").setAttribute("disabled", "disabled");
+       document.getElementById("click").setAttribute("disabled", "disabled");
         this.clearInterval(interval);
       }
 
@@ -39,6 +42,12 @@ export class JuegoClickComponent implements OnInit {
     console.trace('Prueba component click sumar');
 
     this.contador++;
+  }
+
+  restart(){
+    this.contador=RESET_CONTADOR;
+    this.tiempo=TIEMPO_JUEGO;
+    document.getElementById("click").removeAttribute("disabled");
   }
 
 }
