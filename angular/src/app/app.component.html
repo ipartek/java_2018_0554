@@ -13,17 +13,17 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#" [routerLink]="['about']" routerLinkActive="active">About</a>
+        <a class="nav-link" href="#" [routerLink]="['about/1']" routerLinkActive="active">Recibir un parametro</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="['saludar/dani/zallo']" routerLinkActive="active">Saludar</a>
       </li>
       
     </ul>
   </div>
 </nav>
-<div style="text-align:center">
-  <h1>
-    <span>HOLIIII </span>Welcome to {{ title }}!
-  </h1>
+<main class="container pt-4 ">
   <router-outlet></router-outlet>
-</div>
+</main>
 <!-- nuestro nuevo componente de prueba-->
 <!-- <app-prueba></app-prueba>-->
