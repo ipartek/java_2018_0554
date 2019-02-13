@@ -5,7 +5,8 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 })
 export class Directiva1Directive {
 
-  @Input() appDirectiva1:string;
+  @Input('appDirectiva1') appDirectiva1:string;
+  @Input('colorTexto')colorTexto:string;
 
   constructor(private element: ElementRef) {
     console.trace('Directiva1Directive constructor');
@@ -14,14 +15,18 @@ export class Directiva1Directive {
    @HostListener('mouseenter')
    publiconMouseEnter(){
     console.trace('Directiva1Directive publiconMouseEnter');
-    this.element.nativeElement.style.backgroundColor=this.appDirectiva1;
+
+    this.element.nativeElement.style.backgroundColor = (this.colorTexto) ? this.colorTexto : 'black';
+    this.element.nativeElement.style.color = this.appDirectiva1;
 
    }
 
    @HostListener('mouseleave')
    publiconMouseLeave(){
     console.trace('Directiva1Directive publiconMouseLeave');
-    this.element.nativeElement.style.backgroundColor="purple";
+
+    this.element.nativeElement.style.backgroundColor = 'black';
+    this.element.nativeElement.style.colorTexto = 'white';
   
    }
 
