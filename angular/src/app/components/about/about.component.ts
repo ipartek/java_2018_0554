@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-about',
@@ -7,9 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+  repeticiones;
+
+  constructor(
+    private route: ActivatedRoute
+  ) {
+    console.trace('AboutComponent constructor');
+    this.repeticiones = 0;
+  }
 
   ngOnInit() {
+    console.trace('AboutComponent ngOnInit');
+    //recibir parametro 'repeticiones'
+
+    
+    this.route.paramMap.subscribe( params =>{
+      this.repeticiones = +params.get('repeticiones'); //con el mas se pasa a int
+    });
+    
+
+   // usamos + para hacer parseInt, cuidado que si no es numero retorna NaN ( Not a Number )
+   // this.repeticiones = +this.route.snapshot.params.repeticiones;
+
+
   }
 
 }

@@ -9,7 +9,7 @@ const TIEMPO_JUEGO: number = 10;
   styleUrls: ['./prueba.component.scss']
 })
 export class PruebaComponent implements OnInit {
-
+ 
   // variable tipo numerica
   contador: number;
   tiempo: number;

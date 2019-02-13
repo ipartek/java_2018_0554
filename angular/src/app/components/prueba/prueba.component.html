@@ -1,10 +1,4 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-        <h1>
-          Welcome to {{ title }}!
-        </h1>
-        <img width="300" alt="Angular Logo" src="https://www.bizak.es/wp-content/uploads/2017/10/LOGO-JUEGOS.png">
-      </div>
+<div class="jumbotron mt-3">
 <div>
     <span>{{contador}}</span>
     <span>{{tiempo}}'</span>
@@ -15,4 +9,5 @@
     <button  class="btn btn-info" *ngIf="tiempo!=0"(click)="start()" disabled="{{(tiempo == 10)?'':'disabled'}}">{{(tiempo == 10)?'Comenzar':'Jugando'}}</button>
     <button class="btn btn-info" *ngIf="tiempo==0" (click)="restart()">REINICIAR</button>
     <button  class="btn btn-info"(click)="sumar()">Sumar</button>
+</div>
 </div>
