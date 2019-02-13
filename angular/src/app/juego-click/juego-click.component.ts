@@ -22,6 +22,19 @@ export class JuegoClickComponent implements OnInit {
     console.trace('Prueba component ngOnInit');
   }
 
+  start(){
+    let that = this;
+    let interval = setInterval(function(){
+      that.tiempo--;
+
+      if(that.tiempo === 0){
+        document.getElementById("click").setAttribute("disabled", "disabled");
+        this.clearInterval(interval);
+      }
+
+    }, 1000);
+  }
+
   sumar(){
     console.trace('Prueba component click sumar');
 
