@@ -1,21 +1,18 @@
 $bg-color: grey;
 
 div{
-    background-color:$bg-color;
+    
     max-width: 50%;
     margin:0 auto;
     text-align: center;
     display: flex;
-    color:white;
     font-family:'Yu Gothic';
-    span{  
-        font-size: 2em;
-        background-color:coral;
+    font-size: 2em;
+    span{ 
+       
         flex-grow:3;
     }
-    span:nth-child(1){  
-        font-size: 2em;
-        background-color:teal;
+    span:nth-child(1){ 
         flex-grow:23;
     }
     button{
