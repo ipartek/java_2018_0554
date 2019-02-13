@@ -1,4 +1,9 @@
 <div>
+
+  <button (click)="start()" disabled="{{(tiempo==10)?'':'disabled'}}">
+    {{(tiempo ==10)?'Comenzar':'Jugando'}}
+  </button>
+  <button *ngIf="tiempo==0" (click)='restart()'>Nueva Partida</button>
   <p>
       Te quedan {{tiempo}} segundos.
   </p>

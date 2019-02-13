@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+const TIEMPO_JUEGO: number = 10;
+
 @Component({
   selector: 'app-prueba',
   templateUrl: './prueba.component.html',
@@ -11,12 +13,13 @@ export class PruebaComponent implements OnInit {
   contador: number;
   tiempo:number;
 
+  
+
   constructor() { 
     console.trace('PruebaComponent constructor');
-
     //inicializar variable
     this.contador=0;
-    this.tiempo=10;
+    this.tiempo=TIEMPO_JUEGO;
   }
 
   ngOnInit() {
@@ -25,12 +28,27 @@ export class PruebaComponent implements OnInit {
 
   sumar(){
     console.log('click boton sumar');
-    this.contador++;
+    if(this.tiempo>0){
+      this.contador++;
+    }
   }
 
-  startContador(){
-    setInterval(()=>{
-      this.tiempo--;
-    },10000)
+  start(){
+    let that = this;
+    let intervalo=setInterval(()=>{
+      console.debug('restar');
+      if(that.tiempo>0){
+        that.tiempo--;
+      }else{
+        console.debug('parar');
+        clearInterval(intervalo);
+      }
+    },1000)
+  }
+
+  restart(){
+    console.trace('Se ha reseteado la partida');
+    this.tiempo=TIEMPO_JUEGO;
+    this.contador=0;
   }
 }
