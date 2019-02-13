@@ -9,6 +9,8 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { Error404Component } from './components/error404/error404.component';
 import { SaludarComponent } from './components/saludar/saludar.component';
+import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
+import { Directiva1Directive } from './directives/directiva1.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { SaludarComponent } from './components/saludar/saludar.component';
     HomeComponent,
     AboutComponent,
     Error404Component,
-    SaludarComponent
+    SaludarComponent,
+    PaginaDirectivaComponent,
+    Directiva1Directive
   ],
   imports: [
     BrowserModule,
