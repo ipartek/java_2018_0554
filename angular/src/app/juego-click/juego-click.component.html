@@ -1,11 +1,11 @@
 <div>
   <span>{{tiempo}}</span>
-  <button (click)="start()" disabled="{{(tiempo == 10)?'':'disabled'}}">
+  <button class="btn btn-primary" (click)="start()" disabled="{{(tiempo == 10)?'':'disabled'}}">
     {{(tiempo == 10)?'Comenzar':'Jugando'}}
   </button>
-  <button *ngIf="tiempo==0" (click)="restart()">
+  <button class="btn btn-warning" *ngIf="tiempo==0" (click)="restart()">
     Nueva partida
   </button>
   <span>{{contador}}</span>
-  <button (click)="sumar()" id="click">Click</button>
+  <button class="btn btn-danger" (click)="sumar()" id="click">Click</button>
 </div>
