@@ -6,7 +6,7 @@ import { AboutComponent } from './components/about/about.component';
 import { Error404Component } from './components/error404/error404.component';
 import { SaludarComponent } from './components/saludar/saludar.component';
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
-
+import { FlujoComponent } from './components/flujo/flujo.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent  },
   { path: 'about/:repeticiones', component: AboutComponent  },
@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: '404', component: Error404Component }, 
   { path: 'saludar/:nombre', component: SaludarComponent }, 
   { path: 'directiva', component: PaginaDirectivaComponent }, 
+  { path: 'flujo', component: FlujoComponent }, 
   { path: '**', pathMatch:'full', redirectTo : '404'  }
 
 ];
