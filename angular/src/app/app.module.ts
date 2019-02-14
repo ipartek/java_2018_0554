@@ -16,6 +16,10 @@ import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-d
 import { Directiva1Directive } from './directives/directiva1.directive';
 import { CountdownDirective } from './directives/countdown.directive';
 import { FlujoComponent } from './components/flujo/flujo.component';
+import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
+
+// pipes
+import { MonedaPipe } from './pipes/moneda.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,9 @@ import { FlujoComponent } from './components/flujo/flujo.component';
     PaginaDirectivaComponent,
     Directiva1Directive,
     CountdownDirective,
-    FlujoComponent
+    FlujoComponent,
+    PaginaPipeComponent,
+    MonedaPipe
   ],
   imports: [
     BrowserModule,

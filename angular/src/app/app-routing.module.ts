@@ -6,6 +6,7 @@ import { PruebaComponent } from './components/prueba/prueba.component';
 import { Error404Component } from './components/error404/error404.component';
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
 import { FlujoComponent } from './components/flujo/flujo.component';
+import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'juego', component: PruebaComponent },  
   { path: '404', component: Error404Component }, 
   { path: 'flujo', component: FlujoComponent }, 
+  { path: 'pipe', component: PaginaPipeComponent }, 
   { path: 'directiva', component: PaginaDirectivaComponent },
   { path: '**', pathMatch:'full', redirectTo : '404'  }
 ];
