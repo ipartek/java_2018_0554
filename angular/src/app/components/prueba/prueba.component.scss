@@ -1,17 +1,6 @@
 $bg-color: grey;
-
-div{
-    
-    
-    span{ 
-       
-        flex-grow:3;
-    }
-    span:nth-child(1){ 
-        flex-grow:23;
-    }
-    button{
-        display:block;
-        flex-grow:1;
-    }
+.jumbotron{
+    font-size: 2em;
+    text-align: center;
+   
 }

@@ -16,7 +16,7 @@ export class PruebaComponent implements OnInit {
   intervalo;
 
   constructor() {
-    console.trace('PruebaComponent constructor');
+    //console.trace('PruebaComponent constructor');
 
     //inicializar las variables
     this.contador = 0;
@@ -24,7 +24,7 @@ export class PruebaComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.trace('PruebaComponent ngOnInit');
+    //console.trace('PruebaComponent ngOnInit');
   }
 
   restart(){

@@ -1,13 +1,14 @@
 <div class="jumbotron mt-3">
 <div>
     <span>{{contador}}</span>
-    <span>{{tiempo}}'</span>
-    
+</div>
+<div>
+    <span appCountdown="{{tiempo}}" >{{tiempo}}'</span>  
 </div>
 
 <div>
-    <button  class="btn btn-info" *ngIf="tiempo!=0"(click)="start()" disabled="{{(tiempo == 10)?'':'disabled'}}">{{(tiempo == 10)?'Comenzar':'Jugando'}}</button>
-    <button class="btn btn-info" *ngIf="tiempo==0" (click)="restart()">REINICIAR</button>
-    <button  class="btn btn-info"(click)="sumar()">Sumar</button>
+    <button  class="btn btn-info btn-block" *ngIf="tiempo!=0"(click)="start()" disabled="{{(tiempo == 10)?'':'disabled'}}">{{(tiempo == 10)?'Comenzar':'Jugando'}}</button>
+    <button class="btn btn-info btn-block" *ngIf="tiempo==0" (click)="restart()">REINICIAR</button>
+    <button  class="btn btn-info btn-block"(click)="sumar()">Sumar</button>
 </div>
 </div>
