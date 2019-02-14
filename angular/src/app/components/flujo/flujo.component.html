@@ -1,0 +1,23 @@
+<h1 class="text-primary">Flujo de la información de la vista al modelo y modelo a vista</h1>
+<p>* Para más detalle leer manual de angular en pdf ( página 37)</p>
+
+<img src="./assets/imgs/flujo informacion angular.png" alt="Flujo de la información de la vista al modelo y modelo a vista">
+
+<h2>Expresion &#123; &#123; &#125; &#125;</h2>
+<p>{{expresion}}</p>
+
+<h2>Propiedades</h2>
+
+<h3 [class]="claseModelo">HIDDEN</h3>
+  <p [hidden]="isHidden">Este se oculta</p>
+  <p [hidden]="!isHidden">Este se ve</p>
+
+<p>Pulsa para cambiar color titulo</p>
+  <input type="radio" class="form-check-input" name="color" (change)='cambiocolor("text-success")'>Verde<br>
+  <input type="radio" class="form-check-input" name="color" (change)='cambiocolor("text-danger")'>Rojo<hr>
+
+<h2>Doble Bindding o Banana In a Box</h2>
+<p class="text-danger">*CUIDADO importar<b> &#123; import FromsModule &#125; from '@angular/forms:'</b> e importar en <b>app.module.ts</b> </p>
+<p>Tu nombre es: <b>{{nombre}}</b></p>
+<input type="text" placeholder="Dime tu nombre, mínimo tres letras" class="form-control"[(ngModel)]="nombre" (click)="borrar()">
+<hr>
