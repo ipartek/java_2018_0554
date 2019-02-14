@@ -11,6 +11,8 @@ export class FlujoComponent implements OnInit {
   expresion: string;
   isHidden: boolean;
   claseModelo: string;
+  nombre: string;
+  claseInput: string;
 
   constructor() { 
     console.trace("Constructor FlujoComponent");
@@ -18,6 +20,8 @@ export class FlujoComponent implements OnInit {
     this.expresion="Soy una variable inicializada en el Modelo";
     this.isHidden = true;
     this.claseModelo = "text-primary";
+    this.claseInput = "form-control";
+    this.nombre="Todavía no me lo has dicho";
   }
 
   ngOnInit() {
@@ -28,7 +32,20 @@ export class FlujoComponent implements OnInit {
     console.trace("cambioColor FlujoComponent");
     this.claseModelo = clase;
     }
-    
+
+    borrar(){
+      this.nombre = '';
+      this.claseInput="form-control";
+    }
+
+    comprobarNombre(){
+      if(this.nombre.length >= 3){
+        this.claseInput="form-control is-valid";
+      }else{
+        this.claseInput="form-control is-invalid";
+      }
+    }
+
   }
 
 

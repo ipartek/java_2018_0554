@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
+//Componentes
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PruebaComponent } from './prueba/prueba.component';
@@ -10,9 +12,15 @@ import { AboutComponent } from './components/about/about.component';
 import { Error404Component } from './components/error404/error404.component';
 import { NombreComponent } from './components/nombre/nombre.component';
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
+import { FlujoComponent } from './components/flujo/flujo.component';
+import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
+
+//Directivas
 import { Directiva1Directive } from './directives/directiva1.directive';
 import { CountdownDirective } from './directives/countdown.directive';
-import { FlujoComponent } from './components/flujo/flujo.component';
+
+//Pipes
+import { MonedaPipe } from './pipes/moneda.pipe';
 
 @NgModule({
   declarations: [
@@ -26,11 +34,14 @@ import { FlujoComponent } from './components/flujo/flujo.component';
     PaginaDirectivaComponent,
     Directiva1Directive,
     CountdownDirective,
-    FlujoComponent
+    FlujoComponent,
+    PaginaPipeComponent,
+    MonedaPipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule //Para poder usar doble binding
   ],
   providers: [],
   bootstrap: [AppComponent]

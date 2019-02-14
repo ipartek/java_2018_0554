@@ -1,0 +1,15 @@
+<h1 class="text-primary">Pipes o Filtros</h1>
+<h2>Pipes disponibles con Angular</h2>
+<ul>
+  <li><a href="https://angular.io/api?type=pipe">Documentación API</a></li>
+  <li><a href="https://angular.io/guide/pipes">Documentación Pipes</a></li>
+</ul>
+<h3 class="text-warning">LowerCase/UpperCase/TitleCase Pipes</h3>
+<p><b>{{ nombre }}</b> - sin pipe lowercase</p>
+<p><b>{{ nombre | lowercase }}</b> - con pipe lowercase</p>
+<p><b>{{ nombre | uppercase }}</b> - con pipe uppercase</p>
+<p><b>{{ nombre | titlecase }}</b> - con pipe titlecase</p>
+<h3 class="text-warning">Decimal Pipe</h3>
+<p><b>{{ numero }}</b> - sin pipe number</p>
+<p><b>{{ numero | number : '1.0-2' }}</b> - con pipe number '1.0-2'</p>
+<p><b>{{ numero | number : '2.0-3' }}</b> - con pipe number '2.0-3'</p>
