@@ -1,0 +1,27 @@
+<h1 class="text-primary">Pipe o Filtros</h1>
+<div class="row">
+    <div class="col-6">
+    <h2>Pipes disponibles en Angular</h2>
+    <ul>
+      <li><a href="https://angular.io/api?type=pipe">Documentación API</a></li>
+      <li><a href="https://angular.io/guide/pipes">Documentación sobre Pipes</a></li>
+    </ul>
+    <p>Nombre sin pipe: <span class="text-danger"><b>{{nombre }}</b></span></p>
+    <p>Nombre con pipe de lowercase : <span class="text-danger"><b>{{nombre | lowercase}}</b></span></p>
+    <p>Nombre con pipe de uppercase : <span class="text-danger"><b>{{nombre | uppercase}}</b></span></p>
+    <hr>
+    <p>Número sin Pipe, number: <span class="text-danger"><b>{{numero}}</b></span></p>
+    <p>Número con Pipe, number - number: '1.0-2': <span class="text-danger"><b>{{numero | number: '1.0-2'}}</b></span></p>
+    <p>Número con Pipe, number - number: '2.0-3': <span class="text-danger"><b>{{numero | number: '2.0-3'}}</b></span></p>
+    <p class="text-warning">**TODO locale</p>
+    
+  </div>
+  <div class="col-6">
+    <h2>Pipe creado por nosotros</h2>
+    <p>moneda --> añade el simbolo de la moneda dependiendo de que pais sea</p>
+    <p>Número sin Pipe, moneda: <span class="text-danger"><b>{{numero}}</b></span></p>
+    <p>Número con Pipe, moneda - moneda: 'es': <span class="text-danger"><b>{{numero | moneda: 'es'}}</b></span></p>
+    <p>Número con Pipe, moneda - moneda: 'en': <span class="text-danger"><b>{{numero | moneda: 'en'}}</b></span></p>
+    
+  </div>
+</div>
