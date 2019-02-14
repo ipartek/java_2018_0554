@@ -16,8 +16,8 @@ export class Directiva1Directive {
    publiconMouseEnter(){
     console.trace('Directiva1Directive publiconMouseEnter');
 
-    this.element.nativeElement.style.backgroundColor = (this.colorTexto) ? this.colorTexto : 'black';
-    this.element.nativeElement.style.color = this.appDirectiva1;
+    this.element.nativeElement.style.backgroundColor = (this.appDirectiva1) ? this.appDirectiva1 : 'black';
+    this.element.nativeElement.style.color = this.colorTexto;
 
    }
 
@@ -26,7 +26,7 @@ export class Directiva1Directive {
     console.trace('Directiva1Directive publiconMouseLeave');
 
     this.element.nativeElement.style.backgroundColor = 'black';
-    this.element.nativeElement.style.colorTexto = 'white';
+    this.element.nativeElement.style.color = 'white';
   
    }
 
