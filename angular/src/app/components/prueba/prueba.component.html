@@ -6,7 +6,7 @@
   <button (click)="sumar()" class="btn btn-outline-success mr-1" >DALE RAPIDO</button>
   <button *ngIf="tiempo==0" (click)="restart()" class="btn btn-outline-danger">Nueva Partida</button>
 
-  <span>{{tiempo}}</span>
+  <span [appCountdown]="tiempo">{{tiempo}}</span>
   <span>{{contador}}</span>
   
 </div>

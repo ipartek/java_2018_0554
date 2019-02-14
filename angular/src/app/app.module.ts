@@ -4,13 +4,16 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// nuestros components
+// components
 import { PruebaComponent } from './components/prueba/prueba.component';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { Error404Component } from './components/error404/error404.component';
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
+
+// directives
 import { Directiva1Directive } from './directives/directiva1.directive';
+import { CountdownDirective } from './directives/countdown.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,8 @@ import { Directiva1Directive } from './directives/directiva1.directive';
     AboutComponent,
     Error404Component,
     PaginaDirectivaComponent,
-    Directiva1Directive
+    Directiva1Directive,
+    CountdownDirective
   ],
   imports: [
     BrowserModule,
