@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { validateConfig } from '@angular/router/src/config';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-flujo',
@@ -34,12 +36,13 @@ export class FlujoComponent implements OnInit {
     this.nombre = '';
     this.formControl="form-control invalid";
   }
-  validar(texto:string){
+  
+  validar(texto){
     texto = texto.trimLeft();
     texto = texto.trimRight();
     if(texto.length>=3){
       this.formControl="form-control valid";
-    }
+    }else{}
     
   }
   ngOnInit() {
