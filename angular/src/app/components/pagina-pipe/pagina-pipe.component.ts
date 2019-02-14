@@ -9,11 +9,13 @@ export class PaginaPipeComponent implements OnInit {
 
   nombre: string;
   numero: number;
+  texto: string;
 
   constructor() {
     console.trace("PaginaPipeComponent constructor");
     this.nombre='MaNoLiTO gaFOTas';
     this.numero=3.14567890;
+    this.texto='    texto Con Espacios       ';
    }
 
   ngOnInit() {

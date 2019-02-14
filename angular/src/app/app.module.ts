@@ -21,6 +21,7 @@ import { CountdownDirective } from './directives/countdown.directive';
 
 //Pipes
 import { MonedaPipe } from './pipes/moneda.pipe';
+import { TrimPipe } from './pipes/trim.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MonedaPipe } from './pipes/moneda.pipe';
     CountdownDirective,
     FlujoComponent,
     PaginaPipeComponent,
-    MonedaPipe
+    MonedaPipe,
+    TrimPipe
   ],
   imports: [
     BrowserModule,
