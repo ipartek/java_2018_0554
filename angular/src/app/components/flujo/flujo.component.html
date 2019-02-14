@@ -18,6 +18,7 @@
 
 <h2>Doble Bindding o Banana In a Box</h2>
 <p class="text-danger">*CUIDADO importar<b> &#123; import FromsModule &#125; from '@angular/forms:'</b> e importar en <b>app.module.ts</b> </p>
-<p>Tu nombre es: <b>{{nombre}}</b></p>
-<input type="text" placeholder="Dime tu nombre, mínimo tres letras" class="form-control"[(ngModel)]="nombre" (click)="borrar()">
+  <p>Tu nombre es: <b>{{nombre}}</b></p>
+  <input type="text" placeholder="Dime tu nombre, mínimo tres letras" 
+  class="form-control {{(nombre.length <3)? 'is-invalid': 'is-valid'}}"[(ngModel)]="nombre" (click)="borrar()">
 <hr>
