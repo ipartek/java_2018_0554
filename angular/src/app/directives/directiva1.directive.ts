@@ -22,10 +22,4 @@ export class Directiva1Directive {
       console.trace("Directiva1Directive MouseLeave");
       this.element.nativeElement.style.backgroundColor = "white";
     }
-
-    publicCountdown(){
-      //if()
-      this.element.nativeElement.style.color="green";
-    }
-
 }

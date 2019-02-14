@@ -11,6 +11,7 @@ import { Error404Component } from './components/error404/error404.component';
 import { NombreComponent } from './components/nombre/nombre.component';
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
 import { Directiva1Directive } from './directives/directiva1.directive';
+import { CountdownDirective } from './directives/countdown.directive';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { Directiva1Directive } from './directives/directiva1.directive';
     Error404Component,
     NombreComponent,
     PaginaDirectivaComponent,
-    Directiva1Directive
+    Directiva1Directive,
+    CountdownDirective
   ],
   imports: [
     BrowserModule,
