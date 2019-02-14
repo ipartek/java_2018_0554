@@ -10,10 +10,14 @@ import { AboutComponent } from './components/about/about.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { Error404Component } from './components/error404/error404.component';
 import { SaludarComponent } from './components/saludar/saludar.component';
+
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
 import { Directiva1Directive } from './directives/directiva1.directive';
 import { CountdownDirective } from './directives/countdown.directive';
 import { FlujoComponent } from './components/flujo/flujo.component';
+import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
+
+import { MonedaPipe } from './pipes/moneda.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,9 @@ import { FlujoComponent } from './components/flujo/flujo.component';
     PaginaDirectivaComponent,
     Directiva1Directive,
     CountdownDirective,
-    FlujoComponent
+    FlujoComponent,
+    PaginaPipeComponent,
+    MonedaPipe
   ],
   imports: [
     BrowserModule,
