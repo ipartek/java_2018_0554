@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PaginaDirectivaComponent } from './pagina-directiva.component';
+import { FlujoComponent } from './flujo.component';
 
-describe('PaginaDirectivaComponent', () => {
-  let component: PaginaDirectivaComponent;
-  let fixture: ComponentFixture<PaginaDirectivaComponent>;
+describe('FlujoComponent', () => {
+  let component: FlujoComponent;
+  let fixture: ComponentFixture<FlujoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PaginaDirectivaComponent ]
+      declarations: [ FlujoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PaginaDirectivaComponent);
+    fixture = TestBed.createComponent(FlujoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

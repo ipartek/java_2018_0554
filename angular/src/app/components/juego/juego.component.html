@@ -1,6 +1,6 @@
 <div id="juego">
     <div>
-        <span>{{tiempo}}</span>
+        <span [appCountdown]="tiempo">{{tiempo}}</span>
         <button (click) = "start()" disabled="{{ (tiempo == 10)?'':'Jugando'}}">
             {{ (tiempo == 10)?'Comenzar':'Jugando'}}
         </button>

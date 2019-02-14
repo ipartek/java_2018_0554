@@ -1,0 +1,25 @@
+<h1 class="text-primary text-center">Pipes o filtros</h1>
+
+<div class="row mt-5">
+
+  <div class="col-6">
+    <h2 class="mb-4">Pipes disponibles en algular</h2>
+    <p><a href="https://angular.io/api?type=pipe" target="_blank">documentación API</a></p>
+    <p><a href="https://angular.io/guide/pipes" target="_blank">documentación pipes</a></p>
+    <p>{{nombre}} <span class="text-warning">sin pipe</span></p>
+    <p>{{nombre | lowercase}} <span class="text-warning">con pipe lowercase</span></p>
+    <p>{{nombre | uppercase}} <span class="text-warning">con pipe uppercase</span></p>
+    <p>{{nombre | titlecase}} <span class="text-warning">con pipe titlecase</span></p>
+    <br>
+    <p>{{numero}} <span class="text-warning">sin pipe</span></p>
+    <p>{{numero | number : '1.0-2'}} <span class="text-warning">con pipe DecimalPipe(number) '1.0-2'</span></p>
+  </div>
+
+  <div class="col-6">
+    <h2 class="mb-4">Pipes creado por nosotros</h2>
+    <p>{{numero}} <span class="text-warning">sin pipe</span></p>
+    <p>{{numero | number : '1.0-2' | moneda : 'es'}} <span class="text-warning">con pipe numero : 'es'</span></p>
+    <p>{{numero | moneda : 'us'}} <span class="text-warning">con pipe numero : 'us'</span></p>
+  </div>
+
+</div>
