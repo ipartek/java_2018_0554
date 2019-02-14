@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,7 @@ import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-d
 // directives
 import { Directiva1Directive } from './directives/directiva1.directive';
 import { CountdownDirective } from './directives/countdown.directive';
+import { FlujoComponent } from './components/flujo/flujo.component';
 
 @NgModule({
   declarations: [
@@ -24,11 +26,13 @@ import { CountdownDirective } from './directives/countdown.directive';
     Error404Component,
     PaginaDirectivaComponent,
     Directiva1Directive,
-    CountdownDirective
+    CountdownDirective,
+    FlujoComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule   // para poder usar doble binding
   ],
   providers: [],
   bootstrap: [AppComponent]
