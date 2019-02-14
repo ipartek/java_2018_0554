@@ -12,6 +12,7 @@ import { NombreComponent } from './components/nombre/nombre.component';
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
 import { Directiva1Directive } from './directives/directiva1.directive';
 import { CountdownDirective } from './directives/countdown.directive';
+import { FlujoComponent } from './components/flujo/flujo.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CountdownDirective } from './directives/countdown.directive';
     NombreComponent,
     PaginaDirectivaComponent,
     Directiva1Directive,
-    CountdownDirective
+    CountdownDirective,
+    FlujoComponent
   ],
   imports: [
     BrowserModule,

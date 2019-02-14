@@ -1,0 +1,14 @@
+<div class="jumbotron">
+  <h1 class="text-primary">Flujo de la información de la vista al modelo y modelo a vista</h1>
+  <p>*Para mas detalle leer manual de angular en pdf ( pagina 37 )  </p>
+  <img src="assets/img/flujo-informacion-angular.png" alt="Flujo de información entre modelo y vista">
+  <h2>Expresión &#123; &#123; &#125; &#125;</h2>
+  <p>{{expresion}}</p>
+  <h2>Propiedades</h2>
+  <h3 [class]="claseModelo">HIDDEN</h3>
+  <p [hidden]="!isHidden">Este se ve</p>
+  <p [hidden]="isHidden">Este se oculta</p>
+  <input type="radio" name="opcion" id="opcion" (click)="cambioColor('text-warning')">Naranja<br>
+  <input type="radio" name="opcion" id="opcion" (click)="cambioColor('text-primary')">Azul<br>
+  <input type="radio" name="opcion" id="opcion" (click)="cambioColor('text-danger')">Rojo<br>
+</div>

@@ -8,6 +8,7 @@ import { AboutComponent } from './components/about/about.component';
 import { Error404Component } from './components/error404/error404.component';
 import { NombreComponent } from './components/nombre/nombre.component';
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
+import { FlujoComponent } from './components/flujo/flujo.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
   { path: 'directiva',
   component: PaginaDirectivaComponent,
   data: { title: 'directiva' }
+  },
+  { path: 'flujo',
+  component: FlujoComponent,
+  data: { title: 'flujo' }
   },
   { path: '404',
   component: Error404Component,
