@@ -10,6 +10,7 @@ export class FlujoComponent implements OnInit {
   expresion: string;
   ocultar :boolean;
   claseModelo :string;
+  formControl :string;
   nombre:string;
  
 
@@ -19,6 +20,7 @@ export class FlujoComponent implements OnInit {
     this.expresion= "Variable inicilizada en el Modelo";
     this.ocultar=true;
     this.claseModelo="text-primary";
+    this.formControl="form-control invalid";
     this.nombre="";
   }
   
@@ -30,6 +32,15 @@ export class FlujoComponent implements OnInit {
   }
   borrar(){
     this.nombre = '';
+    this.formControl="form-control invalid";
+  }
+  validar(texto:string){
+    texto = texto.trimLeft();
+    texto = texto.trimRight();
+    if(texto.length>=3){
+      this.formControl="form-control valid";
+    }
+    
   }
   ngOnInit() {
   }

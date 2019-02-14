@@ -27,7 +27,7 @@
   </div>
 <hr>
   <h2 class="text-primary">'DOBLE BINDING' O 'BANANA IN A BOX'</h2>
-  <input  type="text" name="nom" class="form-control" placeholder="Escribe tu nombre" [(ngModel)]="nombre">
+  <input  type="text" name="nom" [class]="formControl" placeholder="Escribe tu nombre" [(ngModel)]="nombre" (ngModelChange)="validar(nombre)">
   <h3>Tu nombre es: {{nombre}}</h3>
   <button (click)="borrar()" class="btn btn-warning">Reiniciar</button>
 
