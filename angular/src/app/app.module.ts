@@ -20,6 +20,8 @@ import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.compon
 
 // pipes
 import { MonedaPipe } from './pipes/moneda.pipe';
+import { TrimarPipe } from './pipes/trimar.pipe';
+import { PaginaArrayComponent } from './components/pagina-array/pagina-array.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { MonedaPipe } from './pipes/moneda.pipe';
     CountdownDirective,
     FlujoComponent,
     PaginaPipeComponent,
-    MonedaPipe
+    MonedaPipe,
+    TrimarPipe,
+    PaginaArrayComponent
   ],
   imports: [
     BrowserModule,
