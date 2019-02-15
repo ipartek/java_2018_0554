@@ -7,10 +7,12 @@
     </div>
     <div class="col-6">
       <h2>Frutas Maquetado</h2>
-      <div class="btn-group" role="group" aria-label="Basic example">
+      <div class="btn-group d-flex" role="group" aria-label="Basic example">
           <button type="button" (click)="cambiarOferta(true)" class="btn btn-success">OFERTA</button>
           <button type="button" (click)="cambiarOferta(false)" class="btn btn-secondary">TODAS</button>      
+          <input type="text" name="busqueda" class="form-control ml-3" placeholder="Busqueda">
         </div>
+      
       <ul class="list-group">
         <li *ngFor="let fruta of frutas | filtroOferta : isOferta " class="list-group-item d-flex justify-content-around align-items-center">
           <img class="img-thumbnail rounded" src="{{fruta.imagen}}" alt="fruta.nombre">
