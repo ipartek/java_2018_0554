@@ -7,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaginaArrayComponent implements OnInit {
 
-  frutas: any;
+  isOferta: boolean;
+  frutas: any[];
+  f_nombres: any[];
+  f_precios: any[];
+  f_precios_nombre: any[];
+  f_oferta: any[];
+  f_no_oferta: any[];
+  total_frutas: number;
+  total_frutas_oferta: number;
 
   constructor() {
     console.trace('PaginaArrayComponent constructor');
+    this.isOferta = false;
     this.frutas = [
       {
         "nombre": "fresa",
@@ -67,6 +76,32 @@ export class PaginaArrayComponent implements OnInit {
         ]
       }      
     ];
+
+    console.trace('comenzamos a mappear el array de frutas');
+    this.f_nombres = this.frutas.map( 
+      function ( value, index, array ) {       
+        console.debug('value: ' + value);
+        console.debug('index: ' + index);
+        console.debug('array: ', array);
+        return value.nombre;
+      }
+    );
+
+    this.f_precios = this.frutas.map( fruta => { return fruta.precio });
+
+    this.f_precios_nombre = this.frutas.map( fruta => { 
+      return {
+        "nombre" : fruta.nombre,
+        "precio" : fruta.precio
+      };
+    });
+
+
+    this.f_oferta = this.frutas.filter( f => f.oferta ).map( f => { return f.nombre });
+    this.f_no_oferta = this.frutas.filter( f => !f.oferta ).map( f => { return f.nombre });
+
+    this.total_frutas = this.frutas.map( f=>f.precio).reduce((p,c)=>{ return p + c }, 0);
+    this.total_frutas_oferta = this.frutas.filter(f=>f.oferta).map( f=>f.precio).reduce((p,c)=>{ return p + c }, 0);
   }
 
   ngOnInit() {
@@ -77,5 +112,9 @@ export class PaginaArrayComponent implements OnInit {
     return fruta.precio - ( fruta.precio * fruta.descuento / 100 );
   }
 
+  cambiarOferta( value: boolean){    
+    this.isOferta = value;
+    console.debug('click cambiarOferta ' + this.isOferta);
+  }
 
 }

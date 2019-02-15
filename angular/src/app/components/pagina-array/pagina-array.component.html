@@ -8,8 +8,13 @@
   <div class="col-6">
     <h2>Frutas Maquetado</h2>
     
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" (click)="cambiarOferta(true)" class="btn btn-success">OFERTA</button>
+      <button type="button" (click)="cambiarOferta(false)" class="btn btn-secondary">TODAS</button>      
+    </div>
+
     <ul class="list-group">
-        <li *ngFor="let fruta of frutas" class="list-group-item d-flex justify-content-between">
+        <li *ngFor="let fruta of frutas | filtroOferta : isOferta " class="list-group-item d-flex justify-content-between">
           <img [src]="fruta.imagen" alt="{{fruta.nombre}}">
 
           <!-- nombre y colores -->
@@ -40,12 +45,18 @@
 
 <div class="row">
   <div class="col-6">
-    <h2>Frutas Reduce</h2>
-    <p></p>
+    <h2>Frutas MAP, FILTER, FIND, REDUCE</h2>
+    <p><b>Solo Nombres</b> {{f_nombres | json}}</p>
+    <p><b>Solo Precios</b> {{f_precios | json}}</p>
+    <p><b>Solo Nombre y Precios</b> {{f_precios_nombre | json}}</p>
+    <p><b>Solo Nombre Frutas en Oferta</b> {{f_oferta|json}}</p>
+    <p><b>Solo Nombre Frutas NO en Oferta</b> {{f_no_oferta|json}}</p>
+    <p><b>reduce TOTAL FRUTAS</b> {{ total_frutas }}</p>
+    <p><b>reduce TOTAL FRUTAS OFERTA</b> {{ total_frutas_oferta }}</p>
     
   </div>
   <div class="col-6">
-    <h2>Frutas TODO</h2>
+    <h2></h2>
   
   </div>
 </div>  

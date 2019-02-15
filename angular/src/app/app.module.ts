@@ -22,6 +22,7 @@ import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.compon
 import { MonedaPipe } from './pipes/moneda.pipe';
 import { TrimarPipe } from './pipes/trimar.pipe';
 import { PaginaArrayComponent } from './components/pagina-array/pagina-array.component';
+import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PaginaArrayComponent } from './components/pagina-array/pagina-array.com
     PaginaPipeComponent,
     MonedaPipe,
     TrimarPipe,
-    PaginaArrayComponent
+    PaginaArrayComponent,
+    FiltroOfertaPipe
   ],
   imports: [
     BrowserModule,
