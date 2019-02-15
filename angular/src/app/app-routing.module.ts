@@ -10,6 +10,7 @@ import { NombreComponent } from './components/nombre/nombre.component';
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
 import { FlujoComponent } from './components/flujo/flujo.component';
 import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
+import { ArrayComponent } from './components/array/array.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,10 @@ const routes: Routes = [
   { path: 'pipe',
   component: PaginaPipeComponent,
   data: { title: 'pipe' }
+  },
+  { path: 'array',
+  component: ArrayComponent,
+  data: { title: 'array' }
   },
   { path: '404',
   component: Error404Component,
