@@ -17,7 +17,7 @@ export class ArrayComponent implements OnInit {
   f_oferta_pares:any[];
   total_frutas:any[];
   total_frutas_oferta:any[];
-  fruta_mas_cara:any[];
+  fruta_color_verde:any[];
 
   constructor() { 
     console.log('ArrayComponent constructor ');
@@ -107,7 +107,7 @@ export class ArrayComponent implements OnInit {
     this.f_oferta_pares=this.frutas.filter((f,i)=>(f.oferta && (i%2==0))).map(f=>{return f.nombre});
     this.total_frutas = this.frutas.map(f=>{return f.precio}).reduce((p,c)=>{return p +c},0);
     this.total_frutas_oferta = this.frutas.filter(f=>f.oferta).map(f=>{return f.precio}).reduce((p,c)=>{return p +c},0);
-    this.fruta_mas_cara= this.frutas.find(el => el.precio===10);
+    this.fruta_color_verde= this.frutas.find(el => el.colores.find(e=>e.nombre==="verde"));
   }
 
   ngOnInit() {
