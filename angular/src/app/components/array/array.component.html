@@ -8,8 +8,8 @@
     <div class="col-6">
       <h2>Frutas Maquetado</h2>
       <ul class="list-group">
-        <li *ngFor="let fruta of frutas" class="list-group-item d-flex justify-content-around align-items-end">
-          <img class="img-thumbnail" src="{{fruta.imagen}}" alt="fruta.nombre">
+        <li *ngFor="let fruta of frutas" class="list-group-item d-flex justify-content-around align-items-center">
+          <img class="img-thumbnail rounded" src="{{fruta.imagen}}" alt="fruta.nombre">
           <div class="d-flex flex-column justify-content-start align-items-start">
             {{fruta.nombre}}
             <span *ngFor="let color of fruta.colores" class="badge m-1" [style.color]="color.codigo">
