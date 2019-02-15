@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class ArrayComponent implements OnInit {
 
   frutas: any;
+  f_nombres: any[];
+  f_precios: any[];
 
   constructor() {
     console.trace("ArrayComponent constructor")
@@ -67,6 +69,16 @@ export class ArrayComponent implements OnInit {
         ]
       }      
     ];
+
+    console.trace("Comenzamos a mapear");
+    this.f_nombres = this.frutas.map( (value, index, array) => {
+      console.debug('Value: ' + value);
+      console.debug('Index: ' + index);
+      console.debug('Array: ', array);
+      return value.nombre;
+    } );
+
+    this.f_precios = this.frutas.map( fruta => {return fruta.precio} );
    }
 
   ngOnInit() {
