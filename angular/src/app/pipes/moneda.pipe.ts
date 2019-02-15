@@ -20,7 +20,7 @@ export class MonedaPipe implements PipeTransform {
 
      if(locale==='en'){ simbolo = '$';}
    
-    return numero + ' ' + simbolo;
+    return numero + '' + simbolo;
   }
 
 }

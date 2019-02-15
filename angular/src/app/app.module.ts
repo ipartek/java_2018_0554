@@ -18,6 +18,7 @@ import { FlujoComponent } from './components/flujo/flujo.component';
 import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
 
 import { MonedaPipe } from './pipes/moneda.pipe';
+import { ArraysComponent } from './components/arrays/arrays.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MonedaPipe } from './pipes/moneda.pipe';
     CountdownDirective,
     FlujoComponent,
     PaginaPipeComponent,
-    MonedaPipe
+    MonedaPipe,
+    ArraysComponent
   ],
   imports: [
     BrowserModule,

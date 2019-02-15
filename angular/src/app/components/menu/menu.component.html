@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed">
-    <a class="navbar-brand" [routerLink]="['home']">Navbar</a>
+<nav class="navbar navbar-expand-md navbar-dark  fixed bg-primary">
+    <a class="navbar-brand" [routerLink]="['home']"><img alt="Home" src="https://angular.io/assets/images/logos/angular/logo-nav@2x.png" title="Home" class="ng-star-inserted" width="150" height="40"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -26,6 +26,9 @@
           </li>
           <li class="nav-item" routerLinkActive="active">
             <a class="nav-link" [routerLink]="['pipe']">PIPE</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="['array']">Array</a>
           </li>
       </ul>
     </div>

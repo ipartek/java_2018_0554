@@ -1,0 +1,30 @@
+
+<div class="row" >
+    <div class="col-md-4 " *ngFor="let fruta of frutas">
+        <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h2 class="card-text">
+                {{fruta.nombre | uppercase}}
+                <span *ngIf="fruta.oferta==true"class="badge badge-warning">Descuento {{fruta.descuento}}%</span>
+            </h2>
+            <img src="{{fruta.imagen}}" width="200" height="200">
+            <ul class="list-group">
+            <li class="list-group-item">Precio:
+                <span class="{{(fruta.oferta==true)?'tachado':''}}">{{fruta.precio | moneda}} </span>
+                <span *ngIf="fruta.oferta==true" class="text-success font-weight-bold">{{(fruta.precio - (fruta.precio)/100*fruta.descuento)| number :'1.0-2' |moneda }}</span>
+            </li>   
+            <li class="list-group-item">Nombre:{{fruta.nombre}}</li>
+            <li class="list-group-item">Oferta: {{fruta.oferta}}</li>
+            <li class="list-group-item">Precio: {{fruta.precio}}</li>
+            <li class="list-group-item">Descuento: {{fruta.descuento}}</li>
+            <li class="list-group-item" >
+                Colores: 
+                <ul>
+                <li *ngFor="let color of fruta.colores">{{color.nombre}}</li>
+                </ul>
+            </li>
+            </ul>
+        </div>
+        </div>
+    </div>
+</div>

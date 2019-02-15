@@ -8,6 +8,7 @@ import { SaludarComponent } from './components/saludar/saludar.component';
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
 import { FlujoComponent } from './components/flujo/flujo.component';
 import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
+import { ArraysComponent } from './components/arrays/arrays.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent  },
   { path: 'about/:repeticiones', component: AboutComponent  },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'directiva', component: PaginaDirectivaComponent }, 
   { path: 'flujo', component: FlujoComponent }, 
   { path: 'pipe', component: PaginaPipeComponent },
+  { path: 'array', component: ArraysComponent },
   { path: '**', pathMatch:'full', redirectTo : '404'  }
 
 ];
