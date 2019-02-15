@@ -9,10 +9,12 @@ export class PaginaPipeComponent implements OnInit {
   
   nombre:string;
   numero:number;
+  cadena: string;
   constructor() { 
     console.trace('PaginaPipeComponent constructor');
     this.nombre= 'Manolito Gafotas';
     this.numero = 3.14151678;
+    this.cadena = '  Hola    Que     Axé      '; 
   }
 
   ngOnInit() {

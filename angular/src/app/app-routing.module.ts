@@ -10,6 +10,7 @@ import { SaludarComponent } from './components/saludar/saludar.component';
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
 import { FlujoComponent } from './components/flujo/flujo.component';
 import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
+import { ArrayComponent } from './components/array/array.component';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:'saludar/:nombre/:apellido',component:SaludarComponent},
   {path:'directiva',component:PaginaDirectivaComponent},
   {path:'pipe',component:PaginaPipeComponent},
+  {path:'array',component:ArrayComponent},
   {path:'flujo',component:FlujoComponent},
   {path:'404',component:Error404Component},
   {path:'**',pathMatch:'full',redirectTo:'404'}
