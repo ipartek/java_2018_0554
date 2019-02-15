@@ -21,11 +21,11 @@
               {{ fruta.precio | moneda: 'es' }}
             </del>
             {{ fruta.precio - ((fruta.precio * fruta.descuento) / 100) | number: '1.0-2' | moneda: 'es' }}
-            <span class="badge badge-primary">{{fruta.descuento}}%</span>
+            <span class="badge badge-primary">{{ fruta.descuento | moneda: 'desc' }}</span>
           </span>
           <span *ngIf="!fruta.oferta">
             {{ fruta.precio }}
-            <span class="badge badge-danger">0%</span>
+            <span class="badge badge-danger">{{ 0 | moneda: 'desc' }}</span>
           </span>
         </li>
       </ul>
