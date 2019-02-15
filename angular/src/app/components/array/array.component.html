@@ -8,13 +8,14 @@
     <div class="col-6">
       <h2>Frutas Maquetado</h2>
       <div class="btn-group d-flex" role="group" aria-label="Basic example">
-          <button type="button" (click)="cambiarOferta(true)" class="btn btn-success">OFERTA</button>
-          <button type="button" (click)="cambiarOferta(false)" class="btn btn-secondary">TODAS</button>      
-          <input type="text" name="busqueda" class="form-control ml-3" placeholder="Busqueda">
-        </div>
-      
+        <button type="button" (click)="cambiarOferta(true)" class="btn btn-success">OFERTA</button>
+        <button type="button" (click)="cambiarOferta(false)" class="btn btn-secondary">TODAS</button>
+        <input type="text" name="busqueda" class="form-control m-1" placeholder="Búsqueda">
+      </div>
+
       <ul class="list-group">
-        <li *ngFor="let fruta of frutas | filtroOferta : isOferta " class="list-group-item d-flex justify-content-around align-items-center">
+        <li *ngFor="let fruta of frutas | filtroOferta : isOferta "
+          class="list-group-item d-flex justify-content-around align-items-center">
           <img class="img-thumbnail rounded" src="{{fruta.imagen}}" alt="fruta.nombre">
           <div class="d-flex flex-column justify-content-start align-items-start">
             {{fruta.nombre}}
@@ -40,24 +41,21 @@
   <div class="row">
     <div class="col-6">
       <h2>Frutas MAP</h2>
-        <p><b>Solo Nombres</b>{{ f_nombres | json }}</p>
-        <p><b>Solo Precios</b>{{f_precios | json }}</p>
+      <p><b>Solo Nombres</b> {{ f_nombres | json }}</p>
+      <p><b>Solo Precios</b> {{f_precios | json }}</p>
       <h2>Frutas MAP & Filter</h2>
-        <p><b>Solo Nombre y Precios</b>{{f_nombre_precios | json }}</p>
-        <p><b>En oferta</b>{{f_oferta | json }}</p>
-        <p><b>Sin oferta</b>{{f_no_oferta | json }}</p>
-        <p><b>Con oferta e Índice PAR</b>{{f_indice_par | json }}</p>
-        <p><b>Sin oferta e Índice IMPAR</b>{{f_indice_impar | json }}</p>
-      <h2>Frutas Filter & MAP & Reduce</h2>
-        <p><b>Total frutas</b> {{total_frutas | json | moneda : 'es' }}</p>
-        <p><b>Total frutas en Oferta</b> {{total_frutas_oferta | json | number: '1.0-2' | moneda : 'es' }}</p>
-      <h2>Frutas Find</h2>
-      <p><b>Primera fruta de color naranja</b> {{ f_naranja | json }}</p>
+      <p><b>Solo Nombre y Precios</b> {{f_nombre_precios | json }}</p>
+      <p><b>En oferta</b> {{f_oferta | json }}</p>
+      <p><b>Sin oferta</b> {{f_no_oferta | json }}</p>
+      <p><b>Con oferta e Índice PAR</b> {{f_indice_par | json }}</p>
+      <p><b>Sin oferta e Índice IMPAR</b> {{f_indice_impar | json }}</p>
     </div>
     <div class="col-6">
-      <h2></h2>
-        <p><b></b></p>
-        <p><b></b></p>
+      <h2>Frutas Filter & MAP & Reduce</h2>
+      <p><b>Total frutas</b> {{total_frutas | json | moneda : 'es' }}</p>
+      <p><b>Total frutas en Oferta</b> {{total_frutas_oferta | json | number: '1.0-2' | moneda : 'es' }}</p>
+      <h2>Frutas Find</h2>
+      <p><b>Primera fruta de color naranja</b> {{ f_naranja | json }}</p>
     </div>
   </div>
 </div>
