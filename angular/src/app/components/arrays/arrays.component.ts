@@ -14,7 +14,10 @@ export class ArraysComponent implements OnInit {
   f_no_oferta:any[];
   f_par:any[];
   f_impar:any[];
-
+  total_frutas: number;
+  total_frutas_oferta: number;
+  f_precios_nombre: any[];
+  isOferta: boolean;
   constructor() {
     console.trace("ArraysComponent constructor");
 
@@ -89,8 +92,24 @@ export class ArraysComponent implements OnInit {
     this.f_no_oferta = this.frutas.filter(f => !f.oferta).map(f => {return f.nombre});
 
     this.f_par = this.frutas.filter((f,i)=> i%2==0).map((f)=> {return f.nombre});
-   }
 
+    this.total_frutas = this.frutas.map( f=>f.precio).reduce((p,c)=>{ return p + c }, 0);
+    this.total_frutas_oferta = this.frutas.filter(f=>f.oferta).map( f=>f.precio).reduce((p,c)=>{ return p + c }, 0);
+  
+    this.f_precios_nombre = this.frutas.map( fruta => { 
+      return {
+        "nombre" : fruta.nombre,
+        "precio" : fruta.precio
+      };
+    });
+    
+  }
+
+
+  cambiarOferta( value: boolean){    
+    this.isOferta = value;
+    console.debug('click cambiarOferta ' + this.isOferta);
+  }
 
 
    calcularDescuento(fruta:any):number{

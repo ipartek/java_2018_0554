@@ -1,4 +1,47 @@
 
+
+<div class="row">
+    <div class="col-6">
+      <h2>Frutas JSON</h2>
+      {{ frutas | json }}
+    </div>
+    <div class="col-6">
+      <h2>Frutas Maquetado</h2>
+      
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" (click)="cambiarOferta(true)" class="btn btn-success">OFERTA</button>
+        <button type="button" (click)="cambiarOferta(false)" class="btn btn-secondary">TODAS</button>      
+      </div>
+  
+      <ul class="list-group">
+          <li *ngFor="let fruta of frutas | filtroOferta : isOferta " class="list-group-item d-flex justify-content-between">
+            <img [src]="fruta.imagen" alt="{{fruta.nombre}}">
+  
+            <!-- nombre y colores -->
+            <div class="d-flex flex-column">
+              <p class="title">{{fruta.nombre}}</p>
+              <p>
+                <span *ngFor="let color of fruta.colores" 
+                      class="badge" 
+                      [style.color]="color.codigo">
+                  {{color.nombre}}
+                </span>          
+              </p>
+            </div>
+  
+            <!-- precio y descuentos -->
+            <div class="d-flex flex-column">          
+              <span class="{{(!fruta.oferta)?'precio':'precio-descuento'}}">{{fruta.precio | moneda}}</span>            
+              <span *ngIf="fruta.oferta" class="badge badge-primary">{{fruta.descuento}}%</span>
+              <span *ngIf="fruta.oferta" class="precio">{{ calcularDescuento(fruta) | number : '1.0-2' | moneda }}</span>
+            </div>
+            
+          </li>    
+      </ul>
+  
+    </div>
+  </div>
+<!--
 <div class="row" >
     <div class="col-md-4 " *ngFor="let fruta of frutas">
         <div class="card mb-4 shadow-sm">
@@ -26,14 +69,14 @@
         </div>
     </div>
 </div>
-
+-->
 
 <div class="row" >
     <div class="col-6">
         <h2>Map</h2>
         <p><b>Nombres</b> {{f_nombres | json}}</p>
         <p><b>Precio</b> {{f_precios | json}}</p>
-        <p><b>Nombre-Precio</b> </p>
+        <p><b>Solo Nombre y Precios</b> {{f_precios_nombre | json}}</p>
     </div>
 
     <div class="col-6">
@@ -41,5 +84,7 @@
         <p><b>Oferta</b> {{f_oferta | json}}</p>
         <p><b>Sin Oferta</b> {{f_no_oferta | json}}</p>
         <p><b>Par</b> {{f_par | json}}</p>
+        <p><b>reduce TOTAL FRUTAS</b> {{ total_frutas }}</p>
+        <p><b>reduce TOTAL FRUTAS OFERTA</b> {{ total_frutas_oferta }}</p>
     </div>
 </div>
