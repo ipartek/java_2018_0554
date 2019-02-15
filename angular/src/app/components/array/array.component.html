@@ -3,17 +3,33 @@
   <div class="row">
     <div class="col-6">
       <h2>Frutas JSON</h2>
-        <p>{{ frutas | json }}</p>
+      <p>{{ frutas | json }}</p>
     </div>
     <div class="col-6">
-        <h2>Frutas Maquetado</h2>
-        <ul class="list-group">
-          <li *ngFor="let fruta of frutas" class="list-group-item">
+      <h2>Frutas Maquetado</h2>
+      <ul class="list-group">
+        <li *ngFor="let fruta of frutas" class="list-group-item d-flex justify-content-around align-items-end">
+          <img class="img-thumbnail" src="{{fruta.imagen}}" alt="fruta.nombre">
+          <div class="d-flex flex-column justify-content-start align-items-start">
             {{fruta.nombre}}
-            <span *ngFor="let color of fruta.colores" class="badge badge-secondary m-1">{{color.nombre}}</span>
-          </li>
-        </ul>
+            <span *ngFor="let color of fruta.colores" class="badge m-1" [style.color]="color.codigo">
+              {{color.nombre}}
+            </span>
+          </div>
+          <span *ngIf="fruta.oferta">
+            <del>
+              {{ fruta.precio | moneda: 'es' }}
+            </del>
+            {{ fruta.precio - ((fruta.precio * fruta.descuento) / 100) | number: '1.0-2' | moneda: 'es' }}
+            <span class="badge badge-primary">{{fruta.descuento}}%</span>
+          </span>
+          <span *ngIf="!fruta.oferta">
+            {{ fruta.precio }}
+            <span class="badge badge-danger">0%</span>
+          </span>
+        </li>
+      </ul>
     </div>
   </div>
-  
+
 </div>
