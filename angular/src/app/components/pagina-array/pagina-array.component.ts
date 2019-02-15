@@ -73,4 +73,9 @@ export class PaginaArrayComponent implements OnInit {
     console.trace('PaginaArrayComponent ngOnInit');
   }
 
+  calcularDescuento( fruta: any) : number {    
+    return fruta.precio - ( fruta.precio * fruta.descuento / 100 );
+  }
+
+
 }
