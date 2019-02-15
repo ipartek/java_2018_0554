@@ -19,6 +19,7 @@ export class ArrayComponent implements OnInit {
   total_frutas: number;
   total_frutas_oferta: number;
   f_naranja: any;
+  isOferta: boolean;
 
   constructor() {
     console.trace("ArrayComponent constructor")
@@ -78,7 +79,7 @@ export class ArrayComponent implements OnInit {
         ]
       }
     ];
-
+    this.isOferta = false;
     console.trace("Comenzamos a mapear");
     this.f_nombres = this.frutas.map((value, index, array) => {
       console.debug('Value: ' + value);
@@ -112,11 +113,15 @@ export class ArrayComponent implements OnInit {
     }).reduce((previous, current) => {
       return previous + current;
     });
-    //TODO
-    //this.f_naranja = this.frutas.find( fruta => fruta.colores.nombre === 'naranja' );
 
+    this.f_naranja = this.frutas.find(fruta => fruta.colores.find(el => el.nombre === "naranja"));
 
   } // constructor
+
+  cambiarOferta(value: boolean) {
+    this.isOferta = value;
+    console.debug('click cambiarOferta ' + this.isOferta);
+  }
 
   ngOnInit() {
     console.trace("ArrayComponent ngOnInit")
