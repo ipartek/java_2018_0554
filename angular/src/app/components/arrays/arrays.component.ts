@@ -68,7 +68,9 @@ export class ArraysComponent implements OnInit {
     ];
 
    }
-
+   calcularDescuento(fruta:any):number{
+      return (fruta.precio - (fruta.precio)*fruta.descuento/100);
+   }
   ngOnInit() {
   }
 

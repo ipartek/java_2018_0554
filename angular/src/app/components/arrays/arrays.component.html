@@ -11,12 +11,10 @@
             <ul class="list-group">
             <li class="list-group-item">Precio:
                 <span class="{{(fruta.oferta==true)?'tachado':''}}">{{fruta.precio | moneda}} </span>
-                <span *ngIf="fruta.oferta==true" class="text-success font-weight-bold">{{(fruta.precio - (fruta.precio)/100*fruta.descuento)| number :'1.0-2' |moneda }}</span>
-            </li>   
-            <li class="list-group-item">Nombre:{{fruta.nombre}}</li>
-            <li class="list-group-item">Oferta: {{fruta.oferta}}</li>
-            <li class="list-group-item">Precio: {{fruta.precio}}</li>
-            <li class="list-group-item">Descuento: {{fruta.descuento}}</li>
+                <span *ngIf="fruta.oferta==true" class="text-success font-weight-bold">
+                    {{calcularDescuento(fruta)| number :'1.0-2' |moneda }}
+                </span>
+            </li>
             <li class="list-group-item" >
                 Colores: 
                 <ul>
