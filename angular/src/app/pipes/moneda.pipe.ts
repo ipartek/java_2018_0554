@@ -23,6 +23,9 @@ export class MonedaPipe implements PipeTransform {
       case 'eu':
       simbolo='$';
         break;
+      case 'desc':
+      simbolo='%';
+        break;
       default:
       simbolo='€';
         break;
