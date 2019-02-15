@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArraysComponent implements OnInit {
   frutas:any;
+  f_nombres:any[];
+  f_precios:any[];
+  f_np:any[];
+
   constructor() {
     console.trace("ArraysComponent constructor");
 
@@ -67,6 +71,16 @@ export class ArraysComponent implements OnInit {
       }      
     ];
 
+    console.trace("comenzos a mapear");
+   // this.f_nombres = this.frutas.map(fruta => {return fruta.nombre});
+   this.f_nombres = this.frutas.map((value, index, array) => {
+     console.debug('value: '+ value);
+     console.debug('index: '+ index);
+     console.debug('array: ', array);
+     return value.nombre;
+    });
+    this.f_precios = this.frutas.map(fruta => {return fruta.precio});
+    
    }
    calcularDescuento(fruta:any):number{
       return (fruta.precio - (fruta.precio)*fruta.descuento/100);
