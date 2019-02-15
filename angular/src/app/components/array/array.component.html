@@ -7,8 +7,13 @@
   </div>
   <div class="col-6">
     <h2>Frutas Maquetado</h2>
+      <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" (click)="cambiarOferta(true)"class="btn btn-secondary">OFERTA</button>
+          <button type="button" (click)="cambiarOferta(false)" class="btn btn-secondary">TODAS</button>   
+        {{isOferta}}
+        </div>
     <ul class="list-group">
-        <li *ngFor="let fruta of frutas" class="list-group-item d-flex justify-content-between">
+        <li *ngFor="let fruta of frutas | filtroOferta:isOferta" class="list-group-item d-flex justify-content-between">
           <img [src]="fruta.imagen" alt="{{fruta.nombre}}">
 
           <!-- nombre y colores -->

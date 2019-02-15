@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArrayComponent implements OnInit {
 
+  isOferta:boolean;
   frutas: any[];
   f_nombres:any[];
   f_precios:any[];
@@ -20,6 +21,7 @@ export class ArrayComponent implements OnInit {
 
   constructor() { 
     console.log('ArrayComponent constructor ');
+    this.isOferta=false;
     this.frutas=[
       {
         "nombre": "fresa",
@@ -114,5 +116,9 @@ export class ArrayComponent implements OnInit {
 
   calcularDescuento(fruta:any):number{
     return fruta.precio-((fruta.precio*fruta.descuento)/100);
+  }
+  cambiarOferta(value:boolean){
+    this.isOferta = value;
+    console.debug('cambiarOferta ' + this.isOferta);
   }
 }

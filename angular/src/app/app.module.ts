@@ -18,6 +18,7 @@ import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.compon
 import { MonedaPipe } from './pipes/moneda.pipe';
 import { TrimarPipe } from './pipes/trimar.pipe';
 import { ArrayComponent } from './components/array/array.component';
+import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ArrayComponent } from './components/array/array.component';
     PaginaPipeComponent,
     MonedaPipe,
     TrimarPipe,
-    ArrayComponent
+    ArrayComponent,
+    FiltroOfertaPipe
   ],
   imports: [
     BrowserModule,
