@@ -10,6 +10,10 @@ export class ArraysComponent implements OnInit {
   f_nombres:any[];
   f_precios:any[];
   f_np:any[];
+  f_oferta:any[];
+  f_no_oferta:any[];
+  f_par:any[];
+  f_impar:any[];
 
   constructor() {
     console.trace("ArraysComponent constructor");
@@ -80,11 +84,20 @@ export class ArraysComponent implements OnInit {
      return value.nombre;
     });
     this.f_precios = this.frutas.map(fruta => {return fruta.precio});
-    
+
+    this.f_oferta = this.frutas.filter(f => f.oferta).map(f => {return f.nombre});
+    this.f_no_oferta = this.frutas.filter(f => !f.oferta).map(f => {return f.nombre});
+
+    this.f_par = this.frutas.filter((f,i)=> i%2==0).map((f)=> {return f.nombre});
    }
+
+
+
    calcularDescuento(fruta:any):number{
       return (fruta.precio - (fruta.precio)*fruta.descuento/100);
    }
+
+
   ngOnInit() {
   }
 
