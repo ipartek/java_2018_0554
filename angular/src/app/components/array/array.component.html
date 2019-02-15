@@ -1,4 +1,19 @@
 <div class="container jumbotron">
   <h1 class="text-light bg-primary p-2">Jugando con Arrays</h1>
-  <p>{{ frutas | json }}</p>
+  <div class="row">
+    <div class="col-6">
+      <h2>Frutas JSON</h2>
+        <p>{{ frutas | json }}</p>
+    </div>
+    <div class="col-6">
+        <h2>Frutas Maquetado</h2>
+        <ul class="list-group">
+          <li *ngFor="let fruta of frutas" class="list-group-item">
+            {{fruta.nombre}}
+            <span *ngFor="let color of fruta.colores" class="badge badge-secondary m-1">{{color.nombre}}</span>
+          </li>
+        </ul>
+    </div>
+  </div>
+  
 </div>
