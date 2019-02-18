@@ -8,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class PaginaArrayComponent implements OnInit {
 
   isOferta: boolean;
+  searchText: string;
   frutas: any[];
+
+  //arrays para filtrar, reduce, map, etc..
   f_nombres: any[];
   f_precios: any[];
   f_precios_nombre: any[];
@@ -20,6 +23,7 @@ export class PaginaArrayComponent implements OnInit {
   constructor() {
     console.trace('PaginaArrayComponent constructor');
     this.isOferta = false;
+    this.searchText = '';    
     this.frutas = [
       {
         "nombre": "fresa",

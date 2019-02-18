@@ -13,8 +13,11 @@
       <button type="button" (click)="cambiarOferta(false)" class="btn btn-secondary">TODAS</button>      
     </div>
 
+    <p class="text-danger">{{searchText}}</p>
+    <input type="text" [(ngModel)]="searchText" />
+
     <ul class="list-group">
-        <li *ngFor="let fruta of frutas | filtroOferta : isOferta " class="list-group-item d-flex justify-content-between">
+        <li *ngFor="let fruta of frutas | filtroOferta : isOferta : searchText" class="list-group-item d-flex justify-content-between">
           <img [src]="fruta.imagen" alt="{{fruta.nombre}}">
 
           <!-- nombre y colores -->
