@@ -30,22 +30,22 @@
   <div class="col-10 pb-3 pt-3">
       <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
-            <button class="btn btn-sm btn-outline-secondary" (click)="cambiarOferta(false)">Todos</button>
-            <button class="btn btn-sm btn-outline-secondary" (click)="cambiarOferta(true)">Ofertas</button>
+            <button class="btn btn-sm  {{(!isOferta)?'btn-primary text-white':'btn-outline-secondary'}}" (click)="cambiarOferta(false)">Todos</button>
+            <button class="btn btn-sm  {{(isOferta)?'btn-primary text-white':'btn-outline-secondary'}}" (click)="cambiarOferta(true)">Ofertas</button>
             <input  type="text" name="search-text" class="form-control" placeholder="Buscador" [(ngModel)]="searchText" (ngModelChange)="buscar(searchText)">
              {{searchText  | trimar : searchText}}
           </div><!--/btn-group mr-2-->
         </div><!--/btn-toolbar mb-2 mb-md-0-->
 
 
-          <div class="row">
+          <!--<div class="row">
             
           <div class="col-6">
           <ul class="list-group">
             <li *ngFor="let fruta of frutas | filtroOferta : isOferta :searchText " class="list-group-item d-flex justify-content-between">
               <img [src]="fruta.imagen" alt="{{fruta.nombre}}">
 
-              <!-- nombre y colores -->
+               nombre y colores 
               <div class="d-flex flex-column">
                 <p class="title">{{fruta.nombre}}</p>
                 <p>
@@ -55,9 +55,9 @@
                     {{color.nombre}}
                   </span>
                 </p>
-              </div>
+              </div>-->
 
-              <!-- precio y descuentos -->
+              <!-- precio y descuentos 
               <div class="d-flex flex-column">
                 <span class="{{(!fruta.oferta)?'precio':'precio-descuento'}}">{{fruta.precio | moneda}}</span>
                 <span *ngIf="fruta.oferta" class="badge badge-primary">{{fruta.descuento}}%</span>
@@ -67,7 +67,7 @@
             </li>
         </ul>
       </div>
-    </div>
+    </div>-->
 
 
 
