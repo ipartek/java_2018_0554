@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-fruta-card',
@@ -7,34 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FrutaCardComponent implements OnInit {
 
-  frutas:any[];
-  isOferta:boolean;
   
+  isOferta:boolean;
+  @Input() fruta:any;
+  @Input() frutaComparar:any;
 
   constructor() {
     this.isOferta=false;
-    this.frutas=[
-      {
-        "nombre": "Fresa",
-        "oferta": true,
-        "precio": 3.59,
-        "descuento": 5,
-        "imagen": "https://media.mercola.com/assets/images/foodfacts/strawberry-nutrition-facts.jpg",
-        "colores": [{
-          "nombre": "rojo","codigo":"#FF0000"
-        }]
-      },
-      {
-        "nombre": "pomelo",
-        "oferta": false,
-        "precio": 7.43,
-        "descuento": 7,
-        "imagen": "http://frutasfercas.com/wp-content/uploads/2018/03/pomelo-1.jpg",
-        "colores": [
-          {"nombre": "rojo","codigo":"#F00"},
-          {"nombre": "naranja","codigo":"#FF9800"}
-        ]
-      }];
+   
    }
 
   ngOnInit() {
