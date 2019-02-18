@@ -6,9 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pagina-comparador.component.scss']
 })
 export class PaginaComparadorComponent implements OnInit {
-  frutas2: any;
+  frutas: any;
+  frutaSelec1: any;
+  frutaSelec2: any;
   constructor() {
-    this.frutas2 = [
+    this.frutas = [
       {
         'nombre': 'fresa',
         'oferta': true,
@@ -64,9 +66,17 @@ export class PaginaComparadorComponent implements OnInit {
         ]
       }
     ];
+
+    this.frutaSelec1 = this.frutas[0];
+    this.frutaSelec2 = this.frutas[1];
   }
 
   ngOnInit() {
+  }
+  cambiarFruta(i:number){
+    console.log('click cambiarFruta %o', i);
+    this.frutaSelec2 = this.frutaSelec1;
+    this.frutaSelec1 = this.frutas[i];
   }
 
 }

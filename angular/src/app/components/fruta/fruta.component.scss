@@ -16,11 +16,18 @@
   }
  img{
       max-width: 200px;
+      max-height: 150px;
       margin:0 auto;
   }
-*{font-size: 1.2em;}
+
 .precio-descuento{
     color: lightgray;
 
     text-decoration:line-through;
+}
+
+.texto-grande{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5em;
+    font-weight: 100;
 }

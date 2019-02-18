@@ -6,9 +6,9 @@
             <span *ngIf="fruta.oferta" class="badge badge-primary text-white ">Oferta</span>
     </div>
     <div class="mt-3">
-        <span class="col-3 precio-descuento">{{fruta.precio | moneda}}  </span>
-        <span  class="col-3 badge badge-primary text-white">{{fruta.descuento}}% </span>
-        <span  class=" col-3 precio"> {{ calcularDescuento(fruta) | number : '1.0-2' | moneda }}</span>
+        <span class="col-3 {{(!fruta.oferta)?'precio':'precio-descuento'}}">{{fruta.precio | moneda}}  </span>
+        <span *ngIf="fruta.oferta" class="col-3 badge badge-primary text-white"> {{fruta.descuento}}% </span>
+        <span *ngIf="fruta.oferta" class=" col-3 precio"> {{ calcularDescuento(fruta) | number : '1.0-2' | moneda }}</span>
     </div>
     <div class="mb-3">
         <p class="title">{{fruta.nombre}}</p>
@@ -16,6 +16,14 @@
         </span>
       </div>
   </div>
+  <ul class="list-group texto-grande">
+      <li class="list-group-item">
+        <span class="badge badge-{{fruta.oferta?'success':'danger'}} text-white ">{{fruta.oferta?'En oferta':' Sin oferta'}} </span>
+      </li>
+      <li class="list-group-item">
+          <span class="badge badge-{{fruta.precio<frutaComparar.precio?'success':'danger'}} text-white ">{{fruta.precio | moneda}}</span>
+        </li>
+      
+    </ul>
 </div>
-
 
