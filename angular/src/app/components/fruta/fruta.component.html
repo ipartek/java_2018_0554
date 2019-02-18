@@ -1,0 +1,71 @@
+<div class="card" style="width: 18rem;">
+  <img src="{{ fruta.imagen }}" class="card-img-top" alt="{{ fruta.nombre }}">
+  <div class="card-body">
+    <h5 class="card-title">{{ fruta.nombre | uppercase }}</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <span class="font-italic">Colores: </span>
+      <span class="badge badge-secondary p-2 ml-2" *ngFor="let c of fruta.colores"
+        [style.color]="c.codigo">{{ c.nombre | titlecase }}</span>
+    </li>
+    <li class="list-group-item">
+      <span class="font-italic">Precio: </span>
+      <span class="{{(fruta.precio < frutaComparar.precio)?'text-success':'text-danger'}}">
+        <span class="font-weight-bold">
+          {{fruta.precio | moneda : 'es'}}
+        </span>
+        <span class="font-italic">
+          <small>
+            {{(fruta.precio < frutaComparar.precio)?'':'+'}}{{ (fruta.precio - frutaComparar.precio) }}
+          </small>
+        </span>
+      </span>
+      <span class="text-secondary">
+        <small>(
+          <span class="font-weight-bold"> {{ fruta.precio | moneda : 'es' }}
+          </span> vs
+          {{ frutaComparar.precio | moneda : 'es' }} )
+        </small>
+      </span>
+    </li>
+    <li class="list-group-item">
+      <span class="font-italic">Descuento: </span>
+      <span class="badge badge-{{(fruta.descuento < frutaComparar.descuento)?'danger':'success'}}">
+        {{ fruta.descuento | moneda : 'desc' }}
+      </span>
+      <span class="text-secondary">
+        <small>(
+          <span class="font-weight-bold">
+            {{ fruta.descuento | moneda : 'desc' }}
+          </span>
+          vs {{ frutaComparar.descuento | moneda : 'desc' }})
+        </small>
+      </span>
+    </li>
+    <li class="list-group-item">
+      <span class="font-italic">Precio con descuento: </span>
+      <span
+        class="font-weight-bold {{(fruta.precio - (fruta.precio * fruta.descuento) / 100) < 
+          (frutaComparar.precio - (frutaComparar.precio * frutaComparar.descuento) / 100)?'text-success':'text-danger'}}">
+        {{ ( fruta.precio - (fruta.precio * fruta.descuento) / 100) 
+            | number: '1.0-2' | moneda : 'es' }}
+        <span class="font-italic">
+          <small>
+            {{(( fruta.precio - (fruta.precio * fruta.descuento) / 100) < 
+              ( frutaComparar.precio - (frutaComparar.precio * frutaComparar.descuento) / 100))?'':'+'}}
+            {{ (( fruta.precio - (fruta.precio * fruta.descuento) / 100) - 
+                ( frutaComparar.precio - (frutaComparar.precio * frutaComparar.descuento) / 100)) | number: '1.0-2' }}
+          </small>
+        </span>
+      </span><br>
+      <span class="text-secondary">
+        <small>(
+          <span class="font-weight-bold"> {{ fruta.precio | moneda : 'es' }}
+          </span> vs
+          {{ frutaComparar.precio | moneda : 'es' }} )
+        </small>
+      </span>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <h2 class="text-primary">LISTADO</h2>
+      <ul class="list-group">
+        <li *ngFor="let f of frutas; let i = index" (click)="cambiarFruta(i)" class="list-group-item 
+            {{(f.nombre === frutaSelect1.nombre || f.nombre === frutaSelect2.nombre)?'active':''}}">
+          {{ f.nombre | uppercase }}
+        </li>
+      </ul>
+      <p>frutaSelect1 => {{ frutaSelect1.nombre }}</p>
+      <p>frutaSelect2 => {{ frutaSelect2.nombre }}</p>
+    </div>
+    <div class="col-4">
+      <app-fruta [fruta]="frutaSelect1" [frutaComparar] = "frutaSelect2"></app-fruta>
+    </div>
+    <div class="col-4">
+      <app-fruta [fruta]="frutaSelect2" [frutaComparar] = "frutaSelect1"></app-fruta>
+    </div>
+  </div>
+</div>
