@@ -24,7 +24,6 @@ public class AgenteDAO {
 	private final static Logger LOG = Logger.getLogger(AgenteDAO.class);
 	private static AgenteDAO INSTANCE = null;
 
-	//Prueba
 	// constructor privado, solo acceso por getInstance
 	private AgenteDAO() {
 		super();
