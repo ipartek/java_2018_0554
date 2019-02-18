@@ -34,6 +34,13 @@
       <span class="badge badge-{{(fruta.descuento < frutaComparar.descuento)?'danger':'success'}}">
         {{ fruta.descuento | moneda : 'desc' }}
       </span>
+      <span class="text-{{(fruta.descuento < frutaComparar.descuento)?'danger':'success'}}">
+        <span class="font-italic">
+          <small>
+            {{(fruta.descuento < frutaComparar.descuento)?'':'+'}}{{ (fruta.descuento - frutaComparar.descuento) | moneda : 'desc' }}
+          </small>
+        </span>
+      </span>
       <span class="text-secondary">
         <small>(
           <span class="font-weight-bold">
