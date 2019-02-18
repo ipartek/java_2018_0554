@@ -9,7 +9,7 @@ export class FiltroOfertaPipe implements PipeTransform {
    * Filtro para frutas
    * @param frutas [] array con todas las frutas a filtrar
    * @param isOferta boolean si true mostrar solo frutas en oferta
-   * @param searchText string cadena texto en el nombre de las frutas, caseInsensitive y cualquier coincidencia
+   * @param searchText string cadena texto en el nombre de las frutas o colores[nombre], caseInsensitive y cualquier coincidencia
    */
   transform(frutas: any[], isOferta: boolean, searchText?:string): any[] {
     console.trace('FiltroOfertaPipe isOferta %o frutas%o', isOferta,frutas);
@@ -26,7 +26,10 @@ export class FiltroOfertaPipe implements PipeTransform {
     //2º filtrar por searchText, si esta definido y diferente vacio
     if(searchText && searchText !== ""){
       aResul = aResul.filter(f=>{
-        return f.nombre.includes(searchText);
+          let aColores = f.colores.map(c=> c.nombre);//conseguir array con nombres colores
+          let colores = aColores.join('');//conseguir un string concatenando todos los colores del array
+          let busqueda=f.nombre + colores;
+        return busqueda.includes(searchText);
       });
     } 
     return aResul;
