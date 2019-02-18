@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Persona } from 'src/app/model/persona';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  manolo: Persona;
+  sinNombre: Persona;
+
+
+  constructor() {
+    
+    this.manolo = new Persona('Manolo');
+    this.sinNombre = new Persona();
+ 
+
+    console.debug("manolo sin inicializar %o", this.manolo);
+
+    this.manolo.nombre = 'Manolo';
+  
+
+    console.debug("Dame tu nombre " + this.manolo.nombre );
+
+
+  }
 
   ngOnInit() {
   }
