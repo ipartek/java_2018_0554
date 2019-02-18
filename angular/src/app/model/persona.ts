@@ -7,7 +7,7 @@ export class Persona {
     constructor( nombre?: string){
         this._nombre = (nombre) ? nombre : 'Anonimo';
         
-        // if(nombre){
+        // if(nombre){ prueba
         //     this._nombre=nombre;
         // }else{
         //     this._nombre='Anónimo';
