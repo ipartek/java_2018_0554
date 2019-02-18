@@ -10,11 +10,12 @@
       <div class="btn-group d-flex" role="group" aria-label="Basic example">
         <button type="button" (click)="cambiarOferta(true)" class="btn btn-success">OFERTA</button>
         <button type="button" (click)="cambiarOferta(false)" class="btn btn-secondary">TODAS</button>
-        <input type="text" name="busqueda" class="form-control m-1" placeholder="Búsqueda">
+        <input type="text" name="busqueda" (click)="limpiar()"
+               [(ngModel)]="searchText" class="form-control m-1" placeholder="Filtra por el nombre de la fruta">
       </div>
-
+      <p class="text-danger">{{searchText}}</p>
       <ul class="list-group">
-        <li *ngFor="let fruta of frutas | filtroOferta : isOferta "
+        <li *ngFor="let fruta of frutas | filtroOferta : isOferta : searchText"
           class="list-group-item d-flex justify-content-around align-items-center">
           <img class="img-thumbnail rounded" src="{{fruta.imagen}}" alt="fruta.nombre">
           <div class="d-flex flex-column justify-content-start align-items-start">

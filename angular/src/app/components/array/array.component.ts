@@ -20,6 +20,7 @@ export class ArrayComponent implements OnInit {
   total_frutas_oferta: number;
   f_naranja: any;
   isOferta: boolean;
+  searchText: string;
 
   constructor() {
     console.trace("ArrayComponent constructor")
@@ -115,7 +116,7 @@ export class ArrayComponent implements OnInit {
     });
 
     this.f_naranja = this.frutas.find(fruta => fruta.colores.find(el => el.nombre === "naranja"));
-
+    this.searchText = "";
   } // constructor
 
   cambiarOferta(value: boolean) {
@@ -125,6 +126,10 @@ export class ArrayComponent implements OnInit {
 
   ngOnInit() {
     console.trace("ArrayComponent ngOnInit")
+  }
+
+  limpiar(){
+    this.searchText="";
   }
 
 }
