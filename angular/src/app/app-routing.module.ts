@@ -9,6 +9,7 @@ import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-d
 import { FlujoComponent } from './components/flujo/flujo.component';
 import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
 import { ArraysComponent } from './components/arrays/arrays.component';
+import { PaginaArrayComponent } from './components/pagina-array/pagina-array.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent  },
   { path: 'about/:repeticiones', component: AboutComponent  },
@@ -19,6 +20,8 @@ const routes: Routes = [
   { path: 'flujo', component: FlujoComponent }, 
   { path: 'pipe', component: PaginaPipeComponent },
   { path: 'array', component: ArraysComponent },
+  { path: 'array2', component: PaginaArrayComponent },
+  { path: '', pathMatch:'full', redirectTo : 'home'  },
   { path: '**', pathMatch:'full', redirectTo : '404'  }
 
 ];

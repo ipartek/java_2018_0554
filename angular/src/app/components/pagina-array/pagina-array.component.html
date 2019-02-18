@@ -1,0 +1,107 @@
+<div class="row mt-2">
+  <div class="col-2 border-right pb-3 pt-3">
+      <h2 class="bg-primary" role="button" data-toggle="collapse" data-target="#map" aria-expanded="false" aria-controls="map">map </h2>
+      <div id="map" class="collapse">
+      <p><b>Nombres</b> {{f_nombres | json}}</p>
+        <p><b>Precio</b> {{f_precios | json}}</p>
+        <p><b>Solo Nombre y Precios</b> {{f_precios_nombre | json}}</p>
+      </div>
+
+      <h2  class="bg-primary" role="button" data-toggle="collapse" data-target="#filter" aria-expanded="false" aria-controls="filter">filter</h2>
+      <div id="filter" class="collapse">
+      <p><b>Oferta</b> {{f_oferta | json}}</p>
+        <p><b>Sin Oferta</b> {{f_no_oferta | json}}</p>
+        <p><b>Par</b> {{f_par | json}}</p>
+      </div>
+
+      <h2 class="bg-primary" role="button" data-toggle="collapse" data-target="#reduce" aria-expanded="false" aria-controls="reduce">reduce</h2>
+      <div id="reduce" class="collapse">
+      <p><b>Total frutas: </b> {{ total_frutas }}</p>
+      <p><b>Total frutas oferta: </b> {{ total_frutas_oferta | number : '1.0-2' }}</p>
+      </div>
+      <h2 class="bg-primary" role="button" data-toggle="collapse" data-target="#find" aria-expanded="false" aria-controls="reduce">find</h2>
+      <div id="find" class="collapse">
+      <p><b>Primera fruta de color naranja</b> {{ f_naranja.nombre }}</p>
+      <p><b>busqueda</b> {{ f_buscar_nombre | json }}</p>
+    </div>
+
+  </div><!--/col-3-->
+
+
+  <div class="col-10 pb-3 pt-3">
+      <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <button class="btn btn-sm btn-outline-secondary" (click)="cambiarOferta(false)">Todos</button>
+            <button class="btn btn-sm btn-outline-secondary" (click)="cambiarOferta(true)">Ofertas</button>
+            <input  type="text" name="nom" class="form-control" placeholder="Buscador" [(ngModel)]="nombre" (ngModelChange)="buscar(nombre)">
+             {{nombre  | trimar : nombre}}
+          </div><!--/btn-group mr-2-->
+        </div><!--/btn-toolbar mb-2 mb-md-0-->
+
+
+          <div class="row">
+            <div class="col-6">
+                <p><b>busqueda</b> {{ f_buscar_nombre | json }}</p>
+            </div>
+          <div class="col-6">
+          <ul class="list-group">
+            <li *ngFor="let fruta of frutas | filtroOferta : isOferta | filtroBuscar : nombre" class="list-group-item d-flex justify-content-between">
+              <img [src]="fruta.imagen" alt="{{fruta.nombre}}">
+
+              <!-- nombre y colores -->
+              <div class="d-flex flex-column">
+                <p class="title">{{fruta.nombre}}</p>
+                <p>
+                  <span *ngFor="let color of fruta.colores"
+                        class="badge"
+                        [style.color]="color.codigo">
+                    {{color.nombre}}
+                  </span>
+                </p>
+              </div>
+
+              <!-- precio y descuentos -->
+              <div class="d-flex flex-column">
+                <span class="{{(!fruta.oferta)?'precio':'precio-descuento'}}">{{fruta.precio | moneda}}</span>
+                <span *ngIf="fruta.oferta" class="badge badge-primary">{{fruta.descuento}}%</span>
+                <span *ngIf="fruta.oferta" class="precio">{{ calcularDescuento(fruta) | number : '1.0-2' | moneda }}</span>
+              </div>
+
+            </li>
+        </ul>
+      </div>
+    </div>
+
+        <div class="album py-2 ">
+
+
+          <div class="row">
+
+            <div class="col-md-3 text-center" *ngFor="let fruta of frutas | filtroOferta : isOferta ">
+              <div class="card mb-4 box-shadow position-relative">
+                <img class="card-img-top" [src]="fruta.imagen" alt="{{fruta.nombre}}">
+                <div class="position-absolute ">
+                    <span *ngIf="fruta.oferta" class="badge badge-info text-white ">Oferta</span>
+                </div>
+                <div class="mt-3">
+                    <span class="col-3 {{(!fruta.oferta)?'precio':'precio-descuento'}}">{{fruta.precio | moneda}}  </span>
+                    <span *ngIf="fruta.oferta" class="col-3 badge badge-primary text-white"> {{fruta.descuento}}% </span>
+                    <span *ngIf="fruta.oferta" class=" col-3 precio"> {{ calcularDescuento(fruta) | number : '1.0-2' | moneda }}</span>
+                </div>
+                <div class=" mb-3">
+                    <p class="title">{{fruta.nombre}}</p>
+
+                    <span class="color" [style.background]="color.codigo" *ngFor="let color of fruta.colores" >
+
+                    </span>
+                  </div>
+              </div>
+            </div>
+
+
+
+        </div>
+      </div>
+    </div><!--/col-9 pb-3 pt-3-->
+
+</div><!--/row-->

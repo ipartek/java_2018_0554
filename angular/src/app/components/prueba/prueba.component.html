@@ -1,4 +1,4 @@
-
+<div class="jumbotron mt-3">
 <div>
     <span>{{contador}}</span>
 </div>
@@ -10,4 +10,5 @@
     <button  class="btn btn-info btn-block" *ngIf="tiempo!=0"(click)="start()" disabled="{{(tiempo == 10)?'':'disabled'}}">{{(tiempo == 10)?'Comenzar':'Jugando'}}</button>
     <button class="btn btn-info btn-block" *ngIf="tiempo==0" (click)="restart()">REINICIAR</button>
     <button  class="btn btn-info btn-block"(click)="sumar()">Sumar</button>
+</div>
 </div>

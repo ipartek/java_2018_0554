@@ -1,0 +1,44 @@
+
+
+h2{
+    font-size: 1em;
+    padding: 0.3em;
+    color:white;
+}
+
+.title{
+    font-size: 1.2em;
+    text-transform: uppercase;
+    margin:0;
+    padding:0;
+}
+
+.precio-descuento{
+    color: lightgray;
+
+    text-decoration:line-through;
+}
+img{
+  width: 75px;
+  height: 75px;
+}
+.album img{
+    width: 100%;
+    height: 150px;
+}
+.color{
+        color:red;
+        background: red;
+         border-radius: 0.5em;
+        -moz-border-radius: 0.5em;
+        -webkit-border-radius: 0.5em;
+        color: #ffffff;
+        display: inline-block;
+        font-weight: bold;
+        line-height:1em;
+        margin-right: 5px;
+        text-align: center;
+        width: 1em;
+        overflow: hidden;
+        padding: 0.5em;
+      }

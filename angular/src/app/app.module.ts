@@ -20,6 +20,9 @@ import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.compon
 import { MonedaPipe } from './pipes/moneda.pipe';
 import { ArraysComponent } from './components/arrays/arrays.component';
 import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
+import { PaginaArrayComponent } from './components/pagina-array/pagina-array.component';
+import { FiltroBuscarPipe } from './pipes/filtro-buscar.pipe';
+import { TrimarPipe } from './pipes/trimar.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
     PaginaPipeComponent,
     MonedaPipe,
     ArraysComponent,
-    FiltroOfertaPipe
+    FiltroOfertaPipe,
+    PaginaArrayComponent,
+    FiltroBuscarPipe,
+    TrimarPipe
   ],
   imports: [
     BrowserModule,
