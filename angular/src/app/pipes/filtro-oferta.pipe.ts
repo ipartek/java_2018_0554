@@ -13,6 +13,7 @@ export class FiltroOfertaPipe implements PipeTransform {
   transform( frutas: any[] , isOferta: boolean, searchText?: string): any[] {
     
     console.trace('FiltroOfertaPipe isOferta= %s searchText=%s', isOferta, searchText);
+    searchText = searchText.toLowerCase();
 
     // conseguimos el mismo array pero sin que apunte a la misma posicion de memoria
     // no usar aResul = frutas;
@@ -29,7 +30,7 @@ export class FiltroOfertaPipe implements PipeTransform {
         let aColores = f.colores.map( c => c.nombre); // conseguir array con nombres colores
         let colores = aColores.join(''); // conseguir un string concatenando todos los colores del array
         let busqueda = f.nombre + colores; 
-        return busqueda.includes(searchText);
+        return busqueda.toLowerCase().includes(searchText);
        });
     }
 
