@@ -26,7 +26,7 @@ export class PaginaArrayComponent implements OnInit {
     this.searchText = '';    
     this.frutas = [
       {
-        "nombre": "fresa",
+        "nombre": "fRESa",
         "oferta": true,
         "precio": 3.59,
         "descuento": 5,
