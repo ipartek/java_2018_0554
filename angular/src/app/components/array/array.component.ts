@@ -25,7 +25,7 @@ export class ArrayComponent implements OnInit {
     this.isOferta=false;
     this.frutas=[
       {
-        "nombre": "fresa",
+        "nombre": "fResa",
         "oferta": true,
         "precio": 3.59,
         "descuento": 5,

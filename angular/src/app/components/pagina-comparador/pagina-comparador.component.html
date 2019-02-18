@@ -1,0 +1,22 @@
+<h1 class="text-primary">Comparador de frutacas</h1>
+<div class="row">
+    <div class="col-4">
+        <h2> Listado</h2>
+        <ul class="list-group">
+            <li *ngFor="let f of frutas; let i =index"(click)="cambiarFruta(i)" 
+                class="list-group-item {{(f.nombre === frutaSelec1.nombre || f.nombre === frutaSelec2.nombre)?'active':''}}" >
+                {{f.nombre|uppercase}}
+            </li>
+        </ul>
+        <p>Primera fruta seleccionada:<b> {{frutaSelec1.nombre}}</b></p>
+        <p>Segunda fruta seleccionada:<b> {{frutaSelec2.nombre}}</b></p>
+    </div>
+    <div class="col-4">
+        <h2> Fruta 1</h2>
+        <app-fruta-card ></app-fruta-card>
+    </div>
+    <div class="col-4">
+        <h2>Fruta 2</h2>
+        <app-fruta-card></app-fruta-card>
+    </div>
+</div>

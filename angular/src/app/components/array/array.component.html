@@ -27,11 +27,10 @@
               </span>          
             </p>
           </div>
-
           <!-- precio y descuentos -->
           <div class="d-flex flex-column">          
-            <span class="{{(!fruta.oferta)?'precio':'precio-descuento'}}">{{fruta.precio | moneda}}</span>            
-            <span *ngIf="fruta.oferta" class="badge badge-primary">{{fruta.descuento}}%</span>
+            <span class="{{(!fruta.oferta)?'precio':'precio-descuento'}}">{{fruta.precio | moneda}} </span>            
+            <span *ngIf="fruta.oferta" class="badge badge-primary">{{fruta.descuento}}% </span>
             <span *ngIf="fruta.oferta" class="precio">{{ calcularDescuento(fruta) | number : '1.0-2' | moneda }}</span>
           </div>
           

@@ -11,6 +11,7 @@ import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-d
 import { FlujoComponent } from './components/flujo/flujo.component';
 import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
 import { ArrayComponent } from './components/array/array.component';
+import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path:'directiva',component:PaginaDirectivaComponent},
   {path:'pipe',component:PaginaPipeComponent},
   {path:'array',component:ArrayComponent},
+  {path:'comparador',component:PaginaComparadorComponent},
   {path:'flujo',component:FlujoComponent},
   {path:'404',component:Error404Component},
   {path:'**',pathMatch:'full',redirectTo:'404'}

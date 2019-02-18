@@ -10,14 +10,18 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { Error404Component } from './components/error404/error404.component';
 import { SaludarComponent } from './components/saludar/saludar.component';
+import { FlujoComponent } from './components/flujo/flujo.component';
+import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
+import { ArrayComponent } from './components/array/array.component';
+import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
+import { FrutaCardComponent } from './components/fruta-card/fruta-card.component';
+//directivas
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
 import { Directiva1Directive } from './directives/directiva1.directive';
 import { CountdownDirective } from './directives/countdown.directive';
-import { FlujoComponent } from './components/flujo/flujo.component';
-import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
+//pipe
 import { MonedaPipe } from './pipes/moneda.pipe';
 import { TrimarPipe } from './pipes/trimar.pipe';
-import { ArrayComponent } from './components/array/array.component';
 import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 
 @NgModule({
@@ -37,7 +41,9 @@ import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
     MonedaPipe,
     TrimarPipe,
     ArrayComponent,
-    FiltroOfertaPipe
+    FiltroOfertaPipe,
+    PaginaComparadorComponent,
+    FrutaCardComponent
   ],
   imports: [
     BrowserModule,

@@ -29,7 +29,7 @@ export class FiltroOfertaPipe implements PipeTransform {
           let aColores = f.colores.map(c=> c.nombre);//conseguir array con nombres colores
           let colores = aColores.join('');//conseguir un string concatenando todos los colores del array
           let busqueda=f.nombre + colores;
-        return busqueda.includes(searchText);
+        return busqueda.toLowerCase().includes(searchText.toLowerCase());
       });
     } 
     return aResul;
