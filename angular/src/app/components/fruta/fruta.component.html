@@ -1,20 +1,21 @@
+
 <div class="col-md-12 text-center" >
-  <div class="card mb-4 box-shadow position-relative">
-    <img class="card-img-top" src="https://media.mercola.com/assets/images/foodfacts/strawberry-nutrition-facts.jpg" alt="{{fruta.nombre}}">
+  <div class="card box-shadow position-relative">
+    <img class="card-img-top" src="{{fruta.imagen}}" alt="{{fruta.nombre}}">
     <div class="position-absolute ">
-        <span class="badge badge-info text-white ">Oferta</span>
+            <span *ngIf="fruta.oferta" class="badge badge-primary text-white ">Oferta</span>
     </div>
     <div class="mt-3">
-        <span class="col-3 precio-descuento">3.41€  </span>
-        <span  class="col-3 badge badge-primary text-white">5% </span>
-        <span  class=" col-3 precio"> 3.19€</span>
+        <span class="col-3 precio-descuento">{{fruta.precio | moneda}}  </span>
+        <span  class="col-3 badge badge-primary text-white">{{fruta.descuento}}% </span>
+        <span  class=" col-3 precio"> {{ calcularDescuento(fruta) | number : '1.0-2' | moneda }}</span>
     </div>
-    <div class=" mb-3">
-        <p class="title">FRESA</p>
-
-        <span class="color" [style.background]="red" >
-
+    <div class="mb-3">
+        <p class="title">{{fruta.nombre}}</p>
+        <span class="color" [style.background]="color.codigo" *ngFor="let color of fruta.colores" >
         </span>
       </div>
   </div>
 </div>
+
+

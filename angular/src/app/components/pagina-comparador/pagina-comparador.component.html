@@ -1,8 +1,23 @@
-
-<div class="album py-2 ">
 <div class="row">
-    <app-fruta class="col-6"></app-fruta>
-    <app-fruta class="col-6"></app-fruta>
-    <button class="col-6 justify-content-center" type="button" class="btn btn-info ">Comparar</button>
+    <div class="col-2">
+
+        <ul class="list-group">
+            <li *ngFor="let f of frutas2 " class="list-group-item d-flex justify-content-between">
+              {{f.nombre}}
+            </li>    
+        </ul>
+
+    </div>
+
+    <div class="col-5">
+    <app-fruta></app-fruta>   
+    </div>
+
+    <div class="col-5">
+        <app-fruta></app-fruta>   
+    </div>
+
+    <button class="col-6 justify-content-center" type="button" class="btn btn-primary btn-block">Comparar</button>
 </div>
-</div>
+
+

@@ -47,7 +47,7 @@
               <div class="card mb-4 box-shadow position-relative">
                 <img class="card-img-top" [src]="fruta.imagen" alt="{{fruta.nombre}}">
                 <div class="position-absolute ">
-                    <span *ngIf="fruta.oferta" class="badge badge-info text-white ">Oferta</span>
+                    <span *ngIf="fruta.oferta" class="badge badge-primary text-white ">Oferta</span>
                 </div>
                 <div class="mt-3">
                     <span class="col-3 {{(!fruta.oferta)?'precio':'precio-descuento'}}">{{fruta.precio | moneda}}  </span>
