@@ -23,6 +23,8 @@ import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 import { PaginaArrayComponent } from './components/pagina-array/pagina-array.component';
 import { FiltroBuscarPipe } from './pipes/filtro-buscar.pipe';
 import { TrimarPipe } from './pipes/trimar.pipe';
+import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
+import { FrutaComponent } from './components/fruta/fruta.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { TrimarPipe } from './pipes/trimar.pipe';
     FiltroOfertaPipe,
     PaginaArrayComponent,
     FiltroBuscarPipe,
-    TrimarPipe
+    TrimarPipe,
+    PaginaComparadorComponent,
+    FrutaComponent
   ],
   imports: [
     BrowserModule,

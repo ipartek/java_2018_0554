@@ -10,6 +10,8 @@ import { FlujoComponent } from './components/flujo/flujo.component';
 import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
 import { ArraysComponent } from './components/arrays/arrays.component';
 import { PaginaArrayComponent } from './components/pagina-array/pagina-array.component';
+import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
+import { FrutaComponent } from './components/fruta/fruta.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent  },
   { path: 'about/:repeticiones', component: AboutComponent  },
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'pipe', component: PaginaPipeComponent },
   { path: 'array', component: ArraysComponent },
   { path: 'array2', component: PaginaArrayComponent },
+  { path: 'comparador', component: PaginaComparadorComponent },
+  { path: 'fruta_card', component: FrutaComponent },
   { path: '', pathMatch:'full', redirectTo : 'home'  },
   { path: '**', pathMatch:'full', redirectTo : '404'  }
 

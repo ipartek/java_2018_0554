@@ -1,0 +1,26 @@
+.color{
+    color:red;
+    background: red;
+     border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    color: #ffffff;
+    display: inline-block;
+    font-weight: bold;
+    line-height:1em;
+    margin-right: 5px;
+    text-align: center;
+    width: 1em;
+    overflow: hidden;
+    padding: 0.5em;
+  }
+ img{
+      max-width: 200px;
+      margin:0 auto;
+  }
+*{font-size: 1.2em;}
+.precio-descuento{
+    color: lightgray;
+
+    text-decoration:line-through;
+}
