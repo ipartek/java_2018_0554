@@ -24,14 +24,14 @@
               {{color.nombre}}
             </span>
           </div>
-          <span *ngIf="fruta.oferta">
-            <del>
+          <span *ngIf="fruta.oferta" class="d-flex flex-column">
+            <del class="text-secondary">
               {{ fruta.precio | moneda: 'es' }}
             </del>
             {{ fruta.precio - ((fruta.precio * fruta.descuento) / 100) | number: '1.0-2' | moneda: 'es' }}
             <span class="badge badge-primary">{{ fruta.descuento | moneda: 'desc' }}</span>
           </span>
-          <span *ngIf="!fruta.oferta">
+          <span *ngIf="!fruta.oferta" class="d-flex flex-column">
             {{ fruta.precio }}
             <span class="badge badge-danger">{{ 0 | moneda: 'desc' }}</span>
           </span>
