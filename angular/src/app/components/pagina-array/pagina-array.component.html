@@ -22,7 +22,6 @@
       <h2 class="bg-primary" role="button" data-toggle="collapse" data-target="#find" aria-expanded="false" aria-controls="reduce">find</h2>
       <div id="find" class="collapse">
       <p><b>Primera fruta de color naranja</b> {{ f_naranja.nombre }}</p>
-      <p><b>busqueda</b> {{ f_buscar_nombre | json }}</p>
     </div>
 
   </div><!--/col-3-->
@@ -33,19 +32,17 @@
           <div class="btn-group mr-2">
             <button class="btn btn-sm btn-outline-secondary" (click)="cambiarOferta(false)">Todos</button>
             <button class="btn btn-sm btn-outline-secondary" (click)="cambiarOferta(true)">Ofertas</button>
-            <input  type="text" name="nom" class="form-control" placeholder="Buscador" [(ngModel)]="nombre" (ngModelChange)="buscar(nombre)">
-             {{nombre  | trimar : nombre}}
+            <input  type="text" name="search-text" class="form-control" placeholder="Buscador" [(ngModel)]="searchText" (ngModelChange)="buscar(searchText)">
+             {{searchText  | trimar : searchText}}
           </div><!--/btn-group mr-2-->
         </div><!--/btn-toolbar mb-2 mb-md-0-->
 
 
           <div class="row">
-            <div class="col-6">
-                <p><b>busqueda</b> {{ f_buscar_nombre | json }}</p>
-            </div>
+            
           <div class="col-6">
           <ul class="list-group">
-            <li *ngFor="let fruta of frutas | filtroOferta : isOferta | filtroBuscar : nombre" class="list-group-item d-flex justify-content-between">
+            <li *ngFor="let fruta of frutas | filtroOferta : isOferta :searchText " class="list-group-item d-flex justify-content-between">
               <img [src]="fruta.imagen" alt="{{fruta.nombre}}">
 
               <!-- nombre y colores -->
@@ -72,12 +69,12 @@
       </div>
     </div>
 
+
+
+
         <div class="album py-2 ">
-
-
           <div class="row">
-
-            <div class="col-md-3 text-center" *ngFor="let fruta of frutas | filtroOferta : isOferta ">
+           <div class="col-md-3 text-center" *ngFor="let fruta of frutas | filtroOferta : isOferta :searchText ">
               <div class="card mb-4 box-shadow position-relative">
                 <img class="card-img-top" [src]="fruta.imagen" alt="{{fruta.nombre}}">
                 <div class="position-absolute ">

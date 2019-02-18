@@ -19,8 +19,11 @@ export class PaginaArrayComponent implements OnInit {
   f_precios_nombre: any[];
   isOferta: boolean;
   f_naranja: any;
-  f_buscar_nombre: any;
+  searchText: string;
   constructor() {
+    console.trace('PaginaArrayComponent constructor');
+    this.searchText = '';
+    this.isOferta=false;
     this.frutas = [
       {
         'nombre': 'fresa',
@@ -116,12 +119,7 @@ export class PaginaArrayComponent implements OnInit {
       return (fruta.precio - (fruta.precio) * fruta.descuento / 100);
    }
 
-   buscar(texto: any){console.debug('click BUSCAR ' + texto);
 
-   this.f_buscar_nombre = this.frutas.find(el => el.nombre == texto);
-   return this.f_buscar_nombre;
-
- }
 
 
   ngOnInit() {
