@@ -15,6 +15,9 @@ import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.compon
 import { ArrayComponent } from './components/array/array.component';
 import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
 import { FrutaCardComponent } from './components/fruta-card/fruta-card.component';
+import { CocheCardComponent } from './components/coche-card/coche-card.component';
+import { PaginaComparadorCocheComponent } from './components/pagina-comparador-coche/pagina-comparador-coche.component';
+
 //directivas
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
 import { Directiva1Directive } from './directives/directiva1.directive';
@@ -23,6 +26,7 @@ import { CountdownDirective } from './directives/countdown.directive';
 import { MonedaPipe } from './pipes/moneda.pipe';
 import { TrimarPipe } from './pipes/trimar.pipe';
 import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
+import { FiltroCochePipe } from './pipes/filtro-coche.pipe';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,10 @@ import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
     ArrayComponent,
     FiltroOfertaPipe,
     PaginaComparadorComponent,
-    FrutaCardComponent
+    FrutaCardComponent,
+    CocheCardComponent,
+    PaginaComparadorCocheComponent,
+    FiltroCochePipe
   ],
   imports: [
     BrowserModule,

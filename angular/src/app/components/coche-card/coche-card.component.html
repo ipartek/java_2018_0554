@@ -1,0 +1,15 @@
+<div class="card" style="width: 18rem;">
+    <img src="{{coche.imagen}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{coche.nombre}}</h5>
+      <p class="card-text">
+    
+          <span *ngFor="let color of coche.colores" class="badge" [style.color]="color.codigo">
+              {{color.nombre}}
+          </span>
+        </p>
+        <div class="card-body">
+            <a href="#" class="btn btn-primary">Añadir a carrito</a>
+        </div>
+    </div>
+  </div>

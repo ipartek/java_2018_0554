@@ -14,7 +14,6 @@ export class FrutaCardComponent implements OnInit {
 
   constructor() {
     this.isOferta=false;
-   
    }
 
   ngOnInit() {
