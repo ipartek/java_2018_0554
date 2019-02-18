@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Persona } from 'src/app/model/persona';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  manolo:Persona;
+  anonimo:Persona;
+  constructor() { 
+    this.manolo = new Persona('Manolo');
+    this.anonimo = new Persona();
+    }
 
   ngOnInit() {
   }

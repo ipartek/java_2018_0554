@@ -50,7 +50,7 @@ import { FiltroCochePipe } from './pipes/filtro-coche.pipe';
     FrutaCardComponent,
     CocheCardComponent,
     PaginaComparadorCocheComponent,
-    FiltroCochePipe
+    FiltroCochePipe,
   ],
   imports: [
     BrowserModule,
