@@ -11,6 +11,9 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { Error404Component } from './components/error404/error404.component';
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
+import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
+import { CardFrutaComponent } from './components/card-fruta/card-fruta.component';
+
 
 // directives
 import { Directiva1Directive } from './directives/directiva1.directive';
@@ -39,7 +42,9 @@ import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
     MonedaPipe,
     TrimarPipe,
     PaginaArrayComponent,
-    FiltroOfertaPipe
+    FiltroOfertaPipe,
+    PaginaComparadorComponent,
+    CardFrutaComponent
   ],
   imports: [
     BrowserModule,
