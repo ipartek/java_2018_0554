@@ -13,7 +13,6 @@
         <input type="text" name="busqueda" (click)="limpiar()"
                [(ngModel)]="searchText" class="form-control m-1" placeholder="Filtra por el nombre de la fruta">
       </div>
-      <p class="text-danger">{{searchText}}</p>
       <ul class="list-group">
         <li *ngFor="let fruta of frutas | filtroOferta : isOferta : searchText"
           class="list-group-item d-flex justify-content-around align-items-center">
