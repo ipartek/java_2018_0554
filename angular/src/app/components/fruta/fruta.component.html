@@ -21,9 +21,17 @@
         <span class="badge badge-{{fruta.oferta?'success':'danger'}} text-white ">{{fruta.oferta?'En oferta':' Sin oferta'}} </span>
       </li>
       <li class="list-group-item">
-          <span class="badge badge-{{fruta.precio<frutaComparar.precio?'success':'danger'}} text-white ">{{fruta.precio | moneda}}</span>
+            <span class="badge badge-{{fruta.oferta?'success':'danger'}} text-white ">{{fruta.oferta?fruta.descuento:'-'}}% </span>
+          </li>
+      <li class="list-group-item">
+          <span class="badge badge-{{fruta.oferta || fruta.precio<frutaComparar.precio ?'success':'danger'}} text-white ">{{fruta.precio | moneda}}</span>
         </li>
-      
+      <li>{{fruta.oferta}}</li>
+      <li>{{fruta.precio}}</li>
+      <li>{{fruta.descuento}}</li>
+      <li>{{ calcularDescuento(fruta) | number : '1.0-2' | moneda }}</li>
+     
+
     </ul>
 </div>
 

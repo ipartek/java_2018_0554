@@ -34,7 +34,7 @@ export class PaginaComparadorComponent implements OnInit {
       },
       {
         'nombre': 'chirimoya',
-        'oferta': true,
+        'oferta': false,
         'precio': 10,
         'descuento': 0,
         'imagen': 'https://media.mercola.com/assets/images/foodfacts/cherimoya-nutrition-facts.jpg',
