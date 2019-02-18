@@ -7,13 +7,13 @@
   </div>
   <div class="col-6">
     <h2>Frutas Maquetado</h2>
-      <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" (click)="cambiarOferta(true)"class="btn btn-secondary">OFERTA</button>
-          <button type="button" (click)="cambiarOferta(false)" class="btn btn-secondary">TODAS</button>   
-        {{isOferta}}
-        </div>
+    <div class="btn-group mb-2" role="group" aria-label="Basic example">
+      <button type="button" (click)="cambiarOferta(true)" class="{{(isOferta)?'btn btn-primary':'btn btn-secondary'}}">OFERTA</button>
+      <button type="button" (click)="cambiarOferta(false)" class="{{(!isOferta)?'btn btn-primary':'btn btn-secondary'}}">TODAS</button>      
+      <input type="text" [(ngModel)]="searchText" class="ml-2 text-primary" placeholder="filtra por nombre fruta"/>
+    </div>
     <ul class="list-group">
-        <li *ngFor="let fruta of frutas | filtroOferta:isOferta" class="list-group-item d-flex justify-content-between">
+        <li *ngFor="let fruta of frutas | filtroOferta:isOferta:searchText" class="list-group-item d-flex justify-content-between">
           <img [src]="fruta.imagen" alt="{{fruta.nombre}}">
 
           <!-- nombre y colores -->

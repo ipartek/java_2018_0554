@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ArrayComponent implements OnInit {
 
   isOferta:boolean;
+  searchText: string;
   frutas: any[];
   f_nombres:any[];
   f_precios:any[];
@@ -78,6 +79,9 @@ export class ArrayComponent implements OnInit {
       }
     ];
 
+    //Atributo para buscar una fruta por un texto
+    this.searchText="";
+
     console.trace('comenzamos a mapear el array de frutas');
     //this.f_nombres=this.frutas.map(fruta => {return fruta.nombre});
     this.f_nombres=this.frutas.map((value,index,array) => {
@@ -99,7 +103,7 @@ export class ArrayComponent implements OnInit {
     //MAP,FILTER,MAP
     //map(value,index,array)
     //filter(value,index,array)
-    //map(actual,previous,index,array),valor de previous hay que inicializarlo => 0 ej:.reduce((p,c)=>{return p +c},0);
+    //reduce(actual,previous,index,array),valor de previous hay que inicializarlo => 0 ej:.reduce((p,c)=>{return p +c},0);
     this.f_precios=this.frutas.map(fruta => {return fruta.precio});
 
     this.f_oferta=this.frutas.filter(f =>f.oferta).map(f=>{return f.nombre});
