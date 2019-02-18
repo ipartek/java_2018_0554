@@ -16,11 +16,22 @@ export class FiltroOfertaPipe implements PipeTransform {
     
     console.trace('FiltroOfertaPipe isOferta= %s searchText=%s', isOferta, searchText);
 
+    // conseguimos el mismo array pero sin que apunte a la misma posicion de memoria
+    // no usar aResul = frutas;
+    let aResul = frutas.map(f=>f);
+
+    // 1º filtrar por Oferta
     if ( isOferta ){   
-      return frutas.filter( f => f.oferta );
-    }else{
-      return frutas;
-    }  
+      aResul = aResul.filter( f => f.oferta );
+    }
+
+    //2º filtrar por searchText, si esta definido y diferente vacio
+    if ( searchText && searchText !== '' ){
+      aResul = aResul.filter( f => f.nombre.includes(searchText) );
+    }
+
+    return aResul;
+
   }
 
 }
