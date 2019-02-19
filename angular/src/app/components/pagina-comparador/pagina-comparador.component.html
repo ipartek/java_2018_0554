@@ -6,18 +6,31 @@
               {{f.nombre}}
             </li>    
         </ul>
-        <p>frutaSelec1 => {{frutaSelec1.nombre}}</p>
-        <p>frutaSelec2 => {{frutaSelec2.nombre}}</p>
     </div>
 
-    <div class="col-5">
-        <app-fruta [fruta]="frutaSelec1" [frutaComparar]="frutaSelec2"></app-fruta>   
+    <div class="col-4">
+            
+        <app-fruta (llamarPadre)="escucho($event)" [fruta]="frutaSelec1" [frutaComparar]="frutaSelec2"></app-fruta>   
     </div>
 
-    <div class="col-5">
-        <app-fruta [fruta]="frutaSelec2" [frutaComparar]="frutaSelec1"></app-fruta>   
+    <div class="col-4">
+        <app-fruta (llamarPadre)="escucho($event)" [fruta]="frutaSelec2" [frutaComparar]="frutaSelec1"></app-fruta>   
+        
+    </div>
+
+    <div class="col-2">
+       <h6 class="bg-primary text-white p-2">Carrito</h6>
+       <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action">
+                Fresa  
+                <span class="text-muted">3.41€</span>
+            </a>
+         </div>
+      
     </div>
 
 </div>
+
+
 
 

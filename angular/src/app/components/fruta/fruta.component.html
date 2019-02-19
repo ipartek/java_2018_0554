@@ -1,4 +1,4 @@
-
+<h6 class="bg-primary text-white p-2">Fruta</h6>
 <div class="col-md-12 text-center" >
   <div class="card box-shadow position-relative">
     <img class="card-img-top" src="{{fruta.imagen}}" alt="{{fruta.nombre}}">
@@ -14,8 +14,10 @@
         <p class="title">{{fruta.nombre}}</p>
         <span class="color" [style.background]="color.codigo" *ngFor="let color of fruta.colores" >
         </span>
-      </div>
+    </div>
+    <button (click)="enviarEventoPadre($event)" type="button" class="btn btn-lg btn-block btn-primary">Comprar</button>
   </div>
+  <!--
   <ul class="list-group texto-grande">
       <li class="list-group-item">
         <span class="badge badge-{{fruta.oferta?'success':'danger'}} text-white ">{{fruta.oferta?'En oferta':' Sin oferta'}} </span>
@@ -26,12 +28,7 @@
       <li class="list-group-item">
           <span class="badge badge-{{fruta.oferta || fruta.precio<frutaComparar.precio ?'success':'danger'}} text-white ">{{fruta.precio | moneda}}</span>
         </li>
-      <li>{{fruta.oferta}}</li>
-      <li>{{fruta.precio}}</li>
-      <li>{{fruta.descuento}}</li>
-      <li>{{ calcularDescuento(fruta) | number : '1.0-2' | moneda }}</li>
-     
-
-    </ul>
+  </ul>
+  -->
 </div>
 

@@ -79,4 +79,8 @@ export class PaginaComparadorComponent implements OnInit {
     this.frutaSelec1 = this.frutas[i];
   }
 
+  escucho(event){
+    alert(event.nombre);
+  }
+
 }
