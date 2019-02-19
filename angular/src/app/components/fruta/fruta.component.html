@@ -1,4 +1,4 @@
-<h6 class="bg-primary text-white p-2">Fruta</h6>
+<h6 class="bg-primary text-white p-2 text-center text-uppercase">{{fruta.nombre}}</h6>
 <div class="col-md-12 text-center" >
   <div class="card box-shadow position-relative">
     <img class="card-img-top" src="{{fruta.imagen}}" alt="{{fruta.nombre}}">
@@ -11,11 +11,11 @@
         <span *ngIf="fruta.oferta && fruta.descuento > 0" class=" col-3 precio"> {{ calcularDescuento(fruta) | number : '1.0-2' | moneda }}</span>
     </div>
     <div class="mb-3">
-        <p class="title">{{fruta.nombre}}</p>
+        <p class="title text-uppercase">{{fruta.nombre}}</p>
         <span class="color" [style.background]="color.codigo" *ngFor="let color of fruta.colores" >
         </span>
     </div>
-    <button (click)="enviarCarrito()" type="button" class="btn btn-block btn-warning text-white"><i class="fas fa-cart-plus"></i></button>
+    <button (click)="enviarCarrito()" type="button" class="btn btn-block btn-info text-white"><i class="fas fa-cart-plus"></i></button>
   </div>
   <!--
   <ul class="list-group texto-grande">

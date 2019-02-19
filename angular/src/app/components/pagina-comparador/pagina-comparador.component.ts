@@ -81,7 +81,7 @@ export class PaginaComparadorComponent implements OnInit {
     this.frutaSelec1 = this.frutas[0];
     this.frutaSelec2 = this.frutas[1];
 
-   
+
   }
 
   ngOnInit() {
@@ -98,28 +98,23 @@ export class PaginaComparadorComponent implements OnInit {
     this.frutaCarrito.push(event);
     this.totalFrutaCarrito = this.frutaCarrito.map( f => f.precio).reduce((p, c) => { return p + c }, 0);
     this.f_precio_descuento = this.frutaCarrito.filter(f => f.oferta).map( fruta => {
-return {
- 'descuento' :  (fruta.precio - (fruta.precio - (fruta.precio)*fruta.descuento/100))
-   };
- });
-this.f_descuento_aplicado = this.f_precio_descuento.filter(f => f.descuento).map( f => f.descuento).reduce((p, c) => { return p + c }, 0);
+        return (fruta.precio - (fruta.precio - (fruta.precio)*fruta.descuento/100));
+    });
+this.f_descuento_aplicado = this.f_precio_descuento.reduce((p, c) => { return p + c }, 0);
   }
 
- 
+
   eliminarCarrito(event){
     //alert("vas a eliminar");
     let fruta = event;
-    this.frutaCarrito = this.frutaCarrito.filter(f => f !== fruta); 
+    this.frutaCarrito = this.frutaCarrito.filter(f => f !== fruta);
     this.totalFrutaCarrito = this.frutaCarrito.map( f => f.precio).reduce((p, c) => { return p + c }, 0);
-
+ //this.f_precio_descuento = this.frutaCarrito.filter(f => f.oferta).map( fruta => (fruta.precio - (fruta.precio - (fruta.precio)*fruta.descuento/100)));
     this.f_precio_descuento = this.frutaCarrito.filter(f => f.oferta).map( fruta => {
-      return {
-       'descuento' :  (fruta.precio - (fruta.precio - (fruta.precio)*fruta.descuento/100))
-         };
+     return (fruta.precio - (fruta.precio - (fruta.precio)*fruta.descuento/100));
        });
-      this.f_descuento_aplicado = this.f_precio_descuento.reduce((p, c) => { return p + c }, 0);
+    this.f_descuento_aplicado = this.f_precio_descuento.reduce((p, c) => { return p + c }, 0);
         }
-    
 
 
 
