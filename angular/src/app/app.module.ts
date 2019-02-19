@@ -20,6 +20,7 @@ import { PaginaComparadorComponent } from './components/pagina-comparador/pagina
 import { FrutaComponent } from './components/pagina-comparador/fruta/fruta.component';
 import { PaginaConcesionarioComponent } from './components/pagina-concesionario/pagina-concesionario.component';
 import { CocheComponent } from './components/pagina-concesionario/coche/coche.component';
+import { TraductorComponent } from './components/traductor/traductor.component';
 
 //Directives
 import { Directiva1Directive } from './directives/directiva1.directive';
@@ -29,7 +30,6 @@ import { CountdownDirective } from './directives/countdown.directive';
 import { MonedaPipe } from './pipes/moneda.pipe';
 import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 import { TrimarPipe } from './pipes/trimar.pipe';
-import { TraductorComponent } from './components/traductor/traductor.component';
 
 @NgModule({
   declarations: [

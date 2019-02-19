@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-coche',
@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CocheComponent implements OnInit {
 
+  @Input('coche') coche: any;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  comprarCoche(event){
+
+    let datosEnviar = {
+        'coche': this.coche
+    };
+  }
 }

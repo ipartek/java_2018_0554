@@ -1,3 +1,14 @@
-<p>
-  coche works!
-</p>
+<div class="card">
+  <img src="{{coche.imagen}}" class="card-img-top" alt="{{coche.modelo}}">
+  <div class="card-body">
+    <h5 class="card-title">{{coche.modelo | uppercase }}</h5>
+    <p class="card-text">{{coche.combustible}}</p>
+    <p class="card-text">{{coche.km}}km</p>
+  </div>
+  <div class="card-footer">
+    <span class="text-muted">PRECIO {{coche.precio | moneda }}</span>
+  </div>
+  <div>
+    <button type="button" class="btn btn-primary btn-lg btn-block" (click)="comprarCoche($event)">Añadir al carrito</button>
+  </div>
+</div>
