@@ -7,15 +7,27 @@ import { Persona } from 'src/app/model/persona';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-manolo:Persona;
+
+  manolo:Persona;
+
+  idiomas:string[];
+  idiomaSeleccionado:string;
+
   constructor() {
     this.manolo = new Persona;
     console.debug("manoloc sin inicializar %o", this.manolo);
     this.manolo.nombre ='man';
     console.debug("dame tu nombre" +this.manolo.nombre);
+    this.idiomas=['eu','es','en'];
+    this,this.idiomaSeleccionado = this.idiomas[0];
    }
 
   ngOnInit() {
   }
-
+  cambiarIdioma(idioma:string){
+    this.idiomaSeleccionado = idioma;
+  }
+  escucho(event){
+    alert(event.texto);
+  }
 }

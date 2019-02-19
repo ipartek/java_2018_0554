@@ -1,0 +1,10 @@
+
+<div class="bg-info text-white p-2">
+
+<p>{{idioma}}</p>
+<p>{{texto}}</p>
+<input  type="text" name="nom" [class]="formControl" placeholder="Escribe tu nombre" [(ngModel)]="texto">
+<hr>
+<button (click)="enviarEventoPadre($event)" type="button" class="btn btn-warning">Enviar evento al padre</button>
+
+</div>

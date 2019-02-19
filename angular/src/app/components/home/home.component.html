@@ -1,5 +1,16 @@
 <div class="jumbotron mt-3">
-  <h1>HOME</h1>
-  <p class="lead">This example is a quick exercise to illustrate how the bottom navbar works.</p>
-  <a class="btn btn-lg btn-primary" href="/docs/4.3/components/navbar/" role="button">View navbar docs &raquo;</a>
+    <h1>HOME</h1>
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button *ngFor="let idioma of idiomas" 
+            type="button" 
+            (click)="cambiarIdioma(idioma)"
+            class="{{(idiomaSeleccionado===idioma)?'btn btn-primary':'btn btn-secondary'}}">
+            {{idioma}}
+    </button>
+    </div>
+
+    <span>Idioma seleccionado: {{idiomaSeleccionado}}</span>
+
+ <app-traductor (llamarPadre)="escucho($event)" [idioma]="idiomaSeleccionado"  [texto]="'hola'"></app-traductor>
 </div>

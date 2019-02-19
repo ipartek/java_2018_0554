@@ -25,6 +25,7 @@ import { FiltroBuscarPipe } from './pipes/filtro-buscar.pipe';
 import { TrimarPipe } from './pipes/trimar.pipe';
 import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
 import { FrutaComponent } from './components/fruta/fruta.component';
+import { TraductorComponent } from './components/traductor/traductor.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { FrutaComponent } from './components/fruta/fruta.component';
     FiltroBuscarPipe,
     TrimarPipe,
     PaginaComparadorComponent,
-    FrutaComponent
+    FrutaComponent,
+    TraductorComponent
   ],
   imports: [
     BrowserModule,
