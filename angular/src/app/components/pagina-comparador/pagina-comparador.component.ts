@@ -103,4 +103,12 @@ export class PaginaComparadorComponent implements OnInit {
     
   }
 
+
+  calcularDescuento(fruta:any):number{
+    return (fruta.precio - (fruta.precio)*fruta.descuento/100);
+ }
+
+ calcularDescuentoAplicado(fruta:any):number{
+  return (fruta.precio - (fruta.precio - (fruta.precio)*fruta.descuento/100));
+}
 }

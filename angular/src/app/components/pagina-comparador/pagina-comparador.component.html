@@ -24,11 +24,15 @@
             <li class="list-group-item list-group-item-action" *ngFor="let fc of frutaCarrito">
                     {{fc.nombre |  uppercase}}  
                 <span class="text-muted"> {{fc.precio | moneda}} </span> 
+                <span *ngIf="fc.oferta" class="text-muted"> {{calcularDescuento(fc) | number : '1.0-2' }}</span> 
+                <span *ngIf="fc.oferta" class="text-muted"> {{calcularDescuentoAplicado(fc) | number : '1.0-2' }}</span> 
 
                 <i (click)="eliminarCarrito(fc)"class="fas fa-window-close"> </i>
 
             </li>
-            <li  class="list-group-item list-group-item-action">TOTAL: {{totalFrutaCarrito | number : '1.0-2' }}</li>
+            <li  class="list-group-item list-group-item-action">Total sin descuento: {{totalFrutaCarrito | number : '1.0-2' }}</li>
+            <li  class="list-group-item list-group-item-action">Descuento aplicado: {{totalFrutaCarrito | number : '1.0-2' }}</li>
+            <li  class="list-group-item list-group-item-action">Total a pagar: total - descuento</li>
         </ul>
       
     </div>
