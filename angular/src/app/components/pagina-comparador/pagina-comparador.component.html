@@ -10,23 +10,26 @@
 
     <div class="col-4">
             
-        <app-fruta (llamarPadre)="escucho($event)" [fruta]="frutaSelec1" [frutaComparar]="frutaSelec2"></app-fruta>   
+        <app-fruta (llamarPadre)="agregarCarrito($event)" [fruta]="frutaSelec1" [frutaComparar]="frutaSelec2"></app-fruta>   
     </div>
 
     <div class="col-4">
-        <app-fruta (llamarPadre)="escucho($event)" [fruta]="frutaSelec2" [frutaComparar]="frutaSelec1"></app-fruta>   
+        <app-fruta (llamarPadre)="agregarCarrito($event)" [fruta]="frutaSelec2" [frutaComparar]="frutaSelec1"></app-fruta>   
         
     </div>
 
     <div class="col-2">
        <h6 class="bg-primary text-white p-2">Carrito</h6>
-       <div class="list-group" >
-            <a href="#" class="list-group-item list-group-item-action" *ngFor="let fc of frutaCarrito">
-                    {{fc.nombre}}  
-                <span class="text-muted"> {{fc.precio | moneda}} </span>
-            </a>
-            <div  class="list-group-item list-group-item-action">TOTAL: {{totalFrutaCarrito | number : '1.0-2' }}</div>
-         </div>
+       <ul class="list-group" >
+            <li class="list-group-item list-group-item-action" *ngFor="let fc of frutaCarrito">
+                    {{fc.nombre |  uppercase}}  
+                <span class="text-muted"> {{fc.precio | moneda}} </span> 
+
+                <i (click)="eliminarCarrito(fc)"class="fas fa-window-close"> </i>
+
+            </li>
+            <li  class="list-group-item list-group-item-action">TOTAL: {{totalFrutaCarrito | number : '1.0-2' }}</li>
+        </ul>
       
     </div>
 

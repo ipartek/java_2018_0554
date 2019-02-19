@@ -86,9 +86,19 @@ export class PaginaComparadorComponent implements OnInit {
     this.frutaSelec1 = this.frutas[i];
   }
 
-  escucho(event){
-    
+
+
+  agregarCarrito(event){
     this.frutaCarrito.push(event);
+    this.totalFrutaCarrito = this.frutaCarrito.map( f => f.precio).reduce((p, c) => { return p + c }, 0);
+    
+  }
+
+  eliminarCarrito(event){
+    //alert("vas a eliminar");
+    let fruta = event;
+    this.frutaCarrito = this.frutaCarrito.filter(f => f !== fruta);
+    
     this.totalFrutaCarrito = this.frutaCarrito.map( f => f.precio).reduce((p, c) => { return p + c }, 0);
     
   }

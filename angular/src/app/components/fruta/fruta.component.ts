@@ -21,7 +21,7 @@ calcularDescuento(fruta:any):number{
     return (fruta.precio - (fruta.precio)*fruta.descuento/100);
  }
 
- enviarEventoPadre(event){
+ enviarCarrito(event){
   let datosEnviar =this.fruta;
   this.llamarPadre.emit(datosEnviar);
 }
