@@ -29,6 +29,7 @@
         <div class="card" style="width: 18rem;">
           <div class="card-body bg-danger">
             <h5>CARRITO</h5>
+            <p *ngIf="carrito.length===0">No se ha seleccionado ningún producto</p>
           </div>
           <ul class="list-group list-group-flush">
             <li *ngFor="let fruta of carrito" class="list-group-item bg-secondary">
