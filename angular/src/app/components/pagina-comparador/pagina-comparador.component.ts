@@ -117,7 +117,7 @@ this.f_descuento_aplicado = this.f_precio_descuento.filter(f => f.descuento).map
        'descuento' :  (fruta.precio - (fruta.precio - (fruta.precio)*fruta.descuento/100))
          };
        });
-      this.f_descuento_aplicado = this.f_precio_descuento.filter(f => f.descuento).map( f => f.descuento).reduce((p, c) => { return p + c }, 0);
+      this.f_descuento_aplicado = this.f_precio_descuento.reduce((p, c) => { return p + c }, 0);
         }
     
 
