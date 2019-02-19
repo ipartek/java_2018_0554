@@ -9,6 +9,9 @@ export class PaginaComparadorComponent implements OnInit {
   frutas:any[];
   frutaSelec1:any;
   frutaSelec2:any;
+  carritoCompra:any[];
+  precioTotalCompra:number;
+
   constructor() { 
     this.frutas=[
       {
@@ -67,6 +70,8 @@ export class PaginaComparadorComponent implements OnInit {
     ];
     this.frutaSelec1= this.frutas[0];
     this.frutaSelec2= this.frutas[1];
+    this.carritoCompra=[];
+    this.precioTotalCompra=0;
   }
 
   ngOnInit() {
@@ -76,5 +81,20 @@ export class PaginaComparadorComponent implements OnInit {
     console.log("cambiarFruta: index " + i + " fruta seleccionada");
     this.frutaSelec2 = this.frutaSelec1;
     this.frutaSelec1=this.frutas[i];
+  }
+  /**
+   * Metodo que esta escuchando al Output del hijo y que añade frutas al carrito de la compra
+   * @param event en el evento se le manda la fruta que se ha seleccionado para introducirla al carrito
+   */
+  anadirACarrito(event){
+    let frutaAnadir = event;
+    //Cada vez que se añade una fruta se actualiza el precio total de la compra
+    this.precioTotalCompra = this.precioTotalCompra + event.precio;
+
+    this.carritoCompra.push(frutaAnadir);
+  }
+  elimarFrutaCarrito(f:string){
+   //TODO falta restar del precio total cuando se elimina la fruta.
+    this.carritoCompra=this.carritoCompra.filter(fruta=>fruta.nombre !== f);
   }
 }

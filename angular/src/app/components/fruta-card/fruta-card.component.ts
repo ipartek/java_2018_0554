@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-fruta-card',
@@ -11,6 +11,8 @@ export class FrutaCardComponent implements OnInit {
   isOferta:boolean;
   @Input() fruta:any;
   @Input() frutaComparar:any;
+
+  @Output()frutaAnadir= new EventEmitter();
 
   constructor() {
     this.isOferta=false;
@@ -25,5 +27,13 @@ export class FrutaCardComponent implements OnInit {
   cambiarOferta(value:boolean){
     this.isOferta = value;
     console.debug('cambiarOferta ' + this.isOferta);
+  }
+
+  /**Al hacer click, se activa el evento que avisa al padre y hace lo siguiente.
+   * Metodo que envia la fruta seleccionada previamente, para añadirla al carrito del padre
+   * @param event 
+   */
+  anadirFruta(event){
+    this.frutaAnadir.emit(this.fruta);
   }
 }
