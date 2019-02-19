@@ -27,6 +27,7 @@ import { TrimarPipe } from './pipes/trimar.pipe';
 import { PaginaArrayComponent } from './components/pagina-array/pagina-array.component';
 import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 import { NavComponent } from './nav/nav.component';
+import { TraductorComponent } from './components/traductor/traductor.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { NavComponent } from './nav/nav.component';
     FiltroOfertaPipe,
     PaginaComparadorComponent,
     CardFrutaComponent,
-    NavComponent
+    NavComponent,
+    TraductorComponent
   ],
   imports: [
     BrowserModule,
