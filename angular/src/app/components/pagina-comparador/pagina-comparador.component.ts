@@ -97,14 +97,12 @@ export class PaginaComparadorComponent implements OnInit {
   agregarCarrito(event){
     this.frutaCarrito.push(event);
     this.totalFrutaCarrito = this.frutaCarrito.map( f => f.precio).reduce((p, c) => { return p + c }, 0);
-  this.f_precio_descuento = this.frutaCarrito.filter(f => f.oferta).map( fruta => {
+    this.f_precio_descuento = this.frutaCarrito.filter(f => f.oferta).map( fruta => {
 return {
  'descuento' :  (fruta.precio - (fruta.precio - (fruta.precio)*fruta.descuento/100))
    };
  });
-
-  
-    this.f_descuento_aplicado = this.f_precio_descuento.filter(f => f.descuento).map( f => f.descuento).reduce((p, c) => { return p + c }, 0);
+this.f_descuento_aplicado = this.f_precio_descuento.filter(f => f.descuento).map( f => f.descuento).reduce((p, c) => { return p + c }, 0);
   }
 
  
@@ -113,8 +111,16 @@ return {
     let fruta = event;
     this.frutaCarrito = this.frutaCarrito.filter(f => f !== fruta); 
     this.totalFrutaCarrito = this.frutaCarrito.map( f => f.precio).reduce((p, c) => { return p + c }, 0);
+
+    this.f_precio_descuento = this.frutaCarrito.filter(f => f.oferta).map( fruta => {
+      return {
+       'descuento' :  (fruta.precio - (fruta.precio - (fruta.precio)*fruta.descuento/100))
+         };
+       });
+      this.f_descuento_aplicado = this.f_precio_descuento.filter(f => f.descuento).map( f => f.descuento).reduce((p, c) => { return p + c }, 0);
+        }
     
-  }
+
 
 
   calcularDescuento(fruta:any):number{

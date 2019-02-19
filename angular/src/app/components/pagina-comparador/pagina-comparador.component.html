@@ -18,29 +18,32 @@
         
     </div>
 
-    <div class="col-3">
-       <h6 class="bg-primary text-white p-2"><i class="fas fa-shopping-cart"></i> Carrito </h6>
-       <ul class="list-group" >
+    <div class="col-3" >
+       <h6 class="bg-primary text-white p-2">
+           <i class="fas fa-shopping-cart"></i> 
+           {{totalFrutaCarrito - f_descuento_aplicado | number : '1.0-2' | moneda}} 
+        </h6>
+       <ul  class="list-group" >
             <li class="list-group-item list-group-item-action" *ngFor="let fc of frutaCarrito">
                     {{fc.nombre |  uppercase}}  
                 <span class="text-muted"> {{fc.precio | moneda}} </span> 
-                <span *ngIf="fc.oferta" class="text-muted"> {{calcularDescuento(fc) | number : '1.0-2' }}</span> 
-                <span *ngIf="fc.oferta" class="text-muted"> {{calcularDescuentoAplicado(fc) | number : '1.0-2' }}</span> 
+                <span *ngIf="fc.oferta" class="text-muted"> {{calcularDescuentoAplicado(fc) | number : '1.0-2' | moneda}} </span> 
+                <span *ngIf="fc.oferta" class="text-muted"> {{calcularDescuento(fc) | number : '1.0-2' | moneda}} </span> 
+                
 
                 <i (click)="eliminarCarrito(fc)"class="fas fa-window-close"> </i>
 
             </li>
-            <li  class="list-group-item list-group-item-action">Total sin descuento: {{totalFrutaCarrito | number : '1.0-2' }}</li>
-            <li  class="list-group-item list-group-item-action">Descuento aplicado: {{f_descuento_aplicado | number : '1.0-2' }}</li>
+            <li  class="list-group-item list-group-item-action">Total sin descuento: {{totalFrutaCarrito | number : '1.0-2' | moneda}} </li>
+            <li  class="list-group-item list-group-item-action">Descuento aplicado: {{f_descuento_aplicado | number : '1.0-2' | moneda}} </li>
             <li  class="list-group-item list-group-item-action">
-                Total a pagar: {{totalFrutaCarrito - f_descuento_aplicado | number : '1.0-2' }}
+                Total a pagar: {{totalFrutaCarrito - f_descuento_aplicado | number : '1.0-2' | moneda}} 
             </li>
         </ul>
       
     </div>
 
 </div>
-{{f_descuento_aplicado }}
 
 
 
