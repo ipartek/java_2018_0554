@@ -20,11 +20,12 @@
 
     <div class="col-2">
        <h6 class="bg-primary text-white p-2">Carrito</h6>
-       <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action">
-                Fresa  
-                <span class="text-muted">3.41€</span>
+       <div class="list-group" >
+            <a href="#" class="list-group-item list-group-item-action" *ngFor="let fc of frutaCarrito">
+                    {{fc.nombre}}  
+                <span class="text-muted"> {{fc.precio | moneda}} </span>
             </a>
+            <div  class="list-group-item list-group-item-action">TOTAL: {{totalFrutaCarrito | number : '1.0-2' }}</div>
          </div>
       
     </div>

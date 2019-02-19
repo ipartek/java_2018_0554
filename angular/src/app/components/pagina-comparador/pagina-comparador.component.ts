@@ -9,7 +9,12 @@ export class PaginaComparadorComponent implements OnInit {
   frutas: any;
   frutaSelec1: any;
   frutaSelec2: any;
+  frutaCarrito:any;
+  totalFrutaCarrito: number;
+
   constructor() {
+    this.totalFrutaCarrito=0;
+    this.frutaCarrito = [];
     this.frutas = [
       {
         'nombre': 'fresa',
@@ -69,6 +74,8 @@ export class PaginaComparadorComponent implements OnInit {
 
     this.frutaSelec1 = this.frutas[0];
     this.frutaSelec2 = this.frutas[1];
+
+   
   }
 
   ngOnInit() {
@@ -80,7 +87,10 @@ export class PaginaComparadorComponent implements OnInit {
   }
 
   escucho(event){
-    alert(event.nombre);
+    
+    this.frutaCarrito.push(event);
+    this.totalFrutaCarrito = this.frutaCarrito.map( f => f.precio).reduce((p, c) => { return p + c }, 0);
+    
   }
 
 }
