@@ -102,6 +102,7 @@ export class PaginaComparadorComponent implements OnInit {
     //alert("He recibido un evento del Hijo prueba=" + event.nombre);
     this.carrito.push(event);
     this.precioTotal += event.precio;
+    //this.TotalCarro = this.carrito.map(f=> f.precio).reduce((p,c)=>{return p + c}, 0)
     this.precioTotalDescuento += (event.precio - ((event.precio * event.descuento) / 100))
   }
 }
