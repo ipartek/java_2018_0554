@@ -9,11 +9,17 @@ export class PaginaComparadorComponent implements OnInit {
   frutas: any;
   frutaSelec1: any;
   frutaSelec2: any;
+
   frutaCarrito:any;
+  f_precio_descuento:any;
+  f_descuento_aplicado:number;
+
+
   totalFrutaCarrito: number;
 
   constructor() {
     this.totalFrutaCarrito=0;
+    this.f_descuento_aplicado=0;
     this.frutaCarrito = [];
     this.frutas = [
       {
@@ -91,14 +97,21 @@ export class PaginaComparadorComponent implements OnInit {
   agregarCarrito(event){
     this.frutaCarrito.push(event);
     this.totalFrutaCarrito = this.frutaCarrito.map( f => f.precio).reduce((p, c) => { return p + c }, 0);
-    
+  this.f_precio_descuento = this.frutaCarrito.filter(f => f.oferta).map( fruta => {
+return {
+ 'descuento' :  (fruta.precio - (fruta.precio - (fruta.precio)*fruta.descuento/100))
+   };
+ });
+
+  
+    this.f_descuento_aplicado = this.f_precio_descuento.filter(f => f.descuento).map( f => f.descuento).reduce((p, c) => { return p + c }, 0);
   }
 
+ 
   eliminarCarrito(event){
     //alert("vas a eliminar");
     let fruta = event;
-    this.frutaCarrito = this.frutaCarrito.filter(f => f !== fruta);
-    
+    this.frutaCarrito = this.frutaCarrito.filter(f => f !== fruta); 
     this.totalFrutaCarrito = this.frutaCarrito.map( f => f.precio).reduce((p, c) => { return p + c }, 0);
     
   }

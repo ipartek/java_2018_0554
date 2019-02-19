@@ -31,14 +31,16 @@
 
             </li>
             <li  class="list-group-item list-group-item-action">Total sin descuento: {{totalFrutaCarrito | number : '1.0-2' }}</li>
-            <li  class="list-group-item list-group-item-action">Descuento aplicado: {{totalFrutaCarrito | number : '1.0-2' }}</li>
-            <li  class="list-group-item list-group-item-action">Total a pagar: total - descuento</li>
+            <li  class="list-group-item list-group-item-action">Descuento aplicado: {{f_descuento_aplicado | number : '1.0-2' }}</li>
+            <li  class="list-group-item list-group-item-action">
+                Total a pagar: {{totalFrutaCarrito - f_descuento_aplicado | number : '1.0-2' }}
+            </li>
         </ul>
       
     </div>
 
 </div>
-
+{{f_descuento_aplicado }}
 
 
 
