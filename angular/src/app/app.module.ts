@@ -27,6 +27,7 @@ import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
 import { FrutaComponent } from './components/fruta/fruta.component';
 import { TraductorComponent } from './components/traductor/traductor.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { TraductorComponent } from './components/traductor/traductor.component';
     FiltroOfertaPipe,
     PaginaComparadorComponent,
     FrutaComponent,
-    TraductorComponent
+    TraductorComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,

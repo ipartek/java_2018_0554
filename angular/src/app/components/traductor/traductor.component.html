@@ -1,3 +1,8 @@
-<p>
-  traductor works!
-</p>
+<div>
+  <p>Los parametros de entrada se declara como @Input y son atributos []</p>
+  <p>Idioma: {{ idioma }}</p>
+  <p>Texto a traducir: {{ texto }}</p>
+  <hr>
+  <p>Los parametros de salida se declaran como @Output y son eventos ($event)</p>
+  <button (click)="clickBoton($event)">Pulsa el botón para enviar un evento al padre</button>
+</div>

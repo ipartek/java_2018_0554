@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-4">
+    <div class="col-3">
       <h2 class="text-primary">LISTADO</h2>
       <ul class="list-group">
         <li *ngFor="let f of frutas; let i = index" (click)="cambiarFruta(i)" class="list-group-item 
@@ -15,11 +15,23 @@
       [(ngModel)]="rangoPrecio">10
       <p><b>{{rangoPrecio}}</b></p>
     </div>
-    <div class="col-4">
-      <app-fruta [fruta]="frutaSelect1" [frutaComparar] = "frutaSelect2"></app-fruta>
+    <div class="col-3">
+      <app-fruta (enviarCarrito)="recibirCarrito($event)" [fruta]="frutaSelect1" [frutaComparar] = "frutaSelect2"></app-fruta>
     </div>
-    <div class="col-4">
-      <app-fruta [fruta]="frutaSelect2" [frutaComparar] = "frutaSelect1"></app-fruta>
+    <div class="col-3">
+      <app-fruta  (enviarCarrito)="recibirCarrito($event)" [fruta]="frutaSelect2" [frutaComparar] = "frutaSelect1"></app-fruta>
+    </div>
+    <div class="col-3">
+      <div class="ml-5">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5>CARRITO</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let fruta of carrito" class="list-group-item">{{ fruta.nombre }}</li>
+          </ul>
+        </div>
+      </div>  
     </div>
   </div>
 </div>

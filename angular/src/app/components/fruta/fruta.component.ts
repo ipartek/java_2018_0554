@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-fruta',
@@ -10,12 +10,20 @@ export class FrutaComponent implements OnInit {
   @Input('fruta') fruta: any;
   @Input('frutaComparar') frutaComparar: any;
 
+  @Output() enviarCarrito = new EventEmitter();
+
   constructor() {
     
 
    }
 
   ngOnInit() {
+  }
+
+  anadirCarrito(event){
+    // llamarPadre => @Output hay que usar la función "EMIT"
+    
+    this.enviarCarrito.emit( this.fruta );
   }
 
 }

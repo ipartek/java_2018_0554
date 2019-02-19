@@ -1,3 +1,19 @@
-<p>
-  home works!
-</p>
+
+<!-- Selector de idioma -->
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button *ngFor="let idioma of idiomas" 
+          (click)="cambiarIdioma(idioma)"
+          type="button" 
+          class="{{ ( idioma === idiomaSeleccionado )?'btn btn-primary':'btn btn-secondary' }}">
+          {{ idioma }}
+  </button>
+</div>
+
+<input type="text" [(ngModel)]="textoTraducir" placeholder="Escribe algo" name="textoTraducir" id="textoTraducir">
+
+<p>Idioma Seleccionado: {{ idiomaSeleccionado }}</p>
+
+
+
+<!-- Llamada al componente hijo -->
+<app-traductor (llamarPadre)="escucho($event)" [idioma]="idiomaSeleccionado" [texto]="textoTraducir"></app-traductor>

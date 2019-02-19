@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CarritoComponent } from '../carrito/carrito.component';
 
 @Component({
   selector: 'app-pagina-comparador',
@@ -10,6 +11,7 @@ export class PaginaComparadorComponent implements OnInit {
   frutas: any[];
   frutaSelect1: any;
   frutaSelect2: any;
+  carrito: any[];
 
   constructor() { 
     this.frutas = [
@@ -71,6 +73,7 @@ export class PaginaComparadorComponent implements OnInit {
 
     this.frutaSelect1 = this.frutas[0];
     this.frutaSelect2 = this.frutas[1];
+    this.carrito=[];
   }
 
   ngOnInit() {
@@ -82,4 +85,10 @@ export class PaginaComparadorComponent implements OnInit {
     this.frutaSelect1 = this.frutas[i];
   }
 
+  
+  recibirCarrito(event){
+    //alert("He recibido un evento del Hijo prueba=" + event.nombre);
+    
+    this.carrito.push(event);
+  }
 }
