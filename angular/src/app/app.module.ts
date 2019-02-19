@@ -27,6 +27,7 @@ import { MonedaPipe } from './pipes/moneda.pipe';
 import { TrimarPipe } from './pipes/trimar.pipe';
 import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 import { FiltroCochePipe } from './pipes/filtro-coche.pipe';
+import { TraductorComponent } from './components/traductor/traductor.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { FiltroCochePipe } from './pipes/filtro-coche.pipe';
     CocheCardComponent,
     PaginaComparadorCocheComponent,
     FiltroCochePipe,
+    TraductorComponent,
   ],
   imports: [
     BrowserModule,
