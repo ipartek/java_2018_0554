@@ -24,8 +24,8 @@
            TOTAL - {{totalFrutaCarrito - f_descuento_aplicado | number : '1.0-2' | moneda}}
         </h6>
 
-       <ul  class="list-group" *ngIf="!frutaCarrito == 0">
-          <li *ngIf="frutaCarrito == 0" class="text-muted list-group-item list-group-item-action">Sin productos</li>
+       <ul  class="list-group">
+          <li class="text-muted list-group-item list-group-item-action" *ngIf="frutaCarrito == 0">Sin productos</li>
             <li   class="list-group-item list-group-item-action" *ngFor="let fc of frutaCarrito">
                    <span> {{fc.nombre |  uppercase}} </span>
                 <span class="text-muted"> {{fc.precio | moneda}} </span>
@@ -37,9 +37,9 @@
 
             </li>
           </ul>
-        <ul class="list-group mt-2">
-            <li  class="list-group-item list-group-item-action">Total sin descuento: {{totalFrutaCarrito | number : '1.0-2' | moneda}} </li>
-            <li  class="list-group-item list-group-item-action">Descuento aplicado: {{f_descuento_aplicado | number : '1.0-2' | moneda}} </li>
+        <ul class="list-group mt-2" *ngIf="frutaCarrito != 0">
+            <li *ngIf="f_descuento_aplicado" class="list-group-item list-group-item-action">Total sin descuento: {{totalFrutaCarrito | number : '1.0-2' | moneda}} </li>
+            <li *ngIf="f_descuento_aplicado" class="list-group-item list-group-item-action">Descuento aplicado: {{f_descuento_aplicado | number : '1.0-2' | moneda}} </li>
             <li class="list-group-item list-group-item-action">
                 Total a pagar: {{totalFrutaCarrito - f_descuento_aplicado | number : '1.0-2' | moneda}}
             </li>
