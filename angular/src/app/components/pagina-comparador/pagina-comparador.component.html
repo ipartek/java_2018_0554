@@ -11,15 +11,18 @@
       <p>frutaSelect1 => {{ frutaSelect1.nombre }}</p>
       <p>frutaSelect2 => {{ frutaSelect2.nombre }}</p>
       <label for="precio">Filtro precio: </label><br>
-      0<input type="range" name="precio" id="precio" min="0" max="10" step="1"
-      [(ngModel)]="rangoPrecio">10
+      0<input type="range" name="precio" id="precio" min="0" max="10" step="1" [(ngModel)]="rangoPrecio">10
       <p><b>{{rangoPrecio}}</b></p>
     </div>
     <div class="col-3">
-      <app-fruta (enviarCarrito)="recibirCarrito($event)" [fruta]="frutaSelect1" [frutaComparar] = "frutaSelect2"></app-fruta>
+      <app-fruta (enviarCarrito)="recibirCarrito($event)" [fruta]="frutaSelect1" [frutaComparar]="frutaSelect2">
+      </app-fruta>
     </div>
     <div class="col-3">
-      <app-fruta  (enviarCarrito)="recibirCarrito($event)" [fruta]="frutaSelect2" [frutaComparar] = "frutaSelect1"></app-fruta>
+      <div class="ml-3">
+        <app-fruta (enviarCarrito)="recibirCarrito($event)" [fruta]="frutaSelect2" [frutaComparar]="frutaSelect1">
+        </app-fruta>
+      </div>
     </div>
     <div class="col-3">
       <div class="ml-5">
@@ -29,12 +32,20 @@
           </div>
           <ul class="list-group list-group-flush">
             <li *ngFor="let fruta of carrito" class="list-group-item">
-              {{ fruta.nombre }} 
+              {{ fruta.nombre }}
               <button (click)="eliminarProducto(fruta)" class="btn btn-danger">X</button>
+            </li>
+            <li class="list-group-item"><b>Total:</b> {{ precioTotal | number: '1.0-2' | moneda: 'es' }}</li>
+            <li class="list-group-item">
+              <b>Total con Descuento:</b>
+              {{ precioTotalDescuento | number: '1.0-2' | moneda: 'es'  }}
+              <span class="badge badge-success">
+                {{ precioTotalDescuento - precioTotal | number: '1.0-2' | moneda: 'es' }}
+              </span>
             </li>
           </ul>
         </div>
-      </div>  
+      </div>
     </div>
   </div>
 </div>

@@ -12,6 +12,8 @@ export class PaginaComparadorComponent implements OnInit {
   frutaSelect1: any;
   frutaSelect2: any;
   carrito: any[];
+  precioTotal: number;
+  precioTotalDescuento: number;
 
   constructor() { 
     this.frutas = [
@@ -74,6 +76,8 @@ export class PaginaComparadorComponent implements OnInit {
     this.frutaSelect1 = this.frutas[0];
     this.frutaSelect2 = this.frutas[1];
     this.carrito=[];
+    this.precioTotal = 0;
+    this.precioTotalDescuento = 0;
   }
 
   ngOnInit() {
@@ -86,12 +90,18 @@ export class PaginaComparadorComponent implements OnInit {
   }
 
   eliminarProducto(fruta:any){
+    let cantidad:number = this.carrito.filter(f => f.nombre === fruta.nombre).length;
     this.carrito = this.carrito.filter(f => f.nombre !== fruta.nombre);
+    this.precioTotal = (this.precioTotal - (fruta.precio * cantidad));
+    this.precioTotalDescuento = (this.precioTotalDescuento - (fruta.precio - ((fruta.precio * fruta.descuento)/100)) * cantidad);
   }
+
 
   
   recibirCarrito(event){
     //alert("He recibido un evento del Hijo prueba=" + event.nombre);
     this.carrito.push(event);
+    this.precioTotal += event.precio;
+    this.precioTotalDescuento += (event.precio - ((event.precio * event.descuento) / 100))
   }
 }
