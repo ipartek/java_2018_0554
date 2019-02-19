@@ -5,8 +5,10 @@ export class Persona {
 
     // Solo se puede declarar un constructor
     constructor( nombre?: string){
+        // Con operador ternario (Tipo JavaScript)
         this._nombre = (nombre) ? nombre : 'Anonimo';
         
+        //Tipo Java
         // if(nombre){
         //     this._nombre=nombre;
         // }else{
