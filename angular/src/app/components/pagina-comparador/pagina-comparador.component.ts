@@ -85,10 +85,13 @@ export class PaginaComparadorComponent implements OnInit {
     this.frutaSelect1 = this.frutas[i];
   }
 
+  eliminarProducto(fruta:any){
+    this.carrito = this.carrito.filter(f => f.nombre !== fruta.nombre);
+  }
+
   
   recibirCarrito(event){
     //alert("He recibido un evento del Hijo prueba=" + event.nombre);
-    
     this.carrito.push(event);
   }
 }

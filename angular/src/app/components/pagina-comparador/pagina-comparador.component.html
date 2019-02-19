@@ -28,7 +28,10 @@
             <h5>CARRITO</h5>
           </div>
           <ul class="list-group list-group-flush">
-            <li *ngFor="let fruta of carrito" class="list-group-item">{{ fruta.nombre }}</li>
+            <li *ngFor="let fruta of carrito" class="list-group-item">
+              {{ fruta.nombre }} 
+              <button (click)="eliminarProducto(fruta)" class="btn btn-danger">X</button>
+            </li>
           </ul>
         </div>
       </div>  
