@@ -8,18 +8,18 @@
         </ul>
     </div>
 
-    <div class="col-4">
+    <div class="col-3">
             
         <app-fruta (llamarPadre)="agregarCarrito($event)" [fruta]="frutaSelec1" [frutaComparar]="frutaSelec2"></app-fruta>   
     </div>
 
-    <div class="col-4">
+    <div class="col-3">
         <app-fruta (llamarPadre)="agregarCarrito($event)" [fruta]="frutaSelec2" [frutaComparar]="frutaSelec1"></app-fruta>   
         
     </div>
 
-    <div class="col-2">
-       <h6 class="bg-primary text-white p-2">Carrito</h6>
+    <div class="col-3">
+       <h6 class="bg-primary text-white p-2"><i class="fas fa-shopping-cart"></i> Carrito </h6>
        <ul class="list-group" >
             <li class="list-group-item list-group-item-action" *ngFor="let fc of frutaCarrito">
                     {{fc.nombre |  uppercase}}  
