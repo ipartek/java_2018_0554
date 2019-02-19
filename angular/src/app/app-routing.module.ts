@@ -8,6 +8,10 @@ import { SaludoComponent } from './components/saludo/saludo.component';
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
 import { FlujoComponent } from './components/flujo/flujo.component';
 import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
+import { AboutComponent } from './components/about/about.component';
+import { PaginaArrayComponent } from './components/pagina-array/pagina-array.component';
+import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
+import { PaginaConcesionarioComponent } from './components/pagina-concesionario/pagina-concesionario.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -18,6 +22,10 @@ const routes: Routes = [
   { path: 'pagina-directiva', component: PaginaDirectivaComponent },
   { path: 'flujo', component: FlujoComponent },
   { path: 'pagina-pipe', component: PaginaPipeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'pagina-array', component: PaginaArrayComponent },
+  { path: 'pagina-comparador', component: PaginaComparadorComponent },
+  { path: 'pagina-concesionario', component: PaginaConcesionarioComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'error404' }
 ];
 

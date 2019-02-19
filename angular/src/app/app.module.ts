@@ -14,6 +14,12 @@ import { SaludoComponent } from './components/saludo/saludo.component';
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
 import { FlujoComponent } from './components/flujo/flujo.component';
 import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
+import { AboutComponent } from './components/about/about.component';
+import { PaginaArrayComponent } from './components/pagina-array/pagina-array.component';
+import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
+import { FrutaComponent } from './components/pagina-comparador/fruta/fruta.component';
+import { PaginaConcesionarioComponent } from './components/pagina-concesionario/pagina-concesionario.component';
+import { CocheComponent } from './components/pagina-concesionario/coche/coche.component';
 
 //Directives
 import { Directiva1Directive } from './directives/directiva1.directive';
@@ -21,6 +27,9 @@ import { CountdownDirective } from './directives/countdown.directive';
 
 //Pipes
 import { MonedaPipe } from './pipes/moneda.pipe';
+import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
+import { TrimarPipe } from './pipes/trimar.pipe';
+import { TraductorComponent } from './components/traductor/traductor.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +44,16 @@ import { MonedaPipe } from './pipes/moneda.pipe';
     CountdownDirective,
     FlujoComponent,
     PaginaPipeComponent,
-    MonedaPipe
+    MonedaPipe,
+    AboutComponent,
+    PaginaArrayComponent,
+    FiltroOfertaPipe,
+    TrimarPipe,
+    PaginaComparadorComponent,
+    FrutaComponent,
+    PaginaConcesionarioComponent,
+    CocheComponent,
+    TraductorComponent
   ],
   imports: [
     BrowserModule,

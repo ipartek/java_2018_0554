@@ -1,0 +1,16 @@
+<p>Esperamos recibir una paramtro llamado <b>repeticiones</b></p>
+<p>Mirar <b>app-routing.modulo.ts</b> => <span class="text-primary" > path: 'about/<b class="text-danger">:repeticiones</b>', component: AboutComponent </span></p>
+<p>Ejemplo de llamada => <span class="text-primary" >/about/<b class="text-danger">5</b></span> </p>
+<p>Acordarse de inyectar en el constructor  <b>private route: ActivatedRoute</b> para poder acceder al parametro</p>
+<p>Realizar en el evento <b class="text-success">ngOnInit</b> no en el <b class="text-danger">contrcutor</b></p>
+<p>Para leer parametro usar <span class="text-primary">this.route.snapshot.params.<span class="text-danger">repeticiones</span></span></p>
+<p><a href="https://angular.io/guide/router#route-parameters-in-the-activatedroute-service" target="_blank">Documentación oficial</a></p>
+
+<ul>
+  <li><a [routerLink]="['/about/333']">Ejemplo llamada correcta, porque usamos "+" para realizar parseInt <b>about/333</b></a></li>
+  <li><a [routerLink]="['/about/333fffff-NaN']">Ejemplo llamada Incorrecta <b>about/333fffff-NaN</b></a></li>
+</ul>
+<hr>
+<p>
+  PARAMETRO: {{repeticiones}}
+</p>

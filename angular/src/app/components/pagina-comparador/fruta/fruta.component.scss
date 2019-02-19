@@ -1,0 +1,11 @@
+.card {
+    max-width: 400px;
+
+    img{
+        border-bottom: 1px solid rgba(0,0,0,.125);
+    }
+
+    .card-footer small span.oferta{
+        text-decoration: line-through;
+    }
+}

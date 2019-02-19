@@ -13,8 +13,8 @@ export class FlujoComponent implements OnInit {
   claseModelo: string;
   nombre: string;
   valido: string;
-  //tamano: nombre.length;
-  //tamano = ;
+  //tamano: number;
+  //tamano = nombre.length;
 
   constructor() { 
     console.trace('FlujoComponent constructor');
@@ -39,7 +39,7 @@ export class FlujoComponent implements OnInit {
     this.nombre = '';
   }
 /*
-  if ( tamano <= 2 ) {
+  if ( nombre?.length != 5 ) {
     this.valido = 'is-invalid';
   } else{
     this.valido = 'is-valid';

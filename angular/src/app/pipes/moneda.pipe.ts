@@ -6,21 +6,20 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class MonedaPipe implements PipeTransform {
 
   /**
-   * transforma un número añadiendo al final el símbolo de la moneda
-   * @param numero: number, número a transformar
-   * @param locale: string, por defecto 'es'. cambiamos:
-   *          <ol>
-   *            <li>es -> '€'</li>
-   *            <li>en -> '$'</li>
-   *          </ol>
+   * transforma un numero añadiendo al final el simbolo de la moneda
+   * @param numero: number numero a transformar  
+   * @param locale: string por defecto 'es', cambiamos:
+   *         <ol> 
+   *            <li> es => '€'</li>
+   *            <li> en => '$'</li>   
+   *         <ol>
    */
-  transform(numero: number, locale: string = 'es'): string {
+  transform(numero: number, locale: string = 'es' ): string {
     let simbolo = '€';
-
-    if (locale == 'us'){
+    if ( locale === 'en'){
       simbolo = '$';
     }
-    return numero + '' + simbolo;
+    return numero + ' ' + simbolo;
   }
 
 }

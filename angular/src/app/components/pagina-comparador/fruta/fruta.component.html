@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="img">
+    <img src="{{fruta.imagen}}" class="card-img-top" alt="{{fruta.nombre}}">
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{fruta.nombre | uppercase }}</h5>
+    <p class="card-text">Diferencia de precio: {{fruta.precio-frutaComparar.precio | moneda }}</p>
+    <p *ngFor="let c of fruta.colores" class="card-text">{{c.nombre}}</p>
+  </div>
+  <div class="card-footer">
+    <small class="text-muted">PRECIO <span class="oferta">{{fruta.precio | moneda }}</span> {{ calcularDescuento(fruta) | number : '1.0-2' | moneda }}</small>
+  </div>
+</div>
