@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +29,8 @@ import { PaginaArrayComponent } from './components/pagina-array/pagina-array.com
 import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 import { NavComponent } from './nav/nav.component';
 import { TraductorComponent } from './components/traductor/traductor.component';
+import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
+
 
 @NgModule({
   declarations: [
@@ -48,11 +51,13 @@ import { TraductorComponent } from './components/traductor/traductor.component';
     PaginaComparadorComponent,
     CardFrutaComponent,
     NavComponent,
-    TraductorComponent
+    TraductorComponent,
+    PaginaServiceComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,  // para usarlo con los Services
     FormsModule   // para poder usar doble binding
   ],
   providers: [],

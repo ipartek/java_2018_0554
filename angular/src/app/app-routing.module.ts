@@ -9,6 +9,7 @@ import { FlujoComponent } from './components/flujo/flujo.component';
 import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
 import { PaginaArrayComponent } from './components/pagina-array/pagina-array.component';
 import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
+import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'arrays', component: PaginaArrayComponent }, 
   { path: 'comparador', component: PaginaComparadorComponent }, 
   { path: 'directiva', component: PaginaDirectivaComponent },
+  { path: 'service', component: PaginaServiceComponent }, 
   { path: '**', pathMatch:'full', redirectTo : '404'  }
 ];
 

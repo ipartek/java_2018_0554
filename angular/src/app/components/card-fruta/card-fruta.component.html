@@ -10,6 +10,6 @@
         <li *ngFor="let c of fruta.colores"class="list-group-item">{{ c.nombre}}</li>      
       </ul>
     <div class="card-body">
-      <a href="#" class="card-link">Añadir al Carrito</a>     
+      <button class="btn btn-primary" (click)="emitirEvento()">Añadir al Carrito</button>     
     </div>
   </div>
