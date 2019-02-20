@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Persona } from 'src/app/model/persona';
 import { HttpClient } from '@angular/common/http';
 import { Fruta } from 'src/app/model/fruta';
+import { RandomuserService } from 'src/app/providers/randomuser.service';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,7 @@ export class HomeComponent implements OnInit {
   frutaConstructorDescuento: Fruta;
   frutaConstructorCompleto: Fruta;
 
-  constructor() {
+  constructor( private randomuserService: RandomuserService) {
 
 
     this.frutaConstructor = new Fruta('fresa', 3.45 );
@@ -53,6 +54,21 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.randomuserService.getAll().subscribe( (json:any) => {
+
+       let info = json.info; 
+       let personasJson = json.results; 
+
+       //TODO map de personasJson
+       console.debug('personas %o' , personasJson );
+       personasJson.map( p => {
+          let nombre = p.name.first;
+          let apellido = p.name.last;
+          let imagen = p.picture.large;
+       });
+    });
+
   }
 
 
