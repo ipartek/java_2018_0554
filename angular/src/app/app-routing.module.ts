@@ -12,6 +12,7 @@ import { ArraysComponent } from './components/arrays/arrays.component';
 import { PaginaArrayComponent } from './components/pagina-array/pagina-array.component';
 import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
 import { FrutaComponent } from './components/fruta/fruta.component';
+import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent  },
   { path: 'about/:repeticiones', component: AboutComponent  },
@@ -25,8 +26,10 @@ const routes: Routes = [
   { path: 'array2', component: PaginaArrayComponent },
   { path: 'comparador', component: PaginaComparadorComponent },
   { path: 'fruta_card', component: FrutaComponent },
+  { path: 'service', component: PaginaServiceComponent },
   { path: '', pathMatch:'full', redirectTo : 'home'  },
   { path: '**', pathMatch:'full', redirectTo : '404'  }
+
 
 ];
 

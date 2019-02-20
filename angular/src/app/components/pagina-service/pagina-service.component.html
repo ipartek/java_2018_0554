@@ -1,0 +1,25 @@
+
+  <h2 class="bg-primary text-white p-2 mt-4 text-center text-uppercase">Servicios o Providers</h2>
+    <div class="jumbotron">
+    <p>Servicios o providers van a ser los encargados de manipular la informacion de la APP similar al DAO en java</p>
+    <p>Normalemente la fuetne de informacion es un servicio REST pero podria ser LOCALSTORAGE un sistema de ficheros... etc</p>
+    <h3 class="text-danger">ATENCIÓN</h3>
+    <p>Importar en app.module.ts la libreria <b class="text-primary">@angular/common/HttpClientModule</b></p>
+    <p>En  cada servicio inyectar en el constructor<b class="text-primary">@angular/common/HttpClient</b></p>
+    <p>En los componentes la llamada inicial para obtener datos se hace en <b class="text-primary">OnInit</b> no en el constructor <b class="text-primary">Inyectar el servicio</b></p>
+  </div>
+
+  <h2 class="bg-primary text-white p-2 mt-4 text-center text-uppercase">LISTADO DE FRUTAS DESDE UN SERVICIO</h2>
+  <p>Arrancar json-server en http://localhost:3000</p>
+  <p *ngIf="frutas.length == 0">Cargando...</p>
+
+
+  <ul class="list-group">
+    <li *ngFor="let fruta of frutas">
+     {{fruta.nombre}}
+    </li>    
+</ul>
+
+
+  
+

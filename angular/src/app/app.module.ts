@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +28,7 @@ import { TrimarPipe } from './pipes/trimar.pipe';
 import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
 import { FrutaComponent } from './components/fruta/fruta.component';
 import { TraductorComponent } from './components/traductor/traductor.component';
+import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
 
 @NgModule({
   declarations: [
@@ -49,12 +52,14 @@ import { TraductorComponent } from './components/traductor/traductor.component';
     TrimarPipe,
     PaginaComparadorComponent,
     FrutaComponent,
-    TraductorComponent
+    TraductorComponent,
+    PaginaServiceComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    HttpClientModule, //para usarlo con los serivie
+    FormsModule //para usarlo doble binding
   ],
   providers: [],
   bootstrap: [AppComponent]

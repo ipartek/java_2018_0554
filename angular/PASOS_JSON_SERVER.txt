@@ -1,0 +1,13 @@
+DESCARGAR EL JSON SERVER - https://github.com/typicode/json-server
+
+COPIAR EN LA CAREPTA DEL PROYECTO DE ANGULAR -puede ser en cualquier carpeta.
+
+ABRIR CONSOLA MS2 E IR HASTA LA CARPETA QUE ESTA INSTALADO
+
+INSTALAR LAS LIBRERIAS (dependencias) NECESARIAS CON EL COMANDO 
+		npm i
+instala de forma global npm install -g json-server
+importante lanzar comando dodne este el fichero package.json ( similar al pom.xml)
+
+ARRANCAR EL SERVIDOR UTILIZANDO EL COMANDO json-server --watch db.json
+
