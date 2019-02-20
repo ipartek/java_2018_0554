@@ -32,12 +32,13 @@ export class HomeComponent implements OnInit {
     console.debug('frutaConstructorDescuento: %o',this.frutaConstructorDescuento);
     console.debug('frutaConstructorDescuento: %o',this.frutaConstructorDescuento);
 
-    //Pruebas con objeto Persona
+    /*Pruebas con objeto Persona
     this.manolo = new Persona('Manolo');
     this.anonimo = new Persona();
     this.idiomas=['es','eu','en'];
     this.idiomaSeleccionado=this.idiomas[0];
     this.textoTraducir="";
+    */
     }
 
   ngOnInit() {

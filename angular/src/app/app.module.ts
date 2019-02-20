@@ -30,6 +30,7 @@ import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 import { FiltroCochePipe } from './pipes/filtro-coche.pipe';
 import { TraductorComponent } from './components/traductor/traductor.component';
 import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
+import { PaginaServicePersonaComponent } from './components/pagina-service-persona/pagina-service-persona.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { PaginaServiceComponent } from './components/pagina-service/pagina-servi
     FiltroCochePipe,
     TraductorComponent,
     PaginaServiceComponent,
+    PaginaServicePersonaComponent,
   ],
   imports: [
     BrowserModule,

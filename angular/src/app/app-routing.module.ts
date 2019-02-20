@@ -14,6 +14,7 @@ import { ArrayComponent } from './components/array/array.component';
 import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
 import { PaginaComparadorCocheComponent } from './components/pagina-comparador-coche/pagina-comparador-coche.component';
 import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
+import { PaginaServicePersonaComponent } from './components/pagina-service-persona/pagina-service-persona.component';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path:'flujo',component:FlujoComponent},
   {path:'404',component:Error404Component},
   {path:'service',component:PaginaServiceComponent},
+  {path:'personaService',component:PaginaServicePersonaComponent},
   {path:'**',pathMatch:'full',redirectTo:'404'}
 ];
 

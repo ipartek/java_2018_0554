@@ -1,0 +1,18 @@
+<h1>Service de personas randoms</h1>
+<p *ngIf="personas.length == 0"> Obteninedo datos del FBI ..../p>
+
+<div class="card info" *ngFor="let p of personas">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <img src="{{p.picture}}" class="card-img-top" alt="...">
+      </div>
+      <div class="col">
+        <h5 class="card-title">Nombre: {{p.nombre | titlecase }}     Apellido: {{p.apellido | titlecase}}</h5>
+      </div>
+      <div class="col">
+        <p class="card-text">Email: {{p.email}} </p>
+      </div>
+    </div>
+  </div>
+</div>
