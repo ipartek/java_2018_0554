@@ -9,6 +9,6 @@
 <p>*Acordaros de arrancar json-server en <b>http://localhost:3000</b></p>
 <p *ngIf="frutas.length==0">Cargando frutas....</p>
 <ul>
-  <li *ngFor="let f of frutas">{{f.nombre}}</li>
+  <li *ngFor="let f of frutas">{{f.nombre}} {{f | json}}</li>
 </ul>
 
