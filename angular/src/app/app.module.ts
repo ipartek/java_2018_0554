@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 //Componentes
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +15,12 @@ import { NombreComponent } from './components/nombre/nombre.component';
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
 import { FlujoComponent } from './components/flujo/flujo.component';
 import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
+import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
+import { FrutaComponent } from './components/fruta/fruta.component';
+import { TraductorComponent } from './components/traductor/traductor.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
+import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
+import { ArrayComponent } from './components/array/array.component';
 
 //Directivas
 import { Directiva1Directive } from './directives/directiva1.directive';
@@ -22,12 +29,8 @@ import { CountdownDirective } from './directives/countdown.directive';
 //Pipes
 import { MonedaPipe } from './pipes/moneda.pipe';
 import { TrimPipe } from './pipes/trim.pipe';
-import { ArrayComponent } from './components/array/array.component';
 import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
-import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
-import { FrutaComponent } from './components/fruta/fruta.component';
-import { TraductorComponent } from './components/traductor/traductor.component';
-import { CarritoComponent } from './components/carrito/carrito.component';
+
 
 @NgModule({
   declarations: [
@@ -50,12 +53,14 @@ import { CarritoComponent } from './components/carrito/carrito.component';
     PaginaComparadorComponent,
     FrutaComponent,
     TraductorComponent,
-    CarritoComponent
+    CarritoComponent,
+    PaginaServiceComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule //Para poder usar doble binding
+    FormsModule, //Para poder usar doble binding
+    HttpClientModule //Para usarlo con los services (Obligatorio)
   ],
   providers: [],
   bootstrap: [AppComponent]

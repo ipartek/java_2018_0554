@@ -79,8 +79,9 @@ export class Fruta {
         this._cantidad = value;
     }
 
+    //TODO
     jsonMapper( jsonData: any ){
-        
+
     }
 
 }

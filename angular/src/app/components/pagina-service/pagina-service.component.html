@@ -1,0 +1,11 @@
+<h1>Servicios</h1>
+<p>Servicios o Providers: Van a ser los encargados de manipular la información de la App. (=== DAO)</p>
+<p>Normalmente la fuente de información es un Servicio REST, pero podría ser LOCALSTORAGE, un sistema de ficheros,
+  etc...</p>
+<h2 class="text-warning">Atención</h2>
+<p>Importar en <span class="font-italic">app.module.ts</span> la librería
+  <span class="font-weight-bold">@angular/common/http/HttpClientModule</span></p>
+<p>En cada Servicio, inyectar en el constructor <span
+    class="font-weight-bold">@angular/common/http/HttpClientModule</span></p>
+<p>En los Componentes, la llamada inicial para obtener datos se hace en 
+  <span class="font-weight-bold">ngOnInit</span>,  no en el constructor</p>

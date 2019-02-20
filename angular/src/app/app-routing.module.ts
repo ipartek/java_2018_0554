@@ -12,6 +12,7 @@ import { FlujoComponent } from './components/flujo/flujo.component';
 import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.component';
 import { ArrayComponent } from './components/array/array.component';
 import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
+import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,10 @@ const routes: Routes = [
   { path: 'comparador',
   component: PaginaComparadorComponent,
   data: { title: 'comparador' }
+  },
+  { path: 'servicios',
+  component: PaginaServiceComponent,
+  data: { title: 'servicios' }
   },
   { path: '404',
   component: Error404Component,
