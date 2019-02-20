@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Persona } from 'src/app/model/persona';
+import { Fruta } from 'src/app/model/fruta';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,20 @@ export class HomeComponent implements OnInit {
 
   idiomaSeleccionado: string;
 
+  frutaConstructor: Fruta;
+  frutaConstructorDescuento: Fruta;
+  frutaConstructorCompleto: Fruta;
+
   constructor() { 
+
+    this.frutaConstructor = new Fruta( 'fresa', 3.45 );
+    this.frutaConstructorDescuento = new Fruta('Tamarindo', 25.78, undefined, true, 25, undefined, undefined);
+    this.frutaConstructorCompleto = new Fruta('Naranja', 5.13, 3, true, 5, 'https://comefruta.es/wp-content/uploads/naranjas-verano.jpg', 3);
+
+    console.debug('frutaConstructor: %o', this.frutaConstructor);
+    console.debug('frutaConstructorDescuento: %o', this.frutaConstructorDescuento);
+    console.debug('frutaConstructorCompleto: %o', this.frutaConstructorCompleto);
+
 
     this.idiomas = ['eu', 'es', 'en'];
     this.idiomaSeleccionado = this.idiomas[0]; //eu
