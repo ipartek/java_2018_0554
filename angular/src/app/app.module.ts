@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { TrimarPipe } from './pipes/trimar.pipe';
 import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 import { FiltroCochePipe } from './pipes/filtro-coche.pipe';
 import { TraductorComponent } from './components/traductor/traductor.component';
+import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
 
 @NgModule({
   declarations: [
@@ -53,11 +55,13 @@ import { TraductorComponent } from './components/traductor/traductor.component';
     PaginaComparadorCocheComponent,
     FiltroCochePipe,
     TraductorComponent,
+    PaginaServiceComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule // para poder usar doble binding o banana in a box
+    FormsModule,// para poder usar doble binding o banana in a box
+    HttpClientModule //Para usarlo con los services OBLIGATORIO
   ],
   providers: [],
   bootstrap: [AppComponent]

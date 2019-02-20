@@ -1,0 +1,13 @@
+<h1>Servicios</h1>
+  <p>Servicios o Providers, van a ser los encargados de manipular la información de la app == "DAO".</p>
+  <p>Normalmente la fuente de información es un Servicio REST, pero podría ser localStorage, un sistema de ficheros,etc.</p>
+<h2 class="text-warning">Atención</h2>
+  <p><span class="text-danger">IMPORTAR en app.module.ts</span> la librería, <b>@angular/common/http/HttpClientModule</b></p>
+  <p>En cada servicio inyectar en el costructor <b>@angular/common/http/HttpClient</b></p>
+  <p>En los componentes <b>la llamada inicial,para obtener datos, se hace en OnInit, no en el constructor,inyectar el servicio</b></p>
+<h2 class="text-primary">Listado de Frutas conseguido desde un Servicio</h2>
+  <p>*Acordaros de arrancar json-server en <b>http://192.168.0.12:3000</b></p>
+  <p *ngIf="frutas.length == 0">Cargando frutas ...</p>
+  <ul>
+    <li *ngFor="let f of frutas">{{f.nombre}}</li>
+  </ul>

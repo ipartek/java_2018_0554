@@ -13,6 +13,7 @@ import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.compon
 import { ArrayComponent } from './components/array/array.component';
 import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
 import { PaginaComparadorCocheComponent } from './components/pagina-comparador-coche/pagina-comparador-coche.component';
+import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path:'coche',component:PaginaComparadorCocheComponent},
   {path:'flujo',component:FlujoComponent},
   {path:'404',component:Error404Component},
+  {path:'service',component:PaginaServiceComponent},
   {path:'**',pathMatch:'full',redirectTo:'404'}
 ];
 

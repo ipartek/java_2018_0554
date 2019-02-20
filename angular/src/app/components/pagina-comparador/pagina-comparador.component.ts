@@ -6,14 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pagina-comparador.component.scss']
 })
 export class PaginaComparadorComponent implements OnInit {
-  frutas:any[];
-  frutaSelec1:any;
-  frutaSelec2:any;
-  carritoCompra:any[];
-  precioTotalCompra:number;
+  frutas: any[];
+  frutaSelec1: any;
+  frutaSelec2: any;
+  carritoCompra: any[];
+  precioTotalCompra: number;
 
-  constructor() { 
-    this.frutas=[
+  constructor() {
+    this.frutas = [
       {
         "nombre": "Fresa",
         "oferta": true,
@@ -21,7 +21,7 @@ export class PaginaComparadorComponent implements OnInit {
         "descuento": 5,
         "imagen": "https://media.mercola.com/assets/images/foodfacts/strawberry-nutrition-facts.jpg",
         "colores": [{
-          "nombre": "rojo","codigo":"#FF0000"
+          "nombre": "rojo", "codigo": "#FF0000"
         }]
       },
       {
@@ -31,8 +31,8 @@ export class PaginaComparadorComponent implements OnInit {
         "descuento": 7,
         "imagen": "http://frutasfercas.com/wp-content/uploads/2018/03/pomelo-1.jpg",
         "colores": [
-          {"nombre": "rojo","codigo":"#F00"},
-          {"nombre": "naranja","codigo":"#FF9800"}
+          { "nombre": "rojo", "codigo": "#F00" },
+          { "nombre": "naranja", "codigo": "#FF9800" }
         ]
       },
       {
@@ -42,7 +42,7 @@ export class PaginaComparadorComponent implements OnInit {
         "descuento": 0,
         "imagen": "https://media.mercola.com/assets/images/foodfacts/cherimoya-nutrition-facts.jpg",
         "colores": [
-          {"nombre": "verde","codigo":"#0F0"}]
+          { "nombre": "verde", "codigo": "#0F0" }]
       },
       {
         "nombre": "manzana",
@@ -51,9 +51,9 @@ export class PaginaComparadorComponent implements OnInit {
         "descuento": 3.5,
         "imagen": "https://www.comenaranjas.com/images/stories/virtuemart/product/manzana-royal.jpg",
         "colores": [
-          {"nombre": "verde","codigo": "#0f0"},
-          {"nombre": "roja","codigo": "#f00"},
-          {"nombre": "amarillo","codigo": "#ff0"}
+          { "nombre": "verde", "codigo": "#0f0" },
+          { "nombre": "roja", "codigo": "#f00" },
+          { "nombre": "amarillo", "codigo": "#ff0" }
         ]
       },
       {
@@ -63,38 +63,42 @@ export class PaginaComparadorComponent implements OnInit {
         "descuento": 3,
         "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTuiEhT2_yFMqcz3TlSGzmwVqrOXJnO1gdlEd5ErYl4ynfte4J",
         "colores": [
-          {"nombre": "verde","codigo": "#0f0"},
-          {"nombre": "negro","codigo": "#000"}
+          { "nombre": "verde", "codigo": "#0f0" },
+          { "nombre": "negro", "codigo": "#000" }
         ]
       }
     ];
-    this.frutaSelec1= this.frutas[0];
-    this.frutaSelec2= this.frutas[1];
-    this.carritoCompra=[];
-    this.precioTotalCompra=0;
+    this.frutaSelec1 = this.frutas[0];
+    this.frutaSelec2 = this.frutas[1];
+    this.carritoCompra = [];
+    this.precioTotalCompra = 0;
   }
 
   ngOnInit() {
   }
 
-  cambiarFruta(i:number){
+  cambiarFruta(i: number) {
     console.log("cambiarFruta: index " + i + " fruta seleccionada");
     this.frutaSelec2 = this.frutaSelec1;
-    this.frutaSelec1=this.frutas[i];
+    this.frutaSelec1 = this.frutas[i];
   }
   /**
    * Metodo que esta escuchando al Output del hijo y que añade frutas al carrito de la compra
    * @param event en el evento se le manda la fruta que se ha seleccionado para introducirla al carrito
    */
-  anadirACarrito(event){
+  anadirACarrito(event) {
     let frutaAnadir = event;
     //Cada vez que se añade una fruta se actualiza el precio total de la compra
-    this.precioTotalCompra = this.precioTotalCompra + event.precio;
+    //this.precioTotalCompra = this.precioTotalCompra + event.precio;
+    this.precioTotalCompra = this.carritoCompra.map(f=>f.precio).reduce((p,c)=>{return p+c},0);
 
     this.carritoCompra.push(frutaAnadir);
   }
-  elimarFrutaCarrito(f:string){
-   //TODO falta restar del precio total cuando se elimina la fruta.
-    this.carritoCompra=this.carritoCompra.filter(fruta=>fruta.nombre !== f);
+  elimarFrutaCarrito(f: any) {
+    //TODO falta restar del precio total cuando se elimina la fruta
+      //esto resta su precio, de la fruta eliminada, al preciototal
+      //this.precioTotalCompra = this.precioTotalCompra - f.precio;
+    this.precioTotalCompra = this.carritoCompra.map(f=>f.precio).reduce((p,c)=>{return p+c},0);
+    this.carritoCompra = this.carritoCompra.filter(fruta =>{return fruta.nombre !== f.nombre});
   }
 }

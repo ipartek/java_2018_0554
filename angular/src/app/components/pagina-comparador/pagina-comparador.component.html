@@ -1,6 +1,6 @@
 <h1 class="text-primary">Comparador de frutacas</h1>
 <div class="row">
-    <div class="col-3">
+    <div class="col">
         <h2> Listado</h2>
         <ul class="list-group">
             <li *ngFor="let f of frutas; let i =index"(click)="cambiarFruta(i)" 
@@ -11,22 +11,24 @@
         <p>Primera fruta seleccionada:<b> {{frutaSelec1.nombre}}</b></p>
         <p>Segunda fruta seleccionada:<b> {{frutaSelec2.nombre}}</b></p>
     </div>
-    <div class="col-3">
+    <div class="col">
         <h2> Fruta 1</h2>
         <app-fruta-card (frutaAnadir)="anadirACarrito($event)" [fruta]="frutaSelec1" [frutaComparar]="frutaSelec2"></app-fruta-card>
     </div>
-    <div class="col-3">
+    <div class="col">
         <h2>Fruta 2</h2>
         <app-fruta-card (frutaAnadir)="anadirACarrito($event)" [fruta]="frutaSelec2" [frutaComparar]="frutaSelec2"></app-fruta-card>
     </div>
-    <div class="col-3">
+    <div class="col">
         <h2>Carrito compra</h2>
+        <p *ngIf="carritoCompra.length == 0 "> No hay nada en el carrito</p>
         <ul class="list-group">
             <li  class="list-group-item" *ngFor="let f of carritoCompra" >
                 {{f.nombre |uppercase}}
-                <button class="btn btn-danger"(click)="elimarFrutaCarrito(f.nombre)"><img src="\assets\icons\garbage.png" alt="trash can"></button>
+                <button class="btn btn-danger"(click)="elimarFrutaCarrito(f)"><img src="\assets\icons\garbage.png" alt="trash can"></button>
             </li>
-            <li class="list-group-item">Total: {{precioTotalCompra |moneda}} </li>
+            
+            <li *ngIf="precioTotalCompra !== 0"class="list-group-item">Total: {{precioTotalCompra|number:'1.0-2'|moneda}} </li>
         </ul>
     </div>
 </div>
