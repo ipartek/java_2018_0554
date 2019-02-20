@@ -22,6 +22,9 @@ export class PaginaServiceComponent implements OnInit {
     this.frutaService.getAll().subscribe(jsonData =>{
       console.debug('recibimos datos json %o',jsonData);
       //TODO mapear
+      this.frutas = jsonData.map(f=>{
+        return new Fruta(f.nombre,f.precio,f.id,f.oferta,f.descuento,f.imagen,1);
+      });
     });
   }
 
