@@ -17,11 +17,16 @@ export class PaginaServiceComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.trace("ngOnInit PaginaServiceComponent ");
-    this.frutaService.getAll().subscribe(json =>{
-      console.log("DATOS ---> json: %o", json);
-      this.frutas = json;
-        })
+    console.trace('PaginaServiceComponent ngOnInit');
+    //realizar llamada Servicio
+
+    this.frutaService.getAll().subscribe( json => {
+      console.debug("recibimos datos json: %o", json);      
+      this.frutas = json.map( f => {
+        return new Fruta( f.nombre, f.precio, f.id, f.oferta, f.descuento, f.imagen, 1);
+      });
+    });
+
   }
 
 }
