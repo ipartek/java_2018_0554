@@ -13,6 +13,9 @@ import { PaginaArrayComponent } from './components/pagina-array/pagina-array.com
 import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
 import { FrutaComponent } from './components/fruta/fruta.component';
 import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
+import { RandomuserPaginaComponent } from './components/randomuser-pagina/randomuser-pagina.component';
+
+
 const routes: Routes = [
   { path: 'home', component: HomeComponent  },
   { path: 'about/:repeticiones', component: AboutComponent  },
@@ -27,6 +30,7 @@ const routes: Routes = [
   { path: 'comparador', component: PaginaComparadorComponent },
   { path: 'fruta_card', component: FrutaComponent },
   { path: 'service', component: PaginaServiceComponent },
+  { path: 'persona', component: RandomuserPaginaComponent },
   { path: '', pathMatch:'full', redirectTo : 'home'  },
   { path: '**', pathMatch:'full', redirectTo : '404'  }
 

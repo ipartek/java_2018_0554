@@ -29,6 +29,7 @@ import { PaginaComparadorComponent } from './components/pagina-comparador/pagina
 import { FrutaComponent } from './components/fruta/fruta.component';
 import { TraductorComponent } from './components/traductor/traductor.component';
 import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
+import { RandomuserPaginaComponent } from './components/randomuser-pagina/randomuser-pagina.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { PaginaServiceComponent } from './components/pagina-service/pagina-servi
     PaginaComparadorComponent,
     FrutaComponent,
     TraductorComponent,
-    PaginaServiceComponent
+    PaginaServiceComponent,
+    RandomuserPaginaComponent
   ],
   imports: [
     BrowserModule,
