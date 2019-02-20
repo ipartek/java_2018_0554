@@ -1,21 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-pagina-comparador',
-  templateUrl: './pagina-comparador.component.html',
-  styleUrls: ['./pagina-comparador.component.scss']
+  selector: 'app-tienda',
+  templateUrl: './tienda.component.html',
+  styleUrls: ['./tienda.component.scss']
 })
-export class PaginaComparadorComponent implements OnInit {
+export class TiendaComponent implements OnInit {
 
   frutas: any[];
-  frutaSelec1: any;
-  frutaSelec2: any;
-  frutaSelec3: any;
+  frutasSelec1: any;
+  frutasSelec2: any;
+  frutasSelec3: any;
+  carrito: any[];
 
+  totalCarro: number;
   totalDescuento: number;
 
   constructor() {
 
+    this.carrito = [];
+    this.totalCarro = 0;
     this.totalDescuento = 0;
 
     this.frutas =
@@ -74,20 +78,36 @@ export class PaginaComparadorComponent implements OnInit {
         ]
       }
     ];
-    this.frutaSelec1 = this.frutas[0];
-    this.frutaSelec2 = this.frutas[1];
-    this.frutaSelec3 = this.frutas[2];
+    this.frutasSelec1 = this.frutas[0];
+    this.frutasSelec2 = this.frutas[1];
+    this.frutasSelec3 = this.frutas[2];
 
    }
 
   ngOnInit() {
   }
 
-  cambiarFruta(i:number){
+  cambiarFrutas(i:number){
     console.log('click cambiarFruta %o', i);
-    this.frutaSelec3 = this.frutaSelec2;
-    this.frutaSelec2 = this.frutaSelec1;
-    this.frutaSelec1 = this.frutas[i];
+    this.frutasSelec3 = this.frutasSelec2;
+    this.frutasSelec2 = this.frutasSelec1;
+    this.frutasSelec1 = this.frutas[i];
+  }
+
+  addCarrito(event){
+
+    this.carrito.push(event);
+
+    //calcular totales
+    this.totalCarro = this.carrito.map( f=> f.precio ).reduce( (p,c)=>{ return p+c }, 0);
+  }
+
+  eliminarCarro( frutaCarro: any ): void{
+    console.trace('click eliminar %o', frutaCarro );
+    this.carrito = this.carrito.filter( f=> {return f.nombre !== frutaCarro.nombre});
+
+     //calcular totales
+    this.totalCarro = this.carrito.map( f=> f.precio ).reduce( (p,c)=>{ return p+c }, 0);
   }
 
 }

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 //Components
 import { AppComponent } from './app.component';
@@ -21,6 +22,9 @@ import { FrutaComponent } from './components/pagina-comparador/fruta/fruta.compo
 import { PaginaConcesionarioComponent } from './components/pagina-concesionario/pagina-concesionario.component';
 import { CocheComponent } from './components/pagina-concesionario/coche/coche.component';
 import { TraductorComponent } from './components/traductor/traductor.component';
+import { PaginaServiceComponent } from './components/pagina-comparador/pagina-service/pagina-service.component';
+import { TiendaComponent } from './components/pagina-comparador/tienda/tienda.component';
+import { FrutasComponent } from './components/pagina-comparador/tienda/frutas/frutas.component';
 
 //Directives
 import { Directiva1Directive } from './directives/directiva1.directive';
@@ -53,12 +57,16 @@ import { TrimarPipe } from './pipes/trimar.pipe';
     FrutaComponent,
     PaginaConcesionarioComponent,
     CocheComponent,
-    TraductorComponent
+    TraductorComponent,
+    PaginaServiceComponent,
+    TiendaComponent,
+    FrutasComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

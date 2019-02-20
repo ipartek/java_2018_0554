@@ -15,7 +15,7 @@ export class Persona {
         }else{
             this._nombre = 'Anonimo';
         } 
-        */   
+        */
     }
 
     // getters y setters

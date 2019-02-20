@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-fruta',
@@ -9,6 +9,7 @@ export class FrutaComponent implements OnInit {
 
   @Input('fruta') fruta: any;
   @Input('frutaComparar') frutaComparar: any;
+  @Output('frutaSeleccionada') eventFrutaSeleccionada = new EventEmitter();
 
   constructor() { 
   }
@@ -18,6 +19,10 @@ export class FrutaComponent implements OnInit {
 
   calcularDescuento( fruta: any) : number {    
     return fruta.precio - ( fruta.precio * fruta.descuento / 100 );
+  }
+
+  emitirEvento(){
+    this.eventFrutaSeleccionada.emit(this.fruta);
   }
 
 }
