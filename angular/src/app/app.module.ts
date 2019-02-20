@@ -30,6 +30,7 @@ import { CountdownDirective } from './directives/countdown.directive';
 import { MonedaPipe } from './pipes/moneda.pipe';
 import { TrimPipe } from './pipes/trim.pipe';
 import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
+import { PaginaServicePersonasComponent } from './components/pagina-service-personas/pagina-service-personas.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
     FrutaComponent,
     TraductorComponent,
     CarritoComponent,
-    PaginaServiceComponent
+    PaginaServiceComponent,
+    PaginaServicePersonasComponent
   ],
   imports: [
     BrowserModule,

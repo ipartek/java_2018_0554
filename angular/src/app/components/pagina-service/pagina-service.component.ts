@@ -18,7 +18,7 @@ export class PaginaServiceComponent implements OnInit {
    }
 
   ngOnInit() {
-    console.trace('PaginaServiceComponent constructor');
+    console.trace('PaginaServiceComponent ngOnInit');
 
     //Realizar llamada al Servicio
     this.frutaService.getAll().subscribe( json => {//Debemos suscribirnos porque devuelve un Observable

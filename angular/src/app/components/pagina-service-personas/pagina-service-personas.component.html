@@ -1,0 +1,12 @@
+<h1>Servicio Personas</h1>
+<input type="text" class="col-offset-8 col-md-2 form-control">
+<p *ngIf="personas.length===0">Cargando personas...</p>
+<div *ngFor="let p of personas"  class="border border-secondary d-flex" >
+  <div> 
+    <img class="rounded" src="{{ p.imagen }}" alt="{{ p.nombre }}"> 
+  </div>
+  <div class="col-md-6 d-flex flex-column justify-content-around align-items-center">
+   <h5>{{ p.nombre | titlecase }} {{ p.apellido | titlecase }}</h5>
+   <h5>{{ p.email }}</h5>
+  </div>
+</div>
