@@ -24,7 +24,9 @@ export class PaginaServiceComponent implements OnInit {
     this.frutaService.getAll().subscribe( json => {//Debemos suscribirnos porque devuelve un Observable
       console.debug("Recibimos datos del JSON: %o", json);
       //TODO mapear
-      this.frutas = json;
+      this.frutas = json.map( f => { //Mapear los datos del JSON a un objeto Fruta
+        return new Fruta(f.nombre, f.precio, f.id, f.oferta, f.descuento, f.imagen, 1);
+      });
     });
 
   }
