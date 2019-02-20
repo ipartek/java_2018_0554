@@ -1,7 +1,0 @@
-**/*.log
-node_modules
-tmp
-lib
-.DS_Store
-.idea
-db.json

@@ -13,12 +13,12 @@ export class FrutaService {
     console.trace('FrutaService constructor');
   }
 
-  getAll():Observable<any>{
+  public getAll():Observable<any>{
     console.trace('getAll ' + this.endpoint);
     return this.httpClient.get( this.endpoint );
   }
 
-  getById( id: number ):Observable<any>{
+  public getById( id: number ):Observable<any>{
     let url = this.endpoint + id;
     console.trace('getById ' + url);
     return this.httpClient.get( url );

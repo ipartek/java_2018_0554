@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Fruta } from 'src/app/model/fruta';
+import { FrutaService } from 'src/app/providers/fruta.service';
 
 @Component({
   selector: 'app-pagina-service',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaginaServiceComponent implements OnInit {
 
-  constructor() { }
+
+  frutas: Fruta[];
+
+  constructor( private frutaService: FrutaService ) {
+    console.trace('PaginaServiceComponent constructor');
+    this.frutas = [];
+   }
 
   ngOnInit() {
+    console.trace('PaginaServiceComponent constructor');
+
+    //Realizar llamada al Servicio
+    this.frutaService.getAll().subscribe( json => {//Debemos suscribirnos porque devuelve un Observable
+      console.debug("Recibimos datos del JSON: %o", json);
+      //TODO mapear
+      this.frutas = json;
+    });
+
   }
 
 }

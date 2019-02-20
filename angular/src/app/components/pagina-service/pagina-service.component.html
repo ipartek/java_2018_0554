@@ -7,5 +7,13 @@
   <span class="font-weight-bold">@angular/common/http/HttpClientModule</span></p>
 <p>En cada Servicio, inyectar en el constructor <span
     class="font-weight-bold">@angular/common/http/HttpClientModule</span></p>
-<p>En los Componentes, la llamada inicial para obtener datos se hace en 
-  <span class="font-weight-bold">ngOnInit</span>,  no en el constructor</p>
+<p>En los Componentes, la llamada inicial para obtener datos se hace en
+  <span class="font-weight-bold">ngOnInit</span>, no en el constructor. Inyectar el servicio</p>
+<h2 class="text-primary">Listado de Frutas conseguido desde un Servicio</h2>
+<p><span class="font-italic">*Acordaros de arrancar JSON-Server en <span
+      class="font-weight-bold">http://localhost:3000</span></span></p>
+<p *ngIf="frutas.length===0">Cargando frutas...</p>
+<ul>
+  <li *ngFor="let f of frutas">{{ f.nombre }}</li>
+</ul>
+
