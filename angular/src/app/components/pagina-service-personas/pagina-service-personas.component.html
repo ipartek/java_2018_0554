@@ -1,7 +1,13 @@
 <h1>Servicio Personas</h1>
-<input type="text" [(ngModel)]="nPersonas" (keyup)="refrescarLista()" class="form-control">
+<div class="col-md-12 d-flex flex-row justify-content-center align-items-center">
+<span>Número de resultados a mostrar:</span>
+<div class="col-md-2">
+  <input type="text" [(ngModel)]="nPersonas" (keyup)="refrescarLista()" class="form-control col-md-4">
+</div>
+</div>
 <p *ngIf="personas.length===0">Cargando personas...</p>
-<p><i>Mostrando {{ nPersonas }} personas ...</i></p>
+<p *ngIf="nPersonas > 0"><i>Mostrando {{ nPersonas }} personas ...</i></p>
+<div *ngIf="nPersonas > 0">
 <div *ngFor="let p of personas"  class="border border-secondary d-flex" >
   <div> 
     <img class="rounded" src="{{ p.imagen }}" alt="{{ p.nombre }}"> 
@@ -10,4 +16,8 @@
    <h5>{{ p.nombre | titlecase }} {{ p.apellido | titlecase }}</h5>
    <h5>{{ p.email }}</h5>
   </div>
+</div>
+</div>
+<div *ngIf="nPersonas <= 0">
+  <h4 class="text-danger">Debes introducir un valor válido (Mínimo 1, sólo caracteres numéricos)</h4>
 </div>

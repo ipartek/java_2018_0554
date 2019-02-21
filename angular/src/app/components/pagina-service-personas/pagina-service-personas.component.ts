@@ -25,6 +25,10 @@ export class PaginaServicePersonasComponent implements OnInit {
   }
 
   refrescarLista(){
+    if(this.nPersonas < 0){
+      this.nPersonas = 1;
+    }
+    
     this.personaService.getAll(this.nPersonas).subscribe( json => {
       console.debug("Recibimos datos del JSON: %o", json);
       //TODO mapear
