@@ -1,3 +1,25 @@
-<p>
-  pagina-servicio-fruta works!
-</p>
+<ul class="list-group">
+    <li *ngFor="let fruta of frutas | filtroOferta : isOferta " class="list-group-item d-flex justify-content-between">
+      <img [src]="fruta.imagen" alt="{{fruta.nombre}}">
+
+      <!-- nombre y colores -->
+      <div class="d-flex flex-column">
+        <p class="title">{{fruta.nombre}}</p>
+        <p>
+          <span *ngFor="let color of fruta.colores" 
+                class="badge" 
+                [style.color]="color.codigo">
+            {{color.nombre}}
+          </span>          
+        </p>
+      </div>
+
+      <!-- precio y descuentos -->
+      <div class="d-flex flex-column">          
+        <span class="{{(!fruta.oferta)?'precio':'precio-descuento'}}">{{fruta.precio | moneda}}</span>            
+        <span *ngIf="fruta.oferta" class="badge badge-primary">{{fruta.descuento}}%</span>
+        <span *ngIf="fruta.oferta" class="precio">{{ calcularDescuento(fruta) | number : '1.0-2' | moneda }}</span>
+      </div>
+      
+    </li>    
+</ul>

@@ -1,8 +1,8 @@
 <h2 class="bg-primary text-white p-2 mt-1 text-center text-uppercase">
     Listado de {{numPersonas?personas.length+' '+numPersonas:'numPersonas'}} Personas</h2>
 <div class="mt-2 mb-2 row">
-<input class="col-2 " type="text" name="numPersonas" [(ngModel)]="numPersonas" (ngModelChange)="cambiarCantidad(numPersonas)"  placeholder=10>
-<button class="col-2 btn btn-warning">Cambiar</button>
+<input class="col-2 " type="text" name="numPersonas" [(ngModel)]="numPersonas"   placeholder=10>
+<button class="col-2 btn btn-warning" (click)="cambiarCantidad()">Cambiar</button>
 </div>
 <ul class="list-group">
     <li *ngFor="let p of personas" class="list-group-item">
