@@ -11,13 +11,15 @@ export class PaginaServicioFrutaComponent implements OnInit {
 
   frutas: any;
   nuevaFruta: string;
-  nombreFrutaNueva:string;
+  nombreFrutaNueva: string;
+  nuevaFrutaNombre2: string;
 
   constructor(private frutaService: FrutaService) {
-    console.trace("constructor PaginaServicioFrutaComponent ");
+    console.trace('constructor PaginaServicioFrutaComponent ');
     this.frutas = [];
-    this.nuevaFruta ="base fruta";
-    this.nombreFrutaNueva ="fruiljkiuovbiutopia";
+    this.nuevaFruta = 'base fruta';
+    this.nombreFrutaNueva = 'fruitopia';
+    this.nuevaFrutaNombre2 = 'Fruta';
   }
 
   ngOnInit() {
@@ -25,9 +27,9 @@ export class PaginaServicioFrutaComponent implements OnInit {
     this.cargarLista();
   }
 
-  cargarLista(){
+  cargarLista() {
     this.frutaService.getAll().subscribe( json => {
-      console.debug("recibimos datos json: %o", json);      
+      console.debug('recibimos datos json: %o', json);
       this.frutas = json.map( f => {
         return new Fruta( f.nombre, f.precio, f.id, f.oferta, f.descuento, f.imagen, 1);
       });
@@ -35,15 +37,15 @@ export class PaginaServicioFrutaComponent implements OnInit {
   }
 
 
-  new(){
+  new() {
     console.log('PaginaServicioFrutaComponent new ');
-    let fruta = this.nombreFrutaNueva;
+    const fruta = this.nombreFrutaNueva;
     this.frutaService.post(new Fruta(fruta)).subscribe(
-      result=>{
+      result => {
         console.log('PaginaServicioFrutaComponent new %o', result);
         this.cargarLista();
       },
-      error=>{
+      error => {
         alert('No de pudo Crear Fruta');
         console.error(error);
       }
@@ -52,29 +54,29 @@ export class PaginaServicioFrutaComponent implements OnInit {
 
 
 
-  delete(fruta: Fruta){
+  delete(fruta: Fruta) {
     console.log('PaginaServicioFrutaComponent delete %o', fruta );
 
     this.frutaService.delete(fruta.id).subscribe(
-      result=>{
+      result => {
         this.cargarLista();
       },
-      error=>{
+      error => {
         alert('No se pudo elimiar Fruta');
       }
     );
     }
 
-    change(fruta :Fruta){
+    change(fruta: Fruta) {
       console.log('PaginaServicioFrutaComponent change %o', fruta );
-      this.frutaService.patch(fruta).subscribe(     
-          result=>{
+      this.frutaService.patch(fruta).subscribe(
+          result => {
             console.log('Fruta modificada con exito %o', result);
             this.cargarLista();
           },
-          error=>{
+          error => {
             alert('No de pudo Modificar la Tarea');
-          }      
+          }
       );
         }
 

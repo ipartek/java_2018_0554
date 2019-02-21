@@ -2,18 +2,18 @@
 <h2 class="bg-primary text-white p-2 mt-4 text-center text-uppercase">CRUD FRUTAS</h2>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">
+<button (click)="modal()" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#formularioCrear">
     Nueva Fruta
   </button>
 
 
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="formularioCrear" tabindex="-1" role="dialog" aria-labelledby="formularioCrearLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Fruta</h5>
+          <h5 class="modal-title" id="formularioCrearLabel">Fruta</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -27,67 +27,48 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
-          <button (click)="new()" class="btn btn-primary">CREAR</button>  
+          <button (click)="new()" class="btn btn-primary">CREAR</button>
         </div>
       </div>
     </div>
   </div>
 
+<div class="row">
 
-
-  <table id="example" class="table" > 
+  <table id="example" class="table col-12 " >
     <thead>
         <tr>
-            <th> <input type="checkbox" ></th> 
-            <th>id</th>     
-            <th>nombre</th>      
+            <th> <input type="checkbox" ></th>
+            <th>id</th>
+            <th>nombre</th>
             <th>precio</th>
             <th>oferta</th>
             <th>descuento</th>
             <th>imagen</th>
-            <th><i class="fa fa-trash" aria-hidden="true"></i></th> 
-            <th><i class="far fa-edit"></i></th> 
-                                       
+            <th><i  class="fa fa-trash" aria-hidden="true"></i></th>
+            <th><i class="far fa-edit"></i></th>
+
         </tr>
     </thead>
-    <tbody>                    
+    <tbody>
         <tr  *ngFor="let fruta of frutas">
-            <th> <input type="checkbox" ></th> 
-            <td>{{fruta.id}}</td>     
-            <td>{{fruta.nombre}}</td>      
+            <th> <input type="checkbox"  ></th>
+            <td>{{fruta.id}}</td>
+            <td>{{fruta.nombre}}
+                <input type="text" class="form-control" id="nombre" [(ngModel)]="fruta.nombre" placeholder="nombre fruta ">
+
+            </td>
             <td>{{fruta.precio}}</td>
             <td>{{fruta.oferta}}</td>
             <td>{{fruta.descuento}}</td>
             <td><img src="{{fruta.imagen}}" width="100" height="100"></td>
-            <th><i (click)="delete(fruta)" class="fa fa-trash" aria-hidden="true"></i></th> 
-            <th><i class="far fa-edit" data-toggle="modal" data-target="#modificar"></i></th>  
+            <th><i (click)="delete(fruta)" class="fa fa-trash" aria-hidden="true"></i></th>
+            <th><i (click)="change(fruta)" class="far fa-edit"></i></th>
 
-              <!-- Modal -->
-  <div class="modal fade" id="modificar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Fruta</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-                <div class="form-group">
-                  <label for="f-nombre" class="col-form-label">Nombre:</label>
-                  <input type="text" class="form-control" id="nombre" [(ngModel)]="fruta.nombre" placeholder="nombre fruta ">
-                  {{fruta.nombre}}
-                </div>
-               
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
-          <button  class="btn btn-primary">Modificar</button>  
-        </div>
-      </div>
-    </div>
-  </div>
-        </tr>                                                       
-    </tbody>      
-    
-</table>   
+
+        </tr>
+    </tbody>
+
+</table>
+
+</div>
