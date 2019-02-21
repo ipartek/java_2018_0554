@@ -33,6 +33,7 @@ import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 import { PaginaServicePersonasComponent } from './components/pagina-service-personas/pagina-service-personas.component';
 import { NavComponent } from './components/nav/nav.component';
 import { PaginaTodosComponent } from './components/pagina-todos/pagina-todos.component';
+import { PaginaFrutasComponent } from './components/pagina-frutas/pagina-frutas.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { PaginaTodosComponent } from './components/pagina-todos/pagina-todos.com
     PaginaServiceComponent,
     PaginaServicePersonasComponent,
     NavComponent,
-    PaginaTodosComponent
+    PaginaTodosComponent,
+    PaginaFrutasComponent
   ],
   imports: [
     BrowserModule,

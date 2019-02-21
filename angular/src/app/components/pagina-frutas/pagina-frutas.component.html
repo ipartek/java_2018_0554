@@ -1,0 +1,33 @@
+<div class="col-12">
+  <h2>Frutas Maquetado</h2>
+  <div class="btn-group d-flex" role="group" aria-label="Basic example">
+    <input type="text" name="busqueda" (click)="limpiar()"
+           [(ngModel)]="searchText" class="form-control m-1" placeholder="Nombre de la fruta">
+    <button type="button" (click)="cambiarOferta(true)" class="btn btn-success">Crear</button>
+  </div>
+  <!-- <ul class="list-group"> -->
+  <div class="d-flex flex-row flex-wrap" >
+    <div *ngFor="let fruta of frutas"
+      class="col-3 list-group-item d-flex justify-content-around align-items-center">
+      <img class="img-thumbnail rounded" src="{{fruta.imagen}}" alt="fruta.nombre">
+      <div class="d-flex flex-column justify-content-start align-items-start">
+        {{fruta.nombre}}
+        <span *ngFor="let color of fruta.colores" class="badge m-1" [style.color]="color.codigo">
+          {{color.nombre}}
+        </span>
+      </div>
+      <span *ngIf="fruta.oferta" class="d-flex flex-column">
+        <del class="text-secondary">
+          {{ fruta.precio | moneda: 'es' }}
+        </del>
+        {{ fruta.precio - ((fruta.precio * fruta.descuento) / 100) | number: '1.0-2' | moneda: 'es' }}
+        <span class="badge badge-primary">{{ fruta.descuento | moneda: 'desc' }}</span>
+      </span>
+      <span *ngIf="!fruta.oferta" class="d-flex flex-column">
+        {{ fruta.precio }}
+        <span class="badge badge-danger">{{ 0 | moneda: 'desc' }}</span>
+      </span>
+    </div>
+  <!-- </ul> -->
+</div>
+</div>

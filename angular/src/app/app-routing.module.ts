@@ -15,6 +15,7 @@ import { PaginaComparadorComponent } from './components/pagina-comparador/pagina
 import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
 import { PaginaServicePersonasComponent } from './components/pagina-service-personas/pagina-service-personas.component';
 import { PaginaTodosComponent } from './components/pagina-todos/pagina-todos.component';
+import { PaginaFrutasComponent } from './components/pagina-frutas/pagina-frutas.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,10 @@ const routes: Routes = [
   { path: 'servicio-todos',
   component: PaginaTodosComponent,
   data: { title: 'servicio-todos' }
+  },
+  { path: 'servicio-frutas',
+  component: PaginaFrutasComponent,
+  data: { title: 'servicio-frutas' }
   },
   { path: '404',
   component: Error404Component,
