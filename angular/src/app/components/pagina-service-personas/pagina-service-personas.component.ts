@@ -20,7 +20,6 @@ export class PaginaServicePersonasComponent implements OnInit {
 
   ngOnInit() {
     console.trace('PaginaServicePersonasComponent ngOnInit');
-
     this.refrescarLista();
   }
 
@@ -39,4 +38,5 @@ export class PaginaServicePersonasComponent implements OnInit {
       });
     });
   }
+
 }

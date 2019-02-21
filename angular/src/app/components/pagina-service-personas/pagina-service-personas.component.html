@@ -9,7 +9,8 @@
 <p *ngIf="personas.length===0">Cargando personas...</p>
 <p *ngIf="nPersonas > 0"><i>Mostrando {{ nPersonas }} personas ...</i></p>
 <div *ngIf="nPersonas > 0">
-<div *ngFor="let p of personas"  class="border border-secondary d-flex p-2" >
+<div *ngFor="let p of personas"  
+      class="border border-secondary d-flex p-2" >
   <div> 
     <img class="rounded-circle shadow p-1 bg-primary rounded" src="{{ p.imagen }}" alt="{{ p.nombre }}"> 
   </div>
