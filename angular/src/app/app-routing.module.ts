@@ -14,6 +14,7 @@ import { PaginaComparadorComponent } from './components/pagina-comparador/pagina
 import { FrutaComponent } from './components/fruta/fruta.component';
 import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
 import { RandomuserPaginaComponent } from './components/randomuser-pagina/randomuser-pagina.component';
+import { PaginaServicioFrutaComponent } from './components/pagina-servicio-fruta/pagina-servicio-fruta.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'fruta_card', component: FrutaComponent },
   { path: 'service', component: PaginaServiceComponent },
   { path: 'persona', component: RandomuserPaginaComponent },
+  { path: 'frutas-servicio', component: PaginaServicioFrutaComponent },
   { path: '', pathMatch:'full', redirectTo : 'home'  },
   { path: '**', pathMatch:'full', redirectTo : '404'  }
 

@@ -12,41 +12,54 @@
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['home']">Home</a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['about/1']">About</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['juego']">Juego</a>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Basico
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" [routerLink]="['about/1']">About</a>
+                <a class="dropdown-item " [routerLink]="['juego']">Juego</a>
+                <a class="dropdown-item" [routerLink]="['saludar/imanol']">Saludar</a>
+                <a class=" dropdown-item " [routerLink]="['directiva']">Directiva</a> 
+            </div>
           </li>
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['saludar/imanol']">Saludar</a>
-          </li>
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['directiva']">Directiva</a>
-          </li>
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['flujo']">Flujo de informacion</a>
-          </li>
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['pipe']">PIPE</a>
-          </li>
-          <!--
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['array']">Array 1</a>
-          </li>
-          -->
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['array2']">Array 2</a>
-          </li>
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['comparador']">Comparador</a>
-          </li>
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['service']">Service</a>
-          </li>
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['persona']">Random User</a>
-          </li>
+
+         
+
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Medio
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" [routerLink]="['pipe']">PIPE</a>
+                    <!--
+                        <a class="nav-link" [routerLink]="['array']">Array 1</a>
+                      -->
+                    <a class="dropdown-item" [routerLink]="['array2']">Array 2</a>
+                    <a class="dropdown-item" [routerLink]="['comparador']">Comparador</a>   
+                    <a class="dropdown-item" [routerLink]="['flujo']">Flujo de informacion</a>   
+                    <a class="dropdown-item" [routerLink]="['array2']">Array 2</a>
+                    <a class="dropdown-item" [routerLink]="['comparador']">Comparador</a>    
+                    <a class="dropdown-item" [routerLink]="['flujo']">Flujo de informacion</a>  
+                </div>
+              </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Servicios
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" [routerLink]="['service']">Service</a>
+                    <a class="dropdown-item" [routerLink]="['persona']">Random User</a>
+                    <a class="dropdown-item" [routerLink]="['frutas-servicio']">Frutas Servicio</a>
+                </div>
+              </li>
+
+
+          
       </ul>
+      
     </div>
   </nav>

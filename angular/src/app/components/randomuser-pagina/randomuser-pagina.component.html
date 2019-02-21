@@ -15,7 +15,8 @@
 -->
 <!--Maquetado con: https://bootsnipp.com/snippets/92xNm-->
 
-<input  type="number" name="numPersonas" placeholder="Cantidad" [(ngModel)]="numPersonas">
+     
+      <input  type="text" name="numPersonas" placeholder="Cantidad" [(ngModel)]="numPersonas" (ngModelChange)="cambiarCantidad(numPersonas)">
 
 <div class="row">
 <p *ngIf="personas.length == 0">Cargando datos </p>

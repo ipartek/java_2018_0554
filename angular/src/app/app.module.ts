@@ -30,6 +30,7 @@ import { FrutaComponent } from './components/fruta/fruta.component';
 import { TraductorComponent } from './components/traductor/traductor.component';
 import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
 import { RandomuserPaginaComponent } from './components/randomuser-pagina/randomuser-pagina.component';
+import { PaginaServicioFrutaComponent } from './components/pagina-servicio-fruta/pagina-servicio-fruta.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { RandomuserPaginaComponent } from './components/randomuser-pagina/random
     FrutaComponent,
     TraductorComponent,
     PaginaServiceComponent,
-    RandomuserPaginaComponent
+    RandomuserPaginaComponent,
+    PaginaServicioFrutaComponent
   ],
   imports: [
     BrowserModule,
