@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class FrutaService {
   //se guarda en services/provider
 
-  endpoint = 'http://192.168.0.12:3000/frutas/';
+  endpoint = 'http://localhost:3000/frutas/';
 
   constructor(private http:HttpClient) { 
     console.trace('FrutaService constructor');

@@ -15,6 +15,8 @@ import { PaginaComparadorComponent } from './components/pagina-comparador/pagina
 import { PaginaComparadorCocheComponent } from './components/pagina-comparador-coche/pagina-comparador-coche.component';
 import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
 import { PaginaServicePersonaComponent } from './components/pagina-service-persona/pagina-service-persona.component';
+import { PaginaServiceFrutasComponent } from './components/pagina-service-frutas/pagina-service-frutas.component';
+import { PaginaServiceTodosComponent } from './components/pagina-service-todos/pagina-service-todos.component';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent},
@@ -30,6 +32,8 @@ const routes: Routes = [
   {path:'404',component:Error404Component},
   {path:'service',component:PaginaServiceComponent},
   {path:'personaService',component:PaginaServicePersonaComponent},
+  {path:'frutasService',component:PaginaServiceFrutasComponent}, 
+  {path:'todosService',component:PaginaServiceTodosComponent},
   {path:'**',pathMatch:'full',redirectTo:'404'}
 ];
 

@@ -18,6 +18,11 @@ import { PaginaComparadorComponent } from './components/pagina-comparador/pagina
 import { FrutaCardComponent } from './components/fruta-card/fruta-card.component';
 import { CocheCardComponent } from './components/coche-card/coche-card.component';
 import { PaginaComparadorCocheComponent } from './components/pagina-comparador-coche/pagina-comparador-coche.component';
+import { TraductorComponent } from './components/traductor/traductor.component';
+import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
+import { PaginaServicePersonaComponent } from './components/pagina-service-persona/pagina-service-persona.component';
+import { PaginaServiceFrutasComponent } from './components/pagina-service-frutas/pagina-service-frutas.component';
+import { PaginaServiceTodosComponent } from './components/pagina-service-todos/pagina-service-todos.component';
 
 //directivas
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
@@ -28,9 +33,8 @@ import { MonedaPipe } from './pipes/moneda.pipe';
 import { TrimarPipe } from './pipes/trimar.pipe';
 import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 import { FiltroCochePipe } from './pipes/filtro-coche.pipe';
-import { TraductorComponent } from './components/traductor/traductor.component';
-import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
-import { PaginaServicePersonaComponent } from './components/pagina-service-persona/pagina-service-persona.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+
 
 @NgModule({
   declarations: [
@@ -58,6 +62,9 @@ import { PaginaServicePersonaComponent } from './components/pagina-service-perso
     TraductorComponent,
     PaginaServiceComponent,
     PaginaServicePersonaComponent,
+    PaginaServiceFrutasComponent,
+    PaginaServiceTodosComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

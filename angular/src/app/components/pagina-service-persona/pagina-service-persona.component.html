@@ -1,17 +1,24 @@
 <h1>Service de personas randoms</h1>
-<p *ngIf="personas.length == 0"> Obteninedo datos del FBI ..../p>
+<p>Obtenemos la información de <a href="https://randomuser.me/documentation" target="_blank">randomuser.me</a></p>
+<p>Ejemplo para aprender a obtener información de un servicio externo y mapear a nuestro modelo Persona</p>
+
+
+<div class="mb-2" role="group">
+  <label><b>Introduce la cantidad de Usuarios que quieres mostrar y luego pulsa la tecla enter:</b></label>
+  <input type="number" [(ngModel)]="cantidadUsuarios" (change)="getAllUserByNumber(cantidadUsuarios)"class="ml-2 text-primary form-control" placeholder="Por la cantidad de usuarios que quieres ver"/>
+</div>
+<p>Personas Listadas {{personas.length}}</p>
+<p *ngIf="personas.length==0"> Obteninedo datos del FBI ....</p>
 
 <div class="card info" *ngFor="let p of personas">
   <div class="card-body">
-    <div class="row">
-      <div class="col">
-        <img src="{{p.picture}}" class="card-img-top" alt="...">
+    <div class="d-flex">
+      <div>
+        <img src="{{p.picture}}" class=" rounded-circle shadow p-1  bg-white rounded" alt="...">
       </div>
-      <div class="col">
-        <h5 class="card-title">Nombre: {{p.nombre | titlecase }}     Apellido: {{p.apellido | titlecase}}</h5>
-      </div>
-      <div class="col">
-        <p class="card-text">Email: {{p.email}} </p>
+      <div class="ml-2">
+        <h5 class="card-title nombre text-primary">{{p.nombre | titlecase }}     {{p.apellido | titlecase}}</h5>
+        <p class="card-text nombre"> {{p.email}} </p>
       </div>
     </div>
   </div>
