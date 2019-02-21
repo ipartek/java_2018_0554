@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Fruta } from '../model/fruta';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,25 @@ export class FrutaService {
     let url = this.endpoint + id
     console.trace('getById ' + url);
     return this.http.get(url);
+  }
+
+  /**
+   * metodo que elimina una fruta de la bd
+   * @param id el id de la fruta a eliminar
+   */
+  delete(id: number){
+    let url  =this.endpoint +id;
+    console.trace('delete ' + url);
+    return this.http.delete(url);
+  }
+
+  post(fruta: Fruta): Observable<any> {
+
+    return undefined;
+  }
+
+  patch(fruta: Fruta): Observable<any> {
+
+    return undefined;
   }
 }

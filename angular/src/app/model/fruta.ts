@@ -24,7 +24,7 @@ export class Fruta {
      * @param imagen? opcional
      * @param cantidad 1 por defecto
      */
-    constructor(nombre:string,precio:number,id?:number,oferta=false,descuento?:number,imagen?:string,cantidad=1){
+    constructor(nombre:string,precio?:number,id?:number,oferta=false,descuento?:number,imagen?:string,cantidad=1){
 
         this._nombre = nombre;
         this._precio = precio;

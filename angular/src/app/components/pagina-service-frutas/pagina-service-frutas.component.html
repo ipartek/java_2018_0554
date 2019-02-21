@@ -1,3 +1,20 @@
-<p>
-  pagina-service-frutas works!
-</p>
+<h1>Service de frutas CRUD </h1>
+<p>CRUD completo de Fruta</p>
+<p *ngIf="frutas.length == 0">----- Cargando las frutas de la huerta -----</p>
+<div class="card info" *ngFor="let f of frutas">
+  <div class="card-body">
+    <div class="d-flex">
+      <div>
+        <img src="{{f.imagen}}" class=" rounded-circle shadow p-1  bg-white rounded" alt="...">
+      </div>
+      <div class="ml-2">
+        <h5 class="card-title nombre text-primary">{{f.nombre | titlecase }} {{f.precio |number :'1.0-2' |moneda}}</h5>
+        <p class="badge badge-primary"> {{f.descuento}} % </p>
+        <p> {{calcularDescuento(f)|number :'1.0-2' |moneda}}</p>
+      </div>
+      <div class=" col ml-2">
+        <button class="btn btn-danger"(click)="delete(f)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
