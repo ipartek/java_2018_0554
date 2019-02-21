@@ -1,9 +1,11 @@
 <div class="col-12">
   <h2>Frutas Maquetado</h2>
   <div class="btn-group d-flex" role="group" aria-label="Basic example">
-    <input type="text" name="busqueda" (click)="limpiar()"
-           [(ngModel)]="searchText" class="form-control m-1" placeholder="Nombre de la fruta">
-    <button type="button" (click)="cambiarOferta(true)" class="btn btn-success">Crear</button>
+    <input type="text" name="nombre" (click)="limpiarNombre()"
+           [(ngModel)]="nuevaFrutaNombre" class="form-control m-1" placeholder="Nombre de la fruta" autofocus>
+    <input type="text" name="precio" (click)="limpiarPrecio()"
+           [(ngModel)]="nuevaFrutaPrecio" class="form-control m-1" placeholder="Precio de la fruta">
+    <button type="button" (click)="create()" class="btn btn-success">Crear</button>
   </div>
   <!-- <ul class="list-group"> -->
   <div class="d-flex flex-row flex-wrap" >

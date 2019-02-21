@@ -10,6 +10,8 @@ import { Fruta } from 'src/app/model/fruta';
 export class PaginaFrutasComponent implements OnInit {
 
   frutas: Fruta[];
+  nuevaFrutaNombre : string;
+  nuevaFrutaPrecio : number;
 
   constructor(public paginaFrutasService: PaginaFrutasService) {
     console.log('PaginaFrutasComponent constructor');
@@ -41,6 +43,17 @@ export class PaginaFrutasComponent implements OnInit {
     })
   }
 
+  create(){
+    let fruta = new Fruta(this.nuevaFrutaNombre, this.nuevaFrutaPrecio);
+
+    this.paginaFrutasService.post(fruta).subscribe( result => {
+      this.limpiar();
+      this.cargarFrutas();
+    }, error => {
+      alert('No se pudo Crear la Nueva Fruta');
+    });
+  }
+
   /**
    * Función que mapea las Frutas del JSON al objeto Fruta y los añade
    * al array de frutas
@@ -59,6 +72,19 @@ export class PaginaFrutasComponent implements OnInit {
       //console.debug("Fruta mapeada: %o", el);
     });
 
+  }
+
+  limpiarNombre(){
+    this.nuevaFrutaNombre = "";
+  }
+
+  limpiarPrecio(){
+    this.nuevaFrutaPrecio = null;
+  }
+
+  limpiar(){
+    this.limpiarNombre();
+    this.limpiarPrecio();
   }
 
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GLOBAL } from '../GLOBAL';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Fruta } from '../model/fruta';
 
 @Injectable({
@@ -28,6 +28,28 @@ export class PaginaFrutasService {
   delete(id: number){
     let url = GLOBAL.endpoint + '/fruta/'+id;
     return this.http.delete(url);
+  }
+
+  post(fruta:Fruta): Observable<any> {
+    let url = GLOBAL.endpoint + '/fruta/';
+
+    let body = {
+      // "id": todo.id,
+      "nombre": fruta.nombre,
+      "precio": fruta.precio,
+      "oferta": fruta.oferta,
+      "descuento": fruta.descuento,
+      "imagen": fruta.imagen
+    }
+    
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+
+    return this.http.post( url, body , httpOptions );
+
   }
 
 }
