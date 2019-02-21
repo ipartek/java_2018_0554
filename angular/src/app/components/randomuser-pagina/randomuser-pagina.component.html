@@ -1,15 +1,73 @@
-<h2 class="bg-primary text-white p-2 mt-4 text-center text-uppercase">ListadO de Personas</h2>
+<h2 class="bg-primary text-white p-2 mt-1 text-center text-uppercase">Listado de {{numPersonas?numPersonas:'10'}} Personas</h2>
+<!--
+<div class="row">
 
-<div class="list-group">
-  <div class="list-group-item">
-    <img src="https://randomuser.me/api/portraits/lego/6.jpg" alt="" width="100px" height="100px">
-    <div>Nombre Apellido</div>
-    <div>Email</div>
-  </div>
-  <div class="list-group-item">Dapibus ac facilisis in</div>
-  <div class="list-group-item">Morbi leo risus</div>
-  <div class="list-group-item">Porta ac consectetur ac</div>
-  <div class="list-group-item">Vestibulum at eros</div>
+  <div class="card m-2 col-3"  *ngFor="let p of personas">
+      <img class="card-img-top"  src="{{p.imagen}}"  alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{p.nombre}} {{p.apellido}}</h5>
+        <p class="card-text">{{p.email}}</p>
+        <a href="" class="btn btn-primary">Detalle</a>
+      </div>
+    </div>
+
+</div>
+-->
+<!--Maquetado con: https://bootsnipp.com/snippets/92xNm-->
+
+<input  type="number" name="numPersonas" placeholder="Cantidad" [(ngModel)]="numPersonas">
+
+<div class="row">
+<p *ngIf="personas.length == 0">Cargando datos </p>
+ <!-- Team member -->
+ <div class="col-xs-12 col-sm-6 col-md-3" *ngFor="let p of personas">
+    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+        <div class="mainflip">
+            <div class="frontside">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <p><img class=" img-fluid" src="{{p.imagen}}" alt="card image"></p>
+                        <h4 class="card-title">{{p.nombre}} {{p.apellido}}</h4>
+                        <p class="card-text">{{p.email}}</p>
+                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="backside">
+                <div class="card">
+                    <div class="card-body text-center mt-4">
+                        <h4 class="card-title">Sunlimetech</h4>
+                        <p class="card-text">{{p.email}}</p>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <a class="social-icon text-xs-center" target="_blank" href="#">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="social-icon text-xs-center" target="_blank" href="#">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="social-icon text-xs-center" target="_blank" href="#">
+                                    <i class="fa fa-skype"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="social-icon text-xs-center" target="_blank" href="#">
+                                    <i class="fa fa-google"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ./Team member -->
+
+
 </div>
 
-<p>{{personas |json}}</p>
