@@ -32,6 +32,7 @@ import { TrimPipe } from './pipes/trim.pipe';
 import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 import { PaginaServicePersonasComponent } from './components/pagina-service-personas/pagina-service-personas.component';
 import { NavComponent } from './components/nav/nav.component';
+import { PaginaTodosComponent } from './components/pagina-todos/pagina-todos.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { NavComponent } from './components/nav/nav.component';
     CarritoComponent,
     PaginaServiceComponent,
     PaginaServicePersonasComponent,
-    NavComponent
+    NavComponent,
+    PaginaTodosComponent
   ],
   imports: [
     BrowserModule,

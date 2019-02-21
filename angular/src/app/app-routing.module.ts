@@ -14,6 +14,7 @@ import { ArrayComponent } from './components/array/array.component';
 import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
 import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
 import { PaginaServicePersonasComponent } from './components/pagina-service-personas/pagina-service-personas.component';
+import { PaginaTodosComponent } from './components/pagina-todos/pagina-todos.component';
 
 const routes: Routes = [
   {
@@ -60,6 +61,10 @@ const routes: Routes = [
   { path: 'servicio-personas',
   component: PaginaServicePersonasComponent,
   data: { title: 'servicio-personas' }
+  },
+  { path: 'servicio-todos',
+  component: PaginaTodosComponent,
+  data: { title: 'servicio-todos' }
   },
   { path: '404',
   component: Error404Component,
