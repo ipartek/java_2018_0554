@@ -21,6 +21,10 @@ export class PaginaServicePersonasComponent implements OnInit {
   ngOnInit() {
     console.trace('PaginaServicePersonasComponent ngOnInit');
 
+    this.refrescarLista();
+  }
+
+  refrescarLista(){
     this.personaService.getAll(this.nPersonas).subscribe( json => {
       console.debug("Recibimos datos del JSON: %o", json);
       //TODO mapear
