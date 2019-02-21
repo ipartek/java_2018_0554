@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PruebaComponent } from './components/prueba/prueba.component';
 import { OtromasComponent } from './components/otromas/otromas.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { Error404Component } from './components/error404/error404.component';
@@ -33,7 +34,7 @@ import { MonedaPipe } from './pipes/moneda.pipe';
 import { TrimarPipe } from './pipes/trimar.pipe';
 import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 import { FiltroCochePipe } from './pipes/filtro-coche.pipe';
-import { NavbarComponent } from './components/navbar/navbar.component';
+
 
 
 @NgModule({
