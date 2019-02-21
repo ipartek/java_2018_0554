@@ -12,6 +12,8 @@ export class PaginaFrutasComponent implements OnInit {
   frutas: Fruta[];
   nuevaFrutaNombre : string;
   nuevaFrutaPrecio : number;
+  nuevaFrutaDescuento : number;
+  nuevaFrutaImagen : string;
 
   constructor(public paginaFrutasService: PaginaFrutasService) {
     console.log('PaginaFrutasComponent constructor');
@@ -37,6 +39,7 @@ export class PaginaFrutasComponent implements OnInit {
   delete(fruta: Fruta){
     this.paginaFrutasService.delete(fruta.id).subscribe( result => {
       this.cargarFrutas();
+      this.limpiar();
     },
     error => {
       alert('No se pudo eliminar la Fruta ' + fruta.id);
@@ -56,7 +59,18 @@ export class PaginaFrutasComponent implements OnInit {
 
   changeOferta(fruta: Fruta){
     //fruta.oferta = true;
-    fruta.descuento = 5;
+    if(!fruta.oferta){
+      if(this.nuevaFrutaDescuento <= 0){
+        fruta.descuento = 5;
+      }else{
+        fruta.descuento = this.nuevaFrutaDescuento;
+      }
+      
+    }else{
+      fruta.descuento = 0;
+    }
+    
+    
     this.paginaFrutasService.patch(fruta).subscribe( result => {
       this.cargarFrutas();
     }, error => {
@@ -87,6 +101,8 @@ export class PaginaFrutasComponent implements OnInit {
   rellenarDatos(fruta: Fruta){
     this.nuevaFrutaNombre = fruta.nombre;
     this.nuevaFrutaPrecio = fruta.precio;
+    this.nuevaFrutaDescuento = fruta.descuento;
+    this.nuevaFrutaImagen = fruta.imagen;
   }
 
   /**
@@ -104,11 +120,27 @@ export class PaginaFrutasComponent implements OnInit {
   }
 
   /**
+   * Limpia únicamente el input de descuento
+   */
+  limpiarDescuento(){
+    this.nuevaFrutaDescuento = null;
+  }
+
+  /**
+   * Limpia únicamente el input de imagen
+   */
+  limpiarImagen(){
+    this.nuevaFrutaImagen = "";
+  }
+
+  /**
    * Llama a las 2 funciones de limpieza de cada input, para limpiar ambos
    */
   limpiar(){
     this.limpiarNombre();
     this.limpiarPrecio();
+    this.limpiarDescuento();
+    this.limpiarImagen();
   }
 
 }

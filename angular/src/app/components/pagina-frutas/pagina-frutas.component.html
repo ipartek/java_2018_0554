@@ -1,16 +1,24 @@
 <div class="col-12">
   <h2>Frutas Maquetado</h2>
-  <div class="btn-group d-flex" role="group" aria-label="Basic example">
+  <div class=" form-group d-flex" role="group" aria-label="Basic example">
     <input type="text" name="nombre" (click)="limpiarNombre()"
            [(ngModel)]="nuevaFrutaNombre" class="form-control m-1" placeholder="Nombre de la fruta" autofocus>
     <input type="text" name="precio" (click)="limpiarPrecio()"
            [(ngModel)]="nuevaFrutaPrecio" class="form-control m-1" placeholder="Precio de la fruta">
+  </div>
+  <div class="form-group d-flex ">
+    <input type="text" name="descuento" (click)="limpiarDescuento()"
+      [(ngModel)]="nuevaFrutaDescuento" class="form-control m-1" placeholder="Descuento de la fruta" autofocus>
+    <!-- <input type="text" name="imagen" (click)="limpiarImagen()"
+      [(ngModel)]="nuevaFrutaImagen" class="form-control m-1" placeholder="Imagen de la fruta"> -->
+  </div>
+  <div class="form-group">
     <button type="button" (click)="create()" class="btn btn-success">Crear</button>
   </div>
   <!-- <ul class="list-group"> -->
-  <div class="d-flex flex-row flex-wrap">
+  <div class="d-flex flex-row flex-wrap justify-content-between">
     <div *ngFor="let fruta of frutas"
-      class="col-4 d-flex justify-content-around align-items-center border border-secondary m-1"
+      class="col-5 d-flex justify-content-around align-items-center border border-secondary m-1"
       (click)="rellenarDatos(fruta)">
       
       <img class="rounded-circle shadow p-1 bg-primary rounded" src="{{fruta.imagen}}" alt="fruta.nombre">   
