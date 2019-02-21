@@ -24,6 +24,9 @@ export class PaginaServicePersonasComponent implements OnInit {
   }
 
   refrescarLista(){
+
+    this.personas=[];
+
     if(this.nPersonas < 0){
       this.nPersonas = 1;
     }
