@@ -8,13 +8,13 @@
   <!-- <ul class="list-group"> -->
   <div class="d-flex flex-row flex-wrap" >
     <div *ngFor="let fruta of frutas"
-      class="col-3 list-group-item d-flex justify-content-around align-items-center">
-      <img class="img-thumbnail rounded" src="{{fruta.imagen}}" alt="fruta.nombre">
+      class="col-4 d-flex justify-content-around align-items-center border border-secondary m-1">
+      
+      <img class="rounded-circle shadow p-1 bg-primary rounded" src="{{fruta.imagen}}" alt="fruta.nombre">   
+         
       <div class="d-flex flex-column justify-content-start align-items-start">
-        {{fruta.nombre}}
-        <span *ngFor="let color of fruta.colores" class="badge m-1" [style.color]="color.codigo">
-          {{color.nombre}}
-        </span>
+        <b>{{fruta.nombre}}</b>
+        
       </div>
       <span *ngIf="fruta.oferta" class="d-flex flex-column">
         <del class="text-secondary">
@@ -27,8 +27,8 @@
         {{ fruta.precio }}
         <span class="badge badge-danger">{{ 0 | moneda: 'desc' }}</span>
       </span>
-      <button class="btn btn-danger" (click)="delete(fruta)" >Eliminar</button>
-    </div>
+      <button class="btn btn-danger" (click)="delete(fruta)" >x</button>  
+     </div> <!-- div For -->
   <!-- </ul> -->
 </div>
 </div>
