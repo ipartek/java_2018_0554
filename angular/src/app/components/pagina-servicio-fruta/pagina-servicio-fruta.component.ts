@@ -65,7 +65,17 @@ export class PaginaServicioFrutaComponent implements OnInit {
     );
     }
 
-
-
+    change(fruta :Fruta){
+      console.log('PaginaServicioFrutaComponent change %o', fruta );
+      this.frutaService.patch(fruta).subscribe(     
+          result=>{
+            console.log('Fruta modificada con exito %o', result);
+            this.cargarLista();
+          },
+          error=>{
+            alert('No de pudo Modificar la Tarea');
+          }      
+      );
+        }
 
 }

@@ -37,6 +37,18 @@ export class FrutaService {
     return this.http.post( url, body , httpOptions );
   }
 
+  patch(fruta: Fruta):Observable<any>{
+    let url = this.endpoint + `${fruta.id}`;
+    console.log(`FrutaService patch ${url}`);
+
+    let body = {                    
+                  "nombre": fruta.nombre   
+                } 
+              
+    
+    return this.http.patch( url, body );
+  }
+
 
   delete(id:number){
     let url = this.endpoint + id;
