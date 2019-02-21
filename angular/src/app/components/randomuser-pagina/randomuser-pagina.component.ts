@@ -16,13 +16,14 @@ export class RandomuserPaginaComponent implements OnInit {
   constructor(private personaService: PersonaService) {
     console.trace('RandomuserPaginaComponent constructor');
     this.personas = [];
+    this.numPersonas = 10;
 
   }
-  cambiarCantidad(numPersonas: number) {
+  cambiarCantidad() {
    
     console.warn('RandomuserPaginaComponent this.numPersonas' + this.numPersonas);
     this.personas = [];
-    this.personaService.getAll(numPersonas).subscribe( json => {
+    this.personaService.getAll(this.numPersonas).subscribe( json => {
       const info = json['info'];
       const personasJson = json['results'];
       console.debug('%o', personasJson);
@@ -40,25 +41,7 @@ export class RandomuserPaginaComponent implements OnInit {
 
   ngOnInit() {
     console.trace('PaginaServiceComponent ngOnInit');
-    this.personaService.getAll().subscribe( json => {
-      const info = json['info'];
-      // mapeado desde el json que envia randomUser entramos a results
-      const personasJson = json['results'];
-
-      console.debug('%o', personasJson);
-// una vez en results mapeado de los atributos que necesitamos para el pojo de persona.
-// se puede hacer con p.name.first es igual que p['name']['first'];
-// para coger dentro de name el first
-      personasJson.map(p => {
-        const nombre = p['name']['first'];
-        const apellido = p.name.last;
-        const email = p['email'];
-        const imagen = p.picture.large;
-        this.personas.push(new Randomuser(nombre, apellido, email, imagen ));
-      });
-
-    });
-
+    this.cambiarCantidad() ;
 
   }
 

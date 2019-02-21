@@ -1,22 +1,23 @@
-<h2 class="bg-primary text-white p-2 mt-1 text-center text-uppercase">Listado de {{numPersonas?numPersonas:'10'}} Personas</h2>
-<!--
-<div class="row">
-
-  <div class="card m-2 col-3"  *ngFor="let p of personas">
-      <img class="card-img-top"  src="{{p.imagen}}"  alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">{{p.nombre}} {{p.apellido}}</h5>
-        <p class="card-text">{{p.email}}</p>
-        <a href="" class="btn btn-primary">Detalle</a>
-      </div>
-    </div>
-
+<h2 class="bg-primary text-white p-2 mt-1 text-center text-uppercase">
+    Listado de {{numPersonas?personas.length+' '+numPersonas:'numPersonas'}} Personas</h2>
+<div class="mt-2 mb-2 row">
+<input class="col-2 " type="text" name="numPersonas" [(ngModel)]="numPersonas" (ngModelChange)="cambiarCantidad(numPersonas)"  placeholder=10>
+<button class="col-2 btn btn-warning">Cambiar</button>
 </div>
--->
-<!--Maquetado con: https://bootsnipp.com/snippets/92xNm-->
+<ul class="list-group">
+    <li *ngFor="let p of personas" class="list-group-item">
+        <div class="d-flex">
+            <img class="mr-3 rounded-circle" src="{{p.imagen}}" alt="card image">
+            <div>
+                <h4 class="text-primary">{{p.nombre}} {{p.apellido}}</h4>
+                <p class="card-text">{{p.email}}</p>
+            </div>
+        </div>
 
-     
-      <input  type="text" name="numPersonas" placeholder="Cantidad" [(ngModel)]="numPersonas" (ngModelChange)="cambiarCantidad(numPersonas)">
+    </li>
+</ul>
+
+<!--Maquetado con: https://bootsnipp.com/snippets/92xNm-->
 
 <div class="row">
 <p *ngIf="personas.length == 0">Cargando datos </p>
