@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GLOBAL } from '../GLOBAL';
 import { HttpClient } from '@angular/common/http';
+import { Fruta } from '../model/fruta';
 
 @Injectable({
   providedIn: 'root'
