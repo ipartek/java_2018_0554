@@ -10,6 +10,9 @@ import { PaginaPipeComponent } from './components/pagina-pipe/pagina-pipe.compon
 import { PaginaArrayComponent } from './components/pagina-array/pagina-array.component';
 import { PaginaComparadorComponent } from './components/pagina-comparador/pagina-comparador.component';
 import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
+import { PaginaTodosComponent } from './components/pagina-todos/pagina-todos.component';
+import { PaginaFrutasComponent } from './components/pagina-frutas/pagina-frutas.component';
+import { PaginaPersonasComponent } from './components/pagina-personas/pagina-personas.component';
 
 
 const routes: Routes = [
@@ -23,6 +26,9 @@ const routes: Routes = [
   { path: 'comparador', component: PaginaComparadorComponent }, 
   { path: 'directiva', component: PaginaDirectivaComponent },
   { path: 'service', component: PaginaServiceComponent }, 
+  { path: 'pesonas', component: PaginaPersonasComponent }, 
+  { path: 'frutas', component: PaginaFrutasComponent }, 
+  { path: 'todos', component: PaginaTodosComponent }, 
   { path: '**', pathMatch:'full', redirectTo : '404'  }
 ];
 

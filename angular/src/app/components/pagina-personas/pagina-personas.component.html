@@ -1,0 +1,7 @@
+<h1>Listado de Personas</h1>
+<p>Obtenemos la información de <a href="https://randomuser.me/" target="_blank">randomuser.me</a></p>
+<p>Ejemplo para aprender a obtener información de un servicio externo y mapear a nuestro modelo Persona</p>
+<p *ngIf="personas.length==0" class="text-danger">*Cargando personas....</p>
+<ul>
+  <li *ngFor="let p of personas">{{p|json}}}</li>
+</ul>

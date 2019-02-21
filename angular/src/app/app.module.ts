@@ -30,6 +30,9 @@ import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 import { NavComponent } from './nav/nav.component';
 import { TraductorComponent } from './components/traductor/traductor.component';
 import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
+import { PaginaFrutasComponent } from './components/pagina-frutas/pagina-frutas.component';
+import { PaginaPersonasComponent } from './components/pagina-personas/pagina-personas.component';
+import { PaginaTodosComponent } from './components/pagina-todos/pagina-todos.component';
 
 
 @NgModule({
@@ -52,7 +55,10 @@ import { PaginaServiceComponent } from './components/pagina-service/pagina-servi
     CardFrutaComponent,
     NavComponent,
     TraductorComponent,
-    PaginaServiceComponent
+    PaginaServiceComponent,
+    PaginaFrutasComponent,
+    PaginaPersonasComponent,
+    PaginaTodosComponent
   ],
   imports: [
     BrowserModule,

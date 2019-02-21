@@ -2,20 +2,17 @@ export class Persona {
 
     // atributos privados y comienzan por guion bajo "_"
     private _nombre: string;
-
-
+    private _apellido: string;   
+    private _email: string;  
+    private _foto: string;
+ 
     // solo se puede declara un constructor
-    constructor( nombre?: string ){
+    constructor( nombre: string, apellido: string, email: string, foto:string ){
 
-        this._nombre = (nombre) ? nombre : 'Anonimo';
-
-        /*
-        if (nombre){
-            this._nombre = nombre;
-        }else{
-            this._nombre = 'Anonimo';
-        } 
-        */   
+        this._nombre = (nombre) ? nombre : '';
+        this._apellido = (apellido) ? apellido : '';
+        this._email = (email) ? email : '';
+        this._foto = (foto) ? foto : '';        
     }
 
     // getters y setters
@@ -28,7 +25,24 @@ export class Persona {
         console.trace('setter ' + this._nombre);
         this._nombre = value;
     }
-
+    public get apellido_1(): string {
+        return this._apellido;
+    }
+    public set apellido_1(value: string) {
+        this._apellido = value;
+    }
+    public get email(): string {
+        return this._email;
+    }
+    public set email(value: string) {
+        this._email = value;
+    }  
+    public get foto(): string {
+        return this._foto;
+    }
+    public set foto(value: string) {
+        this._foto = value;
+    }
     
 
 
