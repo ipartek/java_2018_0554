@@ -22,7 +22,7 @@
       "nombre": "chirimoya",
       "oferta": true,
       "precio": 10,
-      "descuento": 5,
+      "descuento": "12",
       "imagen": "https://media.mercola.com/assets/images/foodfacts/cherimoya-nutrition-facts.jpg",
       "colores": [
         {

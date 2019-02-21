@@ -14,6 +14,7 @@ export class PaginaFrutasComponent implements OnInit {
   nuevaFrutaPrecio : number;
   nuevaFrutaDescuento : number;
   nuevaFrutaImagen : string;
+  frutaSeleccionada: Fruta;
 
   constructor(public paginaFrutasService: PaginaFrutasService) {
     console.log('PaginaFrutasComponent constructor');
@@ -34,6 +35,10 @@ export class PaginaFrutasComponent implements OnInit {
     }, error => {
       console.warn('peticion incorrecta %o', error);
     });
+  }
+
+  seleccionada(fruta: Fruta){
+    this.frutaSeleccionada = fruta;
   }
 
   delete(fruta: Fruta){
