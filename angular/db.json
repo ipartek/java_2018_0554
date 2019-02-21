@@ -22,7 +22,7 @@
       "nombre": "chirimoya",
       "oferta": true,
       "precio": 10,
-      "descuento": 0,
+      "descuento": 5,
       "imagen": "https://media.mercola.com/assets/images/foodfacts/cherimoya-nutrition-facts.jpg",
       "colores": [
         {
@@ -48,6 +48,30 @@
           "codigo": "#0F0"
         }
       ]
+    },
+    {
+      "nombre": "Melon",
+      "precio": "8",
+      "oferta": true,
+      "descuento": 5,
+      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
+      "id": 7
+    },
+    {
+      "nombre": "Pomelo",
+      "precio": "33",
+      "oferta": true,
+      "descuento": 5,
+      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
+      "id": 9
+    },
+    {
+      "nombre": "Mandarina",
+      "precio": "3.44",
+      "oferta": false,
+      "descuento": 5,
+      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
+      "id": 10
     }
   ],
   "todos": [

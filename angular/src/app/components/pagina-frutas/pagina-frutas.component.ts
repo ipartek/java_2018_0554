@@ -54,6 +54,17 @@ export class PaginaFrutasComponent implements OnInit {
     });
   }
 
+  changeOferta(fruta: Fruta){
+    //fruta.oferta = true;
+    fruta.descuento = 5;
+    this.paginaFrutasService.patch(fruta).subscribe( result => {
+      this.cargarFrutas();
+    }, error => {
+      alert("No se ha podido poner en oferta la Fruta");
+    });
+
+  }
+
   /**
    * Función que mapea las Frutas del JSON al objeto Fruta y los añade
    * al array de frutas
@@ -71,17 +82,30 @@ export class PaginaFrutasComponent implements OnInit {
       this.frutas.push(fruta);
       //console.debug("Fruta mapeada: %o", el);
     });
-
   }
 
+  rellenarDatos(fruta: Fruta){
+    this.nuevaFrutaNombre = fruta.nombre;
+    this.nuevaFrutaPrecio = fruta.precio;
+  }
+
+  /**
+   * Limpia únicamente el input de nombre
+   */
   limpiarNombre(){
     this.nuevaFrutaNombre = "";
   }
 
+  /**
+   * Limpia únicamente el input de precio
+   */
   limpiarPrecio(){
     this.nuevaFrutaPrecio = null;
   }
 
+  /**
+   * Llama a las 2 funciones de limpieza de cada input, para limpiar ambos
+   */
   limpiar(){
     this.limpiarNombre();
     this.limpiarPrecio();

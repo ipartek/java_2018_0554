@@ -52,4 +52,15 @@ export class PaginaFrutasService {
 
   }
 
+  patch(fruta: Fruta): Observable<any>{
+    let url = GLOBAL.endpoint + `/fruta/${fruta.id}`;
+
+    let body = {                    
+      "oferta": !fruta.oferta,
+      "descuento": fruta.descuento    
+    } 
+  
+    return this.http.patch( url, body );  
+  }
+
 }

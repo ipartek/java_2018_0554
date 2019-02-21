@@ -8,9 +8,10 @@
     <button type="button" (click)="create()" class="btn btn-success">Crear</button>
   </div>
   <!-- <ul class="list-group"> -->
-  <div class="d-flex flex-row flex-wrap" >
+  <div class="d-flex flex-row flex-wrap">
     <div *ngFor="let fruta of frutas"
-      class="col-4 d-flex justify-content-around align-items-center border border-secondary m-1">
+      class="col-4 d-flex justify-content-around align-items-center border border-secondary m-1"
+      (click)="rellenarDatos(fruta)">
       
       <img class="rounded-circle shadow p-1 bg-primary rounded" src="{{fruta.imagen}}" alt="fruta.nombre">   
          
@@ -29,6 +30,7 @@
         {{ fruta.precio }}
         <span class="badge badge-danger">{{ 0 | moneda: 'desc' }}</span>
       </span>
+      <button type="button" (click)="changeOferta(fruta)" class="btn btn-warning">Oferta</button>
       <button class="btn btn-danger" (click)="delete(fruta)" >x</button>  
      </div> <!-- div For -->
   <!-- </ul> -->
