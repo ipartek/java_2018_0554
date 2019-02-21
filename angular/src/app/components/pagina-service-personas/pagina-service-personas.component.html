@@ -2,15 +2,16 @@
 <div class="col-md-12 d-flex flex-row justify-content-center align-items-center">
 <span>Número de resultados a mostrar:</span>
 <div class="col-md-2">
-  <input type="text" [(ngModel)]="nPersonas" (keyup)="refrescarLista()" class="form-control col-md-4">
+  <input type="text" [(ngModel)]="nPersonas" (keyup)="refrescarLista()" class="form-control col-md-4" 
+         autofocus>
 </div>
 </div>
 <p *ngIf="personas.length===0">Cargando personas...</p>
 <p *ngIf="nPersonas > 0"><i>Mostrando {{ nPersonas }} personas ...</i></p>
 <div *ngIf="nPersonas > 0">
-<div *ngFor="let p of personas"  class="border border-secondary d-flex" >
+<div *ngFor="let p of personas"  class="border border-secondary d-flex p-2" >
   <div> 
-    <img class="rounded" src="{{ p.imagen }}" alt="{{ p.nombre }}"> 
+    <img class="rounded-circle shadow p-1 bg-primary rounded" src="{{ p.imagen }}" alt="{{ p.nombre }}"> 
   </div>
   <div class="col-md-6 d-flex flex-column justify-content-around align-items-center">
    <h5>{{ p.nombre | titlecase }} {{ p.apellido | titlecase }}</h5>
