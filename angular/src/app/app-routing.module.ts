@@ -15,7 +15,7 @@ import { FrutaComponent } from './components/fruta/fruta.component';
 import { PaginaServiceComponent } from './components/pagina-service/pagina-service.component';
 import { RandomuserPaginaComponent } from './components/randomuser-pagina/randomuser-pagina.component';
 import { PaginaServicioFrutaComponent } from './components/pagina-servicio-fruta/pagina-servicio-fruta.component';
-
+import { TodosComponent } from './components/todos/todos.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent  },
@@ -33,6 +33,7 @@ const routes: Routes = [
   { path: 'service', component: PaginaServiceComponent },
   { path: 'persona', component: RandomuserPaginaComponent },
   { path: 'frutas-servicio', component: PaginaServicioFrutaComponent },
+  { path: 'todos', component: TodosComponent },
   { path: '', pathMatch:'full', redirectTo : 'home'  },
   { path: '**', pathMatch:'full', redirectTo : '404'  }
 
