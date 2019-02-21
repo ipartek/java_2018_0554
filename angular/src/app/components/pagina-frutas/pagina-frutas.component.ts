@@ -102,7 +102,7 @@ export class PaginaFrutasComponent implements OnInit {
     this.nuevaFrutaNombre = fruta.nombre;
     this.nuevaFrutaPrecio = fruta.precio;
     this.nuevaFrutaDescuento = fruta.descuento;
-    this.nuevaFrutaImagen = fruta.imagen;
+    // this.nuevaFrutaImagen = fruta.imagen;
   }
 
   /**
@@ -129,18 +129,18 @@ export class PaginaFrutasComponent implements OnInit {
   /**
    * Limpia únicamente el input de imagen
    */
-  limpiarImagen(){
-    this.nuevaFrutaImagen = "";
-  }
+  // limpiarImagen(){
+  //   this.nuevaFrutaImagen = "";
+  // }
 
   /**
-   * Llama a las 2 funciones de limpieza de cada input, para limpiar ambos
+   * Llama a las 3 funciones de limpieza de cada input, para limpiar todos
    */
   limpiar(){
     this.limpiarNombre();
     this.limpiarPrecio();
     this.limpiarDescuento();
-    this.limpiarImagen();
+    // this.limpiarImagen();
   }
 
 }
