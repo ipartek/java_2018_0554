@@ -10,16 +10,18 @@ import { PersonaService } from 'src/app/providers/persona.service';
 export class PaginaServicePersonasComponent implements OnInit {
 
   personas: Persona[];
+  nPersonas: number;
 
   constructor( private personaService: PersonaService ) { 
     console.trace('PaginaServicePersonasComponent constructor');
     this.personas=[];
+    this.nPersonas = 10;
   }
 
   ngOnInit() {
     console.trace('PaginaServicePersonasComponent ngOnInit');
 
-    this.personaService.getAll().subscribe( json => {
+    this.personaService.getAll(this.nPersonas).subscribe( json => {
       console.debug("Recibimos datos del JSON: %o", json);
       //TODO mapear
       let personasJson = json.results;

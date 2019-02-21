@@ -1,6 +1,7 @@
 <h1>Servicio Personas</h1>
-<input type="text" class="col-offset-8 col-md-2 form-control">
+<input type="text" [(ngModel)]="nPersonas" (keyPress)="ngOnInit()" class="form-control">
 <p *ngIf="personas.length===0">Cargando personas...</p>
+<p>{{ nPersonas }}</p>
 <div *ngFor="let p of personas"  class="border border-secondary d-flex" >
   <div> 
     <img class="rounded" src="{{ p.imagen }}" alt="{{ p.nombre }}"> 

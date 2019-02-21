@@ -7,15 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class PersonaService {
 
-  endpoint = 'https://randomuser.me/api/?results=10';
+  endpoint = 'https://randomuser.me/api/?results=';
 
   constructor( private httpClient: HttpClient ) { 
     console.trace('PersonaService constructor');
   }
 
-  public getAll():Observable<any>{
+  public getAll(nPersonas: number = 10):Observable<any>{
     console.trace('getAll ' + this.endpoint);
-    return this.httpClient.get( this.endpoint );
+    return this.httpClient.get( this.endpoint + nPersonas);
   }
 
 }

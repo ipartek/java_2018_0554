@@ -31,6 +31,7 @@ import { MonedaPipe } from './pipes/moneda.pipe';
 import { TrimPipe } from './pipes/trim.pipe';
 import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 import { PaginaServicePersonasComponent } from './components/pagina-service-personas/pagina-service-personas.component';
+import { NavComponent } from './components/nav/nav.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { PaginaServicePersonasComponent } from './components/pagina-service-pers
     TraductorComponent,
     CarritoComponent,
     PaginaServiceComponent,
-    PaginaServicePersonasComponent
+    PaginaServicePersonasComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
