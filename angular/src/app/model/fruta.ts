@@ -23,10 +23,10 @@ export class Fruta {
      * @param descuento ? 0
      * @param imagen?IMAGEN_DEFAULT
      */
-    constructor(nombre:string, precio:number,  id?:number, oferta:boolean=false, descuento?:number, imagen?:string, cantidad:number=1){
+    constructor(nombre:string, precio?:number,  id?:number, oferta:boolean=false, descuento?:number, imagen?:string, cantidad:number=1){
         //primero los obligatorios
         this._nombre = nombre;
-        this._precio = precio;
+        this._precio = (precio) ? precio : 5;
         this._id = (id) ? id : -1;
         this._oferta = oferta ;
         this._descuento = (descuento) ? descuento : 0;

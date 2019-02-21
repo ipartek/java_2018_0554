@@ -1,25 +1,67 @@
-<ul class="list-group">
-    <li *ngFor="let fruta of frutas | filtroOferta : isOferta " class="list-group-item d-flex justify-content-between">
-      <img [src]="fruta.imagen" alt="{{fruta.nombre}}">
 
-      <!-- nombre y colores -->
-      <div class="d-flex flex-column">
-        <p class="title">{{fruta.nombre}}</p>
-        <p>
-          <span *ngFor="let color of fruta.colores" 
-                class="badge" 
-                [style.color]="color.codigo">
-            {{color.nombre}}
-          </span>          
-        </p>
-      </div>
+<h2 class="bg-primary text-white p-2 mt-4 text-center text-uppercase">CRUD FRUTAS</h2>
 
-      <!-- precio y descuentos -->
-      <div class="d-flex flex-column">          
-        <span class="{{(!fruta.oferta)?'precio':'precio-descuento'}}">{{fruta.precio | moneda}}</span>            
-        <span *ngIf="fruta.oferta" class="badge badge-primary">{{fruta.descuento}}%</span>
-        <span *ngIf="fruta.oferta" class="precio">{{ calcularDescuento(fruta) | number : '1.0-2' | moneda }}</span>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">
+    Nueva Fruta
+  </button>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Fruta</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                <div class="form-group">
+                  <label for="f-nombre" class="col-form-label">Nombre:</label>
+                  <input type="text" class="form-control" id="nombre" [(ngModel)]="nombreFrutaNueva" placeholder="nombre fruta ">
+                </div>
+                {{nombreFrutaNueva}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
+          <button (click)="new()" class="btn btn-primary">CREAR</button>  
+        </div>
       </div>
-      
-    </li>    
-</ul>
+    </div>
+  </div>
+
+
+
+  <table id="example" class="table" > 
+    <thead>
+        <tr>
+            <th> <input type="checkbox" ></th> 
+            <th>id</th>     
+            <th>nombre</th>      
+            <th>precio</th>
+            <th>oferta</th>
+            <th>descuento</th>
+            <th>imagen</th>
+            <th><i class="fa fa-trash" aria-hidden="true"></i></th> 
+            <th><i class="far fa-edit"></i></th> 
+                                       
+        </tr>
+    </thead>
+    <tbody>                    
+        <tr  *ngFor="let fruta of frutas">
+            <th> <input type="checkbox" ></th> 
+            <td>{{fruta.id}}</td>     
+            <td>{{fruta.nombre}}</td>      
+            <td>{{fruta.precio}}</td>
+            <td>{{fruta.oferta}}</td>
+            <td>{{fruta.descuento}}</td>
+            <td><img src="{{fruta.imagen}}" width="100" height="100"></td>
+            <th><i (click)="delete(fruta)" class="fa fa-trash" aria-hidden="true"></i></th> 
+            <th><i class="far fa-edit"></i></th>  
+        </tr>                                                       
+    </tbody>      
+    
+</table>   
