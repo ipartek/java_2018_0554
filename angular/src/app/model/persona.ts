@@ -25,10 +25,10 @@ export class Persona {
         console.trace('setter ' + this._nombre);
         this._nombre = value;
     }
-    public get apellido_1(): string {
+    public get apellido(): string {
         return this._apellido;
     }
-    public set apellido_1(value: string) {
+    public set apellido(value: string) {
         this._apellido = value;
     }
     public get email(): string {
