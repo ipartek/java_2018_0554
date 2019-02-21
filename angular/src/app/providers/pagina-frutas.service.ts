@@ -21,6 +21,13 @@ export class PaginaFrutasService {
     return this.http.get(url);
   }
 
-  
+  /**
+   * Eliminar fruta mediante su ID
+   * @param id :number Identificador de la fruta a eliminar
+   */
+  delete(id: number){
+    let url = GLOBAL.endpoint + '/fruta/'+id;
+    return this.http.delete(url);
+  }
 
 }

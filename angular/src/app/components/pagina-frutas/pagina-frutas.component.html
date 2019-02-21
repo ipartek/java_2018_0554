@@ -27,6 +27,7 @@
         {{ fruta.precio }}
         <span class="badge badge-danger">{{ 0 | moneda: 'desc' }}</span>
       </span>
+      <button class="btn btn-danger" (click)="delete(fruta)" >Eliminar</button>
     </div>
   <!-- </ul> -->
 </div>

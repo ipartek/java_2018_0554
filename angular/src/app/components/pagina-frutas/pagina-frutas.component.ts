@@ -23,12 +23,22 @@ export class PaginaFrutasComponent implements OnInit {
 
   cargarFrutas() {
     console.log('PaginaFrutasComponent cargarFrutas');
+    this.frutas = [];
     this.paginaFrutasService.getFrutas().subscribe(resultado => {
       // console.debug('peticion correcta %o', resultado);
       this.mapeo(resultado);
     }, error => {
       console.warn('peticion incorrecta %o', error);
     });
+  }
+
+  delete(fruta: Fruta){
+    this.paginaFrutasService.delete(fruta.id).subscribe( result => {
+      this.cargarFrutas();
+    },
+    error => {
+      alert('No se pudo eliminar la Fruta ' + fruta.id);
+    })
   }
 
   /**
