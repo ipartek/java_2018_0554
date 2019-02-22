@@ -59,6 +59,14 @@ export class PaginaFrutasComponent implements OnInit {
     );
   }// cargarFrutas
 
+  editar( fruta: Fruta){
+    console.trace('click editar %o', fruta); 
+
+    this.formulario.controls['nombre'].setValue(fruta.nombre);
+    this.formulario.controls['precio'].setValue(fruta.precio);
+    
+  }
+
   eliminar(fruta: Fruta){
     console.trace('PaginaFrutasComponent click eliminar %o', fruta);    
     if ( confirm('¿ Estas seguro que quieres eliminar ?') ){
