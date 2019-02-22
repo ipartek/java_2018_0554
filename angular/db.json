@@ -52,8 +52,8 @@
     {
       "nombre": "Melon",
       "precio": "8",
-      "oferta": true,
-      "descuento": 5,
+      "oferta": false,
+      "descuento": 0,
       "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
       "id": 7
     },
@@ -75,11 +75,82 @@
     },
     {
       "nombre": "Naranja",
-      "precio": "6",
+      "precio": 0,
       "oferta": true,
-      "descuento": "12",
+      "descuento": "2",
       "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
       "id": 11
+    },
+    {
+      "nombre": "Cereza",
+      "precio": "2.99",
+      "oferta": true,
+      "descuento": "7",
+      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
+      "id": 12
+    },
+    {
+      "nombre": "Limón",
+      "precio": "3.44",
+      "oferta": true,
+      "descuento": 5,
+      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
+      "id": 13
+    },
+    {
+      "nombre": "Maracuyá",
+      "precio": 3.44,
+      "oferta": false,
+      "descuento": 0,
+      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
+      "id": 15
+    },
+    {
+      "nombre": "chirimoya",
+      "precio": 10,
+      "oferta": false,
+      "descuento": 0,
+      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
+      "id": 16
+    },
+    {
+      "nombre": "chirimoya",
+      "precio": 10,
+      "oferta": false,
+      "descuento": 0,
+      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
+      "id": 17
+    },
+    {
+      "nombre": "Cacahuete",
+      "precio": 4.99,
+      "oferta": false,
+      "descuento": 0,
+      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
+      "id": 18
+    },
+    {
+      "nombre": "Cachuete",
+      "precio": 4.99,
+      "oferta": false,
+      "descuento": 0,
+      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
+      "id": 19
+    },
+    {
+      "nombre": "Cacahuete",
+      "precio": 4.99,
+      "oferta": false,
+      "descuento": 0,
+      "id": 20
+    },
+    {
+      "nombre": "Cacahuete",
+      "precio": 4.99,
+      "oferta": false,
+      "descuento": 0,
+      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
+      "id": 21
     }
   ],
   "todos": [

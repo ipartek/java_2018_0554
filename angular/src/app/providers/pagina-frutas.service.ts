@@ -40,6 +40,7 @@ export class PaginaFrutasService {
       "oferta": fruta.oferta,
       "descuento": fruta.descuento,
       "imagen": fruta.imagen
+      //TODO colores
     }
     
     const httpOptions = {
@@ -50,6 +51,19 @@ export class PaginaFrutasService {
 
     return this.http.post( url, body , httpOptions );
 
+  }
+
+  put(fruta: Fruta): Observable<any>{
+    let url = GLOBAL.endpoint + `/fruta/${fruta.id}`;
+
+    let body = {
+      "nombre": fruta.nombre,
+      "precio": fruta.precio,                    
+      "oferta": fruta.oferta,
+      "descuento": fruta.descuento    
+    }
+
+    return this.http.put( url, body );  
   }
 
   patch(fruta: Fruta): Observable<any>{

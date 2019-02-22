@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 //Componentes
@@ -34,6 +34,7 @@ import { PaginaServicePersonasComponent } from './components/pagina-service-pers
 import { NavComponent } from './components/nav/nav.component';
 import { PaginaTodosComponent } from './components/pagina-todos/pagina-todos.component';
 import { PaginaFrutasComponent } from './components/pagina-frutas/pagina-frutas.component';
+import { AlertaComponent } from './components/alerta/alerta.component';
 
 
 @NgModule({
@@ -62,13 +63,15 @@ import { PaginaFrutasComponent } from './components/pagina-frutas/pagina-frutas.
     PaginaServicePersonasComponent,
     NavComponent,
     PaginaTodosComponent,
-    PaginaFrutasComponent
+    PaginaFrutasComponent,
+    AlertaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule, //Para poder usar doble binding
-    HttpClientModule //Para usarlo con los services (Obligatorio)
+    HttpClientModule, //Para usarlo con los services (Obligatorio)
+    ReactiveFormsModule //Para formularios Reactivos
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,3 +2,9 @@ img{
     width: 100px;
     height: 100px;
 }
+
+.fas:hover::before{
+    color:red;
+    font-size: 1.6em;
+    transition-duration: 0.3s; 
+}

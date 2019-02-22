@@ -1,25 +1,69 @@
 <div class="col-12">
-  <h2>Frutas Maquetado</h2>
-  <div class=" form-group d-flex" role="group" aria-label="Basic example">
-    <input type="text" name="nombre" (click)="limpiarNombre()"
-           [(ngModel)]="nuevaFrutaNombre" class="form-control m-1" placeholder="Nombre de la fruta" autofocus>
+  <h1>CRUD Frutas</h1>
+  <div *ngIf="mensaje.texto !=''" class="alert alert-{{mensaje.tipo}}" role="alert">
+      {{ mensaje.texto }}
+  </div>
+  <!-- <div *ngIf="mensajeError !=''" class="alert alert-danger" role="alert">
+      {{ mensajeError }}
+  </div> -->
+  <p>Valores: {{ formulario.value | json }}</p>
+  <p>Estado: {{ formulario.status | json }}</p>
+  <p>Oferta: {{ formulario.value.oferta | json }}</p>
+  
+  <!-- <div class=" form-group d-flex" role="group" aria-label="Basic example"> -->
+    <!-- Formulario viejo -->
+    <!-- <input type="text" name="nombre" (click)="limpiarNombre()"
+           [(ngModel)]="frutaNueva.nombre" class="form-control m-1" placeholder="Nombre de la fruta (Minimo 3 letras)" autofocus>
     <input type="text" name="precio" (click)="limpiarPrecio()"
-           [(ngModel)]="nuevaFrutaPrecio" class="form-control m-1" placeholder="Precio de la fruta">
+           [(ngModel)]="frutaNueva.precio" class="form-control m-1" placeholder="Precio de la fruta">
   </div>
   <div class="form-group d-flex ">
     <input type="text" name="descuento" (click)="limpiarDescuento()"
-      [(ngModel)]="nuevaFrutaDescuento" class="form-control m-1" placeholder="Descuento de la fruta" autofocus>
+      [(ngModel)]="frutaNueva.descuento" class="form-control m-1" placeholder="Descuento de la fruta" autofocus> -->
     <!-- <input type="text" name="imagen" (click)="limpiarImagen()"
-      [(ngModel)]="nuevaFrutaImagen" class="form-control m-1" placeholder="Imagen de la fruta"> -->
-  </div>
-  <div class="form-group">
-    <button type="button" (click)="create()" class="btn btn-success">Crear</button>
-  </div>
-  <!-- <ul class="list-group"> -->
+      [(ngModel)]="frutaNueva.imagen" class="form-control m-1" placeholder="Imagen de la fruta"> -->
+      <!-- (FIN) Formulario viejo -->
+
+      <form [formGroup]="formulario" (submit)="accion()">
+        <div class="col-12 d-flex flex-row flex-wrap">
+          <div class="form-group col-6">
+            <label for="nombre">Nombre</label>
+            <input type="text" formControlName="nombre"
+            class="form-control" placeholder= "Nombre de la fruta (Minimo 3 letras)" autofocus>
+            <small *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched" class="text-danger">*Nombre no válido</small>
+          </div>
+          <div class="form-group col-6">
+            <label for="precio">Precio</label>
+            <input type="number" formControlName="precio"
+            class="form-control" placeholder= "Precio de la fruta">
+            <small *ngIf="formulario.controls.precio.invalid && formulario.controls.precio.touched" class="text-danger">*Precio no válido</small>
+          </div>
+          <div class="form-group col-6">
+              <input type="checkbox" name="oferta" formControlName="oferta">
+              Quiero poner una oferta a este producto
+          </div>
+          <div *ngIf="formulario.value.oferta" class="form-group col-12">
+              <label for="descuento">Descuento</label>
+              <input type="number" formControlName="descuento"
+              class="form-control" placeholder= "Descuento de la fruta (Min=3, Max=70)" 
+              >
+              <small *ngIf="formulario.controls.descuento.invalid && formulario.controls.descuento.touched" class="text-danger">*Descuento no válido</small>
+          </div>
+        </div>
+          <button *ngIf="frutaNueva.id === -1" type="submit" [disabled]="formulario.invalid" class="btn btn-success">Crear</button>
+          <button *ngIf="frutaNueva.id !== -1" class="btn btn-info" (click)="modificar(fruta)">Editar</button>
+          <button *ngIf="frutaNueva.id !== -1" class="btn btn-warning" (click)="limpiar()">Borrar datos</button>
+      </form>
+
+  <!-- </div> -->
+  <!-- Boton de crear -->
+  <!-- <div class="form-group">
+    <button type="button" (click)="create()" class="btn btn-success" disabled="{{(frutaNueva.nombre.length<3)?'disabled':''}}" >Crear</button>
+  </div> -->
+
   <div class="d-flex flex-row flex-wrap justify-content-between">
     <div *ngFor="let fruta of frutas"
-      class="col-5 d-flex justify-content-around align-items-center border border-secondary m-1"
-      (click)="rellenarDatos(fruta)">
+      class="col-5 d-flex justify-content-around align-items-center border border-secondary m-1">
       
       <img class="rounded-circle shadow p-1 bg-primary rounded" src="{{fruta.imagen}}" alt="fruta.nombre">   
          
@@ -38,37 +82,9 @@
         {{ fruta.precio }}
         <span class="badge badge-danger">{{ 0 | moneda: 'desc' }}</span>
       </span>
-      <button type="button" (click)="changeOferta(fruta)" class="btn btn-warning">Oferta</button>
-
-      <!-- Button trigger modal 
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-      </button>-->
-      
-      <!-- Modal 
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal {{ fruta.nombre }}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>-->
-
-      <button class="btn btn-danger" (click)="delete(fruta)" >x</button>  
+      <i (click)="editar(fruta)" class="fas fa-edit"></i>
+      <i (click)="delete(fruta)" class="fas fa-trash-alt"></i>
      </div> <!-- div For -->
-  <!-- </ul> -->
 </div>
 </div>
 
