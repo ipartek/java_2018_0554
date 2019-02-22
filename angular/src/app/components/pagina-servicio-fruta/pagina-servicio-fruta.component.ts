@@ -41,7 +41,11 @@ export class PaginaServicioFrutaComponent implements OnInit {
         0.99,       //value
         // Validaciones
         [Validators.required, Validators.min(0.99), Validators.max(99)]     
-    ]
+    ],
+    oferta: [false],
+    descuento: [0],
+    imagen:['']
+
     });
 
   }
@@ -68,12 +72,12 @@ export class PaginaServicioFrutaComponent implements OnInit {
   new() {
     console.log('PaginaServicioFrutaComponent new %o', this.formulario.value);
     
-    let fruta = new Fruta(this.formulario.value.nombre, this.formulario.value.precio)
+    let fruta = new Fruta(this.formulario.value.nombre, this.formulario.value.precio, this.formulario.value.id, this.formulario.value.oferta, this.formulario.value.descuento, this.formulario.value.imagen)
     this.frutaService.post(fruta).subscribe(
       result => {
         console.log('PaginaServicioFrutaComponent new %o', result);
         this.cargarLista();
-        this.mensaje = 'Fruta creada' + this.nombreFrutaNueva;
+        this.mensaje = 'Fruta creada' + this.formulario.value.nombre;
       },
       error => {
         this.mensaje = 'No de pudo Crear Fruta';

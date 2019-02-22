@@ -24,8 +24,12 @@ export class FrutaService {
     console.log(`FrutaService put ${url}`);
 
     let body = {
-                  
-                  "nombre": fruta.nombre
+              "nombre": fruta.nombre,
+              "precio": fruta.precio,
+              "oferta": fruta.oferta,
+              "descuento": fruta.descuento,
+              "imagen": fruta.imagen
+                 
                 } 
               
     const httpOptions = {
