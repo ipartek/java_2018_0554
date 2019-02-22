@@ -1,5 +1,6 @@
 
 <h2 class="bg-primary text-white p-2 mt-4 text-center text-uppercase">CRUD FRUTAS</h2>
+
 <!-- TODO crearlo en componente -->
 <div *ngIf="mensaje != ''" class="alert alert-info alert-dismissible fade show" role="alert">
 <strong>{{mensaje}}</strong> 
@@ -7,14 +8,43 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<!-- Button trigger modal -->
+
+<div class="jumbotron">
+<p>Valores: {{formulario.value | json}}</p>
+<p>Estado global: {{formulario.status | json}}</p>
+
+</div>
+
+<form [formGroup]="formulario" (submit)="new(formulario.value)">
+    
+  <!-- 
+    directivas que vienen dentro del módulo reactivo
+    formGroup]="objetoFormulario"
+    formControlName="nombreDelControl"
+  -->
+  <div class="form-group">
+    <label for="nombre">Nombre</label>
+    <input type="text" formControlName="nombre" class="form-control"  placeholder="Minimo 3 letras">
+    <p *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched"  
+    class="text-danger">*recuerda que minimo 3 letras</p>
+  </div>  
+  <div class="form-group">
+      <label for="precio">Precio</label>
+      <input type="text" formControlName="precio" class="form-control"  placeholder="Minimo 0,99 max 99">
+    </div> 
+    <button type="submit"
+        [disabled]="formulario.invalid">Save</button>
+</form>
+
+
+
+
+<!-- Button trigger modal 
 <button (click)="modal()" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#formularioCrear">
     Nueva Fruta
-  </button>
+  </button>-->
 
-
-
-  <!-- Modal -->
+<!-- Modal -->
   <div class="modal fade" id="formularioCrear" tabindex="-1" role="dialog" aria-labelledby="formularioCrearLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -38,6 +68,9 @@
       </div>
     </div>
   </div>
+
+
+
 
 <div class="row">
 

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -65,7 +65,8 @@ import { TodosComponent } from './components/todos/todos.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule, //para usarlo con los serivie
-    FormsModule //para usarlo doble binding
+    FormsModule, //para usarlo doble binding
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

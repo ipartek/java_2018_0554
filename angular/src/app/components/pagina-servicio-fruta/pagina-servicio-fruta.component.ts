@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FrutaService } from 'src/app/providers/fruta.service';
 import { Fruta } from 'src/app/model/fruta';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-pagina-servicio-fruta',
@@ -16,8 +17,9 @@ export class PaginaServicioFrutaComponent implements OnInit {
   mensaje :string;
   check:boolean[];
   checkSeleccionado:number;
+  formulario: FormGroup // agrupaion de FromControl = Input
 
-  constructor(private frutaService: FrutaService) {
+  constructor(private frutaService: FrutaService, private fromBuilder: FormBuilder) {
     console.trace('constructor PaginaServicioFrutaComponent ');
     this.frutas = [];
     this.nuevaFruta = 'base fruta';
@@ -25,6 +27,23 @@ export class PaginaServicioFrutaComponent implements OnInit {
     this.nuevaFrutaNombre2 = 'Fruta';
     this.mensaje ="";
     this.check =[];
+
+    //inicializamos el formulario
+    this.formulario = this.fromBuilder.group({
+      //input del nombre FormControl
+      nombre:[
+          'Fruta',       //value
+          // Validaciones
+          [Validators.required, Validators.maxLength(150), Validators.minLength(3)]     
+      ] , 
+      // end nombre FormControl
+      precio: [
+        0.99,       //value
+        // Validaciones
+        [Validators.required, Validators.min(0.99), Validators.max(99)]     
+    ]
+    });
+
   }
 
   ngOnInit() {
@@ -47,9 +66,10 @@ export class PaginaServicioFrutaComponent implements OnInit {
 
 
   new() {
-    console.log('PaginaServicioFrutaComponent new ');
-    const fruta = this.nombreFrutaNueva;
-    this.frutaService.post(new Fruta(fruta)).subscribe(
+    console.log('PaginaServicioFrutaComponent new %o', this.formulario.value);
+    
+    let fruta = new Fruta(this.formulario.value.nombre, this.formulario.value.precio)
+    this.frutaService.post(fruta).subscribe(
       result => {
         console.log('PaginaServicioFrutaComponent new %o', result);
         this.cargarLista();
