@@ -1,1 +1,43 @@
 <h1>Servicio Rest para Frutas</h1>
+
+<!-- TODO crear un componente para reutilizar -->
+<div *ngIf="mensaje != ''" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <p>{{mensaje}}</p>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<input type="text"  [(ngModel)]="frutaNueva.nombre" 
+       class="form-control" 
+       placeholder="Nombre Fruta minimo 3 letras">
+<button (click)="nueva()" 
+        class="btn btn-primary" 
+        disabled="{{(frutaNueva.nombre.length<3)?'disabled':''}}">Crear Nueva</button>
+
+
+
+<table class="table table-bordered">
+    <thead class="bg-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Foto</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Operaciones</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="frutas.length==0">
+        <td colspan="3">Cargando datos...</td>
+      </tr>  
+      <tr *ngFor="let f of frutas">
+        <th scope="row">{{f.id}}</th>
+        <td><img src="{{f.imagen}}" alt="imagen de la fruta {{f.nombre}}"></td>
+        <td>{{f.nombre}}</td>        
+        <td>
+            <i class="fas fa-edit mr-4"></i>
+            <i class="fas fa-trash-alt" (click)="eliminar(f)"></i>            
+        </td>
+      </tr>      
+    </tbody>
+  </table>

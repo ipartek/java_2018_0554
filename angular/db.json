@@ -56,7 +56,7 @@
     },
     {
       "id": 2,
-      "nombre": "pomelo",
+      "nombre": "pomelo duro",
       "oferta": false,
       "precio": 7.43,
       "descuento": 7,
@@ -109,22 +109,20 @@
       ]
     },
     {
-      "id": 5,
-      "nombre": "tamarindo",
-      "oferta": true,
-      "precio": 13.7,
-      "descuento": 3,
-      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTuiEhT2_yFMqcz3TlSGzmwVqrOXJnO1gdlEd5ErYl4ynfte4J",
-      "colores": [
-        {
-          "nombre": "negro",
-          "codigo": "#000"
-        },
-        {
-          "nombre": "verde",
-          "codigo": "#0F0"
-        }
-      ]
+      "nombre": "Orain bai TUTI FRUTIIIIII",
+      "oferta": false,
+      "precio": 0,
+      "descuento": 0,
+      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
+      "id": 5
+    },
+    {
+      "nombre": "dssdsdsdsad",
+      "oferta": false,
+      "precio": 0,
+      "descuento": 0,
+      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
+      "id": 6
     }
   ]
 }

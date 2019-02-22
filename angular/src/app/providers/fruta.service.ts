@@ -25,5 +25,28 @@ export class FrutaService {
     return this.httpClient.get( url );
   };
 
+  public delete(id: number):Observable<any>{
+    let url = this.endpoint + id;
+    console.trace('delete ' + url);
+    return this.httpClient.delete( url );
+  }  
+
+  public crear(fruta: Fruta):Observable<any>{
+    let url = this.endpoint;
+    console.trace('crear ' + url);
+
+    let body = {
+      // "id": 2,  descomentar para que lance error 500
+      "nombre": fruta.nombre,
+      "oferta": fruta.oferta,
+      "precio": fruta.precio,
+      "descuento": fruta.descuento,
+      "imagen": fruta.imagen
+      //TODO colores
+    };
+
+    return this.httpClient.post(url, body);
+  } 
+
 
 }

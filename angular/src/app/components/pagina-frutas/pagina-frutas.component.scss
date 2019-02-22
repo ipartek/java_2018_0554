@@ -1,0 +1,10 @@
+img{
+    width: 75px;
+    height: 75px;
+}
+
+.fas:hover::before{
+   color: orange; 
+   font-size: 1.6em;
+   transition-duration: 0.3s;  
+}
