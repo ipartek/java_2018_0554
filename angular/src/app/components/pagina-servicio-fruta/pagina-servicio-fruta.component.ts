@@ -14,7 +14,8 @@ export class PaginaServicioFrutaComponent implements OnInit {
   nombreFrutaNueva: string;
   nuevaFrutaNombre2: string;
   mensaje :string;
-  check:string;
+  check:boolean[];
+  checkSeleccionado:number;
 
   constructor(private frutaService: FrutaService) {
     console.trace('constructor PaginaServicioFrutaComponent ');
@@ -23,7 +24,7 @@ export class PaginaServicioFrutaComponent implements OnInit {
     this.nombreFrutaNueva = 'fruitopia';
     this.nuevaFrutaNombre2 = 'Fruta';
     this.mensaje ="";
-    this.check ="";
+    this.check =[];
   }
 
   ngOnInit() {
@@ -80,6 +81,7 @@ export class PaginaServicioFrutaComponent implements OnInit {
       this.frutaService.patch(fruta).subscribe(
           result => {
             console.log('Fruta modificada con exito %o', result);
+            this.checkSeleccionado = -1;
             this.cargarLista();
           },
           error => {
@@ -88,10 +90,13 @@ export class PaginaServicioFrutaComponent implements OnInit {
       );
         }
 
-    selecionado(frutas:any){
-      if(this.check =="checked"){
-        this.check ="";
-      }else{ this.check ="checked";}
+    selecionado(frutas:any, i:any){
+      if(i==this.checkSeleccionado){
+        this.checkSeleccionado = -1;
+      }else{
+        this.checkSeleccionado = i;
+      }
+      
      
     }
 
