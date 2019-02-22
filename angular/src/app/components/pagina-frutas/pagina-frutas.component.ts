@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Fruta } from 'src/app/model/fruta';
 import { FrutaService } from 'src/app/providers/fruta.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-pagina-frutas',
@@ -12,12 +13,29 @@ export class PaginaFrutasComponent implements OnInit {
   frutas: Fruta[];
   frutaNueva: Fruta;
   mensaje: string;
+  formulario: FormGroup;  // Agrupacion de FormControls == Input
 
-  constructor( private frutaService: FrutaService) { 
+  constructor( private frutaService: FrutaService, private formBuilder: FormBuilder ) { 
     console.trace('PaginaFrutasComponent constructor');
     this.frutas = [];
     this.frutaNueva = new Fruta('',0);
     this.mensaje = '';
+
+    // inicializamos el formulario
+    this.formulario = this.formBuilder.group({
+
+        // FormControl nombre
+        nombre: [
+                  '',                                                                         // value
+                  [Validators.required, Validators.minLength(3), Validators.maxLength(150)]   // Validaciones
+                ],
+        // end FormControl nombre       
+
+        precio: [
+                  0.99,
+                  [Validators.required, Validators.min(0.99), Validators.max(9999)]
+                ]  
+    });
   }
 
   ngOnInit() {
@@ -59,8 +77,15 @@ export class PaginaFrutasComponent implements OnInit {
   }// eliminar
 
   nueva(){
-    console.trace('click crear nueva fruta %o', this.frutaNueva);
-    this.frutaService.crear(this.frutaNueva).subscribe(
+    console.trace('submit formulario %o', 
+              this.formulario.value);
+    // mappear de formulario a Fruta
+    let fruta = new Fruta(
+                            this.formulario.value.nombre,
+                            this.formulario.value.precio
+                          );
+    // llamar servicio                      
+    this.frutaService.crear(fruta).subscribe(
       data=>{
         console.debug('datos en json %o', data);
         this.cargarFrutas();
@@ -69,8 +94,9 @@ export class PaginaFrutasComponent implements OnInit {
         console.error(error);
         this.mensaje = `No se ha podido CREAR`;
       }
-    );   
-  }
+    );
+       
+  }// nueva
 
 
 }

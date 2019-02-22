@@ -117,12 +117,17 @@
       "id": 5
     },
     {
-      "nombre": "dssdsdsdsad",
+      "nombre": "mARACUYA",
+      "precio": 0.99,
+      "id": 6
+    },
+    {
+      "nombre": "Maracuya con FOTO OK",
       "oferta": false,
-      "precio": 0,
+      "precio": 12,
       "descuento": 0,
       "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
-      "id": 6
+      "id": 7
     }
   ]
 }

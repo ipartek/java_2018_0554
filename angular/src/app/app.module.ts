@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -64,7 +64,8 @@ import { PaginaTodosComponent } from './components/pagina-todos/pagina-todos.com
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,  // para usarlo con los Services
-    FormsModule   // para poder usar doble binding
+    FormsModule,   // para poder usar doble binding
+    ReactiveFormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

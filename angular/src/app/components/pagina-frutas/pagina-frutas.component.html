@@ -8,13 +8,34 @@
     </button>
 </div>
 
+<!--  Para Formularios muy simples usar BanaInaBox
 <input type="text"  [(ngModel)]="frutaNueva.nombre" 
        class="form-control" 
        placeholder="Nombre Fruta minimo 3 letras">
 <button (click)="nueva()" 
         class="btn btn-primary" 
         disabled="{{(frutaNueva.nombre.length<3)?'disabled':''}}">Crear Nueva</button>
+-->
+<div style="border:1px solid red; padding:10px;">
+  <p>Valores: {{ formulario.value | json }}</p>
+  <p>Estado:  {{ formulario.status | json }}</p> 
+</div>
 
+<form [formGroup]="formulario" (submit)="nueva()"  >
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" formControlName="nombre" class="form-control" placeholder="Mínimo 3 letras">      
+      <p *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched"  
+      class="text-danger">*recuerda que minimo 3 letras</p>
+    </div>   
+    <div class="form-group">
+        <label for="nombre">Precio</label>
+        <input type="number" formControlName="precio" class="form-control">      
+      </div>   
+      <button type="submit"
+              class="btn btn-block btn-primary"
+              [disabled]="formulario.invalid">Crear</button>
+</form>
 
 
 <table class="table table-bordered">
@@ -23,6 +44,9 @@
         <th scope="col">#</th>
         <th scope="col">Foto</th>
         <th scope="col">Nombre</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Oferta</th>
+        <th scope="col">Descuento</th>
         <th scope="col">Operaciones</th>
     </tr>
     </thead>
@@ -34,6 +58,9 @@
         <th scope="row">{{f.id}}</th>
         <td><img src="{{f.imagen}}" alt="imagen de la fruta {{f.nombre}}"></td>
         <td>{{f.nombre}}</td>        
+        <td>{{f.precio}}</td>    
+        <td>{{f.oferta}}</td>   
+        <td>{{f.descuento}}</td>    
         <td>
             <i class="fas fa-edit mr-4"></i>
             <i class="fas fa-trash-alt" (click)="eliminar(f)"></i>            
