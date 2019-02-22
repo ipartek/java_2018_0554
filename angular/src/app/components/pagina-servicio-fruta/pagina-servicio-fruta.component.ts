@@ -13,6 +13,8 @@ export class PaginaServicioFrutaComponent implements OnInit {
   nuevaFruta: string;
   nombreFrutaNueva: string;
   nuevaFrutaNombre2: string;
+  mensaje :string;
+  check:string;
 
   constructor(private frutaService: FrutaService) {
     console.trace('constructor PaginaServicioFrutaComponent ');
@@ -20,6 +22,8 @@ export class PaginaServicioFrutaComponent implements OnInit {
     this.nuevaFruta = 'base fruta';
     this.nombreFrutaNueva = 'fruitopia';
     this.nuevaFrutaNombre2 = 'Fruta';
+    this.mensaje ="";
+    this.check ="";
   }
 
   ngOnInit() {
@@ -27,12 +31,16 @@ export class PaginaServicioFrutaComponent implements OnInit {
     this.cargarLista();
   }
 
-  cargarLista() {
-    this.frutaService.getAll().subscribe( json => {
+  cargarLista() {//get all devuelve un observable llamando a la url
+    this.frutaService.getAll().subscribe( 
+      json => {
       console.debug('recibimos datos json: %o', json);
       this.frutas = json.map( f => {
         return new Fruta( f.nombre, f.precio, f.id, f.oferta, f.descuento, f.imagen, 1);
       });
+    },error =>{//se captura el error
+      console.error(error);
+      this.mensaje = 'Sin conexión';
     });
   }
 
@@ -46,7 +54,7 @@ export class PaginaServicioFrutaComponent implements OnInit {
         this.cargarLista();
       },
       error => {
-        alert('No de pudo Crear Fruta');
+        this.mensaje = 'No de pudo Crear Fruta';
         console.error(error);
       }
     );
@@ -62,7 +70,7 @@ export class PaginaServicioFrutaComponent implements OnInit {
         this.cargarLista();
       },
       error => {
-        alert('No se pudo elimiar Fruta');
+        this.mensaje = 'No se pudo elimiar Fruta';
       }
     );
     }
@@ -75,9 +83,17 @@ export class PaginaServicioFrutaComponent implements OnInit {
             this.cargarLista();
           },
           error => {
-            alert('No de pudo Modificar la Tarea');
+            this.mensaje = 'No de pudo Modificar la Fruta';
           }
       );
         }
+
+    selecionado(frutas:any){
+      if(this.check =="checked"){
+        this.check ="";
+      }else{ this.check ="checked";}
+     
+    }
+
 
 }

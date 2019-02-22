@@ -1,6 +1,12 @@
 
 <h2 class="bg-primary text-white p-2 mt-4 text-center text-uppercase">CRUD FRUTAS</h2>
-
+<!-- TODO crearlo en componente -->
+<div *ngIf="mensaje != ''" class="alert alert-info alert-dismissible fade show" role="alert">
+<strong>{{mensaje}}</strong> 
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <!-- Button trigger modal -->
 <button (click)="modal()" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#formularioCrear">
     Nueva Fruta
@@ -38,7 +44,7 @@
   <table id="example" class="table col-12 " >
     <thead>
         <tr>
-            <th> <input type="checkbox" ></th>
+            <th> <input type="checkbox" [checked]="check" (click)="selecionado(frutas)"></th>
             <th>id</th>
             <th>nombre</th>
             <th>precio</th>
@@ -52,10 +58,11 @@
     </thead>
     <tbody>
         <tr  *ngFor="let fruta of frutas">
-            <th> <input type="checkbox"  ></th>
+            <th> <input type="checkbox" id="select"  ></th>
             <td>{{fruta.id}}</td>
-            <td>{{fruta.nombre}}
-                <input type="text" class="form-control" id="nombre" [(ngModel)]="fruta.nombre" placeholder="nombre fruta ">
+            <td >
+              <span *ngIf="(!check)">{{fruta.nombre}}</span>
+                <input type="text" *ngIf="(check)" class="form-control"  id="nombre" [(ngModel)]="fruta.nombre" placeholder="nombre fruta ">
 
             </td>
             <td>{{fruta.precio}}</td>
