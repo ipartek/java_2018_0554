@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Persona } from 'src/app/model/persona';
-import { HttpClient } from '@angular/common/http';
 import { Fruta } from 'src/app/model/fruta';
 
 @Component({
@@ -21,7 +20,8 @@ export class HomeComponent implements OnInit {
   frutaConstructorDescuento: Fruta;
   frutaConstructorCompleto: Fruta;
 
-  constructor() {
+  constructor( ) {
+
 
     this.frutaConstructor = new Fruta('fresa', 3.45 );
     new Fruta('fresa', 3.45, 6 );
@@ -32,12 +32,13 @@ export class HomeComponent implements OnInit {
     console.debug('frutaConstructorDescuento: %o', this.frutaConstructorDescuento);
     console.debug('frutaConstructorCompleto: %o', this.frutaConstructorCompleto);
 
+
     this.idiomas = ['eu','es','en'];
     this.idiomaSeleccionado = this.idiomas[0]; //eu
     this.textoTraducir = '';
 
-    this.manolo = new Persona('Manolo');
-    this.sinNombre = new Persona();
+    this.manolo = new Persona('Manolo','','','');
+    this.sinNombre = new Persona('','','','');
  
 
     console.debug("manolo sin inicializar %o", this.manolo);
@@ -51,6 +52,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
 

@@ -1,4 +1,4 @@
-const IMAGEN_DEFAULT = 'https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg';
+const IMAGEN_DEFAULT = 'https://media.istockphoto.com/vectors/question-mark-food-black-and-white-icon-background-vector-id972328534';
 
 export class Fruta {
 
@@ -9,7 +9,8 @@ export class Fruta {
     private _oferta: boolean;  
     private _descuento: number;    
     private _imagen: string;  
-    private _cantidad: number; 
+    private _cantidad: number;   
+    private _completed: boolean; 
   
 
     // constructor solo puede haber uno, no existe sobrecarga como en Java
@@ -24,6 +25,7 @@ export class Fruta {
      * @param descuento? 0
      * @param imagen? const IMAGEN_DEFAULT
      * @param cantidad = 1
+     * @param completed valor por defecto false
      */
     constructor( 
                 nombre: string, 
@@ -32,7 +34,8 @@ export class Fruta {
                 oferta = false, 
                 descuento?: number, 
                 imagen?: string,
-                cantidad = 1
+                cantidad = 1, 
+                completed = false
     ){
         this._nombre = nombre;
         this._precio = precio;
@@ -41,6 +44,7 @@ export class Fruta {
         this._descuento = (descuento) ? descuento : 0;
         this._imagen = (imagen) ? imagen : IMAGEN_DEFAULT;
         this._cantidad = cantidad;
+        this._completed = completed;
     }
 
     // getters y setters
@@ -91,6 +95,13 @@ export class Fruta {
     }
     public set cantidad(value: number) {
         this._cantidad = value;
+    }
+
+    public get completed(): boolean {
+        return this._completed;
+    }
+    public set completed(value: boolean) {
+        this._completed = value;
     }
 
     // TODO

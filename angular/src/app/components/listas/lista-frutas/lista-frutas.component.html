@@ -1,0 +1,64 @@
+<div id="frutas">
+
+  <section>
+    <h2>Lista Frutas</h2>
+
+    <div *ngIf="mensaje != ''" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <p>{{mensaje}}</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <!-- Para formularios muy simples usar bananainabox
+    <div class="formulario">
+      <input (click)="borrar()" type="text" [(ngModel)]="nuevaFrutaNombre" placeholder="Fruta">
+      <input (click)="borrar()" type="text" [(ngModel)]="nuevaFrutaImg" placeholder="Url de la imagen">
+      <input (click)="borrar()" type="number" [(ngModel)]="nuevaFrutaPrecio" placeholder="Precio">
+      <span (click)="new()" class="btn btn-outline-success"><i class="fas fa-plus"></i></span>
+    </div>-->
+    <div>
+      <p>Valores: {{formulario.value | json }}</p>
+      <p>Estado: {{formulario.status | json }}</p>
+    </div>
+    <form [formGroup]="formulario" (submit)="new()">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input formControlName="nombre" type="text" class="form-control" placeholder="mínimo 3 letras">
+        <small  *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched" id="emailHelp" class="form-text">* Recuerda que minimo 3 letras</small>
+      </div>
+      <div class="form-group">
+        <label for="imagen">Imagen</label>
+        <input formControlName="imagen" type="text" class="form-control" placeholder="inserta la URL de la imagen">
+      </div>
+      <div class="form-group">
+        <label for="precio">Precio</label>
+        <input formControlName="precio" type="number" class="form-control" placeholder="precio">
+      </div>
+      <button type="submit" [disabled]="formulario.invalid" class="btn btn-primary">Crear</button>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Imagen</th>
+          <th>Fruta</th>
+          <th>Precio</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fruta of frutas">
+          <td><img src="{{fruta.imagen}}" alt="{{fruta.nombre}}"></td>
+          <td><span class="nombre {{(fruta.completed)?'terminada':''}}" >{{fruta.nombre}}</span></td>
+          <td><span  [class]="(fruta.completed)?'terminada':''" >{{fruta.precio}}</span></td>
+          <td>
+            <span (click)="change(fruta)" class="btn btn-outline-warning mr-3"><i class="far fa-edit"></i></span>
+            <span (click)="delete(fruta)" class="btn btn-outline-danger"><i class="far fa-trash-alt"></i></span>
+          </td>                      
+        </tr>
+      </tbody>
+    </table>
+  </section>  
+
+</div>

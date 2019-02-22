@@ -1,15 +1,1 @@
-<div class="card" style="width: 18rem;">
-  <img src="{{frutas.imagen}}" class="card-img-top" alt="{{frutas.nombre}}">
-  <div class="card-body">
-    <h5 class="card-title">{{frutas.nombre | uppercase }}</h5>      
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{frutas.precio | moneda }}  TODO {{frutas.precio-frutasComparar.precio}}</li>      
-  </ul>    
-  <ul class="list-group list-group-flush">
-      <li *ngFor="let c of frutas.colores"class="list-group-item">{{ c.nombre}}</li>      
-    </ul>
-  <div class="card-body">
-    <button class="btn btn-primary" (click)="emitirEvento()">Añadir al Carrito</button>     
-  </div>
-</div>
+<p>frutas</p>

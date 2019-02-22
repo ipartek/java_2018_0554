@@ -23,17 +23,28 @@
   <li class="nav-item">
     <a class="nav-link" routerLinkActive="active" [routerLink]="['about']">About</a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" routerLinkActive="active" [routerLink]="['pagina-array']">Frutas</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" routerLinkActive="active" [routerLink]="['pagina-comparador']">Comparador</a>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Frutas</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item"  routerLinkActive="active" [routerLink]="['pagina-array']">Listado frutas</a>
+      <a class="dropdown-item"  routerLinkActive="active" [routerLink]="['pagina-comparador']">Comparador</a>
+    </div>
   </li>
   <li class="nav-item">
     <a class="nav-link" routerLinkActive="active" [routerLink]="['pagina-servicio']">Service</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" routerLinkActive="active" [routerLink]="['pagina-concesionario']">Concesionario</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLinkActive="active" [routerLink]="['pagina-personas']">Personas</a>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Listas</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item"  routerLinkActive="active" [routerLink]="['pagina-todos']">Todos</a>
+      <a class="dropdown-item"  routerLinkActive="active" [routerLink]="['lista-frutas']">Frutas</a>
+    </div>
   </li>
 </ul>
 

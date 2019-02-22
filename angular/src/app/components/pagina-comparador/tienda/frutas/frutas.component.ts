@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-frutas',
@@ -7,18 +7,10 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 })
 export class FrutasComponent implements OnInit {
 
-  @Input('frutas') frutas: any;
-  @Input('frutasComparar') frutasComparar: any;
-  @Output('frutaSeleccionada') eventFrutaSeleccionada = new EventEmitter();
-
   constructor() { 
   }
 
   ngOnInit() {
-  }
-
-  emitirEvento(){
-    this.eventFrutaSeleccionada.emit(this.frutas);
   }
 
 }

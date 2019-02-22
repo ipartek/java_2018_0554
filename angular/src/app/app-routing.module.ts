@@ -14,6 +14,9 @@ import { PaginaComparadorComponent } from './components/pagina-comparador/pagina
 import { PaginaConcesionarioComponent } from './components/pagina-concesionario/pagina-concesionario.component';
 import { PaginaServiceComponent } from './components/pagina-comparador/pagina-service/pagina-service.component';
 import { TiendaComponent } from './components/pagina-comparador/tienda/tienda.component';
+import { PaginaPersonasComponent } from './components/pagina-personas/pagina-personas.component';
+import { PaginaTodosComponent } from './components/listas/pagina-todos/pagina-todos.component';
+import { ListaFrutasComponent } from './components/listas/lista-frutas/lista-frutas.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -30,6 +33,9 @@ const routes: Routes = [
   { path: 'pagina-concesionario', component: PaginaConcesionarioComponent },
   { path: 'pagina-service', component: PaginaServiceComponent },
   { path: 'tienda', component: TiendaComponent },
+  { path: 'pagina-personas', component: PaginaPersonasComponent },
+  { path: 'pagina-todos', component: PaginaTodosComponent },
+  { path: 'lista-frutas', component: ListaFrutasComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'error404' }
 ];
 

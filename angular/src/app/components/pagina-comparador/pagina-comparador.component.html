@@ -1,6 +1,38 @@
-<a [routerLink]="['../tienda']" class="btn btn-primary">Tienda</a>
 
 <div class="row">
+
+  <div class="col">
+      <ul class="list-group">
+        <li *ngFor="let f of frutas;let i = index" 
+            (click)="cambiarFruta(i)"
+            class="list-group-item {{(f.nombre===frutaSelec1.nombre||f.nombre===frutaSelec2.nombre)?'active':''}}">{{f.nombre | uppercase}}</li>         
+      </ul>
+  </div>
+  <div class="col">
+      <app-fruta (frutaSeleccionada)="addCarrito($event)" [fruta]="frutaSelec1" [frutaComparar]="frutaSelec2"></app-fruta>
+  </div>
+  <div class="col">
+      <app-fruta (frutaSeleccionada)="addCarrito($event)" [fruta]="frutaSelec2" [frutaComparar]="frutaSelec1" ></app-fruta>
+  </div>
+  <div class="col">
+        <h4>Carrito Compra</h4>
+        <p *ngIf="carrito.length==0">No existe ningun producto todavia</p>
+        <ul class="list-group">
+                <li *ngFor="let c of carrito"                                         
+                    class="list-group-item">
+                        {{ c.nombre | uppercase}}
+                        <span (click)="eliminarCarro(c)">Eliminar</span>
+                </li>         
+        </ul>
+        <p>TOTAL <b>{{totalCarro | number : '1.0-2' | moneda}}</b></p>
+        <p>Descuentos <b>{{totalDescuento | number : '1.0-2' | moneda}}</b></p>
+  </div>   
+</div>
+
+<!--
+<a [routerLink]="['../tienda']" class="btn btn-primary" style="display: none;">Tienda</a>
+
+<div class="row" style="display: none;">
   <div class="col-4">
     <ul class="list-group">
       <li *ngFor="let f of frutas;let i = index" 
@@ -20,3 +52,4 @@
     </div>
   </div>
 </div>
+-->

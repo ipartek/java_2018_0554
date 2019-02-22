@@ -8,14 +8,17 @@ import { Component, OnInit } from '@angular/core';
 export class PaginaComparadorComponent implements OnInit {
 
   frutas: any[];
+  carrito: any[];
   frutaSelec1: any;
   frutaSelec2: any;
-  frutaSelec3: any;
 
+  totalCarro: number;
   totalDescuento: number;
 
   constructor() {
 
+    this.carrito = [];
+    this.totalCarro = 0;
     this.totalDescuento = 0;
 
     this.frutas =
@@ -37,7 +40,7 @@ export class PaginaComparadorComponent implements OnInit {
         "imagen": "https://www.comenaranjas.com/images/stories/virtuemart/product/pomelo-star-ruby.jpg",
         "colores":  [
           {"nombre": "rojo", "codigo":"red"},
-          {"nombre": "naranja", "codigo":"orange"},
+          {"nombre": "naranja", "codigo":"orange"}
         ]
       },
       {
@@ -59,7 +62,7 @@ export class PaginaComparadorComponent implements OnInit {
         "colores": [
           {"nombre": "verde", "codigo":"green"},
           {"nombre": "rojo", "codigo":"red"},
-          {"nombre": "amarillo", "codigo":"yellow"},
+          {"nombre": "amarillo", "codigo":"yellow"}
         ]
       },
       {
@@ -70,14 +73,15 @@ export class PaginaComparadorComponent implements OnInit {
         "imagen": "https://e.rpp-noticias.io/normal/2016/03/30/042804_108586.jpg",
         "colores": [
           {"nombre": "verde", "codigo":"green"},
-          {"nombre": "negro", "codigo":"black"},
+          {"nombre": "negro", "codigo":"black"}
         ]
       }
     ];
+
     this.frutaSelec1 = this.frutas[0];
     this.frutaSelec2 = this.frutas[1];
-    this.frutaSelec3 = this.frutas[2];
 
+    //this.carrito.push( this.frutas[0]);
    }
 
   ngOnInit() {
@@ -85,9 +89,25 @@ export class PaginaComparadorComponent implements OnInit {
 
   cambiarFruta(i:number){
     console.log('click cambiarFruta %o', i);
-    this.frutaSelec3 = this.frutaSelec2;
     this.frutaSelec2 = this.frutaSelec1;
     this.frutaSelec1 = this.frutas[i];
+  }
+
+
+  addCarrito(event){
+
+    this.carrito.push(event);
+
+    //calcular totales
+    this.totalCarro = this.carrito.map( f=> f.precio ).reduce( (p,c)=>{ return p+c }, 0);
+  }
+
+  eliminarCarro( frutaCarro: any ): void{
+    console.trace('click eliminar %o', frutaCarro );
+    this.carrito = this.carrito.filter( f=> {return f.nombre !== frutaCarro.nombre});
+
+     //calcular totales
+    this.totalCarro = this.carrito.map( f=> f.precio ).reduce( (p,c)=>{ return p+c }, 0);
   }
 
 }

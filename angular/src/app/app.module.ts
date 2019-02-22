@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,6 +25,10 @@ import { TraductorComponent } from './components/traductor/traductor.component';
 import { PaginaServiceComponent } from './components/pagina-comparador/pagina-service/pagina-service.component';
 import { TiendaComponent } from './components/pagina-comparador/tienda/tienda.component';
 import { FrutasComponent } from './components/pagina-comparador/tienda/frutas/frutas.component';
+import { PaginaFrutasComponent } from './components/pagina-comparador/pagina-frutas/pagina-frutas.component';
+import { PaginaPersonasComponent } from './components/pagina-personas/pagina-personas.component';
+import { PaginaTodosComponent } from './components/listas/pagina-todos/pagina-todos.component';
+import { ListaFrutasComponent } from './components/listas/lista-frutas/lista-frutas.component';
 
 //Directives
 import { Directiva1Directive } from './directives/directiva1.directive';
@@ -60,13 +64,18 @@ import { TrimarPipe } from './pipes/trimar.pipe';
     TraductorComponent,
     PaginaServiceComponent,
     TiendaComponent,
-    FrutasComponent
+    FrutasComponent,
+    PaginaFrutasComponent,
+    PaginaPersonasComponent,
+    PaginaTodosComponent,
+    ListaFrutasComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
