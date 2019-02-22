@@ -61,6 +61,14 @@
       "precio": 12,
       "descuento": 0,
       "imagen": "http://frutas.consumer.es/sites/default/files/compra_0.jpg"
+    },
+    {
+      "id": -1,
+      "nombre": "Mandarina",
+      "oferta": true,
+      "precio": 2.3,
+      "descuento": 12,
+      "imagen": "http://frutas.consumer.es/sites/default/files/compra_0.jpg"
     }
   ],
   "todos": [

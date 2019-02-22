@@ -11,7 +11,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class PaginaServiceFrutasComponent implements OnInit {
   frutas: Fruta[];
-  nuevaFruta: string;
   frutaSeleccionada: Fruta;
   mensajeMostrar: Mensaje;
   formulario: FormGroup; //agrupacion de FormControls ==Input
@@ -19,7 +18,7 @@ export class PaginaServiceFrutasComponent implements OnInit {
   constructor(private frutaService: FrutaService, private formBuilder: FormBuilder) {
     console.trace('PaginaServiceFrutasComponent constructor');
     this.frutas = [];
-    this.nuevaFruta = "";
+   
     this.mensajeMostrar = new Mensaje('', '');
 
     // inicializamos el formulario
@@ -37,15 +36,15 @@ export class PaginaServiceFrutasComponent implements OnInit {
       ],
       id: [
         0,
-        [Validators.required, Validators.min(1),]
+        [Validators.required]
       ],
       oferta: [
         false,
-        [ Validators.required]
+        [Validators.required]
       ],
       descuento: [
         0,
-        [Validators.required, Validators.min(0),Validators.max(100)]
+        [Validators.required, Validators.min(0), Validators.max(100)]
       ]
     });
 
@@ -99,15 +98,27 @@ export class PaginaServiceFrutasComponent implements OnInit {
     this.frutaService.post(frutaNueva).subscribe(r => {
       this.getAllFrutas();
       this.mensajeMostrar = new Mensaje(`CREADO ${frutaNueva.nombre}`, 'alert-success');
-      this.nuevaFruta = "";
+     
     },
       error => {
         console.log("Se ha cometido un error al crear la fruta nueva %o", error);
-        this.mensajeMostrar = new Mensaje(`No se ha podido CREAR ${frutaNueva.nombre}`, 'alert-warning');
-        this.nuevaFruta = "";
+        this.mensajeMostrar = new Mensaje(`No se ha podido CREAR ${frutaNueva.nombre}`, Mensaje.WARNING);
+       
       });
   }
-  update(){
+  update() {
+    console.trace('Modificar fruta update %o', this.formulario.value);
+
+    let frutaModificar = this.rowMapper(this.formulario.value);
+    this.frutaService.patch(frutaModificar).subscribe(r => {
+      this.getAllFrutas();
+      this.mensajeMostrar = new Mensaje(`MODIFICAR ${frutaModificar.nombre}`,Mensaje.SUCCESS);
+    },
+      error => {
+        console.log("Se ha cometido un error al crear la fruta nueva %o", error);
+        this.mensajeMostrar = new Mensaje(`No se ha podido MODIFICAR ${frutaModificar.nombre}`, 'alert-warning');
+        
+      })
 
   }
 
@@ -115,7 +126,7 @@ export class PaginaServiceFrutasComponent implements OnInit {
    * Metodo que introduce los datos de la fruta seleccionada al formulario para editar dicha fruta
    * @param fruta  fruta que se ha seleccionado para modificar
    */
-  seleccionaFrutaEditar(fruta:Fruta){
+  seleccionaFrutaEditar(fruta: Fruta) {
     console.trace('click editar %o', fruta);
     this.formulario.controls['nombre'].setValue(fruta.nombre);
     this.formulario.controls['precio'].setValue(fruta.precio);
