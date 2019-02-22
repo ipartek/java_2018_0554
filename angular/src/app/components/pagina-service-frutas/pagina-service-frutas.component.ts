@@ -151,6 +151,14 @@ export class PaginaServiceFrutasComponent implements OnInit {
     )
   }
 
+  limpiarFormulario(){
+    console.trace('click limpiarFormulario ');
+    this.formulario.controls['nombre'].setValue("");
+    this.formulario.controls['precio'].setValue(0);
+    this.formulario.controls['id'].setValue(0);
+    this.formulario.controls['oferta'].setValue(false);
+    this.formulario.controls['descuento'].setValue(0);
+  }
   seleccionarFruta(f: Fruta) {
     this.frutaSeleccionada = f;
   }

@@ -63,6 +63,8 @@
   </div>
   <button *ngIf="formulario.value.id === 0"class="btn btn-primary btn-block" type="submit" [disabled]="formulario.invalid">Crear</button>
   <button *ngIf="formulario.value.id !== 0"class="btn btn-warning btn-block" type="submit" [disabled]="formulario.invalid">Editar</button>
+  <button *ngIf="formulario.value.id !== 0"class="btn btn-success btn-block"(click)="limpiarFormulario()">Limpiar formulario</button>
+  
 </form>
 
 <div class="border border-danger mt-2">
