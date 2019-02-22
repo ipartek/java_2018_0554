@@ -1,5 +1,69 @@
-<h1>Service de frutas CRUD </h1>
-<p>CRUD completo de Fruta</p>
+<h1>Service de frutas CRUD</h1>
+<!-- {{mensajeMostrar |json}} -->
+<app-mensaje [mensaje]="mensajeMostrar"></app-mensaje>
+
+
+<!--  Para formularios muy simples usar BananaInABox [()]
+  <div class="d-flex bd-highlight">
+  <label class="p-2 flex-fill  bd-highlight">
+    Introduce el nombre de la fruta nueva:
+  </label>
+  <input type="text" [(ngModel)]="nuevaFruta"class="mr-2 flex-fill  bd-highlight text-primary "  placeholder="Tiene que meter 4 letras ">
+  <button class="btn btn-success flex-fill  bd-highlight" (click)="insert()"
+  disabled="{{(nuevaFruta.length>3)?'':'disabled'}}">
+    Crear
+  </button>
+</div> -->
+
+<form [formGroup]="formulario" (submit)="insert()">
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label>Nombre </label>
+        <input type="text" formControlName="nombre" class="form-control"
+          placeholder="Nombre de la fruta mínimo tres letras">
+        <p *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched" class="text-danger">
+          *recuerda
+          que minimo 3 letras</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label>Precio </label>
+        <input type="number" formControlName="precio" class="form-control" placeholder="Precio de la fruta">
+        <p *ngIf="formulario.controls.precio.invalid && formulario.controls.precio.touched" class="text-danger">
+          *recuerda
+          tiene que ser un número superior a 0 e inferior de 100</p>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Id </label>
+    <input type="number" formControlName="id" class="form-control" placeholder="Id de la fruta">
+    <p *ngIf="formulario.controls.id.invalid && formulario.controls.id.touched" class="text-danger">*recuerda
+      tiene que ser un id superior a 1</p>
+  </div>
+  <div class="custom-control custom-checkbox form-group">
+    <input type="checkbox" formControlName="oferta" class="custom-control-input" id="oferta">
+    <label class="custom-control-label" for="oferta">Oferta, si está en oferta por un valor entre 1 y 100 en el
+      descuento</label>
+  </div>
+  <div class="form-group" *ngIf="formulario.value.oferta">
+    <label>Descuento % </label>
+    <input type="number" formControlName="descuento" class="form-control" placeholder="Precio de la fruta">
+    <p *ngIf="formulario.controls.descuento.invalid && formulario.controls.descuento.touched" class="text-danger">
+      *recuerda
+      tiene que ser un número superior a 0 e inferior de 100</p>
+  </div>
+  <button class="btn btn-primary btn-block" type="submit" [disabled]="formulario.invalid">Crear</button>
+</form>
+
+<div class="border border-danger mt-2">
+  <p>Valores: {{formulario.value |json}}</p>
+  <p>Estados: {{formulario.status |json}}</p>
+</div>
+
+
 <p *ngIf="frutas.length == 0">----- Cargando las frutas de la huerta -----</p>
 <div class="card info" *ngFor="let f of frutas">
   <div class="card-body">
@@ -9,11 +73,12 @@
       </div>
       <div class="ml-2">
         <h5 class="card-title nombre text-primary">{{f.nombre | titlecase }} {{f.precio |number :'1.0-2' |moneda}}</h5>
-        <p class="badge badge-primary"> {{f.descuento}} % </p>
-        <p> {{calcularDescuento(f)|number :'1.0-2' |moneda}}</p>
+        <p *ngIf="f.oferta" class="badge badge-primary"> {{f.descuento}} % </p>
+        <p *ngIf="f.oferta"> {{calcularDescuento(f)|number :'1.0-2' |moneda}}</p>
       </div>
       <div class=" col ml-2">
-        <button class="btn btn-danger"(click)="delete(f)">Eliminar</button>
+        <button class="btn btn-danger " (click)="delete(f)"><i class="fas fa-trash-alt"></i></button>
+        <button class="btn btn-warning " (click)="seleccionaFrutaEditar(f)"><i class="fas fa-edit"></i></button>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -24,7 +24,7 @@ import { PaginaServiceComponent } from './components/pagina-service/pagina-servi
 import { PaginaServicePersonaComponent } from './components/pagina-service-persona/pagina-service-persona.component';
 import { PaginaServiceFrutasComponent } from './components/pagina-service-frutas/pagina-service-frutas.component';
 import { PaginaServiceTodosComponent } from './components/pagina-service-todos/pagina-service-todos.component';
-
+import { MensajeComponent } from './components/mensaje/mensaje.component';
 //directivas
 import { PaginaDirectivaComponent } from './components/pagina-directiva/pagina-directiva.component';
 import { Directiva1Directive } from './directives/directiva1.directive';
@@ -34,6 +34,7 @@ import { MonedaPipe } from './pipes/moneda.pipe';
 import { TrimarPipe } from './pipes/trimar.pipe';
 import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 import { FiltroCochePipe } from './pipes/filtro-coche.pipe';
+
 
 
 
@@ -66,12 +67,14 @@ import { FiltroCochePipe } from './pipes/filtro-coche.pipe';
     PaginaServiceFrutasComponent,
     PaginaServiceTodosComponent,
     NavbarComponent,
+    MensajeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,// para poder usar doble binding o banana in a box
-    HttpClientModule //Para usarlo con los services OBLIGATORIO
+    HttpClientModule,//Para usarlo con los services OBLIGATORIO
+    ReactiveFormsModule //Para formularios reactivos
   ],
   providers: [],
   bootstrap: [AppComponent]
