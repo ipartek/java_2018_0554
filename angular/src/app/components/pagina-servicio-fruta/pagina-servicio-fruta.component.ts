@@ -53,6 +53,7 @@ export class PaginaServicioFrutaComponent implements OnInit {
       result => {
         console.log('PaginaServicioFrutaComponent new %o', result);
         this.cargarLista();
+        this.mensaje = 'Fruta creada' + this.nombreFrutaNueva;
       },
       error => {
         this.mensaje = 'No de pudo Crear Fruta';
@@ -65,15 +66,17 @@ export class PaginaServicioFrutaComponent implements OnInit {
 
   delete(fruta: Fruta) {
     console.log('PaginaServicioFrutaComponent delete %o', fruta );
-
+    if ( confirm('¿ Estas seguro que quieres eliminar ' + fruta.nombre) ){
     this.frutaService.delete(fruta.id).subscribe(
       result => {
         this.cargarLista();
+        this.mensaje = 'Eliminada' + fruta.nombre;
       },
       error => {
         this.mensaje = 'No se pudo elimiar Fruta';
       }
     );
+    }
     }
 
     change(fruta: Fruta) {
@@ -83,6 +86,7 @@ export class PaginaServicioFrutaComponent implements OnInit {
             console.log('Fruta modificada con exito %o', result);
             this.checkSeleccionado = -1;
             this.cargarLista();
+            this.mensaje = 'Fruta modificada correctamente' + fruta.nombre;
           },
           error => {
             this.mensaje = 'No de pudo Modificar la Fruta';
