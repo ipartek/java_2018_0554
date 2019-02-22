@@ -64,7 +64,7 @@ export class PaginaServicioFrutaComponent implements OnInit {
       });
     },error =>{//se captura el error
       console.error(error);
-      this.mensaje = 'Sin conexión';
+      this.mensaje = 'Sin conexión ';
     });
   }
 
@@ -77,10 +77,10 @@ export class PaginaServicioFrutaComponent implements OnInit {
       result => {
         console.log('PaginaServicioFrutaComponent new %o', result);
         this.cargarLista();
-        this.mensaje = 'Fruta creada' + this.formulario.value.nombre;
+        this.mensaje = 'Fruta creada ' + this.formulario.value.nombre;
       },
       error => {
-        this.mensaje = 'No de pudo Crear Fruta';
+        this.mensaje = 'No de pudo Crear Fruta ';
         console.error(error);
       }
     );
@@ -94,10 +94,10 @@ export class PaginaServicioFrutaComponent implements OnInit {
     this.frutaService.delete(fruta.id).subscribe(
       result => {
         this.cargarLista();
-        this.mensaje = 'Eliminada' + fruta.nombre;
+        this.mensaje = 'Eliminada ' + fruta.nombre;
       },
       error => {
-        this.mensaje = 'No se pudo elimiar Fruta';
+        this.mensaje = 'No se pudo elimiar Fruta ';
       }
     );
     }
@@ -110,13 +110,21 @@ export class PaginaServicioFrutaComponent implements OnInit {
             console.log('Fruta modificada con exito %o', result);
             this.checkSeleccionado = -1;
             this.cargarLista();
-            this.mensaje = 'Fruta modificada correctamente' + fruta.nombre;
+            this.mensaje = 'Fruta modificada correctamente ' + fruta.nombre;
           },
           error => {
             this.mensaje = 'No de pudo Modificar la Fruta';
           }
       );
         }
+
+    mandarEditar(fruta:Fruta){
+      this.formulario.controls['nombre'].setValue(fruta.nombre);
+      this.formulario.controls['precio'].setValue(fruta.precio);
+      this.formulario.controls['oferta'].setValue(fruta.oferta);
+      this.formulario.controls['descuento'].setValue(fruta.descuento);
+      this.formulario.controls['imagen'].setValue(fruta.imagen);
+    }
 
     selecionado(frutas:any, i:any){
       if(i==this.checkSeleccionado){

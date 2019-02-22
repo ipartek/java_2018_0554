@@ -9,19 +9,22 @@
   </button>
 </div>
 
+
+
 <div class="jumbotron">
 <p>Valores: {{formulario.value | json}}</p>
 <p>Estado global: {{formulario.status | json}}</p>
-
 </div>
 
+ 
+<div >
 <form [formGroup]="formulario" (submit)="new(formulario.value)" class="row">
     
-  <!-- 
+<!--
     directivas que vienen dentro del módulo reactivo
     formGroup]="objetoFormulario"
     formControlName="nombreDelControl"
-  -->
+-->
   <div class="form-group col-4">
     <label for="nombre">Nombre</label>
     <input type="text" formControlName="nombre" class="form-control"  placeholder="Minimo 3 letras">
@@ -52,10 +55,10 @@
 
     <button  class ="btn btn-primary btn-block" type="submit" [disabled]="formulario.invalid">Save</button>
 </form>
+</div>
 
-
-<!-- Button trigger modal 
-<button (click)="modal()" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#formularioCrear">
+<!-- Button trigger modal  
+<button (click)="modal()" type="button" class="btn btn-primary mt-2 mb-2" data-toggle="modal" data-target="#formularioCrear">
     Nueva Fruta
   </button>-->
 
@@ -70,15 +73,48 @@
           </button>
         </div>
         <div class="modal-body">
-                <div class="form-group">
-                  <label for="f-nombre" class="col-form-label">Nombre:</label>
-                  <input type="text" class="form-control" id="nombre" [(ngModel)]="nombreFrutaNueva" placeholder="nombre fruta ">
+            <form [formGroup]="formulario" (submit)="new(formulario.value)" class="row">
+    
+                <!-- 
+                  directivas que vienen dentro del módulo reactivo
+                  formGroup]="objetoFormulario"
+                  formControlName="nombreDelControl"
+                -->
+                <div class="form-group col-4">
+                  <label for="nombre">Nombre</label>
+                  <input type="text" formControlName="nombre" class="form-control"  placeholder="Minimo 3 letras">
+                  <p *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched"  
+                  class="text-danger">*recuerda que minimo 3 letras</p>
+                </div>  
+                <div class="form-group col-4">
+                    <label for="precio">Precio</label>
+                    <input type="text" formControlName="precio" class="form-control"  placeholder="Minimo 0,99 max 99">
+                    <p *ngIf="formulario.controls.nombre.invalid && formulario.controls.precio.touched"  
+                    class="text-danger">*Minimo 0,99 max 99</p>
+                </div> 
+                <div class="form-group col-4">
+                    <label for="oferta">Oferta:</label>
+                    <select class="form-control" formControlName="oferta" id="oferta">
+                      <option value="false">No</option>
+                      <option value="true">Si</option>       
+                    </select>
                 </div>
-                {{nombreFrutaNueva}}
+                <div class="form-group col-4">
+                    <label for="descuento">descuento</label>
+                    <input type="text" formControlName="descuento" class="form-control"  placeholder="si existe oferta">
+                </div> 
+                <div class="form-group col-8">
+                    <label for="imagen">imagen</label>
+                    <input type="text" formControlName="imagen" class="form-control"  placeholder="ruta de la imagen">
+                </div> 
+              
+                  
+              </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
-          <button (click)="new()" class="btn btn-primary">CREAR</button>
+          <button (click)="new()" class="btn btn-primary"  type="submit" [disabled]="formulario.invalid">CREAR</button>
+          
         </div>
       </div>
     </div>
@@ -118,6 +154,7 @@
             <td>{{fruta.descuento}}</td>
             <td><img src="{{fruta.imagen}}" width="100" height="100"></td>
             <th><i (click)="delete(fruta)" class="fa fa-trash" aria-hidden="true"></i></th>
+            <th><i (click)="mandarEditar(fruta)"  class="far fa-edit"></i></th>
             <th><i (click)="change(fruta)"  class="far fa-edit"></i></th>
             <td></td>
 
