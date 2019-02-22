@@ -40,7 +40,7 @@ export class PaginaServicioFrutaComponent implements OnInit {
       precio: [
         0.99,       //value
         // Validaciones
-        [Validators.required, Validators.min(1), Validators.max(99)]     
+        [Validators.required,Validators.nullValidator, Validators.min(1), Validators.max(99)]     
     ],
     oferta: [false],
     descuento: [0],
