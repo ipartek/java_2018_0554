@@ -5,235 +5,207 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema industria_farmaceutica
+-- Schema mydb
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `industria_farmaceutica` ;
+-- -----------------------------------------------------
+-- Schema farmaceutica
+-- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema industria_farmaceutica
+-- Schema farmaceutica
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `industria_farmaceutica` DEFAULT CHARACTER SET utf8 ;
-USE `industria_farmaceutica` ;
+CREATE SCHEMA IF NOT EXISTS `farmaceutica` DEFAULT CHARACTER SET utf8 ;
+USE `farmaceutica` ;
 
 -- -----------------------------------------------------
--- Table `industria_farmaceutica`.`cuidad`
+-- Table `farmaceutica`.`accion_terapeutica`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `industria_farmaceutica`.`cuidad` (
-  `id` INT UNSIGNED NOT NULL,
-  `nombre` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `industria_farmaceutica`.`farmaceutico`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `industria_farmaceutica`.`farmaceutico` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  `dni` VARCHAR(45) NOT NULL,
-  `telefono` INT NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `industria_farmaceutica`.`farmacia`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `industria_farmaceutica`.`farmacia` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  `id_cuidad` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `industria_farmaceutica`.`empleado`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `industria_farmaceutica`.`empleado` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  `dni` VARCHAR(45) NOT NULL,
-  `telefono` INT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `industria_farmaceutica`.`personal`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `industria_farmaceutica`.`personal` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `id_empleado` INT NOT NULL,
-  `id_farmaceutico` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_personal_empleado1_idx` (`id_empleado` ASC) ,
-  INDEX `fk_personal_farmaceutico1_idx` (`id_farmaceutico` ASC) ,
-  CONSTRAINT `fk_personal_empleado1`
-    FOREIGN KEY (`id_empleado`)
-    REFERENCES `industria_farmaceutica`.`empleado` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_personal_farmaceutico1`
-    FOREIGN KEY (`id_farmaceutico`)
-    REFERENCES `industria_farmaceutica`.`farmaceutico` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `industria_farmaceutica`.`laboratorio`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `industria_farmaceutica`.`laboratorio` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `industria_farmaceutica`.`medicamento`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `industria_farmaceutica`.`medicamento` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  `cantidad` INT NULL,
-  `precio` FLOAT NULL,
-  `id_laboratorio` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_medicamento_laboratorio1_idx` (`id_laboratorio` ASC) ,
-  CONSTRAINT `fk_medicamento_laboratorio1`
-    FOREIGN KEY (`id_laboratorio`)
-    REFERENCES `industria_farmaceutica`.`laboratorio` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `industria_farmaceutica`.`presentacion`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `industria_farmaceutica`.`presentacion` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `tipo` VARCHAR(45) NOT NULL COMMENT 'Gragea, capsula, ampolla, parche... etc',
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `industria_farmaceutica`.`stock`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `industria_farmaceutica`.`stock` (
-  `cantidad` INT NOT NULL,
-  `id_farmacia` INT NOT NULL,
-  `id_medicamento` INT NOT NULL,
-  `id_presentacion` INT NOT NULL,
-  INDEX `fk_stock_farmacia1_idx` (`id_farmacia` ASC) ,
-  INDEX `fk_stock_medicamento1_idx` (`id_medicamento` ASC) ,
-  INDEX `fk_stock_presentacion1_idx` (`id_presentacion` ASC) ,
-  CONSTRAINT `fk_stock_farmacia1`
-    FOREIGN KEY (`id_farmacia`)
-    REFERENCES `industria_farmaceutica`.`farmacia` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE RESTRICT,
-  CONSTRAINT `fk_stock_medicamento1`
-    FOREIGN KEY (`id_medicamento`)
-    REFERENCES `industria_farmaceutica`.`medicamento` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE RESTRICT,
-  CONSTRAINT `fk_stock_presentacion1`
-    FOREIGN KEY (`id_presentacion`)
-    REFERENCES `industria_farmaceutica`.`presentacion` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE RESTRICT)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `industria_farmaceutica`.`accion_terapeutica`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `industria_farmaceutica`.`accion_terapeutica` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `farmaceutica`.`accion_terapeutica` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `tipo` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 6
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `industria_farmaceutica`.`medicamento_has_accion`
+-- Table `farmaceutica`.`ciudad`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `industria_farmaceutica`.`medicamento_has_accion` (
-  `id_medicamento` INT NOT NULL,
-  `id_accion_terapeutica` INT NOT NULL,
-  INDEX `fk_medicamento_has_accion_medicamento1_idx` (`id_medicamento` ASC) ,
-  INDEX `fk_medicamento_has_accion_accion_terapeutica1_idx` (`id_accion_terapeutica` ASC) ,
-  CONSTRAINT `fk_medicamento_has_accion_medicamento1`
-    FOREIGN KEY (`id_medicamento`)
-    REFERENCES `industria_farmaceutica`.`medicamento` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE RESTRICT,
-  CONSTRAINT `fk_medicamento_has_accion_accion_terapeutica1`
-    FOREIGN KEY (`id_accion_terapeutica`)
-    REFERENCES `industria_farmaceutica`.`accion_terapeutica` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE RESTRICT)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `industria_farmaceutica`.`farmacia_has_empleado`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `industria_farmaceutica`.`farmacia_has_empleado` (
-  `id_farmacia` INT NOT NULL,
-  `id_personal` INT NOT NULL,
-  INDEX `fk_farmacia_has_empleado_farmacia1_idx` (`id_farmacia` ASC) ,
-  INDEX `fk_farmacia_has_empleado_personal1_idx` (`id_personal` ASC) ,
-  CONSTRAINT `fk_farmacia_has_empleado_farmacia1`
-    FOREIGN KEY (`id_farmacia`)
-    REFERENCES `industria_farmaceutica`.`farmacia` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE RESTRICT,
-  CONSTRAINT `fk_farmacia_has_empleado_personal1`
-    FOREIGN KEY (`id_personal`)
-    REFERENCES `industria_farmaceutica`.`personal` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE RESTRICT)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `industria_farmaceutica`.`monodroga`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `industria_farmaceutica`.`monodroga` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `descripcion` VARCHAR(45) NOT NULL,
+CREATE TABLE IF NOT EXISTS `farmaceutica`.`ciudad` (
+  `id` INT(10) UNSIGNED NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `industria_farmaceutica`.`administracion`
+-- Table `farmaceutica`.`farmacia`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `industria_farmaceutica`.`administracion` (
-  `id` INT NOT NULL,
-  `id_monodroga` INT NOT NULL,
-  `id_medicamento` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `farmaceutica`.`farmacia` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL,
+  `id_cuidad` INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_administracion_monodroga1_idx` (`id_monodroga` ASC) ,
-  INDEX `fk_administracion_medicamento1_idx` (`id_medicamento` ASC) ,
-  CONSTRAINT `fk_administracion_monodroga1`
-    FOREIGN KEY (`id_monodroga`)
-    REFERENCES `industria_farmaceutica`.`monodroga` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_administracion_medicamento1`
-    FOREIGN KEY (`id_medicamento`)
-    REFERENCES `industria_farmaceutica`.`medicamento` (`id`)
+  INDEX `fk_farmacia_cuidad1_idx` (`id_cuidad` ASC) VISIBLE,
+  CONSTRAINT `fk_farmacia_cuidad1`
+    FOREIGN KEY (`id_cuidad`)
+    REFERENCES `farmaceutica`.`ciudad` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `farmaceutica`.`laboratorio`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `farmaceutica`.`laboratorio` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `farmaceutica`.`presentacion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `farmaceutica`.`presentacion` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `tipo` VARCHAR(45) NOT NULL COMMENT 'Gragea, capsula, ampolla, parche... etc',
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `farmaceutica`.`medicamento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `farmaceutica`.`medicamento` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL,
+  `precio` FLOAT NULL DEFAULT NULL,
+  `id_laboratorio` INT(11) NOT NULL,
+  `id_presentacion` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_medicamento_laboratorio1_idx` (`id_laboratorio` ASC) VISIBLE,
+  INDEX `fk_medicamento_presentacion1_idx` (`id_presentacion` ASC) VISIBLE,
+  CONSTRAINT `fk_medicamento_laboratorio1`
+    FOREIGN KEY (`id_laboratorio`)
+    REFERENCES `farmaceutica`.`laboratorio` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_medicamento_presentacion1`
+    FOREIGN KEY (`id_presentacion`)
+    REFERENCES `farmaceutica`.`presentacion` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `farmaceutica`.`medicamento_has_accion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `farmaceutica`.`medicamento_has_accion` (
+  `id` VARCHAR(45) NOT NULL,
+  `id_medicamento` INT(11) NOT NULL,
+  `id_accion_terapeutica` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_medicamento_has:accion_medicamento_idx` (`id_medicamento` ASC) VISIBLE,
+  INDEX `fk_medicamento_has:accion_accion_terapeutica_idx` (`id_accion_terapeutica` ASC) VISIBLE,
+  CONSTRAINT `fk_medicamento_has:accion_accion_terapeutica`
+    FOREIGN KEY (`id_accion_terapeutica`)
+    REFERENCES `farmaceutica`.`accion_terapeutica` (`id`),
+  CONSTRAINT `fk_medicamento_has:accion_medicamento`
+    FOREIGN KEY (`id_medicamento`)
+    REFERENCES `farmaceutica`.`medicamento` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `farmaceutica`.`monodroga`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `farmaceutica`.`monodroga` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre` TEXT NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `farmaceutica`.`medicamento_has_monodroga`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `farmaceutica`.`medicamento_has_monodroga` (
+  `id` VARCHAR(45) NOT NULL,
+  `id_medicamento` INT(11) NOT NULL,
+  `id_monodroga` INT(11) NOT NULL,
+  INDEX `fk_medicamento_has_monodroga_monodroga1_idx` (`id_monodroga` ASC) VISIBLE,
+  INDEX `fk_medicamento_has_monodroga_medicamento1_idx` (`id_medicamento` ASC) VISIBLE,
+  CONSTRAINT `fk_medicamento_has_monodroga_medicamento1`
+    FOREIGN KEY (`id_medicamento`)
+    REFERENCES `farmaceutica`.`medicamento` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_medicamento_has_monodroga_monodroga1`
+    FOREIGN KEY (`id_monodroga`)
+    REFERENCES `farmaceutica`.`monodroga` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `farmaceutica`.`stock`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `farmaceutica`.`stock` (
+  `id` VARCHAR(45) NOT NULL,
+  `cantidad` INT(11) NOT NULL,
+  `id_farmacia` INT(11) NOT NULL,
+  `id_medicamento` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_stock_farmacia1_idx` (`id_farmacia` ASC) VISIBLE,
+  INDEX `fk_stock_medicamento1_idx` (`id_medicamento` ASC) VISIBLE,
+  CONSTRAINT `fk_stock_farmacia1`
+    FOREIGN KEY (`id_farmacia`)
+    REFERENCES `farmaceutica`.`farmacia` (`id`),
+  CONSTRAINT `fk_stock_medicamento1`
+    FOREIGN KEY (`id_medicamento`)
+    REFERENCES `farmaceutica`.`medicamento` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `farmaceutica`.`trabajador`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `farmaceutica`.`trabajador` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL,
+  `dni` VARCHAR(45) NOT NULL,
+  `telefono` INT(11) NOT NULL,
+  `encargado` TINYINT(2) NOT NULL COMMENT '0 - Empleado / 1 - Encargado',
+  `id_ciudad` INT(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_trabajador_ciudad1_idx` (`id_ciudad` ASC) VISIBLE,
+  CONSTRAINT `fk_trabajador_ciudad1`
+    FOREIGN KEY (`id_ciudad`)
+    REFERENCES `farmaceutica`.`ciudad` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
