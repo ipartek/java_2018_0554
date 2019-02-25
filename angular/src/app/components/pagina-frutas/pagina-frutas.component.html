@@ -10,43 +10,47 @@
     <p>Oferta: {{ formulario.value.oferta | json }}</p>
   </div>
 
-      <form [formGroup]="formulario" (submit)="nueva()">
-        <div class="col-12 d-flex flex-row flex-wrap">
-          <div class="form-group col-6">
-            <label for="nombre">Nombre</label>
-            <input type="text" formControlName="nombre"
-            class="form-control" placeholder= "Nombre de la fruta (Minimo 3 letras)">
-            <small *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched" class="text-danger">*Nombre no válido</small>
+      <form [formGroup]="formulario" (submit)="nueva()" class="col-12 m-1 jumbotron">
+        <div class="d-flex">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" formControlName="nombre"
+              class="form-control" placeholder= "Nombre de la fruta (Minimo 3 letras)">
+              <small *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched" class="text-danger">*Nombre no válido</small>
+            </div>
+            <div class="d-flex justify-content-between">
+              <div class="form-group col-3">
+                  <label for="precio">Precio</label>
+                  <input type="number" formControlName="precio"
+                  class="form-control" placeholder= "Precio de la fruta">
+                  <small *ngIf="formulario.controls.precio.invalid && formulario.controls.precio.touched" class="text-danger">*Precio no válido</small>
+              </div>
+              <div class="form-group col-2">
+                  <label for="oferta">Oferta</label>
+                  <input type="checkbox" name="oferta" formControlName="oferta">
+              </div>
+              <div *ngIf="formulario.value.oferta" class="form-group col-3">
+                  <label for="descuento">Descuento <b>{{ formulario.controls.descuento.value }} %</b></label>
+                  <input type="range" formControlName="descuento"
+                  class="form-control" min="0" max="99" >
+              </div>
+            </div>
+            <div class="form-group">
+                <label for="imagen">Imagen</label>
+                <input type="text" formControlName="imagen"
+                class="form-control" placeholder= "Imagen de la fruta">
+            </div>
           </div>
-          <div class="form-group col-6">
-            <label for="precio">Precio</label>
-            <input type="number" formControlName="precio"
-            class="form-control" placeholder= "Precio de la fruta">
-            <small *ngIf="formulario.controls.precio.invalid && formulario.controls.precio.touched" class="text-danger">*Precio no válido</small>
-          </div>
-          <div class="form-group col-6">
-              <input type="checkbox" name="oferta" formControlName="oferta">
-              Quiero poner una oferta a este producto
-          </div>
-          <div *ngIf="formulario.value.oferta" class="form-group col-12">
-              <label for="descuento">Descuento <b>{{ formulario.controls.descuento.value }} %</b></label>
-              <input type="range" formControlName="descuento"
-              class="form-control" min="0" max="99" >
-          </div>
-          <div class="form-group col-12">
-            <label for="imagen">Imagen</label>
-            <input type="text" formControlName="imagen"
-            class="form-control" placeholder= "Imagen de la fruta">
+          <div class="col-6 m-3 p-1">
+            <img class="img-formulario" src="{{formulario.controls.imagen.value}}" alt="{{formulario.controls.nombre.value}}">
           </div>
         </div>
         <button type="submit"
-            class="btn btn-block btn-primary"
+            class="btn btn-block btn-primary mt-3"
             [disabled]="formulario.invalid">
             {{(frutaSeleccionada.id == -1)?'Crear':'Modificar'}}
         </button>
-          <!-- <button *ngIf="frutaNueva.id === -1" type="submit" [disabled]="formulario.invalid" class="btn btn-success">Crear</button>
-          <button *ngIf="frutaNueva.id !== -1" class="btn btn-info" (click)="modificar(fruta)">Editar</button>
-          <button *ngIf="frutaNueva.id !== -1" class="btn btn-warning" (click)="limpiar()">Borrar datos</button> -->
       </form>
 
   <div class="d-flex flex-row flex-wrap justify-content-between">
