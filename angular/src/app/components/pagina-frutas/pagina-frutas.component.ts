@@ -48,7 +48,8 @@ export class PaginaFrutasComponent implements OnInit {
         0
         //[Validators.min(0), Validators.max(70)]
       ], 
-      imagen: [ Fruta.IMAGEN_DEFAULT, [Validators.required, Validators.pattern('(https?:){1}.*\.(jpe?g|png|gif)$')]]
+      imagen: [ Fruta.IMAGEN_DEFAULT, [Validators.required, Validators.pattern('(https?:){1}.*\.(jpe?g|png|gif)$')]],
+      colores: this.formBuilder.array( [this.crearColoresFormGroup()], Validators.minLength(1)) // Minimo un Color
     });
     //Suscribirnos al evento cada vez que cambia la oferta para validar el descuento
     this.formulario.get('oferta').valueChanges.subscribe(
@@ -67,6 +68,13 @@ export class PaginaFrutasComponent implements OnInit {
       }
     );
 
+  }
+
+  crearColoresFormGroup(): FormGroup{
+    return this.formBuilder.group({
+      nombre: ['blanco', [Validators.required, Validators.minLength(2)]],
+      codigo: ['#FFFFFF', [Validators.required, Validators.minLength(4), Validators.maxLength(7)]]
+    });
   }
 
   cargarFrutas() {

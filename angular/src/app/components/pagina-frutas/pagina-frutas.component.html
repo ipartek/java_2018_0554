@@ -61,7 +61,12 @@
          
       <div class="d-flex flex-column justify-content-start align-items-start">
         <b>{{fruta.nombre | titlecase }}</b>
-        
+        <!-- Para pintar los colores -->
+        <ul>
+          <li *ngFor="let color of fruta.colores">
+            {{ fruta.colores | json }}
+          </li>
+        </ul>
       </div>
       <span *ngIf="fruta.oferta" class="d-flex flex-column">
         <del class="text-secondary">
