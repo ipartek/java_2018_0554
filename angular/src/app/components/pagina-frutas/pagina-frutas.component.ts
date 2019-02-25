@@ -14,8 +14,6 @@ export class PaginaFrutasComponent implements OnInit {
   frutas: Fruta[];
   frutaSeleccionada: Fruta;
   mensaje: Mensaje;
-  mensajeSuccess: string;
-  mensajeError: string;
   formulario: FormGroup;
 
   constructor(public paginaFrutasService: PaginaFrutasService, private formBuilder: FormBuilder) {

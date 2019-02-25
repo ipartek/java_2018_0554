@@ -1,8 +1,9 @@
 <div class="col-12">
   <h1>CRUD Frutas</h1>
-  <div *ngIf="mensaje.texto !=''" class="alert alert-{{mensaje.tipo}}" role="alert">
+  <!-- <div *ngIf="mensaje.texto !=''" class="alert alert-{{mensaje.tipo}}" role="alert">
       {{ mensaje.texto }}
-  </div>
+  </div> -->
+  <app-alerta [mensaje]="mensaje"></app-alerta>
 
   <div class="border border-danger p-2">
     <p>Valores: {{ formulario.value | json }}</p>

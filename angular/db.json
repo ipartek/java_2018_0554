@@ -50,11 +50,12 @@
       ]
     },
     {
+      "id": 7,
       "nombre": "Melon",
+      "oferta": true,
       "precio": "8",
-      "oferta": false,
-      "descuento": 0,
-      "id": 7
+      "descuento": 12,
+      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg"
     },
     {
       "nombre": "Pomelo",

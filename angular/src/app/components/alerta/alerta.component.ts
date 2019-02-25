@@ -7,11 +7,14 @@ import { Mensaje } from 'src/app/model/mensaje';
   styleUrls: ['./alerta.component.scss']
 })
 
-//@Input() mensaje : Mensaje;
-
 export class AlertaComponent implements OnInit {
 
-  constructor() { }
+  
+  @Input() mensaje: Mensaje;
+
+  constructor() { 
+    this.mensaje = new Mensaje('');
+  }
 
   ngOnInit() {
   }
