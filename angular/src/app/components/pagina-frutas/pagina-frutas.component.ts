@@ -12,7 +12,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PaginaFrutasComponent implements OnInit {
 
   frutas: Fruta[];
-  frutaNueva: Fruta;
   frutaSeleccionada: Fruta;
   mensaje: Mensaje;
   mensajeSuccess: string;
@@ -22,10 +21,18 @@ export class PaginaFrutasComponent implements OnInit {
   constructor(public paginaFrutasService: PaginaFrutasService, private formBuilder: FormBuilder) {
     console.log('PaginaFrutasComponent constructor');
     this.frutas = [];
-    this.frutaNueva = new Fruta("", 0);
-    this.mensajeSuccess="";
-    this.mensajeError="";
+    this.frutaSeleccionada = new Fruta("", 0);
     this.mensaje = new Mensaje("");
+    this.inicializarFormulario();
+  }
+
+  ngOnInit() {
+    console.log('PaginaFrutasComponent ngOnInit');
+    this.cargarFrutas();
+  }
+
+  inicializarFormulario(){
+    this.frutaSeleccionada = new Fruta("", 0);
     //Inicializamos el formulario
     this.formulario = this.formBuilder.group({
       //FormControl nombre
@@ -40,35 +47,32 @@ export class PaginaFrutasComponent implements OnInit {
       ],
       oferta: false, 
       descuento: [
-        undefined,
+        0,
         [Validators.min(0), Validators.max(70)]
-      ]
+      ], 
+      imagen: [ Fruta.IMAGEN_DEFAULT, [Validators.required]]
     });
-  }
-
-  ngOnInit() {
-    console.log('PaginaFrutasComponent ngOnInit');
-    this.cargarFrutas();
-  }
-
-  accion(){
-    if(this.frutaNueva.id === -1){
-      this.create();
-    }else{
-      this.modificar(this.frutaNueva);
-    }
   }
 
   cargarFrutas() {
     console.log('PaginaFrutasComponent cargarFrutas');
     this.frutas = [];
     this.paginaFrutasService.getFrutas().subscribe(resultado => {
-      // console.debug('peticion correcta %o', resultado);
       this.mapeo(resultado);
     }, error => {
       this.mensaje = new Mensaje("No se pueden obtener las frutas de la DB", Mensaje.MENSAJE_ERROR);
       console.warn('peticion incorrecta %o', error);
     });
+  }
+
+  editar(fruta: Fruta){
+    this.frutaSeleccionada = fruta;
+
+    this.formulario.controls['nombre'].setValue(fruta.nombre);
+    this.formulario.controls['precio'].setValue(fruta.precio);
+    this.formulario.controls['oferta'].setValue(fruta.oferta);
+    this.formulario.controls['descuento'].setValue(fruta.descuento);
+    this.formulario.controls['imagen'].setValue(fruta.imagen);
   }
 
   delete(fruta: Fruta){
@@ -78,80 +82,50 @@ export class PaginaFrutasComponent implements OnInit {
       this.mensaje = new Mensaje(`Se ha eliminado la fruta ${fruta.id} ${fruta.nombre}`, Mensaje.MENSAJE_SUCCESS);
       //this.mensajeSuccess = `Se ha eliminado la fruta ${fruta.id} ${fruta.nombre}`;
       this.cargarFrutas();
-      this.limpiar();
+      this.inicializarFormulario();
     },
     error => {
-      //this.mensajeError = `No se pudo eliminar la Fruta ${fruta.id} ${fruta.nombre}`;
       this.mensaje = new Mensaje(`No se pudo eliminar la Fruta ${fruta.id} ${fruta.nombre}`, Mensaje.MENSAJE_ERROR)
     })
   }
 }
 
-  create(){
-    console.trace('Submit formulario: %o', this.formulario.value);
+  nueva(){
+    console.trace('submit formulario %o', 
+              this.formulario.value);
+    
+    let id = this.frutaSeleccionada.id;        
+    console.debug(`identificador fruta {id}`);
 
-    this.frutaNueva = new Fruta(this.formulario.value.nombre, this.formulario.value.precio);
-
-     if(this.frutaNueva.descuento > 0){
-       this.frutaNueva.oferta = true;
-     }
-     //TODO mapear this.formulario.value a Fruta()
-     this.paginaFrutasService.post(this.frutaNueva).subscribe( result => {
-       this.mensajeSuccess = `Creada nueva fruta ${this.frutaNueva.nombre}`;
-       this.mensaje = new Mensaje(`Creada nueva fruta ${this.frutaNueva.nombre}`, Mensaje.MENSAJE_SUCCESS);
-       this.limpiar();
-       this.cargarFrutas();
-     }, error => {
-       console.error(error);
-       this.mensajeError = 'No se pudo Crear la Nueva Fruta';
-       this.mensaje = new Mensaje('No se pudo Crear la Nueva Fruta', Mensaje.MENSAJE_ERROR);
-     });
-  }
-
-  editar(fruta: Fruta){
-    this.frutaNueva = fruta;
-    this.formulario.controls.nombre.setValue(fruta.nombre);
-    this.formulario.controls.precio.setValue(fruta.precio);
-    this.formulario.controls.oferta.setValue(fruta.oferta);
-    this.formulario.controls.descuento.setValue(fruta.descuento);
-  }
-
-  modificar(fruta: Fruta){
-    this.paginaFrutasService.put(fruta).subscribe( result => {
-      this.mensaje = new Mensaje(`Fruta ${fruta.nombre} modificada`, Mensaje.MENSAJE_SUCCESS);
-      this.cargarFrutas();
-    }, error => {
-      console.error(error);
-      this.mensaje = new Mensaje(`No se ha podido modificar la Fruta ${fruta.id} ${fruta.nombre}`, Mensaje.MENSAJE_ERROR);
-    });
-  }
-
-  changeOferta(fruta: Fruta){
-    //fruta.oferta = true;
-    let texto = `Se ha puesto en oferta la fruta ${fruta.nombre}`;
-    let tipo = Mensaje.MENSAJE_SUCCESS;
-    if(!fruta.oferta){
-      if(this.frutaNueva.descuento <= 0){
-        fruta.descuento = 5;
-      }else{
-        fruta.descuento = this.frutaNueva.descuento;
-      }  
-    }else{
-      tipo = Mensaje.MENSAJE_INFO;
-      texto = `Se ha retirado la oferta de la fruta ${fruta.nombre}`;
-      fruta.descuento = 0;
-    }
-    this.paginaFrutasService.patch(fruta).subscribe( result => {
-      //this.mensajeSuccess = texto;
-      this.mensaje = new Mensaje(texto, tipo);
-      this.cargarFrutas();
-    }, error => {
-      console.error(error);
-      //this.mensajeError = `No se ha podido poner en oferta la Fruta ${fruta.id} ${fruta.nombre}`;
-      this.mensaje = new Mensaje(`No se ha podido poner en oferta la Fruta ${fruta.id} ${fruta.nombre}`, Mensaje.MENSAJE_ERROR);
-    });
-
-  }
+    // mappear de formulario a Fruta
+    let fruta = new Fruta(
+                            this.formulario.value.nombre,
+                            this.formulario.value.precio,
+                            id,
+                            this.formulario.value.oferta,
+                            this.formulario.value.descuento,
+                            this.formulario.value.imagen,
+                            0
+                          );
+    // llamar servicio                      
+    this.paginaFrutasService.guardar(fruta).subscribe(
+      data=>{
+        console.debug('datos en json %o', data);
+        this.frutaSeleccionada = new Fruta('',0);  // id => -1
+        this.inicializarFormulario();    
+        this.cargarFrutas();
+        if(id === -1){
+          this.mensaje = new Mensaje(`Creada nueva fruta ${fruta.nombre}`, Mensaje.MENSAJE_SUCCESS);
+        }else{
+          this.mensaje = new Mensaje(`Fruta ${fruta.nombre} modificada`, Mensaje.MENSAJE_SUCCESS);
+        }
+      },error=>{
+        console.error(error);
+        this.mensaje = new Mensaje('No se pudo Crear la Nueva Fruta', Mensaje.MENSAJE_ERROR);
+      }
+    );
+       
+  }// nueva
 
   /**
    * Función que mapea las Frutas del JSON al objeto Fruta y los añade
@@ -161,66 +135,10 @@ export class PaginaFrutasComponent implements OnInit {
   mapeo(result: any) {
     let fruta: Fruta;
     result.forEach(el => {
-      fruta = new Fruta(el.nombre, el.precio);
-      fruta.id = el.id;
-      fruta.oferta = el.oferta;
-      fruta.descuento = el.descuento;
-      fruta.imagen = el.imagen;
-
+      fruta = new Fruta(el.nombre, el.precio, el.id, el.oferta, el.descuento, el.imagen);
       this.frutas.push(fruta);
       //console.debug("Fruta mapeada: %o", el);
     });
-  }
-
-  rellenarDatos(fruta: Fruta){
-    this.frutaNueva.nombre = fruta.nombre;
-    this.frutaNueva.precio = fruta.precio;
-    this.frutaNueva.descuento = fruta.descuento;
-    // this.nuevaFrutaImagen = fruta.imagen;
-  }
-
-  /**
-   * Limpia únicamente el input de nombre
-   */
-  limpiarNombre(){
-    this.frutaNueva.nombre = "";
-  }
-
-  /**
-   * Limpia únicamente el input de precio
-   */
-  limpiarPrecio(){
-    this.frutaNueva.precio = null;
-  }
-
-  /**
-   * Limpia únicamente el input de descuento
-   */
-  limpiarDescuento(){
-    this.frutaNueva.descuento = null;
-  }
-
-  limpiarOferta(){
-    this.frutaNueva.oferta = false;
-  }
-
-  /**
-   * Limpia únicamente el input de imagen
-   */
-  // limpiarImagen(){
-  //   this.nuevaFrutaImagen = "";
-  // }
-
-  /**
-   * Llama a las 3 funciones de limpieza de cada input, para limpiar todos
-   */
-  limpiar(){
-    this.formulario.controls.nombre.setValue("");
-    this.formulario.controls.precio.setValue(undefined);
-    this.formulario.controls.oferta.setValue(false);
-    this.formulario.controls.descuento.setValue(undefined);
-    this.frutaNueva = new Fruta("", 0);
-    // this.limpiarImagen();
   }
 
 }

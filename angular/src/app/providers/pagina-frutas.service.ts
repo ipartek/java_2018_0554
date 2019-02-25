@@ -21,6 +21,12 @@ export class PaginaFrutasService {
     return this.http.get(url);
   }
 
+  public getById(id: number):Observable<any>{
+    let url = GLOBAL.endpoint + id;
+    console.trace('getById ' + url);
+    return this.http.get( url );
+  };
+
   /**
    * Eliminar fruta mediante su ID
    * @param id :number Identificador de la fruta a eliminar
@@ -30,51 +36,81 @@ export class PaginaFrutasService {
     return this.http.delete(url);
   }
 
-  post(fruta:Fruta): Observable<any> {
-    let url = GLOBAL.endpoint + '/fruta/';
+  public guardar(fruta: Fruta):Observable<any>{
+    let url = GLOBAL.endpoint + '/fruta/' ;
+   
+    if ( fruta.id == -1 ){
+      let body = {
+        "nombre": fruta.nombre,
+        "oferta": fruta.oferta,
+        "precio": fruta.precio,
+        "descuento": fruta.descuento,
+        "imagen": fruta.imagen      
+      };
+      console.trace('crear ' + url);
+      return this.http.post(url, body);
 
-    let body = {
-      // "id": todo.id,
-      "nombre": fruta.nombre,
-      "precio": fruta.precio,
-      "oferta": fruta.oferta,
-      "descuento": fruta.descuento,
-      "imagen": fruta.imagen
-      //TODO colores
+    }else{
+      let body = {
+        "id": fruta.id,
+        "nombre": fruta.nombre,
+        "oferta": fruta.oferta,
+        "precio": fruta.precio,
+        "descuento": fruta.descuento,
+        "imagen": fruta.imagen      
+      };
+      console.trace('modificar ' + url + fruta.id);
+      return this.http.put(url + fruta.id , body);
     }
     
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-      })
-    };
+  } 
 
-    return this.http.post( url, body , httpOptions );
+  // post(fruta:Fruta): Observable<any> {
+  //   let url = GLOBAL.endpoint + '/fruta/';
 
-  }
+  //   let body = {
+  //     // "id": todo.id,
+  //     "nombre": fruta.nombre,
+  //     "precio": fruta.precio,
+  //     "oferta": fruta.oferta,
+  //     "descuento": fruta.descuento,
+  //     "imagen": fruta.imagen
+  //     //TODO colores
+  //   }
+    
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type':  'application/json'
+  //     })
+  //   };
 
-  put(fruta: Fruta): Observable<any>{
-    let url = GLOBAL.endpoint + `/fruta/${fruta.id}`;
+  //   return this.http.post( url, body , httpOptions );
 
-    let body = {
-      "nombre": fruta.nombre,
-      "precio": fruta.precio,                    
-      "oferta": fruta.oferta,
-      "descuento": fruta.descuento    
-    }
+  // }
 
-    return this.http.put( url, body );  
-  }
+  // put(fruta: Fruta): Observable<any>{
+  //   let url = GLOBAL.endpoint + `/fruta/${fruta.id}`;
 
-  patch(fruta: Fruta): Observable<any>{
-    let url = GLOBAL.endpoint + `/fruta/${fruta.id}`;
+  //   let body = {
+  //     "nombre": fruta.nombre,
+  //     "precio": fruta.precio,
+  //     "oferta": fruta.oferta,
+  //     "descuento": fruta.descuento,
+  //     "imagen": fruta.imagen   
+  //   }
 
-    let body = {                    
-      "oferta": !fruta.oferta,
-      "descuento": fruta.descuento    
-    } 
+  //   return this.http.put( url, body );  
+  // }
+
+  // patch(fruta: Fruta): Observable<any>{
+  //   let url = GLOBAL.endpoint + `/fruta/${fruta.id}`;
+
+  //   let body = {                    
+  //     "oferta": !fruta.oferta,
+  //     "descuento": fruta.descuento    
+  //   } 
   
-    return this.http.patch( url, body );  
-  }
+  //   return this.http.patch( url, body );  
+  // }
 
 }

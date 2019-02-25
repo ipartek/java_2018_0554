@@ -54,7 +54,6 @@
       "precio": "8",
       "oferta": false,
       "descuento": 0,
-      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
       "id": 7
     },
     {
@@ -66,12 +65,12 @@
       "id": 9
     },
     {
+      "id": 10,
       "nombre": "Mandarina",
+      "oferta": true,
       "precio": "3.44",
-      "oferta": false,
-      "descuento": 0,
-      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
-      "id": 10
+      "descuento": 4,
+      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg"
     },
     {
       "nombre": "Naranja",
@@ -114,22 +113,6 @@
       "id": 16
     },
     {
-      "nombre": "chirimoya",
-      "precio": 10,
-      "oferta": false,
-      "descuento": 0,
-      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
-      "id": 17
-    },
-    {
-      "nombre": "Cacahuete",
-      "precio": 4.99,
-      "oferta": false,
-      "descuento": 0,
-      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
-      "id": 18
-    },
-    {
       "nombre": "Cachuete",
       "precio": 4.99,
       "oferta": false,
@@ -138,19 +121,28 @@
       "id": 19
     },
     {
-      "nombre": "Cacahuete",
-      "precio": 4.99,
+      "id": 22,
+      "nombre": "Platano de Canarias",
       "oferta": false,
-      "descuento": 0,
-      "id": 20
+      "precio": 3.99,
+      "descuento": 15,
+      "imagen": "https://www.abc.es/media/sociedad/2017/12/02/platanos-potasio-salud-k3gG-U212262406718N6D-620x400@abc.jpg"
     },
     {
-      "nombre": "Cacahuete",
-      "precio": 4.99,
+      "nombre": "Coco",
+      "oferta": true,
+      "precio": 4.55,
+      "descuento": 10,
+      "imagen": "https://haycosasmuynuestras.com/wp-content/uploads/2018/07/coco-abierto.jpg",
+      "id": 23
+    },
+    {
+      "nombre": "Sandía",
       "oferta": false,
+      "precio": 5.66,
       "descuento": 0,
-      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
-      "id": 21
+      "imagen": "https://sandiapedia.com/wp-content/uploads/2017/04/origen-de-la-sandia-300x206.jpg",
+      "id": 24
     }
   ],
   "todos": [
