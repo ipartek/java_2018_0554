@@ -31,21 +31,36 @@ export class FrutaService {
     return this.httpClient.delete( url );
   }  
 
-  public crear(fruta: Fruta):Observable<any>{
+  public guardar(fruta: Fruta):Observable<any>{
     let url = this.endpoint;
-    console.trace('crear ' + url);
+   
 
-    let body = {
-      // "id": 2,  descomentar para que lance error 500
-      "nombre": fruta.nombre,
-      "oferta": fruta.oferta,
-      "precio": fruta.precio,
-      "descuento": fruta.descuento,
-      "imagen": fruta.imagen
-      //TODO colores
-    };
+    if ( fruta.id == -1 ){
+      let body = {
+        "nombre": fruta.nombre,
+        "oferta": fruta.oferta,
+        "precio": fruta.precio,
+        "descuento": fruta.descuento,
+        "imagen": fruta.imagen      
+      };
+      console.trace('crear ' + url);
+      return this.httpClient.post(url, body);
 
-    return this.httpClient.post(url, body);
+    }else{
+
+      let body = {
+        "id": fruta.id,
+        "nombre": fruta.nombre,
+        "oferta": fruta.oferta,
+        "precio": fruta.precio,
+        "descuento": fruta.descuento,
+        "imagen": fruta.imagen      
+      };
+      console.trace('modificar ' + url + fruta.id);
+      return this.httpClient.put(url + fruta.id , body);
+    }
+
+    
   } 
 
 

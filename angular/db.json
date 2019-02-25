@@ -42,17 +42,11 @@
   "fruta": [
     {
       "id": 1,
-      "nombre": "fRESa",
+      "nombre": "fresa de huelva",
       "oferta": true,
       "precio": 3.59,
       "descuento": 5,
-      "imagen": "https://media.mercola.com/assets/images/foodfacts/strawberry-nutrition-facts.jpg",
-      "colores": [
-        {
-          "nombre": "rojo",
-          "codigo": "#F00"
-        }
-      ]
+      "imagen": "https://media.mercola.com/assets/images/foodfacts/strawberry-nutrition-facts.jpg"
     },
     {
       "id": 2,
@@ -109,25 +103,20 @@
       ]
     },
     {
-      "nombre": "Orain bai TUTI FRUTIIIIII",
-      "oferta": false,
-      "precio": 0,
-      "descuento": 0,
-      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
-      "id": 5
-    },
-    {
-      "nombre": "mARACUYA",
-      "precio": 0.99,
-      "id": 6
-    },
-    {
       "nombre": "Maracuya con FOTO OK",
       "oferta": false,
       "precio": 12,
       "descuento": 0,
       "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
       "id": 7
+    },
+    {
+      "id": 8,
+      "nombre": "Platano de Canarias",
+      "oferta": true,
+      "precio": 3.99,
+      "descuento": 10,
+      "imagen": "https://www.abc.es/media/sociedad/2017/12/02/platanos-potasio-salud-k3gG-U212262406718N6D-620x400@abc.jpg"
     }
   ]
 }

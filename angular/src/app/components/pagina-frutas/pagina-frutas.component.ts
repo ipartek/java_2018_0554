@@ -11,31 +11,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PaginaFrutasComponent implements OnInit {
 
   frutas: Fruta[];
-  frutaNueva: Fruta;
+  frutaSeleccionada: Fruta;
   mensaje: string;
   formulario: FormGroup;  // Agrupacion de FormControls == Input
 
   constructor( private frutaService: FrutaService, private formBuilder: FormBuilder ) { 
     console.trace('PaginaFrutasComponent constructor');
     this.frutas = [];
-    this.frutaNueva = new Fruta('',0);
+    this.frutaSeleccionada = new Fruta('',0);
     this.mensaje = '';
-
-    // inicializamos el formulario
-    this.formulario = this.formBuilder.group({
-
-        // FormControl nombre
-        nombre: [
-                  '',                                                                         // value
-                  [Validators.required, Validators.minLength(3), Validators.maxLength(150)]   // Validaciones
-                ],
-        // end FormControl nombre       
-
-        precio: [
-                  0.99,
-                  [Validators.required, Validators.min(0.99), Validators.max(9999)]
-                ]  
-    });
+    this.crearFormulario();
   }
 
   ngOnInit() {
@@ -43,6 +28,30 @@ export class PaginaFrutasComponent implements OnInit {
     this.cargarFrutas();
   }
 
+
+  crearFormulario(){
+     console.trace('PaginaFrutasComponent crearFormulario');
+      // inicializamos el formulario
+      this.formulario = this.formBuilder.group({
+
+        // FormControl nombre
+        nombre: [
+                  '',                                                                         // value
+                  [Validators.required, Validators.minLength(3), Validators.maxLength(150)]   // Validaciones
+                ],
+        // end FormControl nombre    
+        precio: [
+                  0.99,
+                  [Validators.required, Validators.min(0.99), Validators.max(9999)]
+                ],
+        oferta: false,
+        descuento: [ 0,
+                      [Validators.min(1), Validators.max(99)]
+                  ],
+        //TODO patter para comprobar que empieze por http: y termine por .png o .jp[e]g           
+        imagen: [ Fruta.IMAGEN_DEFAULT , [Validators.required]]
+      });
+  }
 
   cargarFrutas(){
     console.trace('PaginaFrutasComponent cargarFrutas');
@@ -59,11 +68,15 @@ export class PaginaFrutasComponent implements OnInit {
     );
   }// cargarFrutas
 
-  editar( fruta: Fruta){
+  editar( fruta: Fruta) {
     console.trace('click editar %o', fruta); 
+    this.frutaSeleccionada = fruta;
 
     this.formulario.controls['nombre'].setValue(fruta.nombre);
     this.formulario.controls['precio'].setValue(fruta.precio);
+    this.formulario.controls['oferta'].setValue(fruta.oferta);
+    this.formulario.controls['descuento'].setValue(fruta.descuento);
+    this.formulario.controls['imagen'].setValue(fruta.imagen);
     
   }
 
@@ -87,20 +100,31 @@ export class PaginaFrutasComponent implements OnInit {
   nueva(){
     console.trace('submit formulario %o', 
               this.formulario.value);
+    
+    let id = this.frutaSeleccionada.id;        
+    console.debug(`identificador fruta {id}`);
+
     // mappear de formulario a Fruta
     let fruta = new Fruta(
                             this.formulario.value.nombre,
-                            this.formulario.value.precio
+                            this.formulario.value.precio,
+                            id,
+                            this.formulario.value.oferta,
+                            this.formulario.value.descuento,
+                            this.formulario.value.imagen,
+                            0
                           );
     // llamar servicio                      
-    this.frutaService.crear(fruta).subscribe(
+    this.frutaService.guardar(fruta).subscribe(
       data=>{
         console.debug('datos en json %o', data);
+        this.frutaSeleccionada = new Fruta('',0);  // id => -1
+        this.crearFormulario();    
         this.cargarFrutas();
-        this.mensaje = `Fruta creada con Exito`;
+        this.mensaje = `Fruta guardada con Exito`;
       },error=>{
         console.error(error);
-        this.mensaje = `No se ha podido CREAR`;
+        this.mensaje = `No se ha podido GUARDAR`;
       }
     );
        
