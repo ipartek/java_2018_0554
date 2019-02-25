@@ -45,11 +45,28 @@ export class PaginaFrutasComponent implements OnInit {
       ],
       oferta: false, 
       descuento: [
-        0,
-        [Validators.min(0), Validators.max(70)]
+        0
+        //[Validators.min(0), Validators.max(70)]
       ], 
       imagen: [ Fruta.IMAGEN_DEFAULT, [Validators.required, Validators.pattern('(https?:){1}.*\.(jpe?g|png|gif)$')]]
     });
+    //Suscribirnos al evento cada vez que cambia la oferta para validar el descuento
+    this.formulario.get('oferta').valueChanges.subscribe(
+      oferta=>{
+        console.log('valueChanges %o', oferta);
+        let descuentoFormControl = this.formulario.get('descuento');
+        if(oferta){
+          //Validar descuento
+          descuentoFormControl.setValidators([Validators.min(0), Validators.max(70)]);
+        }else{
+          //Eliminar validaciones
+          descuentoFormControl.setValidators([]);
+        }
+        //Actualizar value y validaciones
+        descuentoFormControl.updateValueAndValidity();
+      }
+    );
+
   }
 
   cargarFrutas() {

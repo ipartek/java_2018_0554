@@ -1,8 +1,5 @@
 <div class="col-12">
   <h1>CRUD Frutas</h1>
-  <!-- <div *ngIf="mensaje.texto !=''" class="alert alert-{{mensaje.tipo}}" role="alert">
-      {{ mensaje.texto }}
-  </div> -->
   <app-alerta [mensaje]="mensaje"></app-alerta>
 
   <div class="border border-danger p-2">
@@ -31,7 +28,7 @@
                   <label for="oferta">Oferta</label>
                   <input type="checkbox" name="oferta" formControlName="oferta">
               </div>
-              <div *ngIf="formulario.value.oferta" class="form-group col-3">
+              <div *ngIf="formulario.controls.oferta.value" class="form-group col-3">
                   <label for="descuento">Descuento <b>{{ formulario.controls.descuento.value }} %</b></label>
                   <input type="range" formControlName="descuento"
                   class="form-control" min="0" max="99" >
