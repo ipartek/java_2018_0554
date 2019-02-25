@@ -15,7 +15,7 @@
   </button>
 </div> -->
 
-<form [formGroup]="formulario" (submit)="insert()">
+<form [formGroup]="formulario" (submit)="seleccionar()">
   <div class="row">
     <div class="col">
       <div class="form-group">
@@ -53,17 +53,23 @@
           descuento</label>
       </div>
       <div class="form-group" *ngIf="formulario.value.oferta">
-        <label>Descuento % </label>
-        <input type="number" formControlName="descuento" class="form-control" placeholder="Precio de la fruta">
+        <label>Descuento % <b>{{formulario.controls.descuento.value}}</b></label>
+        <input type="range" formControlName="descuento" class="form-control" min="0" max="100">
         <p *ngIf="formulario.controls.descuento.invalid && formulario.controls.descuento.touched" class="text-danger">
           *recuerda
           tiene que ser un número superior a 0 e inferior de 100</p>
       </div>
     </div>
   </div>
-  <button *ngIf="formulario.value.id === 0"class="btn btn-primary btn-block" type="submit" [disabled]="formulario.invalid">Crear</button>
-  <button *ngIf="formulario.value.id !== 0"class="btn btn-warning btn-block" type="submit" [disabled]="formulario.invalid">Editar</button>
-  <button *ngIf="formulario.value.id !== 0"class="btn btn-success btn-block"(click)="limpiarFormulario()">Limpiar formulario</button>
+  <div class="row">
+    <div class="col">
+      <input type="text" formControlName="imagen" class="form-control">
+      <img src="{{formulario.controls.imagen.value}}" alt="url de la fruta">
+    </div>
+  </div>
+  <button *ngIf="formulario.value.id === -1"class="btn btn-primary btn-block" type="submit" [disabled]="formulario.invalid">Crear</button>
+  <button *ngIf="formulario.value.id !== -1"class="btn btn-warning btn-block" type="submit" [disabled]="formulario.invalid">Editar</button>
+  <button *ngIf="formulario.value.id !== -1"class="btn btn-success btn-block"(click)="limpiarFormulario()">Limpiar formulario</button>
   
 </form>
 

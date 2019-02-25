@@ -1,5 +1,6 @@
-// la constante se define fuera de la clase
-const IMAGEN_DEFAULT='http://frutas.consumer.es/sites/default/files/compra_0.jpg';
+import { Mensaje } from './mensaje';
+
+
 export class Fruta {
 
     //atributos
@@ -11,6 +12,7 @@ export class Fruta {
     private _imagen: string;
     private _cantidad: number;
 
+    static IMAGEN_DEFAULT = 'http://frutas.consumer.es/sites/default/files/compra_0.jpg';
 
     //http://frutas.consumer.es/sites/default/files/compra_0.jpg img por defecto
     //constructor,solo puede haber uno, no existe sobrecarga
@@ -24,14 +26,14 @@ export class Fruta {
      * @param imagen? opcional
      * @param cantidad 1 por defecto
      */
-    constructor(nombre:string,precio?:number,id?:number,oferta=false,descuento?:number,imagen?:string,cantidad=1){
+    constructor(nombre: string, precio: number, id?: number, oferta = false, descuento?: number, imagen?: string, cantidad = 1) {
 
         this._nombre = nombre;
         this._precio = precio;
-        this._id= (id)?id:-1;
+        this._id = (id) ? id : -1;
         this._oferta = oferta;
-        this._descuento = (descuento)?descuento:0;
-        this._imagen = (imagen)? imagen : IMAGEN_DEFAULT;
+        this._descuento = (descuento) ? descuento : 0;
+        this._imagen = (imagen) ? imagen : Fruta.IMAGEN_DEFAULT;
         this._cantidad = cantidad;
     }
     //getters y setters
@@ -66,10 +68,18 @@ export class Fruta {
         this._descuento = value;
     }
     public get imagen(): string {
-        return this._imagen;
+        if (this._imagen && this._imagen != '') {
+            return this._imagen;
+        }
+
+        return Fruta.IMAGEN_DEFAULT;
     }
     public set imagen(value: string) {
-        this._imagen = value;
+        if (this._imagen && this._imagen != '') {
+            this._imagen = value;
+        }
+
+        this._imagen = Fruta.IMAGEN_DEFAULT;
     }
     public get cantidad(): number {
         return this._cantidad;
@@ -78,7 +88,7 @@ export class Fruta {
         this._cantidad = value;
     }
     //TODO
-    jsonMapper(jsonData:any){
+    jsonMapper(jsonData: any) {
 
     }
 }

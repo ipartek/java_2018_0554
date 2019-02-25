@@ -50,7 +50,7 @@ export class FrutaService {
 
     //Se define el cuerpo de la fruta que se va a crear para enviarla mediante post
     let body = {
-      "id": fruta.id,
+      //"id": fruta.id,
       "nombre": fruta.nombre,
       "oferta": fruta.oferta,
       "precio": fruta.precio,

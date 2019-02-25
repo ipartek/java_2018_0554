@@ -4,19 +4,9 @@
       "id": 2,
       "nombre": "pomelo",
       "oferta": true,
-      "precio": 7.43,
-      "descuento": 7,
-      "imagen": "http://frutasfercas.com/wp-content/uploads/2018/03/pomelo-1.jpg",
-      "colores": [
-        {
-          "nombre": "rojo",
-          "codigo": "#F00"
-        },
-        {
-          "nombre": "naranja",
-          "codigo": "#FF9800"
-        }
-      ]
+      "precio": 2,
+      "descuento": 21,
+      "imagen": "http://frutasfercas.com/wp-content/uploads/2018/03/pomelo-1.jpg"
     },
     {
       "id": 3,
@@ -55,19 +45,11 @@
       ]
     },
     {
-      "id": 12,
-      "nombre": "Sandia",
-      "oferta": false,
-      "precio": 12,
-      "descuento": 0,
-      "imagen": "http://frutas.consumer.es/sites/default/files/compra_0.jpg"
-    },
-    {
-      "id": -1,
-      "nombre": "Mandarina",
+      "id": 5,
+      "nombre": "Melocoton",
       "oferta": true,
-      "precio": 2.3,
-      "descuento": 12,
+      "precio": 1,
+      "descuento": 9,
       "imagen": "http://frutas.consumer.es/sites/default/files/compra_0.jpg"
     }
   ],

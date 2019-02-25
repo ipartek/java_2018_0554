@@ -18,35 +18,10 @@ export class PaginaServiceFrutasComponent implements OnInit {
   constructor(private frutaService: FrutaService, private formBuilder: FormBuilder) {
     console.trace('PaginaServiceFrutasComponent constructor');
     this.frutas = [];
-   
-    this.mensajeMostrar = new Mensaje('', '');
 
-    // inicializamos el formulario
-    this.formulario = this.formBuilder.group({
-      //Aqui se definen los formControll
-      //FormControll --> nombre
-      nombre: [
-        'Fruta Nueva',//value
-        [Validators.required, Validators.minLength(3), Validators.maxLength(150)]//validaciones
-      ],
-      //end control --> nombre
-      precio: [
-        0.99,
-        [Validators.required, Validators.min(0), Validators.max(100)]
-      ],
-      id: [
-        0,
-        [Validators.required]
-      ],
-      oferta: [
-        false,
-        [Validators.required]
-      ],
-      descuento: [
-        0,
-        [Validators.required, Validators.min(0), Validators.max(100)]
-      ]
-    });
+    this.mensajeMostrar = new Mensaje('', '');
+    this.frutaSeleccionada=new Fruta('',0);
+    this.crearFormulario();
 
   }
 
@@ -57,7 +32,6 @@ export class PaginaServiceFrutasComponent implements OnInit {
   }
   getAllFrutas() {
     this.frutaService.getAll().subscribe(jsonData => {
-
       console.debug('Se ha recibido el listado de frutas %o', jsonData);
       this.frutas = jsonData.map(v => {
         return this.rowMapper(v);
@@ -72,7 +46,6 @@ export class PaginaServiceFrutasComponent implements OnInit {
   delete(fruta: Fruta) {
     console.trace('PaginaServiceFrutasComponent delete');
     if (confirm('¿Estas seguro que quieres eliinar?')) {
-
       this.frutaService.delete(fruta.id).subscribe(result => {
         this.getAllFrutas();
         this.mensajeMostrar = new Mensaje(`ELIMINADA ${fruta.nombre}`, 'alert-success');
@@ -92,34 +65,37 @@ export class PaginaServiceFrutasComponent implements OnInit {
    */
   insert() {
     console.trace('Crear nueva fruta insert %o', this.formulario.value);
-
-    let frutaNueva = this.rowMapper(this.formulario.value);
-
-    this.frutaService.post(frutaNueva).subscribe(r => {
+    this.frutaService.post(this.frutaSeleccionada).subscribe(r => {
       this.getAllFrutas();
-      this.mensajeMostrar = new Mensaje(`CREADO ${frutaNueva.nombre}`, 'alert-success');
-     
+      this.mensajeMostrar = new Mensaje(`CREADO ${this.frutaSeleccionada.nombre}`, 'alert-success');
+      this.limpiarFormulario();
     },
       error => {
         console.log("Se ha cometido un error al crear la fruta nueva %o", error);
-        this.mensajeMostrar = new Mensaje(`No se ha podido CREAR ${frutaNueva.nombre}`, Mensaje.WARNING);
-       
+        this.mensajeMostrar = new Mensaje(`No se ha podido CREAR ${this.frutaSeleccionada.nombre}`, Mensaje.WARNING);
+
       });
+  }
+
+  seleccionar() {
+    this.frutaSeleccionada = this.rowMapper(this.formulario.value);
+    if (this.frutaSeleccionada.id === -1) {
+      this.insert();
+    } else {
+      this.update();
+    }
   }
   update() {
     console.trace('Modificar fruta update %o', this.formulario.value);
-
-    let frutaModificar = this.rowMapper(this.formulario.value);
-    this.frutaService.patch(frutaModificar).subscribe(r => {
+    this.frutaService.patch(this.frutaSeleccionada).subscribe(r => {
       this.getAllFrutas();
-      this.mensajeMostrar = new Mensaje(`MODIFICAR ${frutaModificar.nombre}`,Mensaje.SUCCESS);
+      this.mensajeMostrar = new Mensaje(`MODIFICAR ${this.frutaSeleccionada.nombre}`, Mensaje.SUCCESS);
+      this.limpiarFormulario();
     },
       error => {
         console.log("Se ha cometido un error al crear la fruta nueva %o", error);
-        this.mensajeMostrar = new Mensaje(`No se ha podido MODIFICAR ${frutaModificar.nombre}`, 'alert-warning');
-        
+        this.mensajeMostrar = new Mensaje(`No se ha podido MODIFICAR ${this.frutaSeleccionada.nombre}`, 'alert-warning');
       })
-
   }
 
   /**
@@ -133,6 +109,7 @@ export class PaginaServiceFrutasComponent implements OnInit {
     this.formulario.controls['id'].setValue(fruta.id);
     this.formulario.controls['oferta'].setValue(fruta.oferta);
     this.formulario.controls['descuento'].setValue(fruta.descuento);
+    this.formulario.controls['imagen'].setValue(fruta.imagen);
   }
 
   /** 
@@ -151,18 +128,52 @@ export class PaginaServiceFrutasComponent implements OnInit {
     )
   }
 
-  limpiarFormulario(){
+  limpiarFormulario() {
     console.trace('click limpiarFormulario ');
     this.formulario.controls['nombre'].setValue("");
     this.formulario.controls['precio'].setValue(0);
-    this.formulario.controls['id'].setValue(0);
+    this.formulario.controls['id'].setValue(-1);
     this.formulario.controls['oferta'].setValue(false);
     this.formulario.controls['descuento'].setValue(0);
+    this.formulario.controls['imagen'].setValue(Fruta.IMAGEN_DEFAULT);
   }
   seleccionarFruta(f: Fruta) {
     this.frutaSeleccionada = f;
   }
 
+  crearFormulario() {
+    // inicializamos el formulario
+    this.formulario = this.formBuilder.group({
+      //Aqui se definen los formControll
+      //FormControll --> nombre
+      nombre: [
+        'Fruta Nueva',//value
+        [Validators.required, Validators.minLength(3), Validators.maxLength(150)]//validaciones
+      ],
+      //end control --> nombre
+      precio: [
+        0.99,
+        [Validators.required, Validators.min(0), Validators.max(100)]
+      ],
+      id: [
+        -1,
+        [Validators.required]
+      ],
+      oferta: [
+        false,
+        [Validators.required]
+      ],
+      descuento: [
+        0,
+        [Validators.required, Validators.min(0), Validators.max(100)]
+      ],
+      imagen: [
+        Fruta.IMAGEN_DEFAULT,
+        //TODO patter para comprobar que empieze por http y que acabe con extensión .jp[e]g
+        [Validators.required]
+      ]
+    });
+  }
   /**
    * Metodo que hace el calculo de su precio final con el porcentaje de descuento
    * @param fruta 
