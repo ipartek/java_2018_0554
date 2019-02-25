@@ -29,6 +29,7 @@ import { PaginaFrutasComponent } from './components/pagina-comparador/pagina-fru
 import { PaginaPersonasComponent } from './components/pagina-personas/pagina-personas.component';
 import { PaginaTodosComponent } from './components/listas/pagina-todos/pagina-todos.component';
 import { ListaFrutasComponent } from './components/listas/lista-frutas/lista-frutas.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 //Directives
 import { Directiva1Directive } from './directives/directiva1.directive';
@@ -68,7 +69,8 @@ import { TrimarPipe } from './pipes/trimar.pipe';
     PaginaFrutasComponent,
     PaginaPersonasComponent,
     PaginaTodosComponent,
-    ListaFrutasComponent
+    ListaFrutasComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

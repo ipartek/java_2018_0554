@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FrutaService } from 'src/app/providers/fruta.service';
 import { Fruta } from 'src/app/model/fruta';
+import { FrutaService } from 'src/app/providers/fruta.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Alert } from 'src/app/model/alert';
 
 @Component({
   selector: 'app-lista-frutas',
@@ -10,138 +11,144 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ListaFrutasComponent implements OnInit {
 
-  frutas : Fruta[];
-  formulario: FormGroup;
-  mensaje: string;
-/*
-  nuevaFrutaNombre : string;
-  nuevaFrutaPrecio: number;
-  nuevaFrutaId: number;
-  nuevaFrutaImg: string;
-  nuevaFrutaOferta: boolean;
-  nuevaFrutaDescuento: number;
-  nuevaFrutaCantidad: number;
-  nuevaFrutaCompleted: boolean;
-*/
-  constructor( public frutasService:FrutaService, private formBuilder: FormBuilder ) { 
-    console.log('FrutasComponent constructor');
-    this.frutas = [];
-    this.mensaje = '';
+  frutas: Fruta[];
+  frutaSeleccionada: Fruta;
+  alert: Alert;
+  formulario: FormGroup;  // Agrupacion de FormControls == Input
 
-    this.formulario = this.formBuilder.group({
-      nombre: [
-        '', //valor
-        [ Validators.required, Validators.maxLength(150), Validators.minLength(3) ] //validaciones
-      ],
-      precio: [
-        '', //valor
-        [ Validators.required, Validators.max(9999), Validators.min(0.99) ] //validaciones
-      ],
-      imagen: [
-        '', //valor
-        [ Validators.minLength(10) ] //validaciones
-      ]
-    });
+  constructor( private frutaService: FrutaService, private formBuilder: FormBuilder ) { 
+    console.trace('PaginaFrutasComponent constructor');
+    this.frutas = [];
+    this.frutaSeleccionada = new Fruta('',0);
+    //this.alert = new Alert('Ongi etorri', Alert.SUCCESS);
+    this.crearFormulario();
   }
 
   ngOnInit() {
-    console.log('FrutasComponent ngOnInit');
+    console.trace('PaginaFrutasComponent ngOnInit');
     this.cargarFrutas();
   }
 
+
+  crearFormulario(){
+     console.trace('PaginaFrutasComponent crearFormulario');
+      // inicializamos el formulario
+      this.formulario = this.formBuilder.group({
+
+        // FormControl nombre
+        nombre: [
+                  '',                                                                         // value
+                  [Validators.required, Validators.minLength(3), Validators.maxLength(150)]   // Validaciones
+                ],
+        // end FormControl nombre    
+        precio: [
+                  0.99,
+                  [Validators.required, Validators.min(0.99), Validators.max(9999)]
+                ],
+        oferta: false,
+        descuento: [ 0
+                     // [Validators.min(1), Validators.max(99)]
+                  ],        
+        imagen: [ 
+                  Fruta.IMAGEN_DEFAULT , 
+                  [Validators.required, Validators.pattern('(https?:){1}.*\.(jpe?g|png|gif)$')]
+                ]
+      });
+
+      // subscribirnos al evento cada vez que cambia la "oferta" para validar el descuento
+      this.formulario.get('oferta').valueChanges.subscribe(
+        oferta=>{
+          console.log('valueChanges %o', oferta);
+          let descuentoFormControl = this.formulario.get('descuento');
+          if (oferta){
+            //Validar decuento            
+            descuentoFormControl.setValidators([Validators.min(1), Validators.max(100)]);
+          }else{
+            //eliminar validaciones
+            descuentoFormControl.setValidators([]);
+          }
+          //actualizar value y validaciones
+          descuentoFormControl.updateValueAndValidity();
+        }
+      );
+
+  }
+
   cargarFrutas(){
-    console.log('FrutasComponent cargarFrutas');
-    this.frutas = [];
-    this.frutasService.getAll().subscribe(
-      resultado => {
-        console.debug('peticion correcta %o', resultado);
-         this.frutas = resultado;
+    console.trace('PaginaFrutasComponent cargarFrutas');
+    this.frutaService.getAll().subscribe(
+      data=>{
+        console.debug('datos en json %o', data);
+        //TODO mappear bien
+        this.frutas = data;
       },
-      error=>{
-        console.warn('peticion incorrecta %o', error);
+      error => {
+        console.error(error);
+        this.alert = new Alert('Lo sentimos pero no hay conexion con el servidor'); 
       }
     );
+  }// cargarFrutas
+
+  editar( fruta: Fruta) {
+    console.trace('click editar %o', fruta); 
+    this.frutaSeleccionada = fruta;
+
+    this.formulario.controls['nombre'].setValue(fruta.nombre);
+    this.formulario.controls['precio'].setValue(fruta.precio);
+    this.formulario.controls['oferta'].setValue(fruta.oferta);
+    this.formulario.controls['descuento'].setValue(fruta.descuento);
+    this.formulario.controls['imagen'].setValue(fruta.imagen);
+    
   }
 
-  mapeo( result : any ){
-
-    let fruta:Fruta;
-    result.forEach(f => {
-        fruta = new Fruta( f.nombre, f.precio);
-        fruta.id = f.id;
-        fruta.oferta = f.oferta;
-        fruta.descuento = f.descuento;
-        fruta.imagen = f.imagen;
-        fruta.cantidad = f.cantidad;
-
-        this.frutas.push(fruta);
-    });
-  }
-
-  change(fruta:Fruta){
-    console.log('FrutasComponent change %o', fruta );
-    this.frutasService.patch(fruta).subscribe(     
-        result=>{
-          console.log('Fruta modificada con exito %o', result);
-          this.cargarFrutas();
+  eliminar(fruta: Fruta){
+    console.trace('PaginaFrutasComponent click eliminar %o', fruta);    
+    if ( confirm('¿ Estas seguro que quieres eliminar ?') ){
+      this.frutaService.delete( fruta.id ).subscribe(
+        data=>{
+          console.debug('datos en json %o', data);
+          this.cargarFrutas();          
+          this.alert = new Alert(`ELIMINADA ${fruta.nombre}`, Alert.SUCCESS);
         },
         error=>{
-          alert('No se pudo Modificar la Fruta');
-        }      
-    );
-  }
+          console.error(error);
+          this.alert = new Alert(`No se ha podido ELIMINAR ${fruta.nombre}`);
+        }
+      );// frutaService
+    }// confirm
+  }// eliminar
 
-  delete(fruta:Fruta){
-    console.log('FrutasComponent delete %o', fruta );
+  nueva(){
+    console.trace('submit formulario %o', 
+              this.formulario.value);
+    
+    let id = this.frutaSeleccionada.id;        
+    console.debug(`identificador fruta {id}`);
 
-    this.frutasService.delete(fruta.id).subscribe(
-      result=>{
-        this.cargarFrutas();
-      },
-      error=>{
-        alert('No se pudo elimiar la Fruta');
-      }
-    );
-  }
-
-  new(){
-    console.trace('submit formulario', this.formulario.value);
-
+    // mappear de formulario a Fruta
     let fruta = new Fruta(
-      this.formulario.value.nombre,
-      this.formulario.value.precio,
-      this.formulario.value.imagen
-    );
-
-    this.frutasService.post(fruta).subscribe(
+                            this.formulario.value.nombre,
+                            this.formulario.value.precio,
+                            id,
+                            this.formulario.value.oferta,
+                            this.formulario.value.descuento,
+                            this.formulario.value.imagen,
+                            0
+                          );
+    // llamar servicio                      
+    this.frutaService.guardar(fruta).subscribe(
       data=>{
-        console.log('FrutasComponent new %o', data);
+        console.debug('datos en json %o', data);
+        this.frutaSeleccionada = new Fruta('',0);  // id => -1
+        this.crearFormulario();    
         this.cargarFrutas();
-        this.mensaje = 'Fruta creada con éxito';
-      },
-      error=>{
+        this.alert = new Alert(`Fruta guardada con Exito`, Alert.PRIMARY);
+      },error=>{
         console.error(error);
-        this.mensaje = 'No se pudo Crear Nueva Fruta';
+        this.alert = new Alert(`No se ha podido GUARDAR`, Alert.WARNING);
       }
     );
+       
+  }// nueva
 
-    /*
-    console.log('FrutasComponent new ');
-    let fruta = new Fruta(this.nuevaFrutaNombre, this.nuevaFrutaPrecio, this.nuevaFrutaId, this.nuevaFrutaOferta, this.nuevaFrutaDescuento, this.nuevaFrutaImg, this.nuevaFrutaCantidad, this.nuevaFrutaCompleted);
-    this.frutasService.post(fruta).subscribe(
-      result=>{
-        console.log('FrutasComponent new %o', result);
-        this.cargarFrutas();
-      },
-      error=>{
-        alert('No se pudo Crear Nueva Fruta');
-        //console.error(error);
-      }
-    );*/
-  }
-/*
-  borrar(){
-    this.nuevaFrutaNombre = '';
-  }
-*/
 }

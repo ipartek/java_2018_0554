@@ -1,7 +1,8 @@
-const IMAGEN_DEFAULT = 'https://media.istockphoto.com/vectors/question-mark-food-black-and-white-icon-background-vector-id972328534';
+//const IMAGEN_DEFAULT = 'https://media.istockphoto.com/vectors/question-mark-food-black-and-white-icon-background-vector-id972328534';
 
 export class Fruta {
 
+    static IMAGEN_DEFAULT = 'https://media.istockphoto.com/vectors/question-mark-food-black-and-white-icon-background-vector-id972328534';
     //atributos privados y comienzan por guion bajo _atributo
     private _id: number;  
     private _nombre: string;   
@@ -42,7 +43,7 @@ export class Fruta {
         this._id = (id) ? id : -1;
         this._oferta = oferta;
         this._descuento = (descuento) ? descuento : 0;
-        this._imagen = (imagen) ? imagen : IMAGEN_DEFAULT;
+        this._imagen = (imagen && imagen != '') ? imagen : Fruta.IMAGEN_DEFAULT;
         this._cantidad = cantidad;
         this._completed = completed;
     }
@@ -84,10 +85,16 @@ export class Fruta {
     }
 
     public get imagen(): string {
-        return this._imagen;
+        if (this._imagen && this._imagen != ''){
+            return this._imagen;
+        }
+        return Fruta.IMAGEN_DEFAULT;
     }
     public set imagen(value: string) {
-        this._imagen = value;
+        if (this._imagen && this._imagen != ''){
+            this._imagen = value;
+        }
+        this._imagen = Fruta.IMAGEN_DEFAULT;
     }
 
     public get cantidad(): number {

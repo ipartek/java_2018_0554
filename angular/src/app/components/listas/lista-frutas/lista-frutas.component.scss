@@ -26,14 +26,32 @@
             margin-bottom: 30px;
         }
 
-        .formulario{
-            display: flex;
+        form{
             justify-content: space-between;
             margin-bottom: 25px;
 
-            input{
-                width: 30%;
-                padding: 0 12px;
+            .formulario{
+                display: flex;
+                justify-content: space-between;
+                margin: 20px 0;
+
+                .formulario-col{
+                    width: 48%;
+
+                    input{
+                        padding: 0 12px;
+                    }
+                    input[type="range"] {
+                        padding: 0;
+                        min-width: 150px;
+                    }
+                    .oferta div:first-child {
+                        margin: 0 15px;
+                    }
+                    img{
+                        max-width: 100%;
+                    }
+                }
             }
         }
 
@@ -57,10 +75,6 @@
                 }
             
             }    
-        }
-
-        input[type="checkbox"]{            
-            margin-right: 10px;
         }
 
         span.btn {

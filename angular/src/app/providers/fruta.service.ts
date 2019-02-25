@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Fruta } from '../model/fruta';
 
@@ -25,37 +25,41 @@ export class FrutaService {
     return this.httpClient.get( url );
   };
 
-  patch(fruta: Fruta):Observable<any>{
-    let url = this.endpoint + `${fruta.id}`;
-    console.log(`FrutasService patch ${url}`);
-    let body = {                    
-      "completed": !fruta.completed    
-    }                
-    return this.httpClient.patch( url, body );
-  }
-
-  public delete(id:number):Observable<any>{
+  public delete(id: number):Observable<any>{
     let url = this.endpoint + id;
-    console.log(`FrutasService delete ${url}`);
-    return this.httpClient.delete(url);
-  }
+    console.trace('delete ' + url);
+    return this.httpClient.delete( url );
+  }  
 
-  public post(fruta:Fruta):Observable<any>{
+  public guardar(fruta: Fruta):Observable<any>{
     let url = this.endpoint;
-    console.log(`FrutasService put (crear) ${url}`);
+   
 
-    let body = {
-      
-                  "nombre": fruta.nombre,
-                  "precio": fruta.precio,
-                  "oferta": fruta.oferta,
-                  "descuento": fruta.descuento,
-                  "imagen": fruta.imagen,
-                  "cantidad": fruta.cantidad,
-                  "completed": fruta.completed    
-                } 
-              
+    if ( fruta.id == -1 ){
+      let body = {
+        "nombre": fruta.nombre,
+        "oferta": fruta.oferta,
+        "precio": fruta.precio,
+        "descuento": fruta.descuento,
+        "imagen": fruta.imagen      
+      };
+      console.trace('crear ' + url);
+      return this.httpClient.post(url, body);
 
-    return this.httpClient.post( url, body);
-  }
+    }else{
+
+      let body = {
+        "id": fruta.id,
+        "nombre": fruta.nombre,
+        "oferta": fruta.oferta,
+        "precio": fruta.precio,
+        "descuento": fruta.descuento,
+        "imagen": fruta.imagen      
+      };
+      console.trace('modificar ' + url + fruta.id);
+      return this.httpClient.put(url + fruta.id , body);
+    }
+    
+  } 
+
 }

@@ -21,35 +21,17 @@
       "id": 2,
       "nombre": "pomelo",
       "oferta": false,
-      "precio": 7.43,
+      "precio": 9,
       "descuento": 7,
-      "imagen": "https://www.comenaranjas.com/images/stories/virtuemart/product/pomelo-star-ruby.jpg",
-      "colores": [
-        {
-          "nombre": "rojo",
-          "codigo": "red"
-        },
-        {
-          "nombre": "naranja",
-          "codigo": "orange"
-        }
-      ],
-      "completed": false
+      "imagen": "https://www.comenaranjas.com/images/stories/virtuemart/product/pomelo-star-ruby.jpg"
     },
     {
       "id": 3,
       "nombre": "chirimoya",
-      "oferta": true,
+      "oferta": false,
       "precio": 10,
-      "descuento": 0,
-      "imagen": "https://www.frutadelasarga.com/server/Portal_0008706/img/products/chirimoya_1258331.jpg",
-      "colores": [
-        {
-          "nombre": "verde",
-          "codigo": "green"
-        }
-      ],
-      "completed": false
+      "descuento": 70,
+      "imagen": "https://www.frutadelasarga.com/server/Portal_0008706/img/products/chirimoya_1258331.jpg"
     },
     {
       "id": 4,
@@ -103,44 +85,36 @@
       "id": 7
     },
     {
-      "nombre": "yf",
-      "precio": 5,
+      "id": 8,
+      "nombre": "pera",
+      "oferta": true,
+      "precio": 1.97,
+      "descuento": 10,
+      "imagen": "https://media.mercola.com/assets/images/foodfacts/pear-nutrition-facts.jpg"
+    },
+    {
+      "nombre": "plátano",
       "oferta": false,
+      "precio": 1.29,
       "descuento": 0,
-      "imagen": "https://media.istockphoto.com/vectors/question-mark-food-black-and-white-icon-background-vector-id972328534",
-      "cantidad": 1,
-      "completed": false,
+      "imagen": "https://www.carreraspormontana.com/wp-content/images/sites/2/2016/05/2016-05-12_120117.jpg",
       "id": 9
     },
     {
-      "nombre": "gfd",
-      "precio": 43,
+      "nombre": "caqui",
       "oferta": false,
+      "precio": 0.99,
       "descuento": 0,
-      "imagen": "https://media.istockphoto.com/vectors/question-mark-food-black-and-white-icon-background-vector-id972328534",
-      "cantidad": 1,
-      "completed": false,
+      "imagen": "https://cadenaser00.epimg.net/emisora/imagenes/2016/07/20/radio_valencia/1469014257_831049_1469283784_noticia_normal.jpg",
+      "id": 10
+    },
+    {
+      "nombre": "melón galia",
+      "oferta": true,
+      "precio": 3.55,
+      "descuento": 5,
+      "imagen": "http://www.frutaseladio.com/res/uploads/eladio-melon-galia.jpg",
       "id": 11
-    },
-    {
-      "nombre": "nbvc",
-      "precio": 55,
-      "oferta": false,
-      "descuento": 0,
-      "imagen": "https://media.istockphoto.com/vectors/question-mark-food-black-and-white-icon-background-vector-id972328534",
-      "cantidad": 1,
-      "completed": false,
-      "id": 12
-    },
-    {
-      "nombre": "fd2d",
-      "precio": 3,
-      "oferta": false,
-      "descuento": 0,
-      "imagen": "https://media.istockphoto.com/vectors/question-mark-food-black-and-white-icon-background-vector-id972328534",
-      "cantidad": 1,
-      "completed": false,
-      "id": 15
     }
   ],
   "todos": [

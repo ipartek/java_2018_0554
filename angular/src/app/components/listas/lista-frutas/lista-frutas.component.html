@@ -1,64 +1,99 @@
 <div id="frutas">
 
   <section>
-    <h2>Lista Frutas</h2>
+      <app-alert [alert]="alert"></app-alert>
 
-    <div *ngIf="mensaje != ''" class="alert alert-warning alert-dismissible fade show" role="alert">
-        <p>{{mensaje}}</p>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+<!--  Para Formularios muy simples usar BanaInaBox
+<input type="text"  [(ngModel)]="frutaNueva.nombre" 
+     class="form-control" 
+     placeholder="Nombre Fruta minimo 3 letras">
+<button (click)="nueva()" 
+      class="btn btn-primary" 
+      disabled="{{(frutaNueva.nombre.length<3)?'disabled':''}}">Crear Nueva</button>
+-->
+<div style="border:1px solid red; padding:10px;">
+<p>Valores: {{ formulario.value | json }}</p>
+<p>Estado:  {{ formulario.status | json }}</p> 
+</div>
 
-    <!-- Para formularios muy simples usar bananainabox
-    <div class="formulario">
-      <input (click)="borrar()" type="text" [(ngModel)]="nuevaFrutaNombre" placeholder="Fruta">
-      <input (click)="borrar()" type="text" [(ngModel)]="nuevaFrutaImg" placeholder="Url de la imagen">
-      <input (click)="borrar()" type="number" [(ngModel)]="nuevaFrutaPrecio" placeholder="Precio">
-      <span (click)="new()" class="btn btn-outline-success"><i class="fas fa-plus"></i></span>
-    </div>-->
-    <div>
-      <p>Valores: {{formulario.value | json }}</p>
-      <p>Estado: {{formulario.status | json }}</p>
-    </div>
-    <form [formGroup]="formulario" (submit)="new()">
+<form [formGroup]="formulario" (submit)="nueva()" >
+  <div class="formulario">
+    <div class="formulario-col">
       <div class="form-group">
         <label for="nombre">Nombre</label>
-        <input formControlName="nombre" type="text" class="form-control" placeholder="mínimo 3 letras">
-        <small  *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched" id="emailHelp" class="form-text">* Recuerda que minimo 3 letras</small>
+        <input type="text" formControlName="nombre" class="form-control" placeholder="Mínimo 3 letras">      
+        <p *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched"  
+        class="text-danger">*recuerda que minimo 3 letras</p>
       </div>
+      <div class="d-flex">
+        <div class="form-group">
+            <label for="nombre">Precio</label>
+            <input type="number" formControlName="precio" class="form-control">      
+        </div>   
+        <div class="form-group oferta d-flex">
+          <div>
+            <label for="oferta">Oferta</label>
+            <input type="checkbox" formControlName="oferta" class="form-control">  
+          </div>    
+
+          <div *ngIf="formulario.controls.oferta.value"> 
+            <label for="descuento">Descuento <b>{{formulario.controls.descuento.value}} %</b></label>
+            <input type="range" formControlName="descuento" step="5" min="0" max="100" class="form-control">      
+            <p *ngIf="formulario.controls.descuento.invalid"  
+            class="text-danger">*Debes seleccionar un descuento</p>
+          </div>
+        </div>
+      </div> 
       <div class="form-group">
         <label for="imagen">Imagen</label>
-        <input formControlName="imagen" type="text" class="form-control" placeholder="inserta la URL de la imagen">
+        <input type="text" formControlName="imagen" class="form-control">
+        <p *ngIf="formulario.controls.imagen.invalid && formulario.controls.imagen.touched" class="text-danger">*Debe ser una URL de imagen válida, empezar por http(s) y terminar .png, .jp(e)g o gif</p>
       </div>
-      <div class="form-group">
-        <label for="precio">Precio</label>
-        <input formControlName="precio" type="number" class="form-control" placeholder="precio">
-      </div>
-      <button type="submit" [disabled]="formulario.invalid" class="btn btn-primary">Crear</button>
-    </form>
+    </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Imagen</th>
-          <th>Fruta</th>
-          <th>Precio</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let fruta of frutas">
-          <td><img src="{{fruta.imagen}}" alt="{{fruta.nombre}}"></td>
-          <td><span class="nombre {{(fruta.completed)?'terminada':''}}" >{{fruta.nombre}}</span></td>
-          <td><span  [class]="(fruta.completed)?'terminada':''" >{{fruta.precio}}</span></td>
-          <td>
-            <span (click)="change(fruta)" class="btn btn-outline-warning mr-3"><i class="far fa-edit"></i></span>
-            <span (click)="delete(fruta)" class="btn btn-outline-danger"><i class="far fa-trash-alt"></i></span>
-          </td>                      
-        </tr>
-      </tbody>
-    </table>
+    <div class="formulario-col">
+      <img src="{{formulario.controls.imagen.value}}" alt="imagen de la nueva fruta">
+    </div>
+  </div>
+  
+  <button type="submit"
+          class="btn btn-block btn-primary"
+          [disabled]="formulario.invalid">
+          {{(frutaSeleccionada.id == -1)?'Crear':'Modificar'}}
+  </button>
+</form>
+
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Foto</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Oferta</th>
+      <th scope="col">Descuento</th>
+      <th scope="col">Operaciones</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="frutas.length==0">
+      <td colspan="3">Cargando datos...</td>
+    </tr>  
+    <tr *ngFor="let f of frutas">
+      <th scope="row">{{f.id}}</th>
+      <td><img src="{{f.imagen}}" alt="imagen de la fruta {{f.nombre}}"></td>
+      <td>{{f.nombre}}</td>        
+      <td>{{f.precio}}</td>    
+      <td>{{f.oferta}}</td>   
+      <td>{{f.descuento}} %</td>    
+      <td>
+        <span (click)="editar(f)" class="btn btn-outline-warning mr-3"><i class="fas fa-edit"></i></span>
+        <span (click)="eliminar(f)" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></span>        
+      </td>
+    </tr>      
+  </tbody>
+</table>
   </section>  
 
 </div>
