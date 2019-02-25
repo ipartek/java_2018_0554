@@ -83,6 +83,8 @@
                       <div *ngIf="formulario.controls.oferta.value"> 
                         <label for="descuento">Descuento <b>{{formulario.controls.descuento.value}}</b></label>
                         <input type="range" formControlName="descuento" step="5" min="0" max="100" class="form-control">      
+                        <p *ngIf="formulario.controls.descuento.invalid"  
+                        class="text-danger">*Debes seleecionar descuento</p>
                       </div>  
                     </div>  
                     
