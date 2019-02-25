@@ -1,12 +1,6 @@
 <h1>Servicio Rest para Frutas</h1>
 
-<!-- TODO crear un componente para reutilizar -->
-<div *ngIf="mensaje != ''" class="alert alert-warning alert-dismissible fade show" role="alert">
-    <p>{{mensaje}}</p>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+<app-alert [alert]="alert"></app-alert>
 
 <!--  Para Formularios muy simples usar BanaInaBox
 <input type="text"  [(ngModel)]="frutaNueva.nombre" 
@@ -16,88 +10,105 @@
         class="btn btn-primary" 
         disabled="{{(frutaNueva.nombre.length<3)?'disabled':''}}">Crear Nueva</button>
 -->
-<div style="border:1px solid red; padding:10px;">
-  <p>Valores: {{ formulario.value | json }}</p>
-  <p>Estado:  {{ formulario.status | json }}</p> 
+
+
+<div class="row">
+  <div class="col-8">
+
+      <table class="table table-bordered">
+          <thead class="bg-light">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Foto</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Oferta</th>
+              <th scope="col">Descuento</th>
+              <th scope="col">Operaciones</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="frutas.length==0">
+              <td colspan="3">Cargando datos...</td>
+            </tr>  
+            <tr *ngFor="let f of frutas">
+              <th scope="row">{{f.id}}</th>
+              <td><img src="{{f.imagen}}" alt="imagen de la fruta {{f.nombre}}"></td>
+              <td>{{f.nombre}}</td>        
+              <td>{{f.precio}}</td>    
+              <td>{{f.oferta}}</td>   
+              <td>{{f.descuento}}</td>    
+              <td>
+                  <i class="fas fa-edit mr-4" (click)="editar(f)"></i>
+                  <i class="fas fa-trash-alt" (click)="eliminar(f)"></i>            
+              </td>
+            </tr>      
+          </tbody>
+        </table>
+
+  </div>
+
+
+
+  <div class="col-4">
+
+
+      <div style="border:1px solid red; padding:10px;">
+          <p>Valores: {{ formulario.value | json }}</p>
+          <p>Estado:  {{ formulario.status | json }}</p> 
+        </div>
+        
+        <form [formGroup]="formulario" (submit)="nueva()"  class="p-3 mb-4 mt-2 border border-primary">
+        
+            <div class="form-row">
+                <div class="col-6">
+        
+                    <div class="form-group">
+                      <label for="nombre">Nombre</label>
+                      <input type="text" formControlName="nombre" class="form-control" placeholder="Mínimo 3 letras">      
+                      <p *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched"  
+                      class="text-danger">*recuerda que minimo 3 letras</p>
+                    </div>   
+        
+                    <div class="form-group">
+                       <label for="nombre">Precio</label>
+                       <input type="number" formControlName="precio" class="form-control">      
+                    </div>    
+                    
+                    <div class="form-group">
+                      <label for="oferta">Oferta</label>
+                      <input type="checkbox" formControlName="oferta" class="form-control">      
+                    </div>  
+                    <div class="form-group">
+                      <div *ngIf="formulario.controls.oferta.value"> 
+                        <label for="descuento">Descuento <b>{{formulario.controls.descuento.value}}</b></label>
+                        <input type="range" formControlName="descuento" step="5" min="0" max="100" class="form-control">      
+                      </div>  
+                    </div>  
+                    
+        
+                </div> <!-- col-6 -->   
+        
+                <div class="col-6">          
+                  <img class="medium" src="{{formulario.controls.imagen.value}}" alt="url de la imagen de la nueva fruta">
+                  <br>
+                  <label for="imagen">URL de la Imagen</label>
+                  <input type="text" formControlName="imagen" class="form-control">      
+                  <p *ngIf="formulario.controls.imagen.invalid && formulario.controls.imagen.touched"  
+                  class="text-danger">*debe ser una URL de imagen valida empezar por http(s) y terminar .png o .jp(e)g</p>
+                </div>  
+        
+            </div>    
+            
+            <button type="submit"
+                    class="btn btn-block btn-primary mt-5"
+                    [disabled]="formulario.invalid">
+                    {{(frutaSeleccionada.id == -1)?'Crear':'Modificar'}}
+            </button>
+        </form>
+
+  </div>
 </div>
 
-<form [formGroup]="formulario" (submit)="nueva()"  class="p-3 mb-4 mt-2 border border-primary">
-
-    <div class="form-row">
-        <div class="col-6">
-
-            <div class="form-group">
-              <label for="nombre">Nombre</label>
-              <input type="text" formControlName="nombre" class="form-control" placeholder="Mínimo 3 letras">      
-              <p *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched"  
-              class="text-danger">*recuerda que minimo 3 letras</p>
-            </div>   
-
-            <div class="form-row">
-                <div class="col-4">
-                    <label for="nombre">Precio</label>
-                    <input type="number" formControlName="precio" class="form-control">      
-                </div>   
-                <div class="col-4">
-                  <label for="oferta">Oferta</label>
-                  <input type="checkbox" formControlName="oferta" class="form-control">      
-                </div>  
-                <div class="col-4">
-                  <div *ngIf="formulario.controls.oferta.value"> 
-                    <label for="descuento">Descuento <b>{{formulario.controls.descuento.value}}</b></label>
-                    <input type="range" formControlName="descuento" step="5" min="0" max="100" class="form-control">      
-                  </div>  
-                </div>  
-            </div>
-
-        </div> <!-- col-6 -->   
-
-        <div class="col-6">          
-          <img class="medium" src="{{formulario.controls.imagen.value}}" alt="url de la imagen de la nueva fruta">
-          <br>
-          <label for="imagen">URL de la Imagen</label>
-          <input type="text" formControlName="imagen" class="form-control">      
-          <p *ngIf="formulario.controls.imagen.invalid && formulario.controls.imagen.touched"  
-          class="text-danger">*debe ser una URL de imagen valida empezar por http(s) y terminar .png o .jp(e)g</p>
-        </div>  
-
-    </div>    
-    
-    <button type="submit"
-            class="btn btn-block btn-primary mt-5"
-            [disabled]="formulario.invalid">
-            {{(frutaSeleccionada.id == -1)?'Crear':'Modificar'}}
-    </button>
-</form>
 
 
-<table class="table table-bordered">
-    <thead class="bg-light">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Foto</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Precio</th>
-        <th scope="col">Oferta</th>
-        <th scope="col">Descuento</th>
-        <th scope="col">Operaciones</th>
-    </tr>
-    </thead>
-    <tbody>
-      <tr *ngIf="frutas.length==0">
-        <td colspan="3">Cargando datos...</td>
-      </tr>  
-      <tr *ngFor="let f of frutas">
-        <th scope="row">{{f.id}}</th>
-        <td><img src="{{f.imagen}}" alt="imagen de la fruta {{f.nombre}}"></td>
-        <td>{{f.nombre}}</td>        
-        <td>{{f.precio}}</td>    
-        <td>{{f.oferta}}</td>   
-        <td>{{f.descuento}}</td>    
-        <td>
-            <i class="fas fa-edit mr-4" (click)="editar(f)"></i>
-            <i class="fas fa-trash-alt" (click)="eliminar(f)"></i>            
-        </td>
-      </tr>      
-    </tbody>
-  </table>

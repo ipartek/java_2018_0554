@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Fruta } from 'src/app/model/fruta';
 import { FrutaService } from 'src/app/providers/fruta.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Alert } from 'src/app/model/alert';
+
 
 @Component({
   selector: 'app-pagina-frutas',
@@ -12,14 +14,14 @@ export class PaginaFrutasComponent implements OnInit {
 
   frutas: Fruta[];
   frutaSeleccionada: Fruta;
-  mensaje: string;
+  alert: Alert;
   formulario: FormGroup;  // Agrupacion de FormControls == Input
 
   constructor( private frutaService: FrutaService, private formBuilder: FormBuilder ) { 
     console.trace('PaginaFrutasComponent constructor');
     this.frutas = [];
     this.frutaSeleccionada = new Fruta('',0);
-    this.mensaje = '';
+    this.alert = new Alert('Ongi etorri', Alert.SUCCESS);
     this.crearFormulario();
   }
 
@@ -66,7 +68,7 @@ export class PaginaFrutasComponent implements OnInit {
       },
       error => {
         console.error(error);
-        this.mensaje = 'Lo sentimos pero no hay conexion con el servidor';
+        this.alert = new Alert('Lo sentimos pero no hay conexion con el servidor'); 
       }
     );
   }// cargarFrutas
@@ -89,12 +91,12 @@ export class PaginaFrutasComponent implements OnInit {
       this.frutaService.delete( fruta.id ).subscribe(
         data=>{
           console.debug('datos en json %o', data);
-          this.cargarFrutas();
-          this.mensaje = `ELIMINADA ${fruta.nombre}`;
+          this.cargarFrutas();          
+          this.alert = new Alert(`ELIMINADA ${fruta.nombre}`, Alert.SUCCESS);
         },
         error=>{
           console.error(error);
-          this.mensaje = `No se ha podido ELIMINAR ${fruta.nombre}`;
+          this.alert = new Alert(`No se ha podido ELIMINAR ${fruta.nombre}`);
         }
       );// frutaService
     }// confirm
@@ -124,10 +126,10 @@ export class PaginaFrutasComponent implements OnInit {
         this.frutaSeleccionada = new Fruta('',0);  // id => -1
         this.crearFormulario();    
         this.cargarFrutas();
-        this.mensaje = `Fruta guardada con Exito`;
+        this.alert = new Alert(`Fruta guardada con Exito`, Alert.PRIMARY);
       },error=>{
         console.error(error);
-        this.mensaje = `No se ha podido GUARDAR`;
+        this.alert = new Alert(`No se ha podido GUARDAR`, Alert.WARNING);
       }
     );
        
