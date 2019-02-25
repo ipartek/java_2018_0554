@@ -1,3 +1,4 @@
+import { Color } from './color';
 
 export class Fruta {
 
@@ -11,6 +12,7 @@ export class Fruta {
     private _descuento: number;
     private _imagen: string;
     private _cantidad: number;
+    private _colores: Color[];
 
     // Constructor: Sólo puede haber uno, no existe sobrecarga como en Java
     // usaremos parámetros con ? para establecerlos como opcionales
@@ -33,6 +35,7 @@ export class Fruta {
         this._descuento = (descuento) ? descuento : 0;
         this._imagen = (imagen && imagen !='' ) ? imagen : Fruta.IMAGEN_DEFAULT;
         this._cantidad = cantidad;
+        this._colores = [];
     }
 
     //Getters y Setters
@@ -83,6 +86,12 @@ export class Fruta {
     }
     public set cantidad(value: number) {
         this._cantidad = value;
+    }
+    public get colores(): Color[] {
+        return this._colores;
+    }
+    public set colores(value: Color[]) {
+        this._colores = value;
     }
 
     //TODO
