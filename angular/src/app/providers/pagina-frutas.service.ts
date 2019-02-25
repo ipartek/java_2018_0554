@@ -65,52 +65,5 @@ export class PaginaFrutasService {
     
   } 
 
-  // post(fruta:Fruta): Observable<any> {
-  //   let url = GLOBAL.endpoint + '/fruta/';
-
-  //   let body = {
-  //     // "id": todo.id,
-  //     "nombre": fruta.nombre,
-  //     "precio": fruta.precio,
-  //     "oferta": fruta.oferta,
-  //     "descuento": fruta.descuento,
-  //     "imagen": fruta.imagen
-  //     //TODO colores
-  //   }
-    
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type':  'application/json'
-  //     })
-  //   };
-
-  //   return this.http.post( url, body , httpOptions );
-
-  // }
-
-  // put(fruta: Fruta): Observable<any>{
-  //   let url = GLOBAL.endpoint + `/fruta/${fruta.id}`;
-
-  //   let body = {
-  //     "nombre": fruta.nombre,
-  //     "precio": fruta.precio,
-  //     "oferta": fruta.oferta,
-  //     "descuento": fruta.descuento,
-  //     "imagen": fruta.imagen   
-  //   }
-
-  //   return this.http.put( url, body );  
-  // }
-
-  // patch(fruta: Fruta): Observable<any>{
-  //   let url = GLOBAL.endpoint + `/fruta/${fruta.id}`;
-
-  //   let body = {                    
-  //     "oferta": !fruta.oferta,
-  //     "descuento": fruta.descuento    
-  //   } 
   
-  //   return this.http.patch( url, body );  
-  // }
-
 }
