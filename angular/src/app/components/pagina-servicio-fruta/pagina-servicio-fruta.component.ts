@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FrutaService } from 'src/app/providers/fruta.service';
 import { Fruta } from 'src/app/model/fruta';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Color } from 'src/app/model/color';
 
 @Component({
   selector: 'app-pagina-servicio-fruta',
@@ -18,6 +19,7 @@ export class PaginaServicioFrutaComponent implements OnInit {
   check:boolean[];
   checkSeleccionado:number;
   formulario: FormGroup // agrupaion de FromControl = Input
+  colores:Color;
 
   constructor(private frutaService: FrutaService, private fromBuilder: FormBuilder) {
     console.trace('constructor PaginaServicioFrutaComponent ');
@@ -44,7 +46,8 @@ export class PaginaServicioFrutaComponent implements OnInit {
     ],
     oferta: [false],
     descuento: [0],
-    imagen:['']
+    imagen:[''],
+
 
     });
 

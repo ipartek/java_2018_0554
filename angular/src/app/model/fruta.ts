@@ -1,3 +1,5 @@
+import { Color } from './color';
+
 const IMAGEN_DEFAULT ='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxzQ8VNlPlj3bzVsE96lJJIdEHzKRkGBUeaI4y4v_x_PdvWZDN-A';
 
 export class Fruta {
@@ -10,6 +12,13 @@ export class Fruta {
     private _imagen: string;
     private _descuento: number;
     private _cantidad: number;
+    private _colores: Color;
+    public get colores(): Color {
+        return this._colores;
+    }
+    public set colores(value: Color) {
+        this._colores = value;
+    }
    
     
     //constructor solo uno
@@ -31,7 +40,8 @@ export class Fruta {
         this._oferta = oferta ;
         this._descuento = (descuento) ? descuento : 0;
         this._imagen = (imagen) ? imagen : IMAGEN_DEFAULT;
-        this.cantidad = cantidad;
+        this._cantidad = cantidad;
+        
     }
 
 
