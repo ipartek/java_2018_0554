@@ -61,9 +61,10 @@
     </div>
     <div class="col-6 text-center">
 
-      <img src="{{formulario.controls.imagen.value}}" alt="url de la fruta" class="imagenFruta mb-2 rounded-circle shadow p-1  bg-white rounded">
+      <img src="{{formulario.controls.imagen.value}}" alt="url de la fruta"
+        class="imagenFruta mb-2 rounded-circle shadow p-1  bg-white rounded">
       <p *ngIf="formulario.controls.imagen.invalid && formulario.controls.imagen.touched" class="text-danger">
-          *recuerda, la url de la imagen tiene que empezar por http[s]://... .jpg|png|bmp|jpeg</p>
+        *recuerda, la url de la imagen tiene que empezar por http[s]://... .jpg|png|bmp|jpeg</p>
     </div>
   </div>
 

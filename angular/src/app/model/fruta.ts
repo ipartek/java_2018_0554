@@ -1,5 +1,4 @@
-import { Mensaje } from './mensaje';
-
+import { Color } from './color';
 
 export class Fruta {
 
@@ -11,6 +10,8 @@ export class Fruta {
     private _descuento: number;
     private _imagen: string;
     private _cantidad: number;
+    private _colores: Color[];
+
 
     static IMAGEN_DEFAULT = 'http://frutas.consumer.es/sites/default/files/compra_0.jpg';
 
@@ -35,6 +36,7 @@ export class Fruta {
         this._descuento = (descuento) ? descuento : 0;
         this._imagen = (imagen) ? imagen : Fruta.IMAGEN_DEFAULT;
         this._cantidad = cantidad;
+        this._colores=[];
     }
     //getters y setters
     public get id(): number {
@@ -86,6 +88,12 @@ export class Fruta {
     }
     public set cantidad(value: number) {
         this._cantidad = value;
+    }
+    public get colores(): Color[] {
+        return this._colores;
+    }
+    public set colores(value: Color[]) {
+        this._colores = value;
     }
     //TODO
     jsonMapper(jsonData: any) {

@@ -1,17 +1,41 @@
 {
   "frutas": [
     {
+      "id": 1,
+      "nombre": "Fresa",
+      "oferta": true,
+      "precio": 3.59,
+      "descuento": 5,
+      "imagen": "https://media.mercola.com/assets/images/foodfacts/strawberry-nutrition-facts.jpg",
+      "colores": [
+        {
+          "nombre": "rojo",
+          "codigo": "#FF0000"
+        }
+      ]
+    },
+    {
       "id": 2,
       "nombre": "pomelo",
-      "oferta": true,
-      "precio": 2,
-      "descuento": 21,
-      "imagen": "http://frutasfercas.com/wp-content/uploads/2018/03/pomelo-1.jpg"
+      "oferta": false,
+      "precio": 7.43,
+      "descuento": 7,
+      "imagen": "http://frutasfercas.com/wp-content/uploads/2018/03/pomelo-1.jpg",
+      "colores": [
+        {
+          "nombre": "rojo",
+          "codigo": "#F00"
+        },
+        {
+          "nombre": "naranja",
+          "codigo": "#FF9800"
+        }
+      ]
     },
     {
       "id": 3,
       "nombre": "chirimoya",
-      "oferta": false,
+      "oferta": true,
       "precio": 10,
       "descuento": 0,
       "imagen": "https://media.mercola.com/assets/images/foodfacts/cherimoya-nutrition-facts.jpg",
@@ -41,6 +65,56 @@
         {
           "nombre": "amarillo",
           "codigo": "#ff0"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "nombre": "tamarindo",
+      "oferta": true,
+      "precio": 13.7,
+      "descuento": 3,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTuiEhT2_yFMqcz3TlSGzmwVqrOXJnO1gdlEd5ErYl4ynfte4J",
+      "colores": [
+        {
+          "nombre": "verde",
+          "codigo": "#0f0"
+        },
+        {
+          "nombre": "negro",
+          "codigo": "#000"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "nombre": "Melocotón",
+      "oferta": true,
+      "precio": 23,
+      "descuento": 95,
+      "imagen": "https://www.sportlife.es/media/cache/big/upload/images/article/5b4efebe0de694ef0a349b1f/5b4f04c50ce69458628b6fd6-beneficios-y-curiosidades-del-melocoton.jpg",
+      "colores": [
+        {
+          "nombre": "naranja",
+          "codigo": "#FF8000"
+        }
+      ]
+    },
+    {
+      "nombre": "Sandia",
+      "oferta": false,
+      "precio": 5.95,
+      "descuento": 0,
+      "imagen": "https://comefruta.es/wp-content/uploads/sandia_mini.jpg",
+      "id": 7,
+      "colores": [
+        {
+          "nombre": "verde",
+          "codigo": "#0f0"
+        },
+        {
+          "nombre": "rojo",
+          "codigo": "#f00"
         }
       ]
     }

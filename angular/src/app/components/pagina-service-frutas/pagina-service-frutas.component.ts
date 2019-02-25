@@ -20,7 +20,7 @@ export class PaginaServiceFrutasComponent implements OnInit {
     this.frutas = [];
 
     this.mensajeMostrar = new Mensaje('', '');
-    this.frutaSeleccionada=new Fruta('',0);
+    this.frutaSeleccionada = new Fruta('', 0);
     this.crearFormulario();
 
   }
@@ -172,20 +172,22 @@ export class PaginaServiceFrutasComponent implements OnInit {
         //TODO patter para comprobar que empieze por http y que acabe con extensión .jp[e]g ç
         //'(https?\:\/\/)?(www\.)?([a-z0-9]+\.)+([a-z]{2,})(\/[a-zA-Z0-9\-_]+)+(\.)+(jpg|png|bmp|jpeg){1}'
         //'(http:|https:){1,1}.*\.(jpe?g|png|gif)$'
-        [Validators.required,Validators.pattern('(http:|https:){1,1}.*\.(jpe?g|png|gif)$')]
-      ]
+        [Validators.required, Validators.pattern('(http:|https:){1,1}.*\.(jpe?g|png|gif)$')]
+      ],
+      colores:this.formBuilder.array(
+                                      [this.crearColoresFormGroup()],
+                                      [Validators.minLength(1)]
+                                    )//minimo un color
     });
-
-
-     // subscribirnos al evento cada vez que cambia la "oferta" para validar el descuento
-     this.formulario.get('oferta').valueChanges.subscribe(
-      oferta=>{
+    // subscribirnos al evento cada vez que cambia la "oferta" para validar el descuento
+    this.formulario.get('oferta').valueChanges.subscribe(
+      oferta => {
         console.log('valueChanges %o', oferta);
         let descuentoFormControl = this.formulario.get('descuento');
-        if (oferta){
+        if (oferta) {
           //Validar decuento            
           descuentoFormControl.setValidators([Validators.min(1), Validators.max(100)]);
-        }else{
+        } else {
           //eliminar validaciones
           descuentoFormControl.setValidators([]);
         }
@@ -193,6 +195,17 @@ export class PaginaServiceFrutasComponent implements OnInit {
         descuentoFormControl.updateValueAndValidity();
       }
     );
+  }
+  crearColoresFormGroup():FormGroup{
+    return  this.formBuilder.group({
+        nombre:[
+          'blaco',
+          [Validators.required,Validators.minLength(2)]],
+        codigo:[
+          '#FFFFFF',
+          [Validators.required,Validators.minLength(4),Validators.maxLength(7)]
+        ]
+      })
   }
   /**
    * Metodo que hace el calculo de su precio final con el porcentaje de descuento
