@@ -55,15 +55,15 @@
       "oferta": true,
       "precio": "8",
       "descuento": 12,
-      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg"
+      "imagen": "https://okdiario.com/img/recetas/2017/06/20/propiedades-de-melon.jpg"
     },
     {
+      "id": 9,
       "nombre": "Pomelo",
-      "precio": "33",
       "oferta": true,
+      "precio": "33",
       "descuento": 5,
-      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
-      "id": 9
+      "imagen": "https://www.comenaranjas.com/images/stories/virtuemart/product/pomelo-star-ruby.jpg"
     },
     {
       "id": 10,
@@ -71,55 +71,55 @@
       "oferta": true,
       "precio": "3.44",
       "descuento": 4,
-      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg"
+      "imagen": "https://greenshop.com.ar/wp-content/uploads/sites/13/2016/08/A.2.29-500GR.jpg"
     },
     {
+      "id": 11,
       "nombre": "Naranja",
-      "precio": 0,
       "oferta": true,
+      "precio": 4.98,
       "descuento": "2",
-      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
-      "id": 11
+      "imagen": "https://www.naranjasquique.com/387-home_default/15kg.jpg"
     },
     {
+      "id": 12,
       "nombre": "Cereza",
+      "oferta": true,
       "precio": "2.99",
-      "oferta": true,
       "descuento": "7",
-      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
-      "id": 12
+      "imagen": "https://www.frutadelasarga.com/server/Portal_0008706/img/products/cereza-temprana_2930904.jpg"
     },
     {
+      "id": 13,
       "nombre": "Limón",
-      "precio": "3.44",
       "oferta": true,
+      "precio": "3.44",
       "descuento": 5,
-      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
-      "id": 13
+      "imagen": "https://misremedios.com/wp-content/uploads/2015/10/Limon.jpg"
     },
     {
+      "id": 15,
       "nombre": "Maracuyá",
+      "oferta": false,
       "precio": 3.44,
-      "oferta": false,
       "descuento": 0,
-      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
-      "id": 15
+      "imagen": "https://static0.misionesonline.net/wp-content/uploads/2017/03/unnamed-3puau71jmrag.jpg"
     },
     {
+      "id": 16,
       "nombre": "chirimoya",
-      "precio": 10,
       "oferta": false,
+      "precio": 10,
       "descuento": 0,
-      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
-      "id": 16
+      "imagen": "https://www.lavanguardia.com/r/GODO/LV/p5/WebSite/2018/06/26/Recortada/img_jelcacho_20170531-212634_imagenes_lv_terceros_chiri1-k4pH-U45419004168jAB-992x558@LaVanguardia-Web.jpg"
     },
     {
+      "id": 19,
       "nombre": "Cachuete",
-      "precio": 4.99,
       "oferta": false,
+      "precio": 4.99,
       "descuento": 0,
-      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
-      "id": 19
+      "imagen": "https://ejerciciosencasa.as.com/wp-content/uploads/2014/02/a_granel.jpg"
     },
     {
       "id": 22,

@@ -38,7 +38,7 @@
                 <label for="imagen">Imagen</label>
                 <input type="text" formControlName="imagen"
                 class="form-control" placeholder= "Imagen de la fruta">
-                <small *ngIf="formulario.controls.imagen.invalid && formulario.controls.imagen.touched" class="text-danger">*Imagen no válida</small>
+                <small *ngIf="formulario.controls.imagen.invalid && formulario.controls.imagen.touched" class="text-danger">*Debe ser una URL de imagen válida empezar por http(s) y terminar .png o .jp(e)g</small>
             </div>
           </div>
           <div class="col-6 m-3 p-1">
