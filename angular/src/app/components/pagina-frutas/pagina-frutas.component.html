@@ -21,34 +21,50 @@
   <p>Estado:  {{ formulario.status | json }}</p> 
 </div>
 
-<form [formGroup]="formulario" (submit)="nueva()"  >
-    <div class="form-group">
-      <label for="nombre">Nombre</label>
-      <input type="text" formControlName="nombre" class="form-control" placeholder="Mínimo 3 letras">      
-      <p *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched"  
-      class="text-danger">*recuerda que minimo 3 letras</p>
-    </div>   
-    <div class="form-group">
-        <label for="nombre">Precio</label>
-        <input type="number" formControlName="precio" class="form-control">      
-    </div>   
-    <div class="form-group">
-      <label for="oferta">Oferta</label>
-      <input type="checkbox" formControlName="oferta" class="form-control">      
+<form [formGroup]="formulario" (submit)="nueva()"  class="p-3 mb-4 mt-2 border border-primary">
 
-      <div *ngIf="formulario.controls.oferta.value"> 
-        <label for="descuento">Descuento <b>{{formulario.controls.descuento.value}}</b></label>
-        <input type="range" formControlName="descuento" step="5" min="0" max="100" class="form-control">      
-      </div>  
-    </div>  
-    <div class="form-group">
-      <label for="imagen">Imagen</label>
-      <input type="text" formControlName="imagen" class="form-control">      
-      <img src="{{formulario.controls.imagen.value}}" alt="url de la imagen de la nueva fruta">
-    </div>  
+    <div class="form-row">
+        <div class="col-6">
+
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" formControlName="nombre" class="form-control" placeholder="Mínimo 3 letras">      
+              <p *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched"  
+              class="text-danger">*recuerda que minimo 3 letras</p>
+            </div>   
+
+            <div class="form-row">
+                <div class="col-4">
+                    <label for="nombre">Precio</label>
+                    <input type="number" formControlName="precio" class="form-control">      
+                </div>   
+                <div class="col-4">
+                  <label for="oferta">Oferta</label>
+                  <input type="checkbox" formControlName="oferta" class="form-control">      
+                </div>  
+                <div class="col-4">
+                  <div *ngIf="formulario.controls.oferta.value"> 
+                    <label for="descuento">Descuento <b>{{formulario.controls.descuento.value}}</b></label>
+                    <input type="range" formControlName="descuento" step="5" min="0" max="100" class="form-control">      
+                  </div>  
+                </div>  
+            </div>
+
+        </div> <!-- col-6 -->   
+
+        <div class="col-6">          
+          <img class="medium" src="{{formulario.controls.imagen.value}}" alt="url de la imagen de la nueva fruta">
+          <br>
+          <label for="imagen">URL de la Imagen</label>
+          <input type="text" formControlName="imagen" class="form-control">      
+          <p *ngIf="formulario.controls.imagen.invalid && formulario.controls.imagen.touched"  
+          class="text-danger">*debe ser una URL de imagen valida empezar por http(s) y terminar .png o .jp(e)g</p>
+        </div>  
+
+    </div>    
     
     <button type="submit"
-            class="btn btn-block btn-primary"
+            class="btn btn-block btn-primary mt-5"
             [disabled]="formulario.invalid">
             {{(frutaSeleccionada.id == -1)?'Crear':'Modificar'}}
     </button>

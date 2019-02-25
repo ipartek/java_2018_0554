@@ -49,7 +49,10 @@ export class PaginaFrutasComponent implements OnInit {
                       [Validators.min(1), Validators.max(99)]
                   ],
         //TODO patter para comprobar que empieze por http: y termine por .png o .jp[e]g           
-        imagen: [ Fruta.IMAGEN_DEFAULT , [Validators.required]]
+        imagen: [ 
+                  Fruta.IMAGEN_DEFAULT , 
+                  [Validators.required, Validators.pattern('(http:|https:){1,1}.*\.(jpe?g|png|gif)$')]
+                ]
       });
   }
 

@@ -117,6 +117,14 @@
       "precio": 3.99,
       "descuento": 10,
       "imagen": "https://www.abc.es/media/sociedad/2017/12/02/platanos-potasio-salud-k3gG-U212262406718N6D-620x400@abc.jpg"
+    },
+    {
+      "nombre": "Otra",
+      "oferta": true,
+      "precio": 6,
+      "descuento": 20,
+      "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
+      "id": 9
     }
   ]
 }
