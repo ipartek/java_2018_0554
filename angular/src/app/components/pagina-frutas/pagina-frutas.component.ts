@@ -50,7 +50,7 @@ export class PaginaFrutasComponent implements OnInit {
         0,
         [Validators.min(0), Validators.max(70)]
       ], 
-      imagen: [ Fruta.IMAGEN_DEFAULT, [Validators.required]]
+      imagen: [ Fruta.IMAGEN_DEFAULT, [Validators.required, Validators.pattern('(https?:){1}.*\.(jpe?g|png|gif)$')]]
     });
   }
 
