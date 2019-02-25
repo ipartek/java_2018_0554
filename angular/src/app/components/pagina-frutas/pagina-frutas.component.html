@@ -32,6 +32,7 @@
                   <label for="descuento">Descuento <b>{{ formulario.controls.descuento.value }} %</b></label>
                   <input type="range" formControlName="descuento"
                   class="form-control" min="0" max="99" >
+                  <small *ngIf="formulario.controls.precio.invalid && formulario.controls.precio.touched" class="text-danger">*El descuento debe ser entre 1-99%</small>
               </div>
             </div>
             <div class="form-group">
