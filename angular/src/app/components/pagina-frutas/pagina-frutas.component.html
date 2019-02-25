@@ -59,7 +59,7 @@
       <img class="rounded-circle shadow p-1 bg-primary rounded" src="{{fruta.imagen}}" alt="fruta.nombre">   
          
       <div class="d-flex flex-column justify-content-start align-items-start">
-        <b>{{fruta.nombre}}</b>
+        <b>{{fruta.nombre | titlecase }}</b>
         
       </div>
       <span *ngIf="fruta.oferta" class="d-flex flex-column">
@@ -71,7 +71,8 @@
       </span>
       <span *ngIf="!fruta.oferta" class="d-flex flex-column">
         {{ fruta.precio }}
-        <span class="badge badge-danger">{{ 0 | moneda: 'desc' }}</span>
+        <!-- <span class="badge badge-danger">{{ 0 | moneda: 'desc' }}</span> -->
+        <span class="text-danger">Sin oferta</span>
       </span>
       <i (click)="editar(fruta)" class="fas fa-edit"></i>
       <i (click)="delete(fruta)" class="fas fa-trash-alt"></i>

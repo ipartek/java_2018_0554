@@ -57,7 +57,7 @@ export class PaginaFrutasComponent implements OnInit {
         let descuentoFormControl = this.formulario.get('descuento');
         if(oferta){
           //Validar descuento
-          descuentoFormControl.setValidators([Validators.min(0), Validators.max(70)]);
+          descuentoFormControl.setValidators([Validators.min(1), Validators.max(99)]);
         }else{
           //Eliminar validaciones
           descuentoFormControl.setValidators([]);
