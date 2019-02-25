@@ -12,6 +12,7 @@ export class MensajeComponent implements OnInit {
 
   constructor() { 
     console.trace('MensajeComponent constructor');
+    this.mensaje=new Mensaje('');
     
   }
 

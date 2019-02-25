@@ -17,8 +17,8 @@
 
 <form [formGroup]="formulario" (submit)="seleccionar()">
   <div class="row">
-    <div class="col">
-      <div class="form-group">
+    <div class="col-6">
+      <div class="form-group mb-2">
         <label>Nombre </label>
         <input type="text" formControlName="nombre" class="form-control"
           placeholder="Nombre de la fruta mínimo tres letras">
@@ -26,19 +26,16 @@
           *recuerda
           que minimo 3 letras</p>
       </div>
-    </div>
-    <div class="col">
-      <div class="form-group">
-        <label>Precio </label>
-        <input type="number" formControlName="precio" class="form-control" placeholder="Precio de la fruta">
-        <p *ngIf="formulario.controls.precio.invalid && formulario.controls.precio.touched" class="text-danger">
-          *recuerda
-          tiene que ser un número superior a 0 e inferior de 100</p>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <!--       <div class="col">
+      <div class="form-inline mb-2">
+        <div class="form-group mb-2 mr-sm-2">
+          <label class="mr-sm-2">Precio </label>
+          <input type="number" formControlName="precio" class="form-control" placeholder="Precio de la fruta">
+          <p *ngIf="formulario.controls.precio.invalid && formulario.controls.precio.touched" class="text-danger">
+            *recuerda
+            tiene que ser un número superior a 0 e inferior de 100</p>
+        </div>
+
+        <!--       <div class="col">
   <div class="form-group">
     <label>Id </label>
     <input type="number" formControlName="id" class="form-control" placeholder="Id de la fruta">
@@ -46,31 +43,37 @@
       tiene que ser un id superior a 1</p>
   </div>
 </div> -->
-    <div class="col">
-      <div class="custom-control custom-checkbox form-group">
-        <input type="checkbox" formControlName="oferta" class="custom-control-input" id="oferta">
-        <label class="custom-control-label" for="oferta">Oferta, si está en oferta por un valor entre 1 y 100 en el
-          descuento</label>
+
+        <div class="custom-control custom-checkbox form-group mb-2 mr-sm-2">
+          <input type="checkbox" formControlName="oferta" class="custom-control-input" id="oferta">
+          <label class="custom-control-label" for="oferta">En oferta</label>
+        </div>
+        <div class="form-group mb-2 mr-sm-2" *ngIf="formulario.value.oferta">
+          <label>Descuento % <b>{{formulario.controls.descuento.value}}</b></label>
+          <input type="range" formControlName="descuento" class="form-control" min="0" max="100">
+          <p *ngIf="formulario.controls.descuento.invalid && formulario.controls.descuento.touched" class="text-danger">
+            *recuerda
+            tiene que ser un número superior a 0 e inferior de 100</p>
+        </div>
       </div>
-      <div class="form-group" *ngIf="formulario.value.oferta">
-        <label>Descuento % <b>{{formulario.controls.descuento.value}}</b></label>
-        <input type="range" formControlName="descuento" class="form-control" min="0" max="100">
-        <p *ngIf="formulario.controls.descuento.invalid && formulario.controls.descuento.touched" class="text-danger">
-          *recuerda
-          tiene que ser un número superior a 0 e inferior de 100</p>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
+      <label>Url de la imagen:</label>
       <input type="text" formControlName="imagen" class="form-control">
-      <img src="{{formulario.controls.imagen.value}}" alt="url de la fruta">
+    </div>
+    <div class="col-6 text-center">
+
+      <img src="{{formulario.controls.imagen.value}}" alt="url de la fruta" class="imagenFruta mb-2 rounded-circle shadow p-1  bg-white rounded">
+      <p *ngIf="formulario.controls.imagen.invalid && formulario.controls.imagen.touched" class="text-danger">
+          *recuerda, la url de la imagen tiene que empezar por http[s]://... .jpg|png|bmp|jpeg</p>
     </div>
   </div>
-  <button *ngIf="formulario.value.id === -1"class="btn btn-primary btn-block" type="submit" [disabled]="formulario.invalid">Crear</button>
-  <button *ngIf="formulario.value.id !== -1"class="btn btn-warning btn-block" type="submit" [disabled]="formulario.invalid">Editar</button>
-  <button *ngIf="formulario.value.id !== -1"class="btn btn-success btn-block"(click)="limpiarFormulario()">Limpiar formulario</button>
-  
+
+  <button *ngIf="formulario.value.id === -1" class="btn btn-primary btn-block" type="submit"
+    [disabled]="formulario.invalid">Crear</button>
+  <button *ngIf="formulario.value.id !== -1" class="btn btn-warning btn-block" type="submit"
+    [disabled]="formulario.invalid">Editar</button>
+  <button *ngIf="formulario.value.id !== -1" class="btn btn-success btn-block" (click)="limpiarFormulario()">Limpiar
+    formulario</button>
+
 </form>
 
 <div class="border border-danger mt-2">
@@ -84,7 +87,7 @@
   <div class="card-body">
     <div class="d-flex">
       <div>
-        <img src="{{f.imagen}}" class=" rounded-circle shadow p-1  bg-white rounded" alt="...">
+        <img src="{{f.imagen}}" class=" rounded-circle shadow p-1  bg-white rounded imgLista" alt="...">
       </div>
       <div class="ml-2">
         <h5 class="card-title nombre text-primary">{{f.nombre | titlecase }} {{f.precio |number :'1.0-2' |moneda}}</h5>

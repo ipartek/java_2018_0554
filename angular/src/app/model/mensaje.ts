@@ -8,7 +8,7 @@ export class Mensaje {
     static WARNING='alert-warning';
   
 
-    constructor(texto: string, color: string) {
+    constructor(texto: string, color: string= Mensaje.DANGER) {
         this._texto = texto;
         this._color = color;
     }

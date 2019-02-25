@@ -43,14 +43,6 @@
           "codigo": "#ff0"
         }
       ]
-    },
-    {
-      "id": 5,
-      "nombre": "Melocoton",
-      "oferta": true,
-      "precio": 1,
-      "descuento": 9,
-      "imagen": "http://frutas.consumer.es/sites/default/files/compra_0.jpg"
     }
   ],
   "todos": [

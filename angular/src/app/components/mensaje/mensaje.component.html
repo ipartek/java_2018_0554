@@ -1,5 +1,7 @@
-<!-- TODO crear un componente, mensaje para reutilzar-->
-<div *ngIf="mensaje !== ''"
-class="alert {{mensaje.color}}">
-  <strong>{{mensaje.texto}}</strong>
+
+<div *ngIf="mensaje.texto != ''" class="alert {{mensaje.color}} alert-dismissible fade show" role="alert">
+    <p>{{mensaje.texto}}</p>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
 </div>

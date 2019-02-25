@@ -48,11 +48,11 @@ export class PaginaServiceFrutasComponent implements OnInit {
     if (confirm('¿Estas seguro que quieres eliinar?')) {
       this.frutaService.delete(fruta.id).subscribe(result => {
         this.getAllFrutas();
-        this.mensajeMostrar = new Mensaje(`ELIMINADA ${fruta.nombre}`, 'alert-success');
+        this.mensajeMostrar = new Mensaje(`ELIMINADA ${fruta.nombre}`);
       },
         error => {
           console.log(error);
-          this.mensajeMostrar = new Mensaje(`No se ha podido ELIMINAR ${fruta.nombre}`, 'alert-warning');
+          this.mensajeMostrar = new Mensaje(`No se ha podido ELIMINAR ${fruta.nombre}`, Mensaje.WARNING);
         });
     }
 
@@ -67,7 +67,7 @@ export class PaginaServiceFrutasComponent implements OnInit {
     console.trace('Crear nueva fruta insert %o', this.formulario.value);
     this.frutaService.post(this.frutaSeleccionada).subscribe(r => {
       this.getAllFrutas();
-      this.mensajeMostrar = new Mensaje(`CREADO ${this.frutaSeleccionada.nombre}`, 'alert-success');
+      this.mensajeMostrar = new Mensaje(`CREADO ${this.frutaSeleccionada.nombre}`, Mensaje.SUCCESS);
       this.limpiarFormulario();
     },
       error => {
@@ -94,7 +94,7 @@ export class PaginaServiceFrutasComponent implements OnInit {
     },
       error => {
         console.log("Se ha cometido un error al crear la fruta nueva %o", error);
-        this.mensajeMostrar = new Mensaje(`No se ha podido MODIFICAR ${this.frutaSeleccionada.nombre}`, 'alert-warning');
+        this.mensajeMostrar = new Mensaje(`No se ha podido MODIFICAR ${this.frutaSeleccionada.nombre}`, Mensaje.WARNING);
       })
   }
 
@@ -165,14 +165,34 @@ export class PaginaServiceFrutasComponent implements OnInit {
       ],
       descuento: [
         0,
-        [Validators.required, Validators.min(0), Validators.max(100)]
+        //[Validators.required, Validators.min(0), Validators.max(100)]
       ],
       imagen: [
         Fruta.IMAGEN_DEFAULT,
-        //TODO patter para comprobar que empieze por http y que acabe con extensión .jp[e]g
-        [Validators.required]
+        //TODO patter para comprobar que empieze por http y que acabe con extensión .jp[e]g ç
+        //'(https?\:\/\/)?(www\.)?([a-z0-9]+\.)+([a-z]{2,})(\/[a-zA-Z0-9\-_]+)+(\.)+(jpg|png|bmp|jpeg){1}'
+        //'(http:|https:){1,1}.*\.(jpe?g|png|gif)$'
+        [Validators.required,Validators.pattern('(http:|https:){1,1}.*\.(jpe?g|png|gif)$')]
       ]
     });
+
+
+     // subscribirnos al evento cada vez que cambia la "oferta" para validar el descuento
+     this.formulario.get('oferta').valueChanges.subscribe(
+      oferta=>{
+        console.log('valueChanges %o', oferta);
+        let descuentoFormControl = this.formulario.get('descuento');
+        if (oferta){
+          //Validar decuento            
+          descuentoFormControl.setValidators([Validators.min(1), Validators.max(100)]);
+        }else{
+          //eliminar validaciones
+          descuentoFormControl.setValidators([]);
+        }
+        //actualizar value y validaciones
+        descuentoFormControl.updateValueAndValidity();
+      }
+    );
   }
   /**
    * Metodo que hace el calculo de su precio final con el porcentaje de descuento
