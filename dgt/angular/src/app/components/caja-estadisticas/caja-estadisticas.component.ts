@@ -16,6 +16,7 @@ export class CajaEstadisticasComponent implements OnInit {
 
   ngOnInit() {
     console.trace('ngOnInit CajaEstadisticasComponent');
+    console.debug('Valor de tipo ' + this.tipo);
   }
 
 }
