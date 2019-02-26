@@ -202,7 +202,7 @@ public class MultasController extends HttpServlet {
 	private void opVer(HttpServletRequest request) {
 		if (idMultaStr == null) {
 			try {
-				request.setAttribute("multas", daoMulta.getAllByUser(a.getId(), opm));			
+				request.setAttribute("multas", daoMulta.getAllByUser(a.getId()));			
 			}
 			catch (Exception e) {
 				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "No se han puesto multas");
