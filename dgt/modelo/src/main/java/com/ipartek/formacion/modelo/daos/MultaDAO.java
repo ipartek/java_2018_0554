@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.cm.ConnectionManager;
-import com.ipartek.formacion.modelo.pojo.Coche;
+import com.ipartek.formacion.modelo.pojo.Vehiculo;
 import com.ipartek.formacion.modelo.pojo.Multa;
 
 public class MultaDAO {
@@ -142,7 +142,7 @@ public class MultaDAO {
 
 	private Multa rowMapper(ResultSet rs) throws SQLException {
 		Multa m = new Multa();
-		Coche c = new Coche();
+		Vehiculo c = new Vehiculo();
 		Timestamp timestampalta = rs.getTimestamp("fecha_alta");
 		m.setFechaAlta(new java.util.Date(timestampalta.getTime()));
 		if (isBaja) {

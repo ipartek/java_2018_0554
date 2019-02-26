@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-public class Coche {
+public class Vehiculo {
 	private Long id;
 	
 	@NotBlank
@@ -19,7 +19,7 @@ public class Coche {
 	@Min(0)
 	private Integer km;
 	
-	public Coche(Long id, String matricula, String modelo, Integer km) {
+	public Vehiculo(Long id, String matricula, String modelo, Integer km) {
 		this();
 		setId(id);
 		setMatricula(matricula);
@@ -27,7 +27,7 @@ public class Coche {
 		setKm(km);
 	}
 
-	public Coche() {
+	public Vehiculo() {
 		super();
 		this.id=-1l;
 		this.matricula="";

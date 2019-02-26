@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.cm.ConnectionManager;
-import com.ipartek.formacion.modelo.pojo.Coche;
+import com.ipartek.formacion.modelo.pojo.Vehiculo;
 
-public class CocheDAO {
+public class VehiculoDAO {
 
-	private final static Logger LOG = Logger.getLogger(CocheDAO.class);
-	private static CocheDAO INSTANCE = null;
+	private final static Logger LOG = Logger.getLogger(VehiculoDAO.class);
+	private static VehiculoDAO INSTANCE = null;
 	private static final String SQL_GETMATRICULA = "{call pa_coche_getByMatricula(?)}";
 	private static final String SQL_GETALL = "SELECT * FROM coche ORDER BY id DESC LIMIT 100";
 	private static final String SQL_BYID = "SELECT * FROM COCHE WHERE ID=?";
@@ -24,25 +24,25 @@ public class CocheDAO {
 	private static final String SQL_INSERT = "{call pa_coche_insert(?,?,?,?)}";
 	private static final String SQL_UPDATE = "{call pa_coche_update(?,?,?)}";
 
-	private CocheDAO() {
+	private VehiculoDAO() {
 		super();
 	}
 
-	public synchronized static CocheDAO getInstance() {
+	public synchronized static VehiculoDAO getInstance() {
 		if (INSTANCE == null) {
-			INSTANCE = new CocheDAO();
+			INSTANCE = new VehiculoDAO();
 		}
 		return INSTANCE;
 	}
 
 	/**
-	 * Obtenemos un Coche por su matricula
+	 * Obtenemos un Vehiculo por su matricula
 	 * 
 	 * @param matricula
 	 * @return Coche si encuentra, null en caso contrario
 	 */
-	public Coche getByMatricula(String matricula) {
-		Coche c = null;
+	public Vehiculo getByMatricula(String matricula) {
+		Vehiculo c = null;
 		try (Connection conn = ConnectionManager.getConnection();
 				CallableStatement cs = conn.prepareCall(SQL_GETMATRICULA);) {
 
@@ -66,9 +66,9 @@ public class CocheDAO {
 	 * @param id
 	 * @return coche con datos, null si no encuentra
 	 */
-	public Coche getById(long id) {
+	public Vehiculo getById(long id) {
 
-		Coche c = null;
+		Vehiculo c = null;
 
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_BYID);) {
@@ -92,9 +92,9 @@ public class CocheDAO {
 	 * 
 	 * @return si no existe ningun new ArrayList<Coche>
 	 */
-	public ArrayList<Coche> getAll() {
+	public ArrayList<Vehiculo> getAll() {
 
-		ArrayList<Coche> coches = new ArrayList<Coche>();
+		ArrayList<Vehiculo> coches = new ArrayList<Vehiculo>();
 
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_GETALL);
@@ -102,7 +102,7 @@ public class CocheDAO {
 
 			while (rs.next()) {
 				try {
-					Coche coche = new Coche();
+					Vehiculo coche = new Vehiculo();
 					coche.setId(rs.getLong("id"));
 					coche.setMatricula(rs.getString("matricula"));
 					coche.setKm(rs.getInt("km"));
@@ -158,7 +158,7 @@ public class CocheDAO {
 	 * @throws SQLException si la matricula ya existe
 	 */
 
-	public Coche insert(Coche coche) throws SQLException{
+	public Vehiculo insert(Vehiculo coche) throws SQLException{
 
 		try (Connection conn = ConnectionManager.getConnection();
 				CallableStatement cs = conn.prepareCall(SQL_INSERT);) {
@@ -180,7 +180,7 @@ public class CocheDAO {
 	 * Actualizar un coche menos su id y matricula @param coche @throws
 	 * SQLException @returntrue si se modifica, false e caos contrario @throws
 	 */
-	public boolean update(Coche coche) throws SQLException {
+	public boolean update(Vehiculo coche) throws SQLException {
 
 		boolean resul = false;
 		try (Connection conn = ConnectionManager.getConnection();
@@ -197,8 +197,8 @@ public class CocheDAO {
 		return resul;
 	}
 
-	private Coche rowMapper(ResultSet rs) throws SQLException {
-		Coche c = new Coche();
+	private Vehiculo rowMapper(ResultSet rs) throws SQLException {
+		Vehiculo c = new Vehiculo();
 		c.setId(rs.getLong("id"));
 		c.setMatricula(rs.getString("matricula"));
 		c.setModelo(rs.getString("modelo"));
