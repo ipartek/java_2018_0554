@@ -1,0 +1,22 @@
+<main role="main" class="container">
+
+	<div>
+		<img class="img-responsive mx-auto d-block mb-5 mt-5" width="175px"
+			height="200px"
+			src="https://pngimage.net/wp-content/uploads/2018/05/escudo-policia-nacional-espa%C3%B1a-png-1.png"
+			alt="escudo policia">
+	</div>
+	<form novalidate class="form-signin" action="login" method="post">
+		<h1 class="h3 mb-3 font-weight-normal text-center text-white">Iniciar Sesión
+		</h1>
+		<label for="placa" class="sr-only">Nº Placa </label> <input type="tel"
+			id="placa" name="placa" min="-999999" max="999999" maxlength="6" class="form-control number mb-3"
+			placeholder="Nº Placa" value="${placa}" required autofocus> 
+		<label for="password" class="sr-only"> Contraseña:</label> <input
+			type="password" id="password" class="form-control mb-3"
+			placeholder="Contraseña" name="password" value="${password}" required>
+		<a class="btn btn-lg btn-primary btn-block" type="submit" href="http://localhost:4200/home">
+			Acceder</a>
+
+	</form>
+	</main>

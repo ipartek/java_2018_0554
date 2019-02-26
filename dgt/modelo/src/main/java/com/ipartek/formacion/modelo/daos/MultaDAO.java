@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.cm.ConnectionManager;
+import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Coche;
 import com.ipartek.formacion.modelo.pojo.Multa;
 
@@ -81,6 +82,7 @@ public class MultaDAO {
 			cs.setLong(1, id);
 		
 			try (ResultSet rs = cs.executeQuery()) {
+				isGetById = true;
 				while (rs.next()) {
 					try {
 						multas.add(rowMapper(rs));
@@ -139,6 +141,7 @@ public class MultaDAO {
 	private Multa rowMapper(ResultSet rs) throws SQLException {
 		Multa m = new Multa();
 		Coche c = new Coche();
+		Agente a = new Agente();
 		Timestamp timestampalta = rs.getTimestamp("fecha_alta");
 		m.setFechaAlta(new java.util.Date(timestampalta.getTime()));
 		if (isBaja) {
@@ -150,16 +153,26 @@ public class MultaDAO {
 			}
 			
 		}
-		m.setId(rs.getLong("id"));
-		c.setMatricula(rs.getString("matricula"));
+		
 		if (isGetById) {
+			try {
 			m.setImporte(rs.getDouble("importe"));
 			m.setConcepto(rs.getString("concepto"));
 			c.setId(rs.getLong("id_coche"));
 			c.setModelo(rs.getString("modelo"));
 			c.setKm(rs.getInt("km"));
+			m.setId(rs.getLong("id"));
+			c.setMatricula(rs.getString("matricula"));
+			a.setPlaca(rs.getString("placa"));
+			a.setNombre(rs.getString("nombre"));
+			a.setPassword(rs.getString("password"));
+			}catch (Exception e) {
+				LOG.error(e);
+				
+			}
 		}
 		m.setCoche(c);
+		m.setAgente(a);
 		return m;
 	}
 

@@ -40,11 +40,11 @@ public class AgenteController {
 	
 	
 	@RequestMapping( value= {"/api/Agente/{id}"}, method = RequestMethod.GET)
-	public ResponseEntity<Multa> listar ( @PathVariable long id ){
-		ResponseEntity<Multa> response = new ResponseEntity<Multa>( HttpStatus.NOT_FOUND );
+	public ResponseEntity<ArrayList> listar ( @PathVariable long id ){
+		ResponseEntity<ArrayList> response = new ResponseEntity<ArrayList>( HttpStatus.NOT_FOUND );
 		ArrayList<Multa> multas = new ArrayList<Multa>();
 		multas=multaDAO.getAllByUser(id);
-		response = new ResponseEntity<Multa>(multas, HttpStatus.OK );
+		response = new ResponseEntity<ArrayList>(multas, HttpStatus.OK );
 		
 		return response;
 	}
