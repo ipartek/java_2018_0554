@@ -8,6 +8,8 @@ import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './paginas/home/home.component';
 import { CajaEstadisticasComponent } from './components/caja-estadisticas/caja-estadisticas.component';
 import { MonedaPipe } from './pipes/moneda.pipe';
+import { ListadoMultasComponent } from './paginas/listado-multas/listado-multas.component';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { MonedaPipe } from './pipes/moneda.pipe';
     NavComponent,
     HomeComponent,
     CajaEstadisticasComponent,
-    MonedaPipe
+    MonedaPipe,
+    ListadoMultasComponent
   ],
   imports: [
     BrowserModule,

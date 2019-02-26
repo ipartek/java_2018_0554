@@ -1,0 +1,15 @@
+<app-nav></app-nav>
+<h3 class="cover-heading">Multas activas</h3>
+
+<table id="tabla_multas" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+  <thead>
+    <tr>
+      <th scope="col">Multa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let multa of multas">
+      <td>{{ multa }}</td>
+    </tr>
+  </tbody>
+</table>
