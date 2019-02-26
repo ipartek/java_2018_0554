@@ -1,3 +1,4 @@
+import { Color } from './color';
 
 
 export class Fruta {
@@ -12,8 +13,9 @@ export class Fruta {
     private _descuento: number;    
     private _imagen: string;  
     private _cantidad: number; 
+    private _colores: Color[];
   
-
+  
     // constructor solo puede haber uno, no existe sobrecarga como en Java
     // usaremos parametros con ? para opcionales
 
@@ -43,6 +45,7 @@ export class Fruta {
         this._descuento = (descuento) ? descuento : 0;
         this._imagen = (imagen && imagen !='' ) ? imagen : Fruta.IMAGEN_DEFAULT;
         this._cantidad = cantidad;
+        this._colores = [];
     }
 
     // getters y setters
@@ -81,17 +84,15 @@ export class Fruta {
         this._descuento = value;
     }
 
-    public get imagen(): string {
-        if ( this._imagen && this._imagen !='' ) {
-            return this._imagen;
-        }
-        return Fruta.IMAGEN_DEFAULT;
+    public get imagen(): string {       
+        return this._imagen;
     }
     public set imagen(value: string) {
         if ( this._imagen && this._imagen !='' ) {
             this._imagen = value;
-        }
-        this._imagen = Fruta.IMAGEN_DEFAULT;
+        }else{
+            this._imagen = Fruta.IMAGEN_DEFAULT;
+        }    
     }
 
     public get cantidad(): number {
@@ -101,9 +102,12 @@ export class Fruta {
         this._cantidad = value;
     }
 
-    // TODO
-    jsonMapper( jsonData: any ){
-
+    public get colores(): Color[] {
+        return this._colores;
     }
+    public set colores(value: Color[]) {
+        this._colores = value;
+    }
+
 
 }

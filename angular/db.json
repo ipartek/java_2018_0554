@@ -53,14 +53,8 @@
       "nombre": "chirimoya",
       "oferta": true,
       "precio": 10,
-      "descuento": 0,
-      "imagen": "https://media.mercola.com/assets/images/foodfacts/cherimoya-nutrition-facts.jpg",
-      "colores": [
-        {
-          "nombre": "verde",
-          "codigo": "#0F0"
-        }
-      ]
+      "descuento": 10,
+      "imagen": "https://media.mercola.com/assets/images/foodfacts/cherimoya-nutrition-facts.jpg"
     },
     {
       "id": 4,
@@ -68,15 +62,35 @@
       "oferta": true,
       "precio": 5.59,
       "descuento": 3.5,
-      "imagen": "https://www.comenaranjas.com/images/stories/virtuemart/product/manzana-royal.jpg"
+      "imagen": "https://www.comenaranjas.com/images/stories/virtuemart/product/manzana-royal.jpg",
+      "colores": [
+        {
+          "nombre": "blanco",
+          "codigo": "#FFF"
+        },
+        {
+          "nombre": "rojo",
+          "codigo": "#FFF"
+        }
+      ]
     },
     {
-      "nombre": "Maracuya con FOTO OK",
+      "id": 7,
+      "nombre": "Maracuya",
       "oferta": false,
       "precio": 12,
       "descuento": 0,
       "imagen": "https://image.freepik.com/vector-gratis/lema-pina-sandia_41984-19.jpg",
-      "id": 7
+      "colores": [
+        {
+          "nombre": "narnajaddd",
+          "codigo": "#FFFGGG"
+        },
+        {
+          "nombre": "KakiOREO",
+          "codigo": "#DDDD"
+        }
+      ]
     },
     {
       "id": 8,
