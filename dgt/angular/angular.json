@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "app-agente": {
+    "angular": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/app-agente",
+            "outputPath": "dist/angular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "app-agente:build"
+            "browserTarget": "angular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "app-agente:build:production"
+              "browserTarget": "angular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "app-agente:build"
+            "browserTarget": "angular:build"
           }
         },
         "test": {
@@ -107,7 +107,7 @@
         }
       }
     },
-    "app-agente-e2e": {
+    "angular-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -116,11 +116,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "app-agente:serve"
+            "devServerTarget": "angular:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "app-agente:serve:production"
+              "devServerTarget": "angular:serve:production"
             }
           }
         },
@@ -136,5 +136,5 @@
       }
     }
   },
-  "defaultProject": "app-agente"
+  "defaultProject": "angular"
 }
