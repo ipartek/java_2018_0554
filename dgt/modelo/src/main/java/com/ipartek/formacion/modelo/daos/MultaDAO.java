@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
@@ -71,6 +72,23 @@ public class MultaDAO {
 		return m;
 	}
 	
+	public HashMap<Long, Multa> getAllByIdAgente(Long idAgente) throws SQLException {
+		HashMap<Long, Multa> multasAgente = new HashMap<>();
+		Multa m = new Multa();
+		String sql = SQL_GETALL_BYUSER;
+		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(sql);) {
+			cs.setLong(1, idAgente);
+			try (ResultSet rs = cs.executeQuery()) {
+				while (rs.next()) {
+					m = rowMapper(rs);
+					multasAgente.put(m.getId(), m);
+				}
+			}
+		} catch (Exception e) {
+			LOG.debug(e);
+		}
+		return multasAgente;
+	}
 	
 	
 	public ArrayList<Multa> getAllByUser(long id) {
