@@ -1,0 +1,35 @@
+<div class="m-5 pb-5">
+<h1 class="text-primary">Flujo de la información de la vista al modelo y modelo a vista</h1>
+
+<p>
+    Para mas detalle leer manual de angular en pdf ( pagina 37 )
+</p>
+<img src="assets\flujo.png" alt="flujo informacion en angular">
+
+<h2>Expresion &#123; &#123; &#125; &#125; </h2>
+<p>{{expresion}}</p>
+
+<h2>Propiedades</h2>
+<h3 [class]="claseModelo">HIDDEN</h3>
+<p [hidden]="ocultar">Este se oculta</p>
+<p [hidden]="!ocultar">Este se ve</p>
+
+<form>
+    <label class="radio-inline">
+      <input type="radio" name="color" value="text-primary" checked (click)="chageClass('text-primary')">Azul
+    </label><br>
+    <label class="radio-inline">
+      <input type="radio" name="color" value="text-success" (click)="chageClass('text-success')">Verde
+    </label><br>
+    <label class="radio-inline">
+      <input type="radio" name="color" value="text-danger" (click)="chageClass('text-danger')">Rojo
+    </label>
+  </form>
+
+<h2>Doble Binding</h2>
+<p>Tu nombre es: <b>{{nombre}}</b></p>
+<input type="text" (click)="borrar()" [(ngModel)] ="nombre" placeholder="escribe tu nombre, minimo 3 letras"  class="form-control {{valido}}">
+
+
+
+</div>

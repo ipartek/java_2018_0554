@@ -1,0 +1,117 @@
+#frutas {
+
+  /* The image used */
+  //background-image: url("/assets/imgs/fruteria3.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+
+  min-height: 80vh;
+  display: flex;
+
+  section {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    margin: auto;
+    width: 50vw;
+
+    
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    ul {
+      list-style: none;
+      font-size: 1.2em;
+
+      li {
+        margin-bottom: 15px;
+      }
+    }
+
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+
+  }
+
+  .agotada {
+    text-decoration: line-through;
+  }
+
+}
+
+.afoto {
+  height: 75px;
+  width: 75px;
+}
+
+.afoto:hover {
+  height: 125px;
+  width: 125px;
+
+}
+
+h1 {
+  color:lightcoral;
+  font-size: 50px;
+  font-family: 'Gloria Hallelujah', cursive;
+  text-shadow: 0 0 3px black, 0 0 5px silver;
+  text-align: center
+}
+.fotoForm{
+  width: 300px;
+  height: 250px;
+
+}
+
+img{
+  width: 75px;
+  height: 75px;
+}
+
+#editar:hover::before{
+ color: orange; 
+ font-size: 1.6em;
+ transition-duration: 0.3s;  
+}
+#borrar:hover::before{
+  color: red; 
+  font-size: 1.6em;
+  transition-duration: 0.3s;  
+ }
+
+#fruteria tr:hover {//background-color: #ddd;
+  background-color: lightgreen;
+}
+
+#fruteria th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+td.capitalize {
+  text-transform: capitalize;
+  
+}
+
+i[class^="fas fa-check"] {
+  color: green;
+}
+
+i[class^="fas fa-times"] {
+  color: red;
+}
+

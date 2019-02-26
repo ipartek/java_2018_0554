@@ -1,0 +1,35 @@
+<div class="row">
+
+    <div class="col-6">
+  <h2>SUVS</h2>
+      <ul class="list-group">
+          <li *ngFor="let c of coches;let i = index" 
+          (click)="cambiarCoche(i)"
+          class="list-group-item list-group-item-action {{(c.marca===cocheSelec1.marca)?'active':''}}">
+          {{c.marca | uppercase}} - {{c.modelo}}</li>  
+        
+      </ul>
+    </div>
+  <div class="col-6">
+        <app-card-coche (cocheSeleccionado)="addCarrito($event)" [coche]="cocheSelec1"></app-card-coche>
+    </div>
+    
+  </div>
+
+ <div class="row">
+
+     <div class="col-6">
+    <h2>Coches comprados</h2>
+    
+    <ul class="list-group">
+            <li *ngFor="let car of carrito"                                         
+                class="list-group-item">
+                    {{ car.marca | uppercase}}
+                    <span (click)="eliminarCarro(car)">Eliminar</span>
+            </li>         
+    </ul>
+    <p>TOTAL <b>{{totalCarro | number : '1.0-2' | moneda}}</b></p>
+    
+      </div>
+    
+    </div>

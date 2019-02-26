@@ -1,0 +1,28 @@
+<div class="row">
+
+  <div class="col-6">
+    <h2>Listado de Personas</h2>
+    <div class="form-inline">
+      <input type="number" [(ngModel)]="numeroPersonas" class="form-control">
+      <button class="btn btn-primary" (click)="refrescarListado()">Buscar</button>
+    </div>
+    <br>
+    <p *ngIf="personas.length==0" class="spinner-border text-danger"></p>
+    <ul class="list-group">
+      <!--<li *ngFor="let p of personas">{{p|json}}}</li>-->
+      <li *ngFor="let p of personas" class="list-group-item">
+        <div class="d-flex">
+          <img class="avatar mr-3 img-thumbnail" src="{{p.imagen}}" alt="{{p.nombre}}">
+          <div>
+            <p class="text-primary nombre">{{p.nombre}} {{p.apellido}} </p>
+            <p class="text-muted">Email:{{p.email}}</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="col-6">
+
+  </div>
+
+</div>

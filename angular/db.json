@@ -1,0 +1,238 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "fruta": [
+    {
+      "id": 1,
+      "nombre": "fRESa",
+      "oferta": true,
+      "precio": 3.59,
+      "descuento": 5,
+      "imagen": "https://media.mercola.com/assets/images/foodfacts/strawberry-nutrition-facts.jpg",
+      "colores": [
+        {
+          "nombre": "rojo",
+          "codigo": "#F00"
+        }
+      ],
+      "agotada": false
+    },
+    {
+      "id": 2,
+      "nombre": "pomelo",
+      "oferta": false,
+      "precio": 7.43,
+      "descuento": 7,
+      "imagen": "http://frutasfercas.com/wp-content/uploads/2018/03/pomelo-1.jpg",
+      "colores": [
+        {
+          "nombre": "rojo",
+          "codigo": "#F00"
+        },
+        {
+          "nombre": "naranja",
+          "codigo": "#FFA500"
+        }
+      ],
+      "agotada": false
+    },
+    {
+      "id": 3,
+      "nombre": "chirimoya",
+      "oferta": true,
+      "precio": 10,
+      "descuento": 0,
+      "imagen": "https://media.mercola.com/assets/images/foodfacts/cherimoya-nutrition-facts.jpg",
+      "colores": [
+        {
+          "nombre": "verde",
+          "codigo": "#0F0"
+        }
+      ],
+      "agotada": false
+    },
+    {
+      "id": 4,
+      "nombre": "manzana",
+      "oferta": true,
+      "precio": 5.59,
+      "descuento": 3.5,
+      "imagen": "https://www.comenaranjas.com/images/stories/virtuemart/product/manzana-royal.jpg",
+      "colores": [
+        {
+          "nombre": "verde",
+          "codigo": "#0F0"
+        },
+        {
+          "nombre": "rojo",
+          "codigo": "#F00"
+        },
+        {
+          "nombre": "amarillo",
+          "codigo": "#FF0"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "nombre": "tamarindo",
+      "oferta": true,
+      "precio": 13.7,
+      "descuento": 3,
+      "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTuiEhT2_yFMqcz3TlSGzmwVqrOXJnO1gdlEd5ErYl4ynfte4J",
+      "colores": [
+        {
+          "nombre": "negro",
+          "codigo": "#000"
+        },
+        {
+          "nombre": "verde",
+          "codigo": "#0F0"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "nombre": "pera",
+      "oferta": true,
+      "precio": "5",
+      "descuento": 10,
+      "imagen": "http://www.haciendasbio.com/63-large_default/peras.jpg"
+    },
+    {
+      "id": 9,
+      "nombre": "papaya",
+      "oferta": false,
+      "precio": "10",
+      "descuento": 0,
+      "imagen": "https://exoticfruitbox.com/wp-content/uploads/2015/10/papaya-3-Exotic.jpg"
+    },
+    {
+      "nombre": "naranjito",
+      "precio": "3.20",
+      "imagen": "https://www.elindependiente.com/wp-content/uploads/2017/08/naranjito-1.jpg",
+      "agotada": false,
+      "id": 10
+    },
+    {
+      "id": 11,
+      "nombre": "mochilo",
+      "oferta": true,
+      "precio": 150.58,
+      "descuento": 95,
+      "imagen": "https://i.ytimg.com/vi/bg-3yTUGUJA/maxresdefault.jpg"
+    },
+    {
+      "nombre": "freson",
+      "precio": 25.14,
+      "imagen": "http://losfruitis.com/wp-content/uploads/2016/06/alcalde-freson-los-fruitis-277x300.jpg",
+      "agotada": false,
+      "id": 12
+    },
+    {
+      "nombre": "uvas",
+      "precio": 1.47,
+      "imagen": "https://www.pharma20.es/images/uvas-propiedades.jpg",
+      "agotada": false,
+      "id": 13
+    },
+    {
+      "id": 16,
+      "nombre": "melocoton",
+      "oferta": true,
+      "precio": 2.99,
+      "descuento": 10,
+      "imagen": "http://www.5septiembre.cu/wp-content/uploads/2017/07/Foto-melocot%C3%B3n-1-copia-listo.jpg"
+    },
+    {
+      "nombre": "citronio",
+      "oferta": false,
+      "precio": 2,
+      "descuento": 5,
+      "imagen": "https://pbs.twimg.com/profile_images/3282510014/41973c54c45ddc57e6726a924c48da7d_400x400.png",
+      "id": 17
+    },
+    {
+      "nombre": "coco",
+      "oferta": true,
+      "precio": 5.2,
+      "descuento": 30,
+      "imagen": "https://www.minsalud.gob.bo/images/noticias16/coco2.gif",
+      "id": 18
+    },
+    {
+      "nombre": "aguacate",
+      "oferta": true,
+      "precio": 4,
+      "descuento": 5,
+      "imagen": "https://media.mercola.com/assets/images/foodfacts/avocado-nutrition-facts.jpg",
+      "id": 19
+    },
+    {
+      "nombre": "platano",
+      "oferta": false,
+      "precio": 3.25,
+      "descuento": 30,
+      "imagen": "https://i.pinimg.com/originals/57/ca/2d/57ca2defdf7f405615526c83885226a3.gif",
+      "id": 21
+    },
+    {
+      "id": 22,
+      "nombre": "lichis",
+      "oferta": false,
+      "precio": 14,
+      "descuento": 5,
+      "imagen": "http://www.lichipedia.com/wp-content/uploads/2017/01/lichi-litchi-lychee-propiedades-16.jpg"
+    }
+  ],
+  "todos": [
+    {
+      "userId": -1,
+      "title": "Aprender Angular 2.5",
+      "completed": true,
+      "id": 3
+    },
+    {
+      "userId": -1,
+      "title": "nueva",
+      "completed": true,
+      "id": 5
+    },
+    {
+      "userId": -1,
+      "title": "assasasa",
+      "completed": true,
+      "id": 6
+    },
+    {
+      "userId": -1,
+      "title": "liyf",
+      "completed": false,
+      "id": 7
+    },
+    {
+      "frutaId": -1,
+      "nombre": "sdfdsf",
+      "agotada": false,
+      "id": 8
+    },
+    {
+      "frutaId": -1,
+      "nombre": "swdfs",
+      "agotada": false,
+      "id": 9
+    }
+  ]
+}

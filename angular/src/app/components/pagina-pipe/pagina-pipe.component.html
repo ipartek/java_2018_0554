@@ -1,0 +1,26 @@
+<h1 class="text-primary"> Piped o Filtros</h1>
+
+<h2>Pipes disponibles en Angular</h2>
+<ul>
+<li><a href="https://angular.io/api?type=pipe">Documentación API</a></li>
+<li><a href="https://angular.io/guide/pipes">Documentación sobre Pipes</a></li>
+</ul>
+
+<p>{{nombre}} - sin pipe lowercase</p>
+<p>{{nombre | lowercase}} - con pipe lowercase</p>
+<p>{{nombre | uppercase}} - con pipe uppercase</p>
+<p>{{nombre | titlecase}} - con pipe titlecase</p>
+<hr>
+<p>{{numero}} - sin pipe number</p>
+<p>{{numero | number : '1.0-2'}} - con number '1.0-2'</p>
+<p>{{numero | number : '2.0-2'}} - con number '2.0-2'</p>
+<hr>
+<p class="text-danger">TODO locale 'es' buscar</p>
+<hr>
+<h2>Pipes creados por nosotros</h2>
+
+<p>{{numero}}</p>
+<p>{{numero | number : '1.0-2' | moneda  : 'es'}} con pipe numero 'es'</p>
+<p>{{numero | number : '1.0-2' | moneda  : 'en'}} con pipe numero 'en'</p>
+
+<p>{{cadena}} - Hola      que      tal</p>

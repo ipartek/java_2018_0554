@@ -1,0 +1,15 @@
+<div class="container">
+    <h2>{{coche.marca | uppercase}} - {{coche.modelo}}</h2>
+    <div class="card" style="width:400px">
+      <img class="card-img-top" src="{{coche.imagen}}" alt="{{coche.modelo}}" style="width:100%">
+      <div class="card-body">
+        <h4>Precio:</h4>
+        
+          <p>{{coche.precio | number: '.2' | moneda }}</p>
+        
+          
+          <button class="btn btn-primary" (click)="emitirEvento()">Añadir</button>
+      </div>
+    </div>
+    
+  </div>
