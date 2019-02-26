@@ -9,6 +9,7 @@ import { HomeComponent } from './paginas/home/home.component';
 import { CajaEstadisticasComponent } from './components/caja-estadisticas/caja-estadisticas.component';
 import { MonedaPipe } from './pipes/moneda.pipe';
 import { ListadoMultasComponent } from './paginas/listado-multas/listado-multas.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ListadoMultasComponent } from './paginas/listado-multas/listado-multas.
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
