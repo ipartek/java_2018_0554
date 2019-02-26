@@ -402,7 +402,7 @@ BEGIN
     INNER JOIN coche AS c 
     ON m.id_coche= c.id 
     WHERE id_agente=p_idAgente 
-    AND fecha_baja IS NULL 
+    AND m.fecha_baja IS NULL 
     ORDER BY fecha_alta DESC;
 END ;;
 DELIMITER ;
