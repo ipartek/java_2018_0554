@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './paginas/login/login.component';
 import { NavComponent } from './components/nav/nav.component';
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from './paginas/home/home.component';
 import { CajaEstadisticasComponent } from './components/caja-estadisticas/caja-estadisticas.component';
+import { MonedaPipe } from './pipes/moneda.pipe';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CajaEstadisticasComponent } from './components/caja-estadisticas/caja-e
     LoginComponent,
     NavComponent,
     HomeComponent,
-    CajaEstadisticasComponent
+    CajaEstadisticasComponent,
+    MonedaPipe
   ],
   imports: [
     BrowserModule,
