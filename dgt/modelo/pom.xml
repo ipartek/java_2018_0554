@@ -6,7 +6,7 @@
 	<artifactId>modelo</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0</version>
-	<name>modelo</name>
+	<name>modelo</name> 
 	
 
 	<!-- variables comunes para todo el POM -->
