@@ -102,7 +102,7 @@ export class PaginaFrutasComponent implements OnInit {
    */
   nuevoColor(){
     console.trace(' click nuevo color');
-    this.formulario.controls['colores'].push( this.crearColoresFormGroup(new Color('','')) );
+    (this.formulario.controls['colores'] as FormArray).push( this.crearColoresFormGroup(new Color('','')) );
   }
 
   /**
@@ -111,7 +111,7 @@ export class PaginaFrutasComponent implements OnInit {
    */
   eliminarColor(index: number){
     console.trace(' click eliminar color posicion:' + index);
-    this.formulario.controls['colores'].removeAt(index);
+    (this.formulario.controls['colores']as FormArray).removeAt(index);
   }
 
 
