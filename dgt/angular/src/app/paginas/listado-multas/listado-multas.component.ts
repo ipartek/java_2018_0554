@@ -34,10 +34,12 @@ export class ListadoMultasComponent implements OnInit {
     });
   }
 
+  //TODO cambiar forEach por map()
   mapper( result: any ){
     let multa: Multa;
     result.forEach(el => {
       multa = new Multa(el.id, el.importe, el.concepto, el.fecha);
+      this.multas.push(multa);
     });
   }
 

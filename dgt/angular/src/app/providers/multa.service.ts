@@ -17,7 +17,7 @@ export class MultaService {
    * Obtener todas las multas del Servicio REST
    */
   getMultas(): Observable<any> {
-    const url = GLOBAL.endpoint + '/multa';
+    const url = GLOBAL.endpoint + '/agente/1/multa';
     return this.http.get(url);
   }
 }
