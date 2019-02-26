@@ -80,6 +80,10 @@ export class PaginaFrutasComponent implements OnInit {
 
   }
  
+  /**
+   * Crea un nuevo FormGroup para el formulario 
+   * @param color Color nuevo a crear
+   */
   crearColoresFormGroup(color: Color): FormGroup{
    return this.formBuilder.group({
       nombre: [
@@ -93,6 +97,28 @@ export class PaginaFrutasComponent implements OnInit {
     });
   }
 
+  /**
+   * Crea un nuevo ColoresFormGroup dentro del formulario
+   */
+  nuevoColor(){
+    console.trace(' click nuevo color');
+    this.formulario.controls['colores'].push( this.crearColoresFormGroup(new Color('','')) );
+  }
+
+  /**
+   * Eliminar un nuevo ColoresFormGroup dentro del formulario
+   * @param index posicion a eliminar dentro del array
+   */
+  eliminarColor(index: number){
+    console.trace(' click eliminar color posicion:' + index);
+    this.formulario.controls['colores'].removeAt(index);
+  }
+
+
+
+  /**
+   * Llama al servicio para listar todas las frutas en la tabla
+   */
   cargarFrutas(){
     console.trace('PaginaFrutasComponent cargarFrutas');
     this.frutaService.getAll().subscribe(
@@ -106,6 +132,8 @@ export class PaginaFrutasComponent implements OnInit {
       }
     );
   }// cargarFrutas
+
+
 
   /**
    * Mappear de un Json al modelo Fruta
@@ -124,6 +152,7 @@ export class PaginaFrutasComponent implements OnInit {
     }  
     return fruta;
   }
+
 
   /**
    * Mapea los datos de una Fruta al Formulario para poder editarlos
@@ -158,17 +187,13 @@ export class PaginaFrutasComponent implements OnInit {
   }
 
 
-  nuevoColor(){
-    console.trace(' click nuevo color');
-    this.formulario.controls['colores'].push( this.crearColoresFormGroup(new Color('','')) );
-  }
-
-  eliminarColor(index: number){
-    console.trace(' click eliminar color posicion:' + index);
-    this.formulario.controls['colores'].removeAt(index);
-  }
 
 
+
+  /**
+   * Llama al servicio para Eliminar una Fruta
+   * @param fruta: Fruta a eliminar usamos su id
+   */
   eliminar(fruta: Fruta){
     console.trace('PaginaFrutasComponent click eliminar %o', fruta);    
     if ( confirm('¿ Estas seguro que quieres eliminar ?') ){
@@ -186,6 +211,10 @@ export class PaginaFrutasComponent implements OnInit {
     }// confirm
   }// eliminar
 
+
+  /**
+   * Llama al servicio para guardar una fruta, dependiendo del ID crea o modifica
+   */
   nueva(){
     console.trace('submit formulario %o', 
               this.formulario.value);
