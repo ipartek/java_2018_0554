@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
 import { Persona } from 'src/app/model/persona';
 import { Fruta } from 'src/app/model/fruta';
@@ -8,6 +9,9 @@ import { Fruta } from 'src/app/model/fruta';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  //variable dependiente del entorno
+  texto: string = environment.texto;
 
   manolo: Persona;
   sinNombre: Persona;
