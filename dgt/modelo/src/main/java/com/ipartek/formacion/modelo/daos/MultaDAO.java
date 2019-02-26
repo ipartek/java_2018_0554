@@ -25,7 +25,7 @@ public class MultaDAO {
 	//private static final String MULTAS_ACTIVAS = "activas";
 
 	private static final String SQL_GETBYID = "{call pa_multa_getById(?)}";
-	private static final String SQL_GETALL_BYUSER = "{call pa_multa_getByAgenteId(?,?)}";
+	private static final String SQL_GETALL_BYUSER = "{call pa_multa_getByAgenteId(?)}";
 	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
 	private static final String SQL_UPDATE = "{call pa_multa_update(?,?)}";
 
@@ -70,20 +70,16 @@ public class MultaDAO {
 		return m;
 	}
 
-	public ArrayList<Multa> getAllByUser(long id, String opm) {
+	public ArrayList<Multa> getAllByUser(long id) {
 
 		ArrayList<Multa> multas = new ArrayList<Multa>();
 		isGetById = false;
 		try (Connection conn = ConnectionManager.getConnection();
 				CallableStatement cs = conn
 						.prepareCall(SQL_GETALL_BYUSER);) {
-			if (MULTAS_ANULADAS.equals(opm)) {
-				isBaja = true;
-			} else {
-				isBaja = false;
-			}
+		
 			cs.setLong(1, id);
-			cs.setString(2, opm);
+		
 			try (ResultSet rs = cs.executeQuery()) {
 				while (rs.next()) {
 					try {
