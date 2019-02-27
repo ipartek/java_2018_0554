@@ -10,6 +10,7 @@ import { CajaEstadisticasComponent } from './components/caja-estadisticas/caja-e
 import { MonedaPipe } from './pipes/moneda.pipe';
 import { ListadoMultasComponent } from './paginas/listado-multas/listado-multas.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,7 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

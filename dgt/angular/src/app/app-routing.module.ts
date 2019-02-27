@@ -6,7 +6,7 @@ import { ListadoMultasComponent } from './paginas/listado-multas/listado-multas.
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'login',
     component: LoginComponent,
     data: { title: 'login' }
   },
@@ -19,7 +19,8 @@ const routes: Routes = [
     path: 'listado-multas',
     component: ListadoMultasComponent,
     data: { title: 'Listado-multas' }
-  }
+  },
+  { path: '**', pathMatch:'full', redirectTo : 'login'  }
 ];
 
 @NgModule({
