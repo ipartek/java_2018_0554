@@ -7,14 +7,19 @@ import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Multa;
 import com.ipartek.formacion.service.AgenteService;
 
+
 public class AgenteServiceImpl implements AgenteService {
 	
-	AgenteDAO agenteDAO;
+	
+	private AgenteDAO agenteDAO;
+	
 
 	private static AgenteServiceImpl INSTANCE = null;
 
 	private AgenteServiceImpl() {
 		super();
+		agenteDAO = AgenteDAO.getInstance();
+		
 	}
 	
 	public static synchronized AgenteServiceImpl getInstance() {
@@ -25,9 +30,9 @@ public class AgenteServiceImpl implements AgenteService {
 	}
 
 	@Override
-	public Agente existe(String numeroPlaca, String password) {
+	public Agente existe(String placa, String password) {
 		// TODO llamar al DAO
-				Agente agente = null;
+				//Agente agente = null;
 				
 				
 				/*if ( "admin".equals(password) && "admin".equals(numeroPlaca)) {
@@ -35,7 +40,7 @@ public class AgenteServiceImpl implements AgenteService {
 				}*/
 				
 				
-				return agente;
+				return agenteDAO.getByPlaca(placa, password);
 	}
 
 	@Override
