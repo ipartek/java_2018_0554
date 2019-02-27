@@ -35,6 +35,7 @@ import { PaginaPersonasComponent } from './components/pagina-personas/pagina-per
 import { PaginaTodosComponent } from './components/pagina-todos/pagina-todos.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { BackofficeComponent } from './components/backoffice/backoffice.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { BackofficeComponent } from './components/backoffice/backoffice.componen
     PaginaPersonasComponent,
     PaginaTodosComponent,
     AlertComponent,
-    BackofficeComponent
+    BackofficeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
