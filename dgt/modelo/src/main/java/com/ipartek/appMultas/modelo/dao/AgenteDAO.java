@@ -55,7 +55,7 @@ public class AgenteDAO {
 				}
 			}
 		} catch (Exception e) {
-			LOG.debug(e);
+			LOG.error(e);
 		}
 		return a;
 	}

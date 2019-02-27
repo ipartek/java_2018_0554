@@ -61,7 +61,7 @@
 			<version>2.2.4</version>
 			<scope>test</scope>
 		</dependency>
-<!-- logger o trazas -->
+		<!-- logger o trazas -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
