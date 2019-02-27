@@ -16,6 +16,8 @@ import { PaginaServiceComponent } from './components/pagina-service/pagina-servi
 import { PaginaServicePersonasComponent } from './components/pagina-service-personas/pagina-service-personas.component';
 import { PaginaTodosComponent } from './components/pagina-todos/pagina-todos.component';
 import { PaginaFrutasComponent } from './components/pagina-frutas/pagina-frutas.component';
+import { BackofficeComponent } from './components/backoffice/backoffice.component';
+import { PermisosGuard } from './guards/permisos.guard';
 
 const routes: Routes = [
   {
@@ -70,6 +72,11 @@ const routes: Routes = [
   { path: 'servicio-frutas',
   component: PaginaFrutasComponent,
   data: { title: 'servicio-frutas' }
+  },
+  { path: 'backoffice',
+  component: BackofficeComponent,
+  canActivate: [PermisosGuard],
+  data: { title: 'backoffice' }
   },
   { path: '404',
   component: Error404Component,
