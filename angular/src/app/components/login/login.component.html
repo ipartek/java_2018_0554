@@ -1,0 +1,26 @@
+<h1>Login para acceso Zona Segura</h1>
+
+<div class="border border-danger p-2">
+  <p>Valores: {{ formulario.value | json }}</p>
+  <p>Estado: {{ formulario.status | json }}</p>
+</div>
+
+<app-alerta [mensaje]="mensaje"></app-alerta>
+
+<form [formGroup]="formulario" (submit)="comprobar()">
+  <div class="form-group">
+    <label for="nombre">Nombre</label>
+    <input type="text" formControlName="nombre"
+    class="form-control" placeholder= "Nombre de la fruta (Minimo 3 letras)">
+    <small *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched" class="text-danger">*Nombre no válido</small>
+  </div>
+  <div class="form-group">
+    <label for="pass">Contraseña</label>
+    <input type="password" formControlName="pass"
+    class="form-control" placeholder= "Nombre de la fruta (Minimo 3 letras)">
+    <small *ngIf="formulario.controls.pass.invalid && formulario.controls.pass.touched" class="text-danger">*Pass no válido</small>
+  </div>
+  <button type="submit" class="btn btn-block btn-primary mt-3" 
+    [disabled]="formulario.invalid">Acceder
+  </button>
+</form>

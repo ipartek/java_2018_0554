@@ -18,6 +18,7 @@ import { PaginaTodosComponent } from './components/pagina-todos/pagina-todos.com
 import { PaginaFrutasComponent } from './components/pagina-frutas/pagina-frutas.component';
 import { BackofficeComponent } from './components/backoffice/backoffice.component';
 import { PermisosGuard } from './guards/permisos.guard';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {
@@ -77,6 +78,10 @@ const routes: Routes = [
   component: BackofficeComponent,
   canActivate: [PermisosGuard],
   data: { title: 'backoffice' }
+  },
+  { path: 'login',
+  component: LoginComponent,
+  data: { title: 'login' }
   },
   { path: '404',
   component: Error404Component,

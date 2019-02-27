@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AutorizacionService } from '../providers/autorizacion.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PermisosGuard implements CanActivate {
 
-  constructor( private router: Router ){
+  constructor( private autorizacionService: AutorizacionService, private router: Router ){
     console.trace('GuardPermisosGuard constructor');
   }
 
@@ -17,12 +18,15 @@ export class PermisosGuard implements CanActivate {
     
     console.trace('GuardPermisosGuard canActivate');
 
-    //TODO llamar serviceLogin
+    if(this.autorizacionService.estaLogueado){
+      console.debug('Estamos autorizados');
+      return true;
 
-    //Redirigir a home
-    this.router.navigate(['/home']);
-
-    return false;
+    } else{
+      console.warn('NO estamos autorizados');
+      this.router.navigate(['/login']);
+      return false;
+    }
   }
   
 }

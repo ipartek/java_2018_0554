@@ -36,6 +36,7 @@ import { PaginaTodosComponent } from './components/pagina-todos/pagina-todos.com
 import { PaginaFrutasComponent } from './components/pagina-frutas/pagina-frutas.component';
 import { AlertaComponent } from './components/alerta/alerta.component';
 import { BackofficeComponent } from './components/backoffice/backoffice.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { BackofficeComponent } from './components/backoffice/backoffice.componen
     PaginaTodosComponent,
     PaginaFrutasComponent,
     AlertaComponent,
-    BackofficeComponent
+    BackofficeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
