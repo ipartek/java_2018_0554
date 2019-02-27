@@ -1,0 +1,44 @@
+ul li {
+    font-size: .8em;
+
+    a{
+        font-size: .9em;
+        color: #fff;
+    }
+
+    a:hover{
+        color: rgba(255,255,255,.5);
+    }
+    
+    span {
+        color: rgba(255,255,255,.8);
+    }
+}
+.navbar-toggler {
+    padding: .23rem .5rem;
+    font-size: .9rem;
+}
+ul.navbar-nav.float-right {
+    flex-direction: row;
+    align-items: center;
+}
+li.nav-item {
+    font-size: .8em;
+}
+nav.navbar.navbar-dark.bg-dark {
+    border-bottom: 1px solid #666;
+}
+nav a i.fas.fa-chevron-left {
+    color: #fff;
+}
+
+  ul.navbar-nav.float-right li {
+      margin: 0 10px;
+  }
+  main {
+      margin-top: 40px;
+  }
+  
+  /*div#DataTables_Table_0_wrapper {
+      width: 100%;
+  }*/

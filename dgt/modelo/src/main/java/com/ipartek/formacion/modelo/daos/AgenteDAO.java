@@ -10,19 +10,19 @@ import org.apache.log4j.Logger;
 import com.ipartek.formacion.modelo.cm.ConnectionManager;
 import com.ipartek.formacion.modelo.pojo.Agente;
 
-public class LoginDAO {
-	private final static Logger LOG = Logger.getLogger(LoginDAO.class);
-	private static LoginDAO INSTANCE = null;
+public class AgenteDAO {
+	private final static Logger LOG = Logger.getLogger(AgenteDAO.class);
+	private static AgenteDAO INSTANCE = null;
 	private static final String SQL_LOGIN = "{call pa_login(?, ?)}";
 
 	// Constructor privado, solo acceso por getInstance()
-	private LoginDAO() {
+	private AgenteDAO() {
 		super();
 	}
 
-	public synchronized static LoginDAO getInstance() {
+	public synchronized static AgenteDAO getInstance() {
 		if (INSTANCE == null) {
-			INSTANCE = new LoginDAO();
+			INSTANCE = new AgenteDAO();
 		}
 		return INSTANCE;
 	}

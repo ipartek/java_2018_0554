@@ -18,7 +18,7 @@ import javax.validation.ValidatorFactory;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.controller.pojo.Mensaje;
-import com.ipartek.formacion.modelo.daos.LoginDAO;
+import com.ipartek.formacion.modelo.daos.AgenteDAO;
 import com.ipartek.formacion.modelo.pojo.Agente;
 
 @WebServlet("/login")
@@ -35,7 +35,7 @@ public class LoginController extends HttpServlet {
 	private ValidatorFactory factory;
 	private Validator validator;
 	
-	private LoginDAO daoLogin;
+	private AgenteDAO daoLogin;
 	Agente a = null;
 	String placa = "";
 	String password = "";
@@ -44,7 +44,7 @@ public class LoginController extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		daoLogin = LoginDAO.getInstance();
+		daoLogin = AgenteDAO.getInstance();
 		factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
 	}
