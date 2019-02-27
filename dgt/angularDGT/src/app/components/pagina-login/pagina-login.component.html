@@ -16,7 +16,7 @@
   <form [formGroup]="formulario" (submit)="comprobar()" >
   
     <label for="placa">Número de Placa</label>
-    <input type="text" formControlName="placa" class="form-control" placeholder="Mínimo 3 letras">      
+    <input type="text" formControlName="placa" class="form-control" placeholder="Mínimo 3 letras" >      
     <p *ngIf="formulario.controls.placa.invalid && formulario.controls.placa.touched"  
     class="text-danger">*recuerda que minimo 3 letras</p>
   
