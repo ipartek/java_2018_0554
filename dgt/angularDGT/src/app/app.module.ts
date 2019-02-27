@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +11,8 @@ import { FormularioMatriculaComponent } from './components/formulario-matricula/
 import { FormularioMultarComponent } from './components/formulario-multar/formulario-multar.component';
 import { ListaMultasComponent } from './components/lista-multas/lista-multas.component';
 
+import { AlertComponent } from './components/alert/alert.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,11 +21,14 @@ import { ListaMultasComponent } from './components/lista-multas/lista-multas.com
     PrincipalComponent,
     FormularioMatriculaComponent,
     FormularioMultarComponent,
-    ListaMultasComponent
+    ListaMultasComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,   // para poder usar doble binding
+    ReactiveFormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
