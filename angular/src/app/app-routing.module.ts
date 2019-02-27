@@ -13,6 +13,12 @@ import { PaginaServiceComponent } from './components/pagina-service/pagina-servi
 import { PaginaTodosComponent } from './components/pagina-todos/pagina-todos.component';
 import { PaginaFrutasComponent } from './components/pagina-frutas/pagina-frutas.component';
 import { PaginaPersonasComponent } from './components/pagina-personas/pagina-personas.component';
+import { BackofficeComponent } from './components/backoffice/backoffice.component';
+import { LoginComponent } from './components/login/login.component';
+
+// guards
+import { PermisosGuard } from './guards/permisos.guard';
+
 
 
 const routes: Routes = [
@@ -29,6 +35,8 @@ const routes: Routes = [
   { path: 'pesonas', component: PaginaPersonasComponent }, 
   { path: 'frutas', component: PaginaFrutasComponent }, 
   { path: 'todos', component: PaginaTodosComponent }, 
+  { path: 'login', component: LoginComponent }, 
+  { path: 'backoffice', component: BackofficeComponent, canActivate: [PermisosGuard] }, 
   { path: '**', pathMatch:'full', redirectTo : '404'  }
 ];
 

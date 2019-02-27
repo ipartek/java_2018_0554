@@ -1,0 +1,26 @@
+<h1>Login para acceso Zona Segura</h1>
+
+<div style="border:1px solid red; padding:10px;">
+  <p>Valores: {{ formulario.value | json }}</p>
+  <p>Estado:  {{ formulario.status | json }}</p> 
+</div>
+
+<app-alert [alert]="alert"></app-alert>
+
+<form [formGroup]="formulario" (submit)="comprobar()" >
+
+  <label for="nombre">Nombre</label>
+  <input type="text" formControlName="nombre" class="form-control" placeholder="Mínimo 3 letras">      
+  <p *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched"  
+  class="text-danger">*recuerda que minimo 3 letras</p>
+
+  <label for="pass">Contraseña</label>
+  <input type="password" formControlName="pass" class="form-control" placeholder="Mínimo 3 letras">      
+
+  <button type="submit"
+          class="btn btn-block btn-primary mt-5"
+          [disabled]="formulario.invalid">Acceder</button>
+  
+
+
+</form>

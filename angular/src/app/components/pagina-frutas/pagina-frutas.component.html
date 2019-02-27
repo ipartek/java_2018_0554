@@ -24,6 +24,7 @@
               <th scope="col">Precio</th>
               <th scope="col">Oferta</th>
               <th scope="col">Descuento</th>
+              <th scope="col">Colores</th>
               <th scope="col">Operaciones</th>
           </tr>
           </thead>
@@ -38,6 +39,14 @@
               <td>{{f.precio}}</td>    
               <td>{{f.oferta}}</td>   
               <td>{{f.descuento}}</td>    
+              <!-- colores -->
+              <td>
+                <ul>
+                  <li *ngFor="let color of f.colores" >
+                    {{color.nombre}}
+                  </li>
+                </ul>                
+              </td>    
               <td>
                   <i class="fas fa-edit mr-4" (click)="editar(f)"></i>
                   <i class="fas fa-trash-alt" (click)="eliminar(f)"></i>            
@@ -99,6 +108,24 @@
                   <p *ngIf="formulario.controls.imagen.invalid && formulario.controls.imagen.touched"  
                   class="text-danger">*debe ser una URL de imagen valida empezar por http(s) y terminar .png o .jp(e)g</p>
                 </div>  
+
+                <fieldset>
+                    <span><i class="fas fa-plus-circle" (click)="nuevoColor()"></i>Nuevo Color</span>
+                   
+                    <div formArrayName="colores">
+                        <div *ngFor="let color of formulario.get('colores').controls; let i = index;" >
+                            <div [formGroupName]="i">
+                                <label for="imagen">Nombre:</label>
+                                <input formControlName="nombre" class="form-control">                               
+                                <label for="imagen">codigo:</label>
+                                <input formControlName="codigo" class="form-control">    
+                                <span><i class="fas fa-minus-circle" (click)="eliminarColor(i)"></i>Eliminar </span>                               
+                                <hr>
+                            </div> 
+                        </div>
+                      </div>                   
+                </fieldset>
+                
         
             </div>    
             

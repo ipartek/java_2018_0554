@@ -34,16 +34,19 @@ export class FrutaService {
   public guardar(fruta: Fruta):Observable<any>{
     let url = this.endpoint;
    
+    let coloresJson =  fruta.colores.map( c => { return{"nombre": c.nombre, "codigo": c.codigo} } );
 
     if ( fruta.id == -1 ){
+
       let body = {
         "nombre": fruta.nombre,
         "oferta": fruta.oferta,
         "precio": fruta.precio,
         "descuento": fruta.descuento,
-        "imagen": fruta.imagen      
+        "imagen": fruta.imagen,
+        "colores": coloresJson     
       };
-      console.trace('crear ' + url);
+      console.debug('crear url: %s body: %o', url, body);
       return this.httpClient.post(url, body);
 
     }else{
@@ -54,9 +57,10 @@ export class FrutaService {
         "oferta": fruta.oferta,
         "precio": fruta.precio,
         "descuento": fruta.descuento,
-        "imagen": fruta.imagen      
+        "imagen": fruta.imagen,
+        "colores": coloresJson
       };
-      console.trace('modificar ' + url + fruta.id);
+      console.debug('modificar url: %s body: %o', url, body);
       return this.httpClient.put(url + fruta.id , body);
     }
 
