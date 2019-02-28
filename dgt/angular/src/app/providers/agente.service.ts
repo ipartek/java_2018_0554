@@ -20,18 +20,20 @@ export class AgenteService {
   private _isLogged: boolean;
   private _agenteLogueado: Agente;
 
-  public get agenteLogueado(): Agente {
-    return this._agenteLogueado;
-  }
-  public set agenteLogueado(value: Agente) {
-    this._agenteLogueado = value;
-  }
-
   public get isLogged(): boolean {
     return this._isLogged;
   }
   public set isLogged(value: boolean) {
     this._isLogged = value;
+  }
+
+  public get agenteLogueado(): Agente {
+    console.trace('Get AgenteLogueado');
+    return this._agenteLogueado;
+  }
+  public set agenteLogueado(agente: Agente) {
+    console.trace('set AgenteLogueado');
+    this._agenteLogueado = agente;
   }
 
   constructor(public http: HttpClient) {

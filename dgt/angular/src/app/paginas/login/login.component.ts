@@ -14,6 +14,7 @@ import {
   AgenteService
 } from 'src/app/providers/agente.service';
 import { Alerta } from 'src/app/model/alerta';
+import { Agente } from 'src/app/model/agente';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
 
   formulario: FormGroup;
   alerta: Alerta;
+  agente: Agente;
 
   constructor(
     private agenteService: AgenteService,
@@ -72,6 +74,11 @@ export class LoginComponent implements OnInit {
     this.agenteService.login(placa, pass).subscribe(
       data => {
         this.agenteService.isLogged = true;
+        this.agente = new Agente(data.id, data.nombre, data.placa, data.id_departamento);
+        if(this.agente.id != -1){
+          console.debug('Agente obtenido %o', this.agente);
+          this.agenteService.agenteLogueado = this.agente;
+        }
         console.info('isLogged: ' + this.agenteService.isLogged)
         console.info('Login correcto, tenemos permisos JSON: %o', data);
         this.router.navigate(['home']);

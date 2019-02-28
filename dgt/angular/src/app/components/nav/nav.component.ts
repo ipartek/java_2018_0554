@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Agente } from 'src/app/model/agente';
+import { AgenteService } from 'src/app/providers/agente.service';
 
 @Component({
   selector: 'app-nav',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  agenteLogueado: Agente;
+
+  constructor( agenteService: AgenteService ) { 
+    this.agenteLogueado = agenteService.agenteLogueado;
+  }
 
   ngOnInit() {
   }

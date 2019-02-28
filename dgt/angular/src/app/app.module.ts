@@ -12,6 +12,7 @@ import { ListadoMultasComponent } from './paginas/listado-multas/listado-multas.
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertComponent } from './components/alert/alert.component';
+import { PermisosGuard } from './guards/permisos.guard';
 
 
 @NgModule({

@@ -3,6 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable } from 'rxjs';
 import { AgenteService } from '../providers/agente.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
