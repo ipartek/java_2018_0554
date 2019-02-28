@@ -51,16 +51,16 @@ public class VehiculoController {
 	}
 	
 	
-	@RequestMapping( value= {"/api/vehiculo/{id}"}, method = RequestMethod.GET)
-	public ResponseEntity<Coche> detalle( @PathVariable String id ){		
+	@RequestMapping( value= {"/api/vehiculo/{matricula}"}, method = RequestMethod.GET)
+	public ResponseEntity<Coche> detalle( @PathVariable String matricula ){		
 		
 		ResponseEntity<Coche> response = new ResponseEntity<Coche>( HttpStatus.NOT_FOUND );
 		try {
 			
-			long identificador = Long.parseLong(id);
-			Coche coche = cocheDAO.getById(identificador);
-			if ( coche != null ) {
-				response = new ResponseEntity<Coche>( coche,  HttpStatus.OK );
+			String identificador = matricula;
+			Coche c = cocheDAO.getByMatricula(identificador);
+			if ( c != null ) {
+				response = new ResponseEntity<Coche>( c,  HttpStatus.OK );
 			}
 			
 		}catch ( NumberFormatException e) {	

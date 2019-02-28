@@ -1,0 +1,49 @@
+<div class="container-fluid p-5" >
+
+<h1>Login para acceder a la zona segura</h1>
+
+<img src="../../assets/images/placa.png">
+
+<!-- visor de valores para pruebas hardcode -->
+
+<div style="border:1px solid red; padding:10px;">
+
+  <p>Valores: {{ formulario.value | json }}</p>
+
+  <p>Estado: {{ formulario.status | json }}</p>
+
+</div>
+
+<!-- [][][][][][][][][][][][][][][][][][][][] -->
+
+<!-- cuadro de alertas -->
+
+<app-alert [alert]="alert"></app-alert>
+
+<!-- [][][][][][][][][][][][][][][][][][][][] -->
+
+<form [formGroup]="formulario" (submit)="comprobar()">
+  <div class="form-group">
+
+    <label for="nombre">Numero de placa</label>
+    <input type="text" class="form-control" formControlName="nombre" class="form-control" placeholder="Mínimo 6 letras y numeros">
+    <p *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched" class="text-danger">*recuerda
+      que
+      minimo 3 letras</p>
+  </div>
+  <div class="form-group">
+    <label for="pass">Contraseña</label>
+    <input type="password" class="form-control" formControlName="pass" class="form-control" placeholder="Mínimo 3 letras">
+  </div>
+  <button type="submit" class="btn btn-block btn-primary mt-5" [disabled]="formulario.invalid">Entrar</button>
+
+
+
+</form>
+
+<!-- Implementar servicio de, si existe el agente, acceder a la home 
+
+      Tiene que entrar con placa (numeroPlaca) y contraseña
+-->
+
+</div>

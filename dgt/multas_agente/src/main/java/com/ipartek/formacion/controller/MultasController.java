@@ -202,7 +202,7 @@ public class MultasController extends HttpServlet {
 	private void opVer(HttpServletRequest request) {
 		if (idMultaStr == null) {
 			try {
-				request.setAttribute("multas", daoMulta.getAllByUser(a.getId(), opm));			
+				request.setAttribute("multas", daoMulta.getAllByUser(a.getId()));			
 			}
 			catch (Exception e) {
 				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "No se han puesto multas");
@@ -220,7 +220,7 @@ public class MultasController extends HttpServlet {
 		} else {
 			long idMulta = Long.parseLong(idMultaStr);
 			try {
-				m = daoMulta.getById(idMulta, opm);
+				m = daoMulta.getById(idMulta);
 				request.setAttribute("multa", m);
 				LOG.info("Información de la multa "+idMulta);
 				request.setAttribute("titulo", "Multa nº"+idMulta+". Coche: "+m.getCoche().getMatricula()+" | App Multas");
@@ -360,9 +360,9 @@ public class MultasController extends HttpServlet {
 	private void opAnular(HttpServletRequest request) {
 		try {
 			opm = "baja";
-			m = daoMulta.getById(Long.parseLong(idMultaStr),opm);
+			m = daoMulta.getById(Long.parseLong(idMultaStr));
 			if (m!=null) {
-				if(daoMulta.update(m,opr)) {
+				if(daoMulta.update(m)) {
 					op = "ver";
 					if("norecuperar".equals(opr)) {
 						opm = "baja";

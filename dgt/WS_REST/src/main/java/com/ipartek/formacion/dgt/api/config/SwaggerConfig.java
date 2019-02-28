@@ -33,7 +33,7 @@ public class SwaggerConfig {
                                         "",
                                         "1.0",
                                         "",
-                                        new Contact("Ander Uraga Real", "https://github.com/ipartek/java_2018_0508/tree/master/youtube", "auraga@ipartek.com"),
+                                        new Contact("Andoni Penalva", "https://github.com/ipartek/java_2018_0508/", "apenalva@ipartek.com"),
                                         "Apache License",
                                         "");
         return apiInfo;

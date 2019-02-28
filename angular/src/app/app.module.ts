@@ -33,6 +33,7 @@ import { PaginaServiceComponent } from './components/pagina-service/pagina-servi
 import { PaginaFrutasComponent } from './components/pagina-frutas/pagina-frutas.component';
 import { PaginaPersonasComponent } from './components/pagina-personas/pagina-personas.component';
 import { PaginaTodosComponent } from './components/pagina-todos/pagina-todos.component';
+import { LoginComponent } from './components/login/login.component';
 import { AlertComponent } from './components/alert/alert.component';
 
 
@@ -60,6 +61,7 @@ import { AlertComponent } from './components/alert/alert.component';
     PaginaFrutasComponent,
     PaginaPersonasComponent,
     PaginaTodosComponent,
+	LoginComponent,
     AlertComponent
   ],
   imports: [
