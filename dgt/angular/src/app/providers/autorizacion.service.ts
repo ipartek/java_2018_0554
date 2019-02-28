@@ -1,7 +1,15 @@
-import { Injectable } from '@angular/core';
-import { GLOBAL } from '../GLOBAL';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {
+  Injectable
+} from '@angular/core';
+import {
+  GLOBAL
+} from '../GLOBAL';
+import {
+  HttpClient
+} from '@angular/common/http';
+import {
+  Observable
+} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +25,7 @@ export class AutorizacionService {
     this._isLogged = value;
   }
 
-  constructor( public http: HttpClient ) {
+  constructor(public http: HttpClient) {
     console.trace('AutorizacionService constructor');
     this._isLogged = false;
   } // Constructor
@@ -27,24 +35,17 @@ export class AutorizacionService {
    * @param placa Nº de placa del Agente
    * @param pass Contraseña del Agente
    */
-  login(placa: string, pass: string): Observable<any> {
+  login(placa: string, pass: string): Observable < any > {
     console.debug('Placa: %s Pass: %s', placa, pass);
 
-     const url = GLOBAL.endpoint + 'login/' + placa + '/' + pass;
-     console.log(`AutorizacionService login ${url}`);
-     return this.http.get(url);
-
-
-    // if (placa === '1234' && pass === '12345678') {
-    //   this.isLogged = true;
-    // } else {
-    //   this.isLogged = false;
-    // }
+    const url = GLOBAL.endpoint + 'login/' + placa + '/' + pass;
+    console.log(`AutorizacionService login ${url}`);
+    return this.http.get(url);
   } // Login
 
   /**
-  * Cierra la session del usuario llamando al backoffice
-  */
+   * Cierra la sesión del usuario llamando al backoffice
+   */
   logout() {
     //TODO llamar Servicio Rest
     this.isLogged = false;

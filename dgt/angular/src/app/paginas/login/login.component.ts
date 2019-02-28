@@ -1,7 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AutorizacionService } from 'src/app/providers/autorizacion.service';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import {
+  Router
+} from '@angular/router';
+import {
+  AutorizacionService
+} from 'src/app/providers/autorizacion.service';
 
 @Component({
   selector: 'app-login',
@@ -10,13 +21,13 @@ import { AutorizacionService } from 'src/app/providers/autorizacion.service';
 })
 export class LoginComponent implements OnInit {
 
-  formulario: FormGroup; 
+  formulario: FormGroup;
 
   constructor(
     private autorizacionService: AutorizacionService,
     private formBuilder: FormBuilder,
     private router: Router
-  ) { 
+  ) {
     console.trace('LoginComponent constructor');
     this.crearFormulario();
   }
@@ -25,22 +36,30 @@ export class LoginComponent implements OnInit {
     console.trace('LoginComponent ngOnInit');
   }
 
-  crearFormulario(){
+  crearFormulario() {
     console.trace('LoginComponent crearFormulario');
     this.formulario = this.formBuilder.group({
       placa: [
-                '',                                                                         
-                [Validators.required, Validators.min(0), Validators.max(99999), Validators.minLength(4), Validators.maxLength(45)]   
-              ],
-      pass : [
-              '',
-              [Validators.required, Validators.minLength(8), Validators.maxLength(50)]
-      ]  
-    });  
-      
-  }// crearFormulario
+        '',
+        [Validators.required,
+          Validators.min(0),
+          Validators.max(99999),
+          Validators.minLength(4),
+          Validators.maxLength(45)
+        ]
+      ],
+      pass: [
+        '',
+        [Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(50)
+        ]
+      ]
+    });
 
-  comprobar(){
+  } // crearFormulario
+
+  comprobar() {
     console.trace('click boton submit');
     let placa = this.formulario.controls.placa.value;
     let pass = this.formulario.controls.pass.value;
@@ -54,22 +73,20 @@ export class LoginComponent implements OnInit {
         console.info('Login correcto, tenemos permisos JSON: %o', data);
         this.router.navigate(['home']);
       },
-      error=>{
-        //TODO mensaje al usuario
-        if(error.status == 403){
-          console.error('Error esperado: ' + error.status);
-        }else{
-          console.error(error.status);
-        }
-        
+      error => {
         this.autorizacionService.isLogged = false;
         console.info('isLogged: ' + this.autorizacionService.isLogged)
         console.warn('No tienes permisos');
+        //TODO mensaje al usuario
+        if (error.status == 403) {
+          console.error('Error esperado: ' + error.status);
+        } else {
+          console.error(error.status);
+        }
+
       }
-    );
+    ); // subscribe
 
-
-
-  }// comprobar
+  } // comprobar
 
 }
