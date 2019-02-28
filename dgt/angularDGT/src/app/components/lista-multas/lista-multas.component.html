@@ -1,11 +1,4 @@
-<div class="container mb-3 mt-3">
-  <div class="row d-flex align-items-center mb-3">
-    <div class="d-flex">
-      <img class="mr-3 img-thumbnail" src="assets\imagenes\takelberry.jpg" alt="takelberry">
-    </div>
-    <p class="text-primary nombre">{{agente.nombre}} </p>
-  </div>
-</div>
+
 
 
 
@@ -26,7 +19,7 @@
   </thead>
   <tbody>   
     <tr *ngFor="let m of multas">
-      <td>{{m.agente.imagen}}</td>
+      <td> <img class="mr-3 img-thumbnail" src="{{m.agente.imagen}}" alt="{{m.agente.nombre}}"></td>
       <td>{{m.id}}</td>
       <td>{{m.coche.matricula}}</td>
       <td>{{m.importe | moneda}}</td>
@@ -40,3 +33,4 @@
    
   </tbody>
 </table>
+

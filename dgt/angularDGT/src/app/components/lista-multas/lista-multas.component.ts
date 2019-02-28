@@ -35,7 +35,7 @@ export class ListaMultasComponent implements OnInit {
       console.log('TodosComponent ngOnInit');
 
       //
-      this.id_agente= 1; // TODO no hardcor
+      this.id_agente= 4; // TODO no hardcor
       this.getMultas(this.id_agente);
   
     }
