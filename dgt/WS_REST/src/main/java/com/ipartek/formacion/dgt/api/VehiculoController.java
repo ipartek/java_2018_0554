@@ -51,20 +51,37 @@ public class VehiculoController {
 	}
 	
 	
-	@RequestMapping( value= {"/api/vehiculo/{id}"}, method = RequestMethod.GET)
-	public ResponseEntity<Coche> detalle( @PathVariable String id ){		
+//	@RequestMapping( value= {"/api/vehiculo/{id}"}, method = RequestMethod.GET)
+//	public ResponseEntity<Coche> detalle( @PathVariable long id ){		
+//		
+//		ResponseEntity<Coche> response = new ResponseEntity<Coche>( HttpStatus.NOT_FOUND );
+//		try {
+//			
+//			Coche coche = cocheDAO.getById(identificador);  
+//			if ( coche != null ) {
+//				response = new ResponseEntity<Coche>( coche,  HttpStatus.OK );
+//			}
+//			
+//		}catch ( NumberFormatException e) {	
+//			response = new ResponseEntity<Coche>( HttpStatus.BAD_REQUEST );
+//		}catch (Exception e) {
+//			LOG.error(e);
+//			response = new ResponseEntity<Coche>( HttpStatus.INTERNAL_SERVER_ERROR );
+//		}	 	
+//		return response;
+//	}
+	
+	@RequestMapping( value= {"/api/vehiculo/{matricula}"}, method = RequestMethod.GET)
+	public ResponseEntity<Coche> detallePorMatricula( @PathVariable String matricula ){		
 		
 		ResponseEntity<Coche> response = new ResponseEntity<Coche>( HttpStatus.NOT_FOUND );
 		try {
 			
-			long identificador = Long.parseLong(id);
-			Coche coche = cocheDAO.getById(identificador);
+			Coche coche = cocheDAO.getByMatricula(matricula);
 			if ( coche != null ) {
 				response = new ResponseEntity<Coche>( coche,  HttpStatus.OK );
 			}
 			
-		}catch ( NumberFormatException e) {	
-			response = new ResponseEntity<Coche>( HttpStatus.BAD_REQUEST );
 		}catch (Exception e) {
 			LOG.error(e);
 			response = new ResponseEntity<Coche>( HttpStatus.INTERNAL_SERVER_ERROR );

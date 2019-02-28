@@ -13,7 +13,7 @@ import com.ipartek.formacion.modelo.pojo.Agente;
 public class LoginDAO {
 	private final static Logger LOG = Logger.getLogger(LoginDAO.class);
 	private static LoginDAO INSTANCE = null;
-	private static final String SQL_LOGIN = "{call pa_login(?, ?)}";
+	private static final String SQL_LOGIN = "SELECT id, nombre, password, placa from agente where placa = ? AND password = ?";
 
 	// Constructor privado, solo acceso por getInstance()
 	private LoginDAO() {
@@ -34,16 +34,16 @@ public class LoginDAO {
 	 * @param pass  String pass
 	 * @return usuario con datos si existe, null si no existe
 	 */
-	public Agente login(int placa, String password) {
+	public Agente login(int placa, String password ) {
 
-		Agente a = null;
+		Agente agenteEncontrado = null;
 
 		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(SQL_LOGIN);) {
 			cs.setInt(1, placa);
 			cs.setString(2, password);
 			try (ResultSet rs = cs.executeQuery()) {
 				while (rs.next()) { // hemos encontrado usuario
-					a = rowMapper(rs);
+					agenteEncontrado = rowMapper(rs);
 				}
 			}
 			catch (Exception e) {
@@ -52,7 +52,7 @@ public class LoginDAO {
 		} catch (Exception e) {
 			LOG.error(e);
 		}
-		return a;
+		return agenteEncontrado;
 	}
 
 //	public ArrayList<Agente> getAll() {

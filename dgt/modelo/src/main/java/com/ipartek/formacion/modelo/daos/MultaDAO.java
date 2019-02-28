@@ -2,6 +2,7 @@ package com.ipartek.formacion.modelo.daos;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -14,6 +15,7 @@ import com.ipartek.formacion.modelo.cm.ConnectionManager;
 import com.ipartek.formacion.modelo.pojo.Coche;
 import com.ipartek.formacion.modelo.pojo.Multa;
 
+
 public class MultaDAO {
 	private final static Logger LOG = Logger.getLogger(MultaDAO.class);
 	private static MultaDAO INSTANCE = null;
@@ -25,7 +27,7 @@ public class MultaDAO {
 	//private static final String MULTAS_ACTIVAS = "activas";
 
 	private static final String SQL_GETBYID = "{call pa_multa_getById(?)}";
-	private static final String SQL_GETALL_BYUSER = "{call pa_multa_getByAgenteId(?,?)}";
+	private static final String SQL_GETALL_BYUSER = "SELECT multa.id as 'id_multa', coche.id as 'id_coche', multa.concepto as 'concepto', multa.fecha_alta as 'fecha_alta', multa.fecha_baja as 'fecha_baja', coche.matricula as 'matricula', coche.modelo as 'modelo' FROM multa inner join coche on multa.id_coche = coche.id inner join agente on multa.id_agente = agente.id WHERE multa.id_agente = ? ORDER BY multa.id DESC LIMIT 1000;";
 	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
 	private static final String SQL_UPDATE = "{call pa_multa_update(?,?)}";
 
@@ -70,21 +72,15 @@ public class MultaDAO {
 		return m;
 	}
 
-	public ArrayList<Multa> getAllByUser(long id, String opm) {
+	public ArrayList<Multa> getAllByAgente(long id) {
 
 		ArrayList<Multa> multas = new ArrayList<Multa>();
 		isGetById = false;
 		try (Connection conn = ConnectionManager.getConnection();
-				CallableStatement cs = conn
-						.prepareCall(SQL_GETALL_BYUSER);) {
-			if (MULTAS_ANULADAS.equals(opm)) {
-				isBaja = true;
-			} else {
-				isBaja = false;
-			}
-			cs.setLong(1, id);
-			cs.setString(2, opm);
-			try (ResultSet rs = cs.executeQuery()) {
+				PreparedStatement pst = conn.prepareStatement(SQL_GETALL_BYUSER);) {
+
+			pst.setLong(1, id);
+			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
 					try {
 						multas.add(rowMapper(rs));
@@ -100,7 +96,7 @@ public class MultaDAO {
 		return multas;
 	}
 
-	public boolean insert(Multa m) throws SQLException {
+	public boolean insert(Multa m, long idCoche) throws SQLException {
 
 		boolean resul = false;
 		isGetById = false;
@@ -109,7 +105,7 @@ public class MultaDAO {
 
 			cs.setDouble(1, m.getImporte());
 			cs.setString(2, m.getConcepto());
-			cs.setLong(3, m.getCoche().getId());
+			cs.setLong(3, idCoche);
 			cs.setLong(4, m.getAgente().getId());
 			cs.registerOutParameter(5, Types.INTEGER);
 			int affectedRows = cs.executeUpdate();
@@ -139,7 +135,21 @@ public class MultaDAO {
 		return resul;
 
 	}
-
+	private Multa rowMapper(ResultSet rs) throws SQLException {
+		Multa multa = new Multa();
+		Coche coche = new Coche();
+		multa.setId((long)rs.getInt("id_multa"));
+		multa.setConcepto(rs.getString("concepto"));
+		multa.setFechaAlta(rs.getDate("fecha_alta"));
+		multa.setFechaBaja(rs.getDate("fecha_baja"));
+		coche.setId((long)rs.getInt("id_coche"));
+		coche.setMatricula(rs.getString("matricula"));
+		coche.setModelo(rs.getString("modelo"));
+		
+		multa.setCoche(coche);
+		return multa;
+	}
+		/*
 	private Multa rowMapper(ResultSet rs) throws SQLException {
 		Multa m = new Multa();
 		Coche c = new Coche();
@@ -165,6 +175,6 @@ public class MultaDAO {
 		}
 		m.setCoche(c);
 		return m;
-	}
+	}*/
 
 }
