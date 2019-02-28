@@ -11,8 +11,8 @@ import {
   Router
 } from '@angular/router';
 import {
-  AutorizacionService
-} from 'src/app/providers/autorizacion.service';
+  AgenteService
+} from 'src/app/providers/agente.service';
 import { Alerta } from 'src/app/model/alerta';
 
 @Component({
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   alerta: Alerta;
 
   constructor(
-    private autorizacionService: AutorizacionService,
+    private agenteService: AgenteService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {
@@ -69,15 +69,15 @@ export class LoginComponent implements OnInit {
     console.debug('nombre: %s password: %s', placa, pass);
 
     //llamar servicio TODO retornar Observable
-    this.autorizacionService.login(placa, pass).subscribe(
+    this.agenteService.login(placa, pass).subscribe(
       data => {
-        this.autorizacionService.isLogged = true;
-        console.info('isLogged: ' + this.autorizacionService.isLogged)
+        this.agenteService.isLogged = true;
+        console.info('isLogged: ' + this.agenteService.isLogged)
         console.info('Login correcto, tenemos permisos JSON: %o', data);
         this.router.navigate(['home']);
       }, // data
       error => {
-        this.autorizacionService.isLogged = false;
+        this.agenteService.isLogged = false;
         console.warn('No tienes permisos');
         if (error.status == 403) {
           this.alerta = new Alerta(`Credenciales incorrectas, acceso denegado. Código de error: ${error.status}`,

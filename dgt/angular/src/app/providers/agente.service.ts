@@ -14,7 +14,7 @@ import {
 @Injectable({
   providedIn: 'root'
 })
-export class AutorizacionService {
+export class AgenteService {
 
   private _isLogged: boolean;
 
@@ -26,7 +26,7 @@ export class AutorizacionService {
   }
 
   constructor(public http: HttpClient) {
-    console.trace('AutorizacionService constructor');
+    console.trace('AgenteService constructor');
     this._isLogged = false;
   } // Constructor
 
@@ -39,7 +39,7 @@ export class AutorizacionService {
     console.debug('Placa: %s Pass: %s', placa, pass);
 
     const url = GLOBAL.endpoint + 'login/' + placa + '/' + pass;
-    console.log(`AutorizacionService login ${url}`);
+    console.log(`AgenteService login ${url}`);
     return this.http.get(url);
   } // Login
 

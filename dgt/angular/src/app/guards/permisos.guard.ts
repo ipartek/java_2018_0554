@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AutorizacionService } from '../providers/autorizacion.service';
+import { AgenteService } from '../providers/agente.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { AutorizacionService } from '../providers/autorizacion.service';
 export class PermisosGuard implements CanActivate {
 
   constructor(
-    private autorizacionService: AutorizacionService,
+    private agenteService: AgenteService,
     private router: Router
   ){
     console.trace('PermisosGuard constructor');
@@ -20,7 +20,7 @@ export class PermisosGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
       console.trace('PermisosGuard canActivate');
-      if(this.autorizacionService.isLogged){
+      if(this.agenteService.isLogged){
         console.debug('Login correcto');
         return true;
       }else{
