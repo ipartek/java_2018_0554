@@ -13,6 +13,7 @@ import {
 import {
   AutorizacionService
 } from 'src/app/providers/autorizacion.service';
+import { Alerta } from 'src/app/model/alerta';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ import {
 export class LoginComponent implements OnInit {
 
   formulario: FormGroup;
+  alerta: Alerta;
 
   constructor(
     private autorizacionService: AutorizacionService,
@@ -30,6 +32,7 @@ export class LoginComponent implements OnInit {
   ) {
     console.trace('LoginComponent constructor');
     this.crearFormulario();
+    this.alerta = new Alerta('');
   }
 
   ngOnInit() {
@@ -42,17 +45,17 @@ export class LoginComponent implements OnInit {
       placa: [
         '',
         [Validators.required,
-          Validators.min(0),
-          Validators.max(99999),
-          Validators.minLength(4),
-          Validators.maxLength(45)
+        Validators.min(0),
+        Validators.max(99999),
+        Validators.minLength(4),
+        Validators.maxLength(45)
         ]
       ],
       pass: [
         '',
         [Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(50)
+        Validators.minLength(8),
+        Validators.maxLength(50)
         ]
       ]
     });
@@ -72,19 +75,20 @@ export class LoginComponent implements OnInit {
         console.info('isLogged: ' + this.autorizacionService.isLogged)
         console.info('Login correcto, tenemos permisos JSON: %o', data);
         this.router.navigate(['home']);
-      },
+      }, // data
       error => {
         this.autorizacionService.isLogged = false;
-        console.info('isLogged: ' + this.autorizacionService.isLogged)
         console.warn('No tienes permisos');
-        //TODO mensaje al usuario
         if (error.status == 403) {
+          this.alerta = new Alerta(`Credenciales incorrectas, acceso denegado. Código de error: ${error.status}`,
+            Alerta.TIPO_WARNING);
           console.error('Error esperado: ' + error.status);
         } else {
+          this.alerta = new Alerta(`Error inesperado. Código de error: ${error.status}`);
           console.error(error.status);
         }
 
-      }
+      } // error
     ); // subscribe
 
   } // comprobar
