@@ -166,6 +166,7 @@ public class MultaDAO {
 			a.setPlaca(rs.getString("placa"));
 			a.setNombre(rs.getString("nombre"));
 			a.setPassword(rs.getString("password"));
+			a.setImagen(rs.getString("imagen"));
 			}catch (Exception e) {
 				LOG.error(e);
 				

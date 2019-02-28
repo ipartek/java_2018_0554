@@ -13,13 +13,18 @@ public class Agente {
 	@NotEmpty(message = "No puede estar vacio")
 	private String password;
 	
-	public Agente(Long id, String nombre, String placa, String password) {
+	private String imagen;
+	
+	public Agente(Long id, String nombre, String placa, String password, String imagen) {
 		this();
 		setId(id);
 		setNombre(nombre);
 		setPlaca(placa);
 		setPassword(password);
+		setImagen(imagen);
 	}
+
+
 
 	public Agente() {
 		super();
@@ -27,6 +32,7 @@ public class Agente {
 		this.nombre = "";
 		this.placa = "";
 		this.password = "";
+		this.imagen= "";
 	}
 
 	public Long getId() {
@@ -61,9 +67,23 @@ public class Agente {
 		this.password = password;
 	}
 
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "Agente [id=" + id + ", nombre=" + nombre + ", placa=" + placa + ", password=" + password + "]";
+		return "Agente [id=" + id + ", nombre=" + nombre + ", placa=" + placa + ", password=" + password + ", imagen="
+				+ imagen + "]";
 	}
+
+	
+	
 	
 }
