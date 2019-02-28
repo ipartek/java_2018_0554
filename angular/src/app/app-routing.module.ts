@@ -24,7 +24,7 @@ import { PermisosGuard } from './guards/permisos.guard';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about/:repeticiones', component: AboutComponent },  
-  { path: 'juego', component: PruebaComponent },  
+  { path: 'juego', component: PruebaComponent, canActivate: [PermisosGuard] },  
   { path: '404', component: Error404Component }, 
   { path: 'flujo', component: FlujoComponent }, 
   { path: 'pipe', component: PaginaPipeComponent }, 
