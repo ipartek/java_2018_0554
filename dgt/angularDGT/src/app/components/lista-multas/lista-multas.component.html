@@ -3,28 +3,39 @@
     <div class="d-flex">
       <img class="mr-3 img-thumbnail" src="assets\imagenes\takelberry.jpg" alt="takelberry">
     </div>
-    <p class="text-primary nombre">Takelberry </p>
+    <p class="text-primary nombre">{{agente.nombre}} </p>
   </div>
 </div>
 
 
 
 
-<table class="table table-hover tablaOrdenable">
+<table class="table table-hover tablaOrdenable table-striped">
   <thead class="thead-light">
     <tr>
+      <th>imagen</th>
       <th>id</th>
+      <th>Matricula</th>
       <th>Importe</th>
       <th>Concepto</th>
       <th>Fecha de Alta</th>
+      <th>Hora  de Alta</th>
+      <th>Nombre Agente</th>
+      
     </tr>
   </thead>
   <tbody>   
     <tr *ngFor="let m of multas">
+      <td>{{m.agente.imagen}}</td>
       <td>{{m.id}}</td>
-      <td>{{m.importe}}</td>
+      <td>{{m.coche.matricula}}</td>
+      <td>{{m.importe | moneda}}</td>
       <td>{{m.concepto}}</td>
-      <td>{{m.fechaAlta}}</td>
+      <td>{{m.fechaAlta | date}}</td>
+      <td>{{m.fechaAlta | date:'shortTime'}}</td>
+      <td>{{m.agente.nombre}}</td>
+     
+
     </tr>
    
   </tbody>

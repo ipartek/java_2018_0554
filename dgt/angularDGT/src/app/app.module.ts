@@ -13,6 +13,7 @@ import { ListaMultasComponent } from './components/lista-multas/lista-multas.com
 
 import { AlertComponent } from './components/alert/alert.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MonedaPipe } from './pipes/moneda.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormularioMatriculaComponent,
     FormularioMultarComponent,
     ListaMultasComponent,
-    AlertComponent
+    AlertComponent,
+    MonedaPipe
   ],
   imports: [
     BrowserModule,

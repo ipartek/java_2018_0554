@@ -11,6 +11,7 @@ import { PermisosGuard } from './guards/permisos.guard';
 
 const routes: Routes = [
 
+  { path: '', component: PaginaLoginComponent },
   { path: 'login', component: PaginaLoginComponent },
   { path: 'principal', component: PrincipalComponent, canActivate: [PermisosGuard] },
   { path: 'matricula', component: FormularioMatriculaComponent },
