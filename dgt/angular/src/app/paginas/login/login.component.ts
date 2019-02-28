@@ -37,6 +37,9 @@ export class LoginComponent implements OnInit {
     this.alerta = new Alerta('');
   }
 
+  /**
+   * Crea el formulario del login
+   */
   ngOnInit() {
     console.trace('LoginComponent ngOnInit');
   }
@@ -64,6 +67,17 @@ export class LoginComponent implements OnInit {
 
   } // crearFormulario
 
+  /**
+   * Comprueba que los datos introducidos en el formulario
+   * (Nº de Placa y Password) están relacionados con un 
+   * agente de la DB. 
+   * Si las credenciales existen, se obtienen los datos 
+   * del agente registrados en la DB y se construye con 
+   * ellos un objeto Agente [agenteLogueado], cambiando
+   * también el estado de la variable 'isLogged' a true.
+   * En caso de que no exista dicho agente en la DB, se
+   * notificará al usuario mediante un mensaje por pantalla
+   */
   comprobar() {
     console.trace('click boton submit');
     let placa = this.formulario.controls.placa.value;
