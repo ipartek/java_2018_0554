@@ -112,27 +112,29 @@ public class MultaDAO {
 	 * @return True si todo es correcto. False si la inserción es errónea. 
 	 * @throws SQLException Si alguno de los datos viene en formato erróneo.
 	 */
-	public boolean insert(Multa m, Long id_agente) throws SQLException {
-		boolean resul = false;
+	public Multa insert(Float importe, String concepto, int idCoche, int idAgente) throws SQLException {
+		Multa m = null;
 		String sql = SQL_INSERT;
 		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(sql);) {
 			// parametros de entrada
-			cs.setDouble(1, m.getImporte());
-			cs.setString(2, m.getConcepto());
-			cs.setLong(3, m.getCoche().getId());
-			cs.setLong(4, id_agente);
+			cs.setDouble(1, importe);
+			cs.setString(2, concepto);
+			cs.setLong(3, idCoche);
+			cs.setLong(4, idAgente);
 
 			// parametros de salida
 			cs.registerOutParameter(5, Types.INTEGER);
 
 			int affectedRows = cs.executeUpdate();
 			if (affectedRows == 1) {
+				m = new Multa();
 				// conseguir id generado
 				m.setId(cs.getLong(5));
-				resul = true;
+				m.setImporte(importe.doubleValue());
+				m.setConcepto(concepto);
 			}
 		}
-		return resul;
+		return m;
 	}
 
 	/**
