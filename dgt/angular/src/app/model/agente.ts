@@ -7,14 +7,14 @@ export class Agente {
     private _password: string;
 
     constructor(
-        id: number = -1,
-        nombre: string,
-        placa: string,
-        id_departamento: number,
-        password: string
+        id?: number,
+        nombre?: string,
+        placa?: string,
+        id_departamento?: number,
+        password?: string
     ) {
-        this._id = id;
-        this._nombre = nombre;
+        this._id = (id) ? id : -1;
+        this._nombre = (nombre) ? nombre : 'No definido';
         this._placa = placa;
         this._id_departamento = id_departamento;
         this._password = password;

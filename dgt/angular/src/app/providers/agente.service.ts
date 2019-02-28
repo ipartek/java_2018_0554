@@ -10,6 +10,7 @@ import {
 import {
   Observable
 } from 'rxjs';
+import { Agente } from '../model/agente';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,14 @@ import {
 export class AgenteService {
 
   private _isLogged: boolean;
+  private _agenteLogueado: Agente;
+
+  public get agenteLogueado(): Agente {
+    return this._agenteLogueado;
+  }
+  public set agenteLogueado(value: Agente) {
+    this._agenteLogueado = value;
+  }
 
   public get isLogged(): boolean {
     return this._isLogged;
@@ -28,6 +37,7 @@ export class AgenteService {
   constructor(public http: HttpClient) {
     console.trace('AgenteService constructor');
     this._isLogged = false;
+    this._agenteLogueado = new Agente();
   } // Constructor
 
   /**
