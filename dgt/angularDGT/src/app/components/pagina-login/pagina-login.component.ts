@@ -11,55 +11,64 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class PaginaLoginComponent implements OnInit {
 
-  formulario: FormGroup;
+
+  formulario: FormGroup;  
   alert: Alert;
 
-  constructor(private autorizacionService: AutorizacionService,
+  constructor(
+    private autorizacionService: AutorizacionService,
     private formBuilder: FormBuilder,
     private router: Router
-  ) {
-
-    console.trace('PaginaLoginComponent constructor');
+  ) { 
+    console.trace('LoginComponent constructor');
     this.crearFormulario();
     this.alert = new Alert('');
   }
 
   ngOnInit() {
-    console.trace('PaginaLoginComponent ngOnInit');
+    console.trace('LoginComponent ngOnInit');
   }
 
-  crearFormulario() {
-    console.trace('PaginaLoginComponent crearFormulario');
+  crearFormulario(){
+    console.trace('LoginComponent crearFormulario');
     this.formulario = this.formBuilder.group({
       placa: [
-        '',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(40)]
-      ],
-      password: [
-        '',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(16)]
-      ]
-    });
-
+                '',                                                                         
+                [Validators.required, Validators.minLength(3), Validators.maxLength(150)]   
+              ],
+      password : [
+              '',
+              [Validators.required, Validators.minLength(3), Validators.maxLength(16)]
+      ]  
+    });  
+      
   }// crearFormulario
 
-  comprobar() {
+
+  comprobar(){
     console.trace('click boton submit');
     let placa = this.formulario.controls.placa.value;
     let password = this.formulario.controls.password.value;
-    console.debug('placa: %s password: %s', placa, password);
+    console.debug('placa: %s password: %s',placa , password);
 
-    //llamar servicio TODO retornar Observable
-    this.autorizacionService.loggin(placa, password);
+    // llamar servicio Rest, realizar logica dentro de subscripcion
+    // Cuidado es una llamada Asincrona
+    this.autorizacionService.loggin(placa, password).subscribe(
+      data =>{
+        console.debug('Json Agente %o', data);
+        this.autorizacionService.isLogged = true;
+        this.router.navigate(['/principal']);
+      },
+      error=>{
+        console.warn('error login %o', error);
+        this.autorizacionService.isLogged = false;
+        this.alert = new Alert('No tienes permisos');
+      }
+    );
 
-    if (this.autorizacionService.estaLogeado()) {
-      console.info('Login correcto, tenemos permisos');
-      this.router.navigate(['/principal']);
+    // *** Cuidado no intentar usar datos de la respuesta aqui ***
+       
 
-    } else {
-      console.warn('No tienes permisos');
-      this.alert = new Alert('Login incorrecto');
-    }
 
   }// comprobar
 

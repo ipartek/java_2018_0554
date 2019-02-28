@@ -3,6 +3,7 @@ package com.ipartek.formacion.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ipartek.formacion.modelo.daos.LoginDAO;
 import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Multa;
@@ -12,11 +13,13 @@ import com.ipartek.formacion.service.Singleton;
 public class AgenteServiceImpl implements AgenteService, Singleton {
 
 	private static MultaDAO multaDAO;
+	private static LoginDAO loginDAO;
 	private static AgenteServiceImpl INSTANCE = null;
 	
 	private AgenteServiceImpl() {
 		super();	
 		multaDAO = MultaDAO.getInstance();
+		loginDAO = LoginDAO.getInstance();
 	}
 
 	public static synchronized AgenteServiceImpl getInstance() {
@@ -28,16 +31,10 @@ public class AgenteServiceImpl implements AgenteService, Singleton {
 
 //LOGIN AGENTE GET
 	@Override
-	public Agente existe(String numeroPlaca, String password) {
-		// TODO llamar al DAO
-		Agente agente = null;
+	public Agente existe(String placa, String password) {
+	
 		
-		if ( "admin".equals(password) && "admin".equals(numeroPlaca)) {
-			agente = new Agente(1l, "Takelberry", "12345678", "");
-		}
-		
-		
-		return agente;
+		return loginDAO.login(placa, password);
 	}
 // CREAR MULTA POST
 	@Override

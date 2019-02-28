@@ -34,12 +34,12 @@ public class LoginDAO {
 	 * @param pass  String pass
 	 * @return usuario con datos si existe, null si no existe
 	 */
-	public Agente login(int placa, String password) {
+	public Agente login(String placa, String password) {
 
 		Agente a = null;
 
 		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(SQL_LOGIN);) {
-			cs.setInt(1, placa);
+			cs.setString(1, placa);
 			cs.setString(2, password);
 			try (ResultSet rs = cs.executeQuery()) {
 				while (rs.next()) { // hemos encontrado usuario
@@ -167,7 +167,7 @@ public class LoginDAO {
 		Agente a = new Agente();
 		a.setId(rs.getLong("id"));
 		a.setNombre(rs.getString("nombre"));
-		a.setPlaca(String.valueOf(rs.getInt("placa")));
+		a.setPlaca(String.valueOf(rs.getString("placa")));
 		a.setPassword(rs.getString("password"));
 		return a;
 	}

@@ -19,15 +19,17 @@ export class PermisosGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-      console.trace('GuardPermisosGuard canActivate');
-      if ( this.autorizacionService.estaLogeado() ){
-        console.debug(' estamos autorizados');
-        return true;
-  
-      }else{        
-        console.warn(' NO estamos autorizados');
-        this.router.navigate(['/login']);
-        return false;
-      }    
+    console.trace('GuardPermisosGuard canActivate');
+
+    if ( this.autorizacionService.isLogged ){
+      console.debug(' estamos autorizados');
+      return true;
+
+    }else{        
+      console.warn(' NO estamos autorizados');
+      this.router.navigate(['/login']);
+      return false;
+    }    
+
   }
 }
