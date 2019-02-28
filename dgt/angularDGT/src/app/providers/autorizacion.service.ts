@@ -1,15 +1,27 @@
 import { Injectable } from '@angular/core';
 
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AutorizacionService {
 
-  private isLogged: boolean;
+  private _isLogged: boolean;
 
-  constructor() { 
+  
+  public get isLogged(): boolean {
+    return this._isLogged;
+  }
+  public set isLogged(value: boolean) {
+    this._isLogged = value;
+  }
+
+  constructor(private httpClient: HttpClient) { 
     console.trace('AutorizacionService canActivate');
-    this.isLogged = false;
+    this._isLogged = false;
+    
   }
 
 
@@ -25,22 +37,35 @@ export class AutorizacionService {
    * @param placa 
    * @param password 
    */
-  loggin(placa: string, password: string): any{
+  loggin(placa: string, password: string): Observable<any>{
 
-      //TODO llamar Servicio Rest
-      if ( placa === '123456' && password === '123456'){
+    console.trace('AutorizacionService loggin');
+     /* if ( placa === '123456' && password === '123456'){
         this.isLogged = true;
       }else{
         this.isLogged = false;
-      }
+      }*/
+
+
+      // llamar Servicio Rest
+      let uri = `http://localhost:8080/wsrest/api/agente/login/${placa}/${password}`;
+      console.trace('AutorizacionService loggin uri: '+ uri);
+
+      return this.httpClient.get(uri);
+
   }
+
+  
 
   /**
    * Cierra la session del usuario llamando al backoffice
    */
   logout(){
     //TODO llamar Servicio Rest
-    this.isLogged = false;
+    
+    this._isLogged = false;
+
+    
   }
 
 
