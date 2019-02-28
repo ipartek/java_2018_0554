@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Alerta } from 'src/app/model/alerta';
 
 @Component({
   selector: 'app-alert',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlertComponent implements OnInit {
 
-  constructor() { }
+  @Input() alerta: Alerta;
+
+  constructor() { 
+    this.alerta = new Alerta('');
+  }
 
   ngOnInit() {
   }
