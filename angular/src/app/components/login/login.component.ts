@@ -50,17 +50,24 @@ export class LoginComponent implements OnInit {
     let pass = this.formulario.controls.pass.value;
     console.debug('nombre: %s password: %s',nombre , pass);
 
-    //llamar servicio TODO retornar Observable
-    this.autorizacionService.loggin(nombre, pass);
+    // llamar servicio Rest, realizar logica dentro de subscripcion
+    // Cuidado es una llamada Asincrona
+    this.autorizacionService.loggin(nombre, pass).subscribe(
+      data =>{
+        console.debug('Json Agente %o', data);
+        this.autorizacionService.isLogged = true;
+        this.router.navigate(['/backoffice']);
+      },
+      error=>{
+        console.warn('error login %o', error);
+        this.autorizacionService.isLogged = false;
+        this.alert = new Alert('No tienes permisos');
+      }
+    );
 
-    if ( this.autorizacionService.estaLogeado() ){
-      console.info('Login correcto, tenemos permisos');
-      this.router.navigate(['/backoffice']);
+    // *** Cuidado no intentar usar datos de la respuesta aqui ***
+       
 
-    }else{
-      console.warn('No tienes permisos');
-      this.alert = new Alert('No tienes permisos');
-    }
 
   }// comprobar
 
