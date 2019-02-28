@@ -34,6 +34,7 @@ export class FrutaService {
   public guardar(fruta: Fruta):Observable<any>{
     let url = this.endpoint;
    
+    let coloresJson =  fruta.colores.map( c => { return{"nombre": c.nombre, "codigo": c.codigo} } );
 
     if ( fruta.id == -1 ){
       let body = {
@@ -41,7 +42,8 @@ export class FrutaService {
         "oferta": fruta.oferta,
         "precio": fruta.precio,
         "descuento": fruta.descuento,
-        "imagen": fruta.imagen      
+        "imagen": fruta.imagen,
+        "colores": coloresJson    
       };
       console.trace('crear ' + url);
       return this.httpClient.post(url, body);
@@ -54,7 +56,8 @@ export class FrutaService {
         "oferta": fruta.oferta,
         "precio": fruta.precio,
         "descuento": fruta.descuento,
-        "imagen": fruta.imagen      
+        "imagen": fruta.imagen,
+        "colores": coloresJson      
       };
       console.trace('modificar ' + url + fruta.id);
       return this.httpClient.put(url + fruta.id , body);

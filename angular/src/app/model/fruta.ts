@@ -1,3 +1,5 @@
+import { Color } from './color';
+
 //const IMAGEN_DEFAULT = 'https://media.istockphoto.com/vectors/question-mark-food-black-and-white-icon-background-vector-id972328534';
 
 export class Fruta {
@@ -12,6 +14,7 @@ export class Fruta {
     private _imagen: string;  
     private _cantidad: number;   
     private _completed: boolean; 
+    private _colores: Color[];
   
 
     // constructor solo puede haber uno, no existe sobrecarga como en Java
@@ -46,6 +49,7 @@ export class Fruta {
         this._imagen = (imagen && imagen != '') ? imagen : Fruta.IMAGEN_DEFAULT;
         this._cantidad = cantidad;
         this._completed = completed;
+        this._colores = [];
     }
 
     // getters y setters
@@ -109,6 +113,13 @@ export class Fruta {
     }
     public set completed(value: boolean) {
         this._completed = value;
+    }
+
+    public get colores(): Color[] {
+        return this._colores;
+    }
+    public set colores(value: Color[]) {
+        this._colores = value;
     }
 
     // TODO

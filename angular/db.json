@@ -21,7 +21,7 @@
       "id": 2,
       "nombre": "pomelo",
       "oferta": false,
-      "precio": 9,
+      "precio": 9.5,
       "descuento": 7,
       "imagen": "https://www.comenaranjas.com/images/stories/virtuemart/product/pomelo-star-ruby.jpg"
     },
@@ -109,12 +109,26 @@
       "id": 10
     },
     {
+      "id": 11,
       "nombre": "melón galia",
       "oferta": true,
       "precio": 3.55,
       "descuento": 5,
-      "imagen": "http://www.frutaseladio.com/res/uploads/eladio-melon-galia.jpg",
-      "id": 11
+      "imagen": "http://www.frutaseladio.com/res/uploads/eladio-melon-galia.jpg"
+    },
+    {
+      "id": 12,
+      "nombre": "naranja",
+      "oferta": false,
+      "precio": 1.99,
+      "descuento": 0,
+      "imagen": "https://www.elsiglodedurango.com.mx/m/i/2018/08/720452.jpeg",
+      "colores": [
+        {
+          "nombre": "naranja",
+          "codigo": "orange"
+        }
+      ]
     }
   ],
   "todos": [

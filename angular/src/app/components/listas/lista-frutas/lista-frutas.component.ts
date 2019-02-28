@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Fruta } from 'src/app/model/fruta';
 import { FrutaService } from 'src/app/providers/fruta.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Alert } from 'src/app/model/alert';
+import { Color } from 'src/app/model/color';
 
 @Component({
   selector: 'app-lista-frutas',
@@ -52,7 +53,11 @@ export class ListaFrutasComponent implements OnInit {
         imagen: [ 
                   Fruta.IMAGEN_DEFAULT , 
                   [Validators.required, Validators.pattern('(https?:){1}.*\.(jpe?g|png|gif)$')]
-                ]
+                ],
+        colores: this.formBuilder.array( 
+                    [ this.crearColoresFormGroup( new Color('','') )  ], 
+                    Validators.minLength(1) 
+                ) // minimo un color
       });
 
       // subscribirnos al evento cada vez que cambia la "oferta" para validar el descuento
@@ -74,6 +79,40 @@ export class ListaFrutasComponent implements OnInit {
 
   }
 
+   /**
+   * Crea un nuevo FormGroup para el formulario 
+   * @param color Color nuevo a crear
+   */
+  crearColoresFormGroup(color: Color): FormGroup{
+    return this.formBuilder.group({
+       nombre: [
+                   color.nombre, 
+                   [Validators.required, Validators.minLength(2)]
+               ],
+       codigo: [
+                 color.codigo, 
+                 [Validators.required, Validators.minLength(4),Validators.maxLength(7)] 
+               ]
+     });
+   }
+ 
+   /**
+    * Crea un nuevo ColoresFormGroup dentro del formulario
+    */
+   nuevoColor(){
+     console.trace(' click nuevo color');
+     (this.formulario.controls['colores'] as FormArray).push( this.crearColoresFormGroup(new Color('','')) );
+   }
+ 
+   /**
+    * Eliminar un nuevo ColoresFormGroup dentro del formulario
+    * @param index posicion a eliminar dentro del array
+    */
+   eliminarColor(index: number){
+     console.trace(' click eliminar color posicion:' + index);
+     (this.formulario.controls['colores']as FormArray).removeAt(index);
+   } 
+
   cargarFrutas(){
     console.trace('PaginaFrutasComponent cargarFrutas');
     this.frutaService.getAll().subscribe(
@@ -89,6 +128,24 @@ export class ListaFrutasComponent implements OnInit {
     );
   }// cargarFrutas
 
+   /**
+   * Mappear de un Json al modelo Fruta
+   * @param jsonFruta Json que recibimos del servicio Rest
+   */
+  mapperJsonFruta(jsonFruta: any){
+    let fruta = new Fruta( jsonFruta.nombre, jsonFruta.precio );    
+    fruta.id = jsonFruta.id;
+    fruta.imagen = jsonFruta.imagen;
+    fruta.oferta = jsonFruta.oferta;
+    fruta.descuento = jsonFruta.descuento;
+    if ( jsonFruta.colores ){
+      fruta.colores = jsonFruta.colores.map( c => new Color(c.nombre,c.codigo) );
+    }else{
+      fruta.colores = [];
+    }  
+    return fruta;
+  }
+
   editar( fruta: Fruta) {
     console.trace('click editar %o', fruta); 
     this.frutaSeleccionada = fruta;
@@ -99,6 +156,21 @@ export class ListaFrutasComponent implements OnInit {
     this.formulario.controls['descuento'].setValue(fruta.descuento);
     this.formulario.controls['imagen'].setValue(fruta.imagen);
     
+    // /////////////////////////////////////////////////
+    // Mappear colores de la Fruta => FormArray
+    // /////////////////////////////////////////////////
+
+    // inicializar a vacio FormArray
+    let coloresFormArray = this.formBuilder.array( [] ,  Validators.minLength(1) );  
+    
+    if (fruta.colores ) {
+      for( let color of fruta.colores ) {        
+        coloresFormArray.push( this.crearColoresFormGroup(color) );
+      }  
+    }else{   // no hay colores
+      coloresFormArray.push( this.crearColoresFormGroup(new Color('','')) );
+    }  
+    this.formulario.controls['colores'] = coloresFormArray;
   }
 
   eliminar(fruta: Fruta){
@@ -135,6 +207,11 @@ export class ListaFrutasComponent implements OnInit {
                             this.formulario.value.imagen,
                             0
                           );
+       // mapear FormArray a array colores para fruta
+    let coloresFormArray = this.formulario.controls['colores'];
+    let colores: Color[] = coloresFormArray.value.map( c => new Color(c.nombre, c.codigo));
+    fruta.colores = colores;
+    
     // llamar servicio                      
     this.frutaService.guardar(fruta).subscribe(
       data=>{

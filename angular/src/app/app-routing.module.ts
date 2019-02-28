@@ -17,6 +17,9 @@ import { TiendaComponent } from './components/pagina-comparador/tienda/tienda.co
 import { PaginaPersonasComponent } from './components/pagina-personas/pagina-personas.component';
 import { PaginaTodosComponent } from './components/listas/pagina-todos/pagina-todos.component';
 import { ListaFrutasComponent } from './components/listas/lista-frutas/lista-frutas.component';
+import { LoginComponent } from './components/login/login.component';
+import { BackofficeComponent } from './components/backoffice/backoffice.component';
+import { PermisosGuard } from './guards/permisos.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -36,6 +39,8 @@ const routes: Routes = [
   { path: 'pagina-personas', component: PaginaPersonasComponent },
   { path: 'pagina-todos', component: PaginaTodosComponent },
   { path: 'lista-frutas', component: ListaFrutasComponent },
+  { path: 'login', component: LoginComponent }, 
+  { path: 'backoffice', component: BackofficeComponent, canActivate: [PermisosGuard] }, 
   { path: '**', pathMatch: 'full', redirectTo: 'error404' }
 ];
 

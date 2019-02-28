@@ -93,3 +93,19 @@
     }
 
 }
+
+ul.frutas-colores{
+    padding-left: 0;
+    margin-right: 25px;
+    
+    li{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    
+        .colores-frutas{
+            width: 15px;
+            height: 15px;
+        }
+    }
+}

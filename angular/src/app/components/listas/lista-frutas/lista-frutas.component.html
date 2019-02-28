@@ -43,7 +43,22 @@
             class="text-danger">*Debes seleccionar un descuento</p>
           </div>
         </div>
-      </div> 
+      </div>
+      <fieldset>
+        <span><i class="fas fa-plus-circle" (click)="nuevoColor()"></i>Nuevo Color</span>
+        <div formArrayName="colores">
+          <div *ngFor="let color of formulario.get('colores').controls; let i = index;" >
+              <div [formGroupName]="i">
+                  <label for="imagen">Nombre:</label>
+                  <input formControlName="nombre" class="form-control">                               
+                  <label for="imagen">codigo:</label>
+                  <input formControlName="codigo" class="form-control">    
+                  <span><i class="fas fa-minus-circle" (click)="eliminarColor(i)"></i>Eliminar </span>                               
+                  <hr>
+              </div> 
+          </div>
+        </div>                   
+      </fieldset>
       <div class="form-group">
         <label for="imagen">Imagen</label>
         <input type="text" formControlName="imagen" class="form-control">
@@ -73,6 +88,7 @@
       <th scope="col">Precio</th>
       <th scope="col">Oferta</th>
       <th scope="col">Descuento</th>
+      <th scope="col">Colores</th>
       <th scope="col">Operaciones</th>
   </tr>
   </thead>
@@ -86,7 +102,15 @@
       <td>{{f.nombre}}</td>        
       <td>{{f.precio}}</td>    
       <td>{{f.oferta}}</td>   
-      <td>{{f.descuento}} %</td>    
+      <td>{{f.descuento}} %</td>
+      <!-- colores -->
+      <td>
+        <ul class="frutas-colores">
+          <li *ngFor="let color of f.colores" >
+            {{color.nombre}}<div class="colores-frutas" [style.background]="color.codigo"></div>
+          </li>
+        </ul>                
+      </td>     
       <td>
         <span (click)="editar(f)" class="btn btn-outline-warning mr-3"><i class="fas fa-edit"></i></span>
         <span (click)="eliminar(f)" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></span>        

@@ -39,6 +39,8 @@ import { CountdownDirective } from './directives/countdown.directive';
 import { MonedaPipe } from './pipes/moneda.pipe';
 import { FiltroOfertaPipe } from './pipes/filtro-oferta.pipe';
 import { TrimarPipe } from './pipes/trimar.pipe';
+import { BackofficeComponent } from './components/backoffice/backoffice.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,9 @@ import { TrimarPipe } from './pipes/trimar.pipe';
     PaginaPersonasComponent,
     PaginaTodosComponent,
     ListaFrutasComponent,
-    AlertComponent
+    AlertComponent,
+    BackofficeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
