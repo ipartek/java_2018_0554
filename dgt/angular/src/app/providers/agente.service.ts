@@ -61,5 +61,6 @@ export class AgenteService {
   logout() {
     //TODO llamar Servicio Rest
     this.isLogged = false;
+    
   }
 }

@@ -20,7 +20,6 @@ const routes: Routes = [
   {
     path: 'listado-multas',
     component: ListadoMultasComponent,
-    canActivate: [PermisosGuard],
     data: { title: 'Listado-multas' }
   },
   { path: '**', pathMatch:'full', redirectTo : 'login'  }
