@@ -13,6 +13,9 @@ import { FormularioMultarComponent } from './components/formulario-multar/formul
 import { ListaMultasComponent } from './components/lista-multas/lista-multas.component';
 
 import { AlertComponent } from './components/alert/alert.component';
+import { MonedaPipe } from './pipes/moneda.pipe';
+import { DataTableModule } from "ng2-data-table";
+
 
 @NgModule({
   declarations: [
@@ -23,14 +26,16 @@ import { AlertComponent } from './components/alert/alert.component';
     FormularioMatriculaComponent,
     FormularioMultarComponent,
     ListaMultasComponent,
-    AlertComponent
+    AlertComponent,
+    MonedaPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,   // para poder usar doble binding
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
