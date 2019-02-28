@@ -11,6 +11,7 @@ import { MonedaPipe } from './pipes/moneda.pipe';
 import { ListadoMultasComponent } from './paginas/listado-multas/listado-multas.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AlertComponent } from './components/alert/alert.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     CajaEstadisticasComponent,
     MonedaPipe,
-    ListadoMultasComponent
+    ListadoMultasComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
