@@ -14,7 +14,7 @@ import com.ipartek.formacion.modelo.pojo.Agente;
 public class AgenteDAO {
 	private final static Logger LOG = Logger.getLogger(AgenteDAO.class);
 	private static AgenteDAO INSTANCE = null;
-	private static final String SQL_GET_PLACA = "SELECT a.id, a.nombre, a.placa, a.password FROM agente as a WHERE a.placa = ? AND a.password = ?;";
+	private static final String SQL_GET_PLACA = "SELECT a.id, a.nombre, a.placa, a.password, a.imagen FROM agente as a WHERE a.placa = ? AND a.password = ?;";
 	
 	
 	// Esta sincronizado para que no haya dos peticiones al mismo tiempo SINGLETON
@@ -51,6 +51,7 @@ public class AgenteDAO {
 		a.setNombre(rs.getString("nombre"));
 		a.setPlaca(String.valueOf(rs.getInt("placa")));
 		a.setPassword(rs.getString("password"));
+		a.setImagen(rs.getString("imagen"));
 		return a;
 	}
 

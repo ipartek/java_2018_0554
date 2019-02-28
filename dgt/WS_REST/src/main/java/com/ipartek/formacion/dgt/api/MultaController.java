@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.pojo.Multa;
+import com.ipartek.formacion.service.AgenteService;
+import com.ipartek.formacion.service.impl.AgenteServiceImpl;
 
 @CrossOrigin
 @RestController
@@ -22,10 +24,12 @@ public class MultaController {
 
 	private final static Logger LOG = Logger.getLogger(MultaController.class);
 	public static MultaDAO multaDao;
+	private AgenteService agenteService;
 
 	public MultaController() {
 		super();
 		multaDao = MultaDAO.getInstance();
+		agenteService = AgenteServiceImpl.getInstance();
 
 	}
 
@@ -42,14 +46,14 @@ public class MultaController {
 	 * 
 	 * return response; }
 	 */
-	@RequestMapping(value = { "/api/agente/{id}/multa" }, method = RequestMethod.GET)
-	public ResponseEntity<ArrayList<Multa>> listar(@PathVariable Long id) {
+	@RequestMapping(value = { "/api/agente/{id}/multas" }, method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<Multa>> listar(@PathVariable long id) {
 		ResponseEntity<ArrayList<Multa>> response = new ResponseEntity<ArrayList<Multa>>(HttpStatus.NOT_FOUND);
 
 		try {
 
 			ArrayList<Multa> multas = new ArrayList<Multa>();
-			multas = (ArrayList<Multa>) multaDao.getAllByIdAgente(id);
+			multas = (ArrayList<Multa>) agenteService.listarMultas(id);
 			
 			response = new ResponseEntity<ArrayList<Multa>>(multas, HttpStatus.OK);
 

@@ -3,6 +3,7 @@ package com.ipartek.formacion.service.impl;
 import java.util.List;
 
 import com.ipartek.formacion.modelo.daos.AgenteDAO;
+import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Multa;
 import com.ipartek.formacion.service.AgenteService;
@@ -12,6 +13,7 @@ public class AgenteServiceImpl implements AgenteService {
 	
 	
 	private AgenteDAO agenteDAO;
+	private MultaDAO multaDAO;
 	
 
 	private static AgenteServiceImpl INSTANCE = null;
@@ -19,6 +21,7 @@ public class AgenteServiceImpl implements AgenteService {
 	private AgenteServiceImpl() {
 		super();
 		agenteDAO = AgenteDAO.getInstance();
+		multaDAO = MultaDAO.getInstance();
 		
 	}
 	
@@ -49,10 +52,11 @@ public class AgenteServiceImpl implements AgenteService {
 		return null;
 	}
 
+	
+
 	@Override
-	public List<Multa> obtenerMultas(int idAgente) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Multa> listarMultas(long id) {
+		return multaDAO.getAllByIdAgente(id);
 	}
 
 }

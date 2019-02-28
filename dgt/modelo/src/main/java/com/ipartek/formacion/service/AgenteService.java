@@ -33,7 +33,7 @@ public interface AgenteService {
 	 * @param idAgente
 	 * @return listado, si no hay ninguna vacio, no null
 	 */
-	List<Multa> obtenerMultas(int idAgente);
+	List<Multa> listarMultas(long idAgente);
 	
 
 }

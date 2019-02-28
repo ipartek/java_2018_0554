@@ -31,7 +31,7 @@ public class MultaDAO {
 	private static final String SQL_GETALL_BYUSER = "{call pa_multa_getByAgenteId(?)}";
 	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
 	private static final String SQL_UPDATE = "{call pa_multa_update(?,?)}";
-	private static final String SQL_GETALL_BY_AGENTE = "SELECT a.id AS 'agente_id', a.nombre, a.placa, c.id AS 'coche_id', c.matricula, c.modelo, c.km, m.id AS 'multa_id', m.importe, m.concepto, m.fecha_alta, m.id_coche, m.id_agente FROM agente As a, coche AS c, multa AS m WHERE m.id_coche = c.id AND m.id_agente = a.id AND a.id = ? AND m.fecha_baja IS NULL";
+	private static final String SQL_GETALL_BY_AGENTE = "SELECT a.id AS 'agente_id', a.nombre, a.placa, a.imagen, c.id AS 'coche_id', c.matricula, c.modelo, c.km, m.id AS 'multa_id', m.importe, m.concepto, m.fecha_alta, m.id_coche, m.id_agente FROM agente As a, coche AS c, multa AS m WHERE m.id_coche = c.id AND m.id_agente = a.id AND a.id = ? AND m.fecha_baja IS NULL";
 
 	// constructor privado, solo acceso por getInstance()
 	private MultaDAO() {
@@ -213,6 +213,7 @@ public class MultaDAO {
 			a.setId(rs.getLong("agente_id"));
 			a.setNombre(rs.getString("nombre"));
 			a.setPlaca(rs.getString("placa"));
+			a.setImagen(rs.getString("imagen"));
 		}
 		
 		m.setAgente(a);
