@@ -12,6 +12,7 @@ import { FormularioMultarComponent } from './components/formulario-multar/formul
 import { ListaMultasComponent } from './components/lista-multas/lista-multas.component';
 
 import { AlertComponent } from './components/alert/alert.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AlertComponent } from './components/alert/alert.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,   // para poder usar doble binding
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

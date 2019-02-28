@@ -17,7 +17,7 @@ export class ListaMultasComponent implements OnInit {
   importe: number;
   concepto: string;
   fecha_alta: any;
-id_coche: number;
+  id_coche: number;
   id_agente: number;
   
 
@@ -33,12 +33,15 @@ id_coche: number;
   
     ngOnInit() {
       console.log('TodosComponent ngOnInit');
-      this. getAllByUser(this.id);
+
+      //
+      this.id_agente= 1; // TODO no hardcor
+      this.getMultas(this.id_agente);
   
     }
     //ngOnInit
   
-    getAllByUser(id:number){
+    getMultas(id:number){
       console.log('TodosComponent getAllByUser');
       this.multas = [];
       this.multaService.getAllByUser(id).subscribe(resultado => {

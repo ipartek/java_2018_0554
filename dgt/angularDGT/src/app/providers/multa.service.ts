@@ -6,12 +6,13 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class MultaService {
   post(multas: import("../model/multa").Multa): any {
     throw new Error("Method not implemented.");
   }
 
-  endpoint = 'http://localhost:8080/wsrest/api/Agente/';
+  endpoint = 'http://localhost:8080/wsrest/api/agente/';
  
 
   constructor( private httpClient: HttpClient ) { 
@@ -19,8 +20,10 @@ export class MultaService {
   }
 
    getAllByUser(id:number):Observable<any>{
-    console.trace('getAllByUser ' + this.endpoint + id);
-    return this.httpClient.get( this.endpoint + id );
+    
+    let uri = this.endpoint + id + '/multas';
+    console.trace('multa service getAllByUser multas' + uri );
+    return this.httpClient.get( uri );
   }
 
 

@@ -1,6 +1,6 @@
 <main role="main" class="container p-2">
 	<div class="mt-3">
-		<img class="img-responsive mx-auto d-block mb-5 mt-3" width="175px" height="200px"  src="http://nextgencasino.com/wp-content/uploads/2015/05/Badge-300x300.png" alt="escudo dredd">
+		<img class="img-responsive mx-auto d-block mb-5 mt-3" width="175px" height="200px"  src="http://ladieztrece.com/web/wp-content/uploads/2018/07/2a8abe6ddb0c4cfb6b7fd6690013d6df.png" alt="escudo dredd">
 	</div>
 
 	<p class="text-primary nombre">Takelberry </p>
@@ -8,13 +8,10 @@
 	<a  href="http://localhost:4200//matricula" class="mt-6 btn btn-outline-primary btn-block btn-lg ">
 		Poner una multa
 	</a>
-	<button (click)="getByAllUser(1)" class="mt-6 btn btn-outline-secondary btn-block btn-lg">
-		listar sin enlace 
-	</button>
-	
-	
-	
-		<a href="http://localhost:4200//listarMultas" class="btn btn-outline-primary btn-block btn-lg" (click)="getByAllUser(1)"  >Listar con enlace</a>
+
+	<div routerLinkActive="active">
+		<a class=" btn btn-outline-secondary btn-block btn-lg" [routerLink]="['/listarMultas']">LISTAR MULTAS</a>
+	</div>
 	
 	
 	

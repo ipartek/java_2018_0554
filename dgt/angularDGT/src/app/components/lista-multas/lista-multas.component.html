@@ -17,17 +17,15 @@
       <th>Importe</th>
       <th>Concepto</th>
       <th>Fecha de Alta</th>
- 
-
-
     </tr>
   </thead>
-  <tbody *ngFor="let m of multas" class="list-group-item d-flex justify-content-between">
-    <td>{{m.id}}</td>
-    <td>{{m.importe}}</td>
-    <td>{{m.Concepto}}</td>
-    <td>{{m.Fecha}}</td>
-  
-    <td></td>
+  <tbody>   
+    <tr *ngFor="let m of multas">
+      <td>{{m.id}}</td>
+      <td>{{m.importe}}</td>
+      <td>{{m.concepto}}</td>
+      <td>{{m.fechaAlta}}</td>
+    </tr>
+   
   </tbody>
 </table>
