@@ -1,28 +1,52 @@
-<form >
-  <div class="container-fluid">
-    <div class="row content">
-      <div class="col-sm-12">
-        <div class="form-group">
-          <label for="matricula"><b>Matrícula</b></label>
-          <input type="text" formControlName="matricula" class="form-control" placeholder="0000AAA">
+<main role="main" class="container">
+
+ 
+<div class="card mb-3" style="max-width: 75rem;">
+   
+    <form  [formGroup]="formulario" (submit)="comprobar()" >
         
-          <label for="concepto"><b>Concepto</b></label>
-          <textarea class="form-control" rows="5" formControlName="concepto" class="form-control"></textarea>
+      <div class="card mb-3" style="max-width: 75em;">
+            <div class="row no-gutters">
+             
+                <div class="col-md-4">
+                  <img src="https://www.actualidadmotor.com/wp-content/uploads/2018/07/modelo-carta-alegaciones-multa-trafico-830x460.jpg" class="card-img" alt="..." width= "25em">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">Tramitar sancion al Vehiculo:</h5>                
+                      <h6 class="card-text">Matricula: {{cocheMulta.matricula}}</h6>
+                      <h6 class="card-text">Modelo: {{cocheMulta.modelo}}</h6>
+                      <h6 class="card-text">Km: {{cocheMulta.km}}</h6>
+                    </div> 
+                </div> 
 
-          <label for="importe"><b>Importe</b></label>
-          <input type="text" formControlName="importe" class="form-control">
-
-          <label for="agente"><b>Agente</b></label>
-          <input type="text" formControlName="agente" class="form-control">
-
-        </div>
-        <a  href="http://localhost:4200//vermultas" class="mt-6 btn btn-primary btn-block btn-lg ">
-          Multar
-        </a>
-      </div>
+              </div>     
+      </div> 
+              
       
+        <div class="formu">
+          <h5 class="card-title">Introduzca datos:</h5> 
+          <label for="importe">Importe</label>
+          <input type="text" formControlName="importe" class="form-control" placeholder="TODO" >      
+          <p id="p" *ngIf="formulario.controls.importe.invalid && formulario.controls.importe.touched"  
+          class="text-danger">*minimo 3 letras y maximo 40</p>
+        
+          <label for="concepto">Concepto</label>
+          <input type="textarea" formControlName="concepto" class="form-control" placeholder="Mínimo 3 letras">  
+          <p id="p" *ngIf="formulario.controls.concepto.invalid && formulario.controls.concepto.touched"  
+          class="text-danger">*minimo 5 letras y máximo 200</p>     
+        </div>
+        <button type="submit" class="btn btn-block btn-success mt-5" [disabled]="formulario.invalid">Crear Multa</button>
+    </form>
+</div>
 
-    </div>
-    
-  </div>
-</form>
+<div style="border:1px solid red; padding:10px;">
+    <p>Valores: {{ formulario.value | json }}</p>
+    <p>Estado:  {{ formulario.status | json }}</p> 
+</div>
+
+<app-alert [alert]="alert"></app-alert>
+
+
+
+</main>

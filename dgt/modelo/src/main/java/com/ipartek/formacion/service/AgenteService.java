@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ipartek.formacion.modelo.pojo.Agente;
+import com.ipartek.formacion.modelo.pojo.Coche;
 import com.ipartek.formacion.modelo.pojo.Multa;
 
 public interface AgenteService {
@@ -38,4 +39,11 @@ public interface AgenteService {
 	List<Multa> listarMultas(int id);
 	
 
+	/**
+	 * Busca un coche por su matricula
+	 * @param matricula
+	 * @return datos vehiculo, si no hay matricula vacio, null
+	 */
+	Coche  buscarMatricula(String matricula);
+	
 }

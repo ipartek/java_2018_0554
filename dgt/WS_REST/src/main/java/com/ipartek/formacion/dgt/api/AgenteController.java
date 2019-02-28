@@ -42,7 +42,7 @@ public class AgenteController  {
 	}
 	
 	
-	
+	//LOGIN
 	
 	@RequestMapping( value= {"/api/agente/login/{placa}/{password}"}, method = RequestMethod.GET)
 	public ResponseEntity<Agente> login( 
@@ -67,7 +67,7 @@ public class AgenteController  {
 	}
 	
 	
-	
+	// LISTAR MULTAS POR ID AGENTE
 	@RequestMapping( value= {"/api/agente/{id}/multas"}, method = RequestMethod.GET)
 	public ResponseEntity<ArrayList<Multa>> getAllByUser ( @PathVariable int id ){
 		
@@ -83,6 +83,23 @@ public class AgenteController  {
 		return response;
 	}
 
+	
+	
+	// buscar por matricula
+	@RequestMapping( value= {"/api/agente/{matricula}"}, method = RequestMethod.GET)
+	public ResponseEntity<Coche> getByMatricula ( @PathVariable String matricula ){
+		
+		ResponseEntity<Coche> response = new ResponseEntity<Coche>( HttpStatus.NOT_FOUND );
+		try {
+			Coche coche = new Coche();
+			coche =  (Coche) agenteService.buscarMatricula(matricula);
+			response = new ResponseEntity<Coche>(coche, HttpStatus.OK );
+			
+		}catch(Exception e) {
+			e.printStackTrace();  // falta log
+		}
+		return response;
+	}
 
 
 

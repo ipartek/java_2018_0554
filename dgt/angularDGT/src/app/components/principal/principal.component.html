@@ -5,9 +5,9 @@
 
 	<p class="text-primary nombre">Takelberry </p>
 
-	<a  href="http://localhost:4200//matricula" class="mt-6 btn btn-outline-primary btn-block btn-lg ">
-		Poner una multa
-	</a>
+	<div routerLinkActive="active">
+		<a class=" btn btn-outline-secondary btn-block btn-lg" [routerLink]="['/matricula']">PONER MULTA</a>
+	</div>
 
 	<div routerLinkActive="active">
 		<a class=" btn btn-outline-secondary btn-block btn-lg" [routerLink]="['/listarMultas']">LISTAR MULTAS</a>

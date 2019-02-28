@@ -55,7 +55,7 @@ export class PaginaLoginComponent implements OnInit {
     // Cuidado es una llamada Asincrona
     this.autorizacionService.loggin(placa, password).subscribe(
       data =>{
-        console.debug('Json Agente %o', data);
+        console.debug('Json Multa %o', data);
         this.autorizacionService.isLogged = true;
         this.router.navigate(['/principal']);
       },
