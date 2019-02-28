@@ -1,5 +1,8 @@
 package com.ipartek.formacion.dgt.api;
 
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -94,13 +97,18 @@ public class AgenteController {
 	public ResponseEntity<Multa> crear(@RequestBody MultaPOST m,
 									   @PathVariable Long idAgente) {
 		ResponseEntity<Multa> response = new ResponseEntity<Multa>(HttpStatus.INTERNAL_SERVER_ERROR);
-			
+			m.setIdAgente(idAgente.intValue());
 			Multa multa = null;
 			try {
-				multa = agenteService.multar(m.getIdCoche(), idAgente.intValue(), m.getConcepto(), m.getImporte());
-				response = new ResponseEntity<Multa>(multa, HttpStatus.CREATED);
-				LOG.info("Nueva multa creada" + m);
-				
+				Set<ConstraintViolation<MultaPOST>> violations = validator.validate(m);
+				if (violations.size() > 0) {
+					LOG.debug("Multa no válida " + violations);
+					response = new ResponseEntity<Multa>(HttpStatus.BAD_REQUEST);
+				}else {
+					multa = agenteService.multar(m.getIdCoche(), idAgente.intValue(), m.getConcepto(), m.getImporte());
+					response = new ResponseEntity<Multa>(multa, HttpStatus.CREATED);
+					LOG.info("Nueva multa creada" + m);
+				}
 			} 
 			catch (Exception e) {
 				LOG.error(e);

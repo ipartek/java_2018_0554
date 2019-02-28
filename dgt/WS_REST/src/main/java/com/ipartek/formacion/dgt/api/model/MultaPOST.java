@@ -1,10 +1,22 @@
 package com.ipartek.formacion.dgt.api.model;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class MultaPOST {
 	
+	@NotNull
+	@Min(value = 1, message = "El importe de la multa tiene que ser numérico y >=1")
 	private float importe;
+	
+	@NotEmpty
+	@Size(min = 10, max = 255)
 	private String concepto;
 	private int idCoche;
+
 	private int idAgente;
 	
 	public MultaPOST() {
