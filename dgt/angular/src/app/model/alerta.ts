@@ -8,7 +8,7 @@ export class Alerta {
     private _texto: string;
     private _tipo: string;
 
-    constructor(texto: string, tipo = Alerta.TIPO_ERROR){
+    constructor(texto: string, tipo = Alerta.TIPO_ERROR) {
         this._texto = texto;
         this._tipo = tipo;
     }
