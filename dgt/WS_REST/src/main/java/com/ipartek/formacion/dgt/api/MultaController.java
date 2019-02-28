@@ -16,38 +16,48 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.pojo.Multa;
 
-
 @CrossOrigin
 @RestController
 public class MultaController {
-	
+
 	private final static Logger LOG = Logger.getLogger(MultaController.class);
 	public static MultaDAO multaDao;
-	
+
 	public MultaController() {
 		super();
 		multaDao = MultaDAO.getInstance();
-		
+
 	}
 
-	
-	@RequestMapping( value= {"/api/agente/{id}/multa"}, method = RequestMethod.GET)
-	public ResponseEntity<ArrayList<Multa>> listar(@PathVariable Long id){
+	/*
+	 * @RequestMapping( value= {"/api/agente/{id}/multa"}, method =
+	 * RequestMethod.GET) public ResponseEntity<ArrayList<Multa>>
+	 * listar(@PathVariable Long id){ ResponseEntity<ArrayList<Multa>> response =
+	 * new ResponseEntity<ArrayList<Multa>>(HttpStatus.NOT_FOUND); HashMap<Long,
+	 * Multa> hmMultas; try { hmMultas = multaDao.getAllByIdAgente(id);
+	 * ArrayList<Multa> multas = new ArrayList<Multa>(hmMultas.values()); if
+	 * (multas.size() > 0) { response = new ResponseEntity<ArrayList<Multa>>(multas,
+	 * HttpStatus.OK); } } catch (SQLException e) { // TODO Auto-generated catch
+	 * block e.printStackTrace(); }
+	 * 
+	 * return response; }
+	 */
+	@RequestMapping(value = { "/api/agente/{id}/multa" }, method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<Multa>> listar(@PathVariable Long id) {
 		ResponseEntity<ArrayList<Multa>> response = new ResponseEntity<ArrayList<Multa>>(HttpStatus.NOT_FOUND);
-		HashMap<Long, Multa> hmMultas;
+
 		try {
-			hmMultas = multaDao.getAllByIdAgente(id);
-			ArrayList<Multa> multas = new ArrayList<Multa>(hmMultas.values());
-			if (multas.size() > 0) {
-				response = new ResponseEntity<ArrayList<Multa>>(multas, HttpStatus.OK);
-			}
-		} catch (SQLException e) {
+
+			ArrayList<Multa> multas = new ArrayList<Multa>();
+			multas = (ArrayList<Multa>) multaDao.getAllByIdAgente(id);
+			
+			response = new ResponseEntity<ArrayList<Multa>>(multas, HttpStatus.OK);
+
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return response;
 	}
 }
-
-

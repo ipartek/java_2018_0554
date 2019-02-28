@@ -31,7 +31,7 @@ public class AgenteServiceImpl implements AgenteService {
 
 	@Override
 	public Agente existe(String placa, String password) {
-		// TODO llamar al DAO
+
 				//Agente agente = null;
 				
 				
