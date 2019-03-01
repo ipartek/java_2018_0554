@@ -84,7 +84,6 @@ export class AutorizacionService {
    * Cierra la session del usuario llamando al backoffice
    */
   logout(){
-    //TODO llamar Servicio Rest
     
     this.storage.clear();
 

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class MultaService {
 
+  private storage = window.sessionStorage;
   
 
   constructor(private httpClient: HttpClient) {
@@ -29,4 +30,20 @@ export class MultaService {
 
     return this.httpClient.get(uri);
   }
+
+  public saveVehiculo( vehiculo: any ){
+    this.storage.setItem('vehiculo',  JSON.stringify(vehiculo)); 
+  }
+
+  public getAVehiculo(): any{
+
+    let vehiculoString = this.storage.getItem('vehiculo');
+    if( vehiculoString ){    
+      return JSON.parse(vehiculoString);
+    }else{
+      return undefined;
+    }  
+
+  }
+
 }

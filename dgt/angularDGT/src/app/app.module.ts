@@ -14,7 +14,7 @@ import { ListaMultasComponent } from './components/lista-multas/lista-multas.com
 
 import { AlertComponent } from './components/alert/alert.component';
 import { MonedaPipe } from './pipes/moneda.pipe';
-import { DataTableModule } from "ng2-data-table";
+
 
 
 @NgModule({
@@ -34,8 +34,7 @@ import { DataTableModule } from "ng2-data-table";
     AppRoutingModule,
     FormsModule,   // para poder usar doble binding
     ReactiveFormsModule,
-    HttpClientModule,
-    DataTableModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

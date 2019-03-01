@@ -49,7 +49,7 @@ export class FormularioMatriculaComponent implements OnInit {
     this.multaService.buscarMatricula(matricula).subscribe(
       data => {
         console.debug('Json Vehiculo %o', data);
-        
+        this.multaService.saveVehiculo(data);
         this.router.navigate(['/multar']);
       },
       error => {
