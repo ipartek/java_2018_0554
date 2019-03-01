@@ -1,8 +1,10 @@
 package com.ipartek.formacion.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.ipartek.formacion.modelo.pojo.Agente;
+import com.ipartek.formacion.modelo.pojo.Coche;
 import com.ipartek.formacion.modelo.pojo.Multa;
 
 public interface AgenteService {
@@ -34,7 +36,7 @@ public interface AgenteService {
 	 * @param idAgente
 	 * @return listado, si no hay ninguna vacio, no null
 	 */
-	List<Multa> obtenerMultas(long id, String opm);
+	List<Multa> obtenerMultas(long id);
 	
 
 }

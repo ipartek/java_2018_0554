@@ -202,7 +202,7 @@ public class MultasController extends HttpServlet {
 	private void opVer(HttpServletRequest request) {
 		if (idMultaStr == null) {
 			try {
-				request.setAttribute("multas", daoMulta.getAllByUser(a.getId(), opm));			
+				request.setAttribute("multas", daoMulta.getAllByUser(a.getId()));			
 			}
 			catch (Exception e) {
 				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "No se han puesto multas");
@@ -220,7 +220,7 @@ public class MultasController extends HttpServlet {
 		} else {
 			long idMulta = Long.parseLong(idMultaStr);
 			try {
-				m = daoMulta.getById(idMulta, opm);
+				//m = daoMulta.getById(idMulta, opm);
 				request.setAttribute("multa", m);
 				LOG.info("Información de la multa "+idMulta);
 				request.setAttribute("titulo", "Multa nº"+idMulta+". Coche: "+m.getCoche().getMatricula()+" | App Multas");
@@ -229,14 +229,14 @@ public class MultasController extends HttpServlet {
 			}
 			catch (Exception e) {
 				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "La multa que buscas no existe");
-				if(opm == null) {
-					request.setAttribute("titulo", "Tus multas | App Multas");
-					LOG.info("Buscando todas las multas puestas por el agente");
-				}
-				else {
-					request.setAttribute("titulo", "Tus multas anuladas | App Multas");
-					LOG.info("Buscando todas las multas anuladas por el agente");
-				}
+//				if(opm == null) {
+//					request.setAttribute("titulo", "Tus multas | App Multas");
+//					LOG.info("Buscando todas las multas puestas por el agente");
+//				}
+//				else {
+//					request.setAttribute("titulo", "Tus multas anuladas | App Multas");
+//					LOG.info("Buscando todas las multas anuladas por el agente");
+//				}
 				LOG.error(mensaje.getTexto(), e);
 				vista = VISTA_INDEX;
 			}

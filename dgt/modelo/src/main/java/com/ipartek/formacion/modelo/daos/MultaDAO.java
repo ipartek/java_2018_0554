@@ -70,20 +70,20 @@ public class MultaDAO {
 		return m;
 	}
 
-	public ArrayList<Multa> getAllByUser(long id, String opm) {
+	public ArrayList<Multa> getAllByUser(long id) {
 
 		ArrayList<Multa> multas = new ArrayList<Multa>();
 		isGetById = false;
 		try (Connection conn = ConnectionManager.getConnection();
 				CallableStatement cs = conn
 						.prepareCall(SQL_GETALL_BYUSER);) {
-			if (MULTAS_ANULADAS.equals(opm)) {
-				isBaja = true;
-			} else {
-				isBaja = false;
-			}
+//			if (MULTAS_ANULADAS.equals(opm)) {
+//				isBaja = true;
+//			} else {
+//				isBaja = false;
+//			}
 			cs.setLong(1, id);
-			cs.setString(2, opm);
+			//cs.setString(2, opm);
 			try (ResultSet rs = cs.executeQuery()) {
 				while (rs.next()) {
 					try {

@@ -1,5 +1,7 @@
 package com.ipartek.formacion.dgt.api;
 
+import java.sql.Date;
+
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ipartek.formacion.modelo.pojo.Agente;
+import com.ipartek.formacion.modelo.pojo.Coche;
+import com.ipartek.formacion.modelo.pojo.Multa;
 import com.ipartek.formacion.service.AgenteService;
 import com.ipartek.formacion.service.impl.AgenteServiceImpl;
 
@@ -52,6 +56,27 @@ public class AgenteController {
 		}catch (Exception e) {
 			LOG.error(e);
 			response = new ResponseEntity<Agente>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return response;
+		
+	}
+	
+	@RequestMapping( value= {"/api/agente/login/{idAgente}/multas"}, method = RequestMethod.GET)
+	public ResponseEntity<Multa> obtenerMultas( 
+										@PathVariable Long id){		
+		
+		ResponseEntity<Multa> response = new ResponseEntity<Multa>(HttpStatus.FORBIDDEN);
+		try {
+			
+			Multa multa = (Multa) agenteService.obtenerMultas(id);
+			if ( multa !=null ) {
+				response = new ResponseEntity<Multa>(multa, HttpStatus.OK);
+			}		
+			
+		}catch (Exception e) {
+			LOG.error(e);
+			response = new ResponseEntity<Multa>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		return response;
