@@ -1,6 +1,9 @@
 package com.ipartek.formacion.service.impl;
 
+import java.sql.SQLException;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.daos.AgenteDAO;
 import com.ipartek.formacion.modelo.daos.MultaDAO;
@@ -19,6 +22,8 @@ public class AgenteServiceImpl implements AgenteService {
 	private VehiculoDAO vehiculoDAO;
 
 	private static AgenteServiceImpl INSTANCE = null;
+	
+	private final static Logger LOG = Logger.getLogger(AgenteServiceImpl.class);
 
 	private AgenteServiceImpl() {
 		super();
@@ -49,11 +54,7 @@ public class AgenteServiceImpl implements AgenteService {
 				return agenteDAO.getByPlaca(placa, password);
 	}
 
-	@Override
-	public Multa multar(int idCoche, int idAgente, String concepto, float importe) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	
 
@@ -67,5 +68,26 @@ public class AgenteServiceImpl implements AgenteService {
 		
 		return vehiculoDAO.getByMatricula(matricula);
 	}
+
+	@Override
+	public boolean insertar(Multa multa, int idCoche) {
+		boolean resultado = false;
+		try {
+			resultado = multaDAO.insert(multa, idCoche);
+		} catch (SQLException e) {
+			return false;
+		}
+		return resultado;
+	
+	}
+
+	@Override
+	public Vehiculo conseguirId(String matricula) {
+		return vehiculoDAO.getByMatricula(matricula);
+	}
+	
+	//Multar
+	
+	
 
 }

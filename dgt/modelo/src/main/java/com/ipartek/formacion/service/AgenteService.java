@@ -26,7 +26,7 @@ public interface AgenteService {
 	 * @return
 	 * @throws Exception si el concepto es null, el idAgente o idCoche no existen, importe < 0
 	 */
-	Multa multar( int idCoche, int idAgente, String concepto, float importe  ) throws Exception;
+	boolean insertar(Multa multa, int idCoche);
 	
 	
 	/**
@@ -43,5 +43,7 @@ public interface AgenteService {
 	 */
 	Vehiculo buscarMatricula(String matricula);
 	
+	Vehiculo conseguirId(String matricula);
 
+	
 }

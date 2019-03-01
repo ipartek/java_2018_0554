@@ -1,6 +1,5 @@
 package com.ipartek.formacion.modelo.daos;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +15,10 @@ public class AgenteDAO {
 	private static AgenteDAO INSTANCE = null;
 	private static final String SQL_GET_PLACA = "SELECT a.id, a.nombre, a.placa, a.password, a.imagen FROM agente as a WHERE a.placa = ? AND a.password = ?;";
 	
+	
+	private AgenteDAO() {
+		super();
+	}
 	
 	// Esta sincronizado para que no haya dos peticiones al mismo tiempo SINGLETON
 		public synchronized static AgenteDAO getInstance() {

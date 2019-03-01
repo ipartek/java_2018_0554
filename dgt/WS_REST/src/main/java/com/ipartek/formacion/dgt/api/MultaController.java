@@ -9,12 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.pojo.Multa;
+import com.ipartek.formacion.modelo.pojo.Vehiculo;
 import com.ipartek.formacion.service.AgenteService;
 import com.ipartek.formacion.service.impl.AgenteServiceImpl;
 
@@ -63,5 +65,35 @@ public class MultaController {
 		}
 
 		return response;
+	}
+	
+	@RequestMapping(value = { "/api/multa/" }, method = RequestMethod.POST)
+	public ResponseEntity<Multa> crear(@RequestBody Multa multa) {
+
+		ResponseEntity<Multa> response = new ResponseEntity<Multa>(HttpStatus.INTERNAL_SERVER_ERROR);
+		long idCoche = 0;
+		boolean insertado = false;
+		try {
+			// OBTENER ID DEL COCHE CON MATRICULA QUE SE LE PASA
+			Vehiculo coche = agenteService.conseguirId(multa.getCoche().getMatricula());
+			idCoche = coche.getId();
+
+		} catch (Exception e) {
+			response = new ResponseEntity<Multa>(HttpStatus.NOT_FOUND);
+		}
+
+		try {
+			int id = (int) idCoche;
+			insertado = agenteService.insertar(multa, id);
+//			insertado = multaDAO.insert(multa, idCoche);
+			if (insertado == true) {
+				response = new ResponseEntity<Multa>(multa, HttpStatus.CREATED);
+			}
+		} catch (Exception e) {
+			response = new ResponseEntity<Multa>(HttpStatus.BAD_REQUEST);
+		}
+
+		return response;
+
 	}
 }

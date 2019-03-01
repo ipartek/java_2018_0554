@@ -115,9 +115,9 @@ public class MultasController extends HttpServlet {
 		case "buscar":
 			opBuscar(request);
 			break;
-		case "multar":
+		/*case "multar":
 			opMultar(request);
-			break;
+			break;*/
 		case "anular":
 			opAnular(request);
 			break;
@@ -283,7 +283,7 @@ public class MultasController extends HttpServlet {
 	 * En caso de no haberlos se inserta la multa en la base de datos usando el metodo insert de daoMulta.
 	 * Si hay una excepción en la inserción de la multa, se devuelve la vista del formulario
 	 */
-	private void opMultar(HttpServletRequest request) {
+	/*private void opMultar(HttpServletRequest request) {
 		m = new Multa();
 		c = new Vehiculo();
 		try {
@@ -350,7 +350,7 @@ public class MultasController extends HttpServlet {
 			LOG.debug(mensaje.getTexto(), e);
 			opBuscar(request);
 		}
-	}
+	}*/
 	/**
 	 * Similar al método 'opVer', solo que lleva la variable 'opm'
 	 * para ver las multas anuladas. En caso de que la variable 'opr' 

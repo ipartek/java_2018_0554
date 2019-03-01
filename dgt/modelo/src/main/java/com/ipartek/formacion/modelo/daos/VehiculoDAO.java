@@ -108,7 +108,7 @@ public class VehiculoDAO {
 					coche.setMatricula(rs.getString("matricula"));
 					coche.setKm(rs.getInt("km"));
 					coche.setModelo(rs.getString("modelo"));
-					coches.add(coche);
+					//coches.add(coche);
 				} catch (Exception e) {
 					System.out.println("usuario no valido");
 					e.printStackTrace();
