@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Alert } from "src/app/model/alert";
-import { AutorizacionServiceService } from "src/app/providers/autorizacion-service.service";
+import { AutorizacionService } from "src/app/providers/autorizacion.service";
 
 @Component({
   selector: "app-login",
@@ -14,13 +14,13 @@ export class LoginComponent implements OnInit {
   alert: Alert;
 
   constructor(
-    private autorizacionService: AutorizacionServiceService,
+    private autorizacionService: AutorizacionService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {
     console.trace("LoginComponent constructor");
     this.crearFormulario();
-    this.alert = new Alert("");
+    this.alert = new Alert('');
   }
 
   ngOnInit() {
@@ -30,16 +30,16 @@ export class LoginComponent implements OnInit {
   crearFormulario() {
     console.trace("LoginComponent crearFormulario");
     this.formulario = this.formBuilder.group({
-      nombre: [
-        "",
+      placa: [
+        '',
         [
           Validators.required,
           Validators.minLength(3),
           Validators.maxLength(150)
         ]
       ],
-      pass: [
-        "",
+      password: [
+        '',
         [Validators.required, Validators.minLength(3), Validators.maxLength(16)]
       ]
     });
@@ -47,14 +47,14 @@ export class LoginComponent implements OnInit {
 
   comprobar() {
     console.trace("click boton submit");
-    const nombre = this.formulario.controls.nombre.value;
-    const pass = this.formulario.controls.pass.value;
-    console.debug("nombre: %s password: %s", nombre, pass);
+    let placa = this.formulario.controls.placa.value;
+    let password = this.formulario.controls.password.value;
+    console.debug("placa: %s password: %s", placa, password);
 
 
     // llamar servicio Rest, realizar logica dentro de subscripcion
     // Cuidado es una llamada Asincrona
-    this.autorizacionService.loggin(nombre, pass).subscribe(
+    this.autorizacionService.loggin(placa, password).subscribe(
       data =>{
         console.debug('Json Agente %o', data);
         this.autorizacionService.isLogged = true;

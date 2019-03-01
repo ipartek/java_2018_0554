@@ -1,38 +1,62 @@
 package com.ipartek.formacion.service.impl;
 
+import java.util.List;
+
 import com.ipartek.formacion.modelo.daos.AgenteDAO;
+import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.pojo.Agente;
+import com.ipartek.formacion.modelo.pojo.Multa;
 import com.ipartek.formacion.service.AgenteService;
-import com.ipartek.formacion.service.Singleton;
-
-public class AgenteServiceImpl implements AgenteService, Singleton{
 
 
-		
-		private static AgenteServiceImpl INSTANCE = null;
-
-		private AgenteServiceImpl() {
-			super();		
-		}
-		
-		public synchronized static  AgenteServiceImpl getInstance() {
-	        if (INSTANCE == null) {
-	        	INSTANCE = new AgenteServiceImpl();
-	        } 
-	        return INSTANCE;
-	    }
+public class AgenteServiceImpl implements AgenteService {
+	
 	
 	private AgenteDAO agenteDAO;
+	private MultaDAO multaDAO;
+	
 
-	public Agente detalle(int placaAgente, String password) {
-		// TODO Auto-generated method stub
-		return agenteDAO.getAgente(placaAgente, password);
+	private static AgenteServiceImpl INSTANCE = null;
+
+	private AgenteServiceImpl() {
+		super();
+		agenteDAO = AgenteDAO.getInstance();
+		multaDAO = MultaDAO.getInstance();
+		
 	}
 	
+	public static synchronized AgenteServiceImpl getInstance() {
+        if (INSTANCE == null) {
+        	INSTANCE = new AgenteServiceImpl();
+        } 
+        return INSTANCE;
+	}
+
+	@Override
+	public Agente existe(String placa, String password) {
+
+				//Agente agente = null;
+				
+				
+				/*if ( "admin".equals(password) && "admin".equals(numeroPlaca)) {
+					agente = new Agente(1l, "Takelberry", "12345678", "");
+				}*/
+				
+				
+				return agenteDAO.getByPlaca(placa, password);
+	}
+
+	@Override
+	public Multa multar(int idCoche, int idAgente, String concepto, float importe) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
-//	public Agente existe(String numeroPlaca, String password) {
-//		
-//		
-//		if
-//	}
+
+	@Override
+	public List<Multa> listarMultas(long id) {
+		return multaDAO.getAllByIdAgente(id);
+	}
+
 }

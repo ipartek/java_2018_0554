@@ -2,7 +2,11 @@
 
 <h1>Login para acceder a la zona segura</h1>
 
-<img src="../../assets/images/placa.png">
+
+<img class="img-responsive mx-auto d-block mb-5 mt-5" width="175px"
+      height="200px"
+      src="https://www.policia.es/juegos/imagenes/logotipo_cnp.png"
+      alt="escudo policia">
 
 <!-- visor de valores para pruebas hardcode -->
 
@@ -22,21 +26,20 @@
 
 <!-- [][][][][][][][][][][][][][][][][][][][] -->
 
-<form [formGroup]="formulario" (submit)="comprobar()">
-  <div class="form-group">
+<form [formGroup]="formulario" (submit)="comprobar()" >
+  
+  <label for="placa">Número de Placa</label>
+  <input type="text" formControlName="placa" class="form-control" placeholder="Mínimo 3 letras" >      
+  <p *ngIf="formulario.controls.placa.invalid && formulario.controls.placa.touched"  
+  class="text-danger">*recuerda que minimo 3 letras</p>
 
-    <label for="nombre">Numero de placa</label>
-    <input type="text" class="form-control" formControlName="nombre" class="form-control" placeholder="Mínimo 6 letras y numeros">
-    <p *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched" class="text-danger">*recuerda
-      que
-      minimo 3 letras</p>
-  </div>
-  <div class="form-group">
-    <label for="pass">Contraseña</label>
-    <input type="password" class="form-control" formControlName="pass" class="form-control" placeholder="Mínimo 3 letras">
-  </div>
-  <button type="submit" class="btn btn-block btn-primary mt-5" [disabled]="formulario.invalid">Entrar</button>
+  <label for="password">Contraseña</label>
+  <input type="password" formControlName="password" class="form-control" placeholder="Mínimo 3 letras">      
 
+  <button type="submit"
+          class="btn btn-block btn-primary mt-5"
+          [disabled]="formulario.invalid">Acceder</button>
+  
 
 
 </form>

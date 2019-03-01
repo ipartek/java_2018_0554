@@ -34,23 +34,28 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc,
 }
 
 table.dataTable thead .sorting {
-	background-image: url("https://raw.githubusercontent.com/DataTables/DataTables/master/media/images/sort_both.png")
+	background-image:
+		url("https://raw.githubusercontent.com/DataTables/DataTables/master/media/images/sort_both.png")
 }
 
 table.dataTable thead .sorting_asc {
-	background-image: url("https://raw.githubusercontent.com/DataTables/DataTables/master/media/images/sort_asc.png")
+	background-image:
+		url("https://raw.githubusercontent.com/DataTables/DataTables/master/media/images/sort_asc.png")
 }
 
 table.dataTable thead .sorting_desc {
-	background-image: url("https://raw.githubusercontent.com/DataTables/DataTables/master/media/images/sort_desc.png")
+	background-image:
+		url("https://raw.githubusercontent.com/DataTables/DataTables/master/media/images/sort_desc.png")
 }
 
 table.dataTable thead .sorting_asc_disabled {
-	background-image: url("https://raw.githubusercontent.com/DataTables/DataTables/master/media/images/sort_asc_disabled.png")
+	background-image:
+		url("https://raw.githubusercontent.com/DataTables/DataTables/master/media/images/sort_asc_disabled.png")
 }
 
 table.dataTable thead .sorting_desc_disabled {
-	background-image: url("https://raw.githubusercontent.com/DataTables/DataTables/master/media/images/sort_desc_disabled.png")
+	background-image:
+		url("https://raw.githubusercontent.com/DataTables/DataTables/master/media/images/sort_desc_disabled.png")
 }
 
 table.dataTable tbody tr {
@@ -517,13 +522,11 @@ table.dataTable, table.dataTable th, table.dataTable td {
 @media screen and (max-width: 640px) {
 	.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter
 		{
-		width:50px;
-		float:left;
+		width: 50px;
+		float: left;
 		text-align: center;
 	}
 	.dataTables_wrapper .dataTables_filter {
-
 		margin-left: 6.2em;
-
 	}
 }

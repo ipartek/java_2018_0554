@@ -21,10 +21,10 @@ import javax.validation.ValidatorFactory;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.controller.pojo.Mensaje;
-import com.ipartek.formacion.modelo.daos.CocheDAO;
+import com.ipartek.formacion.modelo.daos.VehiculoDAO;
 import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.pojo.Agente;
-import com.ipartek.formacion.modelo.pojo.Coche;
+import com.ipartek.formacion.modelo.pojo.Vehiculo;
 import com.ipartek.formacion.modelo.pojo.Multa;
 
 /**
@@ -51,7 +51,7 @@ public class MultasController extends HttpServlet {
 
 	private Calendar fechaActual;
 	private MultaDAO daoMulta;
-	private CocheDAO daoCoche;
+	private VehiculoDAO daoCoche;
 
 	private String op = null;
 	String opm = "";
@@ -67,7 +67,7 @@ public class MultasController extends HttpServlet {
 	
 	// Objectos
 	Agente a = null;
-	Coche c = null;
+	Vehiculo c = null;
 	Multa m = null;
 
 	HttpSession session;
@@ -83,7 +83,7 @@ public class MultasController extends HttpServlet {
 		validator = factory.getValidator();
 		fechaActual = Calendar.getInstance();
 		daoMulta = MultaDAO.getInstance();
-		daoCoche = CocheDAO.getInstance();
+		daoCoche = VehiculoDAO.getInstance();
 	}
 	
 	/**
@@ -220,7 +220,7 @@ public class MultasController extends HttpServlet {
 		} else {
 			long idMulta = Long.parseLong(idMultaStr);
 			try {
-				m = daoMulta.getById(idMulta);
+				m = daoMulta.getById(idMulta, opm);
 				request.setAttribute("multa", m);
 				LOG.info("Información de la multa "+idMulta);
 				request.setAttribute("titulo", "Multa nº"+idMulta+". Coche: "+m.getCoche().getMatricula()+" | App Multas");
@@ -285,7 +285,7 @@ public class MultasController extends HttpServlet {
 	 */
 	private void opMultar(HttpServletRequest request) {
 		m = new Multa();
-		c = new Coche();
+		c = new Vehiculo();
 		try {
 			m.setConcepto(concepto);
 			c.setId(Long.parseLong(id_coche));
@@ -360,9 +360,9 @@ public class MultasController extends HttpServlet {
 	private void opAnular(HttpServletRequest request) {
 		try {
 			opm = "baja";
-			m = daoMulta.getById(Long.parseLong(idMultaStr));
+			m = daoMulta.getById(Long.parseLong(idMultaStr),opm);
 			if (m!=null) {
-				if(daoMulta.update(m)) {
+				if(daoMulta.update(m,opr)) {
 					op = "ver";
 					if("norecuperar".equals(opr)) {
 						opm = "baja";

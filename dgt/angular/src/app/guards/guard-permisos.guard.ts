@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AutorizacionServiceService } from '../providers/autorizacion-service.service';
+import { AutorizacionService  } from '../providers/autorizacion.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class GuardPermisosGuard implements CanActivate {
 
   constructor(
     //parametros
-    private autorizacionService: AutorizacionServiceService,
+    private autorizacionService: AutorizacionService,
     private router: Router
   ) {
     console.trace('GuardPermisosGuard constructor');

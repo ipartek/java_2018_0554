@@ -19,7 +19,10 @@ public class Agente {
 		setNombre(nombre);
 		setPlaca(placa);
 		setPassword(password);
+		
 	}
+
+	
 
 	public Agente() {
 		super();
@@ -27,7 +30,10 @@ public class Agente {
 		this.nombre = "";
 		this.placa = "";
 		this.password = "";
+		
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -60,10 +66,13 @@ public class Agente {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Agente [id=" + id + ", nombre=" + nombre + ", placa=" + placa + ", password=" + password + "]";
 	}
+
 	
 }

@@ -1,5 +1,4 @@
 package com.ipartek.formacion.modelo.pojo;
-
 import java.util.Date;
 
 import javax.validation.constraints.Digits;
@@ -18,7 +17,7 @@ public class Multa {
 	private Date fechaModificacion;
 	private Date fechaBaja;
 	private Agente agente;
-	private Coche coche;
+	private Vehiculo coche;
 	
 	public Long getId() {
 		return id;
@@ -62,13 +61,13 @@ public class Multa {
 	public void setAgente(Agente agente) {
 		this.agente = agente;
 	}
-	public Coche getCoche() {
+	public Vehiculo getCoche() {
 		return coche;
 	}
-	public void setCoche(Coche coche) {
+	public void setCoche(Vehiculo coche) {
 		this.coche = coche;
 	}
-	public Multa(Long id, Double importe, String concepto, Date fechaAlta, Date fechaModificacion, Date fechaBaja, Agente agente, Coche coche) {
+	public Multa(Long id, Double importe, String concepto, Date fechaAlta, Date fechaModificacion, Date fechaBaja, Agente agente, Vehiculo coche) {
 		this();
 		setId(id);
 		setImporte(importe);
@@ -88,7 +87,7 @@ public class Multa {
 		this.fechaModificacion=null; 
 		this.fechaBaja=null; 
 		this.agente=new Agente();
-		this.coche=new Coche();
+		this.coche=new Vehiculo();
 	}
 	@Override
 	public String toString() {
