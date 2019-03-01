@@ -12,7 +12,7 @@ import { ListadoMultasComponent } from './paginas/listado-multas/listado-multas.
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertComponent } from './components/alert/alert.component';
-import { PermisosGuard } from './guards/permisos.guard';
+import { Error404Component } from './components/error404/error404.component';
 
 
 @NgModule({
@@ -24,7 +24,8 @@ import { PermisosGuard } from './guards/permisos.guard';
     CajaEstadisticasComponent,
     MonedaPipe,
     ListadoMultasComponent,
-    AlertComponent
+    AlertComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,

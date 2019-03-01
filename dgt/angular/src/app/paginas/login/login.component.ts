@@ -14,7 +14,6 @@ import {
   AgenteService
 } from 'src/app/providers/agente.service';
 import { Alerta } from 'src/app/model/alerta';
-import { Agente } from 'src/app/model/agente';
 
 @Component({
   selector: 'app-login',

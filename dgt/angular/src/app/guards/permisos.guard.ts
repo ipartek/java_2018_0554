@@ -21,12 +21,12 @@ export class PermisosGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
       console.trace('PermisosGuard canActivate');
-      if(this.agenteService.isLogged){
+      if(this.agenteService.isLogged()){
         console.debug('Login correcto');
         return true;
       }else{
         console.warn('Login incorrecto');
-        this.router.navigate(['login']);
+        this.router.navigate(['/login']);
         return false;
       }
       
