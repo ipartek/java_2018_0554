@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Multa } from 'src/app/model/multa';
-import { MultaService } from 'src/app/providers/multa.service';
+import { AgenteService } from 'src/app/providers/agente.service';
+import { Alerta } from 'src/app/model/alerta';
 
 @Component({
   selector: 'app-listado-multas',
@@ -10,10 +11,12 @@ import { MultaService } from 'src/app/providers/multa.service';
 export class ListadoMultasComponent implements OnInit {
 
   multas: Multa[];
+  alerta: Alerta;
 
-  constructor(public multaService: MultaService ) {
+  constructor(private agenteService: AgenteService ) {
     console.trace("ListadoMultasComponent constructor");
     this.multas = [];
+    this.alerta = new Alerta('');
    }
 
   ngOnInit() {
@@ -25,11 +28,11 @@ export class ListadoMultasComponent implements OnInit {
   cargarMultas() {
     console.log('ListadoMultasComponent cargarMultas');
     this.multas = [];
-    this.multaService.getMultas().subscribe(resultado => {
+    this.agenteService.getMultas( this.agenteService.getAgente().id ).subscribe(resultado => {
       console.debug('Resultado %o', resultado);
       this.mapper(resultado);
     }, error => {
-      // TODO NOTIFICAR AL USUARIO
+      this.alerta = new Alerta(`Error inesperado. Código de error: ${error.status}`);
       console.warn('peticion incorrecta %o', error);
     });
   }

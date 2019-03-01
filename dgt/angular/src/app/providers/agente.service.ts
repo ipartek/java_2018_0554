@@ -67,6 +67,14 @@ export class AgenteService {
   } // Login
 
   /**
+   * Obtener todas las multas del agente 
+   */
+  getMultas( id: number ): Observable<any> {
+    const url = GLOBAL.endpoint + `/agente/${id}/multa`;
+    return this.http.get(url);
+  }
+
+  /**
    * Cierra la sesión del usuario llamando al backoffice
    */
   logout() {
