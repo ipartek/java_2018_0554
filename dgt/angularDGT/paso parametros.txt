@@ -1,0 +1,1 @@
+https://www.thepolyglotdeveloper.com/2016/10/passing-complex-data-angular-2-router-nativescript/

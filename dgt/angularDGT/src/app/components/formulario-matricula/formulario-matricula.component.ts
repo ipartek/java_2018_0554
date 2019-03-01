@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Alert } from 'src/app/model/alert';
 import { MultaService } from 'src/app/providers/multa.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 
 @Component({
@@ -49,6 +49,7 @@ export class FormularioMatriculaComponent implements OnInit {
     this.multaService.buscarMatricula(matricula).subscribe(
       data => {
         console.debug('Json Vehiculo %o', data);
+        
         this.router.navigate(['/multar']);
       },
       error => {
