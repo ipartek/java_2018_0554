@@ -66,6 +66,21 @@ public class MultaController {
 //		int id = (int) idAgente;
 //		return multaDAO.getAllByAgente(id);
 	}
+	@RequestMapping(value = { "/api/multa/matricula/{matricula}" }, method = RequestMethod.GET)
+	public ResponseEntity<Coche> getIdByMatricula(@PathVariable String matricula) {
+		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+		try {
+			// OBTENER ID DEL COCHE CON MATRICULA QUE SE LE PASA
+			Coche coche = multaService.conseguirId(matricula);
+			response = new ResponseEntity<Coche>(coche, HttpStatus.OK);
+
+		} catch (Exception e) {
+			response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
+		}
+		
+		return response;
+		}
 
 	@RequestMapping(value = { "/api/multa/" }, method = RequestMethod.POST)
 	public ResponseEntity<Multa> crear(@RequestBody Multa multa) {
