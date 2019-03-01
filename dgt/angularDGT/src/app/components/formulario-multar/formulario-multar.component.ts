@@ -41,8 +41,8 @@ export class FormularioMultarComponent implements OnInit {
     ngOnInit() {
       console.log('TodosComponent ngOnInit');
 
-      this.matricula= '3548MKZ'; // TODO no hardcor
-      this.getMatricula(this.matricula);
+      //this.matricula= '3548MKZ'; // TODO no hardcor
+
     }//ngOnInit
   
 
@@ -62,8 +62,8 @@ export class FormularioMultarComponent implements OnInit {
     }// crearFormulario
 
 
-
-    getMatricula(matricula:string){
+/*
+    getCoche(matricula:string){
       console.log('TodosComponent getAllByUser');
       this.cocheMulta = null;
       this.multaService.getByMatricula(matricula).subscribe(resultado => {
@@ -77,7 +77,7 @@ export class FormularioMultarComponent implements OnInit {
         }
       );//subscribe   
     }
-/*
+
     delete(multas:Multa){
       console.log('frutas2Component delete %o', multas );
   

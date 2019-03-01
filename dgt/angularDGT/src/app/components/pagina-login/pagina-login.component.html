@@ -1,8 +1,8 @@
 <main role="main" class="container">
 
   <div>
-    <img class="img-responsive mx-auto d-block mb-5 mt-5" width="180em"
-      height="180em"
+    <img class="img-responsive mx-auto d-block mb-5 mt-5" width="120em"
+      height="120em"
       src="http://ladieztrece.com/web/wp-content/uploads/2018/07/2a8abe6ddb0c4cfb6b7fd6690013d6df.png"
       alt="escudo policia">
   </div>
@@ -20,7 +20,7 @@
           <input type="password" formControlName="password" class="form-control" placeholder="Mínimo 3 letras">  
           <p id="p" *ngIf="formulario.controls.password.invalid && formulario.controls.placa.touched"  
           class="text-danger">*minimo 3 letras y máximo 16</p>     
-          <button type="submit" class="btn btn-block btn-info mt-5" [disabled]="formulario.invalid">Acceder</button>
+          <button type="submit" class="btn btn-block btn-success mt-5" [disabled]="formulario.invalid">Acceder</button>
       </form>
 </div>
   <div style="border:1px solid red; padding:10px;">

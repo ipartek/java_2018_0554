@@ -9,19 +9,24 @@
   
   
   <app-alert [alert]="alert"></app-alert>
+
+  
   <div >
-      <form  [formGroup]="formulario" (submit)="comprobar()" >
+      <form  [formGroup]="formulario" (submit)="comprobarMatricula()" >
           <label for="matricula">Número de matricula</label>
           <input type="text" formControlName="matricula" class="form-control" placeholder="matricula" >      
           <p id="p" *ngIf="formulario.controls.matricula.invalid && formulario.controls.matricula.touched"  
           class="text-danger">*Solo 2 formatos posibles: 1234ABC / AB1234AB </p>
         
-          <button type="submit" class="btn btn-block btn-info mt-5" [disabled]="formulario.invalid">Buscar</button>
-      </form>
-</div>
+          <button type="submit" class="btn btn-block btn-success mt-5" [disabled]="formulario.invalid">Buscar</button>
+      
+        </form>
+  </div>
   <div style="border:1px solid red; padding:10px;">
       <p>Valores: {{ formulario.value | json }}</p>
       <p>Estado:  {{ formulario.status | json }}</p> 
   </div>
+
+
 
   </main>

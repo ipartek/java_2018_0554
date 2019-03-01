@@ -93,8 +93,13 @@ public class AgenteController  {
 		try {
 			Coche coche = new Coche();
 			coche =  (Coche) agenteService.buscarMatricula(matricula);
-			response = new ResponseEntity<Coche>(coche, HttpStatus.OK );
 			
+			if(coche==null) {
+				response = new ResponseEntity<Coche>(coche, HttpStatus.NOT_FOUND );
+			}else {
+				response = new ResponseEntity<Coche>(coche, HttpStatus.OK );
+			}
+		
 		}catch(Exception e) {
 			e.printStackTrace();  // falta log
 		}

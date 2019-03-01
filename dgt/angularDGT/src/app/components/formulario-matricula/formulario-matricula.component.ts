@@ -3,14 +3,15 @@ import { MultaService } from 'src/app/providers/multa.service';
 import { Router } from '@angular/router';
 import { Alert } from 'src/app/model/alert';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { Coche } from 'src/app/model/coche';
 @Component({
   selector: 'app-formulario-matricula',
   templateUrl: './formulario-matricula.component.html',
   styleUrls: ['./formulario-matricula.component.sass']
 })
 export class FormularioMatriculaComponent implements OnInit {
-
+  
+  cocheMulta : Coche ;
 
   formulario: FormGroup;  
   alert: Alert;
@@ -42,30 +43,25 @@ export class FormularioMatriculaComponent implements OnInit {
   }// crearFormulario
 
 
-  comprobar(){
+ comprobarMatricula() {
     console.trace('click boton submit');
     let matricula = this.formulario.controls.matricula.value;
 
-    console.debug('placa: %s password: %s',matricula );
+    console.debug('matricula: %s , matricula');
 
+    //llamar servicio TODO retornar Observable
     // llamar servicio Rest, realizar logica dentro de subscripcion
     // Cuidado es una llamada Asincrona
-    this.multaService.getByMatricula(matricula).subscribe(
-      data =>{
-        console.debug('Json Agente %o', data);
-        this.multaService.encontrada = true;
+    this.multaService.buscarMatricula(matricula).subscribe(
+      data => {
+        console.debug('Json Vehiculo %o', data);
         this.router.navigate(['/multar']);
       },
-      error=>{
-        console.warn('Json login %o', error);
-        this.multaService.encontrada = false;
-        this.alert = new Alert('Este vehiculo no está registrado');
+      error => {
+        console.warn('error vehiculo %o', error);
+        this.alert = new Alert('Matrícula no encontrada');
       }
     );
 
-    // *** Cuidado no intentar usar datos de la respuesta aqui ***
-       
-
-
-  }// comprobar
+  }
 }

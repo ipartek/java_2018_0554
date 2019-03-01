@@ -10,13 +10,13 @@ import { Observable } from 'rxjs';
 export class MultaService {
   
   // variable y getter and setter para comprobar si encuentra la matricula
-  private _encontrada: boolean;
+  private _matriculaEncontrada: boolean;
   
-  public get encontrada(): boolean {
-    return this._encontrada;
+  public get matriculaEncontrada(): boolean {
+    return this._matriculaEncontrada;
   }
-  public set encontrada(value: boolean) {
-    this._encontrada = value;
+  public set matriculaEncontrada(value: boolean) {
+    this._matriculaEncontrada = value;
   }
 
 
@@ -32,7 +32,7 @@ export class MultaService {
 // METODO CONSTRUCTOR CON HTTPCLIENT COMO PARAMETRO
   constructor( private httpClient: HttpClient ) { 
     console.trace('MultaService constructor');
-    this._encontrada = false;
+    this._matriculaEncontrada = false;
   }
 
   //METODO PARA LISTADO MULTAS
@@ -44,12 +44,14 @@ export class MultaService {
   }
   
   //METODO PARA ENCONTRAR MATRICULA
-  getByMatricula(matricula:string):Observable<any>{
+  buscarMatricula(matricula:string):Observable<any>{
     
     let uri = this.endpoint + matricula ;
     console.trace('multa service getByMatricula matricula' + uri );
     return this.httpClient.get( uri );
   }
+
+  
 
 
 

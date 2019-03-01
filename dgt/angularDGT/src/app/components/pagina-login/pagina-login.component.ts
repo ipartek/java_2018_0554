@@ -49,19 +49,20 @@ export class PaginaLoginComponent implements OnInit {
     console.trace('click boton submit');
     let placa = this.formulario.controls.placa.value;
     let password = this.formulario.controls.password.value;
-    console.debug('placa: %s password: %s',placa , password);
+    console.debug('nombre: %s password: %s',placa , password);
 
     // llamar servicio Rest, realizar logica dentro de subscripcion
     // Cuidado es una llamada Asincrona
     this.autorizacionService.loggin(placa, password).subscribe(
       data =>{
-        console.debug('Json Multa %o', data);
-        this.autorizacionService.isLogged = true;
+        console.debug('Json Agente %o', data);
+        this.autorizacionService.setLogged(true);
+        this.autorizacionService.saveAgente(data);
         this.router.navigate(['/principal']);
       },
       error=>{
         console.warn('error login %o', error);
-        this.autorizacionService.isLogged = false;
+        this.autorizacionService.setLogged(false);
         this.alert = new Alert('No tienes permisos');
       }
     );
