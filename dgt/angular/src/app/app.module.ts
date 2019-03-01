@@ -9,6 +9,9 @@ import { LoginComponent } from "./components/login/login.component";
 import { BackofficeComponent } from "./components/backoffice/backoffice.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AlertComponent } from "./components/alert/alert.component";
+import { FormsMatriculaComponent } from './components/forms-matricula/forms-matricula.component';
+import { PaginaMultasComponent } from './components/pagina-multas/pagina-multas.component';
+import { MonedaPipe } from './pipe/moneda.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { AlertComponent } from "./components/alert/alert.component";
     PrincipalComponent,
     LoginComponent,
     BackofficeComponent,
-    AlertComponent
+    AlertComponent,
+    FormsMatriculaComponent,
+    PaginaMultasComponent,
+    MonedaPipe
   ],
   imports: [
     BrowserModule,
