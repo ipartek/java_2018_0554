@@ -1,0 +1,24 @@
+<main role="main" class="inner cover">
+
+    <div style="border:1px solid red; padding:10px;">
+        <p>Valores: {{ formulario.value | json }}</p>
+        <p>Estado:  {{ formulario.status | json }}</p> 
+    </div>
+
+    <h1 class="cover-heading">Registrar multa</h1>
+
+    <app-alert [alerta]="alerta"></app-alert>
+
+    <p class="lead">Introduzca la matrícula del vehículo: </p>
+    
+    <form [formGroup]="formulario" (submit)="comprobar()">
+    <div class="form-group">
+    <input type="text" class="form-control" formControlName="matricula" name="matricula" 
+    	aria-describedby="matriculaHelp" placeholder="P.E: 1234AAA" autofocus required>
+  	</div>
+      <button type="submit" [disabled]="formulario.invalid" class="btn btn-lg btn-secondary btn-block">
+      	<span class="d-flex justify-content-center align-items-center">Buscar
+            <i class="fas fa-search ml-2"></i>
+		</span>
+      </button>
+  	</form>

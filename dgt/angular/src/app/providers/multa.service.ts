@@ -13,5 +13,11 @@ export class MultaService {
 
    }
 
-   
+   getCoche(matricula: string): Observable < any > {
+    console.debug('matricula: %s', matricula);
+
+    const url = GLOBAL.endpoint + `/vehiculo/${matricula}`;
+    console.log(`MultaService login ${url}`);
+    return this.http.get(url);
+  } // getCoche
 }

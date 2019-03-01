@@ -5,6 +5,8 @@ import { LoginComponent } from './paginas/login/login.component';
 import { ListadoMultasComponent } from './paginas/listado-multas/listado-multas.component';
 import { PermisosGuard } from './guards/permisos.guard';
 import { Error404Component } from './components/error404/error404.component';
+import { MatriculaComponent } from './components/matricula/matricula.component';
+import { DatosMultaComponent } from './components/datos-multa/datos-multa.component';
 
 const routes: Routes = [
   {
@@ -22,6 +24,18 @@ const routes: Routes = [
     component: HomeComponent,
     canActivate: [PermisosGuard],
     data: { title: 'Home' }
+  },
+  {
+    path: 'multar',
+    component: MatriculaComponent,
+    canActivate: [PermisosGuard],
+    data: { title: 'Buscar por Matrícula' }
+  },
+  {
+    path: 'datos-multa:coche',
+    component: DatosMultaComponent,
+    canActivate: [PermisosGuard],
+    data: { title: 'Datos Multa' }
   },
   {
     path: 'listado-multas',

@@ -11,11 +11,13 @@ import { Alerta } from 'src/app/model/alerta';
 export class ListadoMultasComponent implements OnInit {
 
   multas: Multa[];
+  multasAnuladas: Multa[];
   alerta: Alerta;
 
   constructor(private agenteService: AgenteService ) {
     console.trace("ListadoMultasComponent constructor");
     this.multas = [];
+    this.multasAnuladas = [];
     this.alerta = new Alerta('');
    }
 
@@ -28,9 +30,23 @@ export class ListadoMultasComponent implements OnInit {
   cargarMultas() {
     console.log('ListadoMultasComponent cargarMultas');
     this.multas = [];
+    this.multasAnuladas = [];
     this.agenteService.getMultas( this.agenteService.getAgente().id ).subscribe(resultado => {
       console.debug('Resultado %o', resultado);
       this.mapper(resultado);
+    }, error => {
+      this.alerta = new Alerta(`Error inesperado. Código de error: ${error.status}`);
+      console.warn('peticion incorrecta %o', error);
+    });
+  }
+
+  cargarMultasAnuladas() {
+    console.log('ListadoMultasComponent cargarMultasAnuladas');
+    this.multas = [];
+    this.multasAnuladas = [];
+    this.agenteService.getMultasAnuladas( this.agenteService.getAgente().id ).subscribe(resultado => {
+      console.debug('Resultado %o', resultado);
+      this.mapperAnuladas(resultado);
     }, error => {
       this.alerta = new Alerta(`Error inesperado. Código de error: ${error.status}`);
       console.warn('peticion incorrecta %o', error);
@@ -43,6 +59,14 @@ export class ListadoMultasComponent implements OnInit {
     result.forEach(el => {
       multa = new Multa(el.id, el.importe, el.concepto, el.fecha);
       this.multas.push(multa);
+    });
+  }
+
+  mapperAnuladas( result: any ){
+    let multa: Multa;
+    result.forEach(el => {
+      multa = new Multa(el.id, el.importe, el.concepto, el.fecha, el.fecha_baja);
+      this.multasAnuladas.push(multa);
     });
   }
 

@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertComponent } from './components/alert/alert.component';
 import { Error404Component } from './components/error404/error404.component';
+import { MatriculaComponent } from './components/matricula/matricula.component';
+import { DatosMultaComponent } from './components/datos-multa/datos-multa.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { Error404Component } from './components/error404/error404.component';
     MonedaPipe,
     ListadoMultasComponent,
     AlertComponent,
-    Error404Component
+    Error404Component,
+    MatriculaComponent,
+    DatosMultaComponent
   ],
   imports: [
     BrowserModule,

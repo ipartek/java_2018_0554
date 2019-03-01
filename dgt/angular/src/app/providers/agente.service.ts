@@ -74,6 +74,11 @@ export class AgenteService {
     return this.http.get(url);
   }
 
+  getMultasAnuladas( id: number ): Observable<any> {
+    const url = GLOBAL.endpoint + `/agente/${id}/anuladas`;
+    return this.http.get(url);
+  }
+
   /**
    * Cierra la sesión del usuario llamando al backoffice
    */

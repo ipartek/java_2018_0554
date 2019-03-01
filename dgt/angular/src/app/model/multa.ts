@@ -4,12 +4,14 @@ export class Multa {
     private _importe: number;
     private _concepto: string;
     private _fecha: string;
+    private _fechaBaja: string;
 
-    constructor(id: number, importe: number, concepto: string, fecha: string) {
-        this._id = id;
+    constructor(id?: number, importe?: number, concepto?: string, fecha?: string, fechaBaja?: string) {
+        this._id = (id) ? id : -1;
         this._importe = importe;
         this._concepto = concepto;
         this._fecha = fecha;
+        this._fechaBaja = (fechaBaja) ? fechaBaja : 'Activa';
     }
 
 
@@ -38,7 +40,11 @@ export class Multa {
     public set fecha(value: string) {
         this._fecha = value;
     }
-
-
+    public get fechaBaja(): string {
+        return this._fechaBaja;
+    }
+    public set fechaBaja(value: string) {
+        this._fechaBaja = value;
+    }
 
 }
