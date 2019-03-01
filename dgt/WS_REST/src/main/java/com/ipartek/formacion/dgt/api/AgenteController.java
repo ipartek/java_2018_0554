@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ipartek.formacion.modelo.pojo.Agente;
+import com.ipartek.formacion.modelo.pojo.Vehiculo;
 import com.ipartek.formacion.service.AgenteService;
 import com.ipartek.formacion.service.impl.AgenteServiceImpl;
 
@@ -55,5 +56,21 @@ public class AgenteController {
 		return response;
 		
 	}
+	
+	// buscar por matricula
+		@RequestMapping( value= {"/api/agente/{matricula}"}, method = RequestMethod.GET)
+		public ResponseEntity<Vehiculo> getByMatricula ( @PathVariable String matricula ){
+			
+			ResponseEntity<Vehiculo> response = new ResponseEntity<Vehiculo>( HttpStatus.NOT_FOUND );
+			try {
+				Vehiculo coche = new Vehiculo();
+				coche =  (Vehiculo) agenteService.buscarMatricula(matricula);
+				response = new ResponseEntity<Vehiculo>(coche, HttpStatus.OK );
+				
+			}catch(Exception e) {
+				e.printStackTrace();  // falta log
+			}
+			return response;
+		}
 
 }

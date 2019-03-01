@@ -4,8 +4,10 @@ import java.util.List;
 
 import com.ipartek.formacion.modelo.daos.AgenteDAO;
 import com.ipartek.formacion.modelo.daos.MultaDAO;
+import com.ipartek.formacion.modelo.daos.VehiculoDAO;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Multa;
+import com.ipartek.formacion.modelo.pojo.Vehiculo;
 import com.ipartek.formacion.service.AgenteService;
 
 
@@ -14,7 +16,7 @@ public class AgenteServiceImpl implements AgenteService {
 	
 	private AgenteDAO agenteDAO;
 	private MultaDAO multaDAO;
-	
+	private VehiculoDAO vehiculoDAO;
 
 	private static AgenteServiceImpl INSTANCE = null;
 
@@ -22,6 +24,7 @@ public class AgenteServiceImpl implements AgenteService {
 		super();
 		agenteDAO = AgenteDAO.getInstance();
 		multaDAO = MultaDAO.getInstance();
+		vehiculoDAO = VehiculoDAO.getInstance();
 		
 	}
 	
@@ -57,6 +60,12 @@ public class AgenteServiceImpl implements AgenteService {
 	@Override
 	public List<Multa> listarMultas(long id) {
 		return multaDAO.getAllByIdAgente(id);
+	}
+
+	@Override
+	public Vehiculo buscarMatricula(String matricula) {
+		
+		return vehiculoDAO.getByMatricula(matricula);
 	}
 
 }
