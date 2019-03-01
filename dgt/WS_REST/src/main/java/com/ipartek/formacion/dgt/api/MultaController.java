@@ -50,32 +50,7 @@ public class MultaController {
 		validator = factory.getValidator();
 	}
 	
-	/**
-	 * Obtiene un listado de todas las multas registradas de un agente concreto.
-	 * @return OK(200) Si existen multas para ese agente en la BD. Además devolverá todas las multas
-	 * @return NOT_FOUND(404) Si no existen multas en la BD para ese agente.
-	 */
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message="Hay multas registrados en la Base de Datos para el agente, se devuelve una lista con ellas."),
-			@ApiResponse(code = 404, message="No existen multas en la Base de datos para dicho agente.")
-	})
-	@RequestMapping( value= {"/api/agente/{id}/multa"}, method = RequestMethod.GET)
-	public ResponseEntity<ArrayList<Multa>> listar(@PathVariable Long id){
-		ResponseEntity<ArrayList<Multa>> response = new ResponseEntity<ArrayList<Multa>>(HttpStatus.NOT_FOUND);
-		HashMap<Long, Multa> hmMultas;
-		try {
-			hmMultas = multaDao.getAllByIdAgente(id);
-			ArrayList<Multa> multas = new ArrayList<Multa>(hmMultas.values());
-			if (multas.size() > 0) {
-				response = new ResponseEntity<ArrayList<Multa>>(multas, HttpStatus.OK);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return response;
-	}
+	
 	
 	
 }

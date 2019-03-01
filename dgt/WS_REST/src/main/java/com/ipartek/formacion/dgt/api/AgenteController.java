@@ -1,5 +1,8 @@
 package com.ipartek.formacion.dgt.api;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ipartek.appMultas.modelo.dao.MultaDAO;
 import com.ipartek.appMultas.modelo.pojo.Agente;
 import com.ipartek.appMultas.modelo.pojo.Multa;
 import com.ipartek.appMultas.modelo.service.impl.AgenteServiceImpl;
@@ -35,12 +39,14 @@ public class AgenteController {
 
 	private final static Logger LOG = Logger.getLogger(AgenteController.class);
 	public static AgenteServiceImpl agenteService;
+	public static MultaDAO multaDao;
 	private ValidatorFactory factory;
 	private Validator validator;
 	
 	public AgenteController() {
 		super();
 		agenteService = AgenteServiceImpl.getInstance();
+		multaDao = MultaDAO.getInstance();
 		//Crear Factoria y Validador
 		factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
@@ -115,6 +121,60 @@ public class AgenteController {
 				//Error 500
 				response = new ResponseEntity<Multa>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
+		
+		return response;
+	}
+	
+	/**
+	 * Obtiene un listado de todas las multas registradas de un agente concreto.
+	 * @return OK(200) Si existen multas para ese agente en la BD. Además devolverá todas las multas
+	 * @return NOT_FOUND(404) Si no existen multas en la BD para ese agente.
+	 */
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message="Hay multas registrados en la Base de Datos para el agente, se devuelve una lista con ellas."),
+			@ApiResponse(code = 404, message="No existen multas en la Base de datos para dicho agente.")
+	})
+	@RequestMapping( value= {"/api/agente/{id}/multa"}, method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<Multa>> listar(@PathVariable Long id){
+		ResponseEntity<ArrayList<Multa>> response = new ResponseEntity<ArrayList<Multa>>(HttpStatus.NOT_FOUND);
+		HashMap<Long, Multa> hmMultas;
+		try {
+			hmMultas = multaDao.getAllByIdAgente(id);
+			ArrayList<Multa> multas = new ArrayList<Multa>(hmMultas.values());
+			if (multas.size() > 0) {
+				response = new ResponseEntity<ArrayList<Multa>>(multas, HttpStatus.OK);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return response;
+	}
+	
+	/**
+	 * Obtiene un listado de todas las multas registradas de un agente concreto.
+	 * @return OK(200) Si existen multas para ese agente en la BD. Además devolverá todas las multas
+	 * @return NOT_FOUND(404) Si no existen multas en la BD para ese agente.
+	 */
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message="Hay multas registrados en la Base de Datos para el agente, se devuelve una lista con ellas."),
+			@ApiResponse(code = 404, message="No existen multas en la Base de datos para dicho agente.")
+	})
+	@RequestMapping( value= {"/api/agente/{id}/anuladas"}, method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<Multa>> listarAnuladas(@PathVariable Long id){
+		ResponseEntity<ArrayList<Multa>> response = new ResponseEntity<ArrayList<Multa>>(HttpStatus.NOT_FOUND);
+		HashMap<Long, Multa> hmMultas;
+		try {
+			hmMultas = multaDao.getAllByIdAgenteDarBaja(id);
+			ArrayList<Multa> multas = new ArrayList<Multa>(hmMultas.values());
+			if (multas.size() > 0) {
+				response = new ResponseEntity<ArrayList<Multa>>(multas, HttpStatus.OK);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return response;
 	}

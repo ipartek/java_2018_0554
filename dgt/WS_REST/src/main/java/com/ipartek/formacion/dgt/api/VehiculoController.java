@@ -78,12 +78,12 @@ public class VehiculoController {
 			@ApiResponse(code = 400, message="El formato del ID no es válido (P.E: El ID no está en formato numérico)."),
 			@ApiResponse(code = 404, message="El ID del vehículo introducido no existe en la Base de Datos.")
 	})
-	@RequestMapping( value= {"/api/vehiculo/{id}"}, method = RequestMethod.GET)
-	public ResponseEntity<Coche> detalle(@PathVariable Long id) {
+	@RequestMapping( value= {"/api/vehiculo/{matricula}"}, method = RequestMethod.GET)
+	public ResponseEntity<Coche> detalle(@PathVariable String matricula) {
 		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
-		Coche c = cocheDao.getBYId(id);
+		Coche c = cocheDao.getByMatricula(matricula);
 		try {
-		if (c.getId() != null) {
+		if (c != null) {
 			response = new ResponseEntity<Coche>(c, HttpStatus.OK);
 		}
 		}catch (NumberFormatException e) {
