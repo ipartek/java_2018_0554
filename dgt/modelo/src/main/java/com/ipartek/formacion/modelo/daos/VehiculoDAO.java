@@ -26,6 +26,7 @@ public class VehiculoDAO {
 
 	private VehiculoDAO() {
 		super();
+		
 	}
 
 	public synchronized static VehiculoDAO getInstance() {

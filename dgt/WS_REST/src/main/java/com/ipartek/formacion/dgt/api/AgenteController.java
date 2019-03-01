@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ipartek.formacion.modelo.pojo.Agente;
+import com.ipartek.formacion.modelo.pojo.Vehiculo;
 import com.ipartek.formacion.service.AgenteService;
 import com.ipartek.formacion.service.impl.AgenteServiceImpl;
 
@@ -28,20 +29,21 @@ public class AgenteController {
 	
 	public AgenteController() {
 		super();
+		//patron singelton para coger la instancia
 		agenteService = AgenteServiceImpl.getInstance();
 		factory  = Validation.buildDefaultValidatorFactory();
     	validator  = factory.getValidator();
 	}
 	
-	@RequestMapping( value= {"/api/agente/login/{numeroPlaca}/{pass}"}, method = RequestMethod.GET)
+	@RequestMapping( value= {"/api/agente/login/{placa}/{password}"}, method = RequestMethod.GET)
 	public ResponseEntity<Agente> login( 
-										@PathVariable String numeroPlaca, 
-										@PathVariable String pass ){		
+										@PathVariable String placa, 
+										@PathVariable String password ){		
 		
 		ResponseEntity<Agente> response = new ResponseEntity<Agente>(HttpStatus.FORBIDDEN);
 		try {
 			
-			Agente agente = agenteService.existe(numeroPlaca, pass);
+			Agente agente = agenteService.existe(placa, password);
 			if ( agente !=null ) {
 				response = new ResponseEntity<Agente>(agente, HttpStatus.OK);
 			}		
@@ -54,5 +56,24 @@ public class AgenteController {
 		return response;
 		
 	}
+	
+	// buscar por matricula
+		@RequestMapping( value= {"/api/agente/{matricula}"}, method = RequestMethod.GET)
+		public ResponseEntity<Vehiculo> getByMatricula ( @PathVariable String matricula ){
+			
+			ResponseEntity<Vehiculo> response = new ResponseEntity<Vehiculo>( HttpStatus.NOT_FOUND );
+			try {
+				Vehiculo coche =  agenteService.buscarMatricula(matricula);
+				if (coche == null) {
+					response = new ResponseEntity<Vehiculo>(HttpStatus.NOT_FOUND);
+				} else {
+					response = new ResponseEntity<Vehiculo>(HttpStatus.OK);
+				}
+			}catch(Exception e) {
+				LOG.error(e);
+				response = new ResponseEntity<Vehiculo>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			return response;
+		}
 
 }

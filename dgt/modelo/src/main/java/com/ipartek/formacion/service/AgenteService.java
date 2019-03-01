@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Multa;
+import com.ipartek.formacion.modelo.pojo.Vehiculo;
 
 public interface AgenteService {
 	
@@ -13,7 +14,7 @@ public interface AgenteService {
 	 * @param password
 	 * @return Agente si existe, null si no existe
 	 */
-	Agente existe( String numeroPlaca, String password);
+	Agente existe( String placa, String password);
 	
 
 	/**
@@ -33,7 +34,14 @@ public interface AgenteService {
 	 * @param idAgente
 	 * @return listado, si no hay ninguna vacio, no null
 	 */
-	List<Multa> obtenerMultas(int idAgente);
+	List<Multa> listarMultas(long idAgente);
+	
+	/**
+	 * Busca un coche por su matricula
+	 * @param matricula
+	 * @return datos vehiculo, si no hay matricula vacio, null
+	 */
+	Vehiculo buscarMatricula(String matricula);
 	
 
 }

@@ -50,16 +50,33 @@ export class PaginaLoginComponent implements OnInit {
     console.debug('placa: %s password: %s', placa, password);
 
     //llamar servicio TODO retornar Observable
-    this.autorizacionService.loggin(placa, password);
+    // llamar servicio Rest, realizar logica dentro de subscripcion
+    // Cuidado es una llamada Asincrona
+    this.autorizacionService.loggin(placa, password).subscribe(
+      data => {
+        console.debug('Json Agente %o', data);
+        this.autorizacionService.setLogged(true);
+        this.autorizacionService.saveAgente(data);
+        this.router.navigate(['/principal']);
+      },
+      error => {
+        console.warn('error login %o', error);
+        this.autorizacionService.setLogged(false);
+        this.alert = new Alert('No tienes permisos');
+      }
+    );
 
-    if (this.autorizacionService.estaLogeado()) {
+    // *** Cuidado no intentar usar datos de la respuesta aqui ***
+
+
+    /*if (this.autorizacionService.estaLogeado()) {
       console.info('Login correcto, tenemos permisos');
       this.router.navigate(['/principal']);
 
     } else {
       console.warn('No tienes permisos');
       this.alert = new Alert('No tienes permisos');
-    }
+    }*/
 
   }// comprobar
 
