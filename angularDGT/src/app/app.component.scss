@@ -5,9 +5,15 @@ ul li {
         font-size: .9em;
         color: #fff;
     }
-
     a:hover{
         color: rgba(255,255,255,.5);
+    }
+
+    a.btn{
+        color: #dc3545;
+    }
+    a.btn:hover{
+        color: #fff;
     }
     
     span {

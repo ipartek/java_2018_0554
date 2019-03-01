@@ -7,11 +7,11 @@
 
     <form [formGroup]="formulario" (submit)="comprobar()">
     	<div class="col">
-        <input type="text" formControlName="nombre" class="form-control" name="nombre" placeholder="Introduce tu número de placa">
+        <input type="text" formControlName="placa" class="form-control" name="placa" placeholder="Introduce tu número de placa">
         <!--<p *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched" class="text-danger">* Recuerda que mínimo 3 letras</p>-->
 	    </div>
 	    <div class="col">
-		    <input type="password" formControlName="pass" class="form-control" name="pass" placeholder="Introduce tu contraseña">
+		    <input type="password" formControlName="password" class="form-control" name="password" placeholder="Introduce tu contraseña">
 	    </div>
 	    <button type="submit" class="btn btn-dark" [disabled]="formulario.invalid">Iniciar sesión</button>
     </form>

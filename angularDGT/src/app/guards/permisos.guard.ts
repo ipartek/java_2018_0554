@@ -21,8 +21,9 @@ export class PermisosGuard implements CanActivate {
 
     console.trace('GuardPermisosGuard canActivate');
 
-    if ( this.autorizacionService.estaLogeado() ){
+    if ( this.autorizacionService.isLogged() ){
       console.debug(' estamos autorizados');
+      console.debug('El agente en sessionStorage %o' , this.autorizacionService.getAgente() );
       return true;
 
     }else{        
@@ -30,5 +31,7 @@ export class PermisosGuard implements CanActivate {
       this.router.navigate(['/login']);
       return false;
     }    
+
   }
+
 }

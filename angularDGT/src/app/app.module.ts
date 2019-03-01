@@ -7,19 +7,23 @@ import { LoginComponent } from './components/paginas/login/login.component';
 import { IndexComponent } from './components/paginas/index/index.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertComponent } from './components/componentes/alert/alert.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MultasComponent } from './components/paginas/multas/multas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     IndexComponent,
-    AlertComponent
+    AlertComponent,
+    MultasComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

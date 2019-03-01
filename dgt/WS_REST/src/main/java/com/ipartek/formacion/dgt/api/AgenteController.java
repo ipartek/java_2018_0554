@@ -36,15 +36,15 @@ public class AgenteController {
 	
 	
 	
-	@RequestMapping( value= {"/api/agente/login/{numeroPlaca}/{pass}"}, method = RequestMethod.GET)
+	@RequestMapping( value= {"/api/agente/login/{placa}/{password}"}, method = RequestMethod.GET)
 	public ResponseEntity<Agente> login( 
-										@PathVariable String numeroPlaca, 
-										@PathVariable String pass ){		
+										@PathVariable String placa, 
+										@PathVariable String password ){		
 		
 		ResponseEntity<Agente> response = new ResponseEntity<Agente>(HttpStatus.FORBIDDEN);
 		try {
 			
-			Agente agente = agenteService.existe(numeroPlaca, pass);
+			Agente agente = agenteService.existe(placa, password);
 			if ( agente !=null ) {
 				response = new ResponseEntity<Agente>(agente, HttpStatus.OK);
 			}		

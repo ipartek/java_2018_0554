@@ -3,7 +3,7 @@
     <a href="javascript:history.back(-1);" title="Ir la página anterior"><i class="fas fa-chevron-left"></i></a>
     <ul class="navbar-nav float-right">
       <li><span><!--${sessionScope.agente.nombre}--> Nombre agente</span></li>
-      <li><a href="logout" class="btn btn-outline-danger">Cerrar sesion</a></li>
+      <li><a class="btn btn-outline-danger" (click)="logout()">Cerrar sesion</a></li>
     </ul>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

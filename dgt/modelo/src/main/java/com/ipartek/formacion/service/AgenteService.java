@@ -10,11 +10,11 @@ public interface AgenteService {
 
 	/**
 	 * 	comprueba que exista el Agente en la bbdd
-	 * @param numeroPlaca
+	 * @param placa
 	 * @param password
 	 * @return Agente si existe, null si no existe
 	 */
-	Agente existe( String numeroPlaca, String password);
+	Agente existe( String placa, String password);
 	
 
 	/**
@@ -34,7 +34,7 @@ public interface AgenteService {
 	 * @param idAgente
 	 * @return listado, si no hay ninguna vacio, no null
 	 */
-	List<Multa> obtenerMultas(int idAgente);
+	List<Multa> obtenerMultas(long id, String opm);
 	
 
 }

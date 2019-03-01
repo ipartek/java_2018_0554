@@ -13,7 +13,7 @@ import com.ipartek.formacion.modelo.pojo.Agente;
 public class AgenteDAO {
 	private final static Logger LOG = Logger.getLogger(AgenteDAO.class);
 	private static AgenteDAO INSTANCE = null;
-	private static final String SQL_LOGIN = "{call pa_login(?, ?)}";
+	private static final String SQL_LOGIN = "{call pa_login(?,?)}";
 
 	// Constructor privado, solo acceso por getInstance()
 	private AgenteDAO() {
@@ -31,15 +31,15 @@ public class AgenteDAO {
 	 * comprobar si existe el usuario en la bbdd
 	 * 
 	 * @param email String
-	 * @param pass  String pass
+	 * @param password  String password
 	 * @return usuario con datos si existe, null si no existe
 	 */
-	public Agente login(int placa, String password) {
+	public Agente login(String placa, String password) {
 
 		Agente a = null;
 
 		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(SQL_LOGIN);) {
-			cs.setInt(1, placa);
+			cs.setString(1, placa);
 			cs.setString(2, password);
 			try (ResultSet rs = cs.executeQuery()) {
 				while (rs.next()) { // hemos encontrado usuario
@@ -54,6 +54,7 @@ public class AgenteDAO {
 		}
 		return a;
 	}
+	
 
 //	public ArrayList<Agente> getAll() {
 //

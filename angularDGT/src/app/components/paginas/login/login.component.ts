@@ -31,34 +31,42 @@ export class LoginComponent implements OnInit {
   crearFormulario(){
     console.trace('LoginComponent crearFormulario');
     this.formulario = this.formBuilder.group({
-      nombre: [
+      placa: [
                 '',                                                                         
                 [Validators.required, Validators.minLength(3), Validators.maxLength(150)]   
               ],
-      pass : [
+      password : [
               '',
               [Validators.required, Validators.minLength(3), Validators.maxLength(16)]
       ]  
     });  
+      
   }// crearFormulario
+
 
   comprobar(){
     console.trace('click boton submit');
-    let nombre = this.formulario.controls.nombre.value;
-    let pass = this.formulario.controls.pass.value;
-    console.debug('nombre: %s password: %s',nombre , pass);
+    let placa = this.formulario.controls.placa.value;
+    let password = this.formulario.controls.password.value;
+    console.debug('placa: %s password: %s',placa , password);
 
-    //llamar servicio TODO retornar Observable
-    this.autorizacionService.loggin(nombre, pass);
+    // llamar servicio Rest, realizar logica dentro de subscripcion
+    // Cuidado es una llamada Asincrona
+    this.autorizacionService.loggin(placa, password).subscribe(
+      data =>{
+        console.debug('Json Agente %o', data);
+        this.autorizacionService.setLogged(true);
+        this.autorizacionService.saveAgente(data);
+        this.router.navigate(['/index']);
+      },
+      error=>{
+        console.warn('error login %o', error);
+        this.autorizacionService.setLogged(false);
+        this.alert = new Alert('No tienes permisos');
+      }
+    );
 
-    if ( this.autorizacionService.estaLogeado() ){
-      console.info('Login correcto, tenemos permisos');
-      this.router.navigate(['/index']);
-
-    }else{
-      console.warn('No tienes permisos');
-      this.alert = new Alert('No tienes permisos');
-    }
+    // *** Cuidado no intentar usar datos de la respuesta aqui ***
   }// comprobar
 
 }

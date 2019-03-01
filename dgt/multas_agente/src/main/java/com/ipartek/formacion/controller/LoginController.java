@@ -75,7 +75,7 @@ public class LoginController extends HttpServlet {
 				setParametersError(request);
 			}
 			else {
-				a = daoLogin.login(Integer.parseInt(placa), password);
+				a = daoLogin.login(placa, password);
 				if (a != null) {
 					HttpSession session = request.getSession();
 					session.setAttribute("agenteLogueado", a);
