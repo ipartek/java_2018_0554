@@ -16,7 +16,7 @@ export class NavComponent implements OnInit {
     private agenteService: AgenteService,
     private route: Router
      ) { 
-    this.agenteLogueado = agenteService.agenteLogueado;
+    this.agenteLogueado = agenteService.getAgente();
   }
 
   ngOnInit() {

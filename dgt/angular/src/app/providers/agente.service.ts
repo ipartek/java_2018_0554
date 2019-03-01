@@ -17,29 +17,40 @@ import { Agente } from '../model/agente';
 })
 export class AgenteService {
 
-  private _isLogged: boolean;
-  private _agenteLogueado: Agente;
+  private storage = window.sessionStorage;
 
-  public get isLogged(): boolean {
-    return this._isLogged;
+  public isLogged(): boolean {
+    if(this.storage.getItem('isLogged') === "true"){
+      return true;
+    }else{
+      return false;
+    }
   }
-  public set isLogged(value: boolean) {
-    this._isLogged = value;
+  public setLogged(value: boolean) {
+    console.debug('Hacemos setter de _isLogged y guardar en sessionStorage %o', this.storage);
+    if(value === true){
+      this.storage.setItem('isLogged', 'true');
+    }else{
+      this.storage.setItem('isLogged', 'false');
+    }
   }
 
-  public get agenteLogueado(): Agente {
-    console.trace('Get AgenteLogueado');
-    return this._agenteLogueado;
+  public saveAgente( agente: Agente){
+    this.storage.setItem('agenteLogueado', JSON.stringify(agente));
   }
-  public set agenteLogueado(agente: Agente) {
-    console.trace('set AgenteLogueado');
-    this._agenteLogueado = agente;
-  }
+
+  public getAgente(): Agente {
+    console.debug('Agente logueado: %o', this.storage.getItem('agenteLogueado'));
+    if(this.storage.getItem('agenteLogueado')){
+      return JSON.parse(this.storage.getItem('agenteLogueado'));
+    }else{
+      return undefined;
+    }
+   }
 
   constructor(public http: HttpClient) {
     console.trace('AgenteService constructor');
-    this._isLogged = false;
-    this._agenteLogueado = new Agente();
+    
   } // Constructor
 
   /**
@@ -60,7 +71,7 @@ export class AgenteService {
    */
   logout() {
     //TODO llamar Servicio Rest
-    this.isLogged = false;
+    //this.isLogged = false;
     
   }
 }

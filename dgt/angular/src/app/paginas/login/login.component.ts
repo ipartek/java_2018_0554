@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   formulario: FormGroup;
   alerta: Alerta;
-  agente: Agente;
+  
 
   constructor(
     private agenteService: AgenteService,
@@ -87,18 +87,17 @@ export class LoginComponent implements OnInit {
     //llamar servicio TODO retornar Observable
     this.agenteService.login(placa, pass).subscribe(
       data => {
-        this.agenteService.isLogged = true;
-        this.agente = new Agente(data.id, data.nombre, data.placa, data.id_departamento);
-        if(this.agente.id != -1){
-          console.debug('Agente obtenido %o', this.agente);
-          this.agenteService.agenteLogueado = this.agente;
+        this.agenteService.setLogged(true);
+        this.agenteService.saveAgente(data);
+        if(this.agenteService.getAgente().id != -1) {
+          console.debug('Agente obtenido %o', this.agenteService.getAgente());          
         }
         console.info('isLogged: ' + this.agenteService.isLogged)
         console.info('Login correcto, tenemos permisos JSON: %o', data);
         this.router.navigate(['home']);
       }, // data
       error => {
-        this.agenteService.isLogged = false;
+        this.agenteService.setLogged(false);
         console.warn('No tienes permisos');
         if (error.status == 403) {
           this.alerta = new Alerta(`Credenciales incorrectas, acceso denegado. Código de error: ${error.status}`,
