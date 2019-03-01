@@ -1,4 +1,5 @@
 package com.ipartek.formacion.dgt.api;
+
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -18,7 +19,6 @@ import com.ipartek.formacion.service.impl.AgenteServiceImpl;
 
 @CrossOrigin
 @RestController
-
 public class AgenteController {
 	
 	private final static Logger LOG = Logger.getLogger(AgenteController.class);
@@ -28,13 +28,13 @@ public class AgenteController {
 	
 	public AgenteController() {
 		super();
-		//patron 
+		//patron singelton para coger la instancia
 		agenteService = AgenteServiceImpl.getInstance();
 		factory  = Validation.buildDefaultValidatorFactory();
     	validator  = factory.getValidator();
 	}
 	
-	@RequestMapping( value= {"/api/agente/login/${placa}/${password}"}, method = RequestMethod.GET)
+	@RequestMapping( value= {"/api/agente/login/{placa}/{password}"}, method = RequestMethod.GET)
 	public ResponseEntity<Agente> login( 
 										@PathVariable String placa, 
 										@PathVariable String password ){		
