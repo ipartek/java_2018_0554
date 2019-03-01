@@ -1,9 +1,10 @@
 <div class="container mb-3 mt-3">
   <div class="row d-flex align-items-center mb-3">
     <div class="d-flex">
-      <img class="mr-3 img-thumbnail" src="assets\imagenes\takelberry.jpg" alt="takelberry">
+        <p *ngIf="multas.length==0" class="spinner-border text-danger"></p>
+      <img class="mr-3 img-thumbnail" src="{{agente.imagen}}" alt="{{agente.nombre}}">
     </div>
-    <p class="text-primary nombre">agente TODO</p>
+    <p class="text-primary nombre">Agente: {{agente.nombre}}</p>
   </div>
 </div>
 

@@ -22,6 +22,7 @@ export class PermisosGuard implements CanActivate {
       console.trace('GuardPermisosGuard canActivate');
       if ( this.autorizacionService.estaLogeado() ){
         console.debug(' estamos autorizados');
+        console.debug('El agente en sessionStorage %o' , this.autorizacionService.getAgente() );
         return true;
   
       }else{        

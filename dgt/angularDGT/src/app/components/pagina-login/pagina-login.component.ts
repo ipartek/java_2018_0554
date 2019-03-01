@@ -55,12 +55,13 @@ export class PaginaLoginComponent implements OnInit {
     this.autorizacionService.loggin(placa, password).subscribe(
       data => {
         console.debug('Json Agente %o', data);
-        this.autorizacionService.isLogged = true;
+        this.autorizacionService.setLogged(true);
+        this.autorizacionService.saveAgente(data);
         this.router.navigate(['/principal']);
       },
       error => {
         console.warn('error login %o', error);
-        this.autorizacionService.isLogged = false;
+        this.autorizacionService.setLogged(false);
         this.alert = new Alert('No tienes permisos');
       }
     );

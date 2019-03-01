@@ -1,18 +1,24 @@
 <main role="main" class="container p-2"> 
-	<form action="privado/multas" method="post">
+
+	<app-alert [alert]="alert"></app-alert>
+	<form [formGroup]="formularioMat" (submit)="comprobar()" >
 		<div>
 			<a href="http://localhost:4200//principal" class="btn btn-outline-primary mt-3 mb-3 col-3">
 				Volver
 			</a>
 		</div>
 		<!--<%@ include file="../../includes/mensajes.jsp"%>-->
-		<input type="hidden" name="op" value="buscar">
+		<!--<input type="hidden" name="matricula" formControlName="matricula">
 			<div class="form-group">
 				<label for="matricula">Introducir Matricula a multar</label> <input type="text" name="matricula" class="form-control" placeholder="4 numeros, 3 letras"  required>
-			</div>
+			</div>-->
+
+			<label for="matricula">Introducir Matricula a multar</label>
+		<input type="text" formControlName="matricula" class="form-control" placeholder="4 numeros, 3 letras" required>
+		<br>
       <!--<button type="submit" class="btn btn-outline-primary btn-block">BUSCAR</button>-->
-      <a  href="http://localhost:4200//multar" class="mt-6 btn btn-primary btn-block btn-lg ">
+      <button class="mt-6 btn btn-primary btn-block btn-lg " type="submit">
         Buscar
-      </a>
+      </button>
 	</form>
 </main>

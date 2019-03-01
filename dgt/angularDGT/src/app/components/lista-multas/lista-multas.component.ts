@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Alert } from 'src/app/model/alert';
 import { Multa } from 'src/app/model/multa';
 import { MultaService } from 'src/app/providers/multa.service';
+import { AutorizacionService } from 'src/app/providers/autorizacion.service';
 
 @Component({
   selector: 'app-lista-multas',
@@ -11,10 +12,10 @@ import { MultaService } from 'src/app/providers/multa.service';
 export class ListaMultasComponent implements OnInit {
 
   multas: Multa[];
-  id_agente: number;
+  agente: any;
   alert: Alert;
 
-  constructor( public multaService:MultaService) {
+  constructor( private autorizacionService: AutorizacionService, public multaService:MultaService) {
     console.log('ListaMultasComponent constructor');
     this.alert = new Alert('');
 
@@ -24,18 +25,22 @@ export class ListaMultasComponent implements OnInit {
 
   ngOnInit() {
     console.log('ListaMultasComponent ngOnInit');
-
-    //
-    this.id_agente = 4; 
-    this.getMultas(this.id_agente);
+    
+    this.getAgenteInfo();
+    this.getMultas(this.agente);
 
   }
   //ngOnInit
 
+  getAgenteInfo(){
+    this.agente = this.autorizacionService.getAgente();
+
+  }
+
   getMultas(id: number) {
     console.log('TodosComponent getAllByUser');
     this.multas = [];
-    this.multaService.listarMultas(id).subscribe(resultado => {
+    this.multaService.listarMultas(this.agente.id).subscribe(resultado => {
       console.debug('peticion correcta %o', resultado);
       // this.mapeo(resultado);
       // this.todos = resultado.filter( todo => !todo.completed );

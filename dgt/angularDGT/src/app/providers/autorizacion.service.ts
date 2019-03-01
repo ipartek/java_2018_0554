@@ -8,19 +8,42 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AutorizacionService {
 
-  private _isLogged: boolean;
+  //private _isLogged: boolean;
+  private storage = window.sessionStorage;
 
   
   public get isLogged(): boolean {
-    return this._isLogged;
+    if ( this.storage.getItem('isLogged') === "true" ){
+      return true;
+    }else{
+      return false;
+    }
   }
-  public set isLogged(value: boolean) {
-    this._isLogged = value;
+
+  public setLogged(value: boolean) {
+    console.debug('Hacemos setter de _isLogged y guardar en sessionStorage %o', this.storage);   
+    this.storage.setItem('isLogged', 'true' ); 
+
   }
+
+  public saveAgente( agente: any ){
+    this.storage.setItem('agente',  JSON.stringify(agente)); 
+  }
+
+  public getAgente(): any{
+
+    let agenteString = this.storage.getItem('agente');
+    if( agenteString ){    
+      return JSON.parse(agenteString);
+    }else{
+      return undefined;
+    }  
+
+  }
+
 
   constructor(private httpClient: HttpClient) { 
     console.trace('AutorizacionService canActivate');
-    this._isLogged = false;
     
   }
 
@@ -63,7 +86,7 @@ export class AutorizacionService {
   logout(){
     //TODO llamar Servicio Rest
     
-    this._isLogged = false;
+    this.storage.clear();
 
     
   }

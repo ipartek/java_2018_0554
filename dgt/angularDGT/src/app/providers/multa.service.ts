@@ -21,4 +21,12 @@ export class MultaService {
       return this.httpClient.get(uri);
 
   }
+
+  buscarMatricula(matricula: string): Observable<any>{
+    let uri = `http://localhost:8080/wsrest/api/agente/${matricula}`;
+
+    console.trace('MultaService buscarMatricula uri: '+ uri);
+
+    return this.httpClient.get(uri);
+  }
 }
