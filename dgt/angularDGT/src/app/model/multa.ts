@@ -12,16 +12,20 @@ export class Multa {
     private _id_coche: number;
     
     private _id_agente: number;
+
+    private _fechaBaja: string;
+    
   
 
  
-    constructor(id:number,importe:any, concepto:string, fecha_alta: any, id_coche: number, id_agente: number ){
+    constructor(id:number,importe:any, concepto:string, fecha_alta: any, id_coche: number, id_agente: number, fechaBaja?: string ){
         this._id=id;
         this._importe=importe; 
         this._concepto=concepto;       
         this._fecha_alta=fecha_alta;
         this._id_coche=id_coche;
         this._id_agente=id_agente;
+        this._fechaBaja = (fechaBaja) ? fechaBaja : 'Activa';
 
     }
     
@@ -66,5 +70,12 @@ export class Multa {
     }
     public set id_agente(value: number) {
         this._id_agente = value;
+    }
+
+    public get fechaBaja(): string {
+        return this._fechaBaja;
+    }
+    public set fechaBaja(value: string) {
+        this._fechaBaja = value;
     }
 }

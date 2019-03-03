@@ -14,10 +14,14 @@ export class ListaMultasComponent implements OnInit {
   multas: Multa[];
   agente: any;
   alert: Alert;
+  multasAnuladas: Multa[];
+  
 
   constructor( private autorizacionService: AutorizacionService, public multaService:MultaService) {
     console.log('ListaMultasComponent constructor');
+    this.multas = [];
     this.alert = new Alert('');
+    this.multasAnuladas = [];
 
   }
 
@@ -40,6 +44,7 @@ export class ListaMultasComponent implements OnInit {
   getMultas(id: number) {
     console.log('TodosComponent getAllByUser');
     this.multas = [];
+    this.multasAnuladas = [];
     this.multaService.listarMultas(this.agente.id).subscribe(resultado => {
       console.debug('peticion correcta %o', resultado);
       // this.mapeo(resultado);
@@ -50,6 +55,19 @@ export class ListaMultasComponent implements OnInit {
         console.warn('peticion incorrecta %o', error);
       }
     );//subscribe   
+  }//getMultas
+
+  cargarMultasAnuladas() {
+    console.log('ListadoMultasComponent cargarMultasAnuladas');
+    this.multas = [];
+    this.multasAnuladas = [];
+    this.multaService.listarMultasAnuladas(this.agente.id).subscribe(resultado => {
+      console.debug('Resultado %o', resultado);
+      this.multas = resultado;
+    },  error => {
+      console.warn('peticion incorrecta %o', error);
+    
+    });
   }
 
 }

@@ -35,7 +35,7 @@ export class MultaService {
     this.storage.setItem('vehiculo',  JSON.stringify(vehiculo)); 
   }
 
-  public getAVehiculo(): any{
+  public getVehiculo(): any{
 
     let vehiculoString = this.storage.getItem('vehiculo');
     if( vehiculoString ){    
@@ -44,6 +44,14 @@ export class MultaService {
       return undefined;
     }  
 
+  }
+
+  public listarMultasAnuladas( id: number ): Observable<any> {
+    let uri = `http://localhost:8080/wsrest/api/agente/${id}/multas`;
+
+      console.trace('MultaService listarMultasAnuladas uri: '+ uri);
+
+    return this.httpClient.get(uri);
   }
 
 }

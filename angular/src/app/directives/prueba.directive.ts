@@ -12,7 +12,7 @@ export class PruebaDirective {
     console.trace('PruebaDirective constructor');
   }
 
-  ngOnChanges (changes: SimpleChange){
+  /*ngOnChanges (changes: SimpleChange){
     if(changes.appPrueba){
       console.debug('input currentValue %o', changes.appPrueba);
       let valorActual = changes.appPrueba.currentValue;
@@ -24,5 +24,5 @@ export class PruebaDirective {
         this.element.nativeElement.style.color = 'green';
       }
     }//changes
-  }//ngOnChanges
+  }//ngOnChanges*/
 }
