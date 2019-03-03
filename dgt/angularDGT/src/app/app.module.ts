@@ -14,6 +14,7 @@ import { ListaMultasComponent } from './components/lista-multas/lista-multas.com
 
 import { AlertComponent } from './components/alert/alert.component';
 import { MonedaPipe } from './pipes/moneda.pipe';
+import { Error404Component } from './components/error404/error404.component';
 
 
 
@@ -27,7 +28,8 @@ import { MonedaPipe } from './pipes/moneda.pipe';
     FormularioMultarComponent,
     ListaMultasComponent,
     AlertComponent,
-    MonedaPipe
+    MonedaPipe,
+    Error404Component
   ],
   imports: [
     BrowserModule,
