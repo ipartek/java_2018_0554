@@ -32,8 +32,8 @@ public class MultaDAO {
 	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
 	//private static final String SQL_INSERT ="INSERT INTO multa (`importe`, `concepto`, `id_coche`, `id_agente`) VALUES (?, ?, ?, ?);";
 	private static final String SQL_UPDATE = "{call pa_multa_update(?,?)}";
-	private static final String SQL_GETALL_BY_AGENTE = "SELECT a.id AS 'agente_id', a.nombre, a.placa, a.imagen, c.id AS 'coche_id', c.matricula, c.modelo, c.km, m.id AS 'multa_id', m.importe, m.concepto, m.fecha_alta, m.id_coche, m.id_agente FROM agente As a, coche AS c, multa AS m WHERE m.id_coche = c.id AND m.id_agente = a.id AND a.id = ? AND m.fecha_baja IS NULL";
-
+	private static final String SQL_GETALL_BY_AGENTE = "SELECT a.id AS 'agente_id', a.nombre, a.placa, a.imagen, c.id AS 'coche_id', c.matricula, c.modelo, c.km, m.id AS 'multa_id', m.importe, m.concepto, m.fecha_alta, m.fecha_baja, m.id_coche, m.id_agente FROM agente As a, coche AS c, multa AS m WHERE m.id_coche = c.id AND m.id_agente = a.id AND a.id = ? AND m.fecha_baja IS NULL";
+	private static final String SQL_GETALL_BY_AGENTE_ANULADA = "SELECT a.id AS 'agente_id', a.nombre, a.placa, a.imagen, c.id AS 'coche_id', c.matricula, c.modelo, c.km, m.id AS 'multa_id', m.importe, m.concepto, m.fecha_alta, m.fecha_baja, m.id_coche, m.id_agente FROM agente As a, coche AS c, multa AS m WHERE m.id_coche = c.id AND m.id_agente = a.id AND a.id = ? AND m.fecha_baja IS NOT NULL;";
 	// constructor privado, solo acceso por getInstance()
 	private MultaDAO() {
 		super();
@@ -78,6 +78,7 @@ public class MultaDAO {
 	
 	public ArrayList<Multa> getAllByIdAgente(long id) {
 
+		isBaja = false;
 		ArrayList<Multa> multas = new ArrayList<Multa>();
 		isGetById = false;
 		try (Connection conn = ConnectionManager.getConnection();
@@ -101,6 +102,32 @@ public class MultaDAO {
 		return multas;
 	}
 	
+	public ArrayList<Multa> getAnulada(long id) {
+		
+		isBaja = true;
+
+		ArrayList<Multa> multas = new ArrayList<Multa>();
+		isGetById = false;
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_GETALL_BY_AGENTE_ANULADA);) {
+			
+			pst.setLong(1, id);
+			try (ResultSet rs = pst.executeQuery()) {
+				isGetById = true;
+				while (rs.next()) {
+					try {
+						multas.add(rowMapper(rs));
+					} catch (Exception e) {						
+						LOG.error(e);
+					}
+				}
+			}
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+
+		return multas;
+	}
 	
 	
 	public ArrayList<Multa> getAllByUser(long id) {
@@ -209,6 +236,7 @@ public class MultaDAO {
 		if (isGetById) {
 			m.setImporte(rs.getDouble("importe"));
 			m.setConcepto(rs.getString("concepto"));
+			m.setFechaBaja(rs.getTimestamp("fecha_baja"));
 			
 			c.setId(rs.getLong("coche_id"));
 			c.setId(rs.getLong("id_coche"));

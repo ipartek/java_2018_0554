@@ -74,6 +74,26 @@ public class MultaController {
 		return response;
 	}
 
+	
+	@RequestMapping(value = { "/api/agente/{id}/multasbaja" }, method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<Multa>> listarAnuladas(@PathVariable long id) {
+		ResponseEntity<ArrayList<Multa>> response = new ResponseEntity<ArrayList<Multa>>(HttpStatus.NOT_FOUND);
+
+		try {
+
+			ArrayList<Multa> multas = new ArrayList<Multa>();
+			multas = (ArrayList<Multa>) agenteService.listarMultasAnuladas(id);
+
+			response = new ResponseEntity<ArrayList<Multa>>(multas, HttpStatus.OK);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return response;
+	}
+	
 	@RequestMapping(value = { "/api/multa/" }, method = RequestMethod.POST)
 	public ResponseEntity<Multa> crear(@RequestBody Multa multa) {
 

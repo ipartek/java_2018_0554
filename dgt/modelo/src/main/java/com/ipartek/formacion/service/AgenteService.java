@@ -37,6 +37,13 @@ public interface AgenteService {
 	List<Multa> listarMultas(long idAgente);
 	
 	/**
+	 * Todas las multas de un Agente con fecha de baja
+	 * @param idAgente
+	 * @return listado, si no hay ninguna vacio, no null
+	 */
+	List<Multa> listarMultasAnuladas(long idAgente);
+	
+	/**
 	 * Busca un coche por su matricula
 	 * @param matricula
 	 * @return datos vehiculo, si no hay matricula vacio, null

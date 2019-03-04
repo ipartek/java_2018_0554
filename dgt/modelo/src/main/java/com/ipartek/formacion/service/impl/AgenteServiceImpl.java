@@ -99,6 +99,11 @@ public class AgenteServiceImpl implements AgenteService {
 		return resultado;
 	
 	}
+
+	@Override
+	public List<Multa> listarMultasAnuladas(long id) {
+		return multaDAO.getAnulada(id);
+	}
 	
 
 	
