@@ -18,6 +18,8 @@ export class DatosMultaComponent implements OnInit {
   nuevaMulta: Multa;
   formulario: FormGroup;
   alerta: Alerta;
+  contadorConcepto: number;
+  contadorClase: string;
 
   constructor(
     private router: Router,
@@ -28,12 +30,14 @@ export class DatosMultaComponent implements OnInit {
     console.trace("constructor datos-multa");
     this.coche = this.multaService.getCocheSession();
     this.crearFormulario();
+    this.contadorConcepto = 0;
+    this.contadorClase = "text-success";
   }
 
   ngOnInit() {
     console.trace("ngOnInit datos-multa");
     console.debug("Coche obtenido: %o", this.coche);
-   
+    
 
   } //ngOnInit
 
@@ -94,6 +98,23 @@ export class DatosMultaComponent implements OnInit {
     )
 
   } // comprobar
+
+  calcularConcepto(textoConcepto: string){
+    console.trace('CalcularConcepto');
+    if(textoConcepto.length <= 255){
+
+      if(textoConcepto.length == 255){
+        this.contadorClase = "text-danger";
+        this.contadorConcepto = textoConcepto.length;
+      }else if(textoConcepto.length > 200 && textoConcepto.length < 255){
+        this.contadorClase = "text-warning";
+        this.contadorConcepto = textoConcepto.length;
+      }else{
+        this.contadorClase = "text-success";
+        this.contadorConcepto = textoConcepto.length;
+      }
+    }
+  } //calcularConcepto
 
 
 }
