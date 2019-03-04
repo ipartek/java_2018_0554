@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AutorizacionService } from 'src/app/providers/autorizacion.service';
 import { Router } from '@angular/router';
 import { Alert } from 'src/app/model/alert';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   formulario: FormGroup;  
   alert: Alert;
+  isModificado: boolean;  // comprobar si hay algun cambio en el formulario para la guarda
 
   constructor(
     private autorizacionService: AutorizacionService,
@@ -22,6 +24,7 @@ export class LoginComponent implements OnInit {
     console.trace('LoginComponent constructor');
     this.crearFormulario();
     this.alert = new Alert('');
+    this.isModificado = false;
   }
 
   ngOnInit() {
@@ -43,6 +46,14 @@ export class LoginComponent implements OnInit {
       
   }// crearFormulario
 
+  public puedoSalir(): Observable<boolean> | boolean {
+    console.debug('LoginComponent puedoSalir');
+    if( this.formulario.dirty ){    // comprobar si el usuario a interactuado con el form
+      const mensaje = '¿ Esta seguro que quieres salir sin logearte ?';
+      return window.confirm(mensaje);
+    }
+    return true;  
+}	
 
   comprobar(){
     console.trace('click boton submit');

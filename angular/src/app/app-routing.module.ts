@@ -18,6 +18,7 @@ import { LoginComponent } from './components/login/login.component';
 
 // guards
 import { PermisosGuard } from './guards/permisos.guard';
+import { CanDeactivateGuard } from './guards/login-deactivate.guard';
 
 
 
@@ -35,7 +36,7 @@ const routes: Routes = [
   { path: 'pesonas', component: PaginaPersonasComponent }, 
   { path: 'frutas', component: PaginaFrutasComponent }, 
   { path: 'todos', component: PaginaTodosComponent }, 
-  { path: 'login', component: LoginComponent }, 
+  { path: 'login', component: LoginComponent, canDeactivate: [CanDeactivateGuard] }, 
   { path: 'backoffice', component: BackofficeComponent, canActivate: [PermisosGuard] }, 
   { path: '**', pathMatch:'full', redirectTo : '404'  }
 ];
