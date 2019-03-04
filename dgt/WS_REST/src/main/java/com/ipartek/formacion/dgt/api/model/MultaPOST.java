@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class MultaPOST {
 	
 	@NotNull
-	@Min(value = 1, message = "El importe de la multa tiene que ser numérico y >=1")
+	@Min(value = 1, message = "El importe de la multa tiene que ser numérico y >= 1")
 	private float importe;
 	
 	@NotEmpty
