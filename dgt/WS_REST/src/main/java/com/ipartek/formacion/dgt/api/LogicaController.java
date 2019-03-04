@@ -138,31 +138,23 @@ public class LogicaController  {
 			@ApiResponse(code = 409 , message = "Existe Multa"),
 			@ApiResponse(code = 400 , message = "Datos Multa No Validos")
 	})
-	public ResponseEntity<Multa> insert(@RequestBody MultaCreada multa) {
+	public ResponseEntity<MultaCreada> insert(@RequestBody MultaCreada multa) {
 
-		ResponseEntity<Multa> response = new ResponseEntity<Multa>(HttpStatus.INTERNAL_SERVER_ERROR);
-		long idCoche = 0;
+		ResponseEntity<MultaCreada> response = new ResponseEntity<MultaCreada>(HttpStatus.INTERNAL_SERVER_ERROR);
+	
 		boolean insertado = false;
-		
-		idCoche=multa.getCoche().getId();
-		
-		Coche coche = new Coche();
-		
-		coche.setId(idCoche);
-		
-		multa.setCoche(coche);
 
-		response = new ResponseEntity<Multa>(HttpStatus.NOT_FOUND);
+		response = new ResponseEntity<MultaCreada>(HttpStatus.NOT_FOUND);
 
 		try {
 			
 			insertado = agenteService.multar(multa);
 
 			if (insertado == true) {
-				response = new ResponseEntity<Multa>(multa, HttpStatus.CREATED);
+				response = new ResponseEntity<MultaCreada>(multa, HttpStatus.CREATED);
 			}
 		} catch (Exception e) {
-			response = new ResponseEntity<Multa>(HttpStatus.BAD_REQUEST);
+			response = new ResponseEntity<MultaCreada>(HttpStatus.BAD_REQUEST);
 		}
 
 		return response;

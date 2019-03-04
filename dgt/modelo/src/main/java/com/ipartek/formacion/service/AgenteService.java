@@ -6,6 +6,7 @@ import java.util.List;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Coche;
 import com.ipartek.formacion.modelo.pojo.Multa;
+import com.ipartek.formacion.modelo.pojo.MultaCreada;
 
 public interface AgenteService {
 	
@@ -27,7 +28,7 @@ public interface AgenteService {
 	 * @return
 	 * @throws Exception si el concepto es null, el idAgente o idCoche no existen, importe < 0
 	 */
-	boolean multar(Multa multa);
+	boolean multar(MultaCreada multa);
 	
 
 	

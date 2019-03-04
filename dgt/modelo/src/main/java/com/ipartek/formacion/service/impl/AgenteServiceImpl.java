@@ -12,6 +12,7 @@ import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Coche;
 import com.ipartek.formacion.modelo.pojo.Multa;
+import com.ipartek.formacion.modelo.pojo.MultaCreada;
 import com.ipartek.formacion.service.AgenteService;
 import com.ipartek.formacion.service.Singleton;
 
@@ -49,7 +50,7 @@ public class AgenteServiceImpl implements AgenteService  {
 	
 	
 	@Override
-	public boolean multar(Multa multa)  {
+	public boolean multar(MultaCreada multa)  {
 		boolean isCreado = false;
 		try {		
 			isCreado = multaDAO.insert(multa);

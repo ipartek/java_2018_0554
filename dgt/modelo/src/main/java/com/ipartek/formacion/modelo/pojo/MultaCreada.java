@@ -8,10 +8,10 @@ import javax.validation.constraints.Size;
 
 public class MultaCreada {
 
-	
+	private Long id;
 	@NotNull
 	@Digits(fraction = 2, integer = 5)
-	private Double importe;
+	private Float importe;
 	@NotNull
 	@Size(min=10, max=255)
 	private String concepto;
@@ -22,27 +22,41 @@ public class MultaCreada {
 	
 	public MultaCreada() {
 		super();
-		
-		this.importe=0.0;
+		this.id= -1L;	
+		this.importe=(float) 0.0;
 		this.concepto="";
 		this.idAgente= -1L;
 		this.idCoche= -1L;
 	}
 
 
-	public MultaCreada(Double importe, String concepto, Long idAgente, Long idCoche) {
+	public MultaCreada(Long id, Float importe, String concepto, Long idAgente, Long idCoche) {
 		this();
+		setId(id);
 		setImporte(importe);
 		setConcepto(concepto);
 		setIdAgente(idAgente);
 		setIdCoche(idCoche);
 	}
 
-	public Double getImporte() {
+	
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public Float getImporte() {
 		return importe;
 	}
 
-	public void setImporte(Double importe) {
+	public void setImporte(Float importe) {
 		this.importe = importe;
 	}
 
@@ -73,10 +87,12 @@ public class MultaCreada {
 
 	@Override
 	public String toString() {
-		return "MultaCreada [importe=" + importe + ", concepto=" + concepto + ", idAgente=" + idAgente + ", idCoche="
-				+ idCoche + "]";
+		return "MultaCreada [id=" + id + ", importe=" + importe + ", concepto=" + concepto + ", idAgente=" + idAgente
+				+ ", idCoche=" + idCoche + "]";
 	}
-	
+
+
+
 	
 	
 }

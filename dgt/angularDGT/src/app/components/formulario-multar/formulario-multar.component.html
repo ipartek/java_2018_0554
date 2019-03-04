@@ -35,7 +35,7 @@
           <label for="importe">Importe</label>
           <input type="text" formControlName="importe" class="form-control" placeholder="TODO" >      
           <p id="p" *ngIf="formulario.controls.importe.invalid && formulario.controls.importe.touched"  
-          class="text-danger">*minimo 3 letras y maximo 40</p>
+          class="text-danger">*El limite de la sancion es 9999 </p>
         
           <label for="concepto">Concepto</label>
           <input type="textarea" formControlName="concepto" class="form-control" placeholder="Mínimo 3 letras">  
@@ -43,6 +43,12 @@
           class="text-danger">*minimo 5 letras y máximo 200</p>     
         </div>
         <button type="submit" class="btn btn-block btn-success mt-5" [disabled]="formulario.invalid">Crear Multa</button>
+
+        <div routerLinkActive="active">
+          <a class=" btn btn-outline-success btn-block btn-lg" [routerLink]="['/listarMultas']">LISTAR MULTAS ANULADAS</a>
+        </div>
+        
+        
     </form>
 </div>
 

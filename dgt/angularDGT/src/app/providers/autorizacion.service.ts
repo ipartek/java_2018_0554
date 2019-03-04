@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 })
 export class AutorizacionService {
 
-  
   private storage = window.sessionStorage;
   
 
@@ -22,9 +21,7 @@ export class AutorizacionService {
   public setLogged(value: boolean) {
     console.debug('Hacemos setter de _isLogged y guardar en sessionStorage %o', this.storage);   
     this.storage.setItem('isLogged', 'true' ); 
-
   }
-
 
   public saveAgente( agente: any ){
     this.storage.setItem('agente',  JSON.stringify(agente)); 
@@ -41,11 +38,10 @@ export class AutorizacionService {
 
   }
 
-
   constructor( private httpClient: HttpClient ) { 
-    console.trace('AutorizacionService canActivate');
-    
+    console.trace('AutorizacionService canActivate');    
   }
+
 
 
   /**
@@ -60,13 +56,10 @@ export class AutorizacionService {
     return this.httpClient.get(uri);    
   }
 
-  /**
-   * Cierra la session del usuario llamando al backoffice
-   */
+ 
   logout(){
-    //TODO llamar Servicio Rest
-    // this._isLogged = false;
-  }
+  this.storage.clear()
+  };
 
 
 }

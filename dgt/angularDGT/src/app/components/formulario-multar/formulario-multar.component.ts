@@ -50,13 +50,13 @@ export class FormularioMultarComponent implements OnInit {
     crearFormulario(){
       console.trace('LoginComponent crearFormulario');
       this.formulario = this.formBuilder.group({
-        importe: [
-                  '',                                                                         
-                  [Validators.required, Validators.minLength(3), Validators.maxLength(150)]   
-                ],
-        concepto : [
-                '',
-                [Validators.required, Validators.minLength(5), Validators.maxLength(200)]
+        importe:  [
+                  null,
+                  [Validators.required, Validators.min(0.99), Validators.max(9999)]
+        ],
+        concepto :  [
+                    '',
+                    [Validators.required, Validators.minLength(5), Validators.maxLength(200)]
         ]  
       });  
         
@@ -74,11 +74,9 @@ export class FormularioMultarComponent implements OnInit {
         -1,
         this.formulario.value.importe,
         this.formulario.value.concepto,
-        '',
-        this.vehiculo.id,
-        this.agente.id
-
-        
+        '', 
+        this.agente.id,
+        this.vehiculo.id     
       );
 
 
@@ -87,6 +85,7 @@ export class FormularioMultarComponent implements OnInit {
           console.debug('Json Multa %o', data);
           this.crearFormulario();
           this.router.navigate(['/vermultas']);
+          this.alert = new Alert('Multa creada con exito',"primary");
         },
         error => {
           console.warn('error multa %o', error);

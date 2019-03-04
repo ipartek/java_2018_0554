@@ -4,7 +4,9 @@
         <p *ngIf="multas.length==0" class="spinner-border text-danger"></p>
       <img class="mr-3 img-thumbnail" src="{{agente.imagen}}" alt="{{agente.nombre}}">
     </div>
-    <p class="text-primary nombre">Agente: {{agente.nombre}}</p>
+    <p>Agente: {{agente.nombre}}</p>
+    <br>
+    <p>           .............imagen: {{agente.imagen}}</p>
   </div>
 </div>
 
@@ -12,20 +14,17 @@
 <table class="table table-hover tablaOrdenable table-striped">
   <thead class="thead-light">
     <tr>
-
       <th>id</th>
       <th>Matricula</th>
       <th>Importe</th>
       <th>Concepto</th>
       <th>Fecha de Alta</th>
       <th>Hora  de Alta</th>
-      <th>Nombre Agente</th>
-      
+      <th>Nombre Agente</th>     
     </tr>
   </thead>
   <tbody>   
     <tr *ngFor="let m of multas">
-
       <td>{{m.id}}</td>
       <td>{{m.coche.matricula}}</td>
       <td>{{m.importe | moneda}}</td>
@@ -33,10 +32,7 @@
       <td>{{m.fechaAlta | date}}</td>
       <td>{{m.fechaAlta | date:'shortTime'}}</td>
       <td>{{m.agente.nombre}}</td>
-     
-
-    </tr>
-   
+    </tr>  
   </tbody>
 </table>
 

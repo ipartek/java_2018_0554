@@ -14,6 +14,7 @@ import com.ipartek.formacion.modelo.cm.ConnectionManager;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Coche;
 import com.ipartek.formacion.modelo.pojo.Multa;
+import com.ipartek.formacion.modelo.pojo.MultaCreada;
 
 public class MultaDAO {
 	private final static Logger LOG = Logger.getLogger(MultaDAO.class);
@@ -136,17 +137,18 @@ public class MultaDAO {
 	
 	
 	// CREAR MULTA
-	public boolean insert(Multa m) throws SQLException {
+	public boolean insert(MultaCreada m) throws SQLException {
 
 		boolean resul = false;
 		isGetById = false;
 		try (Connection conn = ConnectionManager.getConnection();
 				CallableStatement cs = conn.prepareCall(SQL_INSERT);) {
 
-			cs.setDouble(1, m.getImporte());
+			cs.setFloat(1, m.getImporte());
 			cs.setString(2, m.getConcepto());
-			cs.setLong(3, m.getCoche().getId());
-			cs.setLong(4, m.getAgente().getId());
+			cs.setLong(3, m.getIdAgente());
+			cs.setLong(4, m.getIdCoche());
+			
 			
 			cs.registerOutParameter(5, Types.INTEGER);
 			
