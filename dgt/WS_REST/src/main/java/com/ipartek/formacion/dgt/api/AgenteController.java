@@ -63,9 +63,10 @@ public class AgenteController {
 			
 			ResponseEntity<Vehiculo> response = new ResponseEntity<Vehiculo>( HttpStatus.NOT_FOUND );
 			try {
-				Vehiculo coche =  agenteService.buscarMatricula(matricula);
+				Vehiculo coche =  new Vehiculo();
+					coche = (Vehiculo) agenteService.buscarMatricula(matricula);
 				if (coche != null) {
-					response = new ResponseEntity<Vehiculo>(HttpStatus.OK);
+					response = new ResponseEntity<Vehiculo>(coche, HttpStatus.OK);
 				} 
 			}catch(Exception e) {
 				LOG.error(e);

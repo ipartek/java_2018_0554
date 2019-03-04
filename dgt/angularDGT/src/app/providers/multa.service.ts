@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Multa } from '../model/multa';
+import { Vehiculo } from '../model/vehiculo';
+import { AutorizacionService } from './autorizacion.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +13,7 @@ export class MultaService {
   private storage = window.sessionStorage;
   
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private autorizacionService: AutorizacionService) {
     console.trace('MultaService constructor');
    }
 
@@ -53,5 +56,18 @@ export class MultaService {
 
     return this.httpClient.get(uri);
   }
+
+  public multar (multa: Multa): Observable<any> {
+    let url = `http://localhost:8080/wsrest/api/multa/`;
+    console.trace('MultaService multar uri:  '+ url);
+    
+    let body = {
+      "importe": multa.importe,
+      "concepto": multa.concepto,
+      "idVehiculo": this.getVehiculo().id,
+      "idAgente": this.autorizacionService.getAgente().id     
+    };
+    return this.httpClient.post(url, body);
+  } 
 
 }

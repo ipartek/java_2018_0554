@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Alert } from 'src/app/model/alert';
 import { MultaService } from 'src/app/providers/multa.service';
 import { Router, NavigationExtras } from '@angular/router';
+import { AutorizacionService } from 'src/app/providers/autorizacion.service';
 
 
 @Component({
@@ -13,10 +14,11 @@ import { Router, NavigationExtras } from '@angular/router';
 export class FormularioMatriculaComponent implements OnInit {
   formularioMat: FormGroup;
   alert: Alert;
+  agente: any;
 
   constructor(private multaService: MultaService,
     private formBuilder: FormBuilder,
-    private router: Router) {
+    private router: Router, private autorizacionService: AutorizacionService) {
 
     console.trace('FormularioMatriculaComponent constructor');
     this.crearFormulario();
@@ -25,6 +27,7 @@ export class FormularioMatriculaComponent implements OnInit {
 
   ngOnInit() {
     console.trace('FormularioMatriculaComponent ngOnInit');
+    this.getAgenteInfo();
   }
   crearFormulario() {
     console.trace('PaginaLoginComponent crearFormulario');
@@ -57,6 +60,11 @@ export class FormularioMatriculaComponent implements OnInit {
         this.alert = new Alert('Matrícula no encontrada');
       }
     );
+
+  }
+
+  getAgenteInfo(){
+    this.agente = this.autorizacionService.getAgente();
 
   }
 
