@@ -23,7 +23,6 @@ export class ListadoMultasComponent implements OnInit {
 
   ngOnInit() {
     console.trace("ListadoMultasComponent ngOnInit");
-    //this.multas = [new Multa(1, 23, 'Concepto', '24/04/2019'), new Multa(2, 40, 'Concepto II', '14/04/2019')];
     this.cargarMultas();
   }
 
@@ -59,6 +58,7 @@ export class ListadoMultasComponent implements OnInit {
     result.forEach(el => {
       multa = new Multa(el.id, el.importe, el.concepto, el.fecha);
       this.multas.push(multa);
+      this.multas.sort();
     });
   }
 
@@ -67,6 +67,7 @@ export class ListadoMultasComponent implements OnInit {
     result.forEach(el => {
       multa = new Multa(el.id, el.importe, el.concepto, el.fecha, el.fecha_baja);
       this.multasAnuladas.push(multa);
+      this.multasAnuladas.sort();
     });
   }
 

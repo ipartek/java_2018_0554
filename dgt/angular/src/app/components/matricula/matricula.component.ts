@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Alerta } from 'src/app/model/alerta';
 import { MultaService } from 'src/app/providers/multa.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { Coche } from 'src/app/model/coche';
 
 @Component({
@@ -51,17 +51,21 @@ export class MatriculaComponent implements OnInit {
     
     console.debug('matricula: %s', matricula);
     
-    //llamar servicio TODO retornar Observable
     this.multaService.getCoche(matricula).subscribe(
       data => {
         console.debug(data.JSON)
         this.cocheBuscado = data;
         if(this.cocheBuscado.id != -1) {
-          console.debug('Coche obtenido %o', this.cocheBuscado);          
+          console.debug('Coche obtenido %o', this.cocheBuscado); 
+          this.multaService.saveCoche(this.cocheBuscado);
         }
-        //this.router.navigate(['datosMulta/' + this.cocheBuscado]);
-        let ruta = this.router.navigate(['datosMulta/' , this.cocheBuscado]);
-        console.debug('ruta: %o', ruta);
+      //   let navigationExtras: NavigationExtras = {
+      //     queryParams: {
+      //         "coche": JSON.stringify(this.cocheBuscado)
+      //     }
+      // }; 
+        this.router.navigate(["datos-multa"]);
+        
       }, // data
       error => {
         console.warn('No tienes permisos');

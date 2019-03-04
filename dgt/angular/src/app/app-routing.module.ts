@@ -32,7 +32,7 @@ const routes: Routes = [
     data: { title: 'Buscar por Matrícula' }
   },
   {
-    path: 'datos-multa:coche',
+    path: 'datos-multa',
     component: DatosMultaComponent,
     canActivate: [PermisosGuard],
     data: { title: 'Datos Multa' }
