@@ -15,6 +15,7 @@ import { AlertComponent } from './components/alert/alert.component';
 import { Error404Component } from './components/error404/error404.component';
 import { MatriculaComponent } from './components/matricula/matricula.component';
 import { DatosMultaComponent } from './components/datos-multa/datos-multa.component';
+import { DetalleMultaComponent } from './components/detalle-multa/detalle-multa.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { DatosMultaComponent } from './components/datos-multa/datos-multa.compon
     AlertComponent,
     Error404Component,
     MatriculaComponent,
-    DatosMultaComponent
+    DatosMultaComponent,
+    DetalleMultaComponent
   ],
   imports: [
     BrowserModule,
