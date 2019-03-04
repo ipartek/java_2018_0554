@@ -2,5 +2,5 @@
 
 export const environment = {
   production: false,
-  texto: 'POR DEFECTO'
+  texto: 'DESARROLLO'
 };

@@ -19,7 +19,7 @@ export class BackofficeComponent implements OnInit {
 
   cerrar(){
     console.trace('click boton cerrar session');
-    this.autorizacionService.isLogged = false;
+    this.autorizacionService.setLogged(false);
     this.router.navigate(['/login']);
   }
 
