@@ -7,6 +7,7 @@ import { PermisosGuard } from './guards/permisos.guard';
 import { Error404Component } from './components/error404/error404.component';
 import { MatriculaComponent } from './components/matricula/matricula.component';
 import { DatosMultaComponent } from './components/datos-multa/datos-multa.component';
+import { DetalleMultaComponent } from './components/detalle-multa/detalle-multa.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,12 @@ const routes: Routes = [
     component: DatosMultaComponent,
     canActivate: [PermisosGuard],
     data: { title: 'Datos Multa' }
+  },
+  {
+    path: 'detalle-multa',
+    component: DetalleMultaComponent,
+    canActivate: [PermisosGuard],
+    data: { title: 'Detalle Multa' }
   },
   {
     path: 'listado-multas',

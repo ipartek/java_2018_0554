@@ -1,3 +1,120 @@
-<p>
-  detalle-multa works!
-</p>
+
+<main role="main" class="inner cover ">
+<div class="border border-white pr-2 pl-2 rounded">
+   <h3 class="cover-heading text-left ">Detalle multa</h3>
+    
+	<p class="text-left"><strong>Matrícula: </strong>Matricula multa</p>
+	<p class="text-left"><strong>Modelo: </strong>Modelo coche</p>
+  	<p class="text-left"><strong>Importe: </strong>Importe multa&euro;</p>
+  	<p class="text-left"><strong>Fecha alta: </strong>Fecha alta multa</p>
+    <!-- Añadirle ngIf -->
+    <p class="text-left"><strong>Fecha baja: </strong>Fecha baja multa</p>
+    
+	<p class="text-left ">
+		<strong>Concepto: </strong>  
+		<span class=" text-left">  
+		Concepto de la multa
+		</span>
+	</p>
+</div>
+
+		
+  <!-- Si la fecha de baja de la multa es null -->
+	   <p class="lead">
+	      	<!-- Button to Open the Modal -->
+			<button type="button" class="btn btn-lg btn-warning btn-block" data-toggle="modal" data-target="#myModal">
+				<span class="d-flex justify-content-center align-items-center">Anular Multa
+    				<i class="fas fa-check"></i>
+    			</span>
+			</button>
+		</p>
+	  <!-- Si la fecha de baja NO es null -->
+	    <p class="lead">
+	      	<!-- Button to Open the Modal -->
+			<button type="button" class="btn btn-lg btn-warning btn-block" data-toggle="modal" data-target="#myModal2">
+			 <span class="d-flex justify-content-center align-items-center">Des-Anular Multa
+          <i class="fas fa-times"></i>
+    			</span>
+			</button>
+		</p>
+	 
+	
+	
+		<!-- The Modal -->
+		<div class="modal text-body" id="myModal">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title">Atención!</h4>
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      </div>
+		
+		      <!-- Modal body -->
+		      <div class="modal-body">
+		        Estás segur@ de que deseas anular la multa?
+		      </div>
+		
+		      <!-- Modal footer -->
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">
+		        	<span class="d-flex justify-content-center align-items-center">Cancelar
+	    			</span>
+		        </button>
+	        	<button (click)="anularMulta(multa.id)" class="btn btn-success">
+		        	<span class="d-flex justify-content-center align-items-center">Confirmar
+	    			</span>
+    			  </button>	      
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		
+		<!-- The Modal 2 -->
+		<div class="modal text-body" id="myModal2">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title">Atención!</h4>
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      </div>
+		
+		      <!-- Modal body -->
+		      <div class="modal-body">
+		        Estás segur@ de que deseas des-anular la multa?
+		      </div>
+		
+		      <!-- Modal footer -->
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">
+		        <span class="d-flex justify-content-center align-items-center">Cancelar
+	    	  	</span>
+		        </button>
+	        	<button (click)="reactivarMulta(multa.id)" class="btn btn-success">
+	        	<span class="d-flex justify-content-center align-items-center">Confirmar
+	    		  </span>
+	        	</button>		      
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+    <!-- Cuando la fecha de baja es null -->
+        <p class="lead">
+	  	  <a href="listado" class="btn btn-lg btn-info btn-block">
+	  	  <span class="d-flex justify-content-center align-items-center">Volver al listado (Activas)
+    		</span>
+    	</a>
+	  	</p> 
+    <!-- Cuando la fecha de baja NO es null -->
+        <p class="lead">
+	  	  <a href="multa?op=4" class="btn btn-lg btn-info btn-block">
+	  	  <span class="d-flex justify-content-center align-items-center">Volver al listado (Anuladas)
+    		</span>
+    	</a>
+	  	</p>
+</main>

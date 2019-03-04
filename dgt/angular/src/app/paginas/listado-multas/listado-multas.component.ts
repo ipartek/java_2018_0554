@@ -14,6 +14,7 @@ export class ListadoMultasComponent implements OnInit {
   multas: Multa[];
   multasAnuladas: Multa[];
   alerta: Alerta;
+  multaSeleccionada: Multa;
 
   constructor(
     private agenteService: AgenteService,
@@ -23,6 +24,7 @@ export class ListadoMultasComponent implements OnInit {
     this.multas = [];
     this.multasAnuladas = [];
     this.alerta = new Alerta('');
+    this.multaSeleccionada = new Multa;
    }
 
   ngOnInit() {
@@ -80,6 +82,10 @@ export class ListadoMultasComponent implements OnInit {
       this.alerta = new Alerta(`Error inesperado. Código de error: ${error.status}`);
       console.warn('peticion incorrecta %o', error);
     });
+  }
+
+  seleccionar(multa: Multa){
+    this.multaSeleccionada = multa;
   }
 
   //TODO cambiar forEach por map()
