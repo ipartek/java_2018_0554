@@ -2,12 +2,12 @@
 	<div class="col-12">
 		<h3 class="cover-heading">Registrar multa</h3>
 		<p class="lead"><small>Introduzca la matrícula del vehículo: </small></p>
-		
-		<div style="border:1px solid red; padding:10px;">
+		 
+		<!-- <div style="border:1px solid red; padding:10px;">
 			<p>Valores: {{ formulario.value | json }}</p>
 			<p>Estado:  {{ formulario.status | json }}</p> 
-	</div>
-    
+		</div> -->
+
     <form [formGroup]="formulario" (submit)="comprobar()">
     <div class="form-group">	    
 	    <label for="matricula">Matrícula: </label>
@@ -22,14 +22,14 @@
   	<div class="form-group">
 	    <label for="importe">Importe: </label>
 			<input type="number" class="form-control" formControlName="importe" aria-describedby="importeHelp" 
-			placeholder="P.E: 300" step="any">
+			placeholder="P.E: 300" step="any" autofocus required>
 			<small *ngIf="formulario.controls.importe.invalid && formulario.controls.importe.touched" 
 			class="text-danger">*El importe debe ser mayor que 0</small>
   	</div>
   	<div class="form-group">
 	    <label for="concepto">Concepto: (<b id="textoContador" name="textoContador">0</b> /255)</label>
 	    <textarea class="form-control" formControlName="concepto" aria-describedby="importeHelp" 
-						placeholder="Motivo de la sanción"></textarea>
+						placeholder="Motivo de la sanción" required></textarea>
 			<small *ngIf="formulario.controls.concepto.invalid && formulario.controls.concepto.touched" 
             class="text-danger">*El concepto debe tener mínimo 10 y máximo 255 caracteres</small>
   	</div>
