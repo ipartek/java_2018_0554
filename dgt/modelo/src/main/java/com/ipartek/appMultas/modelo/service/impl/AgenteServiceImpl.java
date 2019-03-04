@@ -1,5 +1,8 @@
 package com.ipartek.appMultas.modelo.service.impl;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -57,10 +60,27 @@ public class AgenteServiceImpl implements AgenteService{
 
 	@Override
 	public List<Multa> obtenerMultas(int idAgente) {
-		// TODO Auto-generated method stub
-		return null;
+		HashMap<Long, Multa> hmMultas;
+		ArrayList<Multa> multas = new ArrayList<Multa>();
+		try {
+			hmMultas = multaDAO.getAllByIdAgente(Long.valueOf(idAgente));
+			multas = new ArrayList<Multa>(hmMultas.values());
+		} catch (SQLException e) {
+			LOG.error(e);
+		}
+		return multas;
 	}
-
 	
+	public List<Multa> obtenerMultasAnuladas(int idAgente) {
+		HashMap<Long, Multa> hmMultas;
+		ArrayList<Multa> multas = new ArrayList<Multa>();
+		try {
+			hmMultas = multaDAO.getAllByIdAgenteDarBaja(Long.valueOf(idAgente));
+			multas = new ArrayList<Multa>(hmMultas.values());
+		} catch (SQLException e) {
+			LOG.error(e);
+		}
+		return multas;
+	}
 
 }
