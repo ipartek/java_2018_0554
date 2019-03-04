@@ -77,6 +77,13 @@ export class AgenteService {
     return this.http.get(url);
   }
 
+  crearMulta(matricula: string, agente: string): Observable<any> {
+    console.debug('matricula: %s', matricula);
+
+    const url = GLOBAL.endpoint + `/agente/{id}/multa`;
+    console.log(`MultaService login ${url}`);
+    return this.http.get(url);
+  }
 
   logout() {
     

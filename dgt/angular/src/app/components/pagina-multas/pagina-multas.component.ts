@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Multa } from 'src/app/model/multa';
 import { AgenteService } from 'src/app/providers/agente.service';
 import { Alerta } from 'src/app/model/alerta';
+import { MultaService } from 'src/app/providers/multa.service';
 
 @Component({
   selector: 'app-pagina-multas',
@@ -14,7 +15,7 @@ export class PaginaMultasComponent implements OnInit {
   multasAnuladas: Multa[];
   alerta: Alerta;
 
-  constructor(private agenteService: AgenteService ) {
+  constructor(private agenteService: AgenteService, private multaService: MultaService) {
     console.trace("PaginaMultasComponent constructor");
     this.multas = [];
     this.multasAnuladas = [];
@@ -39,6 +40,13 @@ export class PaginaMultasComponent implements OnInit {
       console.warn('peticion incorrecta %o', error);
     });
   }
+getDatosAgente(){
+this.agenteService.getAgente();
+
+}
+getDatosCoche(){
+  this.multaService.getCoche();
+}
 
   cargarMultasAnuladas() {
     console.log('PaginaMultasComponent cargarMultasAnuladas');

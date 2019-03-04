@@ -15,6 +15,8 @@ export class MatriculaComponent implements OnInit {
   formulario: FormGroup;
   alerta: Alerta;
   cocheBuscado: Coche;
+  agente: any;
+  agenteService: any;
 
   constructor(
     private multaService: MultaService,
@@ -27,6 +29,7 @@ export class MatriculaComponent implements OnInit {
   }
 
   ngOnInit() {
+this.getDatosAgente();
   }
 
   crearFormulario() {
@@ -35,9 +38,7 @@ export class MatriculaComponent implements OnInit {
       matricula: [
         '',
         [Validators.required,
-        Validators.min(0),
-        Validators.max(9999),
-        Validators.minLength(4),
+        Validators.minLength(7),
         Validators.maxLength(10)
         ]
       ]
@@ -52,23 +53,22 @@ export class MatriculaComponent implements OnInit {
     console.debug('matricula: %s', matricula);
     
     //llamar servicio TODO retornar Observable
-    this.multaService.getCoche(matricula).subscribe(
+    this.multaService.getCoche().subscribe(
       data => {
-        console.debug(data.JSON)
+        console.debug('Json Coche %o',data)
         this.cocheBuscado = data;
         if(this.cocheBuscado.id != -1) {
           console.debug('Coche obtenido %o', this.cocheBuscado);          
         }
-        //this.router.navigate(['datosMulta/' + this.cocheBuscado]);
-        let ruta = this.router.navigate(['datosMulta/' , this.cocheBuscado]);
-        console.debug('ruta: %o', ruta);
-      }, // data
+       
+       
+      }, 
       error => {
         console.warn('No tienes permisos');
         if (error.status == 404) {
           this.alerta = new Alerta(`El vehiculo no existe. Error ${error.status}`,
             Alerta.TIPO_WARNING);
-          console.error('Error esperado: ' + error.status);
+          console.error(' Se ha encontrado el siguiente error: ' + error.status);
         } else {
           this.alerta = new Alerta(`Ha ocurrido un error inesperado`);
           console.error(error.status);
@@ -78,5 +78,10 @@ export class MatriculaComponent implements OnInit {
     ); 
 
   } // comprobar
+  getDatosAgente(){
+    this.agente = this.agenteService.getAgente();
 
+  }
+
+  // TO METODO POST (uri: )
 }

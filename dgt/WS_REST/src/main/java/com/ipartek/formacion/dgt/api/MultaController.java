@@ -45,7 +45,6 @@ public class MultaController {
 	public MultaController() {
 		super();
 		multaDao = MultaDAO.getInstance();
-		//Crear Factoria y Validador
 		factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
 	}

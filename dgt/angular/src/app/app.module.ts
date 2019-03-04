@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavComponent } from './components/nav/nav.component';
 import { PrincipalComponent } from './components/principal/principal.component';
-import { CajaEstadisticasComponent } from './components/caja-estadisticas/caja-estadisticas.component';
 import { MonedaPipe } from './pipes/moneda.pipe';
 import { PaginaMultasComponent } from './components/pagina-multas/pagina-multas.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,6 +14,7 @@ import { AlertComponent } from './components/alert/alert.component';
 import { Error404Component } from './components/error404/error404.component';
 import { MatriculaComponent } from './components/matricula/matricula.component';
 import { DatosMultaComponent } from './components/datos-multa/datos-multa.component';
+import { RedactarMultaComponent } from './components/redactar-multa/redactar-multa.component';
 
 
 @NgModule({
@@ -23,13 +23,13 @@ import { DatosMultaComponent } from './components/datos-multa/datos-multa.compon
     LoginComponent,
     NavComponent,
     PrincipalComponent,
-    CajaEstadisticasComponent,
     MonedaPipe,
     PaginaMultasComponent,
     AlertComponent,
     Error404Component,
     MatriculaComponent,
-    DatosMultaComponent
+    DatosMultaComponent,
+    RedactarMultaComponent
   ],
   imports: [
     BrowserModule,

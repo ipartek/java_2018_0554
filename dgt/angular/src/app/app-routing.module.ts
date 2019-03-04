@@ -14,11 +14,7 @@ const routes: Routes = [
     component: LoginComponent,
     data: { title: 'login' }
   },
-  {
-    path: 'login',
-    component: LoginComponent,
-    data: { title: 'login' }
-  },
+  
   {
     path: 'principal',
     component: PrincipalComponent,

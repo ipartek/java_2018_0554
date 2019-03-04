@@ -1,0 +1,25 @@
+<form [formGroup]="formulario" (submit)="comprobar()">
+  <div class="container-fluid">
+    <div class="row content">
+      <div class="col-sm-12">
+        <app-alert>[alerta]</app-alert>
+        <div class="form-group">
+          <label for="matricula"><b>Matrícula</b></label>
+          <input type="text" formControlName="matricula" class="form-control" placeholder="{{coche.matricula}}">
+
+          <label for="concepto"><b>Concepto: comentario breve</b></label>
+          <textarea class="form-control" rows="5" formControlName="concepto" class="form-control"></textarea>
+
+          <label for="importe"><b>Importe: cantidad en €</b></label>
+          <input type="text" formControlName="importe" class="form-control">
+
+          <label for="agente"><b>Redactado por:</b></label>
+          <input type="text" formControlName="agente" class="form-control" placeholder="{{agente.id}}">
+        </div>
+<!-- BOTON TO POST -->    
+          <button type="submit" class="btn btn-lg btn-primary btn-block">Multar</button>
+      </div>
+
+    </div>
+  </div>
+</form>
