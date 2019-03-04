@@ -3,6 +3,7 @@
   <p>Agente: {{ agente | json}}</p>
 </div>
 
+<app-alert [alert]="alert"></app-alert>
 
 <form [formGroup]="formulario" (submit)="nueva()" >
 		<div>

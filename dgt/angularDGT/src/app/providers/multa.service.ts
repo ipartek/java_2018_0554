@@ -64,8 +64,8 @@ export class MultaService {
     let body = {
       "importe": multa.importe,
       "concepto": multa.concepto,
-      "idVehiculo": this.getVehiculo().id,
-      "idAgente": this.autorizacionService.getAgente().id     
+      "id_coche": this.getVehiculo().id,
+      "id_agente": this.autorizacionService.getAgente().id     
     };
     return this.httpClient.post(url, body);
   } 

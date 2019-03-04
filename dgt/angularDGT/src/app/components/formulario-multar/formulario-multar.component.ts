@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Alert } from 'src/app/model/alert';
 import { Multa } from 'src/app/model/multa';
+import { Vehiculo } from 'src/app/model/vehiculo';
 
 @Component({
   selector: 'app-formulario-multar',
@@ -25,6 +26,7 @@ export class FormularioMultarComponent implements OnInit {
 
     console.log('FormularioMultarComponent constructor');
     this.crearFormulario();
+    this.alert = new Alert('');
   }
 
   ngOnInit() {
@@ -52,7 +54,9 @@ export class FormularioMultarComponent implements OnInit {
       concepto: [
         '',
         [Validators.required, Validators.minLength(5), Validators.maxLength(250)]
-      ]
+      ],
+      id_coche:[],
+      id_agente:[]
     });
 
   }// crearFormulario
@@ -63,6 +67,7 @@ export class FormularioMultarComponent implements OnInit {
     console.trace('click boton submit');
     let importe = this.formulario.controls.importe.value;
     let concepto = this.formulario.controls.concepto.value;
+  
     console.debug('importe: %s concepto: %s', importe, concepto);
 
     // mappear de formulario a Multa
@@ -88,7 +93,6 @@ export class FormularioMultarComponent implements OnInit {
       },
       error => {
         console.warn('error multa %o', error);
-        this.autorizacionService.setLogged(false);
         this.alert = new Alert('No se ha podido crear la multa');
       }
     );
