@@ -17,10 +17,32 @@ export class MultaService {
     console.trace('MultaService constructor');
    }
 
+   public saveCoche( coche: Vehiculo){
+    this.storage.setItem('coche_A_Multar', JSON.stringify(coche));
+  }
+
+  public getCocheSession(): Vehiculo {
+    console.debug('coche_A_Multar: %o', this.storage.getItem('coche_A_Multar'));
+    if(this.storage.getItem('coche_A_Multar')){
+      return JSON.parse(this.storage.getItem('coche_A_Multar'));
+    }else{
+      return undefined;
+    }
+   }
+
   listarMultas(id: number): Observable<any>{
     let uri = `http://localhost:8080/wsrest/api/agente/${id}/multas`;
 
       console.trace('MultaService listarMultas uri: '+ uri);
+
+      return this.httpClient.get(uri);
+
+  }
+
+  listarMultasAnuladas(id: number): Observable<any>{
+    let uri = `http://localhost:8080/wsrest/api/agente/${id}/multasbaja`;
+
+      console.trace('MultaService listarMultasAnuladas uri: '+ uri);
 
       return this.httpClient.get(uri);
 
@@ -49,23 +71,18 @@ export class MultaService {
 
   }
 
-  public listarMultasAnuladas( id: number ): Observable<any> {
-    let uri = `http://localhost:8080/wsrest/api/agente/${id}/multas`;
+  
 
-      console.trace('MultaService listarMultasAnuladas uri: '+ uri);
-
-    return this.httpClient.get(uri);
-  }
-
-  public multar (multa: Multa): Observable<any> {
+  public multar (importe: string, concepto: string, agente: AutorizacionService, coche: Vehiculo): Observable<any> {
     let url = `http://localhost:8080/wsrest/api/multa/`;
     console.trace('MultaService multar uri:  '+ url);
     
     let body = {
-      "importe": multa.importe,
-      "concepto": multa.concepto,
-      "id_coche": this.getVehiculo().id,
-      "id_agente": this.autorizacionService.getAgente().id     
+      "importe": importe,
+     "concepto": concepto,
+      "idAgente": agente.getAgente().id,
+      "idCoche": coche.id,
+        
     };
     return this.httpClient.post(url, body);
   } 

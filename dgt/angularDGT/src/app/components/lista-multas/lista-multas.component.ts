@@ -15,6 +15,7 @@ export class ListaMultasComponent implements OnInit {
   agente: any;
   alert: Alert;
   multasAnuladas: Multa[];
+  isActiva: boolean;
   
 
   constructor( private autorizacionService: AutorizacionService, public multaService:MultaService) {
@@ -22,6 +23,7 @@ export class ListaMultasComponent implements OnInit {
     this.multas = [];
     this.alert = new Alert('');
     this.multasAnuladas = [];
+    this.isActiva = false;
 
   }
 
@@ -32,6 +34,7 @@ export class ListaMultasComponent implements OnInit {
     
     this.getAgenteInfo();
     this.getMultas(this.agente);
+    this.getMultasAnuladas(this.agente);
 
   }
   //ngOnInit
@@ -49,6 +52,7 @@ export class ListaMultasComponent implements OnInit {
       console.debug('peticion correcta %o', resultado);
       // this.mapeo(resultado);
       // this.todos = resultado.filter( todo => !todo.completed );
+      this.isActiva = true;
       this.multas = resultado;
     },
       error => {
@@ -57,17 +61,22 @@ export class ListaMultasComponent implements OnInit {
     );//subscribe   
   }//getMultas
 
-  cargarMultasAnuladas() {
-    console.log('ListadoMultasComponent cargarMultasAnuladas');
+  getMultasAnuladas(id: number) {
+    console.log('ListadoMultasComponent getMultasAnuladas');
     this.multas = [];
     this.multasAnuladas = [];
     this.multaService.listarMultasAnuladas(this.agente.id).subscribe(resultado => {
       console.debug('Resultado %o', resultado);
-      this.multas = resultado;
+      this.isActiva = true;
+      this.multasAnuladas = resultado;
     },  error => {
       console.warn('peticion incorrecta %o', error);
     
     });
   }
 
+  cambiarTabla( value: boolean){    
+    this.isActiva = value;
+    console.debug('click cambiarOferta ' + this.isActiva);
+  }
 }

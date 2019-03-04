@@ -54,9 +54,7 @@ export class FormularioMultarComponent implements OnInit {
       concepto: [
         '',
         [Validators.required, Validators.minLength(5), Validators.maxLength(250)]
-      ],
-      id_coche:[],
-      id_agente:[]
+      ]
     });
 
   }// crearFormulario
@@ -67,6 +65,9 @@ export class FormularioMultarComponent implements OnInit {
     console.trace('click boton submit');
     let importe = this.formulario.controls.importe.value;
     let concepto = this.formulario.controls.concepto.value;
+    let agente = this.autorizacionService.getAgente();
+    let coche = this.multaService.getVehiculo();
+
   
     console.debug('importe: %s concepto: %s', importe, concepto);
 
@@ -85,7 +86,7 @@ export class FormularioMultarComponent implements OnInit {
     //llamar servicio TODO retornar Observable
     // llamar servicio Rest, realizar logica dentro de subscripcion
     // Cuidado es una llamada Asincrona
-    this.multaService.multar(multa).subscribe(
+    this.multaService.multar(importe, concepto, agente, coche).subscribe(
       data => {
         console.debug('Json Multa %o', data);
         this.crearFormulario();
