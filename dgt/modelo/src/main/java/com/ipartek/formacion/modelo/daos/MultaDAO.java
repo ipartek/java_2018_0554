@@ -2,6 +2,7 @@ package com.ipartek.formacion.modelo.daos;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -21,13 +22,16 @@ public class MultaDAO {
 	private boolean isBaja = false;
 	
 	
-	private static final String MULTAS_ANULADAS = "baja";
+	//private static final String MULTAS_ANULADAS = "baja";
 	//private static final String MULTAS_ACTIVAS = "activas";
 
 	private static final String SQL_GETBYID = "{call pa_multa_getById(?)}";
-	private static final String SQL_GETALL_BYUSER = "{call pa_multa_getByAgenteId(?,?)}";
+	private static final String SQL_GETALL_BYUSER = "SELECT multa.id as 'id_multa', coche.id as 'id_coche', multa.concepto as 'concepto', multa.fecha_alta as 'fecha_alta', multa.fecha_baja as 'fecha_baja', coche.matricula as 'matricula', coche.modelo as 'modelo', multa.importe as 'importe' FROM multa inner join coche on multa.id_coche = coche.id inner join agente on multa.id_agente = agente.id WHERE multa.id_agente = ? ORDER BY multa.id DESC LIMIT 1000;";
 	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
 	private static final String SQL_UPDATE = "{call pa_multa_update(?,?)}";
+	private static final String SQL_DAR_BAJA = "update multa set fecha_baja = current_timestamp where id = ?";
+	private static final String SQL_DAR_ALTA = "update multa set fecha_baja = null where id = ?";
+	
 
 	// constructor privado, solo acceso por getInstance()
 	private MultaDAO() {
@@ -70,21 +74,45 @@ public class MultaDAO {
 		return m;
 	}
 
-	public ArrayList<Multa> getAllByUser(long id, String opm) {
+//	public ArrayList<Multa> getAllByUser(long id, String opm) {
+//
+//		ArrayList<Multa> multas = new ArrayList<Multa>();
+//		isGetById = false;
+//		try (Connection conn = ConnectionManager.getConnection();
+//				CallableStatement cs = conn
+//						.prepareCall(SQL_GETALL_BYUSER);) {
+//			if (MULTAS_ANULADAS.equals(opm)) {
+//				isBaja = true;
+//			} else {
+//				isBaja = false;
+//			}
+//			cs.setLong(1, id);
+//			cs.setString(2, opm);
+//			try (ResultSet rs = cs.executeQuery()) {
+//				while (rs.next()) {
+//					try {
+//						multas.add(rowMapper(rs));
+//					} catch (Exception e) {						
+//						LOG.error(e);
+//					}
+//				}
+//			}
+//		} catch (Exception e) {
+//			LOG.error(e);
+//		}
+//
+//		return multas;
+//	}
+	
+	public ArrayList<Multa> getAllByUser(long id) {
 
 		ArrayList<Multa> multas = new ArrayList<Multa>();
 		isGetById = false;
 		try (Connection conn = ConnectionManager.getConnection();
-				CallableStatement cs = conn
-						.prepareCall(SQL_GETALL_BYUSER);) {
-			if (MULTAS_ANULADAS.equals(opm)) {
-				isBaja = true;
-			} else {
-				isBaja = false;
-			}
-			cs.setLong(1, id);
-			cs.setString(2, opm);
-			try (ResultSet rs = cs.executeQuery()) {
+				PreparedStatement pst = conn
+						.prepareStatement(SQL_GETALL_BYUSER);) {
+			pst.setLong(1, id);
+			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
 					try {
 						multas.add(rowMapper(rs));
@@ -100,7 +128,8 @@ public class MultaDAO {
 		return multas;
 	}
 
-	public boolean insert(Multa m) throws SQLException {
+
+	public boolean insert(Multa m, long idCoche) throws SQLException {
 
 		boolean resul = false;
 		isGetById = false;
@@ -109,12 +138,48 @@ public class MultaDAO {
 
 			cs.setDouble(1, m.getImporte());
 			cs.setString(2, m.getConcepto());
-			cs.setLong(3, m.getCoche().getId());
+			cs.setLong(3, idCoche);
 			cs.setLong(4, m.getAgente().getId());
 			cs.registerOutParameter(5, Types.INTEGER);
 			int affectedRows = cs.executeUpdate();
 			if (affectedRows == 1) {
 				m.setId(cs.getLong(5));
+				resul = true;
+			}
+
+		}
+		return resul;
+
+	}
+	
+	public boolean darBaja(int idMulta) throws SQLException {
+
+		boolean resul = false;
+		
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement ps = conn.prepareStatement(SQL_DAR_BAJA);) {
+
+			ps.setInt(1, idMulta);
+			int affectedRows = ps.executeUpdate();
+			if (affectedRows == 1) {
+				resul = true;
+			}
+
+		}
+		return resul;
+
+	}
+	
+	public boolean darAlta(int idMulta) throws SQLException {
+
+		boolean resul = false;
+		
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement ps = conn.prepareStatement(SQL_DAR_ALTA);) {
+
+			ps.setInt(1, idMulta);
+			int affectedRows = ps.executeUpdate();
+			if (affectedRows == 1) {
 				resul = true;
 			}
 
@@ -139,32 +204,49 @@ public class MultaDAO {
 		return resul;
 
 	}
-
+	
 	private Multa rowMapper(ResultSet rs) throws SQLException {
-		Multa m = new Multa();
-		Coche c = new Coche();
-		Timestamp timestampalta = rs.getTimestamp("fecha_alta");
-		m.setFechaAlta(new java.util.Date(timestampalta.getTime()));
-		if (isBaja) {
-			Timestamp timestampbaja = rs.getTimestamp("fecha_baja");
-			if(timestampbaja==null) {
-				m.setFechaBaja(null);
-			}else {
-				m.setFechaBaja(new java.util.Date(timestampbaja.getTime()));
-			}
-			
-		}
-		m.setId(rs.getLong("id"));
-		c.setMatricula(rs.getString("matricula"));
-		if (isGetById) {
-			m.setImporte(rs.getDouble("importe"));
-			m.setConcepto(rs.getString("concepto"));
-			c.setId(rs.getLong("id_coche"));
-			c.setModelo(rs.getString("modelo"));
-			c.setKm(rs.getInt("km"));
-		}
-		m.setCoche(c);
-		return m;
+		Multa multa = new Multa();
+		Coche coche = new Coche();
+		multa.setId((long)rs.getInt("id_multa"));
+		multa.setConcepto(rs.getString("concepto"));
+		multa.setFechaAlta(rs.getDate("fecha_alta"));
+		multa.setFechaBaja(rs.getDate("fecha_baja"));
+		multa.setImporte(rs.getDouble("importe"));
+		coche.setId((long)rs.getInt("id_coche"));
+		coche.setMatricula(rs.getString("matricula"));
+		coche.setModelo(rs.getString("modelo"));
+		
+		multa.setCoche(coche);
+		return multa;
 	}
+	
+
+//	private Multa rowMapper(ResultSet rs) throws SQLException {
+//		Multa m = new Multa();
+//		Coche c = new Coche();
+//		Timestamp timestampalta = rs.getTimestamp("fecha_alta");
+//		m.setFechaAlta(new java.util.Date(timestampalta.getTime()));
+//		if (isBaja) {
+//			Timestamp timestampbaja = rs.getTimestamp("fecha_baja");
+//			if(timestampbaja==null) {
+//				m.setFechaBaja(null);
+//			}else {
+//				m.setFechaBaja(new java.util.Date(timestampbaja.getTime()));
+//			}
+//			
+//		}
+//		m.setId(rs.getLong("id"));
+//		c.setMatricula(rs.getString("matricula"));
+//		if (isGetById) {
+//			m.setImporte(rs.getDouble("importe"));
+//			m.setConcepto(rs.getString("concepto"));
+//			c.setId(rs.getLong("id_coche"));
+//			c.setModelo(rs.getString("modelo"));
+//			c.setKm(rs.getInt("km"));
+//		}
+//		m.setCoche(c);
+//		return m;
+//	}
 
 }

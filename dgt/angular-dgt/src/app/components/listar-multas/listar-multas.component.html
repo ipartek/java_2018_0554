@@ -1,0 +1,31 @@
+<div class="jumbotron">
+  <button type="button" class="btn btn-outline-primary" [routerLink]="['/menu-ppal']">Volver</button>
+
+  <table class="table" style="width: 100%">
+    <thead>
+      <tr>
+        <th>Matricula</th>
+        <th>Modelo</th> 
+        <th>Fecha alta</th>
+        <th>Concepto</th>
+        <th>Importe</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let m of multas">
+        <td>{{m.matricula}}</td>
+        <td>{{m.modelo}}</td>
+        <td>{{m.fechaAlta}}</td>
+        <td>{{m.concepto}}</td>
+        <td>{{m.importe}}</td>
+
+        <td><button (click)="anularMulta(m.id)" *ngIf="!m.fechaBaja" type="button" class="btn btn-warning">Anular</button></td>
+        <td><button (click)="habilitarMulta(m.id)" *ngIf="m.fechaBaja" type="button" class="btn btn-info">Habilitar</button></td>
+      </tr>
+
+
+    </tbody>
+  </table>
+
+</div>
