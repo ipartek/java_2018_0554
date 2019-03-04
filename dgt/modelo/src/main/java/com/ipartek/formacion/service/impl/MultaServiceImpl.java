@@ -49,6 +49,28 @@ public class MultaServiceImpl implements MultaService {
 		}
 		return resultado;
 	}
+	
+	@Override
+	public boolean darDeBaja(int idAgente) {
+		boolean resultado = false;
+		try {
+			resultado = multaDAO.darDeBaja(idAgente);
+		} catch (SQLException e) {
+			return false;
+		}
+		return resultado;
+	}
+	
+	@Override
+	public boolean darDeAlta(int idAgente) {
+		boolean resultado = false;
+		try {
+			resultado = multaDAO.darDeAlta(idAgente);
+		} catch (SQLException e) {
+			return false;
+		}
+		return resultado;
+	}
 
 	@Override
 	public ArrayList<Multa> listar(int idAgente) {

@@ -27,9 +27,11 @@ public class MultaDAO {
 	//private static final String MULTAS_ACTIVAS = "activas";
 
 	private static final String SQL_GETBYID = "{call pa_multa_getById(?)}";
-	private static final String SQL_GETALL_BYUSER = "SELECT multa.id as 'id_multa', coche.id as 'id_coche', multa.concepto as 'concepto', multa.fecha_alta as 'fecha_alta', multa.fecha_baja as 'fecha_baja', coche.matricula as 'matricula', coche.modelo as 'modelo' FROM multa inner join coche on multa.id_coche = coche.id inner join agente on multa.id_agente = agente.id WHERE multa.id_agente = ? ORDER BY multa.id DESC LIMIT 1000;";
+	private static final String SQL_GETALL_BYUSER = "SELECT multa.id as 'id_multa', coche.id as 'id_coche', multa.concepto as 'concepto', multa.fecha_alta as 'fecha_alta', multa.fecha_baja as 'fecha_baja', coche.matricula as 'matricula', coche.modelo as 'modelo', multa.importe as 'importe' FROM multa inner join coche on multa.id_coche = coche.id inner join agente on multa.id_agente = agente.id WHERE multa.id_agente = ? ORDER BY multa.id DESC LIMIT 1000;";
 	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
 	private static final String SQL_UPDATE = "{call pa_multa_update(?,?)}";
+	private static final String SQL_DAR_DE_BAJA = "update multa set fecha_baja = current_timestamp where id = ?";
+	private static final String SQL_DAR_DE_ALTA = "update multa set fecha_baja = null where id = ?";
 
 	// constructor privado, solo acceso por getInstance()
 	private MultaDAO() {
@@ -118,6 +120,43 @@ public class MultaDAO {
 		return resul;
 
 	}
+	
+	
+	public boolean darDeBaja(int idMulta) throws SQLException {
+
+		boolean resul = false;
+
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_DAR_DE_BAJA);) {
+			
+			pst.setInt(1, idMulta);
+			
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				resul = true;
+			}
+		}
+		return resul;
+
+	}
+	
+	public boolean darDeAlta(int idMulta) throws SQLException {
+
+		boolean resul = false;
+
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_DAR_DE_ALTA);) {
+			
+			pst.setInt(1, idMulta);
+			
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				resul = true;
+			}
+		}
+		return resul;
+
+	}
 
 	public boolean update(Multa m, String opr) throws SQLException {
 
@@ -142,6 +181,7 @@ public class MultaDAO {
 		multa.setConcepto(rs.getString("concepto"));
 		multa.setFechaAlta(rs.getDate("fecha_alta"));
 		multa.setFechaBaja(rs.getDate("fecha_baja"));
+		multa.setImporte(rs.getDouble("importe"));
 		coche.setId((long)rs.getInt("id_coche"));
 		coche.setMatricula(rs.getString("matricula"));
 		coche.setModelo(rs.getString("modelo"));

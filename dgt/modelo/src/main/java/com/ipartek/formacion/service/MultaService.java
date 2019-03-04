@@ -13,4 +13,8 @@ public interface MultaService {
 	
 	Coche conseguirId(String matricula);
 	
+	boolean darDeBaja(int idMulta);
+	
+	boolean darDeAlta(int idMulta);
+	
 }
