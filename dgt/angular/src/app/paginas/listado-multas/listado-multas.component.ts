@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Multa } from 'src/app/model/multa';
 import { AgenteService } from 'src/app/providers/agente.service';
 import { Alerta } from 'src/app/model/alerta';
+import { MultaService } from 'src/app/providers/multa.service';
 
 @Component({
   selector: 'app-listado-multas',
@@ -14,7 +15,10 @@ export class ListadoMultasComponent implements OnInit {
   multasAnuladas: Multa[];
   alerta: Alerta;
 
-  constructor(private agenteService: AgenteService ) {
+  constructor(
+    private agenteService: AgenteService,
+    private multaService: MultaService
+    ) {
     console.trace("ListadoMultasComponent constructor");
     this.multas = [];
     this.multasAnuladas = [];
@@ -46,6 +50,32 @@ export class ListadoMultasComponent implements OnInit {
     this.agenteService.getMultasAnuladas( this.agenteService.getAgente().id ).subscribe(resultado => {
       console.debug('Resultado %o', resultado);
       this.mapperAnuladas(resultado);
+    }, error => {
+      this.alerta = new Alerta(`Error inesperado. Código de error: ${error.status}`);
+      console.warn('peticion incorrecta %o', error);
+    });
+  }
+
+  anularMulta(idMulta: number) {
+    console.log('ListadoMultasComponent anularMulta ID: ' + idMulta);
+    
+    this.multaService.patchMulta( idMulta, 'baja' ).subscribe(resultado => {
+      console.debug(`Multa con ID: ${idMulta} dada de baja`);
+      this.alerta = new Alerta(`Multa con ID: ${idMulta} dada de baja`, Alerta.TIPO_SUCCESS);
+      this.cargarMultas();
+    }, error => {
+      this.alerta = new Alerta(`Error inesperado. Código de error: ${error.status}`);
+      console.warn('peticion incorrecta %o', error);
+    });
+  }
+
+  reactivarMulta(idMulta: number) {
+    console.log('ListadoMultasComponent reactivarMulta ID: ' + idMulta);
+    
+    this.multaService.patchMulta( idMulta, 'alta' ).subscribe(resultado => {
+      console.debug(`Multa con ID: ${idMulta} dada de alta`);
+      this.alerta = new Alerta(`Multa con ID: ${idMulta} reactivada`, Alerta.TIPO_SUCCESS);
+      this.cargarMultasAnuladas();
     }, error => {
       this.alerta = new Alerta(`Error inesperado. Código de error: ${error.status}`);
       console.warn('peticion incorrecta %o', error);

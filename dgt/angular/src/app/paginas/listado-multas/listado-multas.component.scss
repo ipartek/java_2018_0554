@@ -1,0 +1,11 @@
+.fas.fa-check:hover::before{
+    color: green; 
+    font-size: 1.6em;
+    transition-duration: 0.3s;  
+ }
+
+ .fas.fa-times:hover::before{
+    color: red; 
+    font-size: 1.6em;
+    transition-duration: 0.3s;  
+ }

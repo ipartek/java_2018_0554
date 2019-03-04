@@ -61,4 +61,16 @@ export class MultaService {
 
       return this.http.post( url, body , httpOptions );
   }
+
+  patchMulta(idMulta: number, accion: string){
+
+    if(accion.localeCompare('baja') || accion.localeCompare('alta')){
+      let url = GLOBAL.endpoint + `/multa/${idMulta}/${accion}`;
+
+      let body = { } 
+
+      return this.http.patch(url, body);
+    }
+
+  }
 }
