@@ -1,14 +1,10 @@
 <div class="container marketing">
-  <!-- Three columns of text below the carousel -->
   <div class="centrar">
     <img src="../../assets/img/car.png" alt="coche policia">
-    
     <app-alert [alert]="alert"></app-alert>
-
     <form [formGroup]="formulario" (submit)="comprobar()">
     	<div class="col">
         <input type="text" formControlName="placa" class="form-control" name="placa" placeholder="Introduce tu número de placa">
-        <!--<p *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched" class="text-danger">* Recuerda que mínimo 3 letras</p>-->
 	    </div>
 	    <div class="col">
 		    <input type="password" formControlName="password" class="form-control" name="password" placeholder="Introduce tu contraseña">

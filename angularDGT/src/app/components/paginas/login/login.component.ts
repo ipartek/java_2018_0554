@@ -49,9 +49,6 @@ export class LoginComponent implements OnInit {
     let placa = this.formulario.controls.placa.value;
     let password = this.formulario.controls.password.value;
     console.debug('placa: %s password: %s',placa , password);
-
-    // llamar servicio Rest, realizar logica dentro de subscripcion
-    // Cuidado es una llamada Asincrona
     this.autorizacionService.loggin(placa, password).subscribe(
       data =>{
         console.debug('Json Agente %o', data);
@@ -65,8 +62,5 @@ export class LoginComponent implements OnInit {
         this.alert = new Alert('No tienes permisos');
       }
     );
-
-    // *** Cuidado no intentar usar datos de la respuesta aqui ***
-  }// comprobar
-
+  }
 }

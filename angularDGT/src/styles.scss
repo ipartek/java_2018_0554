@@ -1,7 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
 .alert-dismissible {
     padding-right: 0;
 }
 .alert {
     padding: .75rem 0;
+}
+.centrar {
+    text-align: center;
+}
+form .col {
+    padding: 0;
+    input{
+        margin: 10px 0;
+    }
+    textarea{
+        margin: 10px 0;
+    }
+}
+form button {
+    width: 100%;
+    a{
+        color: #fff;;
+    }
 }
