@@ -1,24 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { GLOBAL } from 'src/global';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MultaService {
 
-  
+  constructor( public http: HttpClient ) {
+    console.log('MultaService constructor');
 
-  constructor(private httpClient: HttpClient) {
-    console.trace('MultaService constructor');
    }
 
-  listarMultas(id: number): Observable<any>{
-    let uri = `http://localhost:8080/wsrest/api/agente/${id}/multas`;
+   getCoche(matricula: string): Observable < any > {
+    console.debug('matricula: %s', matricula);
 
-      console.trace('MultaService listarMultas uri: '+ uri);
-
-      return this.httpClient.get(uri);
-
+    const url = GLOBAL.endpoint + `/vehiculo/${matricula}`;
+    console.log(`MultaService login ${url}`);
+    return this.http.get(url);
   }
 }

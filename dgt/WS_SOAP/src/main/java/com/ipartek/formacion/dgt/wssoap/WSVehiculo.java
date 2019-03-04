@@ -1,25 +1,22 @@
 package com.ipartek.formacion.dgt.wssoap;
 
-import com.ipartek.formacion.modelo.daos.CocheDAO;
-import com.ipartek.formacion.modelo.pojo.Coche;
+import com.ipartek.appMultas.modelo.dao.CocheDAO;
+import com.ipartek.appMultas.modelo.pojo.Coche;
 
 public class WSVehiculo {
-	
-	
-	private static CocheDAO cocheDAO;
+	private static CocheDAO dao = null;
 	
 	public WSVehiculo() {
 		super();
-		cocheDAO = CocheDAO.getInstance();
+		dao = CocheDAO.getInstance();
 	}
-
-	public Coche obtenerDatos ( String matricula ) {
+	
+	public Coche obtenerDatos (String matricula) {
 		
 		Coche c = null;
-				
-		if ( matricula != null ) {		
-			c = cocheDAO.getByMatricula(matricula);
-		}	
+		if (matricula != null) {
+			c = dao.getByMatricula(matricula);
+		}
 		
 		return c;
 	}

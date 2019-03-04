@@ -1,13 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ipartek.formacion.dgt</groupId>
 	<artifactId>multas</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>multas</name>
-	<url>http://localhost:8080/multas</url>
+	<url>http://localhost:8080/multas/</url>
 
 	<!-- variables comunes para todo el POM -->
 	<properties>
@@ -23,14 +22,12 @@
 
 	<!-- librerias o .JARs que necesitamos -->
 	<dependencies>
-
-		<!-- modelo -->
-		<dependency>
+	<!-- Modelo -->
+	<dependency>
 			<groupId>com.ipartek.formacion.dgt</groupId>
 			<artifactId>modelo</artifactId>
-			<version>1.0</version>
+			<version>1.2</version>
 		</dependency>
-
 
 		<!-- Web Project 3.0 -->
 		<dependency>
@@ -66,11 +63,6 @@
 			<artifactId>gson</artifactId>
 			<version>2.8.2</version>
 		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
 
 
 		<!-- Validaciones -->
@@ -92,7 +84,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
-			<scope>test</scope> <!-- solo se usa para Test, cuando se crea el projecto no se usa esta libreria -->
+			<scope>test</scope>			<!-- solo se usa para Test, cuando se crea el projecto no se usa esta libreria -->
 		</dependency>
 
 		<dependency>
@@ -123,6 +115,12 @@
 			<artifactId>javax.el</artifactId>
 			<version>2.2.4</version>
 			<scope>test</scope>
+		</dependency>
+		<!-- logger o trazas -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
 		</dependency>
 
 

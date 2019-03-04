@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions targetNamespace="http://wssoap.dgt.formacion.ipartek.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://wssoap.dgt.formacion.ipartek.com" xmlns:intf="http://wssoap.dgt.formacion.ipartek.com" xmlns:tns1="http://pojo.modelo.formacion.ipartek.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<wsdl:definitions targetNamespace="http://wssoap.dgt.formacion.ipartek.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://wssoap.dgt.formacion.ipartek.com" xmlns:intf="http://wssoap.dgt.formacion.ipartek.com" xmlns:tns1="http://pojo.modelo.appMultas.ipartek.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <!--WSDL created by Apache Axis version: 1.4
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://wssoap.dgt.formacion.ipartek.com" xmlns="http://www.w3.org/2001/XMLSchema">
-   <import namespace="http://pojo.modelo.formacion.ipartek.com"/>
+   <import namespace="http://pojo.modelo.appMultas.ipartek.com"/>
    <element name="obtenerDatos">
     <complexType>
      <sequence>
@@ -20,11 +20,11 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     </complexType>
    </element>
   </schema>
-  <schema elementFormDefault="qualified" targetNamespace="http://pojo.modelo.formacion.ipartek.com" xmlns="http://www.w3.org/2001/XMLSchema">
+  <schema elementFormDefault="qualified" targetNamespace="http://pojo.modelo.appMultas.ipartek.com" xmlns="http://www.w3.org/2001/XMLSchema">
    <complexType name="Coche">
     <sequence>
      <element name="id" nillable="true" type="xsd:long"/>
-     <element name="km" nillable="true" type="xsd:int"/>
+     <element name="km" nillable="true" type="xsd:long"/>
      <element name="matricula" nillable="true" type="xsd:string"/>
      <element name="modelo" nillable="true" type="xsd:string"/>
     </sequence>

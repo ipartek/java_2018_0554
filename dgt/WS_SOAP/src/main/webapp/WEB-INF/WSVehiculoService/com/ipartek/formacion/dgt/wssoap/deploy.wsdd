@@ -5,16 +5,16 @@
   <service name="WSVehiculo" provider="java:RPC" style="wrapped" use="literal">
       <parameter name="wsdlTargetNamespace" value="http://wssoap.dgt.formacion.ipartek.com"/>
       <parameter name="wsdlServiceElement" value="WSVehiculoService"/>
-      <parameter name="schemaQualified" value="http://pojo.modelo.formacion.ipartek.com,http://wssoap.dgt.formacion.ipartek.com"/>
+      <parameter name="schemaQualified" value="http://pojo.modelo.appMultas.ipartek.com,http://wssoap.dgt.formacion.ipartek.com"/>
       <parameter name="wsdlServicePort" value="WSVehiculo"/>
       <parameter name="className" value="com.ipartek.formacion.dgt.wssoap.WSVehiculo"/>
       <parameter name="wsdlPortType" value="WSVehiculo"/>
       <parameter name="typeMappingVersion" value="1.2"/>
-      <operation xmlns:operNS="http://wssoap.dgt.formacion.ipartek.com" xmlns:retNS="http://wssoap.dgt.formacion.ipartek.com" xmlns:rtns="http://pojo.modelo.formacion.ipartek.com" name="obtenerDatos" qname="operNS:obtenerDatos" returnQName="retNS:obtenerDatosReturn" returnType="rtns:Coche" soapAction="">
+      <operation xmlns:operNS="http://wssoap.dgt.formacion.ipartek.com" xmlns:retNS="http://wssoap.dgt.formacion.ipartek.com" xmlns:rtns="http://pojo.modelo.appMultas.ipartek.com" name="obtenerDatos" qname="operNS:obtenerDatos" returnQName="retNS:obtenerDatosReturn" returnType="rtns:Coche" soapAction="">
         <parameter xmlns:pns="http://wssoap.dgt.formacion.ipartek.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:matricula" type="tns:string"/>
       </operation>
       <parameter name="allowedMethods" value="obtenerDatos"/>
 
-      <typeMapping xmlns:ns="http://pojo.modelo.formacion.ipartek.com" qname="ns:Coche" type="java:com.ipartek.formacion.modelo.pojo.Coche" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://pojo.modelo.appMultas.ipartek.com" qname="ns:Coche" type="java:com.ipartek.appMultas.modelo.pojo.Coche" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
   </service>
 </deployment>

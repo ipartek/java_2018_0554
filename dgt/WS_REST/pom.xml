@@ -25,13 +25,12 @@
 
 	<dependencies>
 
-		<!-- dependencia modelo -->
+		<!-- Modelo -->
 		<dependency>
 			<groupId>com.ipartek.formacion.dgt</groupId>
 			<artifactId>modelo</artifactId>
-			<version>1.0</version>
+			<version>1.2</version>
 		</dependency>
-
 
 		<!-- Web Project 3.0 -->
 		<dependency>

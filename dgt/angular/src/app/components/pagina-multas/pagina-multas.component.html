@@ -1,37 +1,55 @@
-<div class="container mb-3 mt-3">
-  <div class="row d-flex align-items-center mb-3">
-    <div class="d-flex">
-      <img class="mr-3 img-thumbnail" src="assets\imagenes\takelberry.jpg" alt="takelberry">
-    </div>
-    <p class="text-sucess nombre">agente</p>
-  </div>
+<app-nav></app-nav>
+<app-alert [alerta]="alerta"></app-alert>
+<div class="col-12 p-3">
+  <h3 class="text-white float-right" *ngIf="multas.length !== 0" >Multas registradas:  <b>{{ multas.length }} </b> </h3>
+  <h3 class="text-white float-right text-danger" *ngIf="multasAnuladas.length !== 0" >Multas anuladas:  <b>  {{ multasAnuladas.length }}</b> </h3>
+    
+
+
+  <button class="btn btn-primary m-3" (click)="cargarMultas()" >Activas 
+  </button>
+  <button class="btn btn-danger -3" (click)="cargarMultasAnuladas()" >Anuladas 
+  </button>
+  
+
+  <table *ngIf="multas.length !== 0" class="table table-striped table-bordered">
+    <thead class="thead-light">
+      <tr>
+        <th>ID</th>
+        <th>Concepto</th>
+        <th>Fecha</th>
+        <th>Importe</th>  
+      </tr>  
+    </thead>
+    <tbody>
+      <tr *ngFor="let multa of multas">
+        <td>{{ multa.id }}</td>
+        <td>{{ multa.concepto }}</td>
+        <td>{{ multa.fecha | date :'medium' }}</td>
+        <td>{{ multa.importe | moneda : 'es' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table *ngIf="multasAnuladas.length !== 0" class="table table-striped table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Concepto</th>
+          <th>Importe</th>  
+          <th>Fecha Baja</th>
+        </tr>  
+      </thead>
+      <tbody>
+        <tr *ngFor="let multa of multasAnuladas">
+          <td>{{ multa.id }}</td>
+          <td>{{ multa.fecha | date :'medium' }}</td>
+          <td>{{ multa.concepto }}</td>
+          <td>{{ multa.importe | moneda : 'es' }}</td>
+          <td>{{ multa.fechaBaja | date :'medium' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
 </div>
-
-<table class="table table-striped table-hover tablaOrdenable">
-  <thead class="thead-light">
-    <tr>
-      <th>Matricula</th>
-      <th>Modelo</th>
-      <th>Importe</th>
-
-      <th>Concepto</th>
-      <th>Fecha</th>
-
-
-
-
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let m of multas">
-      <td><b>{{m.coche.matricula}}</b></td>
-      <td>{{m.coche.modelo}}</td>
-      <td>{{m.importe | moneda}}</td>
-
-      <td>{{m.fechaAlta | date}}</td>
-      <td>{{m.concepto}}</td>
-
-
-
-  </tbody>
-</table>

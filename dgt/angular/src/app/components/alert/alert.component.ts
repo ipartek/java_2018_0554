@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Alert } from 'src/app/model/alert';
-
+import { Alerta } from 'src/app/model/alerta';
 
 @Component({
   selector: 'app-alert',
@@ -9,10 +8,10 @@ import { Alert } from 'src/app/model/alert';
 })
 export class AlertComponent implements OnInit {
 
-  @Input() alert: Alert;
+  @Input() alerta: Alerta;
 
   constructor() { 
-    this.alert = new Alert('');
+    this.alerta = new Alerta('');
   }
 
   ngOnInit() {

@@ -29,14 +29,14 @@ public class SwaggerConfig {
     }
      
     private ApiInfo apiInfo() {
-        ApiInfo apiInfo = new ApiInfo("Direccion General de Trafico API",
-                                        "",
-                                        "1.0",
-                                        "",
-                                        new Contact("Andoni Penalva", "https://github.com/ipartek/java_2018_0508/", "apenalva@ipartek.com"),
-                                        "Apache License",
-                                        "");
-        return apiInfo;
+    	 ApiInfo apiInfo = new ApiInfo("Direccion General de Trafico API",
+                 "",
+                 "1.0",
+                 "",
+                 new Contact("Ander Uraga Real", "https://github.com/ipartek/java_2018_0554/tree/master/dgt", "auraga@ipartek.com"),
+                 "Apache License",
+                 "");
+    	 return apiInfo;
     }
 
 }

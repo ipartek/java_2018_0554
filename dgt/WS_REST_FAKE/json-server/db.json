@@ -1,0 +1,51 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "title": "welcome to Rest",
+      "author": "Ander",
+      "id": 2
+    },
+    {
+      "title": "Para modificar MOD",
+      "author": "Ander MOD",
+      "id": 3
+    },
+    {
+      "title": "Nuevo Post",
+      "author": "Ander",
+      "id": 4
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "vehiculo": [
+    {
+      "id": 1,
+      "matricula": "3548MKZ",
+      "modelo": "Fiat",
+      "km": 450000
+    },
+    {
+      "id": 2,
+      "matricula": "BI0020AZ",
+      "modelo": "flagoneta",
+      "km": 47000
+    },
+    {
+      "id": 3
+    }
+  ]
+}

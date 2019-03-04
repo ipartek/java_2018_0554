@@ -1,0 +1,31 @@
+<header class="masthead mb-auto">
+  <div class="inner">
+    <nav class="navbar navbar-expand-md navbar-dark mb-4  fondo">
+
+     
+
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item float-right p-3">
+            <button class="btn btn-danger btn-block m-4 p-2" (click)="clickCerrarSesion()">
+              <span class="d-flex justify-content-center align-items-center">Cerrar sesión
+              </span>
+            </button>
+          </li>
+
+          <li class="nav-item float-right p-3">
+            <button class="btn btn-primary btn-block m-4 p-2" routerLink="/principal">
+              <span class="d-flex justify-content-center align-items-center">Inicio
+              </span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <h1>
+        <a routerLink="/principal"><img src="assets/img/placa.png"></a><small
+          class=" text-white">Bienvenido agente {{ agenteLogueado.nombre }}</small>
+      </h1>
+    </nav>
+  </div>
+</header>

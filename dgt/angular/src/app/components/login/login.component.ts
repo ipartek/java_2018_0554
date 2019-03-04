@@ -1,76 +1,103 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
-import { Alert } from "src/app/model/alert";
-import { AutorizacionService } from "src/app/providers/autorizacion.service";
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import {
+  Router
+} from '@angular/router';
+import {
+  AgenteService
+} from 'src/app/providers/agente.service';
+import { Alerta } from 'src/app/model/alerta';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
   formulario: FormGroup;
-  alert: Alert;
+  alerta: Alerta;
+
 
   constructor(
-    private autorizacionService: AutorizacionService,
+    private agenteService: AgenteService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {
-    console.trace("LoginComponent constructor");
+    console.trace('LoginComponent constructor');
     this.crearFormulario();
-    this.alert = new Alert('');
+    this.alerta = new Alerta('');
   }
 
+
   ngOnInit() {
-    console.trace("LoginComponent ngOnInit");
+    console.trace('LoginComponent ngOnInit');
   }
 
   crearFormulario() {
-    console.trace("LoginComponent crearFormulario");
+    console.trace('LoginComponent crearFormulario');
     this.formulario = this.formBuilder.group({
       placa: [
         '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(150)
+        [Validators.required,
+        Validators.min(0),
+        Validators.max(99999),
+        Validators.minLength(5),
+        Validators.maxLength(45)
         ]
       ],
-      password: [
+      pass: [
         '',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(16)]
+        [Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(50)
+        ]
       ]
     });
+
   } // crearFormulario
 
+
   comprobar() {
-    console.trace("click boton submit");
+    console.trace('click boton submit');
     let placa = this.formulario.controls.placa.value;
-    let password = this.formulario.controls.password.value;
-    console.debug("placa: %s password: %s", placa, password);
+    let pass = this.formulario.controls.pass.value;
+    console.debug('nombre: %s password: %s', placa, pass);
 
+    //llamar servicio TODO retornar Observable
+    this.agenteService.login(placa, pass).subscribe(
+      data => {
+        this.agenteService.setLogged(true);
+        this.agenteService.saveAgente(data);
+        if (this.agenteService.getAgente().id != -1) {
+          console.debug('Agente obtenido %o', this.agenteService.getAgente());
+        }
+        console.info('isLogged: ' + this.agenteService.isLogged)
+        console.info('Logueado con exito %o', data);
+        this.router.navigate(['principal']);
+      }, // data
+      error => {
+        this.agenteService.setLogged(false);
+        console.warn('No tienes permisos');
+        if (error.status == 403) {
+          this.alerta = new Alerta(`Usuario y/o contraseña incorrectos. Error ${error.status}`,
+            Alerta.TIPO_WARNING);
+          console.error('Error esperado: ' + error.status);
+        } else {
+          this.alerta = new Alerta(`Ha ocurrido un error inesperado`);
+          console.error(error.status);
+        }
 
-    // llamar servicio Rest, realizar logica dentro de subscripcion
-    // Cuidado es una llamada Asincrona
-    this.autorizacionService.loggin(placa, password).subscribe(
-      data =>{
-        console.debug('Json Agente %o', data);
-        this.autorizacionService.isLogged = true;
-        this.router.navigate(['/backoffice']);
-      },
-      error=>{
-        console.warn('error login %o', error);
-        this.autorizacionService.isLogged = false;
-        this.alert = new Alert('No tienes permisos');
-      }
-    );
+      } // error
+    ); // subscribe
 
-    
-
-    
   } // comprobar
-
 
 }
