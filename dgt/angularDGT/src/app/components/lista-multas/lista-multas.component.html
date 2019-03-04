@@ -1,8 +1,18 @@
+<div class="container mb-3 mt-3">
+  <div class="row d-flex align-items-center mb-3">
+    <div class="d-flex">
+        <p *ngIf="multas.length==0" class="spinner-border text-danger"></p>
+      <img class="mr-3 img-thumbnail" src="{{agente.imagen}}" alt="{{agente.nombre}}">
+    </div>
+    <p class="text-primary nombre">Agente: {{agente.nombre}}</p>
+  </div>
+</div>
+
 
 <table class="table table-hover tablaOrdenable table-striped">
   <thead class="thead-light">
     <tr>
-      <th>imagen</th>
+
       <th>id</th>
       <th>Matricula</th>
       <th>Importe</th>
@@ -15,7 +25,7 @@
   </thead>
   <tbody>   
     <tr *ngFor="let m of multas">
-      <td> <img class="mr-3 img-thumbnail" src="{{m.agente.imagen}}" alt="{{m.agente.nombre}}"></td>
+
       <td>{{m.id}}</td>
       <td>{{m.coche.matricula}}</td>
       <td>{{m.importe | moneda}}</td>

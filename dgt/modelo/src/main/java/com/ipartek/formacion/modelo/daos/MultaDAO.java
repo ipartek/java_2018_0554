@@ -26,7 +26,8 @@ public class MultaDAO {
 	//private static final String MULTAS_ACTIVAS = "activas";
 
 	private static final String SQL_GETBYID = "{call pa_multa_getById(?)}";
-	private static final String SQL_GETALL_BYUSER = "{call pa_multa_getByAgenteId(?)}";
+	private static final String SQL_GET_MULTAS_BY_ID_AGENTE = "{call pa_multa_getByAgenteId(?)}";
+	private static final String SQL_GET_MULTAS_ANULADAS_BY_ID_AGENTE = "{call pa_multa_anulada_getByAgenteId(?)}";
 	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
 	private static final String SQL_UPDATE = "{call pa_multa_update(?,?)}";
 
@@ -43,6 +44,7 @@ public class MultaDAO {
 		return INSTANCE;
 	}
 
+// OBTENER MULTA POR ID
 	public Multa getById(long id, String opm) {
 
 		Multa m = null;
@@ -71,13 +73,15 @@ public class MultaDAO {
 		return m;
 	}
 
-	public ArrayList<Multa> getAllByUser(long id) {
+	
+// LISTAR MULTAS POR ID AGENTE
+	public ArrayList<Multa> getMultasByIdAgente(long id) {
 
 		ArrayList<Multa> multas = new ArrayList<Multa>();
 		isGetById = false;
 		try (Connection conn = ConnectionManager.getConnection();
 				CallableStatement cs = conn
-						.prepareCall(SQL_GETALL_BYUSER);) {
+						.prepareCall(SQL_GET_MULTAS_BY_ID_AGENTE);) {
 		
 			cs.setLong(1, id);
 		
@@ -98,6 +102,40 @@ public class MultaDAO {
 		return multas;
 	}
 
+	
+// LISTAR MULTAS ANULADAS  POR ID AGENTE
+	public ArrayList<Multa> getMultasAnuladasByIdAgente(long id) {
+
+		ArrayList<Multa> multas = new ArrayList<Multa>();
+		isGetById = false;
+		try (Connection conn = ConnectionManager.getConnection();
+				CallableStatement cs = conn
+						.prepareCall(SQL_GET_MULTAS_ANULADAS_BY_ID_AGENTE);) {
+		
+			cs.setLong(1, id);
+		
+			try (ResultSet rs = cs.executeQuery()) {
+				isGetById = true;
+				while (rs.next()) {
+					try {
+						multas.add(rowMapper(rs));
+					} catch (Exception e) {						
+						LOG.error(e);
+					}
+				}
+			}
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+
+		return multas;
+	}
+
+	
+	
+	
+	
+	// CREAR MULTA
 	public boolean insert(Multa m) throws SQLException {
 
 		boolean resul = false;
@@ -109,13 +147,17 @@ public class MultaDAO {
 			cs.setString(2, m.getConcepto());
 			cs.setLong(3, m.getCoche().getId());
 			cs.setLong(4, m.getAgente().getId());
+			
 			cs.registerOutParameter(5, Types.INTEGER);
+			
 			int affectedRows = cs.executeUpdate();
 			if (affectedRows == 1) {
 				m.setId(cs.getLong(5));
 				resul = true;
 			}
 
+		}catch (Exception e){
+			e.printStackTrace();
 		}
 		return resul;
 

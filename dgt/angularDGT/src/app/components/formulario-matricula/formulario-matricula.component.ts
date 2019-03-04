@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MultaService } from 'src/app/providers/multa.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { Alert } from 'src/app/model/alert';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Coche } from 'src/app/model/coche';
+import { AutorizacionService } from 'src/app/providers/autorizacion.service';
 @Component({
   selector: 'app-formulario-matricula',
   templateUrl: './formulario-matricula.component.html',
@@ -15,11 +16,13 @@ export class FormularioMatriculaComponent implements OnInit {
 
   formulario: FormGroup;  
   alert: Alert;
+  agente: any;
 
   constructor(
     private multaService: MultaService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private autorizacionService: AutorizacionService
   ) { 
     console.trace('LoginComponent constructor');
     this.crearFormulario();
@@ -28,6 +31,7 @@ export class FormularioMatriculaComponent implements OnInit {
 
   ngOnInit() {
     console.trace('LoginComponent ngOnInit');
+    this.getAgenteInfo();
   }
 
   crearFormulario(){
@@ -55,6 +59,7 @@ export class FormularioMatriculaComponent implements OnInit {
     this.multaService.buscarMatricula(matricula).subscribe(
       data => {
         console.debug('Json Vehiculo %o', data);
+        this.multaService.saveVehiculo(data);
         this.router.navigate(['/multar']);
       },
       error => {
@@ -62,6 +67,11 @@ export class FormularioMatriculaComponent implements OnInit {
         this.alert = new Alert('Matrícula no encontrada');
       }
     );
+
+  }
+
+  getAgenteInfo(){
+    this.agente = this.autorizacionService.getAgente();
 
   }
 }

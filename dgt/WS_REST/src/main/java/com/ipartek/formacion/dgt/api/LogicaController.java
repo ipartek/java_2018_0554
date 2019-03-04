@@ -1,8 +1,11 @@
 package com.ipartek.formacion.dgt.api;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -12,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,17 +28,19 @@ import com.ipartek.formacion.service.AgenteService;
 import com.ipartek.formacion.service.impl.AgenteServiceImpl;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 @CrossOrigin
 @RestController
 @Api(tags = { "AGENTE" }, produces = "application/json", description="Gestión de multas por agente")
-public class AgenteController  {
+public class LogicaController  {
 
-	private final static Logger LOG = Logger.getLogger(AgenteController.class);
+	private final static Logger LOG = Logger.getLogger(LogicaController.class);
 	private AgenteService agenteService;
 	private ValidatorFactory factory;
 	private Validator validator;
 	
-	public AgenteController() {
+	public LogicaController() {
 		super();
 		agenteService = AgenteServiceImpl.getInstance();
 		factory  = Validation.buildDefaultValidatorFactory();
@@ -69,7 +75,7 @@ public class AgenteController  {
 	
 	// LISTAR MULTAS POR ID AGENTE
 	@RequestMapping( value= {"/api/agente/{id}/multas"}, method = RequestMethod.GET)
-	public ResponseEntity<ArrayList<Multa>> getAllByUser ( @PathVariable int id ){
+	public ResponseEntity<ArrayList<Multa>> getMultasByIdAgente ( @PathVariable int id ){
 		
 		ResponseEntity<ArrayList<Multa>> response = new ResponseEntity<ArrayList<Multa>>( HttpStatus.NOT_FOUND );
 		try {
@@ -83,7 +89,22 @@ public class AgenteController  {
 		return response;
 	}
 
-	
+	// LISTAR MULTAS ANULADAS POR ID AGENTE
+	@RequestMapping( value= {"/api/agente/{id}/multasAnuladas"}, method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<Multa>> getMultasAnuladasByIdAgente ( @PathVariable int id ){
+		
+		ResponseEntity<ArrayList<Multa>> response = new ResponseEntity<ArrayList<Multa>>( HttpStatus.NOT_FOUND );
+		try {
+			ArrayList<Multa> multas = new ArrayList<Multa>();
+			multas =  (ArrayList<Multa>) agenteService.listarMultasAnuladas(id);
+			response = new ResponseEntity<ArrayList<Multa>>(multas, HttpStatus.OK );
+			
+		}catch(Exception e) {
+			e.printStackTrace();  // falta log
+		}
+		return response;
+	}
+
 	
 	// buscar por matricula
 	@RequestMapping( value= {"/api/agente/{matricula}"}, method = RequestMethod.GET)
@@ -101,26 +122,51 @@ public class AgenteController  {
 			}
 		
 		}catch(Exception e) {
-			e.printStackTrace();  // falta log
+			LOG.debug("Ya existe matricula ");
 		}
 		return response;
 	}
 
 
 
+// CREAR MULTA
+	
+	@RequestMapping( value= {"/api/vehiculo/multas"}, method = RequestMethod.POST)	
+	@ApiResponses({
+			@ApiResponse(code = 201 , message = "multa creada"),
+			@ApiResponse(code = 409 , message = "Existe Multa"),
+			@ApiResponse(code = 400 , message = "Datos Multa No Validos")
+	})
+	public ResponseEntity<Multa> insert(@RequestBody MultaCreada multa) {
 
+		ResponseEntity<Multa> response = new ResponseEntity<Multa>(HttpStatus.INTERNAL_SERVER_ERROR);
+		long idCoche = 0;
+		boolean insertado = false;
+		
+		idCoche=multa.getCoche().getId();
+		
+		Coche coche = new Coche();
+		
+		coche.setId(idCoche);
+		
+		multa.setCoche(coche);
 
+		response = new ResponseEntity<Multa>(HttpStatus.NOT_FOUND);
+
+		try {
+			
+			insertado = agenteService.multar(multa);
+
+			if (insertado == true) {
+				response = new ResponseEntity<Multa>(multa, HttpStatus.CREATED);
+			}
+		} catch (Exception e) {
+			response = new ResponseEntity<Multa>(HttpStatus.BAD_REQUEST);
+		}
+
+		return response;
+
+	}
 	
 
-
-
-
-
-
-	
-	
-	
-	
-	
-	
 }

@@ -43,9 +43,9 @@ export class ListaMultasComponent implements OnInit {
 
   
     getMultas(id:number){
-      console.log('TodosComponent getAllByUser');
+      console.log('TodosComponent');
       this.multas = [];
-      this.multaService.getAllByUser(this.agente.id).subscribe(resultado => {
+      this.multaService.getMultas(this.agente.id).subscribe(resultado => {
           console.debug('peticion correcta %o', resultado);
          // this.mapeo(resultado);
         // this.todos = resultado.filter( todo => !todo.completed );

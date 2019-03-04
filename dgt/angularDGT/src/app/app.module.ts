@@ -14,6 +14,8 @@ import { ListaMultasComponent } from './components/lista-multas/lista-multas.com
 import { AlertComponent } from './components/alert/alert.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MonedaPipe } from './pipes/moneda.pipe';
+import { Error404Component } from './components/error404/error404.component';
+import { ListaMultasAnuladasComponent } from './components/lista-multas-anuladas/lista-multas-anuladas.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { MonedaPipe } from './pipes/moneda.pipe';
     FormularioMultarComponent,
     ListaMultasComponent,
     AlertComponent,
-    MonedaPipe
+    MonedaPipe,
+    Error404Component,
+    ListaMultasAnuladasComponent
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Alert } from 'src/app/model/alert';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AutorizacionService } from 'src/app/providers/autorizacion.service';
-import { Coche } from 'src/app/model/coche';
+import { Multa } from 'src/app/model/multa';
 
 @Component({
   selector: 'app-formulario-multar',
@@ -14,13 +14,8 @@ import { Coche } from 'src/app/model/coche';
 export class FormularioMultarComponent implements OnInit {
 
 
- cocheMulta : Coche ;
-  
-
-
-  matricula: string; // ????
-
-  
+  agente: any;
+  vehiculo: any;
   formulario: FormGroup;  
   alert: Alert;
 
@@ -31,8 +26,6 @@ export class FormularioMultarComponent implements OnInit {
       private router: Router ) 
       {
         console.log('frutasComponent constructor');
-        this.cocheMulta = null;
-        console.trace('LoginComponent constructor');
         this.crearFormulario();
         this.alert = new Alert('');
     }
@@ -40,10 +33,18 @@ export class FormularioMultarComponent implements OnInit {
   
     ngOnInit() {
       console.log('TodosComponent ngOnInit');
-
-      //this.matricula= '3548MKZ'; // TODO no hardcor
-
+      this.getAgenteInfo();
+      this.getVehiculoInfo();
     }//ngOnInit
+  
+    getAgenteInfo() {
+      this.agente = this.autorizacionService.getAgente();
+  
+    }
+  
+    getVehiculoInfo() {
+      this.vehiculo = this.multaService.getVehiculo();
+    }
   
 
     crearFormulario(){
@@ -62,51 +63,39 @@ export class FormularioMultarComponent implements OnInit {
     }// crearFormulario
 
 
-/*
-    getCoche(matricula:string){
-      console.log('TodosComponent getAllByUser');
-      this.cocheMulta = null;
-      this.multaService.getByMatricula(matricula).subscribe(resultado => {
-          console.debug('Json Coche %o', resultado);
-         // this.mapeo(resultado);
-        // this.todos = resultado.filter( todo => !todo.completed );
-           this.cocheMulta = resultado;
-        },
-        error=>{
-          console.warn('peticion incorrecta %o', error);
-        }
-      );//subscribe   
-    }
+  crear() {
+      console.trace('click boton submit');
+      let importe = this.formulario.controls.importe.value;
+      let concepto = this.formulario.controls.concepto.value;
+      console.debug('importe: %s concepto: %s', importe, concepto);
 
-    delete(multas:Multa){
-      console.log('frutas2Component delete %o', multas );
-  
-      this.multaService.delete(multas.id).subscribe(
-        result=>{
-          this.getAllByUser(this.id_agente);
+      // mappear de formulario a Multa
+      let multa = new Multa(
+        -1,
+        this.formulario.value.importe,
+        this.formulario.value.concepto,
+        '',
+        this.vehiculo.id,
+        this.agente.id
+
+        
+      );
+
+
+      this.multaService.multar(multa).subscribe(
+        data => {
+          console.debug('Json Multa %o', data);
+          this.crearFormulario();
+          this.router.navigate(['/vermultas']);
         },
-        error=>{
-          alert('No de pudo elimiar fruta');
+        error => {
+          console.warn('error multa %o', error);
+          this.autorizacionService.setLogged(false);
+          this.alert = new Alert('No se ha podido crear la multa');
         }
       );
-      }
 
+}
 
-    new(){
-      console.log('FrutaComponent new ');
-      let multas = new Multa(this.id,this.importe,this.concepto,this.fecha_alta,this.id_coche,this.id_agente);
-
-      this.multaService.post(multas).subscribe(
-        result=>{
-          console.log('TodosComponent new %o', result);
-          this.getAllByUser(this.id_agente);
-        },
-        error=>{
-          alert('No se pudo Crear Nueva Tarea');
-          console.error(error);
-        }
-      );
-    }
-  */
   }
   

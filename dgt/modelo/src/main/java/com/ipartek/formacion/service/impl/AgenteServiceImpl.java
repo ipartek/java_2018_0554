@@ -1,7 +1,10 @@
 package com.ipartek.formacion.service.impl;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 
 import com.ipartek.formacion.modelo.daos.CocheDAO;
 import com.ipartek.formacion.modelo.daos.LoginDAO;
@@ -12,7 +15,7 @@ import com.ipartek.formacion.modelo.pojo.Multa;
 import com.ipartek.formacion.service.AgenteService;
 import com.ipartek.formacion.service.Singleton;
 
-public class AgenteServiceImpl implements AgenteService, Singleton {
+public class AgenteServiceImpl implements AgenteService  {
 
 	private static MultaDAO multaDAO;
 	private static CocheDAO cocheDAO;
@@ -24,6 +27,7 @@ public class AgenteServiceImpl implements AgenteService, Singleton {
 		multaDAO = MultaDAO.getInstance();
 		cocheDAO = CocheDAO.getInstance();
 		loginDAO = LoginDAO.getInstance();
+	
 	}
 
 	public static synchronized AgenteServiceImpl getInstance() {
@@ -40,23 +44,51 @@ public class AgenteServiceImpl implements AgenteService, Singleton {
 		
 		return loginDAO.login(placa, password);
 	}
+	
 // CREAR MULTA POST
+	
+	
 	@Override
-	public Multa multar(int idCoche, int idAgente, String concepto, float importe) throws Exception {
-		return null;
+	public boolean multar(Multa multa)  {
+		boolean isCreado = false;
+		try {		
+			isCreado = multaDAO.insert(multa);
+
+			//multa.setTipo(tipoDAO.getByIdTipoAnimal(animal.getId()));
+			//animal.setDieta(dietaDAO.getByIdDietaAnimal(animal.getId()));		
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		return isCreado;
 	}
 
 	
 // GET ALL MULTAS BY ID AGENTE
 	@Override
 	public List<Multa> listarMultas(int id) {
-		return multaDAO.getAllByUser(id);
+		return multaDAO.getMultasByIdAgente(id);
 	}
+
+// GET ALL MULTAS anuladas BY ID AGENTE
+	@Override
+	public List<Multa> listarMultasAnuladas(int id) {
+		return multaDAO.getMultasAnuladasByIdAgente(id);
+	}
+
+			
+	
+	
 	
 //BUSCAR POR MATRICULA
 	@Override
 	public Coche buscarMatricula(String matricula) {	
 		return cocheDAO.getByMatricula(matricula);
+	}
+
+	@Override
+	public Coche conseguirId(String matricula) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

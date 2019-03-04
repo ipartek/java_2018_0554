@@ -1,5 +1,11 @@
 <main role="main" class="container">
-
+  
+  
+  <div style="border:1px solid red; padding:10px;">
+    <p>Coche: {{vehiculo | json }}</p>
+    <p>Agente: {{ agente | json}}</p>
+  </div>
+  
  
 <div class="card mb-3" style="max-width: 75rem;">
    
@@ -14,9 +20,9 @@
                 <div class="col-md-8">
                     <div class="card-body">
                       <h5 class="card-title">Tramitar sancion al Vehiculo:</h5>                
-                      <h6 class="card-text">Matricula: {{cocheMulta.matricula}}</h6>
-                      <h6 class="card-text">Modelo: {{cocheMulta.modelo}}</h6>
-                      <h6 class="card-text">Km: {{cocheMulta.km}}</h6>
+                      <h6 class="card-text">Matricula: {{vehiculo.matricula}}</h6>
+                      <h6 class="card-text">Modelo: {{vehiculo.modelo}}</h6>
+                      <h6 class="card-text">Km: {{vehiculo.km}}</h6>
                     </div> 
                 </div> 
 

@@ -18,7 +18,6 @@ public interface AgenteService {
 	 */
 	Agente existe( String numeroPlaca, String password);
 	
-
 	/**
 	 * Multar un Vehiculo
 	 * @param idCoche
@@ -28,7 +27,9 @@ public interface AgenteService {
 	 * @return
 	 * @throws Exception si el concepto es null, el idAgente o idCoche no existen, importe < 0
 	 */
-	Multa multar( int idCoche, int idAgente, String concepto, float importe  ) throws Exception;
+	boolean multar(Multa multa);
+	
+
 	
 	
 	/**
@@ -38,6 +39,14 @@ public interface AgenteService {
 	 */
 	List<Multa> listarMultas(int id);
 	
+	
+	/**
+	 * Todas las multas de un Agente
+	 * @param idAgente
+	 * @return listado, si no hay ninguna vacio, no null
+	 */
+	List<Multa> listarMultasAnuladas(int id);
+	
 
 	/**
 	 * Busca un coche por su matricula
@@ -45,5 +54,10 @@ public interface AgenteService {
 	 * @return datos vehiculo, si no hay matricula vacio, null
 	 */
 	Coche  buscarMatricula(String matricula);
+
+
+
 	
+	Coche conseguirId(String matricula);
+
 }

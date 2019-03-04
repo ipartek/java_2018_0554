@@ -13,7 +13,10 @@
   
   <div >
       <form  [formGroup]="formulario" (submit)="comprobarMatricula()" >
-          <label for="matricula">Número de matricula</label>
+        
+		
+        
+        <label for="matricula">Número de matricula</label>
           <input type="text" formControlName="matricula" class="form-control" placeholder="matricula" >      
           <p id="p" *ngIf="formulario.controls.matricula.invalid && formulario.controls.matricula.touched"  
           class="text-danger">*Solo 2 formatos posibles: 1234ABC / AB1234AB </p>
@@ -26,7 +29,6 @@
       <p>Valores: {{ formulario.value | json }}</p>
       <p>Estado:  {{ formulario.status | json }}</p> 
   </div>
-
 
 
   </main>
