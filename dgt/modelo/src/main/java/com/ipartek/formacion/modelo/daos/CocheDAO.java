@@ -17,7 +17,7 @@ public class CocheDAO {
 
 	private final static Logger LOG = Logger.getLogger(CocheDAO.class);
 	private static CocheDAO INSTANCE = null;
-	
+
 	private static final String SQL_INSERT = "{call pa_coche_insert(?,?,?,?)}";
 	private static final String SQL_GETALL = "SELECT * FROM coche ORDER BY id DESC LIMIT 100";
 	private static final String SQL_GETMATRICULA = "{call pa_coche_getByMatricula(?)}";
@@ -172,9 +172,9 @@ public class CocheDAO {
 		return resul;
 	}
 
-	
 	/**
 	 * Insertar un nuevo Coche
+	 * 
 	 * @param coche con datos
 	 * @return Coche con los mismos datos y la id generada
 	 * @throws SQLException si la matricula ya existe
@@ -187,11 +187,11 @@ public class CocheDAO {
 			cs.setString(2, coche.getModelo());
 			cs.setInt(3, coche.getKm());
 			cs.registerOutParameter(4, Types.INTEGER);
-			
-			if ( cs.executeUpdate() == 1) {
+
+			if (cs.executeUpdate() == 1) {
 				coche.setId(cs.getLong(4));
 			} else {
-				throw new SQLException("No se puede insertar el coche " + coche );
+				throw new SQLException("No se puede insertar el coche " + coche);
 			}
 		}
 		return coche;

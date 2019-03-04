@@ -45,8 +45,7 @@ public class LoginDAO {
 				while (rs.next()) { // hemos encontrado usuario
 					a = rowMapper(rs);
 				}
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				LOG.error(e);
 			}
 		} catch (Exception e) {

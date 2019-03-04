@@ -12,11 +12,11 @@ public class Coche {
 	@NotBlank
 	@Size(min = 6, max = 10)
 	private String matricula;
-	
+
 	@NotBlank
 	@Size(min = 2, max = 45)
 	private String modelo;
-	
+
 	@Min(0)
 	private Integer km;
 

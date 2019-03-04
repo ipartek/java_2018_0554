@@ -21,10 +21,9 @@ public class MultaDAO {
 	private static MultaDAO INSTANCE = null;
 	private boolean isGetById = false;
 	private boolean isBaja = false;
-	
-	
+
 	private static final String MULTAS_ANULADAS = "baja";
-	//private static final String MULTAS_ACTIVAS = "activas";
+	// private static final String MULTAS_ACTIVAS = "activas";
 
 	private static final String SQL_GETBYID = "{call pa_multa_getById(?)}";
 	private static final String SQL_GET_MULTAS_BY_ID_AGENTE = "{call pa_multa_getByAgenteId(?)}";
@@ -55,7 +54,7 @@ public class MultaDAO {
 		try (Connection conn = ConnectionManager.getConnection();
 				CallableStatement cs = conn.prepareCall(SQL_GETBYID);) {
 			cs.setLong(1, id);
-			
+
 			if ("baja".equals(opm)) {
 				isBaja = true;
 			} else {
@@ -68,30 +67,28 @@ public class MultaDAO {
 				}
 				LOG.debug("Multa encontrada");
 			}
-		} catch (Exception e) {			
+		} catch (Exception e) {
 			LOG.error(e);
 		}
 		return m;
 	}
 
-	
 // LISTAR MULTAS POR ID AGENTE
 	public ArrayList<Multa> getMultasByIdAgente(long id) {
 
 		ArrayList<Multa> multas = new ArrayList<Multa>();
 		isGetById = false;
 		try (Connection conn = ConnectionManager.getConnection();
-				CallableStatement cs = conn
-						.prepareCall(SQL_GET_MULTAS_BY_ID_AGENTE);) {
-		
+				CallableStatement cs = conn.prepareCall(SQL_GET_MULTAS_BY_ID_AGENTE);) {
+
 			cs.setLong(1, id);
-		
+
 			try (ResultSet rs = cs.executeQuery()) {
 				isGetById = true;
 				while (rs.next()) {
 					try {
 						multas.add(rowMapper(rs));
-					} catch (Exception e) {						
+					} catch (Exception e) {
 						LOG.error(e);
 					}
 				}
@@ -103,24 +100,22 @@ public class MultaDAO {
 		return multas;
 	}
 
-	
 // LISTAR MULTAS ANULADAS  POR ID AGENTE
 	public ArrayList<Multa> getMultasAnuladasByIdAgente(long id) {
 
 		ArrayList<Multa> multas = new ArrayList<Multa>();
 		isGetById = false;
 		try (Connection conn = ConnectionManager.getConnection();
-				CallableStatement cs = conn
-						.prepareCall(SQL_GET_MULTAS_ANULADAS_BY_ID_AGENTE);) {
-		
+				CallableStatement cs = conn.prepareCall(SQL_GET_MULTAS_ANULADAS_BY_ID_AGENTE);) {
+
 			cs.setLong(1, id);
-		
+
 			try (ResultSet rs = cs.executeQuery()) {
 				isGetById = true;
 				while (rs.next()) {
 					try {
 						multas.add(rowMapper(rs));
-					} catch (Exception e) {						
+					} catch (Exception e) {
 						LOG.error(e);
 					}
 				}
@@ -132,10 +127,6 @@ public class MultaDAO {
 		return multas;
 	}
 
-	
-	
-	
-	
 	// CREAR MULTA
 	public boolean insert(MultaCreada m) throws SQLException {
 
@@ -148,17 +139,16 @@ public class MultaDAO {
 			cs.setString(2, m.getConcepto());
 			cs.setLong(3, m.getIdAgente());
 			cs.setLong(4, m.getIdCoche());
-			
-			
+
 			cs.registerOutParameter(5, Types.INTEGER);
-			
+
 			int affectedRows = cs.executeUpdate();
 			if (affectedRows == 1) {
 				m.setId(cs.getLong(5));
 				resul = true;
 			}
 
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return resul;
@@ -190,30 +180,30 @@ public class MultaDAO {
 		m.setFechaAlta(new java.util.Date(timestampalta.getTime()));
 		if (isBaja) {
 			Timestamp timestampbaja = rs.getTimestamp("fecha_baja");
-			if(timestampbaja==null) {
+			if (timestampbaja == null) {
 				m.setFechaBaja(null);
-			}else {
+			} else {
 				m.setFechaBaja(new java.util.Date(timestampbaja.getTime()));
 			}
-			
+
 		}
-		
+
 		if (isGetById) {
 			try {
-			m.setImporte(rs.getDouble("importe"));
-			m.setConcepto(rs.getString("concepto"));
-			c.setId(rs.getLong("id_coche"));
-			c.setModelo(rs.getString("modelo"));
-			c.setKm(rs.getInt("km"));
-			m.setId(rs.getLong("id"));
-			c.setMatricula(rs.getString("matricula"));
-			a.setPlaca(rs.getString("placa"));
-			a.setNombre(rs.getString("nombre"));
-			a.setPassword(rs.getString("password"));
-			a.setImagen(rs.getString("imagen"));
-			}catch (Exception e) {
+				m.setImporte(rs.getDouble("importe"));
+				m.setConcepto(rs.getString("concepto"));
+				c.setId(rs.getLong("id_coche"));
+				c.setModelo(rs.getString("modelo"));
+				c.setKm(rs.getInt("km"));
+				m.setId(rs.getLong("id"));
+				c.setMatricula(rs.getString("matricula"));
+				a.setPlaca(rs.getString("placa"));
+				a.setNombre(rs.getString("nombre"));
+				a.setPassword(rs.getString("password"));
+				a.setImagen(rs.getString("imagen"));
+			} catch (Exception e) {
 				LOG.error(e);
-				
+
 			}
 		}
 		m.setCoche(c);

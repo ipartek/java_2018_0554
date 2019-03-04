@@ -9,19 +9,18 @@ public class Estadistica {
 
 	BigDecimal bd;
 
-	public Estadistica(int mes, Float importe,String nombremes) {
+	public Estadistica(int mes, Float importe, String nombremes) {
 		this();
 		setMes(mes);
 		setImporte(importe);
 		setNombremes(nombremes);
 	}
-	
+
 	public Estadistica() {
 		super();
-		this.mes=-1;
-		this.importe=0F;
+		this.mes = -1;
+		this.importe = 0F;
 	}
-
 
 	public int getMes() {
 		return mes;
@@ -42,13 +41,13 @@ public class Estadistica {
 	public void setNombremes(String nombremes) {
 		this.nombremes = nombremes;
 	}
-	
+
 	public void setImporte(Float importe) {
 		this.importe = importe;
 	}
 
 	@Override
 	public String toString() {
-		return "Estadisticas [mes=" + mes + ", importe=" + importe + ", Nombre Mes=" + nombremes +"]";
+		return "Estadisticas [mes=" + mes + ", importe=" + importe + ", Nombre Mes=" + nombremes + "]";
 	}
 }
