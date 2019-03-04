@@ -1,0 +1,112 @@
+1 call_pa_login:
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_login`(IN p_placa INT, IN p_pass VARCHAR(20))
+BEGIN
+SELECT 
+	a.id,
+	a.nombre,
+	a.placa,
+    a.password
+FROM 
+	agente as a
+WHERE
+	a.placa=p_placa AND
+    a.password=p_pass;
+END
+
+
+
+
+2.call pa_multa_getByAgenteId
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_multa_getByAgenteId`(IN a_id INT)
+BEGIN
+
+
+	SELECT
+		
+		m.id ,
+        m.importe,
+        m.concepto,
+        m.id_coche,
+        c.modelo, 
+        c.km,
+		m.fecha_alta  , 
+		m.fecha_baja  ,
+		c.matricula,
+        a.placa,
+        a.nombre,
+        a.password,
+        a.imagen
+		
+	FROM 
+		multa m, 
+		coche c,
+        agente a
+	WHERE 
+		m.id_coche = c.id AND 
+        m.id_agente= a.id AND
+		m.id_agente = a_id AND
+		m.fecha_baja IS  NULL
+	ORDER 
+	
+	
+	
+	
+3. call pa_multa_anulada_getByAgenteId
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_multa_anulada_getByAgenteId`(IN a_id INT)
+BEGIN
+
+
+	SELECT
+		
+		m.id ,
+        m.importe,
+        m.concepto,
+        m.id_coche,
+        c.modelo, 
+        c.km,
+		m.fecha_alta  , 
+		m.fecha_baja  ,
+		c.matricula,
+        a.placa,
+        a.nombre,
+        a.password,
+        a.imagen
+		
+	FROM 
+		multa m, 
+		coche c,
+        agente a
+	WHERE 
+		m.id_coche = c.id AND 
+        m.id_agente= a.id AND
+		m.id_agente = a_id AND
+		m.fecha_baja IS NOT  NULL
+	ORDER BY m.id DESC LIMIT 1000;
+            
+
+
+END
+
+
+
+
+
+
+4.call pa_multa_insert:
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_multa_insert`(IN p_importe FLOAT, IN p_concepto VARCHAR(255),  IN p_id_agente LONG, IN p_id_coche LONG, OUT o_id LONG)
+BEGIN
+INSERT INTO multa (`importe`, `concepto`,`id_agente`, `id_coche` ) VALUES (p_importe, p_concepto,  p_id_agente, p_id_coche);
+
+SET o_id=last_insert_id();
+
+END
+
+
+
+5.call pa_coche_getByMatricula:
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_coche_getByMatricula`(IN p_matricula VARCHAR(50))
+BEGIN
+SELECT id,matricula,modelo,km FROM coche WHERE matricula= p_matricula;
+END
