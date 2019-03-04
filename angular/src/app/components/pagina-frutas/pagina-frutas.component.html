@@ -113,7 +113,7 @@
                     <span><i class="fas fa-plus-circle" (click)="nuevoColor()"></i>Nuevo Color</span>
                    
                     <div formArrayName="colores">
-                        <div *ngFor="let color of formulario.get('colores').controls; let i = index;" >
+                        <div *ngFor="let color of formColores.controls; let i = index;" >
                             <div [formGroupName]="i">
                                 <label for="imagen">Nombre:</label>
                                 <input formControlName="nombre" class="form-control">                               

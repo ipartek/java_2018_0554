@@ -31,6 +31,11 @@ export class PaginaFrutasComponent implements OnInit {
     this.cargarFrutas();
   }
 
+  //@see https://github.com/angular/angular-cli/issues/6099
+  get formColores(){
+    return  <FormArray>this.formulario.get('colores');
+  }
+
 
   crearFormulario(){
      console.trace('PaginaFrutasComponent crearFormulario');
