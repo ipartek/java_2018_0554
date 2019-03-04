@@ -1,32 +1,35 @@
+<app-nav></app-nav>
 <main role="main" class="inner cover">
-	<div class="col-12">
-		<h3 class="cover-heading">Registrar multa</h3>
-		<p class="lead"><small>Introduzca la matrícula del vehículo: </small></p>
-		 
+
 		<!-- <div style="border:1px solid red; padding:10px;">
 			<p>Valores: {{ formulario.value | json }}</p>
 			<p>Estado:  {{ formulario.status | json }}</p> 
 		</div> -->
 
-    <form [formGroup]="formulario" (submit)="comprobar()">
-    <div class="form-group">	    
+    <form class="col-12 d-flex flex-wrap" [formGroup]="formulario" (submit)="comprobar()">
+		<div class="col-12">
+			<h3 class="cover-heading">Registrar multa</h3>
+		<p class="lead"><small>Introduzca la matrícula del vehículo: </small></p>
+	</div>
+		<div class="form-group col-6">	    
 	    <label for="matricula">Matrícula: </label>
 			<input type="text" class="form-control" formControlName="matricula" aria-describedby="matriculaHelp" 
 			disabled placeholder="P.E: 1234AAA" >
   	</div>
-  	<div class="form-group">	    
+  	<div class="form-group  col-6">	    
 	    <label for="modelo">Modelo: </label>
 			<input type="text" class="form-control" formControlName="modelo" aria-describedby="modeloHelp" 
 			disabled placeholder="P.E: Ford Scort" >
-  	</div>
-  	<div class="form-group">
+		</div>
+	
+  	<div class="form-group col-12">
 	    <label for="importe">Importe: </label>
 			<input type="number" class="form-control" formControlName="importe" aria-describedby="importeHelp" 
 			placeholder="P.E: 300" step="any" autofocus required>
 			<small *ngIf="formulario.controls.importe.invalid && formulario.controls.importe.touched" 
 			class="text-danger">*El importe debe ser mayor que 0</small>
   	</div>
-  	<div class="form-group">
+  	<div class="form-group col-12">
 	    <label for="concepto">Concepto: (<b class="{{ contadorClase }}">{{contadorConcepto}}</b> /255)</label>
 	    <textarea class="form-control" formControlName="concepto" aria-describedby="importeHelp" 
 						(keyup)="calcularConcepto(formulario.controls.concepto.value)" [maxLength]="255"
@@ -40,5 +43,4 @@
     	</span>
 	  </button>
 	</form>
-</div>
 </main>
