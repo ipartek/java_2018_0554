@@ -69,6 +69,25 @@ public class AgenteServiceImpl implements AgenteService {
 		return vehiculoDAO.getByMatricula(matricula);
 	}
 
+	/*@Override
+	public boolean insertar(Multa multa, int idCoche) {
+		boolean resultado = false;
+		try {
+			resultado = multaDAO.insert(multa, idCoche);
+		} catch (SQLException e) {
+			return false;
+		}
+		return resultado;
+	
+	}*/
+
+	@Override
+	public Vehiculo conseguirId(String matricula) {
+		return vehiculoDAO.getByMatricula(matricula);
+	}
+
+	
+
 	@Override
 	public boolean insertar(Multa multa, int idCoche) {
 		boolean resultado = false;
@@ -80,13 +99,10 @@ public class AgenteServiceImpl implements AgenteService {
 		return resultado;
 	
 	}
-
-	@Override
-	public Vehiculo conseguirId(String matricula) {
-		return vehiculoDAO.getByMatricula(matricula);
-	}
 	
-	//Multar
+
+	
+	
 	
 	
 

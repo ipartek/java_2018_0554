@@ -29,8 +29,8 @@ public class MultaDAO {
 
 	private static final String SQL_GETBYID = "{call pa_multa_getById(?)}";
 	private static final String SQL_GETALL_BYUSER = "{call pa_multa_getByAgenteId(?)}";
-	//private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
-	private static final String SQL_INSERT ="INSERT INTO multa (`importe`, `concepto`, `id_coche`, `id_agente`) VALUES (?, ?, ?, ?);";
+	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
+	//private static final String SQL_INSERT ="INSERT INTO multa (`importe`, `concepto`, `id_coche`, `id_agente`) VALUES (?, ?, ?, ?);";
 	private static final String SQL_UPDATE = "{call pa_multa_update(?,?)}";
 	private static final String SQL_GETALL_BY_AGENTE = "SELECT a.id AS 'agente_id', a.nombre, a.placa, a.imagen, c.id AS 'coche_id', c.matricula, c.modelo, c.km, m.id AS 'multa_id', m.importe, m.concepto, m.fecha_alta, m.id_coche, m.id_agente FROM agente As a, coche AS c, multa AS m WHERE m.id_coche = c.id AND m.id_agente = a.id AND a.id = ? AND m.fecha_baja IS NULL";
 
@@ -128,13 +128,11 @@ public class MultaDAO {
 		return multas;
 	}
 
-	/*public boolean insert(Multa m, long idCoche) throws SQLException {
-
+	public boolean insert(Multa m, long idCoche) throws SQLException {
 		boolean resul = false;
 		isGetById = false;
 		try (Connection conn = ConnectionManager.getConnection();
 				CallableStatement cs = conn.prepareCall(SQL_INSERT);) {
-
 			cs.setDouble(1, m.getImporte());
 			cs.setString(2, m.getConcepto());
 			cs.setLong(3, m.getCoche().getId());
@@ -145,13 +143,13 @@ public class MultaDAO {
 				m.setId(cs.getLong(5));
 				resul = true;
 			}
-
 		}
 		return resul;
-
-	}*/
+	}
 	
-	public boolean insert(Multa m, long idCoche) throws SQLException {
+	
+	
+	/*public boolean insert(Multa m, long idCoche) throws SQLException {
 
 		boolean resul = false;
 		isGetById = false;
@@ -172,7 +170,7 @@ public class MultaDAO {
 		}
 		return resul;
 
-	}
+	}*/
 
 	public boolean update(Multa m, String opr) throws SQLException {
 
