@@ -36,7 +36,10 @@ public interface AgenteService {
 	 * @param idAgente
 	 * @return listado, si no hay ninguna vacio, no null
 	 */
-	List<Multa> obtenerMultas(long id);
+	List<Multa> obtenerMultas(int idAgente);
 	
+	List<Multa> listar();
+	
+	List<Multa> detalle(long id);
 
 }

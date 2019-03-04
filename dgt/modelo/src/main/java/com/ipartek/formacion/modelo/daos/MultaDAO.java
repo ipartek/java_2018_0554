@@ -2,11 +2,14 @@ package com.ipartek.formacion.modelo.daos;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -98,6 +101,44 @@ public class MultaDAO {
 		}
 
 		return multas;
+	}
+	
+	public Multa detalle(long id) {
+		Multa m = null;
+		
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_GETALL_BYUSER);
+				) {
+				pst.setInt(1, (int) id);
+				try(ResultSet rs  = pst.executeQuery()){
+					while(rs.next()) {
+						m = rowMapper(rs);
+					}
+				}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return m;
+	}
+	
+	public HashMap<Long, Multa> getAllByIdAgente(Long idAgente) throws SQLException {
+		HashMap<Long, Multa> multasAgente = new HashMap<>();
+		Multa m = new Multa();
+		String sql = SQL_GETALL_BYUSER;
+		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(sql);) {
+			cs.setLong(1, idAgente);
+			try (ResultSet rs = cs.executeQuery()) {
+				while (rs.next()) {
+					m = rowMapper(rs);
+					multasAgente.put(m.getId(), m);
+				}
+			}
+		} catch (Exception e) {
+			LOG.debug(e);
+		}
+		return multasAgente;
 	}
 
 	public boolean insert(Multa m) throws SQLException {

@@ -42,9 +42,20 @@ public class AgenteServiceImpl implements AgenteService, Singleton {
 	}
 
 	@Override
-	public List<Multa> obtenerMultas(long id) {
+	public List<Multa> obtenerMultas(int idAgente) {
 		// TODO Auto-generated method stub
-		return multaDao.getAllByUser(id);
+		return null;
+	}
+	
+	@Override
+	public List<Multa> detalle(long id) {
+		return (List<Multa>) multaDao.detalle(id);
+	}
+
+	@Override
+	public List<Multa> listar() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

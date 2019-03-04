@@ -7,12 +7,18 @@ import { Observable } from 'rxjs';
 })
 export class MultasService {
 
+  endpoint: "http://localhost:8080/wsrest/api";
+  http: any;
   constructor( private httpClient: HttpClient ) { }
 
-  obtenerMultas(idAgente: number): Observable<any>{
-        
-    let uri = `http://localhost:8080/wsrest/api/agente/login/${idAgente}/multas`;
-    console.trace('AutorizacionService loggin uri: ' + uri);
+  obtenerMultas( id: number ): Observable<any> {
+    const url = this.endpoint + `/agente/${id}/multa`;
+    return this.http.get(url);
+  }
+
+  existeMatricula(matricula: string): Observable<any>{
+    let uri = `http://localhost:8080/wsrest/api/agente/login/${matricula}`;
+    console.trace('AutorizacionService matricula uri: ' + uri);
     return this.httpClient.get(uri);    
   }
 }
