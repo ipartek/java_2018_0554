@@ -28,7 +28,7 @@ public interface AgenteService {
 	 * @return
 	 * @throws Exception si el concepto es null, el idAgente o idCoche no existen, importe < 0
 	 */
-	Multa multar( int idCoche, int idAgente, String concepto, float importe  ) throws Exception;
+	boolean multar(Multa multa, int idCoche);
 	
 	
 	/**
@@ -36,10 +36,10 @@ public interface AgenteService {
 	 * @param idAgente
 	 * @return listado, si no hay ninguna vacio, no null
 	 */
-	List<Multa> obtenerMultas(int idAgente);
+	List<Multa> obtenerMultas(long idAgente);
 	
-	List<Multa> listar();
+	List<Multa> obtenerMultasAnuladas(long idAgente);
 	
-	List<Multa> detalle(long id);
+	Coche idCoche(String matricula);
 
 }

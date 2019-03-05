@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AutorizacionService } from 'src/app/services/autorizacion.service';
 import { Router } from '@angular/router';
 import { Alert } from 'src/app/model/alert';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,9 @@ import { Alert } from 'src/app/model/alert';
 })
 export class LoginComponent implements OnInit {
 
+  //variable dependiente del entorno
+  texto: string = environment.texto;
+  
   formulario: FormGroup;  
   alert: Alert;
 

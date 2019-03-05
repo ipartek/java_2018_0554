@@ -111,13 +111,9 @@ public class CocheDAO {
 			cs.setString(1, matricula);
 
 			try (ResultSet rs = cs.executeQuery()) {
-				try {
 					while (rs.next()) {
 						c = rowMapper(rs);
 					}
-				} catch (Exception e) {
-					LOG.warn(e);
-				}
 			}
 
 		} catch (Exception e) {
@@ -141,7 +137,17 @@ public class CocheDAO {
 				ResultSet rs = pst.executeQuery()) {
 
 			while (rs.next()) {
-				coches.add(rowMapper(rs));
+				try {
+					Coche coche = new Coche();
+					coche.setId(rs.getLong("id"));
+					coche.setMatricula(rs.getString("matricula"));
+					coche.setKm(rs.getInt("km"));
+					coche.setModelo(rs.getString("modelo"));
+					//coches.add(coche);
+				} catch (Exception e) {
+					System.out.println("usuario no valido");
+					e.printStackTrace();
+				}
 			}
 
 		} catch (Exception e) {
@@ -187,11 +193,11 @@ public class CocheDAO {
 			cs.setString(2, coche.getModelo());
 			cs.setInt(3, coche.getKm());
 			cs.registerOutParameter(4, Types.INTEGER);
-			
-			if ( cs.executeUpdate() == 1) {
+			int affectedRows = cs.executeUpdate();
+			if (affectedRows == 1) {
 				coche.setId(cs.getLong(4));
-			} else {
-				throw new SQLException("No se puede insertar el coche " + coche );
+			}else {
+				coche=null;
 			}
 		}
 		return coche;

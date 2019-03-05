@@ -60,7 +60,9 @@ public class VehiculoController {
 			long identificador = Long.parseLong(id);
 			Coche coche = cocheDAO.getById(identificador);
 			if ( coche != null ) {
-				response = new ResponseEntity<Coche>( coche,  HttpStatus.OK );
+				response = new ResponseEntity<Coche>(HttpStatus.OK );
+			}else {
+				response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
 			}
 			
 		}catch ( NumberFormatException e) {	

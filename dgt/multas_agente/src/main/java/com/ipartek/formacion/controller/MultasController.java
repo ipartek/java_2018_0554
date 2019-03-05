@@ -202,7 +202,7 @@ public class MultasController extends HttpServlet {
 	private void opVer(HttpServletRequest request) {
 		if (idMultaStr == null) {
 			try {
-				request.setAttribute("multas", daoMulta.getAllByUser(a.getId()));			
+				request.setAttribute("multas", daoMulta.getAllByIdAgente(a.getId()));			
 			}
 			catch (Exception e) {
 				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "No se han puesto multas");
@@ -290,7 +290,7 @@ public class MultasController extends HttpServlet {
 			m.setConcepto(concepto);
 			c.setId(Long.parseLong(id_coche));
 			m.setCoche(c);
-			m.setImporte(Double.parseDouble(importe));
+			m.setImporte(Float.parseFloat(importe));
 			m.setAgente((Agente) session.getAttribute("agenteLogueado"));
 			Set<ConstraintViolation<Multa>> violations = validator.validate(m);
 			if (violations.size() > 0) {
@@ -310,7 +310,7 @@ public class MultasController extends HttpServlet {
 			else {
 				LOG.debug("No hay violaciones. Se procede a crear una multa");
 				try {
-					if (daoMulta.insert(m)) {
+					if (daoMulta.insert(m, 0)) {
 						String minuto = "";
 						if (fechaActual.get(Calendar.MINUTE) < 10) {
 							minuto = "0";
