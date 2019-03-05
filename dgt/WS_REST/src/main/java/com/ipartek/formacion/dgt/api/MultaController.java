@@ -1,8 +1,6 @@
 package com.ipartek.formacion.dgt.api;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -17,10 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ipartek.formacion.modelo.daos.AgenteDAO;
 import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.daos.VehiculoDAO;
-import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Multa;
 import com.ipartek.formacion.modelo.pojo.MultaNueva;
-import com.ipartek.formacion.modelo.pojo.Vehiculo;
 import com.ipartek.formacion.service.AgenteService;
 import com.ipartek.formacion.service.impl.AgenteServiceImpl;
 
