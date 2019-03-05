@@ -4,7 +4,7 @@
     <img src="{{agente.imagen}}" class="mr-3" alt="{{agente.nombre}}"  width="100em"
     height="100em">
     <div class="media-body">
-        <p><span class="badge badge-pill badge-warning">Agente: {{agente.nombre}}</span></p>
+        <p><span class="badge badge-pill badge-danger">Agente: {{agente.nombre}}</span></p>
     </div>
   </div>
 
@@ -19,7 +19,8 @@
       <th>Concepto</th>
       <th>Fecha de Alta</th>
       <th>Hora  de Alta</th>
-      <th>Nombre Agente</th>     
+      <th>Nombre Agente</th> 
+      <th>Eliminar</th>    
     </tr>
   </thead>
   <tbody>   
@@ -31,7 +32,35 @@
       <td>{{m.fechaAlta | date}}</td>
       <td>{{m.fechaAlta | date:'shortTime'}}</td>
       <td>{{m.agente.nombre}}</td>
+      <td>
+          <button type="submit" class="btn btn-block btn-danger" data-toggle="modal" 
+            data-target="#myModal">ANULAR
+          </button>
+        </td>
     </tr>  
   </tbody>
 </table>
 
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">¿Desea anular esta multa?</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" (click)="modificarAnular(multaSeleccionada.id)" class="btn btn-danger" data-dismiss="modal">Anular</button>&nbsp;
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        </div>
+  
+  
+      </div>
+    </div>
+  </div>
