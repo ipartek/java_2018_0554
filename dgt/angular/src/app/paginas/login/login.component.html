@@ -1,8 +1,8 @@
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column text-center">
-  <div style="border:1px solid red; padding:10px;">
+  <!-- <div style="border:1px solid red; padding:10px;">
     <p>Valores: {{ formulario.value | json }}</p>
-    <p>Estado:  {{ formulario.status | json }}</p> 
-  </div>
+    <p>Estado:  {{ formulario.status | json }}</p>
+  </div> -->
   <app-alert [alerta]="alerta"></app-alert>
   <main role="main" class="inner cover">
     <h1 class="cover-heading"><i class="fas fa-car"></i></h1>
@@ -11,15 +11,15 @@
       <div class="form-group">
         <label for="placa">Nº Placa: </label>
         <input type="text" formControlName="placa" class="form-control" id="placa" name="placa" aria-describedby="placaHelp" placeholder="P.E: 1234"
-          autofocus required> 
-          <small *ngIf="formulario.controls.placa.invalid && formulario.controls.placa.touched" 
+          autofocus required>
+          <small *ngIf="formulario.controls.placa.invalid && formulario.controls.placa.touched"
             class="text-danger">*El Nº de placa son 4-45 caracteres numéricos</small>
       </div>
       <div class="form-group">
         <label for="pass">Contraseña: </label>
         <input type="password" formControlName="pass" class="form-control" id="pass" name="pass" aria-describedby="passwordHelp"
-          placeholder="P.E: 12345678" required> 
-          <small *ngIf="formulario.controls.pass.invalid && formulario.controls.pass.touched" 
+          placeholder="P.E: 12345678" required>
+          <small *ngIf="formulario.controls.pass.invalid && formulario.controls.pass.touched"
             class="text-danger">*La contraseña son 8-50 caracteres</small>
       </div>
       <button type="submit" [disabled]="formulario.invalid" class="btn btn-lg btn-secondary btn-block mb-3">
