@@ -18,18 +18,7 @@ public interface AgenteService {
 	 */
 	Agente existe(String numeroPlaca, String password);
 
-	/**
-	 * Multar un Vehiculo
-	 * 
-	 * @param idCoche
-	 * @param idAgente
-	 * @param concepto
-	 * @param importe
-	 * @return
-	 * @throws Exception si el concepto es null, el idAgente o idCoche no existen,
-	 *                   importe < 0
-	 */
-	boolean multar(MultaCreada multa);
+
 
 	/**
 	 * Todas las multas de un Agente
@@ -62,5 +51,26 @@ public interface AgenteService {
 	 * @return id vehiculo, si no hay matricula vacio, null
 	 */
 	Coche conseguirId(String matricula);
+	/**
+	 * Multar un Vehiculo
+	 * 
+	 * @param idCoche
+	 * @param idAgente
+	 * @param concepto
+	 * @param importe
+	 * @return
+	 * @throws Exception si el concepto es null, el idAgente o idCoche no existen,
+	 *                   importe < 0
+	 */
+	boolean multar(MultaCreada multa);
+	
+	/**
+	 * Multar un Vehiculo
+	 * 
+	 * @param id  
+	 * @return
+	 * @throws Exception si no existe la multa
+	 */
+	boolean anular (int id, int op);
 
 }

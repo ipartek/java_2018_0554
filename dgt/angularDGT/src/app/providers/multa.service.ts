@@ -39,6 +39,8 @@ export class MultaService {
     this._matriculaEncontrada = false;
   }
 
+ // ------------------------------------------------------LLAMADAS SERVICIOS REST------------------------------------------------- 
+
   //METODO PARA LISTADO MULTAS
    getMultas(id:number):Observable<any>{
     
@@ -79,8 +81,9 @@ export class MultaService {
     }  
   }  
 
+  // metodo para CREAR MULTA
   public multar (multa: Multa): Observable<any> {
-    let url = "http://localhost:8080/wsrest//api/vehiculo/multas";
+    let url = "http://localhost:8080/wsrest//api/agente/multas";
     console.trace('MultaService multar uri:  '+ url);
     
     let body = {
@@ -92,4 +95,21 @@ export class MultaService {
     };
     return this.httpClient.post(url, body);
   } 
+
+  // METODO ANULAR y ACTIVAR MULTA
+  public anularMulta(idMulta: number, op:number): Observable<any> {    
+
+    let uri = this.endpoint + 'anular/' + idMulta +"/"+ op;
+    console.trace('multa service anular' + uri );
+    
+    let body = {
+      
+    };
+  
+    return this.httpClient.patch(uri, body);
+  }
+
+ 
+  
+  // ------------------------------------------------------FIN LLAMADAS SERVICIOS REST------------------------------------------------- 
 }

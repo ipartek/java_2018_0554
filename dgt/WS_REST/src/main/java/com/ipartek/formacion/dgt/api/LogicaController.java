@@ -128,7 +128,7 @@ public class LogicaController {
 
 // CREAR MULTA.
 	
-	@RequestMapping(value = { "/api/vehiculo/multas" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/api/agente/multas" }, method = RequestMethod.POST)
 	@ApiResponses({ @ApiResponse(code = 201, message = "multa creada"),
 			@ApiResponse(code = 409, message = "Existe Multa"),
 			@ApiResponse(code = 400, message = "Datos Multa No Validos") })
@@ -155,4 +155,33 @@ public class LogicaController {
 
 	}
 
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+//ANULAR MULTA
+	@RequestMapping(value = { "/api/agente/anular/{idMulta}/{op}" }, method = RequestMethod.PATCH)
+	@ApiResponses({ @ApiResponse(code = 200, message = "Multa Anulada"),
+		@ApiResponse(code = 500, message = "NO Existe Multa") })
+	public ResponseEntity<Multa> anular(@PathVariable int idMulta, 
+										@PathVariable int op) {
+
+		ResponseEntity<Multa> response = new ResponseEntity<Multa>(HttpStatus.INTERNAL_SERVER_ERROR);
+		boolean anulada = false;
+		int id = -1;
+		try {
+			id = (int) idMulta;
+		} catch (Exception e1) {
+			response = new ResponseEntity<Multa>(HttpStatus.BAD_REQUEST);
+		}
+		try {
+			
+			anulada = agenteService.anular(id,op);
+			if (anulada == true) {
+				response = new ResponseEntity<Multa>(HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			response = new ResponseEntity<Multa>(HttpStatus.NOT_FOUND);
+		}
+
+		return response;
+
+	}
 }

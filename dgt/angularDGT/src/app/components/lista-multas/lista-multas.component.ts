@@ -16,11 +16,13 @@ export class ListaMultasComponent implements OnInit {
   multas : Multa[];
   agente: any;
   alert:Alert;
+  multaSeleccionada:Multa;
    
   constructor( private autorizacionService: AutorizacionService, public multaService:MultaService ) {
     console.log('frutasComponent constructor');
     this.multas = [];
     this.alert = new Alert('');
+    this.multaSeleccionada = new Multa(-1,0,'','',-1,-1);
   }
 
 
@@ -46,4 +48,24 @@ export class ListaMultasComponent implements OnInit {
     }
     );//subscribe   
   }
+
+  anular(idMulta: number, op:number){
+    console.trace('click editar %o', idMulta);
+    
+    this.multaService.anularMulta(idMulta,op).subscribe(
+      resultado => {
+      console.debug(`Multa anulada`);
+      this.getMultas(this.agente.id);   // Volver a listar.  la multa ya se ha anulado pero hay que volver a listar para que desaparezca
+      
+    }, error => {
+      this.alert = new Alert(`Error inesperado. Código de error: ${error.status}`);
+      console.warn('peticion incorrecta %o', error);
+    });
+
+  }
+
+  seleccionar(multa: Multa){
+    this.multaSeleccionada = multa;
+  }
+
 }

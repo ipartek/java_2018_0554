@@ -17,25 +17,28 @@ import com.ipartek.formacion.modelo.pojo.Multa;
 import com.ipartek.formacion.modelo.pojo.MultaCreada;
 
 public class MultaDAO {
+	
 	private final static Logger LOG = Logger.getLogger(MultaDAO.class);
 	private static MultaDAO INSTANCE = null;
 	private boolean isGetById = false;
 	private boolean isBaja = false;
 
 	private static final String MULTAS_ANULADAS = "baja";
-	// private static final String MULTAS_ACTIVAS = "activas";
+// private static final String MULTAS_ACTIVAS = "activas";
 
 	private static final String SQL_GETBYID = "{call pa_multa_getById(?)}";
 	private static final String SQL_GET_MULTAS_BY_ID_AGENTE = "{call pa_multa_getByAgenteId(?)}";
 	private static final String SQL_GET_MULTAS_ANULADAS_BY_ID_AGENTE = "{call pa_multa_anulada_getByAgenteId(?)}";
 	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
-	private static final String SQL_UPDATE = "{call pa_multa_update(?,?)}";
+	private static final String SQL_ANULAR = "{call pa_multa_anular(?)}";
+	private static final String SQL_ACTIVAR = "{call pa_multa_activar(?)}";
 
-	// constructor privado, solo acceso por getInstance()
+// constructor privado, solo acceso por getInstance()
 	private MultaDAO() {
 		super();
 	}
 
+// GET INSTANCE	
 	public synchronized static MultaDAO getInstance() {
 
 		if (INSTANCE == null) {
@@ -44,7 +47,7 @@ public class MultaDAO {
 		return INSTANCE;
 	}
 
-// OBTENER MULTA POR ID
+// OBTENER MULTA POR ID (sin usar)
 	public Multa getById(long id, String opm) {
 
 		Multa m = null;
@@ -155,23 +158,42 @@ public class MultaDAO {
 
 	}
 
-	public boolean update(Multa m, String opr) throws SQLException {
+	//ANULAR MULTA UPDATE..  ANULAR Y ACTIVAR SEGUN OPERACION
+	public boolean anular(int id, int op) throws SQLException {
 
 		boolean resul = false;
-		try (Connection conn = ConnectionManager.getConnection();
-				CallableStatement cs = conn.prepareCall(SQL_UPDATE);) {
+		isBaja = true;
+		isGetById = false;
+		
+		if (op==1) {
+			try (Connection conn = ConnectionManager.getConnection();
+					CallableStatement cs = conn.prepareCall(SQL_ANULAR);) {
 
-			cs.setLong(1, m.getId());
-			cs.setString(2, opr);
-			int affectedRows = cs.executeUpdate();
-			if (affectedRows == 1) {
-				resul = true;
+				cs.setLong(1, id);
+			
+				int affectedRows = cs.executeUpdate();
+				if (affectedRows == 1) {
+					resul = true;
+				}
+			}
+		}else {
+			try (Connection conn = ConnectionManager.getConnection();
+					CallableStatement cs = conn.prepareCall(SQL_ACTIVAR);) {
+
+				cs.setLong(1, id);
+			
+				int affectedRows = cs.executeUpdate();
+				if (affectedRows == 1) {
+					resul = true;
+				}
 			}
 		}
+		
 		return resul;
 
 	}
 
+// ROWMAPPER PARA PARAMETROS DE LA BBDD
 	private Multa rowMapper(ResultSet rs) throws SQLException {
 		Multa m = new Multa();
 		Coche c = new Coche();

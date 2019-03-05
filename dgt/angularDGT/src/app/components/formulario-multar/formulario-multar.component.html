@@ -1,62 +1,53 @@
 <main role="main" class="container">
   
-  
+  <!--
   <div style="border:1px solid red; padding:10px;">
     <p>Coche: {{vehiculo | json }}</p>
     <p>Agente: {{ agente | json}}</p>
   </div>
-  
+   -->
  
-<div class="card mb-3" style="max-width: 75rem;">
-   
-    <form  [formGroup]="formulario" (submit)="crear()" >
-        
-      <div class="card mb-3" style="max-width: 75em;">
-            <div class="row no-gutters">
-             
-                <div class="col-md-4">
-                  <img src="https://www.actualidadmotor.com/wp-content/uploads/2018/07/modelo-carta-alegaciones-multa-trafico-830x460.jpg" class="card-img" alt="..." width= "25em">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                      <h5 class="card-title">Tramitar sancion al Vehiculo:</h5>                
-                      <h6 class="card-text">Matricula: {{vehiculo.matricula}}</h6>
-                      <h6 class="card-text">Modelo: {{vehiculo.modelo}}</h6>
-                      <h6 class="card-text">Km: {{vehiculo.km}}</h6>
-                    </div> 
-                </div> 
 
-              </div>     
-      </div> 
-              
-      
-        <div class="formu">
-          <h5 class="card-title">Introduzca datos:</h5> 
-          <label for="importe">Importe</label>
-          <input type="text" formControlName="importe" class="form-control" placeholder="TODO" >      
+     
+   <div  >
+      <div class="row no-gutters">          
+          
+          <div class="col-md-8 ">
+              <div class="card-body">
+                <h5 class="card-title">Datos Vehiculo:</h5>                
+                <p class="card-text">Matricula: {{vehiculo.matricula}}</p>
+                <p class="card-text">Modelo: {{vehiculo.modelo}}</p>
+                <p class="card-text">Km: {{vehiculo.km}}</p>
+              </div> 
+          </div> 
+        </div>     
+    </div>   
+  <form  [formGroup]="formulario" (submit)="crear()" >
+    
+                   
+      <div class="formu">
+          <h5 class="card-title">Datos sancion:</h5> 
+           <!--<label for="importe">Importe</label> -->
+          <input type="text" formControlName="importe" class="form-control" placeholder="Importe" >      
           <p id="p" *ngIf="formulario.controls.importe.invalid && formulario.controls.importe.touched"  
-          class="text-danger">*El limite de la sancion es 9999 </p>
-        
-          <label for="concepto">Concepto</label>
-          <input type="textarea" formControlName="concepto" class="form-control" placeholder="Mínimo 3 letras">  
-          <p id="p" *ngIf="formulario.controls.concepto.invalid && formulario.controls.concepto.touched"  
-          class="text-danger">*minimo 5 letras y máximo 200</p>     
-        </div>
-        <button type="submit" class="btn btn-block btn-warning mt-5" [disabled]="formulario.invalid">Crear Multa</button>
+             class="text-danger">*El limite de la sancion es 9999 </p>
 
-   
-        
+          <!-- <label for="concepto">Concepto</label> -->
+          <input type="textarea" formControlName="concepto" class="form-control" placeholder="Concepto">  
+          <p id="p" *ngIf="formulario.controls.concepto.invalid && formulario.controls.concepto.touched"  
+             class="text-danger">*minimo 5 letras y máximo 200</p>     
+        </div>
+        <button type="submit" class="btn btn-block btn-secondary mt-3" [disabled]="formulario.invalid">Crear Multa</button>      
         
     </form>
-</div>
-
-<div style="border:1px solid red; padding:10px;">
-    <p>Valores: {{ formulario.value | json }}</p>
-    <p>Estado:  {{ formulario.status | json }}</p> 
-</div>
-
-<app-alert [alert]="alert"></app-alert>
+    <app-alert [alert]="alert"></app-alert>
 
 
+      <!--
+          <div style="border:1px solid red; padding:10px;">
+              <p>Valores: {{ formulario.value | json }}</p>
+              <p>Estado:  {{ formulario.status | json }}</p> 
+          </div>
+      -->
 
 </main>

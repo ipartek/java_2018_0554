@@ -8,7 +8,7 @@ import { AutorizacionService } from 'src/app/providers/autorizacion.service';
 @Component({
   selector: 'app-formulario-matricula',
   templateUrl: './formulario-matricula.component.html',
-  styleUrls: ['./formulario-matricula.component.sass']
+  styleUrls: ['./formulario-matricula.component.scss']
 })
 export class FormularioMatriculaComponent implements OnInit {
   

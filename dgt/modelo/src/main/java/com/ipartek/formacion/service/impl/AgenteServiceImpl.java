@@ -41,21 +41,6 @@ public class AgenteServiceImpl implements AgenteService {
 		return loginDAO.login(placa, password);
 	}
 
-// CREAR MULTA POST
-	@Override
-	public boolean multar(MultaCreada multa) {
-		boolean isCreado = false;
-		try {
-			isCreado = multaDAO.insert(multa);
-
-			// multa.setTipo(tipoDAO.getByIdTipoAnimal(animal.getId()));
-			// animal.setDieta(dietaDAO.getByIdDietaAnimal(animal.getId()));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return isCreado;
-	}
-
 // GET ALL MULTAS BY ID AGENTE
 	@Override
 	public List<Multa> listarMultas(int id) {
@@ -78,6 +63,36 @@ public class AgenteServiceImpl implements AgenteService {
 	public Coche conseguirId(String matricula) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+// CREAR MULTA POST
+	@Override
+	public boolean multar(MultaCreada multa) {
+		boolean isCreado = false;
+		try {
+			isCreado = multaDAO.insert(multa);
+
+			// multa.setTipo(tipoDAO.getByIdTipoAnimal(animal.getId()));
+			// animal.setDieta(dietaDAO.getByIdDietaAnimal(animal.getId()));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isCreado;
+	}
+
+// ANULAR MULTA PATCH
+	@Override
+	public boolean anular(int id, int op) {
+		boolean isAnulado = false;
+		try {
+			isAnulado = multaDAO.anular(id, op);
+
+			// multa.setTipo(tipoDAO.getByIdTipoAnimal(animal.getId()));
+			// animal.setDieta(dietaDAO.getByIdDietaAnimal(animal.getId()));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isAnulado;
 	}
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MultaService } from 'src/app/providers/multa.service';
 import { Multa } from 'src/app/model/multa';
 import { AutorizacionService } from 'src/app/providers/autorizacion.service';
+import { Alert } from 'src/app/model/alert';
 
 
 @Component({
@@ -13,7 +14,9 @@ export class ListaMultasAnuladasComponent implements OnInit {
  
   
     multas : Multa[];
-    
+    alert:Alert;
+    multaSeleccionada:Multa;
+
     // parametros de los inputs
     agente: any;
     
@@ -51,4 +54,23 @@ export class ListaMultasAnuladasComponent implements OnInit {
           }
         );//subscribe   
       }
+
+     activar(idMulta: number, op:number){
+        console.trace('click editar %o', idMulta);
+        
+        this.multaService.anularMulta(idMulta, op).subscribe(
+          resultado => {
+          console.debug(`Multa anulada`);
+          this.getMultasAnuladas(this.agente.id);   // Volver a listar.  la multa ya se ha anulado pero hay que volver a listar para que desaparezca
+          
+        }, error => {
+          this.alert = new Alert(`Error inesperado. Código de error: ${error.status}`);
+          console.warn('peticion incorrecta %o', error);
+        });
     }
+
+
+      seleccionar(multa: Multa){
+        this.multaSeleccionada = multa;
+      }
+  }
