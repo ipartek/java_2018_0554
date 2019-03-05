@@ -10,6 +10,7 @@ import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.daos.VehiculoDAO;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Multa;
+import com.ipartek.formacion.modelo.pojo.MultaNueva;
 import com.ipartek.formacion.modelo.pojo.Vehiculo;
 import com.ipartek.formacion.service.AgenteService;
 
@@ -89,10 +90,10 @@ public class AgenteServiceImpl implements AgenteService {
 	
 
 	@Override
-	public boolean insertar(Multa multa, int idCoche) {
+	public boolean insertar(MultaNueva multa) {
 		boolean resultado = false;
 		try {
-			resultado = multaDAO.insert(multa, idCoche);
+			resultado = multaDAO.insert(multa);
 		} catch (SQLException e) {
 			return false;
 		}
@@ -103,6 +104,17 @@ public class AgenteServiceImpl implements AgenteService {
 	@Override
 	public List<Multa> listarMultasAnuladas(long id) {
 		return multaDAO.getAnulada(id);
+	}
+
+	@Override
+	public boolean anular(int idAgente) {
+		boolean resultado = false;
+		try {
+			resultado = multaDAO.anularMulta(idAgente);
+		} catch (SQLException e) {
+			return false;
+		}
+		return resultado;
 	}
 	
 

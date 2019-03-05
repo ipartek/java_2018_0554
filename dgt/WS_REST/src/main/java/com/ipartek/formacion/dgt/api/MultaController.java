@@ -19,6 +19,7 @@ import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.daos.VehiculoDAO;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Multa;
+import com.ipartek.formacion.modelo.pojo.MultaNueva;
 import com.ipartek.formacion.modelo.pojo.Vehiculo;
 import com.ipartek.formacion.service.AgenteService;
 import com.ipartek.formacion.service.impl.AgenteServiceImpl;
@@ -95,29 +96,29 @@ public class MultaController {
 	}
 	
 	@RequestMapping(value = { "/api/multa/" }, method = RequestMethod.POST)
-	public ResponseEntity<Multa> crear(@RequestBody Multa multa) {
+	public ResponseEntity<MultaNueva> crear(@RequestBody MultaNueva multa) {
 
-		ResponseEntity<Multa> response = new ResponseEntity<Multa>(HttpStatus.INTERNAL_SERVER_ERROR);
-		long idCoche = 0;
+		ResponseEntity<MultaNueva> response = new ResponseEntity<MultaNueva>(HttpStatus.INTERNAL_SERVER_ERROR);
+		
 		boolean insertado = false;
-		try {
+		/*try {
 			// OBTENER ID DEL COCHE CON MATRICULA QUE SE LE PASA
 			Vehiculo coche = agenteService.conseguirId(multa.getCoche().getMatricula());
 			idCoche = coche.getId();
 
 		} catch (Exception e) {
-			response = new ResponseEntity<Multa>(HttpStatus.NOT_FOUND);
+			response = new ResponseEntity<MultaNueva>(HttpStatus.NOT_FOUND);
 		}
-
+*/
 		try {
-			int id = (int) idCoche;
-			insertado = agenteService.insertar(multa, id);
+			//int id = (int) idCoche;
+			insertado = agenteService.insertar(multa);
 //			insertado = multaDAO.insert(multa, idCoche);
 			if (insertado == true) {
-				response = new ResponseEntity<Multa>(multa, HttpStatus.CREATED);
+				response = new ResponseEntity<MultaNueva>(multa, HttpStatus.CREATED);
 			}
 		} catch (Exception e) {
-			response = new ResponseEntity<Multa>(HttpStatus.BAD_REQUEST);
+			response = new ResponseEntity<MultaNueva>(HttpStatus.BAD_REQUEST);
 		}
 
 		return response;

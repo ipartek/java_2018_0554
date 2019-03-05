@@ -16,6 +16,7 @@ import com.ipartek.formacion.modelo.cm.ConnectionManager;
 import com.ipartek.formacion.modelo.pojo.Vehiculo;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Multa;
+import com.ipartek.formacion.modelo.pojo.MultaNueva;
 
 public class MultaDAO {
 	private final static Logger LOG = Logger.getLogger(MultaDAO.class);
@@ -34,6 +35,8 @@ public class MultaDAO {
 	private static final String SQL_UPDATE = "{call pa_multa_update(?,?)}";
 	private static final String SQL_GETALL_BY_AGENTE = "SELECT a.id AS 'agente_id', a.nombre, a.placa, a.imagen, c.id AS 'coche_id', c.matricula, c.modelo, c.km, m.id AS 'multa_id', m.importe, m.concepto, m.fecha_alta, m.fecha_baja, m.id_coche, m.id_agente FROM agente As a, coche AS c, multa AS m WHERE m.id_coche = c.id AND m.id_agente = a.id AND a.id = ? AND m.fecha_baja IS NULL";
 	private static final String SQL_GETALL_BY_AGENTE_ANULADA = "SELECT a.id AS 'agente_id', a.nombre, a.placa, a.imagen, c.id AS 'coche_id', c.matricula, c.modelo, c.km, m.id AS 'multa_id', m.importe, m.concepto, m.fecha_alta, m.fecha_baja, m.id_coche, m.id_agente FROM agente As a, coche AS c, multa AS m WHERE m.id_coche = c.id AND m.id_agente = a.id AND a.id = ? AND m.fecha_baja IS NOT NULL;";
+	private static final String SQL_ANULAR = "UPDATE `dgt`.`multa` SET `fecha_baja` = current_timestamp WHERE id = ?);";
+	
 	// constructor privado, solo acceso por getInstance()
 	private MultaDAO() {
 		super();
@@ -155,15 +158,15 @@ public class MultaDAO {
 		return multas;
 	}
 
-	public boolean insert(Multa m, long idCoche) throws SQLException {
+	public boolean insert(MultaNueva m) throws SQLException {
 		boolean resul = false;
 		isGetById = false;
 		try (Connection conn = ConnectionManager.getConnection();
 				CallableStatement cs = conn.prepareCall(SQL_INSERT);) {
 			cs.setDouble(1, m.getImporte());
 			cs.setString(2, m.getConcepto());
-			cs.setLong(3, m.getCoche().getId());
-			cs.setLong(4, m.getAgente().getId());
+			cs.setLong(3, m.getId_coche());
+			cs.setLong(4, m.getId_agente());
 			cs.registerOutParameter(5, Types.INTEGER);
 			int affectedRows = cs.executeUpdate();
 			if (affectedRows == 1) {
@@ -215,6 +218,23 @@ public class MultaDAO {
 		return resul;
 
 	}
+	public boolean anularMulta(int idMulta) throws SQLException {
+
+		boolean resul = false;
+
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_ANULAR);) {
+			
+			pst.setInt(1, idMulta);
+			
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				resul = true;
+			}
+		}
+		return resul;
+
+	}
 
 	private Multa rowMapper(ResultSet rs) throws SQLException {
 		Multa m = new Multa();
@@ -254,5 +274,7 @@ public class MultaDAO {
 		m.setCoche(c);
 		return m;
 	}
-
+	
+	
+	
 }
