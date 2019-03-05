@@ -84,8 +84,9 @@ export class FormularioMultarComponent implements OnInit {
         data => {
           console.debug('Json Multa %o', data);
           this.crearFormulario();
-          this.router.navigate(['/vermultas']);
+          this.router.navigate(['/listarMultas']);
           this.alert = new Alert('Multa creada con exito',"primary");
+
         },
         error => {
           console.warn('error multa %o', error);

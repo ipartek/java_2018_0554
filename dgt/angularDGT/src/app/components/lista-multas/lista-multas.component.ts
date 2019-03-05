@@ -9,7 +9,7 @@ import { Alert } from 'src/app/model/alert';
 @Component({
   selector: 'app-lista-multas',
   templateUrl: './lista-multas.component.html',
-  styleUrls: ['./lista-multas.component.scss']
+  styleUrls: ['./lista-multas.component.sass']
 })
 export class ListaMultasComponent implements OnInit {
 

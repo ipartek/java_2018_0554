@@ -1,16 +1,16 @@
-<div class="container mb-3 mt-3">
-  <div class="row d-flex align-items-center mb-3">
-    <div class="d-flex">
-        <p *ngIf="multas.length==0" class="spinner-border text-danger"></p>
-      <img  src="{{agente.imagen}}" alt="{{agente.nombre}}" width="100em"
-      height="100em">
-    </div>
-    <br>
-    <p><span class="badge badge-pill badge-success">Agente: {{agente.nombre}}</span></p>
-  </div>
-</div>
 
-<table class="table table-hover tablaOrdenable table-striped">
+<div class="media">
+    <p *ngIf="multas.length==0" class="spinner-border text-danger"></p>
+    <img src="{{agente.imagen}}" class="mr-3" alt="{{agente.nombre}}"  width="100em"
+    height="100em">
+    <div class="media-body">
+        <p><span class="badge badge-pill badge-warning">Agente: {{agente.nombre}}</span></p>
+    </div>
+  </div>
+
+
+
+<table class="table table-hover tablaOrdenable table-striped" id="lista">
   <thead class="thead-light">
     <tr>
       <th>id</th>

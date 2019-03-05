@@ -20,10 +20,10 @@
               </div>
                 
               <input type="text" formControlName="placa" class="form-control" placeholder="Mínimo 3 letras">
-              
+            </div>  
               <p id="p" *ngIf="formulario.controls.placa.invalid && formulario.controls.placa.touched" class="text-danger">
                   *minimo 3 letras y maximo 40</p>
-          </div>
+          
       </div>
 
       <div class="mb-1">
@@ -35,10 +35,10 @@
               </div>
 
               <input type="password" formControlName="password" class="form-control" placeholder="Mínimo 3 letras">
-
+            </div>
               <p id="p" *ngIf="formulario.controls.password.invalid && formulario.controls.placa.touched"
                 class="text-danger">*minimo 3 letras y máximo 16</p>
-          </div>
+          
       </div>
          
         <button type="submit" class="btn btn-block btn-secondary mt-5" [disabled]="formulario.invalid">Acceder</button>
