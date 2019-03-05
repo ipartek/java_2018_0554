@@ -16,6 +16,7 @@ export class ListaMultasComponent implements OnInit {
   alert: Alert;
   multasAnuladas: Multa[];
   isActiva: boolean;
+  multaSeleccionada: Multa;
   
 
   constructor( private autorizacionService: AutorizacionService, public multaService:MultaService) {
@@ -78,5 +79,19 @@ export class ListaMultasComponent implements OnInit {
   cambiarTabla( value: boolean){    
     this.isActiva = value;
     console.debug('click cambiarOferta ' + this.isActiva);
+  }
+
+  modificarAnular(idMulta: number){
+    console.trace('click editar %o', idMulta);
+    this.multaService.anularMulta(idMulta).subscribe(
+      resultado => {
+      console.debug(`Multa con ID: ${idMulta} dada de baja`);
+      this.getMultas(this.agente);
+      
+    }, error => {
+      //this.alerta = new Alerta(`Error inesperado. Código de error: ${error.status}`);
+      console.warn('peticion incorrecta %o', error);
+    });
+
   }
 }
