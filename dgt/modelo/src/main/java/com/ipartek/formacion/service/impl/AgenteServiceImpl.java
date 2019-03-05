@@ -107,10 +107,10 @@ public class AgenteServiceImpl implements AgenteService {
 	}
 
 	@Override
-	public boolean anular(int idAgente) {
+	public boolean anular(int idMulta) {
 		boolean resultado = false;
 		try {
-			resultado = multaDAO.anularMulta(idAgente);
+			resultado = multaDAO.anularMulta(idMulta);
 		} catch (SQLException e) {
 			return false;
 		}

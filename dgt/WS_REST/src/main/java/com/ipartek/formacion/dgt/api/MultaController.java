@@ -101,19 +101,11 @@ public class MultaController {
 		ResponseEntity<MultaNueva> response = new ResponseEntity<MultaNueva>(HttpStatus.INTERNAL_SERVER_ERROR);
 		
 		boolean insertado = false;
-		/*try {
-			// OBTENER ID DEL COCHE CON MATRICULA QUE SE LE PASA
-			Vehiculo coche = agenteService.conseguirId(multa.getCoche().getMatricula());
-			idCoche = coche.getId();
-
-		} catch (Exception e) {
-			response = new ResponseEntity<MultaNueva>(HttpStatus.NOT_FOUND);
-		}
-*/
+		
 		try {
-			//int id = (int) idCoche;
+			
 			insertado = agenteService.insertar(multa);
-//			insertado = multaDAO.insert(multa, idCoche);
+
 			if (insertado == true) {
 				response = new ResponseEntity<MultaNueva>(multa, HttpStatus.CREATED);
 			}
@@ -125,7 +117,7 @@ public class MultaController {
 
 	}
 	
-	@RequestMapping(value = { "/api/multa/baja/{idMulta}" }, method = RequestMethod.PATCH)
+	@RequestMapping(value = { "/api/multa/anular/{idMulta}" }, method = RequestMethod.PATCH)
 	public ResponseEntity<Multa> anular(@PathVariable int idMulta) {
 
 		ResponseEntity<Multa> response = new ResponseEntity<Multa>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -139,7 +131,6 @@ public class MultaController {
 		try {
 			
 			anulada = agenteService.anular(id);
-//			insertado = multaDAO.insert(multa, idCoche);
 			if (anulada == true) {
 				response = new ResponseEntity<Multa>(HttpStatus.OK);
 			}
