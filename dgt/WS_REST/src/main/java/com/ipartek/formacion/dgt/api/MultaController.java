@@ -129,7 +129,7 @@ public class MultaController {
 	public ResponseEntity<Multa> anular(@PathVariable int idMulta) {
 
 		ResponseEntity<Multa> response = new ResponseEntity<Multa>(HttpStatus.INTERNAL_SERVER_ERROR);
-		boolean anulado = false;
+		boolean anulada = false;
 		int id = -1;
 		try {
 			id = (int) idMulta;
@@ -138,9 +138,9 @@ public class MultaController {
 		}
 		try {
 			
-			anulado = multaService.anularMulta(id);
+			anulada = agenteService.anular(id);
 //			insertado = multaDAO.insert(multa, idCoche);
-			if (anulado == true) {
+			if (anulada == true) {
 				response = new ResponseEntity<Multa>(HttpStatus.OK);
 			}
 		} catch (Exception e) {
