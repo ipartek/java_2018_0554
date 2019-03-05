@@ -48,7 +48,7 @@ export class FormularioMultarComponent implements OnInit {
     console.trace('FormularioMultarComponent crearFormulario');
     this.formulario = this.formBuilder.group({
       importe: [
-        0,
+        '',
         [Validators.required]
       ],
       concepto: [

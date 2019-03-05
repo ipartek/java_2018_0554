@@ -1,25 +1,37 @@
-<div style="border:1px solid red; padding:10px;">
+<!--<div style="border:1px solid red; padding:10px;">
   <p>Coche: {{vehiculo | json }}</p>
   <p>Agente: {{ agente | json}}</p>
-</div>
+</div>-->
 
 <app-alert [alert]="alert"></app-alert>
 
-<form [formGroup]="formulario" (submit)="nueva()" >
-		<div>
-			<a href="http://localhost:4200//matricula" class="btn btn-outline-primary mt-3 mb-3 col-3">
-				Volver
-			</a>
-		</div>
+<div>
+	<a href="http://localhost:4200//matricula" class="btn btn-outline-primary mt-3 mb-3 col-3">
+		Volver
+	</a>
+</div>
 
-			<label for="importe">Importe</label>
-    <input type="text" formControlName="importe" class="form-control" required>
-    
-    <label for="concepto">Concepto</label>
-		<textarea type="text" formControlName="concepto" class="form-control" required></textarea>
-		<br>
-      <!--<button type="submit" class="btn btn-outline-primary btn-block">BUSCAR</button>-->
-      <button class="mt-6 btn btn-primary btn-block btn-lg " type="submit">
-        Multar
-      </button>
-	</form>
+<div class="container" style="border:1px solid #17A2B8; padding:10px;" id="receta">
+	
+		<p><b>Matrícula:</b> {{vehiculo.matricula }}</p>
+		<p><b>Modelo:</b> {{ vehiculo.modelo}}</p>
+		<p><b>Km:</b> {{ vehiculo.km}}</p>
+	
+</div>
+
+
+<br>
+
+<form [formGroup]="formulario" (submit)="nueva()">
+
+	<label for="importe"><b>Importe</b></label>
+	<input type="text" formControlName="importe" class="form-control" required>
+
+	<label for="concepto"><b>Concepto</b></label>
+	<textarea type="text" formControlName="concepto" class="form-control" required></textarea>
+	<br>
+	<!--<button type="submit" class="btn btn-outline-primary btn-block">BUSCAR</button>-->
+	<button class="mt-6 btn btn-primary btn-block btn-lg " type="submit">
+		Multar
+	</button>
+</form>
