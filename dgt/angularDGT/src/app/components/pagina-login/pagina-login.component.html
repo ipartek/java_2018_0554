@@ -1,31 +1,54 @@
 <main role="main" class="container">
 
   <div>
-    <img class="img-responsive mx-auto d-block mb-5 mt-5" width="120em"
-      height="120em"
+    <img class="img-responsive mx-auto d-block mb-5 mt-5" width="120em" height="120em"
       src="http://ladieztrece.com/web/wp-content/uploads/2018/07/2a8abe6ddb0c4cfb6b7fd6690013d6df.png"
       alt="escudo policia">
   </div>
-  
-  
+
+
   <app-alert [alert]="alert"></app-alert>
-  <div >
-      <form  [formGroup]="formulario" (submit)="comprobar()" >
-          <label for="placa">Número de Placa</label>
-          <input type="text" formControlName="placa" class="form-control" placeholder="Mínimo 3 letras" >      
-          <p id="p" *ngIf="formulario.controls.placa.invalid && formulario.controls.placa.touched"  
-          class="text-danger">*minimo 3 letras y maximo 40</p>
-        
+
+  <div>
+    <form [formGroup]="formulario" (submit)="comprobar()">
+
+      <div class="mb-1">
+          <label  for="placa">Número de Placa</label>
+          <div class="input-group">
+              <div class="input-group-prepend">
+                  <span class="input-group-text"> <i class=" fas fa-address-book"></i> </span>
+              </div>
+                
+              <input type="text" formControlName="placa" class="form-control" placeholder="Mínimo 3 letras">
+              
+              <p id="p" *ngIf="formulario.controls.placa.invalid && formulario.controls.placa.touched" class="text-danger">
+                  *minimo 3 letras y maximo 40</p>
+          </div>
+      </div>
+
+      <div class="mb-1">
           <label for="password">Contraseña</label>
-          <input type="password" formControlName="password" class="form-control" placeholder="Mínimo 3 letras">  
-          <p id="p" *ngIf="formulario.controls.password.invalid && formulario.controls.placa.touched"  
-          class="text-danger">*minimo 3 letras y máximo 16</p>     
-          <button type="submit" class="btn btn-block btn-success mt-5" [disabled]="formulario.invalid">Acceder</button>
-      </form>
-</div>
-  <div style="border:1px solid red; padding:10px;">
-      <p>Valores: {{ formulario.value | json }}</p>
-      <p>Estado:  {{ formulario.status | json }}</p> 
+          <div class="input-group">
+
+              <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fas fa-unlock-alt"></i> </span>
+              </div>
+
+              <input type="password" formControlName="password" class="form-control" placeholder="Mínimo 3 letras">
+
+              <p id="p" *ngIf="formulario.controls.password.invalid && formulario.controls.placa.touched"
+                class="text-danger">*minimo 3 letras y máximo 16</p>
+          </div>
+      </div>
+         
+        <button type="submit" class="btn btn-block btn-secondary mt-5" [disabled]="formulario.invalid">Acceder</button>
+       
+    </form>
   </div>
 
-  </main>
+  <div style="border:1px solid red; padding:10px;">
+    <p>Valores: {{ formulario.value | json }}</p>
+    <p>Estado: {{ formulario.status | json }}</p>
+  </div>
+
+</main>

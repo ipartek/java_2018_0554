@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `dgt` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `dgt`;
--- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: dgt
 -- ------------------------------------------------------
--- Server version	8.0.13
+-- Server version	8.0.12
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,6 +29,7 @@ CREATE TABLE `agente` (
   `nombre` varchar(45) NOT NULL,
   `placa` int(11) NOT NULL,
   `password` varchar(20) NOT NULL,
+  `imagen` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `placa_UNIQUE` (`placa`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
@@ -40,27 +41,9 @@ CREATE TABLE `agente` (
 
 LOCK TABLES `agente` WRITE;
 /*!40000 ALTER TABLE `agente` DISABLE KEYS */;
-INSERT INTO `agente` VALUES (1,'Majonei',123456,'123456'),(2,'Johnny Walker',987654,'t45gt4w5t'),(3,'Monk',987321,'123456789'),(4,'Takelberry',987987,'987987'),(5,'Tontimmy',998776,'7miti76');
+INSERT INTO `agente` VALUES (1,'Mahoney',123456,'123456','https://vignette.wikia.nocookie.net/policeacademy/images/a/a6/Mahoney_films.jpg/revision/latest?cb=20140315152502'),(2,'Ruiditos',987654,'t45gt4w5t','https://is5-ssl.mzstatic.com/image/thumb/Video118/v4/84/f1/cc/84f1cc9f-c128-b523-e784-7acf70588e17/source/560x315mv.jpg'),(3,'Lassard',987321,'123456789','https://i.pinimg.com/originals/53/b3/9d/53b39d0192760ba84554b1b42b634109.jpg'),(4,'Tackleberry',987987,'987987','https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/media/imagenes/reportajes/que-fue-de-el-reparto-de-loca-academia-de-policia/09-david-graf-tackleberry/7733514-1-esl-ES/09-David-GRaf-Tackleberry.jpg'),(5,'Hightower',998776,'7miti76','https://vignette.wikia.nocookie.net/policeacademy/images/b/bb/Hightower_films.jpg/revision/latest?cb=20140315183731');
 /*!40000 ALTER TABLE `agente` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tbi_agente_comprobacion` BEFORE INSERT ON `agente` FOR EACH ROW BEGIN
-	set new.nombre=trim(new.nombre);
-    set new.password=trim(new.password);
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `coche`
@@ -88,24 +71,6 @@ LOCK TABLES `coche` WRITE;
 INSERT INTO `coche` VALUES (1,'3548MKZ','Toyota Yaris',500),(2,'9605EFH','Fiat multipla',800),(3,'5674MBD','GRT',1800),(4,'BI0020AZ','flagoneta',47500);
 /*!40000 ALTER TABLE `coche` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tbi_coche_comprobaciones` BEFORE INSERT ON `coche` FOR EACH ROW BEGIN
-	set new.matricula=trim(new.matricula);
-    set new.modelo=trim(new.modelo);
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `multa`
@@ -137,26 +102,9 @@ CREATE TABLE `multa` (
 
 LOCK TABLES `multa` WRITE;
 /*!40000 ALTER TABLE `multa` DISABLE KEYS */;
-INSERT INTO `multa` VALUES (12,21.53,'234567876532weerewtrwywete','2018-09-14 10:25:30',1,4,NULL,NULL),(13,0,'por muy feo','2018-09-14 11:06:39',1,4,NULL,NULL),(14,500,'por muy feo','2018-08-14 13:02:47',1,4,NULL,NULL),(15,500.7,'vas mas borracho que el tato','2018-06-15 12:25:10',2,4,NULL,NULL),(16,500.7,'borrachuzo de mierda','2018-05-15 12:31:15',2,4,NULL,NULL),(17,500.7,'borrachuzo de mierda','2018-02-15 12:33:21',2,4,NULL,NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',2,4,NULL,NULL),(19,500.7,'borrachuzo de mierda','2018-08-15 12:37:48',2,4,NULL,NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,4,NULL,NULL),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',2,4,NULL,NULL),(22,500.7,'borrachuzo de mierda','2018-04-15 12:42:02',2,4,NULL,NULL),(23,500.7,'borrachuzo de mierda','2018-07-15 12:45:28',2,4,NULL,NULL),(24,500.7,'borrachuzo de mierda','2018-11-15 12:45:32',2,4,NULL,NULL),(25,500.7,'borrachuzo de mierda','2018-01-15 12:46:07',2,4,NULL,NULL),(26,500.7,'borrachuzo de mierda','2018-10-15 12:48:21',2,4,NULL,NULL),(27,500.7,'borrachuzo de mierda','2018-11-15 12:49:41',2,4,NULL,NULL),(28,456.6,'fdgrd','2018-12-16 09:21:46',2,4,NULL,NULL),(29,540.59,'aefwefwefwfewefwe','2018-12-17 12:08:48',1,1,NULL,NULL),(30,1445,'pruebaaaaaaa','2018-03-20 21:21:10',2,4,NULL,NULL),(31,0,'khfkesjh','2018-03-21 10:02:01',3,4,NULL,NULL);
+INSERT INTO `multa` VALUES (12,21.53,'234567876532weerewtrwywete','2018-09-14 10:25:30',1,1,NULL,'2019-01-15 12:35:22'),(13,0,'por muy feo','2018-09-14 11:06:39',1,1,NULL,NULL),(14,500,'por muy feo','2018-08-14 13:02:47',1,1,NULL,'2019-01-15 12:35:22'),(15,500.7,'vas mas borracho que el tato','2018-06-15 12:25:10',2,2,NULL,NULL),(16,500.7,'borrachuzo de mierda','2018-05-15 12:31:15',4,2,NULL,'2019-01-15 12:35:22'),(17,500.7,'borrachuzo de mierda','2018-02-15 12:33:21',2,2,NULL,NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',4,3,NULL,NULL),(19,500.7,'borrachuzo de mierda','2018-08-15 12:37:48',2,3,NULL,NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,3,NULL,'2019-01-15 12:35:22'),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',3,2,NULL,NULL),(22,500.7,'borrachuzo de mierda','2018-04-15 12:42:02',2,4,NULL,'2019-01-15 12:35:22'),(23,500.7,'borrachuzo de mierda','2018-07-15 12:45:28',3,4,NULL,'2019-01-15 12:35:22'),(24,500.7,'borrachuzo de mierda','2018-11-15 12:45:32',2,4,NULL,NULL),(25,500.7,'borrachuzo de mierda','2018-01-15 12:46:07',3,1,NULL,NULL),(26,500.7,'borrachuzo de mierda','2018-10-15 12:48:21',2,1,NULL,NULL),(27,500.7,'borrachuzo de mierda','2018-11-15 12:49:41',2,4,NULL,'2019-01-15 12:35:22'),(28,456.6,'fdgrd','2018-12-16 09:21:46',2,4,NULL,NULL),(29,540.59,'aefwefwefwfewefwe','2018-12-17 12:08:48',1,1,NULL,'2019-01-15 12:35:22'),(30,1445,'pruebaaaaaaa','2018-03-20 21:21:10',2,4,NULL,NULL),(31,0,'khfkesjh','2018-03-21 10:02:01',3,4,NULL,'2019-01-15 12:35:22');
 /*!40000 ALTER TABLE `multa` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tbi_multa_correcciones` BEFORE INSERT ON `multa` FOR EACH ROW BEGIN
-	set new.concepto=trim(new.concepto);
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `objetivo`
@@ -246,12 +194,62 @@ SELECT
 	a.id,
 	a.nombre,
 	a.placa,
-    a.password
+    a.password,
+    a.imagen
 FROM 
 	agente as a
 WHERE
 	a.placa=p_placa AND
     a.password=p_pass;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `pa_multa_anulada_getByAgenteId` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_multa_anulada_getByAgenteId`(IN a_id INT)
+BEGIN
+
+
+	SELECT
+		
+		m.id ,
+        m.importe,
+        m.concepto,
+        m.id_coche,
+        c.modelo, 
+        c.km,
+		m.fecha_alta  , 
+		m.fecha_baja  ,
+		c.matricula,
+        a.placa,
+        a.nombre,
+        a.password,
+        a.imagen
+		
+	FROM 
+		multa m, 
+		coche c,
+        agente a
+	WHERE 
+		m.id_coche = c.id AND 
+        m.id_agente= a.id AND
+		m.id_agente = a_id AND
+		m.fecha_baja IS NOT  NULL
+	ORDER BY m.id DESC LIMIT 1000;
+            
+
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -307,41 +305,39 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_multa_getByAgenteId`(IN p_id_agente INT, IN p_operacion VARCHAR(15))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_multa_getByAgenteId`(IN a_id INT)
 BEGIN
 
-IF p_operacion = 'baja' then
-	SELECT 
-		m.id,
-		m.fecha_alta, 
-		m.fecha_baja,
-		c.matricula, 
-		c.modelo 
+
+	SELECT
+		
+		m.id ,
+        m.importe,
+        m.concepto,
+        m.id_coche,
+        c.modelo, 
+        c.km,
+		m.fecha_alta  , 
+		m.fecha_baja  ,
+		c.matricula,
+        a.placa,
+        a.nombre,
+        a.password,
+        a.imagen
+		
 	FROM 
 		multa m, 
-		coche c 
+		coche c,
+        agente a
 	WHERE 
 		m.id_coche = c.id AND 
-		m.id_agente = p_id_agente AND
-		m.fecha_baja IS NOT NULL
+        m.id_agente= a.id AND
+		m.id_agente = a_id AND
+		m.fecha_baja IS   NULL
 	ORDER BY m.id DESC LIMIT 1000;
             
-else
-	SELECT 
-		m.id,
-		m.fecha_alta, 
-		m.fecha_baja,
-		c.matricula, 
-		c.modelo 
-	FROM 
-		multa m, 
-		coche c 
-	WHERE 
-		m.id_coche = c.id AND 
-		m.id_agente = p_id_agente AND
-		m.fecha_baja IS NULL
-	ORDER BY m.id DESC LIMIT 1000;
-end if;
+
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -449,4 +445,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-21 19:02:25
+-- Dump completed on 2019-03-05 12:47:55

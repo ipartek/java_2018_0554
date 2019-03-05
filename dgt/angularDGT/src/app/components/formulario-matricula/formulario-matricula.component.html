@@ -1,34 +1,28 @@
 <main role="main" class="container">
 
   <div>
-    <img class="img-responsive mx-auto d-block mb-5 mt-5" width="180em"
-      height="180em"
+    <img class="img-responsive mx-auto d-block mb-5 mt-5" width="180em" height="180em"
       src="http://ladieztrece.com/web/wp-content/uploads/2018/07/2a8abe6ddb0c4cfb6b7fd6690013d6df.png"
       alt="escudo policia">
   </div>
-  
-  
+
   <app-alert [alert]="alert"></app-alert>
 
-  
-  <div >
-      <form  [formGroup]="formulario" (submit)="comprobarMatricula()" >
-        
-		
-        
-        <label for="matricula">Número de matricula</label>
-          <input type="text" formControlName="matricula" class="form-control" placeholder="matricula" >      
-          <p id="p" *ngIf="formulario.controls.matricula.invalid && formulario.controls.matricula.touched"  
-          class="text-danger">*Solo 2 formatos posibles: 1234ABC / AB1234AB </p>
-        
-          <button type="submit" class="btn btn-block btn-success mt-5" [disabled]="formulario.invalid">Buscar</button>
-      
-        </form>
+  <div>
+    <form [formGroup]="formulario" (submit)="comprobarMatricula()">
+
+      <label for="matricula">Número de matricula</label>
+      <input type="text" formControlName="matricula" class="form-control" placeholder="matricula">
+      <p id="p" *ngIf="formulario.controls.matricula.invalid && formulario.controls.matricula.touched"
+        class="text-danger">*Solo 2 formatos posibles: 1234ABC / AB1234AB </p>
+
+      <button type="submit" class="btn btn-block btn-secondary mt-5" [disabled]="formulario.invalid">Buscar</button>
+
+    </form>
   </div>
   <div style="border:1px solid red; padding:10px;">
-      <p>Valores: {{ formulario.value | json }}</p>
-      <p>Estado:  {{ formulario.status | json }}</p> 
+    <p>Valores: {{ formulario.value | json }}</p>
+    <p>Estado: {{ formulario.status | json }}</p>
   </div>
 
-
-  </main>
+</main>

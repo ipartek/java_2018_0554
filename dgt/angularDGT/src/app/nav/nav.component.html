@@ -1,24 +1,37 @@
   
-  <nav class="navbar navbar-expand-lg navbar-info bg-success">
-    <a class="navbar-brand" href="#"><img width="50" alt="Angular Logo" src="http://ladieztrece.com/web/wp-content/uploads/2018/07/2a8abe6ddb0c4cfb6b7fd6690013d6df.png"></a>
+  <nav class="navbar navbar-expand-md navbar-info bg-secondary">
+    <div routerLinkActive="active">
+      <a class="navbar-brand mr-auto" [routerLink]="['principal']" ><img width="50" alt="Angular Logo"  src="http://ladieztrece.com/web/wp-content/uploads/2018/07/2a8abe6ddb0c4cfb6b7fd6690013d6df.png"></a>
+    </div> 
+    
+    
+    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-       
-        <li class="nav-item" routerLinkActive="active">
+      <ul class="flex-row navbar-nav float-right">    
+        <li class=" nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['principal']">PANEL DE CONTROL</a>
         </li>
+      </ul>  
+    </div> 
+
+
+    <div class="d-flex flex-column">          
+      <li class=" mt-6 btn btn-light" (click) = "logout()">
+        Logout
+      </li> 
+    </div>
         
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['login']">LOGIN</a>
-        </li>
-  
-   
-      </ul>
-    </div>    
+
+
+
+
   </nav>
+
+
+ 
 
 

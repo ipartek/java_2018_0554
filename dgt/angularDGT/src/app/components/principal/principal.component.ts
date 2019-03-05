@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-principal',
@@ -7,6 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrincipalComponent implements OnInit {
 
+  //variable dependiente del entorno
+  texto:string=environment.texto;
+
+
+  
   constructor() { }
 
   ngOnInit() {

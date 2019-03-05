@@ -168,6 +168,7 @@ public class LoginDAO {
 		a.setNombre(rs.getString("nombre"));
 		a.setPlaca(String.valueOf(rs.getString("placa")));
 		a.setPassword(rs.getString("password"));
+		a.setImagen(rs.getString("imagen"));
 		return a;
 	}
 }

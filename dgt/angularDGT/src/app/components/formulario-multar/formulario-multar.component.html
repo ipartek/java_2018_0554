@@ -42,10 +42,10 @@
           <p id="p" *ngIf="formulario.controls.concepto.invalid && formulario.controls.concepto.touched"  
           class="text-danger">*minimo 5 letras y máximo 200</p>     
         </div>
-        <button type="submit" class="btn btn-block btn-success mt-5" [disabled]="formulario.invalid">Crear Multa</button>
+        <button type="submit" class="btn btn-block btn-warning mt-5" [disabled]="formulario.invalid">Crear Multa</button>
 
         <div routerLinkActive="active">
-          <a class=" btn btn-outline-success btn-block btn-lg" [routerLink]="['/listarMultas']">LISTAR MULTAS ANULADAS</a>
+          <a class=" btn btn-outline-secondary btn-block btn-lg" [routerLink]="['/listarMultas']">LISTAR MULTAS ANULADAS</a>
         </div>
         
         
