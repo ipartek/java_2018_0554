@@ -73,15 +73,15 @@ export class MultaService {
 
   
 
-  public multar (importe: string, concepto: string, agente: AutorizacionService, coche: Vehiculo): Observable<any> {
+  public multar (multa: Multa): Observable<any> {
     let url = `http://localhost:8080/wsrest/api/multa/`;
     console.trace('MultaService multar uri:  '+ url);
     
     let body = {
-      "importe": importe,
-     "concepto": concepto,
-      "idAgente": agente.getAgente().id,
-      "idCoche": coche.id,
+      "importe": multa.importe,
+     "concepto": multa.concepto,
+      "id_agente": this.autorizacionService.getAgente().id,
+      "id_coche": this.getVehiculo().id,
         
     };
     return this.httpClient.post(url, body);

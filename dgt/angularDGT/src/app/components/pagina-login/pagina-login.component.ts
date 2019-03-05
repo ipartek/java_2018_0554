@@ -3,6 +3,8 @@ import { AutorizacionService } from 'src/app/providers/autorizacion.service';
 import { Router } from '@angular/router';
 import { Alert } from 'src/app/model/alert';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-pagina-login',
@@ -13,6 +15,8 @@ export class PaginaLoginComponent implements OnInit {
 
   formulario: FormGroup;
   alert: Alert;
+
+  texto: string = environment.texto;
 
   constructor(private autorizacionService: AutorizacionService,
     private formBuilder: FormBuilder,

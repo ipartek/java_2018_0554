@@ -124,4 +124,30 @@ public class MultaController {
 		return response;
 
 	}
+	
+	@RequestMapping(value = { "/api/multa/baja/{idMulta}" }, method = RequestMethod.PATCH)
+	public ResponseEntity<Multa> anular(@PathVariable int idMulta) {
+
+		ResponseEntity<Multa> response = new ResponseEntity<Multa>(HttpStatus.INTERNAL_SERVER_ERROR);
+		boolean anulado = false;
+		int id = -1;
+		try {
+			id = (int) idMulta;
+		} catch (Exception e1) {
+			response = new ResponseEntity<Multa>(HttpStatus.BAD_REQUEST);
+		}
+		try {
+			
+			anulado = multaService.anularMulta(id);
+//			insertado = multaDAO.insert(multa, idCoche);
+			if (anulado == true) {
+				response = new ResponseEntity<Multa>(HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			response = new ResponseEntity<Multa>(HttpStatus.NOT_FOUND);
+		}
+
+		return response;
+
+	}
 }

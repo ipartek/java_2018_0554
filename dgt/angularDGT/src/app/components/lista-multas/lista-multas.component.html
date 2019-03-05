@@ -1,12 +1,20 @@
 <div class="container mb-3 mt-3">
+
+    <div>
+        <a href="http://localhost:4200//principal" class="btn btn-outline-primary mt-3 mb-3 col-3">
+          Volver
+        </a>
+      </div>
+
   <div class="row d-flex align-items-center mb-3">
-    <div class="d-flex">
-        <p *ngIf="multas.length==0" class="spinner-border text-danger"></p>
+    <div class="d-flex">        
       <img class="mr-3 img-thumbnail" src="{{agente.imagen}}" alt="{{agente.nombre}}">
     </div>
     <p class="text-primary nombre">Agente: {{agente.nombre}}</p>
   </div>
 </div>
+
+<p *ngIf="multas.length==0" class="spinner-border text-danger"></p>
 
 <div class="btn-group mb-2" role="group" aria-label="Basic example">
   <button type="button" (click)="cambiarTabla(true)" class="{{(isActiva)?'btn btn-primary':'btn btn-secondary'}}">ACTIVAS</button>
@@ -25,6 +33,7 @@
       <th>Importe</th>
       <th>Modelo</th>
       <th>Concepto</th>
+      <th></th>
 
 
     </tr>
@@ -37,6 +46,8 @@
       <td>{{m.importe | moneda}}</td>
       <td>{{m.coche.modelo}}</td>
       <td>{{m.concepto}}</td>
+      <td><button type="submit" class="btn btn-block btn-danger" data-toggle="modal" data-target="#myModal">ANULAR
+          </button></td>
   </tbody>
 </table>
 
@@ -65,3 +76,25 @@
       <td>{{ma.fechaBaja | date}}</td>
   </tbody>
 </table>
+
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Próximamente</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            Estamos trabajando en ello...
+          </div>
+        
+            
+      </div>
+    </div>
+  </div>

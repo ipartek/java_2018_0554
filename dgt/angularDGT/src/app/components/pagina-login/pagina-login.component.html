@@ -11,6 +11,7 @@
     <p>Estado:  {{ formulario.status | json }}</p> 
   </div>
   
+  <p>{{texto}}</p>
   <app-alert [alert]="alert"></app-alert>
   
   <form [formGroup]="formulario" (submit)="comprobar()" >
