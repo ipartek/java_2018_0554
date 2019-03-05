@@ -45,7 +45,7 @@
       <td>{{m.importe | moneda}}</td>
       <td>{{m.coche.modelo}}</td>
       <td>{{m.concepto}}</td>
-      <td><button type="submit" class="btn btn-block btn-danger" data-toggle="modal" data-target="#myModal">ANULAR
+      <td><button type="submit" (click)="seleccionar(multa)" class="btn btn-block btn-danger" data-toggle="modal" data-target="#myModal">ANULAR
         </button></td>
   </tbody>
 </table>
@@ -92,7 +92,7 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" (click)="modificarAnular(multaSeleccionada.id)" class="btn btn-danger" data-dismiss="modal">Anular</button>&nbsp;
+        <button type="button" (click)="modificarAnular(multa.id)" class="btn btn-danger" data-dismiss="modal">Anular</button>&nbsp;
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
       </div>
 

@@ -25,6 +25,7 @@ export class ListaMultasComponent implements OnInit {
     this.alert = new Alert('');
     this.multasAnuladas = [];
     this.isActiva = false;
+    this.multaSeleccionada = new Multa(-1,0,'','',-1,-1);
 
   }
 
@@ -83,9 +84,10 @@ export class ListaMultasComponent implements OnInit {
 
   modificarAnular(idMulta: number){
     console.trace('click editar %o', idMulta);
+    
     this.multaService.anularMulta(idMulta).subscribe(
       resultado => {
-      console.debug(`Multa con ID: ${idMulta} dada de baja`);
+      console.debug(`Multa anulada`);
       this.getMultas(this.agente);
       
     }, error => {
@@ -93,5 +95,9 @@ export class ListaMultasComponent implements OnInit {
       console.warn('peticion incorrecta %o', error);
     });
 
+  }
+
+  seleccionar(multa: Multa){
+    this.multaSeleccionada = multa;
   }
 }

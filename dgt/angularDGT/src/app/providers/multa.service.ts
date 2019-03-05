@@ -88,12 +88,11 @@ export class MultaService {
   } 
 
 
-  public anularMulta(idMulta: number): Observable<any> {
+  public anularMulta(idMulta: number): Observable<any> {    
     let url = `http://localhost:8080/wsrest/api/multa/anular/${idMulta}`;
     console.trace('MultaService anularMulta uri:  '+ url);
 
     let body = {
-      
       
     };
 
