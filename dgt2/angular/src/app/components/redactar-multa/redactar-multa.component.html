@@ -1,0 +1,38 @@
+<app-nav></app-nav>
+<main role="main" class="inner cover">
+	<div class="col-12">
+		<h3 class="text-white p-3">Redactar multa</h3>
+		<p class="text-white ml-5">Rellena los campos con los detalles del vehiculo </p>
+
+
+		<form class="ml-5 text-white" [formGroup]="formulario" (submit)="comprobar()">
+			<div class="form-group">
+				<label for="matricula">Matricula: </label>
+				<input type="text" class="form-control" formControlName="matricula">
+			</div>
+			<div class="form-group text-white">
+				<label for="modelo">Modelo: </label>
+				<input type="text" class="form-control" formControlName="modelo">
+			</div>
+			<div class="form-group">
+				<label for="importe">Importe: </label> <!-- la e 'cuela' como numero irracional -->
+				<input type="number" class="form-control" formControlName="importe">
+				<small *ngIf="formulario.controls.importe.invalid && formulario.controls.importe.touched"
+					class="text-danger">Importe no puede ser nulo, 0 o menor</small>
+			</div>
+			<div class="form-group">
+				<label for="concepto">Concepto: </label>
+				<textarea class="form-control" formControlName="concepto" aria-describedby="importeHelp"
+					placeholder="Descripcion breve"></textarea>
+					<p class="float-right p-2" id="contador" name="contador">0/255</p> 
+				<small *ngIf="formulario.controls.concepto.invalid && formulario.controls.concepto.touched"
+					class="text-danger">Debes insertar al menos 3 caracteres, hasta 250</small>
+			</div>
+			<button type="submit" [disabled]="formulario.invalid" class="btn btn-lg btn-primary btn-block">
+				<span class="d-flex justify-content-center align-items-center">Crear
+
+				</span>
+			</button>
+		</form>
+	</div>
+</main>

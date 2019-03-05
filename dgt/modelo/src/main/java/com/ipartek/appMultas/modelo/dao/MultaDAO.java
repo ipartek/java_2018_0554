@@ -16,12 +16,9 @@ import com.ipartek.appMultas.modelo.pojo.Multa;
 public class MultaDAO {
 
 	private final static String SQL_GET_ALL_BY_ID_AGENTE = "{call pa_getMultasByIdAgente(?)}";
-
 	private final static String SQL_GET_BY_ID = "{call pa_getMultaById(?)}";
-
 	private final static String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
 	private final static String SQL_UPDATE = "{call pa_multa_update(?)}";
-	
 	private final static Logger LOG = Logger.getLogger(MultaDAO.class);
 
 	private static final String SQL_GET_ALL_BY_ID_AGENTE_ANULADA ="{call pa_getMultasByIdAgenteAnulada(?)}";

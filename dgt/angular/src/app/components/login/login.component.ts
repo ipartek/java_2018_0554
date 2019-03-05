@@ -14,7 +14,8 @@ import {
   AgenteService
 } from 'src/app/providers/agente.service';
 import { Alerta } from 'src/app/model/alerta';
-
+import { environment } from './../../../environments/environment';
+console.debug( 'Estamos leyendo el valor de la variable environment.texto: ' + environment.texto );
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -75,19 +76,19 @@ export class LoginComponent implements OnInit {
     this.agenteService.login(placa, pass).subscribe(
       data => {
         this.agenteService.setLogged(true);
-        this.agenteService.saveAgente(data);
+        this.agenteService.guardarAgente(data);
         if (this.agenteService.getAgente().id != -1) {
           console.debug('Agente obtenido %o', this.agenteService.getAgente());
         }
         console.info('isLogged: ' + this.agenteService.isLogged)
-        console.info('Logueado con exito %o', data);
+        console.info('Login correcto, tenemos permisos JSON: %o', data);
         this.router.navigate(['principal']);
       }, // data
       error => {
         this.agenteService.setLogged(false);
         console.warn('No tienes permisos');
         if (error.status == 403) {
-          this.alerta = new Alerta(`Usuario y/o contraseña incorrectos. Error ${error.status}`,
+          this.alerta = new Alerta(`Credenciales incorrectas, acceso denegado. Código de error: ${error.status}`,
             Alerta.TIPO_WARNING);
           console.error('Error esperado: ' + error.status);
         } else {

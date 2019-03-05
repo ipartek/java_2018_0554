@@ -35,18 +35,18 @@
       <thead class="thead-dark">
         <tr>
           <th>ID</th>
-          <th>Fecha</th>
           <th>Concepto</th>
           <th>Importe</th>  
+          <th>Fecha Alta</th>
           <th>Fecha Baja</th>
         </tr>  
       </thead>
       <tbody>
         <tr *ngFor="let multa of multasAnuladas">
           <td>{{ multa.id }}</td>
-          <td>{{ multa.fecha | date :'medium' }}</td>
           <td>{{ multa.concepto }}</td>
           <td>{{ multa.importe | moneda : 'es' }}</td>
+          <td>{{ multa.fecha | date :'medium' }}</td>
           <td>{{ multa.fechaBaja | date :'medium' }}</td>
         </tr>
       </tbody>

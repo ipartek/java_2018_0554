@@ -1,12 +1,11 @@
-import { AgenteService } from '../../providers/agente.service';
 import { Component, OnInit } from '@angular/core';
-import { Alerta } from 'src/app/model/alerta';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MultaService } from 'src/app/providers/multa.service';
-import { Router } from '@angular/router';
-import { Agente } from 'src/app/model/agente';
 import { Multa } from 'src/app/model/multa';
-
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Coche } from 'src/app/model/coche';
+import { Alerta } from 'src/app/model/alerta';
+import { Router } from '@angular/router';
+import { AgenteService } from 'src/app/providers/agente.service';
+import { MultaService } from 'src/app/providers/multa.service';
 
 @Component({
   selector: 'app-redactar-multa',
@@ -14,88 +13,103 @@ import { Multa } from 'src/app/model/multa';
   styleUrls: ['./redactar-multa.component.scss']
 })
 export class RedactarMultaComponent implements OnInit {
-  formulario: FormGroup;
-  alerta: Alerta;
-  coche: any; //DAO en funcionamiento, TODO: arreglar fallo al importar el coche desde la base de datos medieante angular
-  agente: any;
-  vehiculo: any;
+    multaRegistrada: Multa;
+    formulario: FormGroup;
+    coche: Coche;
+    alerta: Alerta;
 
+    contadorTexto: any;
+    colorTexto: String;
 
-
-  //almacenar los datos recopilados por el formulario , metodo post + que liste los nuevos registros (deberia hacerse automaticamente)
-
-
-  constructor(private agenteService: AgenteService,
-    private multaService: MultaService,
-    private formBuilder: FormBuilder,
-    private router: Router) {
-
-    console.log('RedactarMultaComponent constructor');
+  constructor(private router: Router, private multaService: MultaService, private agenteService: AgenteService, private formBuilder: FormBuilder) { 
+    
+    console.trace("constructor datos-multa");
+    this.coche = this.multaService.getCocheGuardado();
     this.crearFormulario();
+
+    //inicializando el contador
+    this.contadorTexto=[];
+  this.colorTexto="";}
+
+    
+  ngOnInit() {console.trace("ngOnInit datos-multa");
+  console.debug("Coche obtenido: %o", this.coche);
   }
-
-
-
-  /**
-   * Creando un formulario que ingrese los valores de vehiculo y agente en el nuevo registro
-   * importe tendra un valor de minima existencia pero el concepto deberá ser menor a 250 caracteres
-   */
   crearFormulario() {
-    console.trace('PaginaLoginComponent crearFormulario');
+    console.trace('MatriculaComponent crearFormulario');
     this.formulario = this.formBuilder.group({
+      matricula: [
+        this.coche.matricula        
+      ],
+      modelo: [
+        this.coche.modelo
+      ],
       importe: [
-        '',
-        [Validators.required]
+        undefined,
+        [Validators.required, Validators.min(1)]
       ],
       concepto: [
         '',
-        [Validators.required, Validators.minLength(3), Validators.maxLength(250)] //limite 250 caracteres 
+        [Validators.required, Validators.minLength(10), Validators.maxLength(255)]
       ]
     });
 
-  }// crearFormulario
-  crearMulta() {
-    console.trace('RedactarMultaComponent, this.crearMulta');
+  } // crearFormulario
 
-    //pasando valores del formulario a un nuevo objeto Multa
 
+  //contador de caracteres con limites de 3-250
+//color: verde (3-249), rojo en caso contrario
+
+  contador(contadorTexto: String){
+
+    if(this.contadorTexto.length === 255 || this.contadorTexto<3){
+      this.colorTexto = "text-danger";
+      this.contadorTexto = contadorTexto.length;
+      
+    }else{
+      this.colorTexto = "text-success bg-white";
+      this.contadorTexto = contadorTexto.length;
+      
+     
+
+//si el contador llega a 250 deshabilitar la edicion del textarea
+  }
+  }
+  comprobar(){
+    console.trace('click boton submit DatosMultaComponent');
     let importe = this.formulario.controls.importe.value;
     let concepto = this.formulario.controls.concepto.value;
-    console.debug('importe: %s concepto: %s', importe, concepto);
+    let agente = this.agenteService.getAgente();
+    let coche = this.multaService.getCocheGuardado();
 
-    // mappear de formulario a Multa
-    let multa = new Multa(
-      -1,
-      this.formulario.value.importe,
-      this.formulario.value.concepto,
-      this.coche.id,
-      this.agente.id
+    console.debug('agente: %o, coche: %o, importe: %s, concepto: %s', agente, coche, importe, concepto);
 
-
-    );
-    //llamar servicio TODO retornar Observable
-
-    // Cuidado es una llamada Asincrona
-    this.multaService.multar(multa).subscribe(
+    this.multaService.multaPost(importe, concepto, agente, coche).subscribe(
       data => {
         console.debug('Json Multa %o', data);
-        this.crearFormulario();
-        this.router.navigate(['/pagina-multas']);
+        this.multaRegistrada = data;
+        console.debug('Multa Registrada: %o', this.multaRegistrada);
+        if(this.multaRegistrada.id != -1){
+          this.router.navigate(["pagina-multas"]);
+        }else{
+          this.alerta = new Alerta(`No se ha podido crear la multa`);
+        }
       },
       error => {
-        console.warn('error multa %o', error);
-        this.agenteService.setLogged(false);
-        this.alerta = new Alerta('Error al crear multa');
+        if (error.status == 400) {
+          this.alerta = new Alerta(` Error: ${error.status}, Verifica los datos.`,
+            Alerta.TIPO_WARNING);
+          console.error('Error encontrado: ' + error.status);
+        } else if (error.status == 500){
+          this.alerta = new Alerta(`Error: ${error.status}, Error del servidor. `);
+          console.error(error.status);
+        }else{
+          this.alerta = new Alerta(`Error: ${error.status}, Error no esperado.`);
+          console.error(error.status);
+        }
       }
-    );
+    )
 
-
-  }
-
-  ngOnInit() {
-    console.trace('RedactarMultaComponent ngOnInit');
-    this.agenteService.getAgente();
-    this.multaService.getCoche();
-  }
+  } 
 
 }

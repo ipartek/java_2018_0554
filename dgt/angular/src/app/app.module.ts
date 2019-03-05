@@ -13,8 +13,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertComponent } from './components/alert/alert.component';
 import { Error404Component } from './components/error404/error404.component';
 import { MatriculaComponent } from './components/matricula/matricula.component';
-import { DatosMultaComponent } from './components/datos-multa/datos-multa.component';
 import { RedactarMultaComponent } from './components/redactar-multa/redactar-multa.component';
+import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
+import { AnularMultaComponent } from './components/anular-multa/anular-multa.component';
 
 
 @NgModule({
@@ -28,15 +29,16 @@ import { RedactarMultaComponent } from './components/redactar-multa/redactar-mul
     AlertComponent,
     Error404Component,
     MatriculaComponent,
-    DatosMultaComponent,
-    RedactarMultaComponent
+    RedactarMultaComponent,
+    EstadisticasComponent,
+    AnularMultaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
