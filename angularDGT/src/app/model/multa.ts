@@ -38,10 +38,10 @@ export class Multa {
         this._id = value;
     }
 
-    public get importe_1(): number {
+    public get importe(): number {
         return this._importe;
     }
-    public set importe_1(value: number) {
+    public set importe(value: number) {
         this._importe = value;
     }
   

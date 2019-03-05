@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Alert } from 'src/app/model/alert';
 import { MultasService } from 'src/app/services/multas.service';
+import { AutorizacionService } from 'src/app/services/autorizacion.service';
 
 @Component({
   selector: 'app-multar-matricula',
@@ -13,22 +14,26 @@ export class MultarMatriculaComponent implements OnInit {
 
   formulario: FormGroup;  
   alert: Alert;
+  agente: any;
 
   constructor(
     private multasService: MultasService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private autorizacionService: AutorizacionService
   ) { 
-    console.trace('LoginComponent constructor');
+    console.trace('MultarMatriculaComponent constructor');
     this.crearFormulario();
     this.alert = new Alert('');
   }
 
   ngOnInit() {
+    console.trace('MultarMatriculaComponent ngOnInit');
+    this.getAgenteInfo();
   }
 
   crearFormulario(){
-    console.trace('LoginComponent crearFormulario');
+    console.trace('MultarMatriculaComponent crearFormulario');
     this.formulario = this.formBuilder.group({
       matriculaenv: [
                 '',                                                                         
@@ -40,14 +45,14 @@ export class MultarMatriculaComponent implements OnInit {
   enviarMatricula(){
     console.trace('click boton submit');
     let matriculaenv = this.formulario.controls.matriculaenv.value;
-    console.debug('placa: %s password: %s',matriculaenv);
+    console.debug('matricula: %s',matriculaenv);
 
     // llamar servicio Rest, realizar logica dentro de subscripcion
     // Cuidado es una llamada Asincrona
-    this.multasService.existeMatricula(matriculaenv).subscribe(
+    this.multasService.existeMatricul(matriculaenv).subscribe(
       data =>{
         console.debug('Json Agente %o', data);
-        this.multasService.existeMatricula(data);
+        this.multasService.existeMatricul(data);
         this.router.navigate(['/multar']);
       },
       error=>{
@@ -57,4 +62,8 @@ export class MultarMatriculaComponent implements OnInit {
     );
     // *** Cuidado no intentar usar datos de la respuesta aqui ***
   }// comprobar
+
+  getAgenteInfo(){
+    this.agente = this.autorizacionService.getAgente();
+  }
 }

@@ -1,22 +1,22 @@
-<table *ngIf="multas.length !== 0"  class="table table-striped responsive no-wrap">
+<table *ngIf="isActiva==true"  class="table table-striped responsive no-wrap">
 	<thead>
 		<tr>
 			<th scope="col">Fecha</th>
 			<th scope="col">Matrícula</th>
 			<th scope="col">Importe</th>
 			<th scope="col">Concepto</th>
-			<th scope="col">Anular</th>
+			<!--<th scope="col">Anular</th>-->
 		</tr>
 	</thead>
 	<tbody>
 		<tr *ngFor="let m of multas">
-			<th scope="row">{{m.fecha}}</th>
+			<th scope="row">{{m.fechaAlta}}</th>
 			<td>{{m.coche.matricula}}</td>
 			<td>{{m.importe}}</td>
 			<td>{{m.concepto}}</td>
-			<td><button type="button" class="btn anular" data-toggle="modal" data-target="#modal${m.id}">
+			<!--<td><button type="button" class="btn anular" data-toggle="modal" data-target="#modal${m.id}">
 				<span class="icon-bin"></span></button>
-			</td>
+			</td>-->
 		</tr>
 		<div class="modal fade" id="modal${m.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">

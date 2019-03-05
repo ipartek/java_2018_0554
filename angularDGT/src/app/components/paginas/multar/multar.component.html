@@ -1,7 +1,7 @@
 <div class="container marketing">
 	<div class="centrar">
 		<app-alert [alert]="alert"></app-alert>
-		<form action="multas" method="post">
+		<form [formGroup]="formulario" (submit)="nueva()">
 			<input type="hidden" class="form-control" name="coche_id" value="${coche.id}">
 			<input type="hidden" class="form-control" name="id_agente" value="${sessionScope.ag.id}">
 			<div class="col">
@@ -14,14 +14,14 @@
 				<input type="text" class="form-control" placeholder="distancia recorrida (en km)" readonly>
 			</div>
 			<div class="col">
-				<input type="number" class="form-control" name="importe" placeholder="Importe de la multa (en €)">
+				<input type="number" class="form-control" name="importe" formControlName="importe" placeholder="Importe de la multa (en €)">
 				<!--<div class="input-group-prepend">
 				<div class="input-group-text">€</div>
 				</div>-->
 			</div>
 			<div class="col">
 				<label for="concepto"><span id="contadorLabel">(0/250)</span></label>
-				<textarea id="concepto" class="form-control" name="concepto" placeholder="Concepto" rows="3"></textarea>
+				<textarea id="concepto" class="form-control" name="concepto" formControlName="concepto" placeholder="Concepto" rows="3"></textarea>
 			</div>
 			<button type="submit" class="btn btn-dark">Crear multa</button>
 		</form>

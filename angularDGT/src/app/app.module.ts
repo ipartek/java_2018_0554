@@ -9,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertComponent } from './components/componentes/alert/alert.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MultasComponent } from './components/paginas/multas/multas.component';
-import { MultasBajaComponent } from './components/paginas/multas-baja/multas-baja.component';
 import { MultarMatriculaComponent } from './components/paginas/multar-matricula/multar-matricula.component';
 import { MultarComponent } from './components/paginas/multar/multar.component';
 
@@ -20,7 +19,6 @@ import { MultarComponent } from './components/paginas/multar/multar.component';
     IndexComponent,
     AlertComponent,
     MultasComponent,
-    MultasBajaComponent,
     MultarMatriculaComponent,
     MultarComponent
   ],

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MultasService } from 'src/app/services/multas.service';
 import { AutorizacionService } from 'src/app/services/autorizacion.service';
-import { Router } from '@angular/router';
 import { Multa } from 'src/app/model/multa';
 import { Alert } from 'src/app/model/alert';
 
@@ -14,37 +13,59 @@ import { Alert } from 'src/app/model/alert';
 export class MultasComponent implements OnInit {
 
   multas: Multa[];
-  alerta: Alert;
+  alert: Alert;
+  agente: any;
+  multasAnuladas: Multa[];
+  isActiva: boolean;
 
   constructor(
-    private multasService: MultasService,
+    public multasService: MultasService,
     private autorizacionService: AutorizacionService,
-    private router: Router) { 
+  ) { 
       this.multas = [];
-      this.alerta = new Alert('');
+      this.alert = new Alert('');
+      this.multasAnuladas = [];
+      this.isActiva = false;
     }
 
   ngOnInit() {
-    this.listarMultas();
+    this.getAgenteInfo();
+    this.getMultas(this.agente);
+    this.getMultasAnuladas(this.agente);
   }
 
-  listarMultas() {
-    console.log('ListadoMultasComponent listarMultas');
+  getAgenteInfo(){
+    this.agente = this.autorizacionService.getAgente();
+  }
+
+  getMultas(id: number) {
+    console.log('TodosComponent getAllByUser');
     this.multas = [];
-    this.multasService.obtenerMultas( this.autorizacionService.getAgente().id ).subscribe(resultado => {
-      console.debug('Resultado %o', resultado);
-      this.mapper(resultado);
-    }, error => {
-      this.alerta = new Alert(`Error inesperado. Código de error: ${error.status}`);
-      console.warn('peticion incorrecta %o', error);
-    });
-  }
+    this.multasAnuladas = [];
+    this.multasService.listarMultas(this.agente.id).subscribe(resultado => {
+      console.debug('peticion correcta %o', resultado);
+      // this.mapeo(resultado);
+      // this.todos = resultado.filter( todo => !todo.completed );
+      this.isActiva = true;
+      this.multas = resultado;
+    },
+      error => {
+        console.warn('peticion incorrecta %o', error);
+      }
+    );//subscribe   
+  }//getMultas
 
-  mapper( result: any ){
-    let multa: Multa;
-    result.forEach(el => {
-      multa = new Multa(el.id, el.importe, el.concepto, el.fechaAlta, el.idAgente, el.idCoche, el.fechaModificacion, el.fechaBaja);
-      this.multas.push(multa);
+  getMultasAnuladas(id: number) {
+    console.log('ListadoMultasComponent getMultasAnuladas');
+    this.multas = [];
+    this.multasAnuladas = [];
+    this.multasService.listarMultasAnuladas(this.agente.id).subscribe(resultado => {
+      console.debug('Resultado %o', resultado);
+      this.isActiva = true;
+      this.multasAnuladas = resultado;
+    },  error => {
+      console.warn('peticion incorrecta %o', error);
+    
     });
   }
 

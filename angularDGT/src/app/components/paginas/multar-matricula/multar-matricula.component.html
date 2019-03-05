@@ -1,14 +1,13 @@
 <div class="container marketing">
 	<div class="centrar">
-		<img src="../../assets/img/matricula.png" alt="coche policia">
 		<app-alert [alert]="alert"></app-alert>
-		<form [formGroup]="formulario" (submit)="comprobar()">
+		<form [formGroup]="formulario" (submit)="enviarMatricula()">
 			<div class="row">
 				<div class="col">
 					<input type="text" formControlName="matriculaenv" name="matriculaenv" placeholder="Introduce la matrícula" class="form-control">
 				</div>
 			</div>
-			<button type="submit" class="btn btn-dark">Enviar</button>
+			<button type="submit" class="btn btn-dark" [disabled]="formulario.invalid">Enviar</button>
 		</form>
 	</div>
 </div>
