@@ -39,7 +39,7 @@ Esta app trabaja con Bases de Datos diseñadas en **MySQL InnoBD** con el fin de
 
 El siguiente esquema representa la BBDD:
 
-<img src="https://github.com/andonishiraiwa/dgt/blob/master/SQL/multas.png"></img>
+<img src="https://github.com/ipartek/java_2018_0554/blob/xabiereguskiza/dgt/WS_REST/src/main/webapp/imagenes/esquema.png"></img>
 
 
 

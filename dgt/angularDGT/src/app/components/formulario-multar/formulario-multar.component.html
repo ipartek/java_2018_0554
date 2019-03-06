@@ -3,6 +3,9 @@
   <p>Agente: {{ agente | json}}</p>
 </div>-->
 
+<app-nav></app-nav>
+
+<main role="main" class="container p-2"> 
 <app-alert [alert]="alert"></app-alert>
 
 <div>
@@ -11,7 +14,7 @@
 	</a>
 </div>
 
-<app-nav></app-nav>
+
 
 <div class="container" style="border:1px solid #17A2B8; padding:10px;" id="receta">
 	
@@ -39,3 +42,5 @@
 		Multar
 	</button>
 </form>
+
+</main>

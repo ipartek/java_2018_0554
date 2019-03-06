@@ -47,7 +47,7 @@
             <th>Hora</th>
             <th>Importe</th>
             <th>Modelo</th>
-            <th>Concepto</th>
+            <!--<th>Concepto</th>-->
             <th></th>
 
 
@@ -60,7 +60,7 @@
             <td>{{m.fechaAlta | date:'shortTime'}}</td>
             <td>{{m.importe | moneda}}</td>
             <td>{{m.coche.modelo}}</td>
-            <td>{{m.concepto}}</td>
+            <!--<td>{{m.concepto}}</td>-->
             <td><button type="submit" (click)="seleccionar(m)" class="btn btn-block btn-danger" data-toggle="modal"
                 data-target="#myModal">ANULAR
               </button></td>
@@ -75,7 +75,7 @@
             <th>Hora</th>
             <th>Importe</th>
             <th>Modelo</th>
-            <th>Concepto</th>
+            <!--<th>Concepto</th>-->
             <th>Fecha Baja</th>
             <th></th>
 
@@ -89,7 +89,7 @@
             <td>{{ma.fechaAlta | date:'shortTime'}}</td>
             <td>{{ma.importe | moneda}}</td>
             <td>{{ma.coche.modelo}}</td>
-            <td>{{ma.concepto}}</td>
+            <!--<td>{{ma.concepto}}</td>-->
             <td>{{ma.fechaBaja | date}}</td>
             <td><button type="submit" (click)="seleccionar(ma)" class="btn btn-block btn-primary" data-toggle="modal"
                 data-target="#myModalDes">DES-ANULAR
