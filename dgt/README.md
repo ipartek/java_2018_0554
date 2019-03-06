@@ -49,7 +49,7 @@ La app cuenta con un diseño responsive que se adapta a todos los dispositivos m
   A continuación mostramos unos ejemplos de la vista:
   
  ### Página de Login
- <img src="https://github.com/ipartek/java_2018_0554/blob/xabiereguskiza/dgt/WS_REST/src/main/webapp/imagenes/login.png" width="250" height="500">
+ <img src="https://github.com/ipartek/java_2018_0554/blob/xabiereguskiza/dgt/WS_REST/src/main/webapp/imagenes/login.png" width="150" height="300">
   
  ### Principal y gestión de Multas
  
