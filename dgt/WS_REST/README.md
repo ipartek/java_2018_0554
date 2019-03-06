@@ -48,16 +48,18 @@ La app cuenta con un diseño responsive que se adapta a todos los dispositivos m
  
   A continuación mostramos unos ejemplos de la vista:
   
- ### Página Principal
+ ### Página de Login
  <img src="https://github.com/andonishiraiwa/dgt/blob/master/src/main/webapp/images/readme/index.png" width="250" height="500">
   
- ### Listado y gestión de Multas
+ ### Principal y gestión de Multas
  
 <table>
 <tr>
-<td width="20%"><img src="https://github.com/andonishiraiwa/dgt/blob/master/src/main/webapp/images/readme/buscar.png"></td>
-<td width="20%"><img src="https://github.com/andonishiraiwa/dgt/blob/master/src/main/webapp/images/readme/redactar.png"></td>
-<td width="20%"><img src="https://github.com/andonishiraiwa/dgt/blob/master/src/main/webapp/images/readme/lista.png"></td>
+<td width="20%"><img src="https://github.com/ipartek/java_2018_0554/blob/xabiereguskiza/dgt/WS_REST/src/main/webapp/imagenes/principal.png"></td>
+<td width="20%"><img src="https://github.com/ipartek/java_2018_0554/blob/xabiereguskiza/dgt/WS_REST/src/main/webapp/imagenes/buscar.png"></td>
+<td width="20%"><img src="https://github.com/ipartek/java_2018_0554/blob/xabiereguskiza/dgt/WS_REST/src/main/webapp/imagenes/multar.png"></td>
+<td width="20%"><img src="https://github.com/ipartek/java_2018_0554/blob/xabiereguskiza/dgt/WS_REST/src/main/webapp/imagenes/multas.png"></td>
+
 
  </tr>
  
@@ -65,4 +67,4 @@ La app cuenta con un diseño responsive que se adapta a todos los dispositivos m
  
 
 ## Desarrolladores
-App desarollada por **andonishiraiwa** y **Xabage**
+App desarollada por Xabier Eguskiza
