@@ -35,8 +35,8 @@ public class MultaDAO {
 	private static final String SQL_UPDATE = "{call pa_multa_update(?,?)}";
 	private static final String SQL_GETALL_BY_AGENTE = "SELECT a.id AS 'agente_id', a.nombre, a.placa, a.imagen, c.id AS 'coche_id', c.matricula, c.modelo, c.km, m.id AS 'multa_id', m.importe, m.concepto, m.fecha_alta, m.fecha_baja, m.id_coche, m.id_agente FROM agente As a, coche AS c, multa AS m WHERE m.id_coche = c.id AND m.id_agente = a.id AND a.id = ? AND m.fecha_baja IS NULL";
 	private static final String SQL_GETALL_BY_AGENTE_ANULADA = "SELECT a.id AS 'agente_id', a.nombre, a.placa, a.imagen, c.id AS 'coche_id', c.matricula, c.modelo, c.km, m.id AS 'multa_id', m.importe, m.concepto, m.fecha_alta, m.fecha_baja, m.id_coche, m.id_agente FROM agente As a, coche AS c, multa AS m WHERE m.id_coche = c.id AND m.id_agente = a.id AND a.id = ? AND m.fecha_baja IS NOT NULL;";
-	private static final String SQL_ANULAR = "UPDATE `dgt`.`multa` SET fecha_baja = current_timestamp WHERE id = ?;";
-	private static final String SQL_DES_ANULAR = "UPDATE `dgt`.`multa` SET fecha_baja = null WHERE id = ?;";
+	private static final String SQL_ANULAR = "UPDATE `dgt_xabi`.`multa` SET fecha_baja = current_timestamp WHERE id = ?;";
+	private static final String SQL_DES_ANULAR = "UPDATE `dgt_xabi`.`multa` SET fecha_baja = null WHERE id = ?;";
 	// constructor privado, solo acceso por getInstance()
 	private MultaDAO() {
 		super();
