@@ -93,7 +93,7 @@ CREATE TABLE `multa` (
   KEY `fk__idx` (`id_agente`),
   CONSTRAINT `fk_multa_agente` FOREIGN KEY (`id_agente`) REFERENCES `agente` (`id`),
   CONSTRAINT `fk_multa_coches` FOREIGN KEY (`id_coche`) REFERENCES `coche` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `multa` (
 
 LOCK TABLES `multa` WRITE;
 /*!40000 ALTER TABLE `multa` DISABLE KEYS */;
-INSERT INTO `multa` VALUES (12,21.53,'234567876532weerewtrwywete','2018-09-14 10:25:30',1,1,NULL,'2019-01-15 12:35:22'),(13,0,'por muy feo','2018-09-14 11:06:39',1,1,NULL,NULL),(14,500,'por muy feo','2018-08-14 13:02:47',1,1,NULL,'2019-01-15 12:35:22'),(15,500.7,'vas mas borracho que el tato','2018-06-15 12:25:10',2,2,NULL,NULL),(16,500.7,'borrachuzo de mierda','2018-05-15 12:31:15',4,2,NULL,'2019-01-15 12:35:22'),(17,500.7,'borrachuzo de mierda','2018-02-15 12:33:21',2,2,NULL,NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',4,3,NULL,NULL),(19,500.7,'borrachuzo de mierda','2018-08-15 12:37:48',2,3,NULL,NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,3,NULL,'2019-01-15 12:35:22'),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',3,2,NULL,NULL),(22,500.7,'borrachuzo de mierda','2018-04-15 12:42:02',2,4,NULL,'2019-01-15 12:35:22'),(23,500.7,'borrachuzo de mierda','2018-07-15 12:45:28',3,4,NULL,'2019-01-15 12:35:22'),(24,500.7,'borrachuzo de mierda','2018-11-15 12:45:32',2,4,NULL,NULL),(25,500.7,'borrachuzo de mierda','2018-01-15 12:46:07',3,1,NULL,NULL),(26,500.7,'borrachuzo de mierda','2018-10-15 12:48:21',2,1,NULL,NULL),(27,500.7,'borrachuzo de mierda','2018-11-15 12:49:41',2,4,NULL,'2019-01-15 12:35:22'),(28,456.6,'fdgrd','2018-12-16 09:21:46',2,4,NULL,NULL),(29,540.59,'aefwefwefwfewefwe','2018-12-17 12:08:48',1,1,NULL,'2019-01-15 12:35:22'),(30,1445,'pruebaaaaaaa','2018-03-20 21:21:10',2,4,NULL,NULL),(31,0,'khfkesjh','2018-03-21 10:02:01',3,4,NULL,'2019-01-15 12:35:22');
+INSERT INTO `multa` VALUES (12,21.53,'234567876532weerewtrwywete','2018-09-14 10:25:30',1,1,NULL,'2019-01-15 12:35:22'),(13,0,'por muy feo','2018-09-14 11:06:39',1,1,NULL,NULL),(14,500,'por muy feo','2018-08-14 13:02:47',1,1,NULL,'2019-01-15 12:35:22'),(15,500.7,'vas mas borracho que el tato','2018-06-15 12:25:10',2,2,NULL,NULL),(16,500.7,'borrachuzo de mierda','2018-05-15 12:31:15',4,2,NULL,'2019-01-15 12:35:22'),(17,500.7,'borrachuzo de mierda','2018-02-15 12:33:21',2,2,NULL,NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',4,3,NULL,NULL),(19,500.7,'borrachuzo de mierda','2018-08-15 12:37:48',2,3,NULL,NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,3,NULL,'2019-01-15 12:35:22'),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',3,2,NULL,NULL),(22,500.7,'borrachuzo de mierda','2018-04-15 12:42:02',2,4,NULL,'2019-01-15 12:35:22'),(23,500.7,'borrachuzo de mierda','2018-07-15 12:45:28',3,4,NULL,'2019-01-15 12:35:22'),(24,500.7,'borrachuzo de mierda','2018-11-15 12:45:32',2,4,NULL,NULL),(25,500.7,'borrachuzo de mierda','2018-01-15 12:46:07',3,1,NULL,NULL),(26,500.7,'borrachuzo de mierda','2018-10-15 12:48:21',2,1,NULL,NULL),(27,500.7,'borrachuzo de mierda','2018-11-15 12:49:41',2,4,NULL,'2019-01-15 12:35:22'),(28,456.6,'fdgrd','2018-12-16 09:21:46',2,4,NULL,NULL),(29,540.59,'aefwefwefwfewefwe','2018-12-17 12:08:48',1,1,NULL,'2019-01-15 12:35:22'),(30,1445,'pruebaaaaaaa','2018-03-20 21:21:10',2,4,NULL,NULL),(31,0,'khfkesjh','2018-03-21 10:02:01',3,4,NULL,'2019-01-15 12:35:22'),(32,2000,'caca de la vaca','2019-03-05 12:56:27',1,1,NULL,NULL),(33,1234,'<xczxzxcxzc','2019-03-05 13:07:05',1,1,NULL,NULL);
 /*!40000 ALTER TABLE `multa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,6 +207,32 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `pa_multa_activar` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_multa_activar`(IN p_id LONG)
+BEGIN
+
+	UPDATE 
+		multa 
+    SET 
+		fecha_baja = null 
+	WHERE 
+		id = p_id;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `pa_multa_anulada_getByAgenteId` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -249,6 +275,32 @@ BEGIN
 	ORDER BY m.id DESC LIMIT 1000;
             
 
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `pa_multa_anular` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_multa_anular`(IN p_id LONG)
+BEGIN
+
+	UPDATE 
+		multa 
+    SET 
+		fecha_baja = CURRENT_TIMESTAMP  
+	WHERE 
+		id = p_id;
 
 END ;;
 DELIMITER ;
@@ -445,4 +497,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-05 12:47:55
+-- Dump completed on 2019-03-06  9:13:56

@@ -90,8 +90,6 @@ END
 
 
 
-
-
 4.call pa_multa_insert:
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_multa_insert`(IN p_importe FLOAT, IN p_concepto VARCHAR(255),  IN p_id_agente LONG, IN p_id_coche LONG, OUT o_id LONG)
@@ -109,4 +107,35 @@ END
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_coche_getByMatricula`(IN p_matricula VARCHAR(50))
 BEGIN
 SELECT id,matricula,modelo,km FROM coche WHERE matricula= p_matricula;
+END
+
+
+
+6.pa_multa_activar
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_multa_activar`(IN p_id LONG)
+BEGIN
+
+	UPDATE 
+		multa 
+    SET 
+		fecha_baja = null 
+	WHERE 
+		id = p_id;
+
+END
+
+
+
+7. pa_multa_anular:
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_multa_anular`(IN p_id LONG)
+BEGIN
+
+	UPDATE 
+		multa 
+    SET 
+		fecha_baja = CURRENT_TIMESTAMP  
+	WHERE 
+		id = p_id;
+
 END
