@@ -39,6 +39,9 @@ export class ListadoMultasComponent implements OnInit {
     this.agenteService.getMultas( this.agenteService.getAgente().id ).subscribe(resultado => {
       console.debug('Resultado %o', resultado);
       this.mapper(resultado);
+      this.multas.sort(function (a, b) {
+        return (b.id - a.id);
+      });
     }, error => {
       this.alerta = new Alerta(`Error inesperado. Código de error: ${error.status}`);
       console.warn('peticion incorrecta %o', error);
@@ -52,15 +55,20 @@ export class ListadoMultasComponent implements OnInit {
     this.agenteService.getMultasAnuladas( this.agenteService.getAgente().id ).subscribe(resultado => {
       console.debug('Resultado %o', resultado);
       this.mapperAnuladas(resultado);
+      this.multasAnuladas.sort(function (a, b) {
+        return (b.id - a.id);
+      });
     }, error => {
       this.alerta = new Alerta(`Error inesperado. Código de error: ${error.status}`);
       console.warn('peticion incorrecta %o', error);
     });
+    console.debug('Ordenando multas anuladas');
+    this.multasAnuladas.sort();
   }
 
   anularMulta(idMulta: number) {
     console.log('ListadoMultasComponent anularMulta ID: ' + idMulta);
-    
+
     this.multaService.patchMulta( idMulta, 'baja' ).subscribe(resultado => {
       console.debug(`Multa con ID: ${idMulta} dada de baja`);
       this.alerta = new Alerta(`Multa con ID: ${idMulta} dada de baja`, Alerta.TIPO_SUCCESS);
@@ -73,7 +81,7 @@ export class ListadoMultasComponent implements OnInit {
 
   reactivarMulta(idMulta: number) {
     console.log('ListadoMultasComponent reactivarMulta ID: ' + idMulta);
-    
+
     this.multaService.patchMulta( idMulta, 'alta' ).subscribe(resultado => {
       console.debug(`Multa con ID: ${idMulta} dada de alta`);
       this.alerta = new Alerta(`Multa con ID: ${idMulta} reactivada`, Alerta.TIPO_SUCCESS);
@@ -94,7 +102,6 @@ export class ListadoMultasComponent implements OnInit {
     result.forEach(el => {
       multa = new Multa(el.id, el.importe, el.concepto, el.fecha);
       this.multas.push(multa);
-      this.multas.sort();
     });
   }
 
@@ -103,7 +110,6 @@ export class ListadoMultasComponent implements OnInit {
     result.forEach(el => {
       multa = new Multa(el.id, el.importe, el.concepto, el.fecha, el.fecha_baja);
       this.multasAnuladas.push(multa);
-      this.multasAnuladas.sort();
     });
   }
 
