@@ -5,12 +5,12 @@ import { Multa } from 'src/app/model/multa';
 import { Alert } from 'src/app/model/alert';
 
 @Component({
-  selector: 'app-multas',
-  templateUrl: './multas.component.html',
-  styleUrls: ['./multas.component.scss']
+  selector: 'app-multas-baja',
+  templateUrl: './multas-baja.component.html',
+  styleUrls: ['./multas-baja.component.scss']
 })
 
-export class MultasComponent implements OnInit {
+export class MultasBajaComponent implements OnInit {
 
   multas: Multa[];
   alert: Alert;
@@ -30,14 +30,12 @@ export class MultasComponent implements OnInit {
 
   ngOnInit() {
     this.getAgenteInfo();
-    this.getMultas(this.agente);
     this.getMultasAnuladas(this.agente);
   }
 
   getAgenteInfo(){
     this.agente = this.autorizacionService.getAgente();
   }
-
   getMultas(id: number) {
     console.log('TodosComponent getAllByUser');
     this.multas = [];
@@ -52,7 +50,6 @@ export class MultasComponent implements OnInit {
       }
     );//subscribe   
   }//getMultas
-
   getMultasAnuladas(id: number) {
     console.log('ListadoMultasComponent getMultasAnuladas');
     this.multas = [];
@@ -66,5 +63,4 @@ export class MultasComponent implements OnInit {
     
     });
   }
-
-}
+};

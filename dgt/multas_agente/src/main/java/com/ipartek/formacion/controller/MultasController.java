@@ -109,6 +109,9 @@ public class MultasController extends HttpServlet {
 		case "ver":
 			opVer(request);
 			break;
+		case "VerAnuladas":
+			opVerAnuladas(request);
+			break;
 		case "irA":
 			opIrA(request);
 			break;
@@ -208,6 +211,33 @@ public class MultasController extends HttpServlet {
 				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "No se han puesto multas");
 				LOG.error(mensaje.getTexto());
 			}
+			vista = VISTA_INDEX;
+		} else {
+			long idMulta = Long.parseLong(idMultaStr);
+			try {
+				request.setAttribute("multa", m);
+				LOG.info("Información de la multa "+idMulta);
+				request.setAttribute("titulo", "Multa nº"+idMulta+". Coche: "+m.getCoche().getMatricula()+" | App Multas");
+				mensaje = null;
+				vista = VISTA_FORM;
+			}
+			catch (Exception e) {
+				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "La multa que buscas no existe");
+				LOG.error(mensaje.getTexto(), e);
+				vista = VISTA_INDEX;
+			}
+		}
+	}
+	
+	private void opVerAnuladas(HttpServletRequest request) {
+		if (idMultaStr == null) {
+			try {
+				request.setAttribute("multas", daoMulta.getMultasAnuladas(a.getId()));			
+			}
+			catch (Exception e) {
+				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "No se han anulado multas");
+				LOG.error(mensaje.getTexto());
+			}
 			if(opm == null) {
 				request.setAttribute("titulo", "Tus multas | App Multas");
 				LOG.info("Buscando todas las multas puestas por el agente");
@@ -220,7 +250,6 @@ public class MultasController extends HttpServlet {
 		} else {
 			long idMulta = Long.parseLong(idMultaStr);
 			try {
-				//m = daoMulta.getById(idMulta, opm);
 				request.setAttribute("multa", m);
 				LOG.info("Información de la multa "+idMulta);
 				request.setAttribute("titulo", "Multa nº"+idMulta+". Coche: "+m.getCoche().getMatricula()+" | App Multas");
@@ -229,14 +258,6 @@ public class MultasController extends HttpServlet {
 			}
 			catch (Exception e) {
 				mensaje = new Mensaje(Mensaje.TIPO_DANGER, "La multa que buscas no existe");
-//				if(opm == null) {
-//					request.setAttribute("titulo", "Tus multas | App Multas");
-//					LOG.info("Buscando todas las multas puestas por el agente");
-//				}
-//				else {
-//					request.setAttribute("titulo", "Tus multas anuladas | App Multas");
-//					LOG.info("Buscando todas las multas anuladas por el agente");
-//				}
 				LOG.error(mensaje.getTexto(), e);
 				vista = VISTA_INDEX;
 			}

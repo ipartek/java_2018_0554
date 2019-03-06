@@ -37,10 +37,7 @@ public class AgenteController {
 		factory  = Validation.buildDefaultValidatorFactory();
     	validator  = factory.getValidator();
 	}
-	
-	
-	
-	
+
 	@RequestMapping( value= {"/api/agente/login/{placa}/{password}"}, method = RequestMethod.GET)
 	public ResponseEntity<Agente> login( 
 										@PathVariable String placa, 
@@ -81,25 +78,22 @@ public class AgenteController {
 
 		return response;
 	}
-//	
-//	@RequestMapping(value = { "/api/agente/{id}/multasbaja" }, method = RequestMethod.GET)
-//	public ResponseEntity<ArrayList<Multa>> listarAnuladas(@PathVariable long id) {
-//		ResponseEntity<ArrayList<Multa>> response = new ResponseEntity<ArrayList<Multa>>(HttpStatus.NOT_FOUND);
-//
-//		try {
-//
-//			ArrayList<Multa> multas = new ArrayList<Multa>();
-//			multas = (ArrayList<Multa>) agenteService.obtenerMultasAnuladas(id);
-//
-//			response = new ResponseEntity<ArrayList<Multa>>(multas, HttpStatus.OK);
-//
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//		return response;
-//	}
+	
+	@RequestMapping(value = { "/api/agente/{id}/multasbaja" }, method = RequestMethod.GET)
+	public ResponseEntity<ArrayList<Multa>> listarAnuladas(@PathVariable long id) {
+		ResponseEntity<ArrayList<Multa>> response = new ResponseEntity<ArrayList<Multa>>(HttpStatus.NOT_FOUND);
+
+		try {
+			ArrayList<Multa> multas = new ArrayList<Multa>();
+			multas = (ArrayList<Multa>) agenteService.obtenerMultasAnuladas(id);
+
+			response = new ResponseEntity<ArrayList<Multa>>(multas, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return response;
+	}
 	
 	@RequestMapping(value = { "/api/multa/" }, method = RequestMethod.POST)
 	public ResponseEntity<Multa> crear(@RequestBody Multa multa) {

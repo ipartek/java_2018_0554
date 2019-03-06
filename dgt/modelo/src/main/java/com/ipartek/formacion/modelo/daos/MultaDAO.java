@@ -27,27 +27,11 @@ public class MultaDAO {
 	//private static final String MULTAS_ANULADAS = "baja";
 	//private static final String MULTAS_ACTIVAS = "activas";
 
-	/*
-	 * 	SELECT 
-		m.id,
-		m.fecha_alta, 
-		m.fecha_baja,
-		c.matricula, 
-		c.modelo 
-	FROM 
-		multa m, 
-		coche c 
-	WHERE 
-		m.id_coche = c.id AND 
-		m.id_agente = p_id_agente AND
-		m.fecha_baja IS NOT NULL
-	ORDER BY m.id DESC LIMIT 1000;
-	 */
 	private static final String SQL_GETBYID = "{call pa_multa_getById(?)}";
-	private static final String SQL_GETALL_BYUSER = "SELECT m.id, m.fecha_alta, m.fecha_baja, c.matricula, m.importe, m.concepto, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? AND m.fecha_baja IS NULL ORDER BY m.id DESC LIMIT 1000;";
+	private static final String SQL_GETALL_BYUSER = "SELECT m.id, m.fecha_alta, m.fecha_baja, c.matricula, m.importe, m.concepto, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? AND m.fecha_baja IS NULL ORDER BY m.fecha_alta DESC LIMIT 1000;";
 	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
 	private static final String SQL_UPDATE = "{call pa_multa_update(?,?)}";
-	private static final String SQL_GETALL_BY_AGENTE_ANULADA = "SELECT a.id AS 'agente_id', a.nombre, a.placa, a.imagen, c.id AS 'coche_id', c.matricula, c.modelo, c.km, m.id AS 'multa_id', m.importe, m.concepto, m.fecha_alta, m.fecha_baja, m.id_coche, m.id_agente FROM agente As a, coche AS c, multa AS m WHERE m.id_coche = c.id AND m.id_agente = a.id AND a.id = ? AND m.fecha_baja IS NOT NULL;";
+	private static final String SQL_GETALL_BYUSER_ANULADA = "SELECT m.id, m.fecha_alta, m.fecha_baja, c.matricula, m.importe, m.concepto, c.modelo FROM multa m, coche c WHERE m.id_coche = c.id AND m.id_agente = ? AND m.fecha_baja IS NOT NULL ORDER BY m.fecha_alta DESC LIMIT 1000;";
 
 	// constructor privado, solo acceso por getInstance()
 	private MultaDAO() {
@@ -95,16 +79,9 @@ public class MultaDAO {
 		ArrayList<Multa> multas = new ArrayList<Multa>();
 		isGetById = false;
 		try (Connection conn = ConnectionManager.getConnection();
-				PreparedStatement cs = conn
-						.prepareStatement(SQL_GETALL_BYUSER);) {
-//			if (MULTAS_ANULADAS.equals(opm)) {
-//				isBaja = true;
-//			} else {
-//				isBaja = false;
-//			}
-			cs.setLong(1, id);
-			//cs.setString(2, opm);
-			try (ResultSet rs = cs.executeQuery()) {
+				PreparedStatement pst = conn.prepareStatement(SQL_GETALL_BYUSER);) {
+			pst.setLong(1, id);
+			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
 					try {
 						multas.add(rowMapper(rs));
@@ -121,13 +98,11 @@ public class MultaDAO {
 	}
 	
 	public ArrayList<Multa> getMultasAnuladas(long id) {
-		
 		isBaja = true;
-
 		ArrayList<Multa> multas = new ArrayList<Multa>();
 		isGetById = false;
 		try (Connection conn = ConnectionManager.getConnection();
-				PreparedStatement pst = conn.prepareStatement(SQL_GETALL_BY_AGENTE_ANULADA);) {
+				PreparedStatement pst = conn.prepareStatement(SQL_GETALL_BYUSER_ANULADA);) {
 			
 			pst.setLong(1, id);
 			try (ResultSet rs = pst.executeQuery()) {
@@ -143,7 +118,6 @@ public class MultaDAO {
 		} catch (Exception e) {
 			LOG.error(e);
 		}
-
 		return multas;
 	}
 	
@@ -242,9 +216,11 @@ public class MultaDAO {
 		c.setMatricula(rs.getString("matricula"));
 		m.setImporte(rs.getFloat("importe"));
 		m.setConcepto(rs.getString("concepto"));
+		m.setFechaBaja(rs.getDate("fecha_alta"));
+		
 		if (isGetById) {
 			
-			m.setFechaBaja(rs.getDate("fecha_alta"));
+			
 			c.setId(rs.getLong("coche_id"));
 			c.setId(rs.getLong("id_coche"));
 			c.setId(rs.getLong("id_agente"));

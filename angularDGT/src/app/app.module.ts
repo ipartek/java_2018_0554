@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MultasComponent } from './components/paginas/multas/multas.component';
 import { MultarMatriculaComponent } from './components/paginas/multar-matricula/multar-matricula.component';
 import { MultarComponent } from './components/paginas/multar/multar.component';
+import { MultasBajaComponent } from './components/paginas/multas-baja/multas-baja.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MultarComponent } from './components/paginas/multar/multar.component';
     AlertComponent,
     MultasComponent,
     MultarMatriculaComponent,
-    MultarComponent
+    MultarComponent,
+    MultasBajaComponent
   ],
   imports: [
     BrowserModule,
