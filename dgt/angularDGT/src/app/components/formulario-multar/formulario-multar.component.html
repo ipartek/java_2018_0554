@@ -6,9 +6,7 @@
     <p>Agente: {{ agente | json}}</p>
   </div>
    -->
- 
-
-     
+  
    <div  >
       <div class="row no-gutters">          
           
@@ -24,21 +22,29 @@
     </div>   
   <form  [formGroup]="formulario" (submit)="crear()" >
     
-                   
-      <div class="formu">
-          <h5 class="card-title">Datos sancion:</h5> 
-           <!--<label for="importe">Importe</label> -->
+    <div class="mb-1">
+        <h5 class="card-title">Datos sancion:</h5> 
+
+      <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fas fa-euro-sign"></i> </span>
+          </div>    
+          <!--<label for="importe">Importe</label> -->
           <input type="text" formControlName="importe" class="form-control" placeholder="Importe" >      
           <p id="p" *ngIf="formulario.controls.importe.invalid && formulario.controls.importe.touched"  
              class="text-danger">*El limite de la sancion es 9999 </p>
-
+      </div>
+      <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fas fa-file-alt"></i> </span>
+          </div> 
           <!-- <label for="concepto">Concepto</label> -->
-          <input type="textarea" formControlName="concepto" class="form-control" placeholder="Concepto">  
+          <textarea type="text" formControlName="concepto" class="form-control" placeholder="Concepto"> </textarea> 
           <p id="p" *ngIf="formulario.controls.concepto.invalid && formulario.controls.concepto.touched"  
              class="text-danger">*minimo 5 letras y máximo 200</p>     
         </div>
         <button type="submit" class="btn btn-block btn-secondary mt-3" [disabled]="formulario.invalid">Crear Multa</button>      
-        
+      </div> 
     </form>
     <app-alert [alert]="alert"></app-alert>
 

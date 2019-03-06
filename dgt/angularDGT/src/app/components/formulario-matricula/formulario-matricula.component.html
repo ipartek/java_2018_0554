@@ -6,18 +6,22 @@
             src="http://ladieztrece.com/web/wp-content/uploads/2018/07/2a8abe6ddb0c4cfb6b7fd6690013d6df.png" alt="escudo policia">
   </div>
 
-  <div>
+  <div  class="mb-1">
     <form [formGroup]="formulario" (submit)="comprobarMatricula()">
-
-      <label for="matricula">Introduce matricula:</label>
-      <input type="text" formControlName="matricula" class="form-control" placeholder="1234ABC o AB1234AB">
-      <p id="p" *ngIf="formulario.controls.matricula.invalid && formulario.controls.matricula.touched"
-        class="text-danger">*Solo 2 formatos posibles: 1234ABC / AB1234AB </p>
-
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fas fa-car"></i> </span>
+        </div>
+        <!--<label for="matricula">Introduce matricula:</label>-->
+        <input type="text" formControlName="matricula" class="form-control" placeholder="Introduce Matricula">
+        <p id="p" *ngIf="formulario.controls.matricula.invalid && formulario.controls.matricula.touched"
+          class="text-danger">*Solo 2 formatos posibles: 1234ABC / AB1234AB </p>
+      </div>
       <button type="submit" class="btn btn-block btn-secondary mt-5" [disabled]="formulario.invalid">Buscar</button>
 
     </form>
   </div>
+
   <!--
       <div style="border:1px solid red; padding:10px;">
         <p>Valores: {{ formulario.value | json }}</p>
