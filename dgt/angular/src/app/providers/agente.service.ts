@@ -11,6 +11,7 @@ import {
   Observable
 } from 'rxjs';
 import { Agente } from '../model/agente';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,37 +21,40 @@ export class AgenteService {
   private storage = window.sessionStorage;
 
   public isLogged(): boolean {
-    if(this.storage.getItem('isLogged') === "true"){
+    if (this.storage.getItem('isLogged') === "true") {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
   public setLogged(value: boolean) {
     console.debug('Hacemos setter de _isLogged y guardar en sessionStorage %o', this.storage);
-    if(value === true){
+    if (value === true) {
       this.storage.setItem('isLogged', 'true');
-    }else{
+    } else {
       this.storage.setItem('isLogged', 'false');
     }
   }
 
-  public saveAgente( agente: Agente){
+  public saveAgente(agente: Agente) {
     this.storage.setItem('agenteLogueado', JSON.stringify(agente));
   }
 
   public getAgente(): Agente {
     console.debug('Agente logueado: %o', this.storage.getItem('agenteLogueado'));
-    if(this.storage.getItem('agenteLogueado')){
+    if (this.storage.getItem('agenteLogueado')) {
       return JSON.parse(this.storage.getItem('agenteLogueado'));
-    }else{
+    } else {
       return undefined;
     }
-   }
+  }
 
-  constructor(public http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {
     console.trace('AgenteService constructor');
-    
+
   } // Constructor
 
   /**
@@ -58,7 +62,7 @@ export class AgenteService {
    * @param placa Nº de placa del Agente
    * @param pass Contraseña del Agente
    */
-  login(placa: string, pass: string): Observable < any > {
+  login(placa: string, pass: string): Observable<any> {
     console.debug('Placa: %s Pass: %s', placa, pass);
 
     const url = GLOBAL.endpoint + 'login/' + placa + '/' + pass;
@@ -67,14 +71,14 @@ export class AgenteService {
   } // Login
 
   /**
-   * Obtener todas las multas del agente 
+   * Obtener todas las multas del agente
    */
-  getMultas( id: number ): Observable<any> {
+  getMultas(id: number): Observable<any> {
     const url = GLOBAL.endpoint + `/agente/${id}/multa`;
     return this.http.get(url);
   }
 
-  getMultasAnuladas( id: number ): Observable<any> {
+  getMultasAnuladas(id: number): Observable<any> {
     const url = GLOBAL.endpoint + `/agente/${id}/anuladas`;
     return this.http.get(url);
   }
@@ -84,7 +88,7 @@ export class AgenteService {
    */
   logout() {
     //TODO llamar Servicio Rest
-    //this.isLogged = false;
-    
+    this.storage.clear();
+    this.router.navigate(['/login']);
   }
 }
