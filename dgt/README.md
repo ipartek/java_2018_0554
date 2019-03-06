@@ -66,5 +66,5 @@ La app cuenta con un diseño responsive que se adapta a todos los dispositivos m
  </table>
  
 
-## Desarrolladores
-App desarollada por Xabier Eguskiza
+## Desarrollado por:
+	Xabier Eguskiza
