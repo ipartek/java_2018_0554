@@ -22,7 +22,7 @@ export class ListaMultasComponent implements OnInit {
   constructor( private autorizacionService: AutorizacionService, public multaService:MultaService) {
     console.log('ListaMultasComponent constructor');
     this.multas = [];
-    this.alert = new Alert('');
+    this.alert = new Alert('', Alert.DANGER);
     this.multasAnuladas = [];
     this.isActiva = false;
     this.multaSeleccionada = new Multa(-1,0,'','',-1,-1);
@@ -89,11 +89,11 @@ export class ListaMultasComponent implements OnInit {
       resultado => {
       console.debug(`Multa anulada`);
       this.getMultas(this.agente.id);
+      this.alert = new Alert('Multa anulada', Alert.SUCCESS);
       
     }, error => {
-      //this.alerta = new Alerta(`Error inesperado. Código de error: ${error.status}`);
       console.warn('peticion incorrecta %o', error);
-      this.alert = new Alert('No se ha podido anular la multa');
+      this.alert = new Alert('No se ha podido anular la multa', Alert.DANGER);
     });
 
   }
@@ -103,13 +103,13 @@ export class ListaMultasComponent implements OnInit {
     
     this.multaService.desAnularMulta(idMulta).subscribe(
       resultado => {
-      console.debug(`Multa anulada`);
+      console.debug(`Multa anulada`, Alert.SUCCESS);
       this.getMultas(this.agente.id);
       
     }, error => {
       //this.alerta = new Alerta(`Error inesperado. Código de error: ${error.status}`);
       console.warn('peticion incorrecta %o', error);
-      this.alert = new Alert('No se ha podido activar la multa la multa');
+      this.alert = new Alert('No se ha podido activar la multa', Alert.DANGER);
     });
 
   }

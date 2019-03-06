@@ -8,12 +8,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav.component.sass']
 })
 export class NavComponent implements OnInit {
+  agente: any;
 
   constructor(private autorizacionService: AutorizacionService, private router: Router) { 
     
   }
 
   ngOnInit() {
+
+    this.getAgenteInfo();
+  }
+
+  getAgenteInfo(){
+    this.agente = this.autorizacionService.getAgente();
+
   }
 
   logout(){
