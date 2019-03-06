@@ -93,7 +93,8 @@ export class ListadoMultasComponent implements OnInit {
   }
 
   seleccionar(multa: Multa){
-    this.multaSeleccionada = multa;
+    this.multaSeleccionada = new Multa(multa.id, multa.importe, multa.concepto, multa.fecha, multa.fechaBaja);
+    this.multaService.saveMulta(this.multaSeleccionada);
   }
 
   //TODO cambiar forEach por map()

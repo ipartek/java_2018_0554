@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { GLOBAL } from 'src/global';
 import { Coche } from '../model/coche';
 import { Agente } from '../model/agente';
+import { Multa } from '../model/multa';
 
 @Injectable({
   providedIn: 'root'
@@ -32,10 +33,31 @@ export class MultaService {
     }
   }
 
+  public saveMulta(multa: Multa) {
+    this.storage.setItem('multa_detalle', multa.toString() );
+  }
+
+  public getMultaSession(): Multa {
+    console.debug('multa_detalle: %o', this.storage.getItem('multa_detalle'));
+    if (this.storage.getItem('multa_detalle')) {
+      return JSON.parse(this.storage.getItem('multa_detalle'));
+    } else {
+      return undefined;
+    }
+  }
+
   getCoche(matricula: string): Observable<any> {
     console.debug('matricula: %s', matricula);
 
     const url = GLOBAL.endpoint + `/vehiculo/${matricula}`;
+    console.log(`MultaService login ${url}`);
+    return this.http.get(url);
+  } // getCoche
+
+  getMulta(id: number): Observable<any> {
+    console.debug('matricula: %s', id);
+
+    const url = GLOBAL.endpoint + `/multa/${id}`;
     console.log(`MultaService login ${url}`);
     return this.http.get(url);
   } // getCoche

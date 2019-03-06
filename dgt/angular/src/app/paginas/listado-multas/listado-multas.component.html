@@ -23,7 +23,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let multa of multas">
-        <td>{{ multa.id }}</td>
+        <td routerLink="/detalle-multa" (click)="seleccionar(multa)">{{ multa.id }}</td>
         <td>{{ multa.fecha | date :'medium' }}</td>
         <td>{{ multa.concepto }}</td>
         <td>{{ multa.importe | moneda : 'es' }}</td>
@@ -45,7 +45,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let multa of multasAnuladas">
-        <td>{{ multa.id }}</td>
+        <td routerLink="/detalle-multa" (click)="seleccionar(multa)">{{ multa.id }}</td>
         <td>{{ multa.fecha | date :'medium' }}</td>
         <td>{{ multa.concepto }}</td>
         <td>{{ multa.importe | moneda : 'es' }}</td>

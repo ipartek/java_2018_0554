@@ -11,7 +11,7 @@ export class Multa {
         this._importe = importe;
         this._concepto = concepto;
         this._fecha = fecha;
-        this._fechaBaja = (fechaBaja) ? fechaBaja : 'Activa';
+        this._fechaBaja = (fechaBaja) ? fechaBaja : "Activa";
     }
 
 
@@ -45,6 +45,11 @@ export class Multa {
     }
     public set fechaBaja(value: string) {
         this._fechaBaja = value;
+    }
+
+
+    public toString() {
+      return `{"id": ${this.id},"importe": ${this.importe},"concepto":"${this.concepto}","fecha": "${this.fecha}","fechaBaja": "${this.fechaBaja}"}`;
     }
 
 }

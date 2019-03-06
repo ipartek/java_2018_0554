@@ -26,7 +26,7 @@ export class DatosMultaComponent implements OnInit {
     private multaService: MultaService,
     private agenteService: AgenteService,
     private formBuilder: FormBuilder
-  ) { 
+  ) {
     console.trace("constructor datos-multa");
     this.coche = this.multaService.getCocheSession();
     this.crearFormulario();
@@ -37,7 +37,7 @@ export class DatosMultaComponent implements OnInit {
   ngOnInit() {
     console.trace("ngOnInit datos-multa");
     console.debug("Coche obtenido: %o", this.coche);
-    
+
 
   } //ngOnInit
 
@@ -45,7 +45,7 @@ export class DatosMultaComponent implements OnInit {
     console.trace('MatriculaComponent crearFormulario');
     this.formulario = this.formBuilder.group({
       matricula: [
-        this.coche.matricula        
+        this.coche.matricula
       ],
       modelo: [
         this.coche.modelo

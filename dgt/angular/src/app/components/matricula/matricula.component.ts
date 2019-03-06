@@ -20,7 +20,7 @@ export class MatriculaComponent implements OnInit {
     private multaService: MultaService,
     private formBuilder: FormBuilder,
     private router: Router
-  ) { 
+  ) {
     console.trace('MatriculaComponent constructor');
     this.crearFormulario();
     this.alerta = new Alerta('');
@@ -48,24 +48,24 @@ export class MatriculaComponent implements OnInit {
   comprobar() {
     console.trace('click boton submit');
     let matricula = this.formulario.controls.matricula.value;
-    
+
     console.debug('matricula: %s', matricula);
-    
+
     this.multaService.getCoche(matricula).subscribe(
       data => {
         console.debug(data.JSON)
         this.cocheBuscado = data;
         if(this.cocheBuscado.id != -1) {
-          console.debug('Coche obtenido %o', this.cocheBuscado); 
+          console.debug('Coche obtenido %o', this.cocheBuscado);
           this.multaService.saveCoche(this.cocheBuscado);
         }
       //   let navigationExtras: NavigationExtras = {
       //     queryParams: {
       //         "coche": JSON.stringify(this.cocheBuscado)
       //     }
-      // }; 
+      // };
         this.router.navigate(["datos-multa"]);
-        
+
       }, // data
       error => {
         console.warn('No tienes permisos');
