@@ -18,7 +18,7 @@
         <th>Fecha</th>
         <th>Concepto</th>
         <th>Importe</th>
-        <th>Eliminar</th>
+        <th>Anular</th>
       </tr>
     </thead>
     <tbody>
@@ -59,18 +59,18 @@
 		<div class="modal text-body" id="myModal">
         <div class="modal-dialog">
           <div class="modal-content">
-      
+
             <!-- Modal Header -->
             <div class="modal-header">
               <h4 class="modal-title">Atención!</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-      
+
             <!-- Modal body -->
             <div class="modal-body">
               Estás segur@ de que deseas anular la multa?
             </div>
-      
+
             <!-- Modal footer -->
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">
@@ -80,7 +80,7 @@
               <button (click)="anularMulta(multaSeleccionada.id)" class="btn btn-success" data-dismiss="modal">
                 <span class="d-flex justify-content-center align-items-center">Confirmar
               </span>
-              </button>	      
+              </button>
             </div>
           </div>
         </div>
@@ -91,18 +91,18 @@
 		<div class="modal text-body" id="myModal2">
         <div class="modal-dialog">
           <div class="modal-content">
-      
+
             <!-- Modal Header -->
             <div class="modal-header">
               <h4 class="modal-title">Atención!</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-      
+
             <!-- Modal body -->
             <div class="modal-body">
               Estás segur@ de que deseas des-anular la multa?
             </div>
-      
+
             <!-- Modal footer -->
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">
@@ -112,7 +112,7 @@
               <button (click)="reactivarMulta(multaSeleccionada.id)" class="btn btn-success" data-dismiss="modal">
               <span class="d-flex justify-content-center align-items-center">Confirmar
               </span>
-              </button>		      
+              </button>
             </div>
           </div>
         </div>
