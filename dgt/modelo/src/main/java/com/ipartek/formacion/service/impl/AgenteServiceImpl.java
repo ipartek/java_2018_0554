@@ -116,6 +116,17 @@ public class AgenteServiceImpl implements AgenteService {
 		}
 		return resultado;
 	}
+
+	@Override
+	public boolean desanular(int idMulta) {
+		boolean resultado = false;
+		try {
+			resultado = multaDAO.desAnularMulta(idMulta);
+		} catch (SQLException e) {
+			return false;
+		}
+		return resultado;
+	}
 	
 
 	

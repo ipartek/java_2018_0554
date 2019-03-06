@@ -9,6 +9,7 @@ import { Error404Component } from './components/error404/error404.component';
 
 // guards
 import { PermisosGuard } from './guards/permisos.guard';
+import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
 
 const routes: Routes = [
   { path: '', component: PaginaLoginComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'matricula', component: FormularioMatriculaComponent },
   { path: 'multar', component: FormularioMultarComponent },
   { path: 'vermultas', component: ListaMultasComponent },
+  { path: 'estadisticas', component: EstadisticasComponent },
   { path: '404', component: Error404Component },
   { path: '**', pathMatch:'full', redirectTo : '404'  }
 ];

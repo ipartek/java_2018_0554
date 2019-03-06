@@ -51,9 +51,29 @@ public interface AgenteService {
 	 */
 	Vehiculo buscarMatricula(String matricula);
 	
+	/**
+	 * Busca el id de un coche por su matricula
+	 * @param matricula
+	 * @return datos del vehiculo, si no hay matricula vacio, null
+	 */
+	
 	Vehiculo conseguirId(String matricula);
 	
+	/**
+	 * modifica la fecha de baja de una multa
+	 * @param idMulta
+	 * @return si es true coambia fecha de baja a current_timestamp
+	 */
+	
 	boolean anular(int idMulta);
+	
+	/**
+	 * modifica la fecha de baja de una multa
+	 * @param idMulta
+	 * @return si es true coambia fecha de baja a null
+	 */
+	
+	boolean desanular(int idMulta);
 
 	
 }

@@ -137,4 +137,29 @@ public class MultaController {
 		return response;
 
 	}
+	
+	@RequestMapping(value = { "/api/multa/desanular/{idMulta}" }, method = RequestMethod.PATCH)
+	public ResponseEntity<Multa> desanular(@PathVariable int idMulta) {
+
+		ResponseEntity<Multa> response = new ResponseEntity<Multa>(HttpStatus.INTERNAL_SERVER_ERROR);
+		boolean anulada = false;
+		int id = -1;
+		try {
+			id = (int) idMulta;
+		} catch (Exception e1) {
+			response = new ResponseEntity<Multa>(HttpStatus.BAD_REQUEST);
+		}
+		try {
+			
+			anulada = agenteService.desanular(id);
+			if (anulada == true) {
+				response = new ResponseEntity<Multa>(HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			response = new ResponseEntity<Multa>(HttpStatus.NOT_FOUND);
+		}
+
+		return response;
+
+	}
 }

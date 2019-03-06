@@ -97,6 +97,20 @@ export class MultaService {
     };
 
     console.debug('modificar url: %s body: %o', url, body);
-    return this.httpClient.patch(url + idMulta , body);
+    return this.httpClient.patch(url, body);
   }
+
+
+  public desAnularMulta(idMulta: number): Observable<any> {    
+    let url = `http://localhost:8080/wsrest/api/multa/desanular/${idMulta}`;
+    console.trace('MultaService desAnularMulta uri:  '+ url);
+
+    let body = {
+      
+    };
+
+    console.debug('modificar url: %s body: %o', url, body);
+    return this.httpClient.patch(url, body);
+  }
+
 }

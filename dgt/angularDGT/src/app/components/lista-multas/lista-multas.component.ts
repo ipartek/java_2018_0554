@@ -88,11 +88,28 @@ export class ListaMultasComponent implements OnInit {
     this.multaService.anularMulta(idMulta).subscribe(
       resultado => {
       console.debug(`Multa anulada`);
-      this.getMultas(this.agente);
+      this.getMultas(this.agente.id);
       
     }, error => {
       //this.alerta = new Alerta(`Error inesperado. Código de error: ${error.status}`);
       console.warn('peticion incorrecta %o', error);
+      this.alert = new Alert('No se ha podido anular la multa');
+    });
+
+  }
+
+  modificarActivar(idMulta: number){
+    console.trace('click editar %o', idMulta);
+    
+    this.multaService.desAnularMulta(idMulta).subscribe(
+      resultado => {
+      console.debug(`Multa anulada`);
+      this.getMultas(this.agente.id);
+      
+    }, error => {
+      //this.alerta = new Alerta(`Error inesperado. Código de error: ${error.status}`);
+      console.warn('peticion incorrecta %o', error);
+      this.alert = new Alert('No se ha podido activar la multa la multa');
     });
 
   }

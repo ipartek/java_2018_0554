@@ -1,9 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `dgt` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `dgt`;
+CREATE DATABASE  IF NOT EXISTS `dgt_xabi` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 -- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: dgt
+-- Host: 127.0.0.1    Database: dgt_xabi
 -- ------------------------------------------------------
 -- Server version	8.0.12
 
@@ -22,7 +21,7 @@ USE `dgt`;
 -- Table structure for table `agente`
 --
 
-DROP TABLE IF EXISTS `agente`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `agente` (
@@ -42,7 +41,7 @@ CREATE TABLE `agente` (
 
 LOCK TABLES `agente` WRITE;
 /*!40000 ALTER TABLE `agente` DISABLE KEYS */;
-INSERT INTO `agente` VALUES (1,'Majonei',123456,'123456','https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2015/10/28/14460342183666.jpg'),(2,'Johnny Walker',987654,'t45gt4w5t','http://www.cuandoerachamo.com/wp-content/uploads/21-3.jpg'),(3,'Monk',987321,'123456789','https://upload.wikimedia.org/wikipedia/en/thumb/9/98/Tony_Shalhoub_as_Adrian_Monk.jpg/250px-Tony_Shalhoub_as_Adrian_Monk.jpg'),(4,'Takelberry',987987,'987987','https://difundir.org/wp-content/uploads/2015/04/images-3.jpg'),(5,'Tontimmy',998776,'7miti76',NULL);
+INSERT INTO `agente` VALUES (1,'Majonei',123456,'123456','https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2015/10/28/14460342183666.jpg'),(2,'Johnny Walker',987654,'987654','http://www.cuandoerachamo.com/wp-content/uploads/21-3.jpg'),(3,'Monk',987321,'123456789','https://upload.wikimedia.org/wikipedia/en/thumb/9/98/Tony_Shalhoub_as_Adrian_Monk.jpg/250px-Tony_Shalhoub_as_Adrian_Monk.jpg'),(4,'Takelberry',987987,'987987','https://difundir.org/wp-content/uploads/2015/04/images-3.jpg'),(5,'Tontimmy',998776,'7miti76','http://4.bp.blogspot.com/-jnYUqrQdJZI/VcsVtBN2IlI/AAAAAAAAAIY/v-cJ9QM3bck/s1600/police-academy_51481_1.jpg');
 /*!40000 ALTER TABLE `agente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -50,7 +49,7 @@ UNLOCK TABLES;
 -- Table structure for table `coche`
 --
 
-DROP TABLE IF EXISTS `coche`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `coche` (
@@ -77,7 +76,7 @@ UNLOCK TABLES;
 -- Table structure for table `multa`
 --
 
-DROP TABLE IF EXISTS `multa`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `multa` (
@@ -94,7 +93,7 @@ CREATE TABLE `multa` (
   KEY `fk__idx` (`id_agente`),
   CONSTRAINT `fk_multa_agente` FOREIGN KEY (`id_agente`) REFERENCES `agente` (`id`),
   CONSTRAINT `fk_multa_coches` FOREIGN KEY (`id_coche`) REFERENCES `coche` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +102,7 @@ CREATE TABLE `multa` (
 
 LOCK TABLES `multa` WRITE;
 /*!40000 ALTER TABLE `multa` DISABLE KEYS */;
-INSERT INTO `multa` VALUES (12,21.53,'234567876532weerewtrwywete','2018-09-14 10:25:30',1,4,NULL,NULL),(13,0,'por muy feo','2018-09-14 11:06:39',1,4,NULL,NULL),(14,500,'por muy feo','2018-08-14 13:02:47',1,4,NULL,NULL),(15,500.7,'vas mas borracho que el tato','2018-06-15 12:25:10',2,4,NULL,NULL),(16,500.7,'borrachuzo de mierda','2018-05-15 12:31:15',2,4,NULL,NULL),(17,500.7,'borrachuzo de mierda','2018-02-15 12:33:21',2,4,NULL,NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',2,4,NULL,NULL),(19,500.7,'borrachuzo de mierda','2018-08-15 12:37:48',2,4,NULL,NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,4,NULL,NULL),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',2,4,NULL,NULL),(22,500.7,'borrachuzo de mierda','2018-04-15 12:42:02',2,4,NULL,NULL),(23,500.7,'borrachuzo de mierda','2018-07-15 12:45:28',2,4,NULL,NULL),(24,500.7,'borrachuzo de mierda','2018-11-15 12:45:32',2,4,NULL,NULL),(25,500.7,'borrachuzo de mierda','2018-01-15 12:46:07',2,4,NULL,NULL),(26,500.7,'borrachuzo de mierda','2018-10-15 12:48:21',2,4,NULL,NULL),(27,500.7,'borrachuzo de mierda','2018-11-15 12:49:41',2,4,NULL,NULL),(28,456.6,'fdgrd','2018-12-16 09:21:46',2,4,NULL,NULL),(29,540.59,'aefwefwefwfewefwe','2018-12-17 12:08:48',1,1,NULL,NULL),(30,1445,'pruebaaaaaaa','2018-03-20 21:21:10',2,4,NULL,NULL),(31,0,'khfkesjh','2018-03-21 10:02:01',3,4,NULL,NULL),(32,60,'prueba multar','2019-03-04 08:50:32',2,1,NULL,NULL),(33,60,'otra prueba','2019-03-04 10:38:46',2,2,NULL,NULL),(38,50,'dfgdfgd','2019-03-04 10:54:21',2,2,NULL,NULL),(60,100,'lkjhgfdsa','2019-03-04 13:51:27',2,1,NULL,NULL);
+INSERT INTO `multa` VALUES (12,21.53,'234567876532weerewtrwywete','2018-09-14 10:25:30',1,4,NULL,NULL),(13,0,'por muy feo','2018-09-14 11:06:39',1,4,NULL,NULL),(14,500,'por muy feo','2018-08-14 13:02:47',1,4,NULL,NULL),(15,500.7,'vas mas borracho que el tato','2018-06-15 12:25:10',2,4,NULL,NULL),(16,500.7,'borrachuzo de mierda','2018-05-15 12:31:15',2,4,NULL,NULL),(17,500.7,'borrachuzo de mierda','2018-02-15 12:33:21',2,4,NULL,NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',2,4,NULL,NULL),(19,500.7,'borrachuzo de mierda','2018-08-15 12:37:48',2,4,NULL,NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,4,NULL,NULL),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',2,4,NULL,NULL),(22,500.7,'borrachuzo de mierda','2018-04-15 12:42:02',2,4,NULL,NULL),(23,500.7,'borrachuzo de mierda','2018-07-15 12:45:28',2,4,NULL,NULL),(24,500.7,'borrachuzo de mierda','2018-11-15 12:45:32',2,4,NULL,NULL),(25,500.7,'borrachuzo de mierda','2018-01-15 12:46:07',2,4,NULL,NULL),(26,500.7,'borrachuzo de mierda','2018-10-15 12:48:21',2,4,NULL,'2019-03-05 07:40:00'),(27,500.7,'borrachuzo de mierda','2018-11-15 12:49:41',2,4,NULL,'2019-03-05 08:40:00'),(28,456.6,'fdgrd','2018-12-16 09:21:46',2,4,NULL,NULL),(29,540.59,'aefwefwefwfewefwe','2018-12-17 12:08:48',1,1,NULL,NULL),(30,1445,'pruebaaaaaaa','2018-03-20 21:21:10',2,4,NULL,NULL),(31,0,'khfkesjh','2018-03-21 10:02:01',3,4,NULL,NULL),(32,60,'prueba multar','2019-03-04 08:50:32',2,1,NULL,NULL),(33,60,'otra prueba','2019-03-04 10:38:46',2,2,NULL,NULL),(38,50,'dfgdfgd','2019-03-04 10:54:21',2,2,NULL,NULL),(60,100,'lkjhgfdsa','2019-03-04 13:51:27',2,1,NULL,NULL),(72,40,'multa pa ti','2019-03-05 10:13:02',2,2,NULL,NULL),(75,150,'sdfsdfsdafs','2019-03-05 10:21:48',3,1,NULL,NULL),(76,152,'multando desde angular','2019-03-06 10:41:47',2,4,NULL,NULL);
 /*!40000 ALTER TABLE `multa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,7 +110,7 @@ UNLOCK TABLES;
 -- Table structure for table `objetivo`
 --
 
-DROP TABLE IF EXISTS `objetivo`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `objetivo` (
@@ -133,7 +132,7 @@ INSERT INTO `objetivo` VALUES (1,2018,12000),(2,2019,14400);
 UNLOCK TABLES;
 
 --
--- Dumping routines for database 'dgt'
+-- Dumping routines for database 'dgt_xabi'
 --
 /*!50003 DROP PROCEDURE IF EXISTS `pa_agente_getById` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -141,7 +140,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8 */ ;
 /*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
+ 
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
@@ -166,7 +165,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
+ 
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -185,7 +184,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
+ 
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -213,7 +212,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
+ 
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -287,7 +286,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
+ 
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -322,7 +321,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8 */ ;
 /*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
+ 
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
@@ -344,7 +343,7 @@ DELIMITER ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
+ 
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -382,4 +381,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-04 14:26:48
+-- Dump completed on 2019-03-06 11:40:05

@@ -1,8 +1,13 @@
+<app-nav></app-nav>
+
 <div class="container mb-3 mt-3">
   <div>
     <a href="http://localhost:4200//principal" class="btn btn-outline-primary mt-3 mb-3 col-3">
       Volver
     </a>
+
+    <app-alert [alert]="alert"></app-alert>
+    
   </div>
   <div class="row d-flex align-items-center mb-3">
 
@@ -18,16 +23,14 @@
 <div class="container-fluid">
 
   <div class="row">
-   
+
     <div class="col-lg-12">
 
       <p *ngIf="multas.length==0" class="spinner-border text-danger"></p>
 
       <div class="btn-group mb-2" role="group" aria-label="Basic example">
-        <button type="button" (click)="cambiarTabla(true)"
-          class="{{(isActiva)?'btn btn-primary':'btn btn-secondary'}}">ACTIVAS</button>
-        <button type="button" (click)="cambiarTabla(false)"
-          class="{{(!isActiva)?'btn btn-danger':'btn btn-secondary'}}">ANULADAS</button>
+        <button type="button" (click)="cambiarTabla(true)" class="{{(isActiva)?'btn btn-primary':'btn btn-secondary'}}">ACTIVAS</button>
+        <button type="button" (click)="cambiarTabla(false)" class="{{(!isActiva)?'btn btn-danger':'btn btn-secondary'}}">ANULADAS</button>
 
       </div>
 
@@ -53,7 +56,7 @@
             <td>{{m.importe | moneda}}</td>
             <td>{{m.coche.modelo}}</td>
             <td>{{m.concepto}}</td>
-            <td><button type="submit" (click)="seleccionar(multa)" class="btn btn-block btn-danger" data-toggle="modal"
+            <td><button type="submit" (click)="seleccionar(m)" class="btn btn-block btn-danger" data-toggle="modal"
                 data-target="#myModal">ANULAR
               </button></td>
         </tbody>
@@ -69,6 +72,7 @@
             <th>Modelo</th>
             <th>Concepto</th>
             <th>Fecha Baja</th>
+            <th></th>
 
 
           </tr>
@@ -82,11 +86,14 @@
             <td>{{ma.coche.modelo}}</td>
             <td>{{ma.concepto}}</td>
             <td>{{ma.fechaBaja | date}}</td>
+            <td><button type="submit" (click)="seleccionar(ma)" class="btn btn-block btn-primary" data-toggle="modal"
+                data-target="#myModalDes">DES-ANULAR
+              </button></td>
         </tbody>
       </table>
 
 
-      <!-- The Modal -->
+      <!-- The Modal ANULAR-->
       <div class="modal fade" id="myModal">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -101,15 +108,44 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-              <button type="button" (click)="modificarAnular(multa.id)" class="btn btn-danger"
-                data-dismiss="modal">Anular</button>&nbsp;
+              <button type="button" (click)="modificarAnular(multaSeleccionada.id)" class="btn btn-danger" data-dismiss="modal">Anular</button>&nbsp;
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
             </div>
+
+
 
 
           </div>
         </div>
       </div>
+      <!--Modal anular-->
+
+      <!-- The Modal DESANULAR-->
+      <div class="modal fade" id="myModalDes">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">¿Desea activar esta multa?</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" (click)="modificarActivar(multaSeleccionada.id)"
+                data-dismiss="modal">Confirmar</button>&nbsp;
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Modal desanular-->
+
+
+
     </div>
   </div>
 </div>

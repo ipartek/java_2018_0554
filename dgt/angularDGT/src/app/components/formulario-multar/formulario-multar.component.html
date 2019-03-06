@@ -11,6 +11,8 @@
 	</a>
 </div>
 
+<app-nav></app-nav>
+
 <div class="container" style="border:1px solid #17A2B8; padding:10px;" id="receta">
 	
 		<p><b>Matrícula:</b> {{vehiculo.matricula }}</p>
@@ -29,6 +31,8 @@
 
 	<label for="concepto"><b>Concepto</b></label>
 	<textarea type="text" formControlName="concepto" class="form-control" required></textarea>
+	<p id="p" *ngIf="formulario.controls.concepto.invalid && formulario.controls.concepto.touched"  
+             class="text-danger">*minimo 5 letras y máximo 200</p> 
 	<br>
 	<!--<button type="submit" class="btn btn-outline-primary btn-block">BUSCAR</button>-->
 	<button class="mt-6 btn btn-primary btn-block btn-lg " type="submit">
