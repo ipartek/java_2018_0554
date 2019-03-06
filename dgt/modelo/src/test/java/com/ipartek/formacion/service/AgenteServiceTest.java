@@ -48,7 +48,7 @@ public class AgenteServiceTest {
 		agente = aService.existe(null, null);
 		assertNull("Cuidadin con los null", agente);
 		
-		agente = aService.existe("admin", "admin");
+		agente = aService.existe("1234", "12345678");
 		assertNotNull(" TODO cambiar numeroPlaca='admin' password='admin' por datos que existan en tu bbdd", agente);
 		
 	}

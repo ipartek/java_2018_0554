@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 
 import com.ipartek.appMultas.modelo.dao.MultaDAO;
+import com.ipartek.appMultas.modelo.pojo.Multa;
 import com.ipartek.appMultas.modelo.service.MultaService;
 
 public class MultaServiceImpl implements MultaService {
@@ -26,6 +27,18 @@ public class MultaServiceImpl implements MultaService {
 		return INSTANCE;
 	}
 
+	@Override
+	public Multa getById(int idMulta) {
+		Multa m = null;
+			try {
+				m = multaDAO.getById(Long.valueOf(idMulta));
+			}catch (Exception e) {
+				LOG.error(e);
+			}
+		
+		return m;
+	}
+	
 	@Override
 	public boolean darDeBaja(int idMulta) {
 		boolean isBaja = false;

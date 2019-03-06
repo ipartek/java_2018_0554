@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ipartek.appMultas.modelo.pojo.Agente;
 import com.ipartek.appMultas.modelo.pojo.Multa;
 import com.ipartek.appMultas.modelo.service.impl.MultaServiceImpl;
 
@@ -36,10 +37,42 @@ public class MultaController {
 	}
 	
 	/**
+	 * Método que obtiene una multa existente de la DB por su ID.
+	 * @param idMulta
+	 * @return NOT_FOUND (404) Si no existe esa multa en la DB.
+	 * @return OK (200) Si existe la multa en la DB.
+	 * @return INTERNAL_SERVER_ERROR (500) Si ocurre cualquier otra Excepción (Mirar log para más info).
+	 */
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message="Multa existente en la DB."),
+			@ApiResponse(code = 404, message="La multa no existe en la DB."),
+			@ApiResponse(code = 500, message="Error interno del servidor.")
+	})
+	@RequestMapping( value= {"/api/multa/{idMulta}"}, method = RequestMethod.GET)
+	public ResponseEntity<Multa> getById(@PathVariable int idMulta) {
+		ResponseEntity<Multa> response = new ResponseEntity<Multa>(HttpStatus.NOT_FOUND);
+		
+			try {
+				Multa m = multaService.getById(idMulta);
+				
+				if (m != null) {
+					response = new ResponseEntity<Multa>(m, HttpStatus.OK);
+				}
+			} 
+			catch (Exception e) {
+				LOG.error(e);
+				//Error 500
+				response = new ResponseEntity<Multa>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		
+		return response;
+	}
+	
+	/**
 	 * Método que permite realizar login con los datos de un agente en la DB.
 	 * @param placa String Nº de Placa del Agente
 	 * @param password String Contraseña del Agente
-	 * @return NOT_FOUND (403) Si no existe ese Agente en la DB.
+	 * @return FORBIDDEN (403) Si no existe ese Agente en la DB.
 	 * @return OK (200) Si existe el Agente en la DB.
 	 * @return INTERNAL_SERVER_ERROR (500) Si ocurre cualquier otra Excepción (Mirar log para más info).
 	 */
