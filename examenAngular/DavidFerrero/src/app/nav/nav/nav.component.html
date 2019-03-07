@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-md navbar-info bg-secondary">
+  <div routerLinkActive="active">
+    <a class="navbar-brand mr-auto" [routerLink]="['principal']" ><img width="50" alt="Angular Logo"  src="http://ladieztrece.com/web/wp-content/uploads/2018/07/2a8abe6ddb0c4cfb6b7fd6690013d6df.png"></a>
+  </div> 
+  
+  
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="flex-row navbar-nav float-right">    
+      <div class="row  " routerLinkActive="active">	
+        <span class=" dfl col-1.5 input-group-text"> <i class=" fab fa-wpforms"></i> </span>
+        <a class="dfr col-8 btn btn-outline-secondary btn-block btn-lg"  [routerLink]="['/principal']">HOME</a>
+      </div>
+    </ul>  
+  </div> 
+
+
+  <div class="d-flex flex-column">          
+    <li class=" mt-6 btn btn-danger" (click) = "logout()" id="logout" >
+      Logout
+    </li> 
+  </div>
+      
+
+
+
+
+</nav>
+
+

@@ -1,0 +1,6 @@
+<div *ngIf="alert.mensaje != ''" class="alert alert-{{alert.tipo}} alert-dismissible fade show" role="alert">
+  <p>{{propiedadAlert.mensaje}}</p>  <!--muestro lo que recibo por el input del resto de componentes MIRAR EJEMPLO EN LOGIN-->>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
