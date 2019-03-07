@@ -71,7 +71,7 @@ export class AutorizacionService {
 
 
       // llamar Servicio Rest
-      let uri = `http://localhost:8080/wsrest/api/agente/login/${placa}/${password}`;
+      let uri = `http://localhost:8080/wsrest-xabi/api/agente/login/${placa}/${password}`;
       console.trace('AutorizacionService loggin uri: '+ uri);
 
       return this.httpClient.get(uri);
