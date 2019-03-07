@@ -14,12 +14,12 @@ export class MultaServiceService {
 
   busquedaMatricula(matricula: string): Observable<any>{
         
-    let uri = `http://localhost:8080/wsrest/api/multa/matricula/${matricula}`;
+    let uri = `http://localhost:8080/wsrest-endika/api/multa/matricula/${matricula}`;
     console.trace('LoginService loggin uri: ' + uri);
     return this.httpClient.get(uri);    
   }
   insertarMulta(multa:Multa){
-    let uri = `http://localhost:8080/wsrest/api/multa/`;
+    let uri = `http://localhost:8080/wsrest-endika/api/multa/`;
     console.trace('MultaService loggin uri: ' + uri);
     const req = this.httpClient.post(uri, {
       "agente": {
@@ -42,7 +42,7 @@ export class MultaServiceService {
   }
   
   darBaja(id: number){
-    let uri = `http://localhost:8080/wsrest/api/multa/baja/`;
+    let uri = `http://localhost:8080/wsrest-endika/api/multa/baja/`;
     console.trace('MultaService loggin uri: ' + uri);
     const req = this.httpClient.patch(uri, {
         "id": id
@@ -58,7 +58,7 @@ export class MultaServiceService {
   }
 
   darAlta(id: number){
-    let uri = `http://localhost:8080/wsrest/api/multa/alta/`;
+    let uri = `http://localhost:8080/wsrest-endika/api/multa/alta/`;
     console.trace('MultaService loggin uri: ' + uri);
     const req = this.httpClient.patch(uri, {
         "id": id
