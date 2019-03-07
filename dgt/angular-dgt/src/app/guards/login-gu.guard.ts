@@ -19,7 +19,7 @@ export class LoginGuGuard implements CanActivate {
 
     console.trace('LoginGuGuard canActivate');
 
-    if ( this.loginS.isLogged ){
+    if ( this.loginS.isLogged() ){
       console.debug(' estamos autorizados');
       console.debug('El agente en sessionStorage %o' , this.loginS.getAgente() );
       return true;
