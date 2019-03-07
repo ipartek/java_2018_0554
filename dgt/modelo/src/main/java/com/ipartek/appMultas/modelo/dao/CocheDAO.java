@@ -36,12 +36,13 @@ public class CocheDAO {
 		}
 		return INSTANCE;
 	}
-	
+
 	/**
 	 * Obtiene todos los vehiculos de la base de datos
-	 * @return ArrayList de coches
+	 * 
+	 * @return ArrayList de coches, vacío si no existen en la DB
 	 */
-	public ArrayList<Coche> getAll(){
+	public ArrayList<Coche> getAll() {
 		ArrayList<Coche> coches = new ArrayList<Coche>();
 		Coche c = null;
 		String sql = SQL_GETALL;
@@ -54,13 +55,14 @@ public class CocheDAO {
 				}
 			}
 		} catch (Exception e) {
-			LOG.debug(e);
+			LOG.error(e);
 		}
 		return coches;
 	}
-	
+
 	/**
-	 * Obtiene un coche a partir de la matrícula que recibe por parámetro. 
+	 * Obtiene un coche a partir de la matrícula que recibe por parámetro.
+	 * 
 	 * @param matricula Matrícula del coche
 	 * @return Coche con dicha matricula. Null si el coche no existe.
 	 */
@@ -77,12 +79,14 @@ public class CocheDAO {
 				}
 			}
 		} catch (Exception e) {
-			LOG.debug(e);
+			LOG.error(e);
 		}
 		return c;
 	}
+
 	/**
-	 * Obtiene un coche a partir del ID que recibe por parámetro. 
+	 * Obtiene un coche a partir del ID que recibe por parámetro.
+	 * 
 	 * @param id ID del coche en la BD.
 	 * @return Coche con dicho ID. Null si el coche no existe.
 	 */
@@ -99,13 +103,14 @@ public class CocheDAO {
 				}
 			}
 		} catch (Exception e) {
-			LOG.debug(e);
+			LOG.error(e);
 		}
 		return c;
 	}
-	
+
 	/**
 	 * Método para insertar un objeto Coche nuevo en la BD
+	 * 
 	 * @param c Coche a insertar en la BD
 	 * @return True si la inserción ha sido correcta.
 	 * @return False si no se ha podido insertar el coche.
@@ -119,7 +124,7 @@ public class CocheDAO {
 			cs.setString(1, c.getMatricula());
 			cs.setString(2, c.getModelo());
 			cs.setLong(3, c.getKm());
-			
+
 			// parametros de salida
 			cs.registerOutParameter(4, Types.INTEGER);
 
@@ -132,12 +137,13 @@ public class CocheDAO {
 		}
 		return resul;
 	}
-	
+
 	/**
-	 * Método para actualizar los datos de un coche específico en la BD. 
-	 * @param c Datos nuevos para actualizar el coche existente. 
+	 * Método para actualizar los datos de un coche específico en la BD.
+	 * 
+	 * @param c Datos nuevos para actualizar el coche existente.
 	 * @return True si la modificación ha sido correcta.
-	 * @return False si no se ha podido modificar el coche. 
+	 * @return False si no se ha podido modificar el coche.
 	 * @throws SQLException P.E: Si algún dato no llega en el formato esperado.
 	 */
 	public boolean update(Coche c) throws SQLException {
@@ -157,10 +163,10 @@ public class CocheDAO {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * 
-	 * @param id del coche a eliminar en la BD. 
+	 * @param id del coche a eliminar en la BD.
 	 * @return True si la inserción ha sido correcta.
 	 * @return False si no se ha podido insertar el coche.
 	 * @throws SQLException Si hay algún problema con la consulta a la BD.
@@ -178,10 +184,11 @@ public class CocheDAO {
 		}
 		return result;
 	}
-	
+
 	/**
-	 * Método que actualiza la fecha de baja del coche en la base de datos.
-	 * Da de baja el coche, pero no lo elimina. 
+	 * Método que actualiza la fecha de baja del coche en la base de datos. Da de
+	 * baja el coche, pero no lo elimina.
+	 * 
 	 * @param id del coche a dar de baja
 	 * @return True si la inserción ha sido correcta.
 	 * @return False si no se ha podido insertar el coche.
@@ -200,10 +207,11 @@ public class CocheDAO {
 		}
 		return result;
 	}
-	
+
 	/**
-	 * Constructor del coche mediante una consulta a la BD. 
-	 * @param rs REsultSet de la consulta realizada a la BD. 
+	 * Constructor del coche mediante una consulta a la BD.
+	 * 
+	 * @param rs REsultSet de la consulta realizada a la BD.
 	 * @return Coche existente en la BD.
 	 * @throws SQLException
 	 */

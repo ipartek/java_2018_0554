@@ -29,11 +29,11 @@ public class ConnectionManager {
 
 			// crear conexion
 			conn = DriverManager.getConnection(prop.getProperty("ddbb.url"), prop.getProperty("ddbb.user"),
-											prop.getProperty("ddbb.pass"));
+					prop.getProperty("ddbb.pass"));
 
 			LOG.info("conexion establecida");
 		} catch (Exception e) {
-			LOG.fatal("Erro estableciendo conexion base datos", e);
+			LOG.error("Error estableciendo conexion base datos", e);
 		}
 		return conn;
 	}

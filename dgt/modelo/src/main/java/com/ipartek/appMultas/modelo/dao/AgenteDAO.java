@@ -14,13 +14,13 @@ import com.ipartek.appMultas.modelo.pojo.Agente;
 import com.ipartek.appMultas.modelo.pojo.Objetivo;
 
 public class AgenteDAO {
-	
+
 	private final static String SQL_GETBYID = "{call agente_getById(?)}";
 	private final static String SQL_LOGIN = "{call agente_login(?,?)}";
 	private final static String SQL_OBJETIVOS_ANIO = "SELECT id_agente,anio,multasAsignadas,totalMultasAnual FROM v_objetivos_anio WHERE id_agente=? AND anio=?;";
 	private final static String SQL_OBJETIVOS_MES = "SELECT id_agente,mes,anio,multasAsignadas,totalMultasMes FROM v_objetivos_mes WHERE id_agente=? AND mes=? AND anio=?;";
-	private final static String SQL_OBJETIVOS_MESES_ANIO="SELECT id_agente,mes,anio,multasAsignadas,totalMultasMes FROM v_objetivos_mes WHERE id_agente=? AND anio=? ORDER BY mes ASC;";
-	
+	private final static String SQL_OBJETIVOS_MESES_ANIO = "SELECT id_agente,mes,anio,multasAsignadas,totalMultasMes FROM v_objetivos_mes WHERE id_agente=? AND anio=? ORDER BY mes ASC;";
+
 	private final static Logger LOG = Logger.getLogger(AgenteDAO.class);
 	private static AgenteDAO INSTANCE = null;
 
@@ -36,11 +36,15 @@ public class AgenteDAO {
 		}
 		return INSTANCE;
 	}
+
 	/**
-	 * Comprueba que la placa y la contraseña recibidos por parámetros coinciden en la BD.
-	 * @param placa Nº de placa del agente.
+	 * Comprueba que la placa y la contraseña recibidos por parámetros coinciden en
+	 * la BD.
+	 * 
+	 * @param placa    Nº de placa del agente.
 	 * @param password Contraseña del agente.
-	 * @return El objeto agente registrado en la BD. Retorna un agente nulo si los datos introducidos no son correctos.
+	 * @return El objeto agente registrado en la BD. Retorna un agente nulo si los
+	 *         datos introducidos no son correctos.
 	 */
 	public Agente login(String placa, String password) {
 		Agente a = null;
@@ -78,15 +82,18 @@ public class AgenteDAO {
 				}
 			}
 		} catch (Exception e) {
-			LOG.debug(e);
+			LOG.error(e);
 		}
 		return a;
 	}
+
 	/**
-	 * Consulta el objetivo anual actual de un agente concreto. 
+	 * Consulta el objetivo anual actual de un agente concreto.
+	 * 
 	 * @param id_agente Identificador del agente (logueado)
-	 * @param anio Año actual
-	 * @return	Objeto de tipo objetivo con datos sobre el objetivo anual de dicho agente.  
+	 * @param anio      Año actual
+	 * @return Objeto de tipo objetivo con datos sobre el objetivo anual de dicho
+	 *         agente.
 	 */
 	public Objetivo getObjetivosAnual(Long id_agente, Long anio) {
 		Objetivo o = new Objetivo();
@@ -96,23 +103,25 @@ public class AgenteDAO {
 			pst.setLong(2, anio);
 			try (ResultSet rs = pst.executeQuery();) {
 				while (rs.next()) {
-					//Crear objeto Objetivo
+					// Crear objeto Objetivo
 					o.setAnio(rs.getDouble("anio"));
-					o.setImporteTotal(rs.getDouble("totalMultasAnual"));		
+					o.setImporteTotal(rs.getDouble("totalMultasAnual"));
 				}
 			}
 		} catch (Exception e) {
-			LOG.debug(e);
+			LOG.error(e);
 		}
 		return o;
 	}
 
 	/**
-	 * Consulta el objetivo mensual actual de un agente concreto. 
+	 * Consulta el objetivo mensual actual de un agente concreto.
+	 * 
 	 * @param id_agente Identificador del agente (logueado)
-	 * @param anio Año actual
-	 * @param mes Mes actual
-	 * @return	Objeto de tipo objetivo con datos sobre el objetivo mensual del año actual de dicho agente.  
+	 * @param anio      Año actual
+	 * @param mes       Mes actual
+	 * @return Objeto de tipo objetivo con datos sobre el objetivo mensual del año
+	 *         actual de dicho agente.
 	 */
 	public Objetivo getObjetivoMensual(Long id_agente, Long anio, Long mes) {
 		Objetivo o = new Objetivo();
@@ -123,39 +132,35 @@ public class AgenteDAO {
 			pst.setLong(3, anio);
 			try (ResultSet rs = pst.executeQuery();) {
 				while (rs.next()) {
-					//Crear objeto Objetivo
 					o.setAnio(rs.getDouble("anio"));
 					o.setImporteTotal(rs.getDouble("totalMultasMes"));
 				}
 			}
 
 		} catch (Exception e) {
-			LOG.debug(e);
+			LOG.error(e);
 		}
-		
+
 		return o;
 	}
+
 	/**
 	 * Obtiene de un año en concreto todos los meses con sus respectivos objetivos
+	 * 
 	 * @param id_agente Identificador del agente (logueado)
-	 * @param anio Año enviado por parámetro
+	 * @param anio      Año enviado por parámetro
 	 * @return ArrayList de objetivos mensuales
 	 */
-	public ArrayList<Objetivo> getObjetivoMeses(Long id_agente, Long anio){
+	public ArrayList<Objetivo> getObjetivoMeses(Long id_agente, Long anio) {
 		ArrayList<Objetivo> objetivos = new ArrayList<Objetivo>();
 		String sql = SQL_OBJETIVOS_MESES_ANIO;
-		try(
-			Connection conn= ConnectionManager.getConnection();
-			PreparedStatement pst = conn.prepareStatement(sql);
-			){
+		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 			pst.setLong(1, id_agente);
 			pst.setLong(2, anio);
-			try(
-				ResultSet rs = pst.executeQuery();
-				){
-				while(rs.next()) {
+			try (ResultSet rs = pst.executeQuery();) {
+				while (rs.next()) {
 					Objetivo o = new Objetivo();
-					//Crear objeto Objetivo
+
 					o.setAnio(rs.getDouble("anio"));
 					o.setImporteTotal(rs.getDouble("totalMultasMes"));
 					switch (rs.getInt("mes")) {
@@ -198,31 +203,37 @@ public class AgenteDAO {
 					default:
 						o.setMes("Error en el mes");
 					}
-					//añadir objetivo al array
+
 					objetivos.add(o);
 				}
-			}	
-		}catch (Exception e) {
-			LOG.debug(e);
+			}
+		} catch (Exception e) {
+			LOG.error(e);
 		}
 		return objetivos;
 	}
+
 	/**
-	 * Obtiene el objetivo anual, mensual y los objetivos de un año en concreto y se los asigna al agente correspondiente 
+	 * Obtiene el objetivo anual, mensual y los objetivos de un año en concreto y se
+	 * los asigna al agente correspondiente
+	 * 
 	 * @param a Agente en sesión, es decir, logueado
 	 * @return Retorna ese mismo agente recibido con los objetivos seteados.
 	 */
 	public Agente obtenerImportes(Agente a) {
 		a.setAnual(getObjetivosAnual(a.getId(), (long) obtenerAnio()));
-		a.setMensual(getObjetivoMensual(a.getId(), (long) obtenerAnio(),(long) obtenerMes()));
+		a.setMensual(getObjetivoMensual(a.getId(), (long) obtenerAnio(), (long) obtenerMes()));
 		// OBTENER TODOS LOS MESES DE UN AÑO ARRAYLIST OBJETIVOS
 		// TODO Printar el array en el jsp
-		//Se le pasaria el año que seleccionaria el agente por el select option, acutalmente le decimos que saque todos los meses del año actual
+		// Se le pasaria el año que seleccionaria el agente por el select option,
+		// acutalmente le decimos que saque todos los meses del año actual
 		a.setObjetivoMeses(getObjetivoMeses(a.getId(), (long) 2018));
 		return a;
 	}
+
 	/**
 	 * Obtiene el año actual.
+	 * 
 	 * @return El año actual.
 	 */
 	private int obtenerAnio() {
@@ -231,8 +242,10 @@ public class AgenteDAO {
 		LOG.debug("Año actual para la búsqueda de estadísticas: " + year);
 		return year;
 	}
+
 	/**
 	 * Obtiene el mes actual.
+	 * 
 	 * @return El mes actual.
 	 */
 	private int obtenerMes() {
@@ -244,6 +257,7 @@ public class AgenteDAO {
 
 	/**
 	 * rowMapper del Agente sin añadirle el listado de multas que ha puesto
+	 * 
 	 * @param rs ResultSet de la consulta realizada en la BD.
 	 * @return El agente.
 	 * @throws SQLException

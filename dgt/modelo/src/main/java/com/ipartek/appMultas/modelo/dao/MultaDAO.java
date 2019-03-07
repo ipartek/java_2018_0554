@@ -38,10 +38,12 @@ public class MultaDAO {
 		}
 		return INSTANCE;
 	}
+
 	/**
 	 * Obtiene una multa con un ID concreto recibido por parámetro.
-	 * @param idMulta ID de la multa en la BD. 
-	 * @return Multa existente en la BD. 
+	 * 
+	 * @param idMulta ID de la multa en la BD.
+	 * @return Multa existente en la BD.
 	 */
 	public Multa getById(Long idMulta) {
 		Multa m = new Multa();
@@ -55,14 +57,16 @@ public class MultaDAO {
 				}
 			}
 		} catch (Exception e) {
-			LOG.debug(e);
+			LOG.error(e);
 		}
 		return m;
 	}
+
 	/**
-	 * Obtiene todas las multas activas de un agente concreto. 
-	 * @param idAgente ID del agente sobre el que se quieren obtener las multas. 
-	 * @return HashMap de multas. 
+	 * Obtiene todas las multas activas de un agente concreto.
+	 * 
+	 * @param idAgente ID del agente sobre el que se quieren obtener las multas.
+	 * @return HashMap de multas.
 	 * @throws SQLException Si el agente no tiene ninguna multa asignada.
 	 */
 	public HashMap<Long, Multa> getAllByIdAgente(Long idAgente) throws SQLException {
@@ -78,14 +82,16 @@ public class MultaDAO {
 				}
 			}
 		} catch (Exception e) {
-			LOG.debug(e);
+			LOG.error(e);
 		}
 		return multasAgente;
 	}
+
 	/**
-	 * Obtiene todas las multas anuladas de un agente concreto. 
-	 * @param idAgente ID del agente sobre el que se quieren obtener las multas. 
-	 * @return HashMap de multas anuladas. 
+	 * Obtiene todas las multas anuladas de un agente concreto.
+	 * 
+	 * @param idAgente ID del agente sobre el que se quieren obtener las multas.
+	 * @return HashMap de multas anuladas.
 	 * @throws SQLException Si el agente no tiene ninguna multa anulada.
 	 */
 	public HashMap<Long, Multa> getAllByIdAgenteDarBaja(Long idAgente) throws SQLException {
@@ -101,15 +107,17 @@ public class MultaDAO {
 				}
 			}
 		} catch (Exception e) {
-			LOG.debug(e);
+			LOG.error(e);
 		}
 		return multasAgente;
 	}
+
 	/**
 	 * Inserta una multa en la BD.
-	 * @param m Objeto multa
+	 * 
+	 * @param m         Objeto multa
 	 * @param id_agente ID del creador de la multa
-	 * @return True si todo es correcto. False si la inserción es errónea. 
+	 * @return True si todo es correcto. False si la inserción es errónea.
 	 * @throws SQLException Si alguno de los datos viene en formato erróneo.
 	 */
 	public Multa insert(Float importe, String concepto, int idCoche, int idAgente) throws SQLException {
@@ -139,6 +147,7 @@ public class MultaDAO {
 
 	/**
 	 * Método que anula una multa en la BD.
+	 * 
 	 * @param id Identificador de la multa a anular
 	 * @return True si todo es correcto. False si la actualización es errónea.
 	 * @throws SQLException Si no puede borrarse la multa por las constraints.
@@ -156,8 +165,10 @@ public class MultaDAO {
 		}
 		return result;
 	}
+
 	/**
 	 * Método que desanula una multa en la BD.
+	 * 
 	 * @param id Identificador de la multa a desanular
 	 * @return True si todo es correcto. False si la actualización es errónea.
 	 * @throws SQLException
@@ -175,8 +186,10 @@ public class MultaDAO {
 		}
 		return result;
 	}
+
 	/**
-	 * Constructor de la multa obtenida de la BD. 
+	 * Constructor de la multa obtenida de la BD.
+	 * 
 	 * @param rs ResultSet de la consulta realizada a la BD.
 	 * @return Objeto multa creado a partir de datos de la BD.
 	 * @throws SQLException
@@ -188,15 +201,15 @@ public class MultaDAO {
 		m.setImporte(rs.getDouble("importe"));
 		m.setFecha(rs.getTimestamp("fecha_alta"));
 		// Seteo el coche
-		m.setCoche( new Coche(
-							rs.getLong("id_coche"), 
-							rs.getString("matricula"), 
-							rs.getString("modelo"), 
-							rs.getLong("km")));
+		m.setCoche(
+				new Coche(rs.getLong("id_coche"), rs.getString("matricula"), rs.getString("modelo"), rs.getLong("km")));
 		return m;
 	}
+
 	/**
-	 * Constructor de la multa obtenida de la BD con la inclusión del campo fecha_baja. 
+	 * Constructor de la multa obtenida de la BD con la inclusión del campo
+	 * fecha_baja.
+	 * 
 	 * @param rs ResultSet de la consulta realizada a la BD.
 	 * @return Objeto multa creado a partir de datos de la BD + fecha_baja.
 	 * @throws SQLException
@@ -209,11 +222,8 @@ public class MultaDAO {
 		m.setFecha(rs.getTimestamp("fecha_alta"));
 		m.setFecha_baja(rs.getTimestamp("fecha_baja"));
 		// Seteo el coche
-		m.setCoche( new Coche(
-							rs.getLong("id_coche"), 
-							rs.getString("matricula"), 
-							rs.getString("modelo"), 
-							rs.getLong("km")));
+		m.setCoche(
+				new Coche(rs.getLong("id_coche"), rs.getString("matricula"), rs.getString("modelo"), rs.getLong("km")));
 		return m;
 	}
 
