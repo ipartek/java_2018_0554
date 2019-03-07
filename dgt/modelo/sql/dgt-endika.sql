@@ -1,10 +1,10 @@
-CREATE DATABASE  IF NOT EXISTS `dgt` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `dgt`;
+CREATE DATABASE  IF NOT EXISTS `dgt-endika` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `dgt-endika`;
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
--- Host: localhost    Database: dgt
+-- Host: 127.0.0.1    Database: dgt-endika
 -- ------------------------------------------------------
--- Server version	8.0.13
+-- Server version	8.0.12
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -128,7 +128,7 @@ CREATE TABLE `multa` (
   KEY `fk__idx` (`id_agente`),
   CONSTRAINT `fk_multa_agente` FOREIGN KEY (`id_agente`) REFERENCES `agente` (`id`),
   CONSTRAINT `fk_multa_coches` FOREIGN KEY (`id_coche`) REFERENCES `coche` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,7 +137,7 @@ CREATE TABLE `multa` (
 
 LOCK TABLES `multa` WRITE;
 /*!40000 ALTER TABLE `multa` DISABLE KEYS */;
-INSERT INTO `multa` VALUES (12,21.53,'234567876532weerewtrwywete','2018-09-14 10:25:30',1,4,NULL,NULL),(13,0,'por muy feo','2018-09-14 11:06:39',1,4,NULL,NULL),(14,500,'por muy feo','2018-08-14 13:02:47',1,4,NULL,NULL),(15,500.7,'vas mas borracho que el tato','2018-06-15 12:25:10',2,4,NULL,NULL),(16,500.7,'borrachuzo de mierda','2018-05-15 12:31:15',2,4,NULL,NULL),(17,500.7,'borrachuzo de mierda','2018-02-15 12:33:21',2,4,NULL,NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',2,4,NULL,NULL),(19,500.7,'borrachuzo de mierda','2018-08-15 12:37:48',2,4,NULL,NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,4,NULL,NULL),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',2,4,NULL,NULL),(22,500.7,'borrachuzo de mierda','2018-04-15 12:42:02',2,4,NULL,NULL),(23,500.7,'borrachuzo de mierda','2018-07-15 12:45:28',2,4,NULL,NULL),(24,500.7,'borrachuzo de mierda','2018-11-15 12:45:32',2,4,NULL,NULL),(25,500.7,'borrachuzo de mierda','2018-01-15 12:46:07',2,4,NULL,NULL),(26,500.7,'borrachuzo de mierda','2018-10-15 12:48:21',2,4,NULL,NULL),(27,500.7,'borrachuzo de mierda','2018-11-15 12:49:41',2,4,NULL,NULL),(28,456.6,'fdgrd','2018-12-16 09:21:46',2,4,NULL,NULL),(29,540.59,'aefwefwefwfewefwe','2018-12-17 12:08:48',1,1,NULL,NULL),(30,1445,'pruebaaaaaaa','2018-03-20 21:21:10',2,4,NULL,NULL),(31,0,'khfkesjh','2018-03-21 10:02:01',3,4,NULL,NULL);
+INSERT INTO `multa` VALUES (12,21.53,'234567876532weerewtrwywete','2018-09-14 10:25:30',1,4,NULL,NULL),(13,0,'por muy feo','2018-09-14 11:06:39',1,4,NULL,NULL),(14,500,'por muy feo','2018-08-14 13:02:47',1,4,NULL,NULL),(15,500.7,'vas mas borracho que el tato','2018-06-15 12:25:10',2,4,NULL,NULL),(16,500.7,'borrachuzo de mierda','2018-05-15 12:31:15',2,4,NULL,NULL),(17,500.7,'borrachuzo de mierda','2018-02-15 12:33:21',2,4,NULL,NULL),(18,500.7,'borrachuzo de mierda','2019-01-15 12:35:22',2,4,NULL,NULL),(19,500.7,'borrachuzo de mierda','2018-08-15 12:37:48',2,4,NULL,NULL),(20,500.7,'borrachuzo de mierda','2019-01-15 12:38:49',2,4,NULL,NULL),(21,500.7,'borrachuzo de mierda','2019-01-15 12:39:12',2,4,NULL,NULL),(22,500.7,'borrachuzo de mierda','2018-04-15 12:42:02',2,4,NULL,NULL),(23,500.7,'borrachuzo de mierda','2018-07-15 12:45:28',2,4,NULL,NULL),(24,500.7,'borrachuzo de mierda','2018-11-15 12:45:32',2,4,NULL,NULL),(25,500.7,'borrachuzo de mierda','2018-01-15 12:46:07',2,4,NULL,NULL),(26,500.7,'borrachuzo de mierda','2018-10-15 12:48:21',2,4,NULL,NULL),(27,500.7,'borrachuzo de mierda','2018-11-15 12:49:41',2,4,NULL,NULL),(28,456.6,'fdgrd','2018-12-16 09:21:46',2,4,NULL,NULL),(29,540.59,'aefwefwefwfewefwe','2018-12-17 12:08:48',1,1,NULL,'2019-03-05 09:59:52'),(30,1445,'pruebaaaaaaa','2018-03-20 21:21:10',2,4,NULL,NULL),(31,0,'khfkesjh','2018-03-21 10:02:01',3,4,NULL,NULL),(32,50,'prueba rest','2019-02-26 13:38:55',2,1,NULL,'2019-03-04 14:21:06'),(33,50,'jesucristo','2019-02-27 14:12:51',3,1,NULL,'2019-03-04 14:00:04'),(34,50,'pruebaaaaaaaaaa','2019-03-04 10:41:00',1,1,NULL,'2019-03-04 14:00:00'),(35,50,'lalalalallala','2019-03-04 12:04:34',3,1,NULL,'2019-03-06 10:08:29'),(36,70,'pipipipipipiip','2019-03-04 12:06:35',3,1,NULL,NULL);
 /*!40000 ALTER TABLE `multa` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -307,26 +307,8 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_multa_getByAgenteId`(IN p_id_agente INT, IN p_operacion VARCHAR(15))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_multa_getByAgenteId`(IN p_id_agente INT)
 BEGIN
-
-IF p_operacion = 'baja' then
-	SELECT 
-		m.id,
-		m.fecha_alta, 
-		m.fecha_baja,
-		c.matricula, 
-		c.modelo 
-	FROM 
-		multa m, 
-		coche c 
-	WHERE 
-		m.id_coche = c.id AND 
-		m.id_agente = p_id_agente AND
-		m.fecha_baja IS NOT NULL
-	ORDER BY m.id DESC LIMIT 1000;
-            
-else
 	SELECT 
 		m.id,
 		m.fecha_alta, 
@@ -341,7 +323,7 @@ else
 		m.id_agente = p_id_agente AND
 		m.fecha_baja IS NULL
 	ORDER BY m.id DESC LIMIT 1000;
-end if;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -449,4 +431,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-21 19:02:25
+-- Dump completed on 2019-03-06 12:10:53
