@@ -65,7 +65,7 @@ public class MultaController {
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.error(e);
 		}
 
 		return response;
@@ -85,7 +85,7 @@ public class MultaController {
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.error(e);
 		}
 
 		return response;
@@ -131,7 +131,9 @@ public class MultaController {
 				response = new ResponseEntity<Multa>(HttpStatus.OK);
 			}
 		} catch (Exception e) {
+			LOG.error(e);
 			response = new ResponseEntity<Multa>(HttpStatus.NOT_FOUND);
+			
 		}
 
 		return response;
@@ -156,6 +158,7 @@ public class MultaController {
 				response = new ResponseEntity<Multa>(HttpStatus.OK);
 			}
 		} catch (Exception e) {
+			LOG.error(e);
 			response = new ResponseEntity<Multa>(HttpStatus.NOT_FOUND);
 		}
 
