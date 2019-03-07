@@ -1,9 +1,20 @@
 <div class="jumbotron">
-  <form [formGroup]="formulario" (submit)="comprobar()">
-    <div class="form-group">
-      <label for="matricula">Matricula</label>
-      <input type="text" formControlName="matricula" class="form-control" aria-describedby="emailHelp" placeholder="Introduce matricula existente">
+  <button type="button" class="btn btn-dark" [routerLink]="['/menu-ppal']">Volver</button>
+  <div class="row">
+    <div class="col-0 col-md-4">
+
     </div>
-    <button type="submit" class="btn btn-block btn-primary mt-5" [disabled]="formulario.invalid">Buscar</button>
-  </form>
+    <div class="col-12 col-md-4">
+      <form [formGroup]="formulario" (submit)="comprobar()">
+        <div class="form-group">
+          <label for="matricula">Matricula</label>
+          <input type="text" formControlName="matricula" class="form-control" aria-describedby="emailHelp" placeholder="Introduce matricula existente">
+        </div>
+        <button type="submit" class="btn btn-block btn-primary mt-5" [disabled]="formulario.invalid">Buscar</button>
+      </form>
+    </div>
+    <div class="col-0 col-md-4">
+
+    </div>
+  </div>
 </div>
