@@ -3,8 +3,8 @@
 
 	<app-alert [alert]="alert"></app-alert>
 	<form [formGroup]="formularioMat" (submit)="comprobar()" >
-		<div>
-			<a href="http://localhost:4200//principal" class="btn btn-outline-primary mt-3 mb-3 col-3">
+		<div routerLinkActive="active">
+			<a [routerLink]="['/principal']" class="btn btn-outline-primary mt-3 mb-3 col-3">
 				Volver
 			</a>
 		</div>

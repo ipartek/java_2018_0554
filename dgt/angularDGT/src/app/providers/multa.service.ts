@@ -31,7 +31,7 @@ export class MultaService {
    }
 
   listarMultas(id: number): Observable<any>{
-    let uri = `http://localhost:8080/wsrest-xabi/api/agente/${id}/multas`;
+    let uri = `http://192.168.0.12:8080/wsrest-xabi/api/agente/${id}/multas`;
 
       console.trace('MultaService listarMultas uri: '+ uri);
 
@@ -40,7 +40,7 @@ export class MultaService {
   }
 
   listarMultasAnuladas(id: number): Observable<any>{
-    let uri = `http://localhost:8080/wsrest-xabi/api/agente/${id}/multasbaja`;
+    let uri = `http://192.168.0.12:8080/wsrest-xabi/api/agente/${id}/multasbaja`;
 
       console.trace('MultaService listarMultasAnuladas uri: '+ uri);
 
@@ -49,7 +49,7 @@ export class MultaService {
   }
 
   buscarMatricula(matricula: string): Observable<any>{
-    let uri = `http://localhost:8080/wsrest-xabi/api/agente/${matricula}`;
+    let uri = `http://192.168.0.12:8080/wsrest-xabi/api/agente/${matricula}`;
 
     console.trace('MultaService buscarMatricula uri: '+ uri);
 
@@ -74,7 +74,7 @@ export class MultaService {
   
 
   public multar (multa: Multa): Observable<any> {
-    let url = `http://localhost:8080/wsrest-xabi/api/multa/`;
+    let url = `http://192.168.0.12:8080/wsrest-xabi/api/multa/`;
     console.trace('MultaService multar uri:  '+ url);
     
     let body = {
@@ -89,7 +89,7 @@ export class MultaService {
 
 
   public anularMulta(idMulta: number): Observable<any> {    
-    let url = `http://localhost:8080/wsrest-xabi/api/multa/anular/${idMulta}`;
+    let url = `http://192.168.0.12:8080/wsrest-xabi/api/multa/anular/${idMulta}`;
     console.trace('MultaService anularMulta uri:  '+ url);
 
     let body = {
@@ -102,7 +102,7 @@ export class MultaService {
 
 
   public desAnularMulta(idMulta: number): Observable<any> {    
-    let url = `http://localhost:8080/wsrest-xabi/api/multa/desanular/${idMulta}`;
+    let url = `http://192.168.0.12:8080/wsrest-xabi/api/multa/desanular/${idMulta}`;
     console.trace('MultaService desAnularMulta uri:  '+ url);
 
     let body = {
