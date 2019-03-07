@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LoginServiceService } from './providers/login-service.service';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-dgt';
+
+  constructor(private loginService: LoginServiceService){
+    
+  }
+  logout(){
+    this.loginService.logout();
+  }
 }
+
