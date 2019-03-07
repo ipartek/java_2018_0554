@@ -51,7 +51,7 @@ export class AutorizacionService {
    */
   loggin(usuario: string, password: string): Observable<any>{
         
-    let uri = `http://localhost:8080/wsrest/api/agente/login/${usuario}/${password}`;
+    let uri = `http://192.168.0.12:8080/wsrest-david/api/agente/login/${usuario}/${password}`;
     console.trace('AutorizacionService loggin uri: ' + uri);
     return this.httpClient.get(uri);    
   }

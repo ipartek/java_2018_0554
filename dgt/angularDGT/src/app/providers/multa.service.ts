@@ -31,7 +31,7 @@ export class MultaService {
   }
 
   //ENDPOINT
-  endpoint = 'http://localhost:8080/wsrest/api/agente/';
+  endpoint = 'http://192.168.0.12:8080/wsrest-david/api/agente/';
  
 // METODO CONSTRUCTOR CON HTTPCLIENT COMO PARAMETRO
   constructor( private httpClient: HttpClient, private autorizacionService: AutorizacionService) { 
@@ -83,7 +83,7 @@ export class MultaService {
 
   // metodo para CREAR MULTA
   public multar (multa: Multa): Observable<any> {
-    let url = "http://localhost:8080/wsrest//api/agente/multas";
+    let url = "http://192.168.0.12:8080/wsrest-david/api/agente/multas";
     console.trace('MultaService multar uri:  '+ url);
     
     let body = {

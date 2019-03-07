@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Coche;
 import com.ipartek.formacion.modelo.pojo.Multa;
@@ -80,7 +81,7 @@ public class LogicaController {
 			response = new ResponseEntity<ArrayList<Multa>>(multas, HttpStatus.OK);
 
 		} catch (Exception e) {
-			e.printStackTrace(); // falta log
+			
 		}
 		return response;
 	}
@@ -98,7 +99,7 @@ public class LogicaController {
 			response = new ResponseEntity<ArrayList<Multa>>(multas, HttpStatus.OK);
 
 		} catch (Exception e) {
-			e.printStackTrace(); // falta log
+			LOG.error(e); // falta log
 		}
 		return response;
 	}

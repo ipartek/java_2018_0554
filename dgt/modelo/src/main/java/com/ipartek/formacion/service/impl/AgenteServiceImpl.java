@@ -3,6 +3,8 @@ package com.ipartek.formacion.service.impl;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.modelo.daos.CocheDAO;
 import com.ipartek.formacion.modelo.daos.LoginDAO;
 import com.ipartek.formacion.modelo.daos.MultaDAO;
@@ -14,6 +16,7 @@ import com.ipartek.formacion.service.AgenteService;
 
 public class AgenteServiceImpl implements AgenteService {
 
+	private final static Logger LOG = Logger.getLogger(MultaDAO.class);
 	private static MultaDAO multaDAO;
 	private static CocheDAO cocheDAO;
 	private static LoginDAO loginDAO;
@@ -75,7 +78,7 @@ public class AgenteServiceImpl implements AgenteService {
 			// multa.setTipo(tipoDAO.getByIdTipoAnimal(animal.getId()));
 			// animal.setDieta(dietaDAO.getByIdDietaAnimal(animal.getId()));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return isCreado;
 	}
@@ -90,7 +93,7 @@ public class AgenteServiceImpl implements AgenteService {
 			// multa.setTipo(tipoDAO.getByIdTipoAnimal(animal.getId()));
 			// animal.setDieta(dietaDAO.getByIdDietaAnimal(animal.getId()));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return isAnulado;
 	}
