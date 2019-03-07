@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginServiceService } from 'src/app/providers/login-service.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -12,6 +13,8 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   formulario: FormGroup;  
+
+  texto: string = environment.texto;
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,

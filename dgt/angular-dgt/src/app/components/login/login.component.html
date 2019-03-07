@@ -1,22 +1,28 @@
 <div class="jumbotron">
+  <div class="row">
+    <div class="col-0 col-md-4">
 
-  <div style="border:1px solid red; padding:10px;">
-    <p>Valores: {{ formulario.value | json }}</p>
-    <p>Estado: {{ formulario.status | json }}</p>
-  </div>
-  <div class="d-flex justify-content-center">
-    <img src="assets\imgs\policia.jpg" />
-  </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="d-flex justify-content-center">
+        <img src="assets\imgs\policia.jpg" />
+      </div>
 
-  <form [formGroup]="formulario" (submit)="comprobar()">
-    <div class="form-group">
-      <label for="placa">Placa</label>
-      <input type="number" formControlName="placa" class="form-control" aria-describedby="emailHelp" placeholder="Placa minimo 3 y numerica">
+      <form [formGroup]="formulario" (submit)="comprobar()">
+        <div class="form-group">
+          <label for="placa">Placa</label>
+          <input type="number" formControlName="placa" class="form-control" aria-describedby="emailHelp" placeholder="Placa minimo 3 y numerica">
+        </div>
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input type="password" formControlName="password" class="form-control" placeholder="Contraseña minimo 3, maximo 16S">
+        </div>
+        <button type="submit" class="btn btn-block btn-primary mt-5" [disabled]="formulario.invalid">Login</button>
+      </form>
     </div>
-    <div class="form-group">
-      <label for="password">Contraseña</label>
-      <input type="password" formControlName="password" class="form-control" placeholder="Contraseña minimo 3, maximo 16S">
+    <div class="col-0 col-md-4">
+
     </div>
-    <button type="submit" class="btn btn-block btn-primary mt-5" [disabled]="formulario.invalid">Login</button>
-  </form>
+  </div>  
+  <p>Entorno {{texto}}</p>
 </div>
