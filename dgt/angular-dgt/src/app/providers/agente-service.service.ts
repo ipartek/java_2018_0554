@@ -13,7 +13,7 @@ export class AgenteServiceService {
    }
 
    listarMultasAg(idAgente: number): Observable<any>{
-    let uri = `http://localhost:8080/wsrest-endika/api/multa/${idAgente}`;
+    let uri = `http://192.168.0.12:8080/wsrest-endika/api/multa/${idAgente}`;
     console.trace('AgenteService loggin uri: ' + uri);
     return this.httpClient.get(uri);    
    }

@@ -73,36 +73,6 @@ public class MultaDAO {
 		}
 		return m;
 	}
-
-//	public ArrayList<Multa> getAllByUser(long id, String opm) {
-//
-//		ArrayList<Multa> multas = new ArrayList<Multa>();
-//		isGetById = false;
-//		try (Connection conn = ConnectionManager.getConnection();
-//				CallableStatement cs = conn
-//						.prepareCall(SQL_GETALL_BYUSER);) {
-//			if (MULTAS_ANULADAS.equals(opm)) {
-//				isBaja = true;
-//			} else {
-//				isBaja = false;
-//			}
-//			cs.setLong(1, id);
-//			cs.setString(2, opm);
-//			try (ResultSet rs = cs.executeQuery()) {
-//				while (rs.next()) {
-//					try {
-//						multas.add(rowMapper(rs));
-//					} catch (Exception e) {						
-//						LOG.error(e);
-//					}
-//				}
-//			}
-//		} catch (Exception e) {
-//			LOG.error(e);
-//		}
-//
-//		return multas;
-//	}
 	
 	public ArrayList<Multa> getAllByUser(long id) {
 
@@ -116,6 +86,7 @@ public class MultaDAO {
 				while (rs.next()) {
 					try {
 						multas.add(rowMapper(rs));
+						LOG.info("Multas encontradas");
 					} catch (Exception e) {						
 						LOG.error(e);
 					}
@@ -146,7 +117,7 @@ public class MultaDAO {
 				m.setId(cs.getLong(5));
 				resul = true;
 			}
-
+			LOG.info("Multa insertada");
 		}
 		return resul;
 
@@ -164,7 +135,7 @@ public class MultaDAO {
 			if (affectedRows == 1) {
 				resul = true;
 			}
-
+		LOG.info("Multa anulada");
 		}
 		return resul;
 
@@ -182,7 +153,7 @@ public class MultaDAO {
 			if (affectedRows == 1) {
 				resul = true;
 			}
-
+			LOG.info("Multa habilitada");
 		}
 		return resul;
 
@@ -200,6 +171,7 @@ public class MultaDAO {
 			if (affectedRows == 1) {
 				resul = true;
 			}
+			LOG.info("Multa editada");
 		}
 		return resul;
 
@@ -221,32 +193,4 @@ public class MultaDAO {
 		return multa;
 	}
 	
-
-//	private Multa rowMapper(ResultSet rs) throws SQLException {
-//		Multa m = new Multa();
-//		Coche c = new Coche();
-//		Timestamp timestampalta = rs.getTimestamp("fecha_alta");
-//		m.setFechaAlta(new java.util.Date(timestampalta.getTime()));
-//		if (isBaja) {
-//			Timestamp timestampbaja = rs.getTimestamp("fecha_baja");
-//			if(timestampbaja==null) {
-//				m.setFechaBaja(null);
-//			}else {
-//				m.setFechaBaja(new java.util.Date(timestampbaja.getTime()));
-//			}
-//			
-//		}
-//		m.setId(rs.getLong("id"));
-//		c.setMatricula(rs.getString("matricula"));
-//		if (isGetById) {
-//			m.setImporte(rs.getDouble("importe"));
-//			m.setConcepto(rs.getString("concepto"));
-//			c.setId(rs.getLong("id_coche"));
-//			c.setModelo(rs.getString("modelo"));
-//			c.setKm(rs.getInt("km"));
-//		}
-//		m.setCoche(c);
-//		return m;
-//	}
-
 }

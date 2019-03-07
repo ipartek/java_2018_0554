@@ -51,7 +51,6 @@ public class CocheDAO {
 
 		if (coche.getId() < 1) {
 			throw new Exception("Identificador de coche debe ser >= 1");
-
 		} else {
 
 			try (Connection conn = ConnectionManager.getConnection();
@@ -63,6 +62,7 @@ public class CocheDAO {
 				int affectedRows = cs.executeUpdate();
 				if (affectedRows == 1) {
 					resul = true;
+					LOG.info("Coche modificado");
 				}
 			}
 		}
@@ -89,6 +89,7 @@ public class CocheDAO {
 				while (rs.next()) {
 					c = rowMapper(rs);
 				}
+				LOG.info("Coche encontrado");
 			}
 
 		} catch (Exception e) {
@@ -115,6 +116,7 @@ public class CocheDAO {
 					while (rs.next()) {
 						c = rowMapper(rs);
 					}
+					LOG.info("Coche encontrado");
 				} catch (Exception e) {
 					LOG.warn(e);
 				}
@@ -143,6 +145,7 @@ public class CocheDAO {
 			while (rs.next()) {
 				coches.add(rowMapper(rs));
 			}
+			LOG.info("Coches encontrados");
 
 		} catch (Exception e) {
 			LOG.error(e);
@@ -168,6 +171,7 @@ public class CocheDAO {
 			if (cs.executeUpdate() == 1) {
 				resul = true;
 			}
+			LOG.info("Coche eliminado");
 		}
 		return resul;
 	}
@@ -193,6 +197,7 @@ public class CocheDAO {
 			} else {
 				throw new SQLException("No se puede insertar el coche " + coche );
 			}
+			LOG.info("Coche insertado");
 		}
 		return coche;
 	}

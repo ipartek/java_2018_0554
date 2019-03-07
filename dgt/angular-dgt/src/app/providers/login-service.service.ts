@@ -48,7 +48,7 @@ export class LoginServiceService {
    */
   loggin(placa: number, password: string): Observable<any>{
         
-    let uri = `http://localhost:8080/wsrest-endika/api/agente/login/${placa}/${password}`;
+    let uri = `http://192.168.0.12:8080/wsrest-endika/api/agente/login/${placa}/${password}`;
     console.trace('LoginService loggin uri: ' + uri);
     return this.httpClient.get(uri);    
   }

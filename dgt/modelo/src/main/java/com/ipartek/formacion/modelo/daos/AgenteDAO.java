@@ -1,6 +1,5 @@
 package com.ipartek.formacion.modelo.daos;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +15,7 @@ public class AgenteDAO {
 	private final static Logger LOG = Logger.getLogger(AgenteDAO.class);
 	private static AgenteDAO INSTANCE = null;
 	
-	private static final String SQL_GETLOGIN = "SELECT id, nombre, placa, password FROM dgt.agente where agente.placa= ? and agente.password = ?;";
+	private static final String SQL_GETLOGIN = "SELECT id, nombre, placa, password FROM dgt_endika.agente where agente.placa= ? and agente.password = ?;";
 	
 	// constructor privado, solo acceso por getInstance()
 		private AgenteDAO() {
@@ -49,6 +48,7 @@ public class AgenteDAO {
 					LOG.debug("Agente encontrado");
 				}
 			}catch(Exception e) {
+				LOG.fatal(e);
 				e.printStackTrace();
 			}
 			return agenteEncontrado;

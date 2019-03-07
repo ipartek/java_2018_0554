@@ -69,7 +69,7 @@ public class AgenteController {
 			LOG.error("No existe el agente");
 		}else {
 			response = new ResponseEntity<Agente>(agEncontrado, HttpStatus.OK);
-			LOG.debug("Se ha encontrado el agente");
+			LOG.info("Se ha encontrado el agente");
 		}
 		
 		return response;

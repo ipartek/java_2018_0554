@@ -45,7 +45,7 @@ public class VehiculoController {
 
 	@RequestMapping(value = { "/api/vehiculo" }, method = RequestMethod.GET)
 	public ArrayList<Coche> listar() {
-
+		LOG.trace("listar");
 		return cocheDAO.getAll();
 	}
 	
