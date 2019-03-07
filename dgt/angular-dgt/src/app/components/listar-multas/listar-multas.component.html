@@ -20,8 +20,8 @@
         <td>{{m.concepto}}</td>
         <td>{{m.importe}}</td>
 
-        <td><button (click)="anularMulta(m.id)" *ngIf="!m.fechaBaja" type="button" class="btn btn-warning">Anular</button></td>
-        <td><button (click)="habilitarMulta(m.id)" *ngIf="m.fechaBaja" type="button" class="btn btn-info">Habilitar</button></td>
+        <td *ngIf="!m.fechaBaja"><button (click)="anularMulta(m.id)"  type="button" class="btn btn-warning">Anular</button></td>
+        <td *ngIf="m.fechaBaja"><button (click)="habilitarMulta(m.id)"  type="button" class="btn btn-info">Habilitar</button></td>
       </tr>
 
 

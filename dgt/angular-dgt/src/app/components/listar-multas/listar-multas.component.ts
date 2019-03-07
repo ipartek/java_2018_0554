@@ -47,7 +47,7 @@ export class ListarMultasComponent implements OnInit {
     console.trace('ListarMultas');
     if (confirm("Estas seguro?")) {
       this.multaS.darBaja(id);
-      window.location.reload();
+      alert("Multa anulada");
     }
   }
 
@@ -55,7 +55,7 @@ export class ListarMultasComponent implements OnInit {
     console.trace('HabilitarMultas');
     if (confirm("Estas seguro?")) {
       this.multaS.darAlta(id);
-      window.location.reload();
+      alert("Multa habilitada");
     }
 
   }
