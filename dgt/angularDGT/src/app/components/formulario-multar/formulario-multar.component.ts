@@ -49,7 +49,7 @@ export class FormularioMultarComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       importe: [
         '',
-        [Validators.required]
+        [Validators.required, Validators.min(0.99), Validators.max(9999)]
       ],
       concepto: [
         '',

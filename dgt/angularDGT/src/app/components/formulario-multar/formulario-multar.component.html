@@ -31,6 +31,8 @@
 
 	<label for="importe"><b>Importe</b></label>
 	<input type="text" formControlName="importe" class="form-control" required>
+	<p id="p" *ngIf="formulario.controls.importe.invalid && formulario.controls.importe.touched"  
+             class="text-danger">*Importe máximo 9999€ </p>
 
 	<label for="concepto"><b>Concepto</b></label>
 	<textarea type="text" formControlName="concepto" class="form-control" required></textarea>
