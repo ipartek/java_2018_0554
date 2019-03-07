@@ -54,18 +54,22 @@ public class AgenteController {
 			placa = Integer.parseInt(splaca);
 		}catch(Exception e) {
 			e.printStackTrace();
+			LOG.error("No se ha parseado");
 		}
 		
 		try {
 			agEncontrado = agService.existe(placa, password);
 		}catch(Exception e) {
 			response = new ResponseEntity<Agente>(HttpStatus.BAD_REQUEST);
+			LOG.error("No se han introducido bien los datos");
 		}
 		
 		if(agEncontrado == null) {
 			response = new ResponseEntity<Agente>(HttpStatus.NOT_FOUND);
+			LOG.error("No existe el agente");
 		}else {
 			response = new ResponseEntity<Agente>(agEncontrado, HttpStatus.OK);
+			LOG.debug("Se ha encontrado el agente");
 		}
 		
 		return response;

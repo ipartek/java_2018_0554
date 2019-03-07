@@ -54,8 +54,10 @@ public class MultaController {
 		try {
 			Coche coche = cocheDAO.getByMatricula(matricula);
 			response = new ResponseEntity<Coche>(coche, HttpStatus.OK);
+			LOG.info("Coche encontrado");
 		} catch (Exception e1) {
 			response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
+			LOG.error("Coche no encontrado");
 		}
 		
 		
@@ -74,10 +76,12 @@ public class MultaController {
 			ArrayList<Multa> multas = agService.obtenerMultas(id);
 			if (multas != null) {
 				response = new ResponseEntity<ArrayList<Multa>>(multas, HttpStatus.OK);
+				LOG.info("Multas encontradas");
 			}
 
 		} catch (NumberFormatException e) {
 			response = new ResponseEntity<ArrayList<Multa>>(HttpStatus.BAD_REQUEST);
+			LOG.error(e);
 		} catch (Exception e) {
 			LOG.error(e);
 			response = new ResponseEntity<ArrayList<Multa>>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -102,6 +106,7 @@ public class MultaController {
 			idCoche = coche.getId();
 		} catch (Exception e1) {
 			response = new ResponseEntity<Multa>(multa, HttpStatus.NOT_FOUND);
+			LOG.error(e1);
 		}
 
 		try {
@@ -112,6 +117,7 @@ public class MultaController {
 			}
 		} catch (Exception e) {
 			response = new ResponseEntity<Multa>(multa, HttpStatus.BAD_REQUEST);
+			LOG.error(e);
 		}
 		return response;
 
@@ -132,15 +138,18 @@ public class MultaController {
 			idMulta = (int)id;
 		} catch (Exception e1) {
 			e1.printStackTrace();
+			LOG.error(e1);
 		}
 		ResponseEntity<Multa> response = new ResponseEntity<Multa>(HttpStatus.INTERNAL_SERVER_ERROR);
 		try {
 			recuperado = agService.darAlta(idMulta);
 			if (recuperado == true) {
 				response = new ResponseEntity<Multa>(HttpStatus.OK);
+				LOG.info("Coche dado de alta");
 			}
 		} catch (Exception e) {
 			response = new ResponseEntity<Multa>(HttpStatus.NOT_FOUND);
+			LOG.error(e);
 		}
 		return response;
 
@@ -160,15 +169,18 @@ public class MultaController {
 			idMulta = (int)id;
 		} catch (Exception e1) {
 			e1.printStackTrace();
+			LOG.error(e1);
 		}
 		ResponseEntity<Multa> response = new ResponseEntity<Multa>(HttpStatus.INTERNAL_SERVER_ERROR);
 		try {
 			anulado = agService.darBaja(idMulta);
 			if (anulado == true) {
 				response = new ResponseEntity<Multa>(HttpStatus.OK);
+				LOG.info("Coche dado de baja");
 			}
 		} catch (Exception e) {
 			response = new ResponseEntity<Multa>(HttpStatus.NOT_FOUND);
+			LOG.error(e);
 		}
 		return response;
 

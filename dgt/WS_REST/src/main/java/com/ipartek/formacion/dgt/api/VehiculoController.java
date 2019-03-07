@@ -49,27 +49,6 @@ public class VehiculoController {
 		return cocheDAO.getAll();
 	}
 	
-	/*
-	@RequestMapping(value = { "/api/vehiculo/{id}" }, method = RequestMethod.GET)
-	public ResponseEntity<Coche> detalle(@PathVariable long id) {
-
-		ResponseEntity<Coche> response = new ResponseEntity<Coche>(HttpStatus.NOT_FOUND);
-		try {
-
-			
-			Coche coche = cocheDAO.getById(id);
-			if (coche != null) {
-				response = new ResponseEntity<Coche>(coche, HttpStatus.OK);
-			}
-
-		} catch (NumberFormatException e) {
-			response = new ResponseEntity<Coche>(HttpStatus.BAD_REQUEST);
-		} catch (Exception e) {
-			LOG.error(e);
-			response = new ResponseEntity<Coche>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return response;
-	}*/
 
 	@RequestMapping(value = { "/api/vehiculo/{matricula}" }, method = RequestMethod.GET)
 	public ResponseEntity<Coche> detalleByMatricula(@PathVariable String matricula) {
@@ -79,10 +58,12 @@ public class VehiculoController {
 			Coche coche = cocheDAO.getByMatricula(matricula);
 			if (coche != null) {
 				response = new ResponseEntity<Coche>(coche, HttpStatus.OK);
+				LOG.info("Detalle del coche" + coche);
 			}
 
 		} catch (NumberFormatException e) {
 			response = new ResponseEntity<Coche>(HttpStatus.BAD_REQUEST);
+			LOG.error(e);
 		} catch (Exception e) {
 			LOG.error(e);
 			response = new ResponseEntity<Coche>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -98,6 +79,7 @@ public class VehiculoController {
 
 			if (cocheDAO.delete(id)) {
 				response = new ResponseEntity<Coche>(HttpStatus.OK);
+				LOG.info("Coche eliminado");
 			}
 		} catch (SQLException e) {
 
