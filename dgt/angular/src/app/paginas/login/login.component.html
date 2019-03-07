@@ -20,7 +20,7 @@
         <input type="password" formControlName="pass" class="form-control" id="pass" name="pass" aria-describedby="passwordHelp"
           placeholder="P.E: 12345678" required>
           <small *ngIf="formulario.controls.pass.invalid && formulario.controls.pass.touched"
-            class="text-danger">*La contraseña son 8-50 caracteres</small>
+            class="text-danger">*La contraseña son 6-50 caracteres</small>
       </div>
       <button type="submit" [disabled]="formulario.invalid" class="btn btn-lg btn-secondary btn-block mb-3">
         <span class="d-flex justify-content-center align-items-center">Acceder

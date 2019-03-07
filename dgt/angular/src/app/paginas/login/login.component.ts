@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   formulario: FormGroup;
   alerta: Alerta;
-  
+
 
   constructor(
     private agenteService: AgenteService,
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
         '',
         [Validators.required,
         Validators.min(0),
-        Validators.max(99999),
+        Validators.max(999999),
         Validators.minLength(4),
         Validators.maxLength(45)
         ]
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
       pass: [
         '',
         [Validators.required,
-        Validators.minLength(8),
+        Validators.minLength(6),
         Validators.maxLength(50)
         ]
       ]
@@ -68,10 +68,10 @@ export class LoginComponent implements OnInit {
 
   /**
    * Comprueba que los datos introducidos en el formulario
-   * (Nº de Placa y Password) están relacionados con un 
-   * agente de la DB. 
-   * Si las credenciales existen, se obtienen los datos 
-   * del agente registrados en la DB y se construye con 
+   * (Nº de Placa y Password) están relacionados con un
+   * agente de la DB.
+   * Si las credenciales existen, se obtienen los datos
+   * del agente registrados en la DB y se construye con
    * ellos un objeto Agente [agenteLogueado], cambiando
    * también el estado de la variable 'isLogged' a true.
    * En caso de que no exista dicho agente en la DB, se
@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
         this.agenteService.setLogged(true);
         this.agenteService.saveAgente(data);
         if(this.agenteService.getAgente().id != -1) {
-          console.debug('Agente obtenido %o', this.agenteService.getAgente());          
+          console.debug('Agente obtenido %o', this.agenteService.getAgente());
         }
         console.info('isLogged: ' + this.agenteService.isLogged)
         console.info('Login correcto, tenemos permisos JSON: %o', data);

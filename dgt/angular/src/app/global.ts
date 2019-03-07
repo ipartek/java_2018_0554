@@ -1,6 +1,6 @@
 export const GLOBAL = {
-    
+
     "app_name" : "DGT",
-    "endpoint" : "http://localhost:8080/wsrest/api/"
+    "endpoint" : "http://192.168.0.12:8080/wsrest-ander/api/"
 
 }
