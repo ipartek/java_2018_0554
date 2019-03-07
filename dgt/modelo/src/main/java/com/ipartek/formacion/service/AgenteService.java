@@ -1,6 +1,9 @@
 package com.ipartek.formacion.service;
 
+import java.util.ArrayList;
+
 import com.ipartek.formacion.modelo.pojo.Agente;
+import com.ipartek.formacion.modelo.pojo.Estadistica;
 
 public interface AgenteService {
 	
@@ -14,7 +17,9 @@ public interface AgenteService {
 	Agente existe( int placa, String password);
 	
 	
+	ArrayList<Estadistica> objetivosMes(int idAgente, int anyo);
 	
+	float objetivosAnyo(int idAgente, int anyo);
 	
 
 	/**
