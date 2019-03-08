@@ -1,0 +1,31 @@
+<ul class="list-group">
+  <li *ngFor="let ca of casas, let i = index" class="list-group-item"  >
+      <div class="container">
+        <div class="card" style="width:400px">
+          <img class="card-img-top" src="{{ca.foto}}" alt="Card image" style="width:100%">
+          <div class="card-body">
+            <h4 class="card-title">{{ca.nombre}}</h4>
+            <p class="card-text">Habitaciones: {{ca.habitaciones}}</p>
+            <p class="card-text">Dirección: {{ca.direccion}}</p>
+            <h5 class="card-title">Servicios</h5>
+            <table class="table table-bordered" *ngFor="let s of ca.servicios">
+              <thead>
+                <tr>
+                  <th>{{s.nombre| uppercase}}</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><i class="fas fa-{{(s.disponible==true)?'check':'times'}}"></i></td>
+                                 
+                </tr>
+              </tbody>
+            </table>            
+          </div>
+        </div>
+    </div>   
+  </li>
+</ul>
+
+{{casas|json}}

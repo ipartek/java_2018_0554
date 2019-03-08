@@ -7,23 +7,16 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['home']">Home</a>
-      </li>
      
-      <!-- Dropdown -->
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" routerLinkActive="active" data-toggle="dropdown">
-          Dropdown
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" [routerLink]="['home']">1</a>
-          <a class="dropdown-item" [routerLink]="['home']">2</a>
-          <a class="dropdown-item" [routerLink]="['home']">3</a>
-          
-        </div>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/principal']">Principal</a>
       </li>
-
+      <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/formulario']">Añadir Casa</a>
+        </li>
     </ul>
+    <button class="mt-6 btn btn-light" (click) = "logout()">
+        Logout
+      </button>
   </div>
 </nav>

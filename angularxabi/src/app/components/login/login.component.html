@@ -1,0 +1,17 @@
+<form [formGroup]="formulario" (submit)="comprobar()" >
+
+  <label for="nombre">Nombre</label>
+  <input type="text" formControlName="nombre" class="form-control" placeholder="Mínimo 3 letras">      
+  <p *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched"  
+  class="text-danger">*recuerda que minimo 3 letras</p>
+
+  <label for="pass">Contraseña</label>
+  <input type="password" formControlName="pass" class="form-control" placeholder="Mínimo 3 letras">      
+
+  <button type="submit"
+          class="btn btn-block btn-primary mt-5"
+          [disabled]="formulario.invalid">Acceder</button>
+  
+
+
+</form>

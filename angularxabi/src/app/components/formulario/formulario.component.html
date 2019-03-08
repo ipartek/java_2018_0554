@@ -1,0 +1,58 @@
+<app-nav></app-nav>
+<form [formGroup]="formulario" (submit)="nueva()"  class="p-3 mb-4 mt-2 border border-primary">
+        
+    <div class="form-row">
+        <div class="col-6">
+
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" formControlName="nombre" class="form-control" placeholder="Mínimo 3 letras">      
+              <p *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched"  
+              class="text-danger">*recuerda que minimo 3 letras</p>
+            </div>   
+
+            <div class="form-group">
+               <label for="precio">Precio</label>
+               <input type="number" formControlName="precio" class="form-control">      
+            </div>    
+            
+            <div class="form-group">
+              <label for="habitaciones">Habitaciones</label>
+              <input type="number" formControlName="habitaciones" class="form-control">      
+            </div> 
+            
+            <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <input type="text" formControlName="direccion" class="form-control" placeholder="Mínimo 3 letras">      
+                <p *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched"  
+                class="text-danger">*recuerda que minimo 3 letras</p>
+              </div>  
+              <div class="form-group">
+                  <label for="alquiler">Oferta</label>
+                  <input type="checkbox" formControlName="alquiler" class="form-control">      
+                </div>   
+            
+
+        </div> <!-- col-6 -->   
+
+        <div class="col-6">          
+          <img class="medium" src="{{formulario.controls.foto.value}}" alt="url de la imagen de la nueva fruta">
+          <br>
+          <label for="foto">URL de la Imagen</label>
+          <input type="text" formControlName="foto" class="form-control">      
+          <p *ngIf="formulario.controls.foto.invalid && formulario.controls.foto.touched"  
+          class="text-danger">*debe ser una URL de imagen valida empezar por http(s) y terminar .png o .jp(e)g</p>
+        </div>  
+
+        
+        
+
+    </div>    
+    
+    <button type="submit"
+            class="btn btn-block btn-primary mt-5"
+            >
+            Crear
+    </button>
+</form>
+

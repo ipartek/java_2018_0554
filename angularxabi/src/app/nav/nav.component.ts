@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AutorizacionService } from '../providers/autorizacion.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  constructor(private autorizacionService: AutorizacionService, private router: Router) { }
 
   ngOnInit() {
   }
-
+  logout(){
+    this.autorizacionService.logout();
+    this.router.navigate(['/']);
+  }
 }

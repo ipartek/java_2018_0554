@@ -1,0 +1,80 @@
+<app-nav></app-nav>
+<main class="container pt-4">
+<h1>Inmobiliara IparHouse</h1>
+
+<div class="d-flex inline mb-2">
+  <!--<button (click)="refrescarListado()" class="btn btn-primary">Buscar</button>-->
+
+  <p *ngIf="casas.length==0" class="spinner-border text-danger"></p>
+  <p>Lista de Viviendas</p>
+
+</div>
+
+<!--<p>{{casas | json}}</p>-->
+<!--
+<div class="btn-group mb-2" role="group" aria-label="Basic example">
+  <button type="button" (click)="cambiarTabla(true)" class="{{(isAlquiler)?'btn btn-primary':'btn btn-secondary'}}">TODAS</button>
+  <button type="button" (click)="cambiarTabla(false)" class="{{(isAlquiler)?'btn btn-primary':'btn btn-secondary'}}">ALQUILER</button>
+  <button type="button" (click)="cambiarTabla(false)" class="{{(!isAlquiler)?'btn btn-primary':'btn btn-secondary'}}">COMPRA</button>
+  
+</div>-->
+<div class="container">
+  <div class="row">
+
+    <div class="col-6">
+      <ul class="list-group">
+        <li *ngFor="let c of casas, let i = index" (click)="cambiarCasa(i)" class="list-group-item">
+          <div class="container">
+            <div class="card" style="width:400px">
+              <img class="card-img-top" src="{{c.foto}}" alt="Card image" style="width:100%">
+              <div class="card-body">
+                <h4 class="card-title">{{c.nombre}}</h4>
+                <p class="card-text">{{(c.alquiler==true)?'Alquiler':'Compra'}}: {{c.precio | moneda}}</p>
+                <button class="btn btn-primary" (click)="cambiarCasa(i)"> Detalle</button>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+
+
+    <div class="col-6">
+      <h3>Detalle</h3>
+      <app-card-casa></app-card-casa>
+    </div>
+  </div>
+</div>
+
+
+
+<!--
+<ul class="list-group" *ngIf="isAlquiler==true">
+  <li *ngFor="let a of alquileres" class="list-group-item"  >
+      <div class="container">
+        <div class="card" style="width:400px">
+          <img class="card-img-top" src="{{a.foto}}" alt="Card image" style="width:100%">
+          <div class="card-body">
+            <h4 class="card-title">{{a.nombre}}</h4>
+            <p class="card-text">{{(a.alquiler==true)?'Alquiler':'Compra'}}: {{a.precio | moneda}}</p>
+          </div>
+        </div>
+    </div>   
+  </li>
+</ul>
+
+<ul class="list-group" *ngIf="isAlquiler==true">
+  <li *ngFor="let v of ventas" class="list-group-item" >
+      <div class="container">
+        <div class="card" style="width:400px">
+          <img class="card-img-top" src="{{v.foto}}" alt="Card image" style="width:100%">
+          <div class="card-body">
+            <h4 class="card-title">{{v.nombre}}</h4>
+            <p class="card-text">{{(v.alquiler==true)?'Alquiler':'Compra'}}: {{v.precio | moneda}}</p>
+          </div>
+        </div>
+    </div>   
+  </li>
+</ul>-->
+</main>
